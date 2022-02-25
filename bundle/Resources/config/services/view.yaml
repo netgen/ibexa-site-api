@@ -17,6 +17,8 @@ services:
             - '@Ibexa\Core\MVC\Symfony\View\Configurator\ViewProvider'
             - '@Ibexa\Core\MVC\Symfony\View\ParametersInjector\EventDispatcherInjector'
             - '@netgen.ibexa_site_api.view.location_resolver'
+        tags:
+            - { name: ibexa.view.builder }
 
     netgen.ibexa_site_api.content_view_provider.ngcontent_configured:
         class: Netgen\Bundle\IbexaSiteApiBundle\View\Provider\Configured
