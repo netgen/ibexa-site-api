@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Core\Site\Exceptions;
+namespace Netgen\IbexaSiteApi\Core\Site\Exceptions;
 
 use Exception;
-use eZ\Publish\Core\Base\Exceptions\Httpable;
-use eZ\Publish\Core\Base\Translatable;
-use eZ\Publish\Core\Base\TranslatableBase;
-use Netgen\EzPlatformSiteApi\API\Exceptions\TranslationNotMatchedException as APITranslationNotMatchedException;
+use Ibexa\Core\Base\Exceptions\Httpable;
+use Ibexa\Core\Base\Translatable;
+use Ibexa\Core\Base\TranslatableBase;
+use Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException as APITranslationNotMatchedException;
 use function var_export;
 
 /**

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\Templating\Twig\NodeVisitor;
+namespace Netgen\Bundle\IbexaSiteApiBundle\Templating\Twig\NodeVisitor;
 
-use Netgen\Bundle\EzPlatformSiteApiBundle\Templating\Twig\Node\GetAttrExpressionDecorator;
+use Netgen\Bundle\IbexaSiteApiBundle\Templating\Twig\Node\GetAttrExpressionDecorator;
 use Twig\Environment;
 use Twig\Node\Expression\GetAttrExpression;
 use Twig\Node\Node;

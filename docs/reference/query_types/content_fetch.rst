@@ -20,7 +20,7 @@ This Query Type is used to build general purpose Content queries.
 | parameters  | - `sort`_                                                                    |
 +-------------+------------------------------------------------------------------------------+
 
-.. | Class       | :class:`Netgen\\EzPlatformSiteApi\\Core\\Site\\QueryType\\Content\\Fetch`    |
+.. | Class       | :class:`Netgen\\IbexaSiteApi\\Core\\Site\\QueryType\\Content\\Fetch`    |
 .. +-------------+------------------------------------------------------------------------------+
 
 Examples

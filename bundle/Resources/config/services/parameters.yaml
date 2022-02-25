@@ -1,0 +1,6 @@
+parameters:
+    # Content view fallback templates
+    netgen.ibexa_site_api.content_view_fallback.to_ibexa.embed: '@@NetgenIbexaSiteApi/content_view_fallback/to_ibexa/embed.html.twig'
+    netgen.ibexa_site_api.content_view_fallback.to_ibexa.view: '@@NetgenIbexaSiteApi/content_view_fallback/to_ibexa/view.html.twig'
+    netgen.ibexa_site_api.content_view_fallback.to_site_api.embed: '@@NetgenIbexaSiteApi/content_view_fallback/to_site_api/embed.html.twig'
+    netgen.ibexa_site_api.content_view_fallback.to_site_api.view: '@@NetgenIbexaSiteApi/content_view_fallback/to_site_api/view.html.twig'

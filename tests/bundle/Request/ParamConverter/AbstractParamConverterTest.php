@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\Tests\Request\ParamConverter;
+namespace Netgen\Bundle\IbexaSiteApiBundle\Tests\Request\ParamConverter;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;

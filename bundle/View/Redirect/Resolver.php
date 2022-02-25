@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\View\Redirect;
+namespace Netgen\Bundle\IbexaSiteApiBundle\View\Redirect;
 
-use Netgen\Bundle\EzPlatformSiteApiBundle\Exception\InvalidRedirectConfiguration;
-use Netgen\Bundle\EzPlatformSiteApiBundle\View\ContentView;
-use Netgen\EzPlatformSiteApi\API\Values\Content;
-use Netgen\EzPlatformSiteApi\API\Values\Location;
+use Netgen\Bundle\IbexaSiteApiBundle\Exception\InvalidRedirectConfiguration;
+use Netgen\Bundle\IbexaSiteApiBundle\View\ContentView;
+use Netgen\IbexaSiteApi\API\Values\Content;
+use Netgen\IbexaSiteApi\API\Values\Location;
 use Netgen\TagsBundle\API\Repository\Values\Tags\Tag;
 use Symfony\Cmf\Component\Routing\RouteObjectInterface;
 use Symfony\Component\Routing\Exception\InvalidParameterException;
@@ -20,15 +20,8 @@ use function mb_stripos;
 
 final class Resolver
 {
-    /**
-     * @var \Netgen\Bundle\EzPlatformSiteApiBundle\View\Redirect\ParameterProcessor
-     */
-    private $parameterProcessor;
-
-    /**
-     * @var \Symfony\Component\Routing\RouterInterface
-     */
-    private $router;
+    private ParameterProcessor $parameterProcessor;
+    private RouterInterface $router;
 
     public function __construct(
         ParameterProcessor $parameterProcessor,
@@ -41,9 +34,7 @@ final class Resolver
     /**
      * Builds a path to the redirect target.
      *
-     * @param \Netgen\Bundle\EzPlatformSiteApiBundle\View\Redirect\RedirectConfiguration $redirectConfig
-     *
-     * @throws \Netgen\Bundle\EzPlatformSiteApiBundle\Exception\InvalidRedirectConfiguration
+     * @throws \Netgen\Bundle\IbexaSiteApiBundle\Exception\InvalidRedirectConfiguration
      */
     public function resolveTarget(RedirectConfiguration $redirectConfig, ContentView $view): string
     {
@@ -67,9 +58,7 @@ final class Resolver
     }
 
     /**
-     * @param \Netgen\Bundle\EzPlatformSiteApiBundle\View\Redirect\RedirectConfiguration $redirectConfig
-     *
-     * @throws \Netgen\Bundle\EzPlatformSiteApiBundle\Exception\InvalidRedirectConfiguration
+     * @throws \Netgen\Bundle\IbexaSiteApiBundle\Exception\InvalidRedirectConfiguration
      */
     private function processExpression(RedirectConfiguration $redirectConfig, ContentView $view): string
     {

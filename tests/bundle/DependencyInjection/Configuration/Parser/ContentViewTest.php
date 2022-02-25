@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\Tests\DependencyInjection\Configuration\Parser;
+namespace Netgen\Bundle\IbexaSiteApiBundle\Tests\DependencyInjection\Configuration\Parser;
 
-use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\EzPublishCoreExtension;
-use eZ\Bundle\EzPublishCoreBundle\Tests\DependencyInjection\Configuration\Parser\AbstractParserTestCase;
+use Ibexa\Bundle\Core\DependencyInjection\IbexaCoreExtension;
+use Ibexa\Tests\Bundle\Core\DependencyInjection\Configuration\Parser\AbstractParserTestCase;
 use InvalidArgumentException;
-use Netgen\Bundle\EzPlatformSiteApiBundle\DependencyInjection\Configuration\Parser\ContentView;
+use Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Configuration\Parser\ContentView;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\Yaml\Yaml;
 use function file_get_contents;
@@ -131,7 +131,7 @@ final class ContentViewTest extends AbstractParserTestCase
     {
         $this->load([
             'system' => [
-                'ezdemo_group' => [
+                'ibexa_demo_group' => [
                     'ng_content_view' => [
                         'full' => [
                             'throttle' => [
@@ -255,7 +255,7 @@ final class ContentViewTest extends AbstractParserTestCase
     {
         $baseConfig = [
             'system' => [
-                'ezdemo_group' => [
+                'ibexa_demo_group' => [
                     'ng_content_view' => [
                         'base' => [
                             'one' => [
@@ -317,7 +317,7 @@ final class ContentViewTest extends AbstractParserTestCase
             ],
         ];
 
-        $this->assertContainerBuilderHasParameter('ezsettings.ezdemo_site.ng_content_view', $expectedValues);
+        $this->assertContainerBuilderHasParameter('ibexa.site_access.config.ibexa_demo_site.ng_content_view', $expectedValues);
 
         $this->addToAssertionCount(1);
     }
@@ -425,11 +425,11 @@ final class ContentViewTest extends AbstractParserTestCase
     {
         $this->expectException($exceptionClass);
         $exceptionMessage = preg_quote($exceptionMessage, '/');
-        self::matchesRegularExpression("/{$exceptionMessage}/");
+        self::matchesRegularExpression("/$exceptionMessage/");
 
         $this->load([
             'system' => [
-                'ezdemo_group' => [
+                'ibexa_demo_group' => [
                     'ng_content_view' => [
                         'potato' => [
                             'chips' => [
@@ -561,7 +561,7 @@ final class ContentViewTest extends AbstractParserTestCase
     {
         $this->load([
             'system' => [
-                'ezdemo_group' => [
+                'ibexa_demo_group' => [
                     'ng_content_view' => [
                         'some_view' => [
                             'some_key' => $configurationValues,
@@ -579,14 +579,14 @@ final class ContentViewTest extends AbstractParserTestCase
         $this->assertConfigResolverParameterValue(
             'ng_content_view',
             $expectedConfigurationValues,
-            'ezdemo_site'
+            'ibexa_demo_site'
         );
     }
 
     protected function getContainerExtensions(): array
     {
         return [
-            new EzPublishCoreExtension([
+            new IbexaCoreExtension([
                 new ContentView(),
             ]),
         ];
@@ -594,6 +594,6 @@ final class ContentViewTest extends AbstractParserTestCase
 
     protected function getMinimalConfiguration(): array
     {
-        return Yaml::parse(file_get_contents(__DIR__ . '/../../Fixtures/minimal.yml'));
+        return Yaml::parse(file_get_contents(__DIR__ . '/../../Fixtures/minimal.yaml'));
     }
 }

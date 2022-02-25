@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\Routing;
+namespace Netgen\Bundle\IbexaSiteApiBundle\Routing;
 
-use eZ\Publish\Core\MVC\Symfony\Routing\Generator\UrlAliasGenerator;
+use Ibexa\Core\MVC\Symfony\Routing\Generator\UrlAliasGenerator;
 use LogicException;
-use Netgen\EzPlatformSiteApi\API\Values\Content;
-use Netgen\EzPlatformSiteApi\API\Values\ContentInfo;
+use Netgen\IbexaSiteApi\API\Values\Content;
+use Netgen\IbexaSiteApi\API\Values\ContentInfo;
 use RuntimeException;
 use Symfony\Cmf\Component\Routing\ChainedRouterInterface;
 use Symfony\Cmf\Component\Routing\RouteObjectInterface;
@@ -22,15 +22,8 @@ use function is_object;
 
 class ContentUrlAliasRouter implements ChainedRouterInterface, RequestMatcherInterface
 {
-    /**
-     * @var \eZ\Publish\Core\MVC\Symfony\Routing\Generator\UrlAliasGenerator
-     */
-    protected $generator;
-
-    /**
-     * @var \Symfony\Component\Routing\RequestContext
-     */
-    protected $requestContext;
+    protected UrlAliasGenerator $generator;
+    protected RequestContext $requestContext;
 
     public function __construct(UrlAliasGenerator $generator, ?RequestContext $requestContext = null)
     {
@@ -52,7 +45,7 @@ class ContentUrlAliasRouter implements ChainedRouterInterface, RequestMatcherInt
             throw new RouteNotFoundException('Could not match route');
         }
 
-        /** @var \Netgen\EzPlatformSiteApi\API\Values\Content|\Netgen\EzPlatformSiteApi\API\Values\ContentInfo $content */
+        /** @var \Netgen\IbexaSiteApi\API\Values\Content|\Netgen\IbexaSiteApi\API\Values\ContentInfo $content */
         $content = $parameters[RouteObjectInterface::ROUTE_OBJECT];
         unset($parameters[RouteObjectInterface::ROUTE_OBJECT]);
 

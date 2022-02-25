@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\API\Values;
+namespace Netgen\IbexaSiteApi\API\Values;
 
-use eZ\Publish\API\Repository\Values\ValueObject;
+use Ibexa\Contracts\Core\Repository\Values\ValueObject;
 use Pagerfanta\Pagerfanta;
 
 /**
  * Site Location represents location of Site Content object in the content tree.
  *
- * Corresponds to eZ Platform Repository Location object.
+ * Corresponds to Ibexa Repository Location object.
  *
- * @see \eZ\Publish\API\Repository\Values\Content\Location
+ * @see \Ibexa\Contracts\Core\Repository\Values\Content\Location
  *
  * @property int $id
  * @property int $status
@@ -29,41 +29,35 @@ use Pagerfanta\Pagerfanta;
  * @property int $sortField
  * @property int $sortOrder
  * @property int $contentId
- * @property \eZ\Publish\API\Repository\Values\Content\Location $innerLocation
- * @property \Netgen\EzPlatformSiteApi\API\Values\ContentInfo $contentInfo
- * @property \Netgen\EzPlatformSiteApi\API\Values\Location|null $parent
- * @property \Netgen\EzPlatformSiteApi\API\Values\Content $content
+ * @property \Ibexa\Contracts\Core\Repository\Values\Content\Location $innerLocation
+ * @property \Netgen\IbexaSiteApi\API\Values\ContentInfo $contentInfo
+ * @property \Netgen\IbexaSiteApi\API\Values\Location|null $parent
+ * @property \Netgen\IbexaSiteApi\API\Values\Content $content
  */
 abstract class Location extends ValueObject
 {
     /**
      * Return an array of children Locations, limited by optional $limit.
      *
-     * @return \Netgen\EzPlatformSiteApi\API\Values\Location[]
+     * @return \Netgen\IbexaSiteApi\API\Values\Location[]
      */
     abstract public function getChildren(int $limit = 25): array;
 
     /**
      * Return an array of children Locations, filtered by optional
      * $contentTypeIdentifiers, $maxPerPage and $currentPage.
-     *
-     * @param string[] $contentTypeIdentifiers
-     *
-     * @return \Pagerfanta\Pagerfanta Pagerfanta instance iterating over Site API Locations
      */
     abstract public function filterChildren(array $contentTypeIdentifiers = [], int $maxPerPage = 25, int $currentPage = 1): Pagerfanta;
 
     /**
      * Return first child, limited by optional $contentTypeIdentifier.
-     *
-     * @return \Netgen\EzPlatformSiteApi\API\Values\Location|null
      */
     abstract public function getFirstChild(?string $contentTypeIdentifier = null): ?Location;
 
     /**
      * Return an array of Location siblings, limited by optional $limit.
      *
-     * @return \Netgen\EzPlatformSiteApi\API\Values\Location[]
+     * @return \Netgen\IbexaSiteApi\API\Values\Location[]
      */
     abstract public function getSiblings(int $limit = 25): array;
 
@@ -71,11 +65,7 @@ abstract class Location extends ValueObject
      * Return an array of Location siblings, filtered by optional
      * $contentTypeIdentifiers, $maxPerPage and $currentPage.
      *
-     * Siblings will not include current Locations.
-     *
-     * @param string[] $contentTypeIdentifiers
-     *
-     * @return \Pagerfanta\Pagerfanta Pagerfanta instance iterating over Site API Locations
+     * Siblings will not include current Location.
      */
     abstract public function filterSiblings(array $contentTypeIdentifiers = [], int $maxPerPage = 25, int $currentPage = 1): Pagerfanta;
 }

@@ -1,0 +1,57 @@
+imports:
+    - { resource: services/*.yaml }
+
+services:
+    netgen.ibexa_site_api.controller.base:
+        class: Netgen\Bundle\IbexaSiteApiBundle\Controller\Controller
+        public: true
+        abstract: true
+        calls:
+            - [setContainer, ['@service_container']]
+
+    netgen.ibexa_site_api.core.settings:
+        class: Netgen\Bundle\IbexaSiteApiBundle\Core\Site\Settings
+        public: false
+        arguments:
+            - '@ibexa.config.resolver'
+
+    netgen.ibexa_site_api.controller.content.view:
+        class: Netgen\Bundle\IbexaSiteApiBundle\Controller\Content\ViewController
+        parent: Ibexa\Core\MVC\Symfony\Controller\Controller
+        public: true
+
+    ng_content:
+        alias: netgen.ibexa_site_api.controller.content.view
+        public: true
+
+    netgen.ibexa_site_api.routing.content_url_alias_router:
+        class: Netgen\Bundle\IbexaSiteApiBundle\Routing\ContentUrlAliasRouter
+        public: false
+        arguments:
+            - '@Ibexa\Core\MVC\Symfony\Routing\Generator\UrlAliasGenerator'
+            - '@?router.request_context'
+        tags:
+            - { name: router, priority: 200 }
+
+    netgen.ibexa_site_api.routing.location_url_alias_router:
+        class: Netgen\Bundle\IbexaSiteApiBundle\Routing\LocationUrlAliasRouter
+        public: false
+        arguments:
+            - '@Ibexa\Core\MVC\Symfony\Routing\Generator\UrlAliasGenerator'
+            - "@?router.request_context"
+        tags:
+            - { name: router, priority: 200 }
+
+    netgen.ibexa_site_api.param_converter.location:
+        class: Netgen\Bundle\IbexaSiteApiBundle\Request\ParamConverter\ContentParamConverter
+        arguments:
+            - '@netgen.ibexa_site_api.load_service'
+        tags:
+            - { name: request.param_converter, priority: -1 }
+
+    netgen.ibexa_site_api.param_converter.content:
+        class: Netgen\Bundle\IbexaSiteApiBundle\Request\ParamConverter\LocationParamConverter
+        arguments:
+            - '@netgen.ibexa_site_api.load_service'
+        tags:
+            - { name: request.param_converter, priority: -1 }

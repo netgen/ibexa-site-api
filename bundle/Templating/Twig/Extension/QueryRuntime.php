@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\Templating\Twig\Extension;
+namespace Netgen\Bundle\IbexaSiteApiBundle\Templating\Twig\Extension;
 
-use eZ\Publish\API\Repository\Values\Content\Search\SearchResult;
-use Netgen\Bundle\EzPlatformSiteApiBundle\QueryType\QueryDefinitionCollection;
-use Netgen\Bundle\EzPlatformSiteApiBundle\QueryType\QueryExecutor;
-use Netgen\Bundle\EzPlatformSiteApiBundle\View\ContentView;
+use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchResult;
+use Netgen\Bundle\IbexaSiteApiBundle\QueryType\QueryDefinitionCollection;
+use Netgen\Bundle\IbexaSiteApiBundle\QueryType\QueryExecutor;
+use Netgen\Bundle\IbexaSiteApiBundle\View\ContentView;
 use Pagerfanta\Pagerfanta;
 use Twig\Error\RuntimeError;
 use function array_key_exists;
@@ -19,10 +19,7 @@ use function is_array;
  */
 class QueryRuntime
 {
-    /**
-     * @var \Netgen\Bundle\EzPlatformSiteApiBundle\QueryType\QueryExecutor
-     */
-    private $queryExecutor;
+    private QueryExecutor $queryExecutor;
 
     public function __construct(QueryExecutor $queryExecutor)
     {
@@ -30,8 +27,6 @@ class QueryRuntime
     }
 
     /**
-     * @param mixed $context
-     *
      * @throws \Pagerfanta\Exception\Exception
      * @throws \Twig\Error\RuntimeError
      */
@@ -43,10 +38,8 @@ class QueryRuntime
     }
 
     /**
-     * @param mixed $context
-     *
      * @throws \Twig\Error\RuntimeError
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
     public function executeRawQuery($context, string $name): SearchResult
     {
@@ -57,8 +50,6 @@ class QueryRuntime
 
     /**
      * Returns the QueryDefinitionCollection variable from the given $context.
-     *
-     * @param mixed $context
      *
      * @throws \Twig\Error\RuntimeError
      */

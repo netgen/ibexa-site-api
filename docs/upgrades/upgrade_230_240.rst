@@ -1,7 +1,7 @@
 Upgrading from 2.3.0 to 2.4.0
 =============================
 
-Controllers that extend from ``Netgen\Bundle\EzPlatformSiteApiBundle\Controller\Controller`` and are
+Controllers that extend from ``Netgen\Bundle\IbexaSiteApiBundle\Controller\Controller`` and are
 registered inside dependency injection container should set two setter injection ``calls``:
 
 .. code-block:: yaml

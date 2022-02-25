@@ -2,26 +2,26 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Tests\Unit\Core\Site\QueryType;
+namespace Netgen\IbexaSiteApi\Tests\Unit\Core\Site\QueryType;
 
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\ContentTypeIdentifier;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\DateMetadata;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\Field;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\Location\Depth;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\Location\IsMainLocation;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\Location\Priority;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\LogicalAnd;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\LogicalNot;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\Operator;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\ParentLocationId;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\Subtree;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ContentTypeIdentifier;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\DateMetadata;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Field;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Location\Depth;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Location\IsMainLocation;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Location\Priority;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LogicalAnd;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LogicalNot;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Operator;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ParentLocationId;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Subtree;
 use InvalidArgumentException;
-use Netgen\EzPlatformSearchExtra\API\Values\Content\Query\Criterion\IsFieldEmpty;
-use Netgen\EzPlatformSearchExtra\API\Values\Content\Query\Criterion\ObjectStateIdentifier;
-use Netgen\EzPlatformSearchExtra\API\Values\Content\Query\Criterion\SectionIdentifier;
-use Netgen\EzPlatformSearchExtra\API\Values\Content\Query\Criterion\Visible;
-use Netgen\EzPlatformSiteApi\Core\Site\QueryType\CriteriaBuilder;
-use Netgen\EzPlatformSiteApi\Core\Site\QueryType\CriterionDefinition;
+use Netgen\IbexaSearchExtra\API\Values\Content\Query\Criterion\IsFieldEmpty;
+use Netgen\IbexaSearchExtra\API\Values\Content\Query\Criterion\ObjectStateIdentifier;
+use Netgen\IbexaSearchExtra\API\Values\Content\Query\Criterion\SectionIdentifier;
+use Netgen\IbexaSearchExtra\API\Values\Content\Query\Criterion\Visible;
+use Netgen\IbexaSiteApi\Core\Site\QueryType\CriteriaBuilder;
+use Netgen\IbexaSiteApi\Core\Site\QueryType\CriterionDefinition;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -29,13 +29,13 @@ use PHPUnit\Framework\TestCase;
  *
  * @group query-type
  *
- * @see \Netgen\EzPlatformSiteApi\Core\Site\QueryType\CriteriaBuilder
+ * @see \Netgen\IbexaSiteApi\Core\Site\QueryType\CriteriaBuilder
  *
  * @internal
  */
 final class CriteriaBuilderTest extends TestCase
 {
-    protected $criteriaBuilder;
+    protected ?CriteriaBuilder $criteriaBuilder = null;
 
     public function providerForTestBuild(): array
     {
@@ -415,8 +415,8 @@ final class CriteriaBuilderTest extends TestCase
     /**
      * @dataProvider providerForTestBuild
      *
-     * @param \Netgen\EzPlatformSiteApi\Core\Site\QueryType\CriterionDefinition[] $arguments
-     * @param \eZ\Publish\API\Repository\Values\Content\Query\Criterion[] $expectedCriteria
+     * @param \Netgen\IbexaSiteApi\Core\Site\QueryType\CriterionDefinition[] $arguments
+     * @param \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion[] $expectedCriteria
      */
     public function testBuild(array $arguments, array $expectedCriteria): void
     {

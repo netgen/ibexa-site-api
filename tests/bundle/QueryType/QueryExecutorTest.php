@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\Tests\QueryType;
+namespace Netgen\Bundle\IbexaSiteApiBundle\Tests\QueryType;
 
-use eZ\Publish\API\Repository\Values\Content\LocationQuery;
-use eZ\Publish\API\Repository\Values\Content\Query;
-use eZ\Publish\API\Repository\Values\Content\Search\SearchResult;
-use eZ\Publish\Core\QueryType\QueryType;
-use eZ\Publish\Core\QueryType\QueryTypeRegistry;
-use Netgen\Bundle\EzPlatformSiteApiBundle\QueryType\QueryDefinition;
-use Netgen\Bundle\EzPlatformSiteApiBundle\QueryType\QueryExecutor;
-use Netgen\EzPlatformSiteApi\API\FilterService;
-use Netgen\EzPlatformSiteApi\API\FindService;
-use Netgen\EzPlatformSiteApi\Core\Site\Pagination\Pagerfanta\FilterAdapter;
-use Netgen\EzPlatformSiteApi\Core\Site\Pagination\Pagerfanta\FindAdapter;
+use Ibexa\Contracts\Core\Repository\Values\Content\LocationQuery;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query;
+use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchResult;
+use Ibexa\Core\QueryType\QueryType;
+use Ibexa\Core\QueryType\QueryTypeRegistry;
+use Netgen\Bundle\IbexaSiteApiBundle\QueryType\QueryDefinition;
+use Netgen\Bundle\IbexaSiteApiBundle\QueryType\QueryExecutor;
+use Netgen\IbexaSiteApi\API\FilterService;
+use Netgen\IbexaSiteApi\API\FindService;
+use Netgen\IbexaSiteApi\Core\Site\Pagination\Pagerfanta\FilterAdapter;
+use Netgen\IbexaSiteApi\Core\Site\Pagination\Pagerfanta\FindAdapter;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -24,7 +24,7 @@ use PHPUnit\Framework\TestCase;
 final class QueryExecutorTest extends TestCase
 {
     /**
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
     public function testExecuteContentFilterQuery(): void
     {
@@ -65,7 +65,7 @@ final class QueryExecutorTest extends TestCase
     }
 
     /**
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
     public function testExecuteContentFindQuery(): void
     {
@@ -106,7 +106,7 @@ final class QueryExecutorTest extends TestCase
     }
 
     /**
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
     public function testExecuteLocationFilterQuery(): void
     {
@@ -147,7 +147,7 @@ final class QueryExecutorTest extends TestCase
     }
 
     /**
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
     public function testExecuteLocationFindQuery(): void
     {
@@ -229,7 +229,7 @@ final class QueryExecutorTest extends TestCase
     }
 
     /**
-     * @return \Netgen\EzPlatformSiteApi\API\FilterService|\PHPUnit\Framework\MockObject\MockObject
+     * @return \Netgen\IbexaSiteApi\API\FilterService|\PHPUnit\Framework\MockObject\MockObject
      */
     protected function getFilterServiceMock(): MockObject
     {
@@ -245,7 +245,7 @@ final class QueryExecutorTest extends TestCase
     }
 
     /**
-     * @return \Netgen\EzPlatformSiteApi\API\FindService|\PHPUnit\Framework\MockObject\MockObject
+     * @return \Netgen\IbexaSiteApi\API\FindService|\PHPUnit\Framework\MockObject\MockObject
      */
     protected function getFindServiceMock(): MockObject
     {
@@ -261,7 +261,7 @@ final class QueryExecutorTest extends TestCase
     }
 
     /**
-     * @return \eZ\Publish\Core\QueryType\QueryTypeRegistry|\PHPUnit\Framework\MockObject\MockObject
+     * @return \Ibexa\Core\QueryType\QueryTypeRegistry|\PHPUnit\Framework\MockObject\MockObject
      */
     protected function getQueryTypeRegistryMock(): MockObject
     {

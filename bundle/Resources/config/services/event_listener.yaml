@@ -1,0 +1,27 @@
+services:
+    netgen.ibexa_site_api.event_listener.view_tagger:
+        class: Netgen\Bundle\IbexaSiteApiBundle\EventListener\ViewTaggerSubscriber
+        arguments:
+            - '@Ibexa\Contracts\HttpCache\ResponseTagger\ResponseTagger'
+        tags:
+            - { name: kernel.event_subscriber }
+
+    netgen.ibexa_site_api.event_listener.internal_content_view_route:
+        class: Netgen\Bundle\IbexaSiteApiBundle\EventListener\InternalContentViewRouteListener
+        arguments:
+            - '@ibexa.config.resolver'
+            - '@fragment.handler'
+            - '@router'
+            - '%ibexa.site_access.groups%'
+        tags:
+            - { name: kernel.event_subscriber }
+
+    netgen.ibexa_site_api.event_listener.invalid_redirect_configuration:
+        class: Netgen\Bundle\IbexaSiteApiBundle\EventListener\InvalidRedirectConfigurationListener
+        public: false
+        arguments:
+            - '@router'
+            - '@ibexa.config.resolver'
+            - '@?logger'
+        tags:
+            - { name: kernel.event_subscriber }

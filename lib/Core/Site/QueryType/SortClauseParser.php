@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Core\Site\QueryType;
+namespace Netgen\IbexaSiteApi\Core\Site\QueryType;
 
-use eZ\Publish\API\Repository\Values\Content\Query;
-use eZ\Publish\API\Repository\Values\Content\Query\SortClause;
-use eZ\Publish\API\Repository\Values\Content\Query\SortClause\ContentName;
-use eZ\Publish\API\Repository\Values\Content\Query\SortClause\DateModified;
-use eZ\Publish\API\Repository\Values\Content\Query\SortClause\DatePublished;
-use eZ\Publish\API\Repository\Values\Content\Query\SortClause\Field;
-use eZ\Publish\API\Repository\Values\Content\Query\SortClause\Location\Depth;
-use eZ\Publish\API\Repository\Values\Content\Query\SortClause\Location\Priority;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\ContentName;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\DateModified;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\DatePublished;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\Field;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\Location\Depth;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\Location\Priority;
 use InvalidArgumentException;
 use function array_key_exists;
 use function explode;
@@ -74,7 +74,7 @@ final class SortClauseParser
         }
 
         throw new InvalidArgumentException(
-            "Could not handle sort type '{$type}'"
+            "Could not handle sort type '$type'"
         );
     }
 
@@ -125,7 +125,7 @@ final class SortClauseParser
         }
 
         throw new InvalidArgumentException(
-            "Could not handle sort direction '{$direction}'"
+            "Could not handle sort direction '$direction'"
         );
     }
 }

@@ -1,0 +1,87 @@
+parameters:
+    # Default view templates
+    netgen.ibexa_site_api.default_view_templates.content.asset_image: "@@NetgenIbexaSiteApi/default/content/asset_image.html.twig"
+    netgen.ibexa_site_api.default_view_templates.content.embed: "@@NetgenIbexaSiteApi/default/content/embed.html.twig"
+    netgen.ibexa_site_api.default_view_templates.content.embed_image: "@@NetgenIbexaSiteApi/default/content/embed_image.html.twig"
+    netgen.ibexa_site_api.default_view_templates.content.embed_inline: "@@NetgenIbexaSiteApi/default/content/embed_inline.html.twig"
+    netgen.ibexa_site_api.default_view_templates.content.full: "@@NetgenIbexaSiteApi/default/content/full.html.twig"
+    netgen.ibexa_site_api.default_view_templates.content.line: "@@NetgenIbexaSiteApi/default/content/line.html.twig"
+    netgen.ibexa_site_api.default_view_templates.content.text_linked: "@@NetgenIbexaSiteApi/default/content/text_linked.html.twig"
+    # List of content type identifiers to display as image when embedded
+    netgen.ibexa_site_api.content_view.image_embed_content_type_identifiers: ['image']
+
+    # Default Ibexa settings
+    # By default we don't override URL alias view action, for that reason this is commented out
+    #ibexa.site_access.config.default.pagelayout: '@@NetgenIbexaSiteApi/pagelayout.html.twig'
+
+    # We override the default full view template because of the automatic view fallback, to prevent
+    # the default one from extending configured page_layout, which is customized for Site API
+    # See: @IbexaCore/default/content/full.html.twig
+    ibexa.default_view_templates.content.full: '@@NetgenIbexaSiteApi/ibexa_default/content/full.html.twig'
+
+    ibexa.site_access.config.default.ng_fieldtypes.ezrichtext.embed.content:
+        template: "@@NetgenIbexaSiteApi/default/field_type/ezrichtext/embed/content.html.twig"
+    ibexa.site_access.config.default.ng_fieldtypes.ezrichtext.embed.content_denied:
+        template: "@@NetgenIbexaSiteApi/default/field_type/ezrichtext/embed/content_denied.html.twig"
+    ibexa.site_access.config.default.ng_fieldtypes.ezrichtext.embed.content_inline:
+        template: "@@NetgenIbexaSiteApi/default/field_type/ezrichtext/embed/content_inline.html.twig"
+    ibexa.site_access.config.default.ng_fieldtypes.ezrichtext.embed.content_inline_denied:
+        template: "@@NetgenIbexaSiteApi/default/field_type/ezrichtext/embed/content_inline_denied.html.twig"
+    ibexa.site_access.config.default.ng_fieldtypes.ezrichtext.embed.default:
+        template: "@@NetgenIbexaSiteApi/default/field_type/ezrichtext/embed/default.html.twig"
+    ibexa.site_access.config.default.ng_fieldtypes.ezrichtext.embed.default_inline:
+        template: "@@NetgenIbexaSiteApi/default/field_type/ezrichtext/embed/default_inline.html.twig"
+    ibexa.site_access.config.default.ng_fieldtypes.ezrichtext.embed.location:
+        template: "@@NetgenIbexaSiteApi/default/field_type/ezrichtext/embed/location.html.twig"
+    ibexa.site_access.config.default.ng_fieldtypes.ezrichtext.embed.location_denied:
+        template: "@@NetgenIbexaSiteApi/default/field_type/ezrichtext/embed/location_denied.html.twig"
+    ibexa.site_access.config.default.ng_fieldtypes.ezrichtext.embed.location_inline:
+        template: "@@NetgenIbexaSiteApi/default/field_type/ezrichtext/embed/location_inline.html.twig"
+    ibexa.site_access.config.default.ng_fieldtypes.ezrichtext.embed.location_inline_denied:
+        template: "@@NetgenIbexaSiteApi/default/field_type/ezrichtext/embed/location_inline_denied.html.twig"
+
+    # Default Site API settings under Ibexa CMS 'ibexa/system' configuration node
+    ibexa.site_access.config.default.ng_site_api.site_api_is_primary_content_view: false
+    ibexa.site_access.config.default.ng_site_api.fallback_to_secondary_content_view: true
+    ibexa.site_access.config.default.ng_site_api.fallback_without_subrequest: true
+    ibexa.site_access.config.default.ng_site_api.richtext_embed_without_subrequest: false
+    ibexa.site_access.config.default.ng_site_api.use_always_available_fallback: true
+    ibexa.site_access.config.default.ng_site_api.show_hidden_items: false
+    ibexa.site_access.config.default.ng_site_api.fail_on_missing_field: '%kernel.debug%'
+    ibexa.site_access.config.default.ng_site_api.render_missing_field_info: false
+    ibexa.site_access.config.default.ng_site_api.enable_internal_view_route: true
+    ibexa.site_access.config.default.ng_site_api.redirect_internal_view_route_to_url_alias: true
+    ibexa.site_access.config.default.ng_site_api.named_queries: []
+    ibexa.site_access.config.default.ng_site_api.named_objects: []
+    ibexa.site_access.config.default.ng_content_view: []
+    ibexa.site_access.config.default.ng_content_view_defaults:
+        asset_image:
+            default:
+                template: '%netgen.ibexa_site_api.default_view_templates.content.asset_image%'
+                match: []
+        embed:
+            image:
+                template: '%netgen.ibexa_site_api.default_view_templates.content.embed_image%'
+                match:
+                    Identifier\ContentType: '%netgen.ibexa_site_api.content_view.image_embed_content_type_identifiers%'
+            default:
+                template: "%netgen.ibexa_site_api.default_view_templates.content.embed%"
+                match: []
+        embed-inline:
+            default:
+                template: "%netgen.ibexa_site_api.default_view_templates.content.embed_inline%"
+                match: []
+        # Default full view is intentionally disabled because for some cases we depend on Content
+        # redirecting to the homepage when the full view is not configured.
+        #full:
+        #    default:
+        #        template: "%netgen.ibexa_site_api.default_view_templates.content.full%"
+        #        match: []
+        line:
+            default:
+                template: "%netgen.ibexa_site_api.default_view_templates.content.line%"
+                match: []
+        text_linked:
+            default:
+                template: "%netgen.ibexa_site_api.default_view_templates.content.text_linked%"
+                match: []

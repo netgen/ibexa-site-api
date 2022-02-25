@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\Routing;
+namespace Netgen\Bundle\IbexaSiteApiBundle\Routing;
 
-use eZ\Publish\Core\MVC\Symfony\Routing\Generator\UrlAliasGenerator;
-use Netgen\EzPlatformSiteApi\API\Values\Location;
+use Ibexa\Core\MVC\Symfony\Routing\Generator\UrlAliasGenerator;
+use Netgen\IbexaSiteApi\API\Values\Location;
 use RuntimeException;
 use Symfony\Cmf\Component\Routing\ChainedRouterInterface;
 use Symfony\Cmf\Component\Routing\RouteObjectInterface;
@@ -20,15 +20,8 @@ use function is_object;
 
 class LocationUrlAliasRouter implements ChainedRouterInterface, RequestMatcherInterface
 {
-    /**
-     * @var \eZ\Publish\Core\MVC\Symfony\Routing\Generator\UrlAliasGenerator
-     */
-    protected $generator;
-
-    /**
-     * @var \Symfony\Component\Routing\RequestContext
-     */
-    protected $requestContext;
+    protected UrlAliasGenerator $generator;
+    protected RequestContext $requestContext;
 
     public function __construct(UrlAliasGenerator $generator, ?RequestContext $requestContext = null)
     {
@@ -50,7 +43,7 @@ class LocationUrlAliasRouter implements ChainedRouterInterface, RequestMatcherIn
             throw new RouteNotFoundException('Could not match route');
         }
 
-        /** @var \Netgen\EzPlatformSiteApi\API\Values\Location $location */
+        /** @var \Netgen\IbexaSiteApi\API\Values\Location $location */
         $location = $parameters[RouteObjectInterface::ROUTE_OBJECT];
         unset($parameters[RouteObjectInterface::ROUTE_OBJECT]);
 

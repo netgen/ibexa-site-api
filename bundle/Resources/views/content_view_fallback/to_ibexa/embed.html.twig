@@ -1,0 +1,16 @@
+{# content \Netgen\IbexaSiteApi\API\Values\Content #}
+{# location \Netgen\IbexaSiteApi\API\Values\Location #}
+
+{% if ibexa.configResolver.getParameter('ng_site_api.fallback_without_subrequest') == true %}
+    {{ ng_ibexa_view_content_embedded(app.request.attributes.get('viewType'), { "content": content.innerContent, "location": location.innerLocation }) }}
+{% else %}
+    {{ render(
+        controller(
+            'ibexa_content:embedAction', {
+                'content': content.innerContent,
+                'location': location.innerLocation,
+                'viewType': app.request.attributes.get('viewType')
+            }
+        )
+    ) }}
+{% endif %}

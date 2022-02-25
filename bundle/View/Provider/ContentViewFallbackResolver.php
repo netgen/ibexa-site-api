@@ -2,75 +2,52 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\View\Provider;
+namespace Netgen\Bundle\IbexaSiteApiBundle\View\Provider;
 
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use eZ\Publish\Core\MVC\Symfony\View\ContentView;
-use Netgen\Bundle\EzPlatformSiteApiBundle\View\ContentView as SiteContentView;
+use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
+use Ibexa\Core\MVC\Symfony\View\ContentView;
+use Netgen\Bundle\IbexaSiteApiBundle\View\ContentView as SiteContentView;
 
 final class ContentViewFallbackResolver
 {
-    /**
-     * @var \eZ\Publish\Core\MVC\ConfigResolverInterface
-     */
-    private $configResolver;
-
-    /**
-     * @var string
-     */
-    private $toEzPlatformEmbedFallbackTemplate;
-
-    /**
-     * @var string
-     */
-    private $toEzPlatformViewFallbackTemplate;
-
-    /**
-     * @var string
-     */
-    private $toSiteApiEmbedFallbackTemplate;
-
-    /**
-     * @var string
-     */
-    private $toSiteApiViewFallbackTemplate;
+    private ConfigResolverInterface $configResolver;
+    private string $toIbexaPlatformEmbedFallbackTemplate;
+    private string $toIbexaPlatformViewFallbackTemplate;
+    private string $toSiteApiEmbedFallbackTemplate;
+    private string $toSiteApiViewFallbackTemplate;
 
     public function __construct(
         ConfigResolverInterface $configResolver,
-        string $toEzPlatformEmbedFallbackTemplate,
-        string $toEzPlatformViewFallbackTemplate,
+        string $toIbexaPlatformEmbedFallbackTemplate,
+        string $toIbexaPlatformViewFallbackTemplate,
         string $toSiteApiEmbedFallbackTemplate,
         string $toSiteApiViewFallbackTemplate
     ) {
         $this->configResolver = $configResolver;
-        $this->toEzPlatformEmbedFallbackTemplate = $toEzPlatformEmbedFallbackTemplate;
-        $this->toEzPlatformViewFallbackTemplate = $toEzPlatformViewFallbackTemplate;
+        $this->toIbexaPlatformEmbedFallbackTemplate = $toIbexaPlatformEmbedFallbackTemplate;
+        $this->toIbexaPlatformViewFallbackTemplate = $toIbexaPlatformViewFallbackTemplate;
         $this->toSiteApiEmbedFallbackTemplate = $toSiteApiEmbedFallbackTemplate;
         $this->toSiteApiViewFallbackTemplate = $toSiteApiViewFallbackTemplate;
     }
 
     /**
-     * @throws \eZ\Publish\Core\Base\Exceptions\InvalidArgumentType
-     *
-     * @return \eZ\Publish\Core\MVC\Symfony\View\ContentView
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
-    public function getEzPlatformFallbackDto(SiteContentView $view): ?ContentView
+    public function getIbexaPlatformFallbackDto(SiteContentView $view): ?ContentView
     {
-        if (!$this->isEzPlatformFallbackEnabled()) {
+        if (!$this->isIbexaPlatformFallbackEnabled()) {
             return null;
         }
 
         if ($view->isEmbed()) {
-            return new ContentView($this->toEzPlatformEmbedFallbackTemplate);
+            return new ContentView($this->toIbexaPlatformEmbedFallbackTemplate);
         }
 
-        return new ContentView($this->toEzPlatformViewFallbackTemplate);
+        return new ContentView($this->toIbexaPlatformViewFallbackTemplate);
     }
 
     /**
-     * @throws \eZ\Publish\Core\Base\Exceptions\InvalidArgumentType
-     *
-     * @return \eZ\Publish\Core\MVC\Symfony\View\ContentView
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
     public function getSiteApiFallbackDto(ContentView $view): ?ContentView
     {
@@ -85,7 +62,7 @@ final class ContentViewFallbackResolver
         return new ContentView($this->toSiteApiViewFallbackTemplate);
     }
 
-    private function isEzPlatformFallbackEnabled(): bool
+    private function isIbexaPlatformFallbackEnabled(): bool
     {
         return $this->isSiteApiContentViewEnabled() && $this->useContentViewFallback();
     }

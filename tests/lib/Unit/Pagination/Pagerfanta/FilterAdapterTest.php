@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Tests\Unit\Pagination\Pagerfanta;
+namespace Netgen\IbexaSiteApi\Tests\Unit\Pagination\Pagerfanta;
 
-use eZ\Publish\API\Repository\Values\Content\LocationQuery;
-use eZ\Publish\API\Repository\Values\Content\Query;
-use eZ\Publish\API\Repository\Values\Content\Search\SearchHit;
-use eZ\Publish\API\Repository\Values\Content\Search\SearchResult;
-use Netgen\EzPlatformSearchExtra\Core\Pagination\Pagerfanta\Slice;
-use Netgen\EzPlatformSiteApi\API\FilterService;
-use Netgen\EzPlatformSiteApi\Core\Site\Pagination\Pagerfanta\FilterAdapter;
+use Ibexa\Contracts\Core\Repository\Values\Content\LocationQuery;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query;
+use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchHit;
+use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchResult;
+use Netgen\IbexaSearchExtra\Core\Pagination\Pagerfanta\Slice;
+use Netgen\IbexaSiteApi\API\FilterService;
+use Netgen\IbexaSiteApi\Core\Site\Pagination\Pagerfanta\FilterAdapter;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -21,7 +21,7 @@ use PHPUnit\Framework\TestCase;
 final class FilterAdapterTest extends TestCase
 {
     /**
-     * @var \Netgen\EzPlatformSiteApi\API\FilterService|\PHPUnit\Framework\MockObject\MockObject
+     * @var \Netgen\IbexaSiteApi\API\FilterService|\PHPUnit\Framework\MockObject\MockObject
      */
     protected $filterService;
 
@@ -30,7 +30,7 @@ final class FilterAdapterTest extends TestCase
         parent::setUp();
         $this->filterService = $this->getMockBuilder(FilterService::class)
             ->disableOriginalConstructor()
-            ->setMethods([])
+            ->onlyMethods([])
             ->getMock();
     }
 
@@ -113,7 +113,7 @@ final class FilterAdapterTest extends TestCase
         $nbResults = 123;
         $facets = ['facet', 'facet'];
         $maxScore = 100.0;
-        $time = 256;
+        $time = 256.0;
         $query = new Query(['offset' => 5, 'limit' => 10]);
         $searchQuery = clone $query;
         $searchQuery->offset = $offset;
@@ -138,7 +138,6 @@ final class FilterAdapterTest extends TestCase
         $adapter = $this->getAdapter($query);
         $slice = $adapter->getSlice($offset, $limit);
 
-        self::assertInstanceOf(Slice::class, $slice);
         self::assertSame($hits, $slice->getSearchHits());
         self::assertSame($nbResults, $adapter->getNbResults());
         self::assertSame($facets, $adapter->getFacets());

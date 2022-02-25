@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Tests\Unit\Core\Site\Values;
+namespace Netgen\IbexaSiteApi\Tests\Unit\Core\Site\Values;
 
-use Netgen\EzPlatformSiteApi\Core\Site\Values\Field\SurrogateValue;
+use Netgen\IbexaSiteApi\Core\Site\Values\Field\SurrogateValue;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @group fields
  *
- * @see \Netgen\EzPlatformSiteApi\Core\Site\Values\Field\SurrogateValue
+ * @see \Netgen\IbexaSiteApi\Core\Site\Values\Field\SurrogateValue
  *
  * @internal
  */

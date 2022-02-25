@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\DependencyInjection\Compiler;
+namespace Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -11,7 +11,7 @@ final class InvalidRedirectConfigurationListenerPass implements CompilerPassInte
 {
     public function process(ContainerBuilder $container): void
     {
-        if (!$container->hasDefinition('netgen.ezplatform_site.event_listener.invalid_redirect_configuration')) {
+        if (!$container->hasDefinition('netgen.ibexa_site_api.event_listener.invalid_redirect_configuration')) {
             return;
         }
 
@@ -19,6 +19,6 @@ final class InvalidRedirectConfigurationListenerPass implements CompilerPassInte
             return;
         }
 
-        $container->removeDefinition('netgen.ezplatform_site.event_listener.invalid_redirect_configuration');
+        $container->removeDefinition('netgen.ibexa_site_api.event_listener.invalid_redirect_configuration');
     }
 }

@@ -2,26 +2,26 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Tests\Unit\Core\Site\QueryType\Base;
+namespace Netgen\IbexaSiteApi\Tests\Unit\Core\Site\QueryType\Base;
 
-use eZ\Publish\API\Repository\Values\Content\LocationQuery;
-use eZ\Publish\API\Repository\Values\Content\Query;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\DateMetadata;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\FullText;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\SectionId;
-use eZ\Publish\API\Repository\Values\Content\Query\FacetBuilder\SectionFacetBuilder;
-use eZ\Publish\API\Repository\Values\Content\Query\SortClause;
-use eZ\Publish\API\Repository\Values\Content\Query\SortClause\SectionIdentifier;
-use eZ\Publish\API\Repository\Values\Content\Query\SortClause\SectionName;
-use Netgen\EzPlatformSiteApi\Core\Site\QueryType\Base;
-use Netgen\EzPlatformSiteApi\Core\Site\QueryType\CriterionDefinition;
+use Ibexa\Contracts\Core\Repository\Values\Content\LocationQuery;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\DateMetadata;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\FullText;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\SectionId;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\FacetBuilder\SectionFacetBuilder;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\SectionIdentifier;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\SectionName;
+use Netgen\IbexaSiteApi\Core\Site\QueryType\Base;
+use Netgen\IbexaSiteApi\Core\Site\QueryType\CriterionDefinition;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Test stub for custom QueryType.
  *
- * @see \Netgen\EzPlatformSiteApi\Core\Site\QueryType\Base
+ * @see \Netgen\IbexaSiteApi\Core\Site\QueryType\Base
  */
 class CustomQueryType extends Base
 {

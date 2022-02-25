@@ -2,28 +2,21 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\Templating\Twig\Extension;
+namespace Netgen\Bundle\IbexaSiteApiBundle\Templating\Twig\Extension;
 
-use eZ\Publish\API\Repository\Exceptions\InvalidVariationException;
-use eZ\Publish\Core\MVC\Exception\SourceImageNotFoundException;
-use eZ\Publish\SPI\Variation\Values\Variation;
-use eZ\Publish\SPI\Variation\VariationHandler;
+use Ibexa\Contracts\Core\Repository\Exceptions\InvalidVariationException;
+use Ibexa\Contracts\Core\Variation\Values\Variation;
+use Ibexa\Contracts\Core\Variation\VariationHandler;
+use Ibexa\Core\MVC\Exception\SourceImageNotFoundException;
 use InvalidArgumentException;
-use Netgen\EzPlatformSiteApi\API\Values\Field;
+use Netgen\IbexaSiteApi\API\Values\Field;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 
 class ImageRuntime
 {
-    /**
-     * @var VariationHandler
-     */
-    private $imageVariationService;
-
-    /**
-     * @var \Psr\Log\LoggerInterface
-     */
-    private $logger;
+    private VariationHandler $imageVariationService;
+    private LoggerInterface $logger;
 
     public function __construct(
         VariationHandler $imageVariationService,
@@ -38,11 +31,15 @@ class ImageRuntime
      */
     public function getImageVariation(Field $field, string $variationName): ?Variation
     {
-        /** @var \eZ\Publish\Core\FieldType\Image\Value $value */
+        /** @var \Ibexa\Core\FieldType\Image\Value $value */
         $value = $field->value;
 
         try {
-            return $this->imageVariationService->getVariation($field->innerField, $field->content->versionInfo, $variationName);
+            return $this->imageVariationService->getVariation(
+                $field->innerField,
+                $field->content->versionInfo,
+                $variationName
+            );
         } catch (InvalidVariationException $e) {
             $this->logger->error("Couldn't get variation '{$variationName}' for image with id {$value->id}");
         } catch (SourceImageNotFoundException $e) {

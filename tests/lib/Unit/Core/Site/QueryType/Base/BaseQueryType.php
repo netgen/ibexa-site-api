@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Tests\Unit\Core\Site\QueryType\Base;
+namespace Netgen\IbexaSiteApi\Tests\Unit\Core\Site\QueryType\Base;
 
-use eZ\Publish\API\Repository\Values\Content\Query;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
-use Netgen\EzPlatformSiteApi\Core\Site\QueryType\Base;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion;
+use Netgen\IbexaSiteApi\Core\Site\QueryType\Base;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Test stub for Base QueryType.
  *
- * @see \Netgen\EzPlatformSiteApi\Core\Site\QueryType\Base
+ * @see \Netgen\IbexaSiteApi\Core\Site\QueryType\Base
  */
 class BaseQueryType extends Base
 {

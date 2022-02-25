@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\DependencyInjection\Compiler;
+namespace Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Compiler;
 
-use Netgen\Bundle\EzPlatformSiteApiBundle\Controller\PreviewController;
+use Netgen\Bundle\IbexaSiteApiBundle\Controller\PreviewController;
 use Symfony\Component\DependencyInjection\Alias;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -14,7 +14,7 @@ class PreviewControllerOverridePass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container): void
     {
-        $corePreviewControllerServiceId = 'ezpublish.controller.content.preview.core';
+        $corePreviewControllerServiceId = '@Ibexa\Core\MVC\Symfony\Controller\Content\PreviewController';
 
         if (!$container->hasDefinition($corePreviewControllerServiceId)) {
             return;
@@ -25,17 +25,18 @@ class PreviewControllerOverridePass implements CompilerPassInterface
             ->setClass(PreviewController::class)
             ->addMethodCall(
                 'setConfigResolver',
-                [new Reference('ezpublish.config.resolver')]
+                [new Reference('ibexa.config.resolver')]
             )
             ->addMethodCall(
                 'setSite',
-                [new Reference('netgen.ezplatform_site.core.site')]
+                [new Reference('netgen.ibexa_site_api.core.site')]
             );
 
+        // todo check
         // Redefine the alias as it seems to be mangled in some cases
         // See https://github.com/netgen/ezplatform-site-api/pull/168
         $container->setAlias(
-            'ezpublish.controller.content.preview',
+            'ibexa.controller.content.preview',
             new Alias($corePreviewControllerServiceId, true)
         );
     }

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\QueryType;
+namespace Netgen\Bundle\IbexaSiteApiBundle\QueryType;
 
-use eZ\Publish\API\Repository\Values\ValueObject;
+use Ibexa\Contracts\Core\Repository\Values\ValueObject;
 
 /**
  * QueryDefinition defines a search query through the QueryType configuration.
  *
- * @see \eZ\Publish\Core\QueryType\QueryType
+ * @see \Ibexa\Core\QueryType\QueryType
  *
  * @property string $name QueryType name.
  * @property array $parameters An array of configured QueryType options.
@@ -24,37 +24,27 @@ final class QueryDefinition extends ValueObject
     /**
      * QueryType name.
      *
-     * @see \eZ\Publish\Core\QueryType\QueryType::getName()
-     *
-     * @var string
+     * @see \Ibexa\Core\QueryType\QueryType::getName()
      */
-    protected $name;
+    protected string $name;
 
     /**
      * An array of configured QueryType options.
-     *
-     * @var array
      */
-    protected $parameters;
+    protected array $parameters;
 
     /**
      * Whether to use FilterService or Find Service.
-     *
-     * @var bool
      */
-    protected $useFilter;
+    protected bool $useFilter;
 
     /**
      * Maximum results per page for Pagerfanta.
-     *
-     * @var int
      */
-    protected $maxPerPage;
+    protected int $maxPerPage;
 
     /**
      * Current page for Pagerfanta.
-     *
-     * @var int
      */
-    protected $page;
+    protected int $page;
 }

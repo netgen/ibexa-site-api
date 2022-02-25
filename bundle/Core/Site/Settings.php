@@ -2,19 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\Core\Site;
+namespace Netgen\Bundle\IbexaSiteApiBundle\Core\Site;
 
-use eZ\Publish\API\Repository\Exceptions\PropertyNotFoundException;
-use eZ\Publish\API\Repository\Exceptions\PropertyReadOnlyException;
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use Netgen\EzPlatformSiteApi\API\Settings as BaseSettings;
+use Ibexa\Contracts\Core\Repository\Exceptions\PropertyNotFoundException;
+use Ibexa\Contracts\Core\Repository\Exceptions\PropertyReadOnlyException;
+use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
+use Netgen\IbexaSiteApi\API\Settings as BaseSettings;
 
 final class Settings extends BaseSettings
 {
-    /**
-     * @var \eZ\Publish\Core\MVC\ConfigResolverInterface
-     */
-    private $configResolver;
+    private ConfigResolverInterface $configResolver;
 
     public function __construct(ConfigResolverInterface $configResolver)
     {
@@ -22,7 +19,7 @@ final class Settings extends BaseSettings
     }
 
     /**
-     * @throws \eZ\Publish\API\Repository\Exceptions\PropertyNotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\PropertyNotFoundException
      */
     public function __get(string $property)
     {
@@ -39,21 +36,21 @@ final class Settings extends BaseSettings
                 return $this->configResolver->getParameter('ng_site_api.fail_on_missing_field');
         }
 
-        throw new PropertyNotFoundException($property, static::class);
+        throw new PropertyNotFoundException($property, __CLASS__);
     }
 
     /**
      * @param mixed $value
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\PropertyReadOnlyException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\PropertyReadOnlyException
      */
     public function __set(string $property, $value): void
     {
-        throw new PropertyReadOnlyException($property, static::class);
+        throw new PropertyReadOnlyException($property, __CLASS__);
     }
 
     /**
-     * @throws \eZ\Publish\API\Repository\Exceptions\PropertyNotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\PropertyNotFoundException
      */
     public function __isset(string $property): bool
     {
@@ -66,6 +63,6 @@ final class Settings extends BaseSettings
                 return true;
         }
 
-        throw new PropertyNotFoundException($property, static::class);
+        throw new PropertyNotFoundException($property, __CLASS__);
     }
 }

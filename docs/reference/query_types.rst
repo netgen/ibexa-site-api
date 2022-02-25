@@ -312,7 +312,7 @@ Function ``fieldValue(identifier)`` provides access to the field value object of
 Configuration
 ~~~~~~~~~~~~~
 
-eZ Platform ConfigResolver service is available as ``configResolver``. Through it you can access
+Ibexa ConfigResolver service is available as ``configResolver``. Through it you can access
 dynamic (per siteaccess) configuration, for example maximum items per page:
 
 .. code-block:: yaml
@@ -470,7 +470,7 @@ Values that will be provided for evaluation in your custom expression function i
 - ``location``, :ref:`Site API Location object<location_object>`
 - ``content``, :ref:`Site API Content object<content_object>`
 - ``request``, Symfony's Request object (current request)
-- ``configResolver``, eZ Platform ConfigResolver service
+- ``configResolver``, Ibexa ConfigResolver service
 - ``namedObject``, :ref:`Site API NamedObjectProvider service<named_object_php>`
 
 Templating

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\DependencyInjection\Compiler;
+namespace Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Compiler;
 
 use LogicException;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
@@ -18,20 +18,20 @@ final class RelationResolverRegistrationPass implements CompilerPassInterface
     /**
      * Service ID of the resolver registry.
      *
-     * @see \Netgen\EzPlatformSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Registry
+     * @see \Netgen\IbexaSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Registry
      *
      * @var string
      */
-    private $resolverRegistryId = 'netgen.ezplatform_site.plugins.field_type.relation_resolver.registry';
+    private $resolverRegistryId = 'netgen.ibexa_site_api.plugins.field_type.relation_resolver.registry';
 
     /**
      * Service tag used for field type relation resolvers.
      *
-     * @see \Netgen\EzPlatformSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Resolver
+     * @see \Netgen\IbexaSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Resolver
      *
      * @var string
      */
-    private $resolverTag = 'netgen.ezplatform_site.plugins.field_type.relation_resolver';
+    private $resolverTag = 'netgen.ibexa_site_api.plugins.field_type.relation_resolver';
 
     public function process(ContainerBuilder $container): void
     {

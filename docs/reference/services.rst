@@ -22,7 +22,7 @@ LoadService
 -----------
 
 +--------------------------------+----------------------------------------------+
-| **Instance of**                | ``Netgen\EzPlatformSiteApi\API\LoadService`` |
+| **Instance of**                | ``Netgen\IbexaSiteApi\API\LoadService`` |
 +--------------------------------+----------------------------------------------+
 | **Container service ID**       | ``netgen.ezplatform_site.load_service``      |
 +--------------------------------+----------------------------------------------+
@@ -104,12 +104,12 @@ FindService
 -----------
 
 +--------------------------------+----------------------------------------------+
-| **Instance of**                | ``Netgen\EzPlatformSiteApi\API\FindService`` |
+| **Instance of**                | ``Netgen\IbexaSiteApi\API\FindService`` |
 +--------------------------------+----------------------------------------------+
 | **Container service ID**       | ``netgen.ezplatform_site.find_service``      |
 +--------------------------------+----------------------------------------------+
 
-The purpose of the ``FindService`` is to find Content and Locations by using eZ Platform's
+The purpose of the ``FindService`` is to find Content and Locations by using Ibexa's
 Repository Search API. This service will use the search engine that is configured for the
 Repository. That can be Legacy search engine or Solr search engine.
 
@@ -158,12 +158,12 @@ FilterService
 -------------
 
 +--------------------------------+------------------------------------------------+
-| **Instance of**                | ``Netgen\EzPlatformSiteApi\API\FilterService`` |
+| **Instance of**                | ``Netgen\IbexaSiteApi\API\FilterService`` |
 +--------------------------------+------------------------------------------------+
 | **Container service ID**       | ``netgen.ezplatform_site.filter_service``      |
 +--------------------------------+------------------------------------------------+
 
-The purpose of the ``FindService`` is to find Content and Locations by using eZ Platform's
+The purpose of the ``FindService`` is to find Content and Locations by using Ibexa's
 Repository Search API. That is the same as ``FindService``, but with the difference that it will
 always use Legacy search engine.
 
@@ -220,7 +220,7 @@ RelationService
 ---------------
 
 +--------------------------------+--------------------------------------------------+
-| **Instance of**                | ``Netgen\EzPlatformSiteApi\API\RelationService`` |
+| **Instance of**                | ``Netgen\IbexaSiteApi\API\RelationService`` |
 +--------------------------------+--------------------------------------------------+
 | **Container service ID**       | ``netgen.ezplatform_site.relation_service``      |
 +--------------------------------+--------------------------------------------------+
@@ -246,7 +246,7 @@ current user. If the field contains multiple relations, the first one will be re
 supports optional filtering by ContentType.
 
 +----------------------------------------+------------------------------------------------------------------------------------+
-| **Parameters**                         | 1. ``Netgen\EzPlatformSiteApi\API\Values\Content $content``                        |
+| **Parameters**                         | 1. ``Netgen\IbexaSiteApi\API\Values\Content $content``                        |
 |                                        | 2. ``string $fieldDefinitionIdentifier``                                           |
 |                                        | 3. ``array $contentTypeIdentifiers = []``                                          |
 +----------------------------------------+------------------------------------------------------------------------------------+
@@ -269,7 +269,7 @@ Get all field relation :ref:`Content items<content_object>` from a specific fiel
 filtering by ContentType.
 
 +----------------------------------------+------------------------------------------------------------------------------------+
-| **Parameters**                         | 1. ``Netgen\EzPlatformSiteApi\API\Values\Content $content``                        |
+| **Parameters**                         | 1. ``Netgen\IbexaSiteApi\API\Values\Content $content``                        |
 |                                        | 2. ``string $fieldDefinitionIdentifier``                                           |
 |                                        | 3. ``array $contentTypeIdentifiers = []``                                          |
 +----------------------------------------+------------------------------------------------------------------------------------+
@@ -295,7 +295,7 @@ current user. If the field contains multiple relations, the first one will be re
 supports optional filtering by ContentType.
 
 +----------------------------------------+------------------------------------------------------------------------------------+
-| **Parameters**                         | 1. ``Netgen\EzPlatformSiteApi\API\Values\Content $content``                        |
+| **Parameters**                         | 1. ``Netgen\IbexaSiteApi\API\Values\Content $content``                        |
 |                                        | 2. ``string $fieldDefinitionIdentifier``                                           |
 |                                        | 3. ``array $contentTypeIdentifiers = []``                                          |
 +----------------------------------------+------------------------------------------------------------------------------------+
@@ -318,7 +318,7 @@ Get all field relation :ref:`Locations<location_object>` from a specific field o
 filtering by ContentType.
 
 +----------------------------------------+------------------------------------------------------------------------------------+
-| **Parameters**                         | 1. ``Netgen\EzPlatformSiteApi\API\Values\Content $content``                        |
+| **Parameters**                         | 1. ``Netgen\IbexaSiteApi\API\Values\Content $content``                        |
 |                                        | 2. ``string $fieldDefinitionIdentifier``                                           |
 |                                        | 3. ``array $contentTypeIdentifiers = []``                                          |
 +----------------------------------------+------------------------------------------------------------------------------------+
@@ -340,7 +340,7 @@ Settings
 The purpose of ``Settings`` object is to provide read access to current configuration.
 
 +--------------------------------+-------------------------------------------+
-| **Instance of**                | ``Netgen\EzPlatformSiteApi\API\Settings`` |
+| **Instance of**                | ``Netgen\IbexaSiteApi\API\Settings`` |
 +--------------------------------+-------------------------------------------+
 | **Container service ID**       | ``netgen.ezplatform_site.settings``       |
 +--------------------------------+-------------------------------------------+
@@ -366,7 +366,7 @@ The purpose of ``Site`` service is to aggregate all other Site API services in o
 implements a getter method for each of the services described above.
 
 +--------------------------------+---------------------------------------+
-| **Instance of**                | ``Netgen\EzPlatformSiteApi\API\Site`` |
+| **Instance of**                | ``Netgen\IbexaSiteApi\API\Site`` |
 +--------------------------------+---------------------------------------+
 | **Container service ID**       | ``netgen.ezplatform_site.site``       |
 +--------------------------------+---------------------------------------+
@@ -397,7 +397,7 @@ The purpose of ``NamedObjectProvider`` service is to provide access to named obj
 of named objects is :ref:`documented on the Configuration page<named_object_configuration>`.
 
 +--------------------------------+----------------------------------------------------------------+
-| **Instance of**                | ``Netgen\Bundle\EzPlatformSiteApiBundle\NamedObject\Provider`` |
+| **Instance of**                | ``Netgen\Bundle\IbexaSiteApiBundle\NamedObject\Provider`` |
 +--------------------------------+----------------------------------------------------------------+
 | **Container service ID**       | ``netgen.ezplatform_site.named_object_provider``               |
 +--------------------------------+----------------------------------------------------------------+

@@ -2,27 +2,27 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\API\Values;
+namespace Netgen\IbexaSiteApi\API\Values;
 
-use eZ\Publish\API\Repository\Values\ValueObject;
+use Ibexa\Contracts\Core\Repository\Values\ValueObject;
 
 /**
  * Site Field represents a field of a Site Content object.
  *
- * Corresponds to eZ Platform Repository Field object.
+ * Corresponds to Ibexa Repository Field object.
  *
- * @see \eZ\Publish\API\Repository\Values\Content\Field
+ * @see \Ibexa\Contracts\Core\Repository\Values\Content\Field
  *
  * @property int|string $id
  * @property string $fieldDefIdentifier
- * @property \eZ\Publish\SPI\FieldType\Value $value
+ * @property \Ibexa\Contracts\Core\FieldType\Value $value
  * @property string $languageCode
  * @property string $fieldTypeIdentifier
  * @property string $name
  * @property string $description
- * @property \Netgen\EzPlatformSiteApi\API\Values\Content $content
- * @property \eZ\Publish\API\Repository\Values\Content\Field $innerField
- * @property \eZ\Publish\API\Repository\Values\ContentType\FieldDefinition $innerFieldDefinition
+ * @property \Netgen\IbexaSiteApi\API\Values\Content $content
+ * @property \Ibexa\Contracts\Core\Repository\Values\Content\Field $innerField
+ * @property \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition $innerFieldDefinition
  */
 abstract class Field extends ValueObject
 {

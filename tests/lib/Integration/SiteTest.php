@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Tests\Integration;
+namespace Netgen\IbexaSiteApi\Tests\Integration;
 
 /**
  * Test case for the Site.
  *
- * @see \Netgen\EzPlatformSiteApi\API\Site
+ * @see \Netgen\IbexaSiteApi\API\Site
  *
  * @group site
  *
@@ -18,7 +18,7 @@ final class SiteTest extends BaseTest
     /**
      * Test for the getSettings() method.
      *
-     * @see \Netgen\EzPlatformSiteApi\API\Site::getSettings()
+     * @see \Netgen\IbexaSiteApi\API\Site::getSettings()
      *
      * @throws \ErrorException
      */
@@ -34,7 +34,7 @@ final class SiteTest extends BaseTest
      *
      * @group filter
      *
-     * @see \Netgen\EzPlatformSiteApi\API\Site::getFilterService()
+     * @see \Netgen\IbexaSiteApi\API\Site::getFilterService()
      *
      * @throws \ErrorException
      */
@@ -50,7 +50,7 @@ final class SiteTest extends BaseTest
      *
      * @group find
      *
-     * @see \Netgen\EzPlatformSiteApi\API\Site::getFindService()
+     * @see \Netgen\IbexaSiteApi\API\Site::getFindService()
      *
      * @throws \ErrorException
      */
@@ -66,7 +66,7 @@ final class SiteTest extends BaseTest
      *
      * @group load
      *
-     * @see \Netgen\EzPlatformSiteApi\API\Site::getLoadService()
+     * @see \Netgen\IbexaSiteApi\API\Site::getLoadService()
      *
      * @throws \ErrorException
      */

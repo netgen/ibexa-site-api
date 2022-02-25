@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\DependencyInjection;
+namespace Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Resource\FileResource;
@@ -15,17 +15,17 @@ use function array_keys;
 use function file_get_contents;
 use function in_array;
 
-class NetgenEzPlatformSiteApiExtension extends Extension implements PrependExtensionInterface
+class NetgenIbexaSiteApiExtension extends Extension implements PrependExtensionInterface
 {
     public function getAlias(): string
     {
-        return 'netgen_ez_platform_site_api';
+        return 'netgen_ibexa_site_api';
     }
 
     /**
      * {@inheritdoc}
      *
-     * @return \Netgen\Bundle\EzPlatformSiteApiBundle\DependencyInjection\Configuration
+     * @return \Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Configuration
      */
     public function getConfiguration(array $config, ContainerBuilder $container): Configuration
     {
@@ -46,23 +46,23 @@ class NetgenEzPlatformSiteApiExtension extends Extension implements PrependExten
 
         $coreFileLocator = new FileLocator(__DIR__ . '/../../lib/Resources/config');
         $coreLoader = new Loader\YamlFileLoader($container, $coreFileLocator);
-        $coreLoader->load('services.yml');
+        $coreLoader->load('services.yaml');
 
         if (in_array('NetgenTagsBundle', $activatedBundles, true)) {
-            $coreLoader->load('query_types/netgen_tags_dependant.yml');
+            $coreLoader->load('query_types/netgen_tags_dependant.yaml');
         }
 
         $fileLocator = new FileLocator(__DIR__ . '/../Resources/config');
         $loader = new Loader\YamlFileLoader($container, $fileLocator);
-        $loader->load('services.yml');
+        $loader->load('services.yaml');
     }
 
     public function prepend(ContainerBuilder $container): void
     {
-        $configFile = __DIR__ . '/../Resources/config/ezplatform.yml';
+        $configFile = __DIR__ . '/../Resources/config/ibexa.yaml';
         $config = Yaml::parse(file_get_contents($configFile));
         $container->addResource(new FileResource($configFile));
 
-        $container->prependExtensionConfig('ezpublish', $config);
+        $container->prependExtensionConfig('ibexa', $config);
     }
 }

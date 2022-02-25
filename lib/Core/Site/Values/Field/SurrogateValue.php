@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Core\Site\Values\Field;
+namespace Netgen\IbexaSiteApi\Core\Site\Values\Field;
 
-use eZ\Publish\Core\FieldType\Value;
+use Ibexa\Core\FieldType\Value;
 
 /**
  * Used as a value of a 'ngsurrogate' Field, returned when accessing non-existent Content Field.

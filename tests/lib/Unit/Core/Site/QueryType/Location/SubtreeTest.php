@@ -2,29 +2,32 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Tests\Unit\Core\Site\QueryType\Location;
+namespace Netgen\IbexaSiteApi\Tests\Unit\Core\Site\QueryType\Location;
 
-use eZ\Publish\API\Repository\Values\Content\LocationQuery;
-use eZ\Publish\API\Repository\Values\Content\Query;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\ContentTypeIdentifier;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\DateMetadata;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\Field;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\Location\Depth;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\LocationId;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\LogicalAnd;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\LogicalNot;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\Operator;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\Subtree as SubtreeCriterion;
-use eZ\Publish\API\Repository\Values\Content\Query\SortClause\ContentName;
-use eZ\Publish\API\Repository\Values\Content\Query\SortClause\DatePublished;
-use eZ\Publish\API\Repository\Values\Content\Query\SortClause\Location\Priority;
-use eZ\Publish\Core\Repository\Values\Content\Location as RepositoryLocation;
-use Netgen\EzPlatformSearchExtra\API\Values\Content\Query\Criterion\Visible;
-use Netgen\EzPlatformSiteApi\Core\Site\QueryType\Location\Subtree;
-use Netgen\EzPlatformSiteApi\Core\Site\QueryType\QueryType;
-use Netgen\EzPlatformSiteApi\Core\Site\Settings;
-use Netgen\EzPlatformSiteApi\Core\Site\Values\Location;
-use Netgen\EzPlatformSiteApi\Tests\Unit\Core\Site\QueryType\QueryTypeBaseTest;
+use Ibexa\Contracts\Core\Repository\Values\Content\LocationQuery;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ContentTypeIdentifier;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\DateMetadata;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Field;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Location\Depth;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LocationId;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LogicalAnd;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LogicalNot;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Operator;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Subtree as SubtreeCriterion;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\ContentName;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\DatePublished;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\Location\Priority;
+use Ibexa\Core\Repository\Values\Content\Location as RepositoryLocation;
+use Ibexa\Contracts\Core\Repository\Values\Content\Location as APILocation;
+use Ibexa\Core\Repository\Values\ContentType\FieldDefinitionCollection;
+use Netgen\IbexaSearchExtra\API\Values\Content\Query\Criterion\Visible;
+use Netgen\IbexaSiteApi\Core\Site\QueryType\Location\Subtree;
+use Netgen\IbexaSiteApi\Core\Site\QueryType\QueryType;
+use Netgen\IbexaSiteApi\Core\Site\Settings;
+use Netgen\IbexaSiteApi\Core\Site\Values\Location;
+use Netgen\IbexaSiteApi\Tests\Unit\Core\Site\ContentFieldsMockTrait;
+use Netgen\IbexaSiteApi\Tests\Unit\Core\Site\QueryType\QueryTypeBaseTest;
 use Psr\Log\NullLogger;
 
 /**
@@ -36,6 +39,8 @@ use Psr\Log\NullLogger;
  */
 final class SubtreeTest extends QueryTypeBaseTest
 {
+    use ContentFieldsMockTrait;
+
     public function providerForTestGetQuery(): array
     {
         $location = $this->getTestLocation();
@@ -410,16 +415,17 @@ final class SubtreeTest extends QueryTypeBaseTest
     {
         return new Location(
             [
-                'site' => false,
-                'domainObjectMapper' => false,
-                'innerVersionInfo' => false,
-                'languageCode' => false,
+                'site' => $this->getSiteMock(),
+                'domainObjectMapper' => $this->getDomainObjectMapper(),
+                'innerVersionInfo' => $this->getRepoVersionInfo(),
+                'languageCode' => 'cro-HR',
                 'innerLocation' => new RepositoryLocation([
                     'id' => 42,
                     'pathString' => '/3/5/7/11/',
                     'depth' => 4,
-                    'sortField' => RepositoryLocation::SORT_FIELD_PRIORITY,
-                    'sortOrder' => RepositoryLocation::SORT_ORDER_DESC,
+                    'sortField' => APILocation::SORT_FIELD_PRIORITY,
+                    'sortOrder' => APILocation::SORT_ORDER_DESC,
+                    'contentInfo' => $this->getRepoContentInfo(),
                 ]),
             ],
             new NullLogger()
@@ -447,5 +453,15 @@ final class SubtreeTest extends QueryTypeBaseTest
             'exclude_self',
             'relative_depth',
         ];
+    }
+
+    public function internalGetRepoFields(): array
+    {
+        return [];
+    }
+
+    protected function internalGetRepoFieldDefinitions(): FieldDefinitionCollection
+    {
+        return new FieldDefinitionCollection();
     }
 }

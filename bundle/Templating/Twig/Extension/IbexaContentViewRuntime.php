@@ -2,31 +2,24 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\Templating\Twig\Extension;
+namespace Netgen\Bundle\IbexaSiteApiBundle\Templating\Twig\Extension;
 
-use eZ\Publish\API\Repository\Values\Content\Content as APIContent;
-use eZ\Publish\API\Repository\Values\Content\Location as APILocation;
-use eZ\Publish\API\Repository\Values\ValueObject;
-use eZ\Publish\Core\MVC\Symfony\View\Builder\ContentViewBuilder;
+use Ibexa\Contracts\Core\Repository\Values\Content\Content as APIContent;
+use Ibexa\Contracts\Core\Repository\Values\Content\Location as APILocation;
+use Ibexa\Contracts\Core\Repository\Values\ValueObject;
+use Ibexa\Core\MVC\Symfony\View\Builder\ContentViewBuilder;
 use LogicException;
-use Netgen\Bundle\EzPlatformSiteApiBundle\View\ViewRenderer;
-use Netgen\EzPlatformSiteApi\API\Values\Content;
-use Netgen\EzPlatformSiteApi\API\Values\Location;
+use Netgen\Bundle\IbexaSiteApiBundle\View\ViewRenderer;
+use Netgen\IbexaSiteApi\API\Values\Content;
+use Netgen\IbexaSiteApi\API\Values\Location;
 
 /**
- * Twig extension runtime for eZ Platform content view rendering.
+ * Twig extension runtime for Ibexa CMS content view rendering.
  */
-final class EzContentViewRuntime
+final class IbexaContentViewRuntime
 {
-    /**
-     * @var \eZ\Publish\Core\MVC\Symfony\View\Builder\ContentViewBuilder
-     */
-    private $viewBuilder;
-
-    /**
-     * @var \Netgen\Bundle\EzPlatformSiteApiBundle\View\ViewRenderer
-     */
-    private $viewRenderer;
+    private ContentViewBuilder $viewBuilder;
+    private ViewRenderer $viewRenderer;
 
     public function __construct(ContentViewBuilder $viewBuilder, ViewRenderer $viewRenderer)
     {
@@ -37,8 +30,8 @@ final class EzContentViewRuntime
     /**
      * Renders the HTML for a given $content.
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
     public function renderContentView(
         ValueObject $value,
@@ -53,7 +46,7 @@ final class EzContentViewRuntime
             'content' => $content,
             'viewType' => $viewType,
             'layout' => $layout,
-            '_controller' => 'ez_content::viewAction',
+            '_controller' => 'ibexa_content::viewAction',
         ];
 
         if ($location !== null) {
@@ -75,13 +68,12 @@ final class EzContentViewRuntime
             return $value;
         }
 
-        if ($value instanceof Location) {
-            return $value->content->innerContent;
+        if ($value instanceof APILocation) {
+            return $value->getContent();
         }
 
-        if ($value instanceof APILocation) {
-            // eZ location also has a lazy loaded "content" property
-            return $value->getContent();
+        if ($value instanceof Location) {
+            return $value->content->innerContent;
         }
 
         throw new LogicException('Given value must be Content or Location instance.');

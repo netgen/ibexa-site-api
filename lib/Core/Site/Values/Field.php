@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Core\Site\Values;
+namespace Netgen\IbexaSiteApi\Core\Site\Values;
 
-use Netgen\EzPlatformSiteApi\API\Values\Field as APIField;
+use Netgen\IbexaSiteApi\API\Values\Field as APIField;
 
 final class Field extends APIField
 {
     /**
-     * @var int|string
+     * @var int
      */
     protected $id;
 
@@ -19,7 +19,7 @@ final class Field extends APIField
     protected $fieldDefIdentifier;
 
     /**
-     * @var \eZ\Publish\SPI\FieldType\Value
+     * @var \Ibexa\Contracts\Core\FieldType\Value
      */
     protected $value;
 
@@ -44,17 +44,17 @@ final class Field extends APIField
     protected $description;
 
     /**
-     * @var \Netgen\EzPlatformSiteApi\API\Values\Content
+     * @var \Netgen\IbexaSiteApi\API\Values\Content
      */
     protected $content;
 
     /**
-     * @var \eZ\Publish\API\Repository\Values\Content\Field
+     * @var \Ibexa\Contracts\Core\Repository\Values\Content\Field
      */
     protected $innerField;
 
     /**
-     * @var \eZ\Publish\API\Repository\Values\ContentType\FieldDefinition
+     * @var \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition
      */
     protected $innerFieldDefinition;
 
@@ -88,11 +88,11 @@ final class Field extends APIField
             'fieldTypeIdentifier' => $this->fieldTypeIdentifier,
             'name' => $this->name,
             'description' => $this->description,
-            'content' => '[An instance of Netgen\EzPlatformSiteApi\API\Values\Content]',
+            'content' => '[An instance of Netgen\IbexaSiteApi\API\Values\Content]',
             'contentId' => $this->content->id,
             'isEmpty' => $this->isEmpty,
             'isSurrogate' => $this->isSurrogate,
-            'innerField' => '[An instance of eZ\Publish\API\Repository\Values\Content\Field]',
+            'innerField' => '[An instance of Ibexa\Contracts\Core\Repository\Values\Content\Field]',
             'innerFieldDefinition' => $this->innerFieldDefinition,
         ];
     }

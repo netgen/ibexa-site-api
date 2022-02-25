@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\View;
+namespace Netgen\Bundle\IbexaSiteApiBundle\View;
 
-use eZ\Publish\API\Repository\Values\Content\Content as RepoContent;
-use eZ\Publish\API\Repository\Values\Content\Location as RepoLocation;
-use eZ\Publish\Core\MVC\Symfony\View\BaseView;
-use eZ\Publish\Core\MVC\Symfony\View\CachableView;
-use eZ\Publish\Core\MVC\Symfony\View\EmbedView;
-use Netgen\EzPlatformSiteApi\API\Values\Content;
-use Netgen\EzPlatformSiteApi\API\Values\Location;
+use Ibexa\Contracts\Core\Repository\Values\Content\Content as RepoContent;
+use Ibexa\Contracts\Core\Repository\Values\Content\Location as RepoLocation;
+use Ibexa\Core\MVC\Symfony\View\BaseView;
+use Ibexa\Core\MVC\Symfony\View\CachableView;
+use Ibexa\Core\MVC\Symfony\View\EmbedView;
+use Netgen\IbexaSiteApi\API\Values\Content;
+use Netgen\IbexaSiteApi\API\Values\Location;
 use RuntimeException;
 
 /**
@@ -21,24 +21,13 @@ class ContentView extends BaseView implements ContentValueView, LocationValueVie
     /**
      * Name of the QueryDefinitionCollection variable injected to the template.
      *
-     * @see \Netgen\Bundle\EzPlatformSiteApiBundle\QueryType\QueryDefinitionCollection
+     * @see \Netgen\Bundle\IbexaSiteApiBundle\QueryType\QueryDefinitionCollection
      */
     public const QUERY_DEFINITION_COLLECTION_NAME = 'ng_query_definition_collection';
 
-    /**
-     * @var \Netgen\EzPlatformSiteApi\API\Values\Content
-     */
-    private $content;
-
-    /**
-     * @var \Netgen\EzPlatformSiteApi\API\Values\Location|null
-     */
-    private $location;
-
-    /**
-     * @var bool
-     */
-    private $isEmbed = false;
+    private ?Content $content;
+    private ?Location $location;
+    private ?bool $isEmbed = false;
 
     public function setSiteContent(Content $content): void
     {

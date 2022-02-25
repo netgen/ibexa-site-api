@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\View\Provider;
+namespace Netgen\Bundle\IbexaSiteApiBundle\View\Provider;
 
-use eZ\Publish\Core\MVC\Symfony\Matcher\MatcherFactoryInterface;
-use eZ\Publish\Core\MVC\Symfony\View\ContentView as CoreContentView;
-use eZ\Publish\Core\MVC\Symfony\View\View;
-use eZ\Publish\Core\MVC\Symfony\View\ViewProvider;
-use Netgen\Bundle\EzPlatformSiteApiBundle\DependencyInjection\Configuration\Parser\ContentView as ContentViewParser;
-use Netgen\Bundle\EzPlatformSiteApiBundle\QueryType\QueryDefinitionCollection;
-use Netgen\Bundle\EzPlatformSiteApiBundle\QueryType\QueryDefinitionMapper;
-use Netgen\Bundle\EzPlatformSiteApiBundle\View\ContentView;
-use Netgen\Bundle\EzPlatformSiteApiBundle\View\Redirect\RedirectConfiguration;
-use Netgen\Bundle\EzPlatformSiteApiBundle\View\Redirect\Resolver;
+use Ibexa\Core\MVC\Symfony\Matcher\MatcherFactoryInterface;
+use Ibexa\Core\MVC\Symfony\View\ContentView as CoreContentView;
+use Ibexa\Core\MVC\Symfony\View\View;
+use Ibexa\Core\MVC\Symfony\View\ViewProvider;
+use Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Configuration\Parser\ContentView as ContentViewParser;
+use Netgen\Bundle\IbexaSiteApiBundle\QueryType\QueryDefinitionCollection;
+use Netgen\Bundle\IbexaSiteApiBundle\QueryType\QueryDefinitionMapper;
+use Netgen\Bundle\IbexaSiteApiBundle\View\ContentView;
+use Netgen\Bundle\IbexaSiteApiBundle\View\Redirect\RedirectConfiguration;
+use Netgen\Bundle\IbexaSiteApiBundle\View\Redirect\Resolver;
 use Symfony\Bundle\FrameworkBundle\Controller\RedirectController;
 use Symfony\Component\HttpKernel\Controller\ControllerReference;
 use function array_key_exists;
@@ -24,29 +24,14 @@ use function sprintf;
 /**
  * A kind of a plugin to the Configurator, uses view configuration.
  *
- * @see \eZ\Publish\Core\MVC\Symfony\View\Configurator\ViewProvider
+ * @see \Ibexa\Core\MVC\Symfony\View\Configurator\ViewProvider
  */
 class Configured implements ViewProvider
 {
-    /**
-     * @var \eZ\Publish\Core\MVC\Symfony\Matcher\MatcherFactoryInterface
-     */
-    protected $matcherFactory;
-
-    /**
-     * @var \Netgen\Bundle\EzPlatformSiteApiBundle\QueryType\QueryDefinitionMapper
-     */
-    private $queryDefinitionMapper;
-
-    /**
-     * @var \Netgen\Bundle\EzPlatformSiteApiBundle\View\Redirect\Resolver
-     */
-    private $redirectResolver;
-
-    /**
-     * @var \Netgen\Bundle\EzPlatformSiteApiBundle\View\Provider\ContentViewFallbackResolver
-     */
-    private $contentViewFallbackResolver;
+    protected MatcherFactoryInterface $matcherFactory;
+    private QueryDefinitionMapper $queryDefinitionMapper;
+    private Resolver $redirectResolver;
+    private ContentViewFallbackResolver $contentViewFallbackResolver;
 
     public function __construct(
         MatcherFactoryInterface $matcherFactory,
@@ -65,17 +50,17 @@ class Configured implements ViewProvider
      *
      * Returns view as a data transfer object.
      *
-     * @throws \Netgen\Bundle\EzPlatformSiteApiBundle\Exception\InvalidRedirectConfiguration
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws \Netgen\Bundle\IbexaSiteApiBundle\Exception\InvalidRedirectConfiguration
      */
     public function getView(View $view): ?View
     {
         // Service is dispatched by the configured view class, so this should be safe
-        /** @var \Netgen\Bundle\EzPlatformSiteApiBundle\View\ContentView $view */
+        /** @var \Netgen\Bundle\IbexaSiteApiBundle\View\ContentView $view */
         $configHash = $this->matcherFactory->match($view);
 
         if ($configHash === null) {
-            return $this->contentViewFallbackResolver->getEzPlatformFallbackDto($view);
+            return $this->contentViewFallbackResolver->getIbexaPlatformFallbackDto($view);
         }
 
         // We can set the collection directly to the view, no need to go through DTO
@@ -114,8 +99,8 @@ class Configured implements ViewProvider
     /**
      * Builds a ContentView object from $viewConfig.
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
-     * @throws \Netgen\Bundle\EzPlatformSiteApiBundle\Exception\InvalidRedirectConfiguration
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws \Netgen\Bundle\IbexaSiteApiBundle\Exception\InvalidRedirectConfiguration
      */
     private function getDTO(array $viewConfig, ContentView $view): CoreContentView
     {
@@ -147,7 +132,7 @@ class Configured implements ViewProvider
     }
 
     /**
-     * @throws \Netgen\Bundle\EzPlatformSiteApiBundle\Exception\InvalidRedirectConfiguration
+     * @throws \Netgen\Bundle\IbexaSiteApiBundle\Exception\InvalidRedirectConfiguration
      */
     private function processRedirects(CoreContentView $dto, array $viewConfig, ContentView $view): void
     {

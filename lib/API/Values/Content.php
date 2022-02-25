@@ -2,33 +2,33 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\API\Values;
+namespace Netgen\IbexaSiteApi\API\Values;
 
-use eZ\Publish\API\Repository\Values\ValueObject;
-use eZ\Publish\SPI\FieldType\Value;
+use Ibexa\Contracts\Core\Repository\Values\ValueObject;
+use Ibexa\Contracts\Core\FieldType\Value;
 use Pagerfanta\Pagerfanta;
 
 /**
- * Site Content object represents eZ Platform Repository Content object in a current version
+ * Site Content object represents Ibexa Repository Content object in a current version
  * and specific language.
  *
- * Corresponds to eZ Platform Repository Content object.
+ * Corresponds to Ibexa Repository Content object.
  *
- * @see \eZ\Publish\API\Repository\Values\Content\Content
+ * @see \Ibexa\Contracts\Core\Repository\Values\Content\Content
  *
  * @property int $id
  * @property int|null $mainLocationId
  * @property string $name
  * @property string $languageCode
  * @property bool $isVisible
- * @property \Netgen\EzPlatformSiteApi\API\Values\ContentInfo $contentInfo
- * @property \Netgen\EzPlatformSiteApi\API\Values\Field[]|\Netgen\EzPlatformSiteApi\API\Values\Fields $fields
- * @property \Netgen\EzPlatformSiteApi\API\Values\Location|null $mainLocation
- * @property \Netgen\EzPlatformSiteApi\API\Values\Content|null $owner
- * @property \eZ\Publish\API\Repository\Values\User\User|null $innerOwnerUser
- * @property \eZ\Publish\API\Repository\Values\Content\Content $innerContent
- * @property \eZ\Publish\API\Repository\Values\Content\VersionInfo $innerVersionInfo
- * @property \eZ\Publish\API\Repository\Values\Content\VersionInfo $versionInfo
+ * @property \Netgen\IbexaSiteApi\API\Values\ContentInfo $contentInfo
+ * @property \Netgen\IbexaSiteApi\API\Values\Field[]|\Netgen\IbexaSiteApi\API\Values\Fields $fields
+ * @property \Netgen\IbexaSiteApi\API\Values\Location|null $mainLocation
+ * @property \Netgen\IbexaSiteApi\API\Values\Content|null $owner
+ * @property \Ibexa\Contracts\Core\Repository\Values\User\User|null $innerOwnerUser
+ * @property \Ibexa\Contracts\Core\Repository\Values\Content\Content $innerContent
+ * @property \Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo $innerVersionInfo
+ * @property \Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo $versionInfo
  */
 abstract class Content extends ValueObject
 {
@@ -38,9 +38,7 @@ abstract class Content extends ValueObject
     abstract public function hasField(string $identifier): bool;
 
     /**
-     * Return Field object for the given field definition $identifier.
-     *
-     * @return \Netgen\EzPlatformSiteApi\API\Values\Field
+     * Return the Field object for the given field definition $identifier.
      */
     abstract public function getField(string $identifier): Field;
 
@@ -56,7 +54,7 @@ abstract class Content extends ValueObject
      *
      * @param int|string $id
      *
-     * @return \Netgen\EzPlatformSiteApi\API\Values\Field
+     * @return \Netgen\IbexaSiteApi\API\Values\Field
      */
     abstract public function getFieldById($id): Field;
 
@@ -65,10 +63,6 @@ abstract class Content extends ValueObject
      *
      * If no field is found in the Content, a surrogate field will be returned.
      * If all found fields are empty, the first found field will be returned.
-     *
-     * @param string ...$otherIdentifiers
-     *
-     * @return \Netgen\EzPlatformSiteApi\API\Values\Field
      */
     abstract public function getFirstNonEmptyField(string $firstIdentifier, string ...$otherIdentifiers): Field;
 
@@ -87,7 +81,7 @@ abstract class Content extends ValueObject
     /**
      * Return an array of Locations, limited by optional $limit.
      *
-     * @return \Netgen\EzPlatformSiteApi\API\Values\Location[]
+     * @return \Netgen\IbexaSiteApi\API\Values\Location[]
      */
     abstract public function getLocations(int $limit = 25): array;
 
@@ -100,15 +94,13 @@ abstract class Content extends ValueObject
 
     /**
      * Return single related Content from $fieldDefinitionIdentifier field.
-     *
-     * @return \Netgen\EzPlatformSiteApi\API\Values\Content|null
      */
     abstract public function getFieldRelation(string $fieldDefinitionIdentifier): ?Content;
 
     /**
      * Return all related Content from $fieldDefinitionIdentifier.
      *
-     * @return \Netgen\EzPlatformSiteApi\API\Values\Content[]
+     * @return \Netgen\IbexaSiteApi\API\Values\Content[]
      */
     abstract public function getFieldRelations(string $fieldDefinitionIdentifier, int $limit = 25): array;
 
@@ -132,7 +124,7 @@ abstract class Content extends ValueObject
      *
      * @param string $fieldDefinitionIdentifier
      *
-     * @return null|\Netgen\EzPlatformSiteApi\API\Values\Location
+     * @return null|\Netgen\IbexaSiteApi\API\Values\Location
      */
     abstract public function getFieldRelationLocation(string $fieldDefinitionIdentifier): ?Location;
 
@@ -142,7 +134,7 @@ abstract class Content extends ValueObject
      * @param string $fieldDefinitionIdentifier
      * @param int $limit
      *
-     * @return \Netgen\EzPlatformSiteApi\API\Values\Location[]
+     * @return \Netgen\IbexaSiteApi\API\Values\Location[]
      */
     abstract public function getFieldRelationLocations(string $fieldDefinitionIdentifier, int $limit = 25): array;
 

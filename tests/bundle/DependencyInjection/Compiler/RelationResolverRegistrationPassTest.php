@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\Tests\DependencyInjection\Compiler;
+namespace Netgen\Bundle\IbexaSiteApiBundle\Tests\DependencyInjection\Compiler;
 
 use LogicException;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
-use Netgen\Bundle\EzPlatformSiteApiBundle\DependencyInjection\Compiler\RelationResolverRegistrationPass;
+use Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Compiler\RelationResolverRegistrationPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
@@ -20,7 +20,7 @@ final class RelationResolverRegistrationPassTest extends AbstractCompilerPassTes
         parent::setUp();
 
         $this->setDefinition(
-            'netgen.ezplatform_site.plugins.field_type.relation_resolver.registry',
+            'netgen.ibexa_site_api.plugins.field_type.relation_resolver.registry',
             new Definition()
         );
     }
@@ -31,7 +31,7 @@ final class RelationResolverRegistrationPassTest extends AbstractCompilerPassTes
         $serviceId = 'service_id';
         $definition = new Definition();
         $definition->addTag(
-            'netgen.ezplatform_site.plugins.field_type.relation_resolver',
+            'netgen.ibexa_site_api.plugins.field_type.relation_resolver',
             ['identifier' => $fieldTypeIdentifier]
         );
         $this->setDefinition($serviceId, $definition);
@@ -39,7 +39,7 @@ final class RelationResolverRegistrationPassTest extends AbstractCompilerPassTes
         $this->compile();
 
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
-            'netgen.ezplatform_site.plugins.field_type.relation_resolver.registry',
+            'netgen.ibexa_site_api.plugins.field_type.relation_resolver.registry',
             'register',
             [$fieldTypeIdentifier, $serviceId]
         );
@@ -51,7 +51,7 @@ final class RelationResolverRegistrationPassTest extends AbstractCompilerPassTes
 
         $serviceId = 'service_id';
         $definition = new Definition();
-        $definition->addTag('netgen.ezplatform_site.plugins.field_type.relation_resolver');
+        $definition->addTag('netgen.ibexa_site_api.plugins.field_type.relation_resolver');
         $this->setDefinition($serviceId, $definition);
 
         $this->compile();

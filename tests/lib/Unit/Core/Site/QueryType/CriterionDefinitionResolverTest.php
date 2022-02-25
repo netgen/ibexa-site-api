@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Tests\Unit\Core\Site\QueryType;
+namespace Netgen\IbexaSiteApi\Tests\Unit\Core\Site\QueryType;
 
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\Operator;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Operator;
 use InvalidArgumentException;
-use Netgen\EzPlatformSiteApi\Core\Site\QueryType\CriterionDefinition;
-use Netgen\EzPlatformSiteApi\Core\Site\QueryType\CriterionDefinitionResolver;
+use Netgen\IbexaSiteApi\Core\Site\QueryType\CriterionDefinition;
+use Netgen\IbexaSiteApi\Core\Site\QueryType\CriterionDefinitionResolver;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -15,13 +15,13 @@ use PHPUnit\Framework\TestCase;
  *
  * @group query-type
  *
- * @see \Netgen\EzPlatformSiteApi\Core\Site\QueryType\CriteriaResolver
+ * @see \Netgen\IbexaSiteApi\Core\Site\QueryType\CriteriaResolver
  *
  * @internal
  */
 final class CriterionDefinitionResolverTest extends TestCase
 {
-    protected $criterionDefinitionResolver;
+    protected ?CriterionDefinitionResolver $criterionDefinitionResolver = null;
 
     public function providerForTestResolve(): array
     {
@@ -355,7 +355,7 @@ final class CriterionDefinitionResolverTest extends TestCase
     /**
      * @dataProvider providerForTestResolve
      *
-     * @param \Netgen\EzPlatformSiteApi\Core\Site\QueryType\CriterionDefinition[] $expectedCriterionDefinitions
+     * @param \Netgen\IbexaSiteApi\Core\Site\QueryType\CriterionDefinition[] $expectedCriterionDefinitions
      * @param mixed $parameters
      */
     public function testResolve($parameters, array $expectedCriterionDefinitions): void
@@ -804,7 +804,7 @@ final class CriterionDefinitionResolverTest extends TestCase
     /**
      * @dataProvider providerForTestResolveTargets
      *
-     * @param \Netgen\EzPlatformSiteApi\Core\Site\QueryType\CriterionDefinition[] $expectedCriterionDefinitions
+     * @param \Netgen\IbexaSiteApi\Core\Site\QueryType\CriterionDefinition[] $expectedCriterionDefinitions
      * @param mixed $parameters
      */
     public function testResolveTargets($parameters, array $expectedCriterionDefinitions): void

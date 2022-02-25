@@ -2,29 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\View\Redirect;
+namespace Netgen\Bundle\IbexaSiteApiBundle\View\Redirect;
 
 final class RedirectConfiguration
 {
-    /**
-     * @var string
-     */
-    private $target;
-
-    /**
-     * @var array
-     */
-    private $targetParameters = [];
-
-    /**
-     * @var bool
-     */
-    private $permanent;
-
-    /**
-     * @var bool
-     */
-    private $absolute;
+    private string $target;
+    private array $targetParameters;
+    private bool $permanent;
+    private bool $absolute;
 
     public function __construct(string $target, array $targetParameters, bool $permanent, bool $absolute)
     {

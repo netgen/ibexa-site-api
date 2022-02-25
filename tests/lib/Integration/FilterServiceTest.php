@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Tests\Integration;
+namespace Netgen\IbexaSiteApi\Tests\Integration;
 
-use eZ\Publish\API\Repository\Values\Content\LocationQuery;
-use eZ\Publish\API\Repository\Values\Content\Query;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\ContentId;
-use eZ\Publish\API\Repository\Values\Content\Search\SearchResult;
+use Ibexa\Contracts\Core\Repository\Values\Content\LocationQuery;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ContentId;
+use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchResult;
 
 /**
  * Test case for the FilterService.
  *
- * @see \Netgen\EzPlatformSiteApi\API\FilterService
+ * @see \Netgen\IbexaSiteApi\API\FilterService
  *
  * @group integration
  * @group filter
@@ -24,9 +24,10 @@ final class FilterServiceTest extends BaseTest
     /**
      * Test for the findContent() method.
      *
-     * @see \Netgen\EzPlatformSiteApi\API\FindService::findContent()
-     * @depends Netgen\EzPlatformSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
-     * @depends Netgen\EzPlatformSiteApi\Tests\Integration\SiteTest::testGetFilterService
+     * @see \Netgen\IbexaSiteApi\API\FindService::findContent()
+     *
+     * @depends Netgen\IbexaSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
+     * @depends Netgen\IbexaSiteApi\Tests\Integration\SiteTest::testGetFilterService
      *
      * @throws \ReflectionException
      * @throws \ErrorException
@@ -56,9 +57,10 @@ final class FilterServiceTest extends BaseTest
     /**
      * Test for the findContent() method.
      *
-     * @see \Netgen\EzPlatformSiteApi\API\FindService::findContent()
-     * @depends Netgen\EzPlatformSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
-     * @depends Netgen\EzPlatformSiteApi\Tests\Integration\SiteTest::testGetFilterService
+     * @see \Netgen\IbexaSiteApi\API\FindService::findContent()
+     *
+     * @depends Netgen\IbexaSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
+     * @depends Netgen\IbexaSiteApi\Tests\Integration\SiteTest::testGetFilterService
      *
      * @throws \ReflectionException
      * @throws \ErrorException
@@ -88,9 +90,10 @@ final class FilterServiceTest extends BaseTest
     /**
      * Test for the findContent() method.
      *
-     * @see \Netgen\EzPlatformSiteApi\API\FindService::findContent()
-     * @depends Netgen\EzPlatformSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
-     * @depends Netgen\EzPlatformSiteApi\Tests\Integration\SiteTest::testGetFilterService
+     * @see \Netgen\IbexaSiteApi\API\FindService::findContent()
+     *
+     * @depends Netgen\IbexaSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
+     * @depends Netgen\IbexaSiteApi\Tests\Integration\SiteTest::testGetFilterService
      *
      * @throws \ReflectionException
      * @throws \ErrorException
@@ -119,9 +122,10 @@ final class FilterServiceTest extends BaseTest
     /**
      * Test for the findContent() method.
      *
-     * @see \Netgen\EzPlatformSiteApi\API\FindService::findContent()
-     * @depends Netgen\EzPlatformSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
-     * @depends Netgen\EzPlatformSiteApi\Tests\Integration\SiteTest::testGetFilterService
+     * @see \Netgen\IbexaSiteApi\API\FindService::findContent()
+     *
+     * @depends Netgen\IbexaSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
+     * @depends Netgen\IbexaSiteApi\Tests\Integration\SiteTest::testGetFilterService
      *
      * @throws \ReflectionException
      * @throws \ErrorException
@@ -150,9 +154,10 @@ final class FilterServiceTest extends BaseTest
     /**
      * Test for the findLocations() method.
      *
-     * @see \Netgen\EzPlatformSiteApi\API\FindService::findLocations()
-     * @depends Netgen\EzPlatformSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
-     * @depends Netgen\EzPlatformSiteApi\Tests\Integration\SiteTest::testGetFilterService
+     * @see \Netgen\IbexaSiteApi\API\FindService::findLocations()
+     *
+     * @depends Netgen\IbexaSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
+     * @depends Netgen\IbexaSiteApi\Tests\Integration\SiteTest::testGetFilterService
      *
      * @throws \ReflectionException
      * @throws \ErrorException
@@ -182,9 +187,10 @@ final class FilterServiceTest extends BaseTest
     /**
      * Test for the findLocations() method.
      *
-     * @see \Netgen\EzPlatformSiteApi\API\FindService::findLocations()
-     * @depends Netgen\EzPlatformSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
-     * @depends Netgen\EzPlatformSiteApi\Tests\Integration\SiteTest::testGetFilterService
+     * @see \Netgen\IbexaSiteApi\API\FindService::findLocations()
+     *
+     * @depends Netgen\IbexaSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
+     * @depends Netgen\IbexaSiteApi\Tests\Integration\SiteTest::testGetFilterService
      *
      * @throws \ReflectionException
      * @throws \ErrorException
@@ -214,9 +220,10 @@ final class FilterServiceTest extends BaseTest
     /**
      * Test for the findLocations() method.
      *
-     * @see \Netgen\EzPlatformSiteApi\API\FindService::findLocations()
-     * @depends Netgen\EzPlatformSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
-     * @depends Netgen\EzPlatformSiteApi\Tests\Integration\SiteTest::testGetFilterService
+     * @see \Netgen\IbexaSiteApi\API\FindService::findLocations()
+     *
+     * @depends Netgen\IbexaSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
+     * @depends Netgen\IbexaSiteApi\Tests\Integration\SiteTest::testGetFilterService
      *
      * @throws \ReflectionException
      * @throws \ErrorException
@@ -245,9 +252,10 @@ final class FilterServiceTest extends BaseTest
     /**
      * Test for the findLocations() method.
      *
-     * @see \Netgen\EzPlatformSiteApi\API\FindService::findLocations()
-     * @depends Netgen\EzPlatformSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
-     * @depends Netgen\EzPlatformSiteApi\Tests\Integration\SiteTest::testGetFilterService
+     * @see \Netgen\IbexaSiteApi\API\FindService::findLocations()
+     *
+     * @depends Netgen\IbexaSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
+     * @depends Netgen\IbexaSiteApi\Tests\Integration\SiteTest::testGetFilterService
      *
      * @throws \ReflectionException
      * @throws \ErrorException

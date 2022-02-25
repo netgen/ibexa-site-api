@@ -2,26 +2,26 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Core\Traits;
+namespace Netgen\IbexaSiteApi\Core\Traits;
 
-use eZ\Publish\API\Repository\Values\Content\Search\SearchHit;
-use eZ\Publish\API\Repository\Values\Content\Search\SearchResult;
-use Netgen\EzPlatformSiteApi\API\Values\Content;
-use Netgen\EzPlatformSiteApi\API\Values\Location;
+use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchHit;
+use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchResult;
+use Netgen\IbexaSiteApi\API\Values\Content;
+use Netgen\IbexaSiteApi\API\Values\Location;
 use function array_map;
 
 /**
  * SearchResultExtractorTrait provides a way to extract value objects
- * (usually Content items or Locations) for eZ Platform SearchResult.
+ * (usually Content items or Locations) for Ibexa CMS SearchResult.
  *
- * @see \eZ\Publish\API\Repository\Values\Content\Search\SearchResult
+ * @see \Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchResult
  */
 trait SearchResultExtractorTrait
 {
     /**
      * Extracts value objects from SearchResult.
      *
-     * @return \eZ\Publish\API\Repository\Values\ValueObject[]
+     * @return \Ibexa\Contracts\Core\Repository\Values\ValueObject[]
      */
     protected function extractValueObjects(SearchResult $searchResult): array
     {
@@ -36,13 +36,13 @@ trait SearchResultExtractorTrait
     /**
      * Extracts Content items from SearchResult.
      *
-     * @return \Netgen\EzPlatformSiteApi\API\Values\Content[]
+     * @return \Netgen\IbexaSiteApi\API\Values\Content[]
      */
     protected function extractContentItems(SearchResult $searchResult): array
     {
         return array_map(
             static function (SearchHit $searchHit): Content {
-                /** @var \Netgen\EzPlatformSiteApi\API\Values\Content $content */
+                /** @var \Netgen\IbexaSiteApi\API\Values\Content $content */
                 $content = $searchHit->valueObject;
 
                 return $content;
@@ -54,13 +54,13 @@ trait SearchResultExtractorTrait
     /**
      * Extracts Locations from SearchResult.
      *
-     * @return \Netgen\EzPlatformSiteApi\API\Values\Location[]
+     * @return \Netgen\IbexaSiteApi\API\Values\Location[]
      */
     protected function extractLocations(SearchResult $searchResult): array
     {
         return array_map(
             static function (SearchHit $searchHit): Location {
-                /** @var \Netgen\EzPlatformSiteApi\API\Values\Location $location */
+                /** @var \Netgen\IbexaSiteApi\API\Values\Location $location */
                 $location = $searchHit->valueObject;
 
                 return $location;

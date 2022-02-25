@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Resolver;
+namespace Netgen\IbexaSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Resolver;
 
-use eZ\Publish\SPI\FieldType\Value;
-use Netgen\EzPlatformSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Resolver;
+use Ibexa\Contracts\Core\FieldType\Value;
+use Netgen\IbexaSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Resolver;
 
 /**
  * Surrogate field type relation Resolver.

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\QueryType;
+namespace Netgen\Bundle\IbexaSiteApiBundle\QueryType;
 
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use Netgen\Bundle\EzPlatformSiteApiBundle\NamedObject\Provider;
-use Netgen\Bundle\EzPlatformSiteApiBundle\View\ContentView;
+use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
+use Netgen\Bundle\IbexaSiteApiBundle\NamedObject\Provider;
+use Netgen\Bundle\IbexaSiteApiBundle\View\ContentView;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\HttpFoundation\RequestStack;
 use function is_string;
@@ -26,25 +26,10 @@ final class ParameterProcessor
      */
     private const ExpressionMarker = '@=';
 
-    /**
-     * @var \Symfony\Component\ExpressionLanguage\ExpressionLanguage
-     */
-    private $expressionLanguage;
-
-    /**
-     * @var \Symfony\Component\HttpFoundation\RequestStack
-     */
-    private $requestStack;
-
-    /**
-     * @var \eZ\Publish\Core\MVC\ConfigResolverInterface
-     */
-    private $configResolver;
-
-    /**
-     * @var \Netgen\Bundle\EzPlatformSiteApiBundle\NamedObject\Provider
-     */
-    private $namedObjectProvider;
+    private ExpressionLanguage $expressionLanguage;
+    private RequestStack $requestStack;
+    private ConfigResolverInterface $configResolver;
+    private Provider $namedObjectProvider;
 
     public function __construct(
         ExpressionLanguage $expressionLanguage,

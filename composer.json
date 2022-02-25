@@ -1,7 +1,7 @@
 {
-    "name": "netgen/ezplatform-site-api",
-    "description": "Netgen's Site API for eZ Platform",
-    "type": "ezplatform-bundle",
+    "name": "netgen/ibexa-site-api",
+    "description": "Netgen's Site API for Ibexa CMS",
+    "type": "ibexa-bundle",
     "license": "GPL-2.0-only",
     "authors": [
         {
@@ -10,19 +10,20 @@
         }
     ],
     "require": {
-        "php": "^7.3",
+        "php": "^7.4|^8.0",
         "ext-dom": "*",
-        "ezsystems/ezplatform-kernel": "^1.2",
-        "ezsystems/ezplatform-http-cache": "^2.2",
-        "ezsystems/ezplatform-richtext": "^2.2",
-        "netgen/ezplatform-search-extra": "^2.5",
-        "sensio/framework-extra-bundle": "^5.5|^6.0"
+        "ibexa/core": "^4.0",
+        "ibexa/http-cache": "^4.0",
+        "ibexa/fieldtype-richtext": "^4.0",
+        "netgen/ezplatform-search-extra": "^2.6",
+        "sensio/framework-extra-bundle": "^6.1.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.0",
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
-        "netgen/tagsbundle": "^4.0",
-        "composer/package-versions-deprecated": "*"
+        "netgen/tagsbundle": "^5.0.x-dev",
+        "composer/package-versions-deprecated": "*",
+        "franzl/studio": "^0.15.0"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -31,23 +32,28 @@
     },
     "autoload": {
         "psr-4": {
-            "Netgen\\EzPlatformSiteApi\\": "lib",
-            "Netgen\\Bundle\\EzPlatformSiteApiBundle\\": "bundle"
+            "Netgen\\IbexaSiteApi\\": "lib",
+            "Netgen\\Bundle\\IbexaSiteApiBundle\\": "bundle"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Netgen\\EzPlatformSiteApi\\Tests\\": "tests/lib",
-            "Netgen\\Bundle\\EzPlatformSiteApiBundle\\Tests\\": "tests/bundle"
+            "Netgen\\IbexaSiteApi\\Tests\\": "tests/lib",
+            "Netgen\\Bundle\\IbexaSiteApiBundle\\Tests\\": "tests/bundle"
         }
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "4.4-dev"
+            "dev-master": "5.0-dev"
         }
     },
     "scripts": {
         "test": "@php vendor/bin/phpunit --colors=always",
         "test-integration": "@php vendor/bin/phpunit --colors=always -c phpunit-integration-legacy.xml"
+    },
+    "config": {
+        "allow-plugins": {
+            "franzl/studio": true
+        }
     }
 }

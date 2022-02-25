@@ -2,31 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\View\LocationResolver;
+namespace Netgen\Bundle\IbexaSiteApiBundle\View\LocationResolver;
 
-use eZ\Publish\API\Repository\Repository;
-use eZ\Publish\Core\Helper\ContentInfoLocationLoader;
-use Netgen\Bundle\EzPlatformSiteApiBundle\View\LocationResolver;
-use Netgen\EzPlatformSiteApi\API\LoadService;
-use Netgen\EzPlatformSiteApi\API\Values\Content;
-use Netgen\EzPlatformSiteApi\API\Values\Location;
+use Ibexa\Contracts\Core\Repository\Repository;
+use Ibexa\Core\Helper\ContentInfoLocationLoader;
+use Netgen\Bundle\IbexaSiteApiBundle\View\LocationResolver;
+use Netgen\IbexaSiteApi\API\LoadService;
+use Netgen\IbexaSiteApi\API\Values\Content;
+use Netgen\IbexaSiteApi\API\Values\Location;
 
 class CoreAdapterResolver extends LocationResolver
 {
-    /**
-     * @var \eZ\Publish\API\Repository\Repository
-     */
-    private $repository;
-
-    /**
-     * @var \Netgen\EzPlatformSiteApi\API\LoadService
-     */
-    private $loadService;
-
-    /**
-     * @var \eZ\Publish\Core\Helper\ContentInfoLocationLoader
-     */
-    private $coreLoader;
+    private Repository $repository;
+    private LoadService $loadService;
+    private ContentInfoLocationLoader $coreLoader;
 
     public function __construct(
         Repository $repository,

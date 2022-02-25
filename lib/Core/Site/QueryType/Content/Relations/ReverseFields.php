@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Core\Site\QueryType\Content\Relations;
+namespace Netgen\IbexaSiteApi\Core\Site\QueryType\Content\Relations;
 
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\FieldRelation;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\MatchNone;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\Operator;
-use Netgen\EzPlatformSiteApi\API\Values\Content as SiteContent;
-use Netgen\EzPlatformSiteApi\Core\Site\QueryType\Content;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\FieldRelation;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\MatchNone;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Operator;
+use Netgen\IbexaSiteApi\API\Values\Content as SiteContent;
+use Netgen\IbexaSiteApi\Core\Site\QueryType\Content;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -54,7 +54,7 @@ final class ReverseFields extends Content
             return new MatchNone();
         }
 
-        /** @var \Netgen\EzPlatformSiteApi\API\Values\Content $content */
+        /** @var \Netgen\IbexaSiteApi\API\Values\Content $content */
         $content = $parameters['content'];
         $criteria = [];
 

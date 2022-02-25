@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\NamedObject\Provider;
+namespace Netgen\Bundle\IbexaSiteApiBundle\NamedObject\Provider;
 
-use Netgen\Bundle\EzPlatformSiteApiBundle\NamedObject\Provider;
-use Netgen\EzPlatformSiteApi\API\Values\Content;
-use Netgen\EzPlatformSiteApi\API\Values\Location;
+use Netgen\Bundle\IbexaSiteApiBundle\NamedObject\Provider;
+use Netgen\IbexaSiteApi\API\Values\Content;
+use Netgen\IbexaSiteApi\API\Values\Location;
 use Netgen\TagsBundle\API\Repository\Values\Tags\Tag;
 
 /**
@@ -18,15 +18,8 @@ use Netgen\TagsBundle\API\Repository\Values\Tags\Tag;
  */
 final class Caching extends Provider
 {
-    /**
-     * @var \Netgen\Bundle\EzPlatformSiteApiBundle\NamedObject\Provider
-     */
-    private $provider;
-
-    /**
-     * @var array
-     */
-    private $cache = [];
+    private Provider $provider;
+    private array $cache = [];
 
     public function __construct(Provider $provider)
     {

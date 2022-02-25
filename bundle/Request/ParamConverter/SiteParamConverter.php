@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\Request\ParamConverter;
+namespace Netgen\Bundle\IbexaSiteApiBundle\Request\ParamConverter;
 
-use Netgen\EzPlatformSiteApi\API\LoadService;
+use Netgen\IbexaSiteApi\API\LoadService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,10 +12,7 @@ use function is_a;
 
 abstract class SiteParamConverter implements ParamConverterInterface
 {
-    /**
-     * @var \Netgen\EzPlatformSiteApi\API\LoadService
-     */
-    protected $loadService;
+    protected LoadService $loadService;
 
     public function __construct(LoadService $loadService)
     {
@@ -32,7 +29,9 @@ abstract class SiteParamConverter implements ParamConverterInterface
         if (!$request->attributes->has($this->getPropertyName())) {
             return false;
         }
+
         $valueObjectId = $request->attributes->getInt($this->getPropertyName());
+
         if (!$valueObjectId && $configuration->isOptional()) {
             return false;
         }

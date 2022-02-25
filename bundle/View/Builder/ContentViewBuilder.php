@@ -2,25 +2,25 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\View\Builder;
+namespace Netgen\Bundle\IbexaSiteApiBundle\View\Builder;
 
-use eZ\Publish\API\Repository\Exceptions\NotFoundException;
-use eZ\Publish\API\Repository\Repository;
-use eZ\Publish\API\Repository\Values\Content\Content as APIContent;
-use eZ\Publish\API\Repository\Values\Content\ContentInfo;
-use eZ\Publish\API\Repository\Values\Content\Location as APILocation;
-use eZ\Publish\API\Repository\Values\Content\VersionInfo;
-use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
-use eZ\Publish\Core\Base\Exceptions\UnauthorizedException;
-use eZ\Publish\Core\MVC\Symfony\View\Builder\ViewBuilder;
-use eZ\Publish\Core\MVC\Symfony\View\Configurator;
-use eZ\Publish\Core\MVC\Symfony\View\EmbedView;
-use eZ\Publish\Core\MVC\Symfony\View\ParametersInjector;
-use Netgen\Bundle\EzPlatformSiteApiBundle\View\ContentView;
-use Netgen\Bundle\EzPlatformSiteApiBundle\View\LocationResolver;
-use Netgen\EzPlatformSiteApi\API\Site;
-use Netgen\EzPlatformSiteApi\API\Values\Content;
-use Netgen\EzPlatformSiteApi\API\Values\Location;
+use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
+use Ibexa\Contracts\Core\Repository\Repository;
+use Ibexa\Contracts\Core\Repository\Values\Content\Content as APIContent;
+use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
+use Ibexa\Contracts\Core\Repository\Values\Content\Location as APILocation;
+use Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo;
+use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
+use Ibexa\Core\Base\Exceptions\UnauthorizedException;
+use Ibexa\Core\MVC\Symfony\View\Builder\ViewBuilder;
+use Ibexa\Core\MVC\Symfony\View\Configurator;
+use Ibexa\Core\MVC\Symfony\View\EmbedView;
+use Ibexa\Core\MVC\Symfony\View\ParametersInjector;
+use Netgen\Bundle\IbexaSiteApiBundle\View\ContentView;
+use Netgen\Bundle\IbexaSiteApiBundle\View\LocationResolver;
+use Netgen\IbexaSiteApi\API\Site;
+use Netgen\IbexaSiteApi\API\Values\Content;
+use Netgen\IbexaSiteApi\API\Values\Location;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use function in_array;
 use function is_string;
@@ -31,30 +31,11 @@ use function mb_strpos;
  */
 class ContentViewBuilder implements ViewBuilder
 {
-    /**
-     * @var \Netgen\EzPlatformSiteApi\API\Site
-     */
-    private $site;
-
-    /**
-     * @var \eZ\Publish\API\Repository\Repository
-     */
-    private $repository;
-
-    /**
-     * @var \eZ\Publish\Core\MVC\Symfony\View\Configurator
-     */
-    private $viewConfigurator;
-
-    /**
-     * @var \eZ\Publish\Core\MVC\Symfony\View\ParametersInjector
-     */
-    private $viewParametersInjector;
-
-    /**
-     * @var \Netgen\Bundle\EzPlatformSiteApiBundle\View\LocationResolver
-     */
-    private $locationResolver;
+    private Site $site;
+    private Repository $repository;
+    private Configurator $viewConfigurator;
+    private ParametersInjector $viewParametersInjector;
+    private LocationResolver $locationResolver;
 
     public function __construct(
         Site $site,
@@ -76,10 +57,10 @@ class ContentViewBuilder implements ViewBuilder
     }
 
     /**
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      * @throws \Exception
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
     public function buildView(array $parameters): ContentView
     {
@@ -151,15 +132,11 @@ class ContentViewBuilder implements ViewBuilder
     }
 
     /**
-     * Loads Content with id $contentId.
-     *
-     * @param int $contentId
-     *
-     * @throws \Netgen\EzPlatformSiteApi\API\Exceptions\TranslationNotMatchedException
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
      */
-    private function loadContent($contentId): Content
+    private function loadContent(int $contentId): Content
     {
         return $this->site->getLoadService()->loadContent($contentId);
     }
@@ -169,15 +146,12 @@ class ContentViewBuilder implements ViewBuilder
      * Will load the content with sudo(), and check if the user can view_embed this content, for the given location
      * if provided.
      *
-     * @param int $contentId
-     * @param \Netgen\EzPlatformSiteApi\API\Values\Location $location
-     *
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
      * @throws \Exception
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
-    private function loadEmbeddedContent($contentId, ?Location $location = null): Content
+    private function loadEmbeddedContent(int $contentId, ?Location $location = null): Content
     {
-        /** @var \Netgen\EzPlatformSiteApi\API\Values\Content $content */
+        /** @var \Netgen\IbexaSiteApi\API\Values\Content $content */
         $content = $this->repository->sudo(
             function () use ($contentId): Content {
                 return $this->site->getLoadService()->loadContent($contentId);
@@ -206,15 +180,13 @@ class ContentViewBuilder implements ViewBuilder
     }
 
     /**
-     * Loads a visible Location.
+     * Loads a Location with visibility check.
      *
      * @todo Do we need to handle permissions here ?
      *
-     * @param int $locationId
-     *
      * @throws \Exception
      */
-    private function loadLocation($locationId, bool $checkVisibility = true): Location
+    private function loadLocation(int $locationId, bool $checkVisibility = true): Location
     {
         $location = $this->repository->sudo(
             function (Repository $repository) use ($locationId): Location {
@@ -234,10 +206,8 @@ class ContentViewBuilder implements ViewBuilder
     /**
      * Checks if a user can read a content, or view it as an embed.
      *
-     * @param \Netgen\EzPlatformSiteApi\API\Values\Location $location
-     *
-     * @throws \eZ\Publish\API\Repository\Exceptions\BadStateException
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\BadStateException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
     private function canReadOrViewEmbed(ContentInfo $contentInfo, ?Location $location = null): bool
     {

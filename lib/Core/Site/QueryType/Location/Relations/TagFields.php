@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Core\Site\QueryType\Location\Relations;
+namespace Netgen\IbexaSiteApi\Core\Site\QueryType\Location\Relations;
 
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\ContentId;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\LogicalNot;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\MatchNone;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ContentId;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LogicalNot;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\MatchNone;
 use InvalidArgumentException;
-use Netgen\EzPlatformSiteApi\API\Values\Content as SiteContent;
-use Netgen\EzPlatformSiteApi\Core\Site\QueryType\Location;
+use Netgen\IbexaSiteApi\API\Values\Content as SiteContent;
+use Netgen\IbexaSiteApi\Core\Site\QueryType\Location;
 use Netgen\TagsBundle\API\Repository\Values\Content\Query\Criterion\TagId;
 use Netgen\TagsBundle\API\Repository\Values\Tags\Tag;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -61,7 +61,7 @@ final class TagFields extends Location
      */
     protected function getFilterCriteria(array $parameters)
     {
-        /** @var \Netgen\EzPlatformSiteApi\API\Values\Content $content */
+        /** @var \Netgen\IbexaSiteApi\API\Values\Content $content */
         $content = $parameters['content'];
         /** @var string[] $fields */
         $fields = (array) $parameters['relation_field'];
@@ -86,12 +86,9 @@ final class TagFields extends Location
     /**
      * Extract Tag IDs from $fields in the given $content.
      *
-     * @param \Netgen\EzPlatformSiteApi\API\Values\Content $content
      * @param string[] $fields
      *
      * @throws \InvalidArgumentException
-     *
-     * @return array
      */
     private function extractTagIds(SiteContent $content, array $fields): array
     {

@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Tests\Unit\Core\Site\QueryType;
+namespace Netgen\IbexaSiteApi\Tests\Unit\Core\Site\QueryType;
 
-use eZ\Publish\API\Repository\Values\Content\Query;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query;
 use InvalidArgumentException;
-use Netgen\EzPlatformSiteApi\Core\Site\QueryType\QueryType;
+use Netgen\IbexaSiteApi\Core\Site\QueryType\QueryType;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use function array_flip;
-use function array_key_exists;
 use function count;
 use function md5;
 use function time;
@@ -77,7 +76,7 @@ abstract class QueryTypeBaseTest extends TestCase
         $parameterSet = array_flip($parameters);
 
         foreach ($expectedParameters as $expectedParameter) {
-            self::assertTrue(array_key_exists($expectedParameter, $parameterSet));
+            self::assertArrayHasKey($expectedParameter, $parameterSet);
             self::assertTrue($queryType->supportsParameter($expectedParameter));
         }
     }
@@ -102,6 +101,7 @@ abstract class QueryTypeBaseTest extends TestCase
     abstract public function providerForTestGetQueryWithInvalidOptions();
 
     /**
+     * @group yyy
      * @dataProvider providerForTestGetQueryWithInvalidOptions
      */
     public function testGetQueryWithInvalidOptions(array $parameters): void

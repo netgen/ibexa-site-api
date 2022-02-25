@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\Templating\Twig\Extension;
+namespace Netgen\Bundle\IbexaSiteApiBundle\Templating\Twig\Extension;
 
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 /**
- * Twig extension for eZ Platform content view rendering.
+ * Twig extension for Ibexa CMS content view rendering.
  */
-class EzContentViewExtension extends AbstractExtension
+class IbexaContentViewExtension extends AbstractExtension
 {
     /**
      * @return \Twig\TwigFunction[]
@@ -19,8 +19,8 @@ class EzContentViewExtension extends AbstractExtension
     {
         return [
             new TwigFunction(
-                'ng_ez_view_content',
-                [EzContentViewRuntime::class, 'renderContentView'],
+                'ng_ibexa_view_content',
+                [IbexaContentViewRuntime::class, 'renderContentView'],
                 ['is_safe' => ['html']]
             ),
         ];

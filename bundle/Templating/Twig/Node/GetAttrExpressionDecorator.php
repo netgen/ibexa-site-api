@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\Templating\Twig\Node;
+namespace Netgen\Bundle\IbexaSiteApiBundle\Templating\Twig\Node;
 
-use Netgen\EzPlatformSiteApi\Core\Site\Values\Fields;
+use Netgen\IbexaSiteApi\Core\Site\Values\Fields;
 use Traversable;
 use Twig\Compiler;
 use Twig\Environment;
@@ -17,10 +17,7 @@ use function twig_get_attribute;
 
 final class GetAttrExpressionDecorator extends GetAttrExpression
 {
-    /**
-     * @var \Twig\Node\Expression\GetAttrExpression
-     */
-    private $decoratedExpression;
+    private GetAttrExpression $decoratedExpression;
 
     /** @noinspection MagicMethodsValidityInspection */
 
@@ -183,8 +180,8 @@ final class GetAttrExpressionDecorator extends GetAttrExpression
      * @param mixed $object
      * @param mixed $item
      *
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      * @throws \Twig\Error\RuntimeError
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
      */
     public static function twig_get_attribute(
         Environment $env,

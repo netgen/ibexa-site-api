@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Resolver;
+namespace Netgen\IbexaSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Resolver;
 
-use eZ\Publish\SPI\FieldType\Value;
-use Netgen\EzPlatformSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Resolver;
+use Ibexa\Contracts\Core\FieldType\Value;
+use Netgen\IbexaSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Resolver;
 
 /**
  * RelationList field type relation resolver.
  *
- * @see \eZ\Publish\Core\FieldType\RelationList
+ * @see \Ibexa\Core\FieldType\RelationList
  */
 class RelationList extends Resolver
 {
@@ -21,7 +21,7 @@ class RelationList extends Resolver
 
     protected function getRelationIdsFromValue(Value $value): array
     {
-        /* @var \eZ\Publish\Core\FieldType\RelationList\Value $value */
+        /* @var \Ibexa\Core\FieldType\RelationList\Value $value */
         return $value->destinationContentIds;
     }
 }

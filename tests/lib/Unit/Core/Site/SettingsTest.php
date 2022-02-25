@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Tests\Unit\Core\Site;
+namespace Netgen\IbexaSiteApi\Tests\Unit\Core\Site;
 
-use eZ\Publish\API\Repository\Exceptions\PropertyNotFoundException;
-use eZ\Publish\API\Repository\Exceptions\PropertyReadOnlyException;
-use Netgen\EzPlatformSiteApi\Core\Site\Settings;
+use Ibexa\Contracts\Core\Repository\Exceptions\PropertyNotFoundException;
+use Ibexa\Contracts\Core\Repository\Exceptions\PropertyReadOnlyException;
+use Netgen\IbexaSiteApi\Core\Site\Settings;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Settings value unit tests.
  *
- * @see \Netgen\EzPlatformSiteApi\API\Settings
+ * @see \Netgen\IbexaSiteApi\API\Settings
  *
  * @internal
  */
@@ -94,9 +94,6 @@ final class SettingsTest extends TestCase
         $settings->rootLocationId = 24;
     }
 
-    /**
-     * @return \Netgen\EzPlatformSiteApi\API\Settings
-     */
     protected function getSettingsUnderTest(): Settings
     {
         return new Settings(

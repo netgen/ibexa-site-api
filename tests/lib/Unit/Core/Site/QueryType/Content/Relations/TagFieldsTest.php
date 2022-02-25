@@ -2,31 +2,31 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Tests\Unit\Core\Site\QueryType\Content\Relations;
+namespace Netgen\IbexaSiteApi\Tests\Unit\Core\Site\QueryType\Content\Relations;
 
-use eZ\Publish\API\Repository\Values\Content\Field as RepoField;
-use eZ\Publish\API\Repository\Values\Content\Query;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\ContentId;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\ContentTypeIdentifier;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\DateMetadata;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\Field;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\LogicalAnd;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\LogicalNot;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\MatchNone;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\Operator;
-use eZ\Publish\API\Repository\Values\Content\Query\SortClause\ContentName;
-use eZ\Publish\API\Repository\Values\Content\Query\SortClause\DatePublished;
-use eZ\Publish\Core\FieldType\TextLine\Value;
-use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
-use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinitionCollection;
+use Ibexa\Contracts\Core\Repository\Values\Content\Field as RepoField;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ContentId;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ContentTypeIdentifier;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\DateMetadata;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Field;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LogicalAnd;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LogicalNot;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\MatchNone;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Operator;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\ContentName;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\DatePublished;
+use Ibexa\Core\FieldType\TextLine\Value;
+use Ibexa\Core\Repository\Values\ContentType\FieldDefinition;
+use Ibexa\Core\Repository\Values\ContentType\FieldDefinitionCollection;
 use InvalidArgumentException;
-use Netgen\EzPlatformSearchExtra\API\Values\Content\Query\Criterion\Visible;
-use Netgen\EzPlatformSiteApi\Core\Site\QueryType\Content\Relations\TagFields;
-use Netgen\EzPlatformSiteApi\Core\Site\QueryType\QueryType;
-use Netgen\EzPlatformSiteApi\Core\Site\Settings;
-use Netgen\EzPlatformSiteApi\Core\Site\Values\Content;
-use Netgen\EzPlatformSiteApi\Tests\Unit\Core\Site\ContentFieldsMockTrait;
-use Netgen\EzPlatformSiteApi\Tests\Unit\Core\Site\QueryType\QueryTypeBaseTest;
+use Netgen\IbexaSearchExtra\API\Values\Content\Query\Criterion\Visible;
+use Netgen\IbexaSiteApi\Core\Site\QueryType\Content\Relations\TagFields;
+use Netgen\IbexaSiteApi\Core\Site\QueryType\QueryType;
+use Netgen\IbexaSiteApi\Core\Site\Settings;
+use Netgen\IbexaSiteApi\Core\Site\Values\Content;
+use Netgen\IbexaSiteApi\Tests\Unit\Core\Site\ContentFieldsMockTrait;
+use Netgen\IbexaSiteApi\Tests\Unit\Core\Site\QueryType\QueryTypeBaseTest;
 use Netgen\TagsBundle\API\Repository\Values\Content\Query\Criterion\TagId;
 use Netgen\TagsBundle\API\Repository\Values\Tags\Tag;
 use Netgen\TagsBundle\Core\FieldType\Tags\Value as TagValue;
@@ -38,7 +38,7 @@ use RuntimeException;
  *
  * @group query-type
  *
- * @see \Netgen\EzPlatformSiteApi\Core\Site\QueryType\Content\Relations\TagFields
+ * @see \Netgen\IbexaSiteApi\Core\Site\QueryType\Content\Relations\TagFields
  *
  * @internal
  */
@@ -438,10 +438,11 @@ final class TagFieldsTest extends QueryTypeBaseTest
         return new Content(
             [
                 'id' => 42,
-                'site' => false,
+                'site' => $this->getSiteMock(),
+                'name' => 'Krešo',
+                'mainLocationId' => 123,
                 'domainObjectMapper' => $this->getDomainObjectMapper($failOnMissingField),
                 'repository' => $this->getRepositoryMock(),
-                'innerContent' => $this->getRepoContent(),
                 'innerVersionInfo' => $this->getRepoVersionInfo(),
                 'languageCode' => 'eng-GB',
             ],

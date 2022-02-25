@@ -1,4 +1,4 @@
 parameters:
-    netgen.ezplatform_site.prioritized_languages:
+    netgen.ibexa_site_api.prioritized_languages:
         - 'eng-GB'
         - 'ger-DE'

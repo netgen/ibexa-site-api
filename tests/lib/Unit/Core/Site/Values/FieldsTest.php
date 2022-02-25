@@ -2,24 +2,23 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Tests\Unit\Core\Site\Values;
+namespace Netgen\IbexaSiteApi\Tests\Unit\Core\Site\Values;
 
-use eZ\Publish\API\Repository\Values\Content\Field as RepoField;
-use eZ\Publish\Core\FieldType\Integer\Value;
-use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
-use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinitionCollection;
-use Netgen\EzPlatformSiteApi\API\Values\Content as APIContent;
-use Netgen\EzPlatformSiteApi\API\Values\Field as SiteField;
-use Netgen\EzPlatformSiteApi\API\Values\Fields as APIFields;
-use Netgen\EzPlatformSiteApi\Core\Site\Values\Content;
-use Netgen\EzPlatformSiteApi\Core\Site\Values\Fields;
-use Netgen\EzPlatformSiteApi\Tests\Unit\Core\Site\ContentFieldsMockTrait;
+use Ibexa\Contracts\Core\Repository\Values\Content\Field as RepoField;
+use Ibexa\Core\FieldType\Integer\Value;
+use Ibexa\Core\Repository\Values\ContentType\FieldDefinition;
+use Ibexa\Core\Repository\Values\ContentType\FieldDefinitionCollection;
+use Netgen\IbexaSiteApi\API\Values\Content as APIContent;
+use Netgen\IbexaSiteApi\API\Values\Field as SiteField;
+use Netgen\IbexaSiteApi\API\Values\Fields as APIFields;
+use Netgen\IbexaSiteApi\Core\Site\Values\Content;
+use Netgen\IbexaSiteApi\Core\Site\Values\Fields;
+use Netgen\IbexaSiteApi\Tests\Unit\Core\Site\ContentFieldsMockTrait;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use RuntimeException;
-use function count;
 use function sprintf;
 
 /**
@@ -27,7 +26,7 @@ use function sprintf;
  *
  * @group fields
  *
- * @see \Netgen\EzPlatformSiteApi\API\Values\Fields
+ * @see \Netgen\IbexaSiteApi\API\Values\Fields
  *
  * @internal
  */
@@ -35,16 +34,13 @@ final class FieldsTest extends TestCase
 {
     use ContentFieldsMockTrait;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject
-     */
-    private $loggerMock;
+    private ?MockObject $loggerMock = null;
 
     public function testFieldsCanBeCounted(): void
     {
         $fields = $this->getFieldsUnderTest(true);
 
-        self::assertEquals(3, count($fields));
+        self::assertCount(3, $fields);
     }
 
     /**
@@ -55,15 +51,16 @@ final class FieldsTest extends TestCase
         $fields = $this->getFieldsUnderTest(true);
         $i = 1;
 
+        self::assertInstanceOf(APIFields::class, $fields);
+
         foreach ($fields as $field) {
-            self::assertInstanceOf(APIFields::class, $fields);
             self::assertEquals($i, $field->id);
             ++$i;
         }
     }
 
     /**
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     public function testExistenceOfExistingFieldCanBeCheckedByIdentifier(): void
     {
@@ -73,7 +70,7 @@ final class FieldsTest extends TestCase
     }
 
     /**
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     public function testExistenceOfNonExistingFieldCanBeCheckedByIdentifier(): void
     {
@@ -153,7 +150,7 @@ final class FieldsTest extends TestCase
             ->method('critical')
             ->with('Field "fourth" in Content #1 does not exist, using surrogate field instead');
 
-        /** @var \Netgen\EzPlatformSiteApi\API\Values\Field $field */
+        /** @var \Netgen\IbexaSiteApi\API\Values\Field $field */
         $field = $fields[$identifier];
 
         self::assertInstanceOf(SiteField::class, $field);
@@ -169,7 +166,6 @@ final class FieldsTest extends TestCase
 
         $fields = $this->getFieldsUnderTest(true);
 
-        /* @noinspection OnlyWritesOnParameterInspection */
         $fields['pekmez'] = 'džem';
     }
 
@@ -184,7 +180,7 @@ final class FieldsTest extends TestCase
     }
 
     /**
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     public function testExistenceOfExistingFieldCanBeCheckedById(): void
     {
@@ -194,7 +190,7 @@ final class FieldsTest extends TestCase
     }
 
     /**
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     public function testExistenceOfNonExistingFieldCanBeCheckedById(): void
     {
@@ -204,7 +200,7 @@ final class FieldsTest extends TestCase
     }
 
     /**
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     public function testExistingFieldCanBeAccessedById(): void
     {
@@ -217,14 +213,14 @@ final class FieldsTest extends TestCase
     }
 
     /**
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     public function testNonExistentFieldCanNotBeAccessedById(): void
     {
         $id = 101;
 
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage("Field #{$id} in Content #1 does not exist");
+        $this->expectExceptionMessage("Field #$id in Content #1 does not exist");
 
         $fields = $this->getFieldsUnderTest(true);
 
@@ -232,7 +228,7 @@ final class FieldsTest extends TestCase
     }
 
     /**
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     public function testAccessingNonExistentFieldByIdReturnsNullField(): void
     {
@@ -248,7 +244,7 @@ final class FieldsTest extends TestCase
     }
 
     /**
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     public function testExistingFieldCanBeAccessedByIdentifier(): void
     {
@@ -261,7 +257,7 @@ final class FieldsTest extends TestCase
     }
 
     /**
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     public function testNonExistentFieldCanNotBeAccessedByIdentifier(): void
     {
@@ -276,7 +272,7 @@ final class FieldsTest extends TestCase
     }
 
     /**
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     public function testAccessingNonExistentFieldByIdentifierReturnsNullField(): void
     {
@@ -292,7 +288,7 @@ final class FieldsTest extends TestCase
     }
 
     /**
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     public function testFirstNonEmptyFieldReturnsFirstField(): void
     {
@@ -306,7 +302,7 @@ final class FieldsTest extends TestCase
     }
 
     /**
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     public function testFirstNonEmptyFieldReturnsFirstNonEmptyField(): void
     {
@@ -318,7 +314,7 @@ final class FieldsTest extends TestCase
     }
 
     /**
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     public function testFirstNonEmptyFieldReturnsThirdField(): void
     {
@@ -332,7 +328,7 @@ final class FieldsTest extends TestCase
     }
 
     /**
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     public function testFirstNonEmptyFieldReturnsSurrogateField(): void
     {
@@ -348,7 +344,7 @@ final class FieldsTest extends TestCase
     }
 
     /**
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     public function testDebugInfo(): void
     {
@@ -390,10 +386,11 @@ final class FieldsTest extends TestCase
             [
                 'id' => 1,
                 'site' => $this->getSiteMock(),
+                'name' => 'Krešo',
+                'mainLocationId' => 123,
                 'domainObjectMapper' => $this->getDomainObjectMapper(),
                 'repository' => $this->getRepositoryMock(),
                 'innerVersionInfo' => $this->getRepoVersionInfo(),
-                'innerContent' => $this->getRepoContent(),
                 'languageCode' => 'eng-GB',
             ],
             true,

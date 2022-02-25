@@ -2,18 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\View\Provider;
+namespace Netgen\Bundle\IbexaSiteApiBundle\View\Provider;
 
-use eZ\Bundle\EzPublishCoreBundle\View\Provider\Configured as CoreConfigured;
-use eZ\Publish\Core\MVC\Symfony\Matcher\MatcherFactoryInterface;
-use eZ\Publish\Core\MVC\Symfony\View\View;
+use Ibexa\Bundle\Core\View\Provider\Configured as CoreConfigured;
+use Ibexa\Core\MVC\Symfony\Matcher\MatcherFactoryInterface;
+use Ibexa\Core\MVC\Symfony\View\View;
 
 final class CoreOverride extends CoreConfigured
 {
-    /**
-     * @var \Netgen\Bundle\EzPlatformSiteApiBundle\View\Provider\ContentViewFallbackResolver
-     */
-    private $contentViewFallbackResolver;
+    private ContentViewFallbackResolver $contentViewFallbackResolver;
 
     public function __construct(
         MatcherFactoryInterface $matcherFactory,
@@ -27,12 +24,12 @@ final class CoreOverride extends CoreConfigured
     /**
      * {@inheritdoc}
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
     public function getView(View $view): ?View
     {
         // Service is dispatched by the configured view class, so this should be safe
-        /** @var \eZ\Publish\Core\MVC\Symfony\View\ContentView $view */
+        /** @var \Ibexa\Core\MVC\Symfony\View\ContentView $view */
         $configHash = $this->matcherFactory->match($view);
 
         if ($configHash === null) {

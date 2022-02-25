@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Tests\Unit\Core\Site;
+namespace Netgen\IbexaSiteApi\Tests\Unit\Core\Site;
 
-use eZ\Publish\API\Repository\ContentTypeService;
-use eZ\Publish\API\Repository\FieldType;
-use eZ\Publish\API\Repository\FieldTypeService;
-use eZ\Publish\API\Repository\Values\Content\ContentInfo as RepoContentInfo;
-use eZ\Publish\API\Repository\Values\ContentType\FieldDefinitionCollection;
-use eZ\Publish\Core\Repository\Repository as CoreRepository;
-use eZ\Publish\Core\Repository\Values\Content\Content;
-use eZ\Publish\Core\Repository\Values\Content\Content as RepoContent;
-use eZ\Publish\Core\Repository\Values\Content\VersionInfo;
-use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
-use Netgen\EzPlatformSiteApi\API\Site;
-use Netgen\EzPlatformSiteApi\Core\Site\DomainObjectMapper;
+use Ibexa\Contracts\Core\Repository\ContentTypeService;
+use Ibexa\Contracts\Core\Repository\FieldType;
+use Ibexa\Contracts\Core\Repository\FieldTypeService;
+use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo as RepoContentInfo;
+use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinitionCollection;
+use Ibexa\Core\Repository\Repository as CoreRepository;
+use Ibexa\Core\Repository\Values\Content\Content;
+use Ibexa\Core\Repository\Values\Content\Content as RepoContent;
+use Ibexa\Core\Repository\Values\Content\VersionInfo;
+use Ibexa\Core\Repository\Values\ContentType\ContentType;
+use Netgen\IbexaSiteApi\API\Site;
+use Netgen\IbexaSiteApi\Core\Site\DomainObjectMapper;
 use PHPUnit\Framework\MockObject\MockBuilder;
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Log\NullLogger;
@@ -26,52 +26,60 @@ use Psr\Log\NullLogger;
 trait ContentFieldsMockTrait
 {
     /**
-     * @var \Netgen\EzPlatformSiteApi\API\Site|\PHPUnit\Framework\MockObject\MockObject
+     * @var \Netgen\IbexaSiteApi\API\Site|\PHPUnit\Framework\MockObject\MockObject
      */
     protected $siteMock;
 
     /**
-     * @var \Netgen\EzPlatformSiteApi\Core\Site\DomainObjectMapper[]
+     * @var \Netgen\IbexaSiteApi\Core\Site\DomainObjectMapper[]
      */
     protected $domainObjectMapper = [];
 
     /**
-     * @var \eZ\Publish\API\Repository\Repository|\PHPUnit\Framework\MockObject\MockObject
+     * @var \Netgen\IbexaSiteApi\Core\Site\DomainObjectMapper[]
+     */
+    protected $domainObjectMapperForContentWithoutFields = [];
+
+    /**
+     * @var \Ibexa\Contracts\Core\Repository\Repository|\PHPUnit\Framework\MockObject\MockObject
      */
     protected $repositoryMock;
 
     /**
-     * @var \eZ\Publish\Core\Repository\Values\Content\VersionInfo
+     * @var \Ibexa\Contracts\Core\Repository\Repository|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected $repositoryMockForContentWithoutFields;
+
+    /**
+     * @var \Ibexa\Core\Repository\Values\Content\VersionInfo
      */
     protected $repoVersionInfo;
 
-    /**
-     * @var \eZ\Publish\Core\Repository\Values\Content\Content
-     */
-    protected $repoContent;
+    protected ?RepoContent $repoContent = null;
+    protected ?RepoContent $repoContentWithoutFields = null;
 
     /**
-     * @var \eZ\Publish\API\Repository\Values\Content\Field[]
+     * @var \Ibexa\Contracts\Core\Repository\Values\Content\Field[]
      */
-    protected $internalFields;
+    protected ?array $internalFields = null;
 
     /**
-     * @var \eZ\Publish\API\Repository\Values\ContentType\FieldDefinitionCollection
+     * @var \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinitionCollection
      */
     protected $fieldDefinitions;
 
     /**
-     * @var \eZ\Publish\API\Repository\ContentTypeService|\PHPUnit\Framework\MockObject\MockObject
+     * @var \Ibexa\Contracts\Core\Repository\ContentTypeService|\PHPUnit\Framework\MockObject\MockObject
      */
     protected $contentTypeServiceMock;
 
     /**
-     * @var \eZ\Publish\API\Repository\FieldTypeService|\PHPUnit\Framework\MockObject\MockObject
+     * @var \Ibexa\Contracts\Core\Repository\FieldTypeService|\PHPUnit\Framework\MockObject\MockObject
      */
     protected $fieldTypeServiceMock;
 
     /**
-     * @var \eZ\Publish\SPI\FieldType\FieldType|\PHPUnit\Framework\MockObject\MockObject
+     * @var \Ibexa\Core\FieldType\FieldType|\PHPUnit\Framework\MockObject\MockObject
      */
     protected $fieldTypeMock;
 
@@ -81,12 +89,12 @@ trait ContentFieldsMockTrait
     abstract public function getMockBuilder(string $className): MockBuilder;
 
     /**
-     * @return \eZ\Publish\API\Repository\Values\Content\Field[]
+     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Field[]
      */
     abstract public function internalGetRepoFields(): array;
 
     /**
-     * @return \Netgen\EzPlatformSiteApi\API\Site|\PHPUnit\Framework\MockObject\MockObject
+     * @return \Netgen\IbexaSiteApi\API\Site|\PHPUnit\Framework\MockObject\MockObject
      */
     protected function getSiteMock(): MockObject
     {
@@ -115,8 +123,24 @@ trait ContentFieldsMockTrait
         return $this->domainObjectMapper[$failOnMissingField];
     }
 
+    protected function getDomainObjectMapperForContentWithoutFields(bool $failOnMissingField = true): DomainObjectMapper
+    {
+        if (isset($this->domainObjectMapperForContentWithoutFields[$failOnMissingField])) {
+            return $this->domainObjectMapperForContentWithoutFields[$failOnMissingField];
+        }
+
+        $this->domainObjectMapperForContentWithoutFields[$failOnMissingField] = new DomainObjectMapper(
+            $this->getSiteMock(),
+            $this->getRepositoryMockForContentWithoutFields(),
+            $failOnMissingField,
+            new NullLogger()
+        );
+
+        return $this->domainObjectMapperForContentWithoutFields[$failOnMissingField];
+    }
+
     /**
-     * @return \eZ\Publish\API\Repository\Repository|\PHPUnit\Framework\MockObject\MockObject
+     * @return \Ibexa\Contracts\Core\Repository\Repository|\PHPUnit\Framework\MockObject\MockObject
      */
     protected function getRepositoryMock(): MockObject
     {
@@ -142,7 +166,33 @@ trait ContentFieldsMockTrait
     }
 
     /**
-     * @return \eZ\Publish\API\Repository\FieldTypeService|\PHPUnit\Framework\MockObject\MockObject
+     * @return \Ibexa\Contracts\Core\Repository\Repository|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected function getRepositoryMockForContentWithoutFields(): MockObject
+    {
+        if ($this->repositoryMockForContentWithoutFields !== null) {
+            return $this->repositoryMockForContentWithoutFields;
+        }
+
+        $this->repositoryMockForContentWithoutFields = $this
+            ->getMockBuilder(CoreRepository::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $repoContent = $this->getRepoContentWithoutFields();
+        $this->repositoryMockForContentWithoutFields->method('sudo')->willReturn($repoContent);
+
+        $contentTypeServiceMock = $this->getContentTypeServiceMock();
+        $this->repositoryMockForContentWithoutFields->method('getContentTypeService')->willReturn($contentTypeServiceMock);
+
+        $fieldTypeServiceMock = $this->getFieldTypeServiceMock();
+        $this->repositoryMockForContentWithoutFields->method('getFieldTypeService')->willReturn($fieldTypeServiceMock);
+
+        return $this->repositoryMockForContentWithoutFields;
+    }
+
+    /**
+     * @return \Ibexa\Contracts\Core\Repository\FieldTypeService|\PHPUnit\Framework\MockObject\MockObject
      */
     protected function getFieldTypeServiceMock(): MockObject
     {
@@ -163,7 +213,7 @@ trait ContentFieldsMockTrait
     }
 
     /**
-     * @return \eZ\Publish\API\Repository\FieldType|\PHPUnit\Framework\MockObject\MockObject
+     * @return \Ibexa\Contracts\Core\Repository\FieldType|\PHPUnit\Framework\MockObject\MockObject
      */
     protected function getFieldTypeMock(): MockObject
     {
@@ -183,7 +233,7 @@ trait ContentFieldsMockTrait
     }
 
     /**
-     * @return \eZ\Publish\API\Repository\ContentTypeService|\PHPUnit\Framework\MockObject\MockObject
+     * @return \Ibexa\Contracts\Core\Repository\ContentTypeService|\PHPUnit\Framework\MockObject\MockObject
      */
     protected function getContentTypeServiceMock(): MockObject
     {
@@ -221,7 +271,7 @@ trait ContentFieldsMockTrait
     abstract protected function internalGetRepoFieldDefinitions(): FieldDefinitionCollection;
 
     /**
-     * @return \eZ\Publish\Core\Repository\Values\Content\Content|\PHPUnit\Framework\MockObject\MockObject
+     * @return \Ibexa\Core\Repository\Values\Content\Content|\PHPUnit\Framework\MockObject\MockObject
      */
     protected function getRepoContent(): Content
     {
@@ -240,7 +290,26 @@ trait ContentFieldsMockTrait
     }
 
     /**
-     * @return \eZ\Publish\API\Repository\Values\Content\Field[]
+     * @return \Ibexa\Core\Repository\Values\Content\Content|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected function getRepoContentWithoutFields(): Content
+    {
+        if ($this->repoContentWithoutFields !== null) {
+            return $this->repoContentWithoutFields;
+        }
+
+        $repoVersionInfo = $this->getRepoVersionInfo();
+
+        $this->repoContentWithoutFields = new RepoContent([
+            'versionInfo' => $repoVersionInfo,
+            'internalFields' => [],
+        ]);
+
+        return $this->repoContentWithoutFields;
+    }
+
+    /**
+     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Field[]
      */
     protected function getRepoFields(): array
     {
@@ -259,17 +328,22 @@ trait ContentFieldsMockTrait
             return $this->repoVersionInfo;
         }
 
-        $repoContentInfo = new RepoContentInfo([
-            'id' => 1,
-            'ownerId' => 'ownerId',
-            'contentTypeId' => 42,
-            'mainLanguageCode' => 'eng-GB',
-        ]);
+        $repoContentInfo = $this->getRepoContentInfo();
 
         $this->repoVersionInfo = new VersionInfo([
             'contentInfo' => $repoContentInfo,
         ]);
 
         return $this->repoVersionInfo;
+    }
+
+    protected function getRepoContentInfo(): RepoContentInfo
+    {
+        return new RepoContentInfo([
+            'id' => 1,
+            'ownerId' => 'ownerId',
+            'contentTypeId' => 42,
+            'mainLanguageCode' => 'eng-GB',
+        ]);
     }
 }

@@ -2,16 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Core\Traits;
+namespace Netgen\IbexaSiteApi\Core\Traits;
 
-use Netgen\EzPlatformSiteApi\API\Site;
+use Netgen\IbexaSiteApi\API\Site;
 
 trait SiteAwareTrait
 {
-    /**
-     * @var \Netgen\EzPlatformSiteApi\API\Site
-     */
-    protected $site;
+    protected ?Site $site;
 
     /**
      * Site setter.

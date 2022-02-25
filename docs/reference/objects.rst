@@ -2,7 +2,7 @@ Objects
 =======
 
 Site API comes with its own set of entities and values. These are similar, but still different from
-their counterparts in eZ Platform's Repository API. Main benefits they provide over them are:
+their counterparts in Ibexa's Repository API. Main benefits they provide over them are:
 
 - Content is available in a single translation, this voids the need for various helper services
 - Additional properties otherwise available only through separate entities (like ContentType

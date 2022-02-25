@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Core\Site\QueryType\Location;
+namespace Netgen\IbexaSiteApi\Core\Site\QueryType\Location;
 
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\Location\Depth;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\LocationId;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\LogicalNot;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\Subtree as SubtreeCriterion;
-use Netgen\EzPlatformSiteApi\API\Values\Location as SiteLocation;
-use Netgen\EzPlatformSiteApi\Core\Site\QueryType\CriterionDefinition;
-use Netgen\EzPlatformSiteApi\Core\Site\QueryType\Location;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Location\Depth;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LocationId;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LogicalNot;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Subtree as SubtreeCriterion;
+use Netgen\IbexaSiteApi\API\Values\Location as SiteLocation;
+use Netgen\IbexaSiteApi\Core\Site\QueryType\CriterionDefinition;
+use Netgen\IbexaSiteApi\Core\Site\QueryType\Location;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use function array_map;
 use function is_array;
@@ -18,7 +18,7 @@ use function is_array;
 /**
  * Subtree Location QueryType.
  *
- * @see \Netgen\EzPlatformSiteApi\Core\Site\QueryType\Location
+ * @see \Netgen\IbexaSiteApi\Core\Site\QueryType\Location
  */
 final class Subtree extends Location
 {
@@ -60,7 +60,7 @@ final class Subtree extends Location
                     return null;
                 }
 
-                /** @var \Netgen\EzPlatformSiteApi\API\Values\Location $location */
+                /** @var \Netgen\IbexaSiteApi\API\Values\Location $location */
                 $location = $parameters['location'];
                 $relativeDepth = $this->getRelativeDepthValue(
                     $location->depth,
@@ -77,11 +77,11 @@ final class Subtree extends Location
      *
      * @throws \InvalidArgumentException
      *
-     * @return \eZ\Publish\API\Repository\Values\Content\Query\Criterion[]
+     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion[]
      */
     protected function getFilterCriteria(array $parameters): array
     {
-        /** @var \Netgen\EzPlatformSiteApi\API\Values\Location $location */
+        /** @var \Netgen\IbexaSiteApi\API\Values\Location $location */
         $location = $parameters['location'];
 
         $criteria = [];

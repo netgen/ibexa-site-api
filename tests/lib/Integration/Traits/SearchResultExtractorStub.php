@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Tests\Integration\Traits;
+namespace Netgen\IbexaSiteApi\Tests\Integration\Traits;
 
-use eZ\Publish\API\Repository\Values\Content\Search\SearchResult;
-use Netgen\EzPlatformSiteApi\Core\Traits\SearchResultExtractorTrait;
+use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchResult;
+use Netgen\IbexaSiteApi\Core\Traits\SearchResultExtractorTrait;
 
 class SearchResultExtractorStub
 {
     use SearchResultExtractorTrait;
 
     /**
-     * @return \eZ\Publish\API\Repository\Values\ValueObject[]
+     * @return \Ibexa\Contracts\Core\Repository\Values\ValueObject[]
      */
     public function doExtractValueObjects(SearchResult $searchResult): array
     {
@@ -20,7 +20,7 @@ class SearchResultExtractorStub
     }
 
     /**
-     * @return \eZ\Publish\API\Repository\Values\ValueObject[]
+     * @return \Ibexa\Contracts\Core\Repository\Values\ValueObject[]
      */
     public function doExtractContentItems(SearchResult $searchResult): array
     {
@@ -28,7 +28,7 @@ class SearchResultExtractorStub
     }
 
     /**
-     * @return \eZ\Publish\API\Repository\Values\ValueObject[]
+     * @return \Ibexa\Contracts\Core\Repository\Values\ValueObject[]
      */
     public function doExtractLocations(SearchResult $searchResult): array
     {

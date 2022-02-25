@@ -2,13 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\Exception;
+namespace Netgen\Bundle\IbexaSiteApiBundle\Exception;
 
-final class InvalidRedirectConfiguration extends \Exception
+use Exception;
+
+final class InvalidRedirectConfiguration extends Exception
 {
     public function __construct(string $target)
     {
-        $message = "Not possible to resolve redirect from given target: '{$target}'";
+        $message = "Not possible to resolve redirect from given target: '$target'";
 
         parent::__construct($message);
     }

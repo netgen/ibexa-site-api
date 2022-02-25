@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\View\Redirect;
+namespace Netgen\Bundle\IbexaSiteApiBundle\View\Redirect;
 
-use Netgen\Bundle\EzPlatformSiteApiBundle\NamedObject\Provider;
-use Netgen\Bundle\EzPlatformSiteApiBundle\View\ContentView;
+use Netgen\Bundle\IbexaSiteApiBundle\NamedObject\Provider;
+use Netgen\Bundle\IbexaSiteApiBundle\View\ContentView;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use function is_string;
 use function mb_stripos;
@@ -13,10 +13,7 @@ use function mb_substr;
 
 final class ParameterProcessor
 {
-    /**
-     * @var \Netgen\Bundle\EzPlatformSiteApiBundle\NamedObject\Provider
-     */
-    private $namedObjectProvider;
+    private Provider $namedObjectProvider;
 
     public function __construct(
         Provider $namedObjectProvider

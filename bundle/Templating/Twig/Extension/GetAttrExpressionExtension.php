@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\Templating\Twig\Extension;
+namespace Netgen\Bundle\IbexaSiteApiBundle\Templating\Twig\Extension;
 
-use Netgen\Bundle\EzPlatformSiteApiBundle\Templating\Twig\NodeVisitor\GetAttrExpressionReplacer;
+use Netgen\Bundle\IbexaSiteApiBundle\Templating\Twig\NodeVisitor\GetAttrExpressionReplacer;
 use Twig\Extension\AbstractExtension;
 
 class GetAttrExpressionExtension extends AbstractExtension

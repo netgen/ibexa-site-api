@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\API\Values;
+namespace Netgen\IbexaSiteApi\API\Values;
 
 use ArrayAccess;
 use Countable;
@@ -11,7 +11,7 @@ use IteratorAggregate;
 /**
  * Collection of Content Fields, accessible as an array with FieldDefinition identifier as Field's key.
  *
- * @see \Netgen\EzPlatformSiteApi\API\Values\Field
+ * @see \Netgen\IbexaSiteApi\API\Values\Field
  */
 abstract class Fields implements IteratorAggregate, ArrayAccess, Countable
 {
@@ -23,7 +23,7 @@ abstract class Fields implements IteratorAggregate, ArrayAccess, Countable
     /**
      * Return the field with the given $identifier.
      *
-     * @return \Netgen\EzPlatformSiteApi\API\Values\Field
+     * @return \Netgen\IbexaSiteApi\API\Values\Field
      */
     abstract public function getField(string $identifier): Field;
 
@@ -39,7 +39,7 @@ abstract class Fields implements IteratorAggregate, ArrayAccess, Countable
      *
      * @param int|string $id
      *
-     * @return \Netgen\EzPlatformSiteApi\API\Values\Field
+     * @return \Netgen\IbexaSiteApi\API\Values\Field
      */
     abstract public function getFieldById($id): Field;
 
@@ -51,7 +51,7 @@ abstract class Fields implements IteratorAggregate, ArrayAccess, Countable
      *
      * @param string ...$otherIdentifiers
      *
-     * @return \Netgen\EzPlatformSiteApi\API\Values\Field
+     * @return \Netgen\IbexaSiteApi\API\Values\Field
      */
     abstract public function getFirstNonEmptyField(string $firstIdentifier, string ...$otherIdentifiers): Field;
 }

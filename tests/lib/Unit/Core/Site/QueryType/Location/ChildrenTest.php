@@ -2,26 +2,31 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Tests\Unit\Core\Site\QueryType\Location;
+namespace Netgen\IbexaSiteApi\Tests\Unit\Core\Site\QueryType\Location;
 
-use eZ\Publish\API\Repository\Values\Content\LocationQuery;
-use eZ\Publish\API\Repository\Values\Content\Query;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\ContentTypeIdentifier;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\DateMetadata;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\Field;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\LogicalAnd;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\Operator;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\ParentLocationId;
-use eZ\Publish\API\Repository\Values\Content\Query\SortClause\ContentName;
-use eZ\Publish\API\Repository\Values\Content\Query\SortClause\DatePublished;
-use eZ\Publish\API\Repository\Values\Content\Query\SortClause\Location\Priority;
-use eZ\Publish\Core\Repository\Values\Content\Location as RepositoryLocation;
-use Netgen\EzPlatformSearchExtra\API\Values\Content\Query\Criterion\Visible;
-use Netgen\EzPlatformSiteApi\Core\Site\QueryType\Location\Children;
-use Netgen\EzPlatformSiteApi\Core\Site\QueryType\QueryType;
-use Netgen\EzPlatformSiteApi\Core\Site\Settings;
-use Netgen\EzPlatformSiteApi\Core\Site\Values\Location;
-use Netgen\EzPlatformSiteApi\Tests\Unit\Core\Site\QueryType\QueryTypeBaseTest;
+use Ibexa\Contracts\Core\Repository\Values\Content\LocationQuery;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ContentTypeIdentifier;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\DateMetadata;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Field;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LogicalAnd;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Operator;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ParentLocationId;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\ContentName;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\DatePublished;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\Location\Priority;
+use Ibexa\Contracts\Core\Repository\Values\Content\Location as APILocation;
+use Ibexa\Core\Repository\Values\ContentType\FieldDefinitionCollection;
+use Ibexa\Core\Repository\Values\Content\Location as RepositoryLocation;
+use Netgen\IbexaSearchExtra\API\Values\Content\Query\Criterion\Visible;
+use Netgen\IbexaSiteApi\API\Site;
+use Netgen\IbexaSiteApi\Core\Site\QueryType\Location\Children;
+use Netgen\IbexaSiteApi\Core\Site\QueryType\QueryType;
+use Netgen\IbexaSiteApi\Core\Site\Settings;
+use Netgen\IbexaSiteApi\Core\Site\Values\Location;
+use Netgen\IbexaSiteApi\Tests\Unit\Core\Site\ContentFieldsMockTrait;
+use Netgen\IbexaSiteApi\Tests\Unit\Core\Site\QueryType\QueryTypeBaseTest;
+use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Log\NullLogger;
 
 /**
@@ -33,6 +38,8 @@ use Psr\Log\NullLogger;
  */
 final class ChildrenTest extends QueryTypeBaseTest
 {
+    use ContentFieldsMockTrait;
+
     public function providerForTestGetQuery(): array
     {
         $location = $this->getTestLocation();
@@ -326,14 +333,15 @@ final class ChildrenTest extends QueryTypeBaseTest
     {
         return new Location(
             [
-                'site' => false,
-                'domainObjectMapper' => false,
-                'innerVersionInfo' => false,
-                'languageCode' => false,
+                'site' => $this->getSiteMock(),
+                'domainObjectMapper' => $this->getDomainObjectMapper(),
+                'innerVersionInfo' => $this->getRepoVersionInfo(),
+                'languageCode' => 'cro-HR',
                 'innerLocation' => new RepositoryLocation([
                     'id' => 42,
-                    'sortField' => RepositoryLocation::SORT_FIELD_PRIORITY,
-                    'sortOrder' => RepositoryLocation::SORT_ORDER_DESC,
+                    'sortField' => APILocation::SORT_FIELD_PRIORITY,
+                    'sortOrder' => APILocation::SORT_ORDER_DESC,
+                    'contentInfo' => $this->getRepoContentInfo(),
                 ]),
             ],
             new NullLogger()
@@ -358,5 +366,29 @@ final class ChildrenTest extends QueryTypeBaseTest
             'priority',
             'location',
         ];
+    }
+
+    /**
+     * @return \Netgen\IbexaSiteApi\API\Site|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected function getSiteMock(): MockObject
+    {
+        if ($this->siteMock !== null) {
+            return $this->siteMock;
+        }
+
+        $this->siteMock = $this->getMockBuilder(Site::class)->getMock();
+
+        return $this->siteMock;
+    }
+
+    public function internalGetRepoFields(): array
+    {
+        return [];
+    }
+
+    protected function internalGetRepoFieldDefinitions(): FieldDefinitionCollection
+    {
+        return new FieldDefinitionCollection();
     }
 }

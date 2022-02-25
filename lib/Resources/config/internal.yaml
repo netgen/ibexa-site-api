@@ -1,0 +1,97 @@
+parameters:
+    netgen.ibexa_site_api.use_always_available: true
+    netgen.ibexa_site_api.prioritized_languages:
+        - 'eng-GB'
+    netgen.ibexa_site_api.root_location_id: 2
+    netgen.ibexa_site_api.show_hidden_items: false
+    netgen.ibexa_site_api.fail_on_missing_field: false
+
+services:
+    netgen.ibexa_site_api.repository.inner:
+        class: Ibexa\Core\Repository\Repository
+        factory:
+            - '@Ibexa\Bundle\Core\ApiLoader\RepositoryFactory'
+            - buildRepository
+        arguments:
+            - '@ibexa.api.persistence_handler'
+            - '@Ibexa\Core\Search\Legacy\Content\Handler'
+            - '@Ibexa\Bundle\Core\EventListener\BackgroundIndexingTerminateListener'
+            - '@Ibexa\Core\Repository\Helper\RelationProcessor'
+            - '@Ibexa\Core\FieldType\FieldTypeRegistry'
+            - '@Ibexa\Core\Repository\User\PasswordHashService'
+            - '@Ibexa\Core\Repository\Strategy\ContentThumbnail\ThumbnailChainStrategy'
+            - '@Ibexa\Core\Repository\ProxyFactory\ProxyDomainMapperFactory'
+            - '@Ibexa\Core\Repository\Mapper\ContentDomainMapper'
+            - '@Ibexa\Core\Repository\Mapper\ContentTypeDomainMapper'
+            - '@Ibexa\Core\Repository\Mapper\RoleDomainMapper'
+            - '@Ibexa\Core\Repository\Mapper\ContentMapper'
+            - '@Ibexa\Contracts\Core\Repository\Validator\ContentValidator'
+            - '@Ibexa\Core\Repository\Permission\LimitationService'
+            - '@Ibexa\Contracts\Core\Repository\PermissionService'
+            - '@Ibexa\Core\Persistence\Legacy\Filter\Handler\ContentFilteringHandler'
+            - '@Ibexa\Core\Persistence\Legacy\Filter\Handler\LocationFilteringHandler'
+            - '@Ibexa\Core\Repository\User\PasswordValidatorInterface'
+            - '%languages%'
+        lazy: true
+        public: false
+
+    netgen.ibexa_site_api.repository.filtering_search_service:
+        class: Ibexa\Core\Repository\SearchService
+        factory:
+            - '@netgen.ibexa_site_api.repository.inner'
+            - getSearchService
+        lazy: true
+        public: false
+
+    netgen.ibexa_site_api.core.settings:
+        class: Netgen\IbexaSiteApi\Core\Site\Settings
+        public: false
+        arguments:
+            - '%netgen.ibexa_site_api.prioritized_languages%'
+            - '%netgen.ibexa_site_api.use_always_available%'
+            - '%netgen.ibexa_site_api.root_location_id%'
+            - '%netgen.ibexa_site_api.show_hidden_items%'
+            - '%netgen.ibexa_site_api.fail_on_missing_field%'
+
+    netgen.ibexa_site_api.core.site:
+        class: Netgen\IbexaSiteApi\Core\Site\Site
+        public: false
+        arguments:
+            - '@netgen.ibexa_site_api.core.settings'
+            - '@ibexa.api.repository'
+            - '@netgen.ibexa_site_api.repository.filtering_search_service'
+            - '@netgen.ibexa_site_api.plugins.field_type.relation_resolver.registry'
+            - '@?logger'
+        lazy: true
+
+    netgen.ibexa_site_api.core.filter_service:
+        class: Netgen\IbexaSiteApi\Core\Site\FilterService
+        public: false
+        factory:
+            - '@netgen.ibexa_site_api.core.site'
+            - getFilterService
+        lazy: true
+
+    netgen.ibexa_site_api.core.find_service:
+        class: Netgen\IbexaSiteApi\Core\Site\FindService
+        public: false
+        factory:
+            - '@netgen.ibexa_site_api.core.site'
+            - getFindService
+        lazy: true
+
+    netgen.ibexa_site_api.core.load_service:
+        class: Netgen\IbexaSiteApi\Core\Site\LoadService
+        public: false
+        factory:
+            - '@netgen.ibexa_site_api.core.site'
+            - getLoadService
+        lazy: true
+
+    netgen.ibexa_site_api.core.relation_service:
+        class: Netgen\IbexaSiteApi\Core\Site\RelationService
+        public: false
+        factory:
+            - '@netgen.ibexa_site_api.core.site'
+            - getRelationService
+        lazy: true

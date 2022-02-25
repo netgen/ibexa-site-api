@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\Templating\Twig\Extension;
+namespace Netgen\Bundle\IbexaSiteApiBundle\Templating\Twig\Extension;
 
-use eZ\Publish\Core\Base\Exceptions\UnauthorizedException;
-use Netgen\Bundle\EzPlatformSiteApiBundle\NamedObject\Provider;
-use Netgen\EzPlatformSiteApi\API\Values\Content;
-use Netgen\EzPlatformSiteApi\API\Values\Location;
+use Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException;
+use Netgen\Bundle\IbexaSiteApiBundle\NamedObject\Provider;
+use Netgen\IbexaSiteApi\API\Values\Content;
+use Netgen\IbexaSiteApi\API\Values\Location;
 use Netgen\TagsBundle\API\Repository\Values\Tags\Tag;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
@@ -15,24 +15,13 @@ use Psr\Log\NullLogger;
 /**
  * NamedObjectExtension runtime.
  *
- * @see \Netgen\Bundle\EzPlatformSiteApiBundle\Templating\Twig\Extension\NamedObjectExtension
+ * @see \Netgen\Bundle\IbexaSiteApiBundle\Templating\Twig\Extension\NamedObjectExtension
  */
 class NamedObjectRuntime
 {
-    /**
-     * @var \Netgen\Bundle\EzPlatformSiteApiBundle\NamedObject\Provider
-     */
-    private $namedObjectProvider;
-
-    /**
-     * @var bool
-     */
-    private $isDebug;
-
-    /**
-     * @var \Psr\Log\LoggerInterface
-     */
-    private $logger;
+    private Provider $namedObjectProvider;
+    private bool $isDebug;
+    private LoggerInterface $logger;
 
     public function __construct(
         Provider $specialObjectProvider,
@@ -44,6 +33,10 @@ class NamedObjectRuntime
         $this->logger = $logger ?? new NullLogger();
     }
 
+    /**
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
+     */
     public function getNamedContent(string $name): ?Content
     {
         try {
@@ -59,6 +52,10 @@ class NamedObjectRuntime
         return null;
     }
 
+    /**
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
+     */
     public function getNamedLocation(string $name): ?Location
     {
         try {
@@ -74,6 +71,10 @@ class NamedObjectRuntime
         return null;
     }
 
+    /**
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
+     */
     public function getNamedTag(string $name): ?Tag
     {
         try {

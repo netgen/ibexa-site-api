@@ -1,0 +1,5 @@
+# todo test https://github.com/netgen/ezplatform-site-api/pull/165
+services:
+    Ibexa\Core\QueryType\QueryTypeRegistry: '@Ibexa\Core\QueryType\ArrayQueryTypeRegistry'
+    Netgen\Bundle\IbexaSiteApiBundle\NamedObject\Provider: '@netgen.ibexa_site_api.named_object_provider'
+    Netgen\IbexaSiteApi\API\Site: '@netgen.ibexa_site_api.site'

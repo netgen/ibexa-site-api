@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\DependencyInjection\Compiler;
+namespace Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -11,8 +11,8 @@ use function array_keys;
 
 final class QueryTypeExpressionFunctionProviderPass implements CompilerPassInterface
 {
-    private const QueryTypeExpressionLanguageId = 'netgen.ezplatform_site.query_type.expression_language';
-    private const QueryTypeExpressionFunctionProviderTag = 'netgen.ezplatform_site.query_type.expression_function_provider';
+    private const QueryTypeExpressionLanguageId = 'netgen.ibexa_site_api.query_type.expression_language';
+    private const QueryTypeExpressionFunctionProviderTag = 'netgen.ibexa_site_api.query_type.expression_function_provider';
 
     public function process(ContainerBuilder $container): void
     {

@@ -2,17 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Core\Site\Values;
+namespace Netgen\IbexaSiteApi\Core\Site\Values;
 
 use ArrayIterator;
-use eZ\Publish\API\Repository\Values\Content\Field as RepoField;
-use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition as CoreFieldDefinition;
-use Netgen\EzPlatformSiteApi\API\Values\Content as RepoContent;
-use Netgen\EzPlatformSiteApi\API\Values\Content as SiteContent;
-use Netgen\EzPlatformSiteApi\API\Values\Field as APIField;
-use Netgen\EzPlatformSiteApi\API\Values\Fields as APIFields;
-use Netgen\EzPlatformSiteApi\Core\Site\DomainObjectMapper;
-use Netgen\EzPlatformSiteApi\Core\Site\Values\Field\SurrogateValue;
+use Ibexa\Contracts\Core\Repository\Values\Content\Field as RepoField;
+use Ibexa\Core\Repository\Values\ContentType\FieldDefinition as CoreFieldDefinition;
+use Netgen\IbexaSiteApi\API\Values\Content as SiteContent;
+use Netgen\IbexaSiteApi\API\Values\Field as APIField;
+use Netgen\IbexaSiteApi\API\Values\Fields as APIFields;
+use Netgen\IbexaSiteApi\Core\Site\DomainObjectMapper;
+use Netgen\IbexaSiteApi\Core\Site\Values\Field\SurrogateValue;
 use Psr\Log\LoggerInterface;
 use RuntimeException;
 use Traversable;
@@ -24,57 +23,27 @@ use function sprintf;
 /**
  * @internal do not depend on this implementation, use API Fields instead
  *
- * @see \Netgen\EzPlatformSiteApi\API\Values\Fields
+ * @see \Netgen\IbexaSiteApi\API\Values\Fields
  */
 final class Fields extends APIFields
 {
-    /**
-     * @var \Netgen\EzPlatformSiteApi\API\Values\Content
-     */
-    private $content;
+    private bool $failOnMissingField;
+    private bool $areFieldsInitialized = false;
 
-    /**
-     * @var \Netgen\EzPlatformSiteApi\Core\Site\DomainObjectMapper
-     */
-    private $domainObjectMapper;
+    private ?ArrayIterator $iterator = null;
 
-    /**
-     * @var bool
-     */
-    private $failOnMissingField;
-
-    /**
-     * @var \Psr\Log\LoggerInterface
-     */
-    private $logger;
-
-    /**
-     * @var bool
-     */
-    private $areFieldsInitialized = false;
-
-    /**
-     * @var \ArrayIterator
-     */
-    private $iterator;
-
-    /**
-     * @var \Netgen\EzPlatformSiteApi\API\Values\Field[]
-     */
-    private $fieldsByIdentifier = [];
-
-    /**
-     * @var \Netgen\EzPlatformSiteApi\API\Values\Field[]
-     */
-    private $fieldsById = [];
-
-    /**
-     * @var \Netgen\EzPlatformSiteApi\API\Values\Field[]
-     */
-    private $fieldsByNumericSequence = [];
+    private SiteContent $content;
+    private DomainObjectMapper $domainObjectMapper;
+    private LoggerInterface $logger;
+    /** @var \Netgen\IbexaSiteApi\API\Values\Field[] */
+    private array $fieldsByIdentifier = [];
+    /** @var \Netgen\IbexaSiteApi\API\Values\Field[] */
+    private array $fieldsById = [];
+    /** @var \Netgen\IbexaSiteApi\API\Values\Field[] */
+    private array $fieldsByNumericSequence = [];
 
     public function __construct(
-        RepoContent $content,
+        SiteContent $content,
         DomainObjectMapper $domainObjectMapper,
         bool $failOnMissingField,
         LoggerInterface $logger
@@ -86,7 +55,7 @@ final class Fields extends APIFields
     }
 
     /**
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     public function __debugInfo(): array
     {
@@ -98,7 +67,7 @@ final class Fields extends APIFields
     /**
      * {@inheritdoc}
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     public function getIterator(): Traversable
     {
@@ -110,18 +79,18 @@ final class Fields extends APIFields
     /**
      * {@inheritdoc}
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
-    public function offsetExists($identifier): bool
+    public function offsetExists($offset): bool
     {
         $this->initialize();
 
-        return array_key_exists($identifier, $this->fieldsByIdentifier)
-            || array_key_exists($identifier, $this->fieldsByNumericSequence);
+        return array_key_exists($offset, $this->fieldsByIdentifier)
+            || array_key_exists($offset, $this->fieldsByNumericSequence);
     }
 
     /**
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     public function hasField(string $identifier): bool
     {
@@ -133,7 +102,7 @@ final class Fields extends APIFields
     /**
      * {@inheritdoc}
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     public function getField(string $identifier): APIField
     {
@@ -155,21 +124,21 @@ final class Fields extends APIFields
     /**
      * {@inheritdoc}
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
-    public function offsetGet($identifier): APIField
+    public function offsetGet($offset): APIField
     {
         $this->initialize();
 
-        if (array_key_exists($identifier, $this->fieldsByIdentifier)) {
-            return $this->fieldsByIdentifier[$identifier];
+        if (array_key_exists($offset, $this->fieldsByIdentifier)) {
+            return $this->fieldsByIdentifier[$offset];
         }
 
-        if (array_key_exists($identifier, $this->fieldsByNumericSequence)) {
-            return $this->fieldsByNumericSequence[$identifier];
+        if (array_key_exists($offset, $this->fieldsByNumericSequence)) {
+            return $this->fieldsByNumericSequence[$offset];
         }
 
-        $message = sprintf('Field "%s" in Content #%s does not exist', $identifier, $this->content->id);
+        $message = sprintf('Field "%s" in Content #%s does not exist', $offset, $this->content->id);
 
         if ($this->failOnMissingField) {
             throw new RuntimeException($message);
@@ -177,15 +146,15 @@ final class Fields extends APIFields
 
         $this->logger->critical($message . ', using surrogate field instead');
 
-        return $this->getSurrogateField($identifier, $this->content);
+        return $this->getSurrogateField($offset, $this->content);
     }
 
-    public function offsetSet($identifier, $value): void
+    public function offsetSet($offset, $value): void
     {
         throw new RuntimeException('Setting the field to the collection is not allowed');
     }
 
-    public function offsetUnset($identifier): void
+    public function offsetUnset($offset): void
     {
         throw new RuntimeException('Unsetting the field from the collection is not allowed');
     }
@@ -193,7 +162,7 @@ final class Fields extends APIFields
     /**
      * {@inheritdoc}
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     public function count(): int
     {
@@ -205,7 +174,7 @@ final class Fields extends APIFields
     /**
      * {@inheritdoc}
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     public function hasFieldById($id): bool
     {
@@ -217,7 +186,7 @@ final class Fields extends APIFields
     /**
      * {@inheritdoc}
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     public function getFieldById($id): APIField
     {
@@ -239,7 +208,7 @@ final class Fields extends APIFields
     /**
      * {@inheritdoc}
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     public function getFirstNonEmptyField(string $firstIdentifier, string ...$otherIdentifiers): APIField
     {
@@ -258,9 +227,9 @@ final class Fields extends APIFields
     /**
      * @param string[] $identifiers
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      *
-     * @return \Netgen\EzPlatformSiteApi\API\Values\Field[]
+     * @return \Netgen\IbexaSiteApi\API\Values\Field[]
      */
     private function getAvailableFields(array $identifiers): array
     {
@@ -276,7 +245,7 @@ final class Fields extends APIFields
     }
 
     /**
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     private function initialize(): void
     {
@@ -292,8 +261,9 @@ final class Fields extends APIFields
             $this->fieldsByIdentifier[$field->fieldDefIdentifier] = $field;
             $this->fieldsById[$field->id] = $field;
             $this->fieldsByNumericSequence[] = $field;
-            $this->iterator = new ArrayIterator($this->fieldsByIdentifier);
         }
+
+        $this->iterator = new ArrayIterator($this->fieldsByIdentifier);
 
         $this->areFieldsInitialized = true;
     }

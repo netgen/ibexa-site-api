@@ -1,0 +1,76 @@
+services:
+    netgen.ibexa_site_api.query_type.content.relations.forward_fields:
+        class: Netgen\IbexaSiteApi\Core\Site\QueryType\Content\Relations\ForwardFields
+        arguments:
+            - '@netgen.ibexa_site_api.settings'
+            - '@netgen.ibexa_site_api.plugins.field_type.relation_resolver.registry'
+        tags:
+            - {name: ibexa.query_type}
+        public: false
+
+    netgen.ibexa_site_api.query_type.content.relations.reverse_fields:
+        class: Netgen\IbexaSiteApi\Core\Site\QueryType\Content\Relations\ReverseFields
+        arguments:
+            - '@netgen.ibexa_site_api.settings'
+        tags:
+            - {name: ibexa.query_type}
+        public: false
+
+    netgen.ibexa_site_api.query_type.content.fetch:
+        class: Netgen\IbexaSiteApi\Core\Site\QueryType\Content\Fetch
+        arguments:
+            - '@netgen.ibexa_site_api.settings'
+        tags:
+            - {name: ibexa.query_type}
+        public: false
+
+    netgen.ibexa_site_api.query_type.location.relations.forward_fields:
+        class: Netgen\IbexaSiteApi\Core\Site\QueryType\Location\Relations\ForwardFields
+        arguments:
+            - '@netgen.ibexa_site_api.settings'
+            - '@netgen.ibexa_site_api.plugins.field_type.relation_resolver.registry'
+        tags:
+            - {name: ibexa.query_type}
+        public: false
+
+    netgen.ibexa_site_api.query_type.location.relations.reverse_fields:
+        class: Netgen\IbexaSiteApi\Core\Site\QueryType\Location\Relations\ReverseFields
+        arguments:
+            - '@netgen.ibexa_site_api.settings'
+        tags:
+            - {name: ibexa.query_type}
+        public: false
+
+    netgen.ibexa_site_api.query_type.location.children:
+        class: Netgen\IbexaSiteApi\Core\Site\QueryType\Location\Children
+        arguments:
+            - '@netgen.ibexa_site_api.settings'
+            - '@logger'
+        tags:
+            - { name: ibexa.query_type }
+        public: false
+
+    netgen.ibexa_site_api.query_type.location.siblings:
+        class: Netgen\IbexaSiteApi\Core\Site\QueryType\Location\Siblings
+        arguments:
+            - '@netgen.ibexa_site_api.settings'
+            - '@logger'
+        tags:
+            - { name: ibexa.query_type }
+        public: false
+
+    netgen.ibexa_site_api.query_type.location.subtree:
+        class: Netgen\IbexaSiteApi\Core\Site\QueryType\Location\Subtree
+        arguments:
+            - '@netgen.ibexa_site_api.settings'
+        tags:
+            - { name: ibexa.query_type }
+        public: false
+
+    netgen.ibexa_site_api.query_type.location.fetch:
+        class: Netgen\IbexaSiteApi\Core\Site\QueryType\Location\Fetch
+        arguments:
+            - '@netgen.ibexa_site_api.settings'
+        tags:
+            - { name: ibexa.query_type }
+        public: false

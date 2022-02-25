@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Core\Site\QueryType\Content;
+namespace Netgen\IbexaSiteApi\Core\Site\QueryType\Content;
 
-use Netgen\EzPlatformSiteApi\Core\Site\QueryType\Content;
+use Netgen\IbexaSiteApi\Core\Site\QueryType\Content;
 
 /**
  * Fetch Content QueryType.
  *
- * @see \Netgen\EzPlatformSiteApi\Core\Site\QueryType\Content
+ * @see \Netgen\IbexaSiteApi\Core\Site\QueryType\Content
  */
 class Fetch extends Content
 {

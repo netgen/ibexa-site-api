@@ -1,0 +1,15 @@
+services:
+    netgen.ibexa_site_api.named_object_provider:
+        alias: netgen.ibexa_site_api.named_object_provider.caching
+
+    netgen.ibexa_site_api.named_object_provider.caching:
+        class: Netgen\Bundle\IbexaSiteApiBundle\NamedObject\Provider\Caching
+        arguments:
+            - '@netgen.ibexa_site_api.named_object_provider.loading'
+
+    netgen.ibexa_site_api.named_object_provider.loading:
+        class: Netgen\Bundle\IbexaSiteApiBundle\NamedObject\Provider\Loading
+        arguments:
+            - '@netgen.ibexa_site_api.load_service'
+            - '@?netgen_tags.api.service.tags'
+            - '@ibexa.config.resolver'

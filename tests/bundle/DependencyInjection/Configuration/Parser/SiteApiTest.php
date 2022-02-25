@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\Tests\DependencyInjection\Configuration\Parser;
+namespace Netgen\Bundle\IbexaSiteApiBundle\Tests\DependencyInjection\Configuration\Parser;
 
-use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\EzPublishCoreExtension;
-use eZ\Bundle\EzPublishCoreBundle\Tests\DependencyInjection\Configuration\Parser\AbstractParserTestCase;
-use Netgen\Bundle\EzPlatformSiteApiBundle\DependencyInjection\Configuration\Parser\SiteApi;
+use Generator;
+use Ibexa\Bundle\Core\DependencyInjection\IbexaCoreExtension;
+use Ibexa\Tests\Bundle\Core\DependencyInjection\Configuration\Parser\AbstractParserTestCase;
+use Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Configuration\Parser\SiteApi;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\Config\Definition\Exception\InvalidTypeException;
 use Symfony\Component\Yaml\Yaml;
@@ -15,7 +16,6 @@ use function preg_quote;
 
 /**
  * @group config
- * @group xxx
  *
  * @internal
  */
@@ -48,7 +48,7 @@ final class SiteApiTest extends AbstractParserTestCase
         ];
     }
 
-    public function providerForTestBooleanConfigurationValid(): \Generator
+    public function providerForTestBooleanConfigurationValid(): Generator
     {
         $names = $this->getBooleanConfigurationNames();
         $valuePairs = $this->getBooleanConfigurationValidValuePairs();
@@ -74,7 +74,7 @@ final class SiteApiTest extends AbstractParserTestCase
     {
         $this->load([
             'system' => [
-                'ezdemo_group' => [
+                'ibexa_demo_group' => [
                     'ng_site_api' => [
                         $name => $config,
                     ],
@@ -85,7 +85,7 @@ final class SiteApiTest extends AbstractParserTestCase
         $this->assertConfigResolverParameterValue(
             'ng_site_api.' . $name,
             $expectedValue,
-            'ezdemo_site'
+            'ibexa_demo_site'
         );
     }
 
@@ -100,7 +100,7 @@ final class SiteApiTest extends AbstractParserTestCase
         ];
     }
 
-    public function providerForTestBooleanConfigurationInvalid(): \Generator
+    public function providerForTestBooleanConfigurationInvalid(): Generator
     {
         $names = $this->getBooleanConfigurationNames();
         $values = $this->getBooleanConfigurationInvalidValues();
@@ -126,7 +126,7 @@ final class SiteApiTest extends AbstractParserTestCase
 
         $this->load([
             'system' => [
-                'ezdemo_group' => [
+                'ibexa_demo_group' => [
                     'ng_site_api' => [
                         $name => $config,
                     ],
@@ -224,7 +224,7 @@ final class SiteApiTest extends AbstractParserTestCase
         ];
     }
 
-    public function providerForTestNamedObjectConfigurationValid(): \Generator
+    public function providerForTestNamedObjectConfigurationValid(): Generator
     {
         $names = $this->getNamedObjectConfigurationNames();
         $valuePairs = $this->getValidNamedObjectConfigurationValuePairs();
@@ -249,7 +249,7 @@ final class SiteApiTest extends AbstractParserTestCase
     {
         $this->load([
             'system' => [
-                'ezdemo_group' => [
+                'ibexa_demo_group' => [
                     'ng_site_api' => [
                         'named_objects' => [
                             $name => $configuration,
@@ -268,12 +268,12 @@ final class SiteApiTest extends AbstractParserTestCase
         $this->assertConfigResolverParameterValue(
             'ng_site_api.named_objects',
             [$name => $expectedValue] + $defaultValues,
-            'ezdemo_site'
+            'ibexa_demo_site'
         );
 
         // todo another path
         $this->assertContainerBuilderHasParameter(
-            'ezsettings.ezdemo_group.ng_site_api.named_objects',
+            'ibexa.site_access.config.ibexa_demo_group.ng_site_api.named_objects',
             [$name => $expectedValue] + $defaultValues
         );
     }
@@ -299,7 +299,7 @@ final class SiteApiTest extends AbstractParserTestCase
         ];
     }
 
-    public function providerForTestNamedObjectConfigurationInvalid(): \Generator
+    public function providerForTestNamedObjectConfigurationInvalid(): Generator
     {
         $names = $this->getNamedObjectConfigurationNames();
         $configurations = $this->getNamedObjectInvalidConfigurations();
@@ -323,7 +323,7 @@ final class SiteApiTest extends AbstractParserTestCase
 
         $this->load([
             'system' => [
-                'ezdemo_group' => [
+                'ibexa_demo_group' => [
                     'ng_site_api' => [
                         'named_objects' => [
                             $name => $configuration,
@@ -363,7 +363,7 @@ final class SiteApiTest extends AbstractParserTestCase
     {
         $this->load([
             'system' => [
-                'ezdemo_group' => [
+                'ibexa_demo_group' => [
                     'ng_site_api' => [
                         'named_objects' => $configurationValues,
                     ],
@@ -374,7 +374,7 @@ final class SiteApiTest extends AbstractParserTestCase
         $this->assertConfigResolverParameterValue(
             'ng_site_api.named_objects',
             $expectedConfigurationValues,
-            'ezdemo_site'
+            'ibexa_demo_site'
         );
     }
 
@@ -428,7 +428,7 @@ final class SiteApiTest extends AbstractParserTestCase
 
         $this->load([
             'system' => [
-                'ezdemo_group' => [
+                'ibexa_demo_group' => [
                     'ng_site_api' => [
                         'named_queries' => [
                             $queryName => $configurationValues,
@@ -448,7 +448,7 @@ final class SiteApiTest extends AbstractParserTestCase
         $this->assertConfigResolverParameterValue(
             'ng_site_api.named_queries',
             [$queryName => $configurationValues + $defaultValues],
-            'ezdemo_site'
+            'ibexa_demo_site'
         );
         // Avoid detecting risky tests
         self::assertTrue(true);
@@ -479,7 +479,7 @@ final class SiteApiTest extends AbstractParserTestCase
                         'page' => 2,
                     ],
                 ],
-                'The child node "query_type" at path "ezpublish.system.ezdemo_group.ng_named_queries.some_key" must be configured',
+                'The child node "query_type" at path "ibexa.system.ibexa_demo_group.ng_named_queries.some_key" must be configured',
             ],
             [
                 [
@@ -518,11 +518,11 @@ final class SiteApiTest extends AbstractParserTestCase
     {
         $this->expectException(InvalidConfigurationException::class);
         $message = preg_quote($message, '/');
-        self::matchesRegularExpression("/{$message}/");
+        self::matchesRegularExpression("/$message/");
 
         $this->load([
             'system' => [
-                'ezdemo_group' => [
+                'ibexa_demo_group' => [
                     'ng_site_api' => [
                         'named_queries' => $configurationValues,
                     ],
@@ -560,7 +560,7 @@ final class SiteApiTest extends AbstractParserTestCase
     {
         $this->load([
             'system' => [
-                'ezdemo_group' => [
+                'ibexa_demo_group' => [
                     'ng_site_api' => [
                         'named_queries' => $configurationValues,
                     ],
@@ -571,14 +571,14 @@ final class SiteApiTest extends AbstractParserTestCase
         $this->assertConfigResolverParameterValue(
             'ng_site_api.named_queries',
             $expectedConfigurationValues,
-            'ezdemo_site'
+            'ibexa_demo_site'
         );
     }
 
     protected function getContainerExtensions(): array
     {
         return [
-            new EzPublishCoreExtension([
+            new IbexaCoreExtension([
                 new SiteApi(),
             ]),
         ];
@@ -586,6 +586,6 @@ final class SiteApiTest extends AbstractParserTestCase
 
     protected function getMinimalConfiguration(): array
     {
-        return Yaml::parse(file_get_contents(__DIR__ . '/../../Fixtures/minimal.yml'));
+        return Yaml::parse(file_get_contents(__DIR__ . '/../../Fixtures/minimal.yaml'));
     }
 }

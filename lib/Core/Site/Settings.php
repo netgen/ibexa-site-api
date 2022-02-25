@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Core\Site;
+namespace Netgen\IbexaSiteApi\Core\Site;
 
-use eZ\Publish\API\Repository\Exceptions\PropertyNotFoundException;
-use eZ\Publish\API\Repository\Exceptions\PropertyReadOnlyException;
-use Netgen\EzPlatformSiteApi\API\Settings as BaseSettings;
+use Ibexa\Contracts\Core\Repository\Exceptions\PropertyNotFoundException;
+use Ibexa\Contracts\Core\Repository\Exceptions\PropertyReadOnlyException;
+use Netgen\IbexaSiteApi\API\Settings as BaseSettings;
 
 /**
  * @internal
  *
  * Hint against API abstract class instead of this service:
  *
- * @see \Netgen\EzPlatformSiteApi\API\Settings
+ * @see \Netgen\IbexaSiteApi\API\Settings
  */
 final class Settings extends BaseSettings
 {
@@ -60,7 +60,7 @@ final class Settings extends BaseSettings
     }
 
     /**
-     * @throws \eZ\Publish\API\Repository\Exceptions\PropertyNotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\PropertyNotFoundException
      */
     public function __get(string $property)
     {
@@ -77,21 +77,21 @@ final class Settings extends BaseSettings
                 return $this->failOnMissingField;
         }
 
-        throw new PropertyNotFoundException($property, static::class);
+        throw new PropertyNotFoundException($property, __CLASS__);
     }
 
     /**
      * @param mixed $value
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\PropertyReadOnlyException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\PropertyReadOnlyException
      */
     public function __set(string $property, $value): void
     {
-        throw new PropertyReadOnlyException($property, static::class);
+        throw new PropertyReadOnlyException($property, __CLASS__);
     }
 
     /**
-     * @throws \eZ\Publish\API\Repository\Exceptions\PropertyNotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\PropertyNotFoundException
      */
     public function __isset(string $property): bool
     {
@@ -104,6 +104,6 @@ final class Settings extends BaseSettings
                 return true;
         }
 
-        throw new PropertyNotFoundException($property, static::class);
+        throw new PropertyNotFoundException($property, __CLASS__);
     }
 }

@@ -2,25 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Core\Site\Pagination\Pagerfanta;
+namespace Netgen\IbexaSiteApi\Core\Site\Pagination\Pagerfanta;
 
-use eZ\Publish\API\Repository\Values\Content\LocationQuery;
-use eZ\Publish\API\Repository\Values\Content\Query;
-use eZ\Publish\API\Repository\Values\Content\Search\SearchResult;
+use Ibexa\Contracts\Core\Repository\Values\Content\LocationQuery;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query;
+use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchResult;
 use Netgen\EzPlatformSearchExtra\Core\Pagination\Pagerfanta\BaseAdapter;
-use Netgen\EzPlatformSiteApi\API\FindService;
+use Netgen\IbexaSiteApi\API\FindService;
 
 /**
  * Pagerfanta adapter performing search using FindService.
  *
- * @see \Netgen\EzPlatformSiteApi\API\FindService
+ * @see \Netgen\IbexaSiteApi\API\FindService
  */
 final class FindAdapter extends BaseAdapter
 {
-    /**
-     * @var \Netgen\EzPlatformSiteApi\API\FindService
-     */
-    private $findService;
+    private FindService $findService;
 
     public function __construct(Query $query, FindService $findService)
     {
@@ -30,7 +27,7 @@ final class FindAdapter extends BaseAdapter
     }
 
     /**
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
     protected function executeQuery(Query $query): SearchResult
     {
