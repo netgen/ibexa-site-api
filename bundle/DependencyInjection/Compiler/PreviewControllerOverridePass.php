@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Compiler;
 
+use Ibexa\Core\MVC\Symfony\Controller\Content\PreviewController as IbexaPreviewController;
 use Netgen\Bundle\IbexaSiteApiBundle\Controller\PreviewController;
 use Symfony\Component\DependencyInjection\Alias;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
@@ -14,7 +15,7 @@ class PreviewControllerOverridePass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container): void
     {
-        $corePreviewControllerServiceId = '@Ibexa\Core\MVC\Symfony\Controller\Content\PreviewController';
+        $corePreviewControllerServiceId = IbexaPreviewController::class;
 
         if (!$container->hasDefinition($corePreviewControllerServiceId)) {
             return;
