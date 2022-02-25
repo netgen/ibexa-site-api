@@ -1,8 +1,8 @@
-{# content \Netgen\EzPlatformSiteApi\API\Values\Content #}
-{# location \Netgen\EzPlatformSiteApi\API\Values\Location #}
+{# content \Netgen\IbexaSiteApi\API\Values\Content #}
+{# location \Netgen\IbexaSiteApi\API\Values\Location #}
 
 {% if location is defined %}
-    <a href="{{ ez_path(location) }}">{{ content.name }}</a>
+    <a href="{{ ibexa_path(location) }}">{{ content.name }}</a>
 {% else %}
-    <a href="{{ ez_path(content) }}">{{ content.name }}</a>
+    <a href="{{ ibexa_path(content) }}">{{ content.name }}</a>
 {% endif %}

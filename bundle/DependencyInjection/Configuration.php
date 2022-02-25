@@ -2,17 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\DependencyInjection;
+namespace Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 class Configuration implements ConfigurationInterface
 {
-    /**
-     * @var string
-     */
-    protected $rootNodeName;
+    protected string $rootNodeName;
 
     public function __construct(string $rootNodeName)
     {

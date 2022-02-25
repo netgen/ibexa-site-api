@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Core\Site\QueryType;
+namespace Netgen\IbexaSiteApi\Core\Site\QueryType;
 
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\Operator;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Operator;
 use InvalidArgumentException;
 use function array_key_exists;
 use function array_keys;
@@ -23,7 +23,7 @@ final class CriterionDefinitionResolver
      *
      * @var array
      */
-    private static $operatorMap = [
+    private static array $operatorMap = [
         'eq' => Operator::EQ,
         'gt' => Operator::GT,
         'gte' => Operator::GTE,
@@ -43,7 +43,7 @@ final class CriterionDefinitionResolver
      *
      * @throws \InvalidArgumentException
      *
-     * @return \Netgen\EzPlatformSiteApi\Core\Site\QueryType\CriterionDefinition[]
+     * @return \Netgen\IbexaSiteApi\Core\Site\QueryType\CriterionDefinition[]
      */
     public function resolve(string $name, $parameters): array
     {
@@ -55,7 +55,7 @@ final class CriterionDefinitionResolver
      *
      * @throws \InvalidArgumentException
      *
-     * @return \Netgen\EzPlatformSiteApi\Core\Site\QueryType\CriterionDefinition[]
+     * @return \Netgen\IbexaSiteApi\Core\Site\QueryType\CriterionDefinition[]
      */
     public function resolveTargets(string $name, array $parameters): array
     {
@@ -76,7 +76,7 @@ final class CriterionDefinitionResolver
      *
      * @throws \InvalidArgumentException
      *
-     * @return \Netgen\EzPlatformSiteApi\Core\Site\QueryType\CriterionDefinition[]
+     * @return \Netgen\IbexaSiteApi\Core\Site\QueryType\CriterionDefinition[]
      */
     private function resolveForTarget(string $name, ?string $target, $parameters): array
     {
@@ -92,7 +92,7 @@ final class CriterionDefinitionResolver
     /**
      * Return CriterionDefinition instances for the given Field $target and its operator $map.
      *
-     * @return \Netgen\EzPlatformSiteApi\Core\Site\QueryType\CriterionDefinition[]
+     * @return \Netgen\IbexaSiteApi\Core\Site\QueryType\CriterionDefinition[]
      */
     private function resolveOperatorMap(string $name, ?string $target, array $map): array
     {
@@ -107,8 +107,6 @@ final class CriterionDefinitionResolver
 
     /**
      * @param mixed $value
-     *
-     * @return \Netgen\EzPlatformSiteApi\Core\Site\QueryType\CriterionDefinition
      */
     private function buildDefinitionForOperator(string $name, ?string $target, string $operator, $value): CriterionDefinition
     {
@@ -128,8 +126,6 @@ final class CriterionDefinitionResolver
      * Return CriterionDefinition instance from the given arguments.
      *
      * @param mixed $value
-     *
-     * @return \Netgen\EzPlatformSiteApi\Core\Site\QueryType\CriterionDefinition
      */
     private function buildDefinition(
         string $name,

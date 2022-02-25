@@ -2,22 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\Tests\QueryType;
+namespace Netgen\Bundle\IbexaSiteApiBundle\Tests\QueryType;
 
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use eZ\Publish\Core\MVC\Symfony\ExpressionLanguage\ExpressionLanguage;
-use eZ\Publish\Core\QueryType\QueryType;
-use eZ\Publish\Core\QueryType\QueryTypeRegistry;
+use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
+use Ibexa\Core\MVC\Symfony\ExpressionLanguage\ExpressionLanguage;
+use Ibexa\Core\QueryType\QueryType;
+use Ibexa\Core\QueryType\QueryTypeRegistry;
 use InvalidArgumentException;
-use Netgen\Bundle\EzPlatformSiteApiBundle\NamedObject\Provider;
-use Netgen\Bundle\EzPlatformSiteApiBundle\QueryType\ExpressionFunctionProvider;
-use Netgen\Bundle\EzPlatformSiteApiBundle\QueryType\ParameterProcessor;
-use Netgen\Bundle\EzPlatformSiteApiBundle\QueryType\QueryDefinition;
-use Netgen\Bundle\EzPlatformSiteApiBundle\QueryType\QueryDefinitionMapper;
-use Netgen\Bundle\EzPlatformSiteApiBundle\View\ContentView;
-use Netgen\EzPlatformSiteApi\API\Values\Content;
-use Netgen\EzPlatformSiteApi\API\Values\Location;
-use Netgen\EzPlatformSiteApi\Core\Site\QueryType\QueryType as SiteQueryType;
+use Netgen\Bundle\IbexaSiteApiBundle\NamedObject\Provider;
+use Netgen\Bundle\IbexaSiteApiBundle\QueryType\ExpressionFunctionProvider;
+use Netgen\Bundle\IbexaSiteApiBundle\QueryType\ParameterProcessor;
+use Netgen\Bundle\IbexaSiteApiBundle\QueryType\QueryDefinition;
+use Netgen\Bundle\IbexaSiteApiBundle\QueryType\QueryDefinitionMapper;
+use Netgen\Bundle\IbexaSiteApiBundle\View\ContentView;
+use Netgen\IbexaSiteApi\API\Values\Content;
+use Netgen\IbexaSiteApi\API\Values\Location;
+use Netgen\IbexaSiteApi\Core\Site\QueryType\QueryType as SiteQueryType;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -194,7 +194,7 @@ final class QueryDefinitionMapperTest extends TestCase
     }
 
     /**
-     * @return \eZ\Publish\Core\MVC\ConfigResolverInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @return \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     protected function getConfigResolverMock(): MockObject
     {
@@ -234,7 +234,7 @@ final class QueryDefinitionMapperTest extends TestCase
     }
 
     /**
-     * @return \eZ\Publish\Core\QueryType\QueryTypeRegistry|\PHPUnit\Framework\MockObject\MockObject
+     * @return \Ibexa\Core\QueryType\QueryTypeRegistry|\PHPUnit\Framework\MockObject\MockObject
      */
     protected function getQueryTypeRegistryMock(): MockObject
     {
@@ -271,9 +271,9 @@ final class QueryDefinitionMapperTest extends TestCase
     {
         /** @var \Symfony\Component\HttpFoundation\RequestStack $requestStack */
         $requestStack = $this->getMockBuilder(RequestStack::class)->getMock();
-        /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface $configResolverMock */
+        /** @var \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface $configResolverMock */
         $configResolverMock = $this->getMockBuilder(ConfigResolverInterface::class)->getMock();
-        /** @var \Netgen\Bundle\EzPlatformSiteApiBundle\NamedObject\Provider $namedObjectProviderMock */
+        /** @var \Netgen\Bundle\IbexaSiteApiBundle\NamedObject\Provider $namedObjectProviderMock */
         $namedObjectProviderMock = $this->getMockBuilder(Provider::class)->getMock();
         $expressionLanguage = new ExpressionLanguage(null, [new ExpressionFunctionProvider()]);
 
@@ -281,7 +281,7 @@ final class QueryDefinitionMapperTest extends TestCase
     }
 
     /**
-     * @return \Netgen\Bundle\EzPlatformSiteApiBundle\View\ContentView|\PHPUnit\Framework\MockObject\MockObject
+     * @return \Netgen\Bundle\IbexaSiteApiBundle\View\ContentView|\PHPUnit\Framework\MockObject\MockObject
      */
     protected function getViewMock(): MockObject
     {

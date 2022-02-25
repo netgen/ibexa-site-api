@@ -2,26 +2,26 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Tests\Unit\Core\Site\QueryType\Content\Relations;
+namespace Netgen\IbexaSiteApi\Tests\Unit\Core\Site\QueryType\Content\Relations;
 
-use eZ\Publish\API\Repository\Values\Content\Query;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\ContentTypeIdentifier;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\DateMetadata;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\Field;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\FieldRelation;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\LogicalAnd;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\MatchNone;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\Operator;
-use eZ\Publish\API\Repository\Values\Content\Query\SortClause\ContentName;
-use eZ\Publish\API\Repository\Values\Content\Query\SortClause\DatePublished;
-use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinitionCollection;
-use Netgen\EzPlatformSearchExtra\API\Values\Content\Query\Criterion\Visible;
-use Netgen\EzPlatformSiteApi\Core\Site\QueryType\Content\Relations\ReverseFields;
-use Netgen\EzPlatformSiteApi\Core\Site\QueryType\QueryType;
-use Netgen\EzPlatformSiteApi\Core\Site\Settings;
-use Netgen\EzPlatformSiteApi\Core\Site\Values\Content;
-use Netgen\EzPlatformSiteApi\Tests\Unit\Core\Site\ContentFieldsMockTrait;
-use Netgen\EzPlatformSiteApi\Tests\Unit\Core\Site\QueryType\QueryTypeBaseTest;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ContentTypeIdentifier;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\DateMetadata;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Field;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\FieldRelation;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LogicalAnd;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\MatchNone;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Operator;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\ContentName;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\DatePublished;
+use Ibexa\Core\Repository\Values\ContentType\FieldDefinitionCollection;
+use Netgen\IbexaSearchExtra\API\Values\Content\Query\Criterion\Visible;
+use Netgen\IbexaSiteApi\Core\Site\QueryType\Content\Relations\ReverseFields;
+use Netgen\IbexaSiteApi\Core\Site\QueryType\QueryType;
+use Netgen\IbexaSiteApi\Core\Site\Settings;
+use Netgen\IbexaSiteApi\Core\Site\Values\Content;
+use Netgen\IbexaSiteApi\Tests\Unit\Core\Site\ContentFieldsMockTrait;
+use Netgen\IbexaSiteApi\Tests\Unit\Core\Site\QueryType\QueryTypeBaseTest;
 use Psr\Log\NullLogger;
 
 /**
@@ -29,7 +29,7 @@ use Psr\Log\NullLogger;
  *
  * @group query-type
  *
- * @see \Netgen\EzPlatformSiteApi\Core\Site\QueryType\Content\Relations\ReverseFields
+ * @see \Netgen\IbexaSiteApi\Core\Site\QueryType\Content\Relations\ReverseFields
  *
  * @internal
  */
@@ -316,10 +316,12 @@ final class ReverseFieldsTest extends QueryTypeBaseTest
         return new Content(
             [
                 'id' => 42,
-                'site' => false,
+                'site' => $this->getSiteMock(),
+                'name' => 'Krešo',
+                'mainLocationId' => 123,
                 'domainObjectMapper' => $this->getDomainObjectMapper(),
                 'repository' => $this->getRepositoryMock(),
-                'fields' => [],
+                'innerVersionInfo' => $this->getRepoVersionInfo(),
                 'languageCode' => 'eng-GB',
             ],
             true,

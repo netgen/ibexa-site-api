@@ -16,7 +16,7 @@ Once Site API is installed, activate the bundle in ``app/AppKernel.php`` file by
     {
         //...
 
-        $bundles[] = new Netgen\Bundle\EzPlatformSiteApiBundle\NetgenEzPlatformSiteApiBundle();
+        $bundles[] = new Netgen\Bundle\IbexaSiteApiBundle\NetgenIbexaSiteApiBundle();
         $bundles[] = new Netgen\Bundle\EzPlatformSearchExtraBundle\NetgenEzPlatformSearchExtraBundle();
 
         return $bundles;

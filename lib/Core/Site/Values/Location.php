@@ -2,76 +2,49 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Core\Site\Values;
+namespace Netgen\IbexaSiteApi\Core\Site\Values;
 
-use eZ\Publish\API\Repository\Exceptions\NotImplementedException;
-use eZ\Publish\API\Repository\Values\Content\LocationQuery;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\ContentTypeIdentifier;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\LocationId;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\LogicalAnd;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\LogicalNot;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\ParentLocationId;
+use Ibexa\Contracts\Core\Repository\Exceptions\NotImplementedException;
+use Ibexa\Contracts\Core\Repository\Values\Content\Location as RepoLocation;
+use Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo;
+use Ibexa\Contracts\Core\Repository\Values\Content\LocationQuery;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ContentTypeIdentifier;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LocationId;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LogicalAnd;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LogicalNot;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ParentLocationId;
 use Netgen\EzPlatformSearchExtra\API\Values\Content\Query\Criterion\Visible;
-use Netgen\EzPlatformSiteApi\API\Values\Content as APIContent;
-use Netgen\EzPlatformSiteApi\API\Values\ContentInfo as APIContentInfo;
-use Netgen\EzPlatformSiteApi\API\Values\Location as APILocation;
-use Netgen\EzPlatformSiteApi\Core\Site\Pagination\Pagerfanta\FilterAdapter;
+use Netgen\IbexaSiteApi\API\Site;
+use Netgen\IbexaSiteApi\API\Values\Content as APIContent;
+use Netgen\IbexaSiteApi\API\Values\ContentInfo as APIContentInfo;
+use Netgen\IbexaSiteApi\API\Values\Location as APILocation;
+use Netgen\IbexaSiteApi\Core\Site\DomainObjectMapper;
+use Netgen\IbexaSiteApi\Core\Site\Pagination\Pagerfanta\FilterAdapter;
 use Pagerfanta\Pagerfanta;
 use Psr\Log\LoggerInterface;
 use function property_exists;
 
 final class Location extends APILocation
 {
-    /**
-     * @var \Netgen\EzPlatformSiteApi\API\Values\ContentInfo
-     */
-    protected $contentInfo;
+    private string $languageCode;
 
-    /**
-     * @var \eZ\Publish\API\Repository\Values\Content\Location
-     */
-    protected $innerLocation;
+    private ?APIContentInfo $contentInfo = null;
+    private ?APILocation $internalParent = null;
+    private ?APIContent $internalContent = null;
 
-    /**
-     * @var string
-     */
-    private $languageCode;
+    protected RepoLocation $innerLocation;
 
-    /**
-     * @var \eZ\Publish\API\Repository\Values\Content\VersionInfo
-     */
-    private $innerVersionInfo;
-
-    /**
-     * @var \Netgen\EzPlatformSiteApi\API\Site
-     */
-    private $site;
-
-    /**
-     * @var \Netgen\EzPlatformSiteApi\Core\Site\DomainObjectMapper
-     */
-    private $domainObjectMapper;
-
-    /**
-     * @var \Netgen\EzPlatformSiteApi\API\Values\Location
-     */
-    private $internalParent;
-
-    /**
-     * @var \Netgen\EzPlatformSiteApi\API\Values\Content
-     */
-    private $internalContent;
-
-    /**
-     * @var \Psr\Log\LoggerInterface
-     */
-    private $logger;
+    private VersionInfo $innerVersionInfo;
+    private Site $site;
+    private DomainObjectMapper $domainObjectMapper;
+    private LoggerInterface $logger;
 
     public function __construct(array $properties, LoggerInterface $logger)
     {
         $this->site = $properties['site'];
         $this->domainObjectMapper = $properties['domainObjectMapper'];
         $this->innerVersionInfo = $properties['innerVersionInfo'];
+        $this->innerLocation = $properties['innerLocation'];
         $this->languageCode = $properties['languageCode'];
         $this->logger = $logger;
 
@@ -79,6 +52,7 @@ final class Location extends APILocation
             $properties['site'],
             $properties['domainObjectMapper'],
             $properties['innerVersionInfo'],
+            $properties['innerLocation'],
             $properties['languageCode']
         );
 
@@ -92,10 +66,10 @@ final class Location extends APILocation
      *
      * @param string $property The name of the property to retrieve
      *
-     * @throws \Netgen\EzPlatformSiteApi\API\Exceptions\TranslationNotMatchedException
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
-     * @throws \eZ\Publish\API\Repository\Exceptions\PropertyNotFoundException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\PropertyNotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
      */
     public function __get($property)
     {
@@ -147,7 +121,7 @@ final class Location extends APILocation
     }
 
     /**
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     public function __debugInfo(): array
     {
@@ -167,10 +141,10 @@ final class Location extends APILocation
             'sortField' => $this->innerLocation->sortField,
             'sortOrder' => $this->innerLocation->sortOrder,
             'contentId' => $this->innerLocation->contentId,
-            'innerLocation' => '[An instance of eZ\Publish\API\Repository\Values\Content\Location]',
+            'innerLocation' => '[An instance of Ibexa\Contracts\Core\Repository\Values\Content\Location]',
             'contentInfo' => $this->getContentInfo(),
-            'parent' => '[An instance of Netgen\EzPlatformSiteApi\API\Values\Location]',
-            'content' => '[An instance of Netgen\EzPlatformSiteApi\API\Values\Content]',
+            'parent' => '[An instance of Netgen\IbexaSiteApi\API\Values\Location]',
+            'content' => '[An instance of Netgen\IbexaSiteApi\API\Values\Content]',
         ];
     }
 
@@ -266,9 +240,9 @@ final class Location extends APILocation
     }
 
     /**
-     * @throws \Netgen\EzPlatformSiteApi\API\Exceptions\TranslationNotMatchedException
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
      */
     private function getParent(): APILocation
     {
@@ -294,7 +268,7 @@ final class Location extends APILocation
     }
 
     /**
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     private function getContentInfo(): APIContentInfo
     {

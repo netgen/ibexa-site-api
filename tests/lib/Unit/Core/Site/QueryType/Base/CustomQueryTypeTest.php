@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Tests\Unit\Core\Site\QueryType\Base;
+namespace Netgen\IbexaSiteApi\Tests\Unit\Core\Site\QueryType\Base;
 
-use eZ\Publish\API\Repository\Values\Content\LocationQuery;
-use eZ\Publish\API\Repository\Values\Content\Query;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\DateMetadata;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\FullText;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\LogicalAnd;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\Operator;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\SectionId;
-use eZ\Publish\API\Repository\Values\Content\Query\FacetBuilder\SectionFacetBuilder;
-use eZ\Publish\API\Repository\Values\Content\Query\SortClause\SectionIdentifier;
-use eZ\Publish\API\Repository\Values\Content\Query\SortClause\SectionName;
-use Netgen\EzPlatformSearchExtra\API\Values\Content\Query\Criterion\Visible;
-use Netgen\EzPlatformSiteApi\Core\Site\QueryType\QueryType;
-use Netgen\EzPlatformSiteApi\Core\Site\Settings;
+use Ibexa\Contracts\Core\Repository\Values\Content\LocationQuery;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\DateMetadata;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\FullText;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LogicalAnd;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Operator;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\SectionId;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\FacetBuilder\SectionFacetBuilder;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\SectionIdentifier;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\SectionName;
+use Netgen\IbexaSearchExtra\API\Values\Content\Query\Criterion\Visible;
+use Netgen\IbexaSiteApi\Core\Site\QueryType\QueryType;
+use Netgen\IbexaSiteApi\Core\Site\Settings;
 use PHPUnit\Framework\TestCase;
 
 /**

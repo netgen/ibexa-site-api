@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Core\Site;
+namespace Netgen\IbexaSiteApi\Core\Site;
 
-use eZ\Publish\API\Repository\Values\Content\LocationQuery;
-use eZ\Publish\API\Repository\Values\Content\Query;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\ContentId;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\ContentTypeIdentifier;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\Location\IsMainLocation;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\LogicalAnd;
+use Ibexa\Contracts\Core\Repository\Values\Content\LocationQuery;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ContentId;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ContentTypeIdentifier;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Location\IsMainLocation;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LogicalAnd;
 use Netgen\EzPlatformSearchExtra\API\Values\Content\Query\Criterion\Visible;
-use Netgen\EzPlatformSiteApi\API\RelationService as RelationServiceInterface;
-use Netgen\EzPlatformSiteApi\API\Site as SiteInterface;
-use Netgen\EzPlatformSiteApi\API\Values\Content;
-use Netgen\EzPlatformSiteApi\API\Values\Location;
-use Netgen\EzPlatformSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Registry as RelationResolverRegistry;
-use Netgen\EzPlatformSiteApi\Core\Traits\SearchResultExtractorTrait;
+use Netgen\IbexaSiteApi\API\RelationService as RelationServiceInterface;
+use Netgen\IbexaSiteApi\API\Site as SiteInterface;
+use Netgen\IbexaSiteApi\API\Values\Content;
+use Netgen\IbexaSiteApi\API\Values\Location;
+use Netgen\IbexaSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Registry as RelationResolverRegistry;
+use Netgen\IbexaSiteApi\Core\Traits\SearchResultExtractorTrait;
 use function array_flip;
 use function array_slice;
 use function count;
@@ -29,21 +29,14 @@ use function usort;
  *
  * Hint against API interface instead of this service:
  *
- * @see \Netgen\EzPlatformSiteApi\API\RelationService
+ * @see \Netgen\IbexaSiteApi\API\RelationService
  */
 class RelationService implements RelationServiceInterface
 {
     use SearchResultExtractorTrait;
 
-    /**
-     * @var \Netgen\EzPlatformSiteApi\API\Site
-     */
-    private $site;
-
-    /**
-     * @var \Netgen\EzPlatformSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Registry
-     */
-    private $relationResolverRegistry;
+    private SiteInterface $site;
+    private RelationResolverRegistry $relationResolverRegistry;
 
     public function __construct(
         SiteInterface $site,
@@ -56,7 +49,7 @@ class RelationService implements RelationServiceInterface
     /**
      * {@inheritdoc}
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
     public function loadFieldRelation(
         Content $content,
@@ -75,7 +68,7 @@ class RelationService implements RelationServiceInterface
     /**
      * {@inheritdoc}
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
     public function loadFieldRelations(
         Content $content,
@@ -100,7 +93,7 @@ class RelationService implements RelationServiceInterface
     /**
      * {@inheritdoc}
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
     public function loadFieldRelationLocation(
         Content $content,
@@ -119,7 +112,7 @@ class RelationService implements RelationServiceInterface
     /**
      * {@inheritdoc}
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
     public function loadFieldRelationLocations(
         Content $content,
@@ -144,12 +137,15 @@ class RelationService implements RelationServiceInterface
     /**
      * Return an array of related Content items, optionally limited by $limit.
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      *
-     * @return \Netgen\EzPlatformSiteApi\API\Values\Content[]
+     * @return \Netgen\IbexaSiteApi\API\Values\Content[]
      */
-    private function getRelatedContentItems(array $relatedContentIds, array $contentTypeIdentifiers, ?int $limit = null): array
-    {
+    private function getRelatedContentItems(
+        array $relatedContentIds,
+        array $contentTypeIdentifiers,
+        ?int $limit = null
+    ): array {
         if (count($relatedContentIds) === 0) {
             return [];
         }
@@ -188,13 +184,16 @@ class RelationService implements RelationServiceInterface
      * @param array $contentTypeIdentifiers
      * @param null|int $limit
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      *
-     * @return \Netgen\EzPlatformSiteApi\API\Values\Content[]
+     * @return \Netgen\IbexaSiteApi\API\Values\Content[]
      */
-    private function getRelatedLocations(array $relatedContentIds, array $contentTypeIdentifiers, ?int $limit = null): array
-    {
-        if (\count($relatedContentIds) === 0) {
+    private function getRelatedLocations(
+        array $relatedContentIds,
+        array $contentTypeIdentifiers,
+        ?int $limit = null
+    ): array {
+        if (count($relatedContentIds) === 0) {
             return [];
         }
 
@@ -210,14 +209,14 @@ class RelationService implements RelationServiceInterface
 
         $query = new LocationQuery([
             'filter' => new LogicalAnd($criteria),
-            'limit' => \count($relatedContentIds),
+            'limit' => count($relatedContentIds),
         ]);
 
         $searchResult = $this->site->getFilterService()->filterLocations($query);
         $locations = $this->extractLocations($searchResult);
 
         if ($limit !== null) {
-            return \array_slice($locations, 0, $limit);
+            return array_slice($locations, 0, $limit);
         }
 
         return $locations;
@@ -245,12 +244,12 @@ class RelationService implements RelationServiceInterface
      */
     private function sortLocationsByIdOrder(array &$relatedLocations, array $relatedContentIds): void
     {
-        $sortedIdList = \array_flip($relatedContentIds);
+        $sortedIdList = array_flip($relatedContentIds);
 
         $sorter = static function (Location $location1, Location $location2) use ($sortedIdList): int {
             return $sortedIdList[$location1->contentId] <=> $sortedIdList[$location2->contentId];
         };
 
-        \usort($relatedLocations, $sorter);
+        usort($relatedLocations, $sorter);
     }
 }

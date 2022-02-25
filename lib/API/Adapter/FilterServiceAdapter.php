@@ -2,23 +2,23 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\API\Adapter;
+namespace Netgen\IbexaSiteApi\API\Adapter;
 
-use eZ\Publish\API\Repository\SearchService;
-use eZ\Publish\API\Repository\Values\Content\Content;
-use eZ\Publish\API\Repository\Values\Content\LocationQuery;
-use eZ\Publish\API\Repository\Values\Content\Query;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
-use eZ\Publish\API\Repository\Values\Content\Search\SearchResult;
-use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
-use eZ\Publish\Core\Base\Exceptions\NotFoundException;
-use eZ\Publish\SPI\Search\Capable;
-use eZ\Publish\SPI\Search\Handler;
-use Netgen\EzPlatformSiteApi\API\FilterService;
+use Ibexa\Contracts\Core\Repository\SearchService;
+use Ibexa\Contracts\Core\Repository\Values\Content\Content;
+use Ibexa\Contracts\Core\Repository\Values\Content\LocationQuery;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion;
+use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchResult;
+use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
+use Ibexa\Core\Base\Exceptions\NotFoundException;
+use Ibexa\Contracts\Core\Search\Capable;
+use Ibexa\Contracts\Core\Search\Handler;
+use Netgen\IbexaSiteApi\API\FilterService;
 
 /**
  * This class is an adapter from Site API filter service to SearchService interface
- * from eZ Publish kernel. The point is being able to replace usage of eZ search service
+ * from Ibexa core. The point is being able to replace usage of Ibexa CMS SearchService
  * with Site API filter service without touching consuming code.
  *
  * Methods implemented here do not use $languageFilter argument since it is handled automatically
@@ -28,15 +28,8 @@ use Netgen\EzPlatformSiteApi\API\FilterService;
  */
 final class FilterServiceAdapter implements SearchService
 {
-    /**
-     * @var \Netgen\EzPlatformSiteApi\API\FilterService
-     */
-    private $filterService;
-
-    /**
-     * @var \eZ\Publish\SPI\Search\Handler
-     */
-    private $searchHandler;
+    private FilterService $filterService;
+    private Handler $searchHandler;
 
     public function __construct(FilterService $filterService, Handler $searchHandler)
     {
@@ -49,7 +42,7 @@ final class FilterServiceAdapter implements SearchService
         $searchResult = $this->filterService->filterContent($query);
 
         foreach ($searchResult->searchHits as $searchHit) {
-            /** @var \Netgen\EzPlatformSiteApi\API\Values\Content $siteContent */
+            /** @var \Netgen\IbexaSiteApi\API\Values\Content $siteContent */
             $siteContent = $searchHit->valueObject;
             $searchHit->valueObject = $siteContent->innerContent;
         }
@@ -62,7 +55,7 @@ final class FilterServiceAdapter implements SearchService
         $searchResult = $this->filterService->filterContent($query);
 
         foreach ($searchResult->searchHits as $searchHit) {
-            /** @var \Netgen\EzPlatformSiteApi\API\Values\Content $siteContent */
+            /** @var \Netgen\IbexaSiteApi\API\Values\Content $siteContent */
             $siteContent = $searchHit->valueObject;
             $searchHit->valueObject = $siteContent->contentInfo->innerContentInfo;
         }
@@ -75,7 +68,7 @@ final class FilterServiceAdapter implements SearchService
         $searchResult = $this->filterService->filterLocations($query);
 
         foreach ($searchResult->searchHits as $searchHit) {
-            /** @var \Netgen\EzPlatformSiteApi\API\Values\Location $siteLocation */
+            /** @var \Netgen\IbexaSiteApi\API\Values\Location $siteLocation */
             $siteLocation = $searchHit->valueObject;
             $searchHit->valueObject = $siteLocation->innerLocation;
         }
@@ -99,7 +92,7 @@ final class FilterServiceAdapter implements SearchService
             throw new InvalidArgumentException('totalCount', 'findSingle() found more then one item for given $filter');
         }
 
-        /** @var \Netgen\EzPlatformSiteApi\API\Values\Content $siteContent */
+        /** @var \Netgen\IbexaSiteApi\API\Values\Content $siteContent */
         $siteContent = $searchResult->searchHits[0]->valueObject;
 
         return $siteContent->innerContent;

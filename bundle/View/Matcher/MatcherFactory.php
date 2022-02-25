@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\View\Matcher;
+namespace Netgen\Bundle\IbexaSiteApiBundle\View\Matcher;
 
-use eZ\Bundle\EzPublishCoreBundle\Matcher\ViewMatcherRegistry;
-use eZ\Publish\API\Repository\Repository;
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use eZ\Publish\Core\MVC\Symfony\Matcher\ClassNameMatcherFactory;
-use eZ\Publish\Core\MVC\Symfony\View\View;
+use Ibexa\Bundle\Core\Matcher\ViewMatcherRegistry;
+use Ibexa\Contracts\Core\Repository\Repository;
+use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
+use Ibexa\Core\MVC\Symfony\Matcher\ClassNameMatcherFactory;
+use Ibexa\Core\MVC\Symfony\View\View;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use function mb_strpos;
 use function mb_substr;
@@ -17,30 +17,11 @@ class MatcherFactory extends ClassNameMatcherFactory
 {
     use ContainerAwareTrait;
 
-    /**
-     * @var \eZ\Bundle\EzPublishCoreBundle\Matcher\ViewMatcherRegistry|null
-     */
-    private $viewMatcherRegistry;
-
-    /**
-     * @var \eZ\Publish\Core\MVC\ConfigResolverInterface
-     */
-    private $configResolver;
-
-    /**
-     * @var string
-     */
-    private $parameterName;
-
-    /**
-     * @var string|null
-     */
-    private $namespace;
-
-    /**
-     * @var string|null
-     */
-    private $scope;
+    private ?ViewMatcherRegistry $viewMatcherRegistry;
+    private ConfigResolverInterface $configResolver;
+    private string $parameterName;
+    private ?string $namespace;
+    private ?string $scope;
 
     public function __construct(
         ?ViewMatcherRegistry $viewMatcherRegistry,
@@ -71,9 +52,9 @@ class MatcherFactory extends ClassNameMatcherFactory
     /**
      * @param string $matcherIdentifier
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      *
-     * @return \eZ\Publish\Core\MVC\Symfony\Matcher\ViewMatcherInterface
+     * @return \Ibexa\Core\MVC\Symfony\Matcher\ViewMatcherInterface
      */
     protected function getMatcher($matcherIdentifier)
     {
@@ -82,7 +63,7 @@ class MatcherFactory extends ClassNameMatcherFactory
         }
 
         if ($this->container->has($matcherIdentifier)) {
-            /** @var \eZ\Publish\Core\MVC\Symfony\Matcher\ViewMatcherInterface $matcher */
+            /** @var \Ibexa\Core\MVC\Symfony\Matcher\ViewMatcherInterface $matcher */
             $matcher = $this->container->get($matcherIdentifier);
 
             return $matcher;

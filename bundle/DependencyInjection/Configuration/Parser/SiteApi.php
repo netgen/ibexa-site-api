@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\DependencyInjection\Configuration\Parser;
+namespace Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Configuration\Parser;
 
-use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\AbstractParser;
-use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\SiteAccessAware\ContextualizerInterface;
-use Netgen\Bundle\EzPlatformSiteApiBundle\DependencyInjection\Configuration\Parser\SiteApi\NamedObjectBuilder;
-use Netgen\Bundle\EzPlatformSiteApiBundle\DependencyInjection\Configuration\Parser\SiteApi\NamedQueryBuilder;
+use Ibexa\Bundle\Core\DependencyInjection\Configuration\AbstractParser;
+use Ibexa\Bundle\Core\DependencyInjection\Configuration\SiteAccessAware\ContextualizerInterface;
+use Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Configuration\Parser\SiteApi\NamedObjectBuilder;
+use Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Configuration\Parser\SiteApi\NamedQueryBuilder;
 use Symfony\Component\Config\Definition\Builder\NodeBuilder;
 
 class SiteApi extends AbstractParser
@@ -23,7 +23,7 @@ class SiteApi extends AbstractParser
                 ->info('Controls whether Site API content view should be used as the primary content view')
             ->end()
             ->booleanNode('fallback_to_secondary_content_view')
-                ->info('Controls fallback content view rendering between primary and secondary content view (Site API or eZ Platform)')
+                ->info('Controls fallback content view rendering between primary and secondary content view (Site API or Ibexa CMS)')
             ->end()
             ->booleanNode('fallback_without_subrequest')
                 ->info('Controls whether secondary content view fallback should use a subrequest')

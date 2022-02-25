@@ -2,17 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Tests\Integration;
+namespace Netgen\IbexaSiteApi\Tests\Integration;
 
-use eZ\Publish\API\Repository\Values\Content\LocationQuery;
-use eZ\Publish\API\Repository\Values\Content\Query;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\ContentId;
-use eZ\Publish\API\Repository\Values\Content\Search\SearchResult;
+use Ibexa\Contracts\Core\Repository\Values\Content\LocationQuery;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ContentId;
+use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchResult;
+use Netgen\IbexaSiteApi\API\Values\Content;
+use Netgen\IbexaSiteApi\API\Values\Location;
 
 /**
  * Test case for the FindService.
  *
- * @see \Netgen\EzPlatformSiteApi\API\FindService
+ * @see \Netgen\IbexaSiteApi\API\FindService
  *
  * @group integration
  * @group find
@@ -24,12 +26,14 @@ final class FindServiceTest extends BaseTest
     /**
      * Test for the findContent() method.
      *
-     * @see \Netgen\EzPlatformSiteApi\API\FindService::findContent()
-     * @depends Netgen\EzPlatformSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
-     * @depends Netgen\EzPlatformSiteApi\Tests\Integration\SiteTest::testGetFindService
+     * @see \Netgen\IbexaSiteApi\API\FindService::findContent()
      *
-     * @throws \ReflectionException
+     * @depends Netgen\IbexaSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
+     * @depends Netgen\IbexaSiteApi\Tests\Integration\SiteTest::testGetFindService
+     *
      * @throws \ErrorException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws \ReflectionException
      */
     public function testFindContentMatchPrimaryLanguage(): void
     {
@@ -56,12 +60,14 @@ final class FindServiceTest extends BaseTest
     /**
      * Test for the findContent() method.
      *
-     * @see \Netgen\EzPlatformSiteApi\API\FindService::findContent()
-     * @depends Netgen\EzPlatformSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
-     * @depends Netgen\EzPlatformSiteApi\Tests\Integration\SiteTest::testGetFindService
+     * @see \Netgen\IbexaSiteApi\API\FindService::findContent()
      *
-     * @throws \ReflectionException
+     * @depends Netgen\IbexaSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
+     * @depends Netgen\IbexaSiteApi\Tests\Integration\SiteTest::testGetFindService
+     *
      * @throws \ErrorException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws \ReflectionException
      */
     public function testFindContentMatchSecondaryLanguage(): void
     {
@@ -88,12 +94,14 @@ final class FindServiceTest extends BaseTest
     /**
      * Test for the findContent() method.
      *
-     * @see \Netgen\EzPlatformSiteApi\API\FindService::findContent()
-     * @depends Netgen\EzPlatformSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
-     * @depends Netgen\EzPlatformSiteApi\Tests\Integration\SiteTest::testGetFindService
+     * @see \Netgen\IbexaSiteApi\API\FindService::findContent()
      *
-     * @throws \ReflectionException
+     * @depends Netgen\IbexaSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
+     * @depends Netgen\IbexaSiteApi\Tests\Integration\SiteTest::testGetFindService
+     *
      * @throws \ErrorException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws \ReflectionException
      */
     public function testFindContentMatchAlwaysAvailableLanguage(): void
     {
@@ -119,12 +127,14 @@ final class FindServiceTest extends BaseTest
     /**
      * Test for the findContent() method.
      *
-     * @see \Netgen\EzPlatformSiteApi\API\FindService::findContent()
-     * @depends Netgen\EzPlatformSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
-     * @depends Netgen\EzPlatformSiteApi\Tests\Integration\SiteTest::testGetFindService
+     * @see \Netgen\IbexaSiteApi\API\FindService::findContent()
      *
-     * @throws \ReflectionException
+     * @depends Netgen\IbexaSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
+     * @depends Netgen\IbexaSiteApi\Tests\Integration\SiteTest::testGetFindService
+     *
      * @throws \ErrorException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws \ReflectionException
      */
     public function testFindContentTranslationNotMatched(): void
     {
@@ -150,12 +160,14 @@ final class FindServiceTest extends BaseTest
     /**
      * Test for the findLocations() method.
      *
-     * @see \Netgen\EzPlatformSiteApi\API\FindService::findLocations()
-     * @depends Netgen\EzPlatformSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
-     * @depends Netgen\EzPlatformSiteApi\Tests\Integration\SiteTest::testGetFindService
+     * @see \Netgen\IbexaSiteApi\API\FindService::findLocations()
      *
-     * @throws \ReflectionException
+     * @depends Netgen\IbexaSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
+     * @depends Netgen\IbexaSiteApi\Tests\Integration\SiteTest::testGetFindService
+     *
      * @throws \ErrorException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws \ReflectionException
      */
     public function testFindLocationsMatchPrimaryLanguage(): void
     {
@@ -182,12 +194,14 @@ final class FindServiceTest extends BaseTest
     /**
      * Test for the findLocations() method.
      *
-     * @see \Netgen\EzPlatformSiteApi\API\FindService::findLocations()
-     * @depends Netgen\EzPlatformSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
-     * @depends Netgen\EzPlatformSiteApi\Tests\Integration\SiteTest::testGetFindService
+     * @see \Netgen\IbexaSiteApi\API\FindService::findLocations()
      *
-     * @throws \ReflectionException
+     * @depends Netgen\IbexaSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
+     * @depends Netgen\IbexaSiteApi\Tests\Integration\SiteTest::testGetFindService
+     *
      * @throws \ErrorException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws \ReflectionException
      */
     public function testFindLocationsMatchSecondaryLanguage(): void
     {
@@ -214,12 +228,14 @@ final class FindServiceTest extends BaseTest
     /**
      * Test for the findLocations() method.
      *
-     * @see \Netgen\EzPlatformSiteApi\API\FindService::findLocations()
-     * @depends Netgen\EzPlatformSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
-     * @depends Netgen\EzPlatformSiteApi\Tests\Integration\SiteTest::testGetFindService
+     * @see \Netgen\IbexaSiteApi\API\FindService::findLocations()
      *
-     * @throws \ReflectionException
+     * @depends Netgen\IbexaSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
+     * @depends Netgen\IbexaSiteApi\Tests\Integration\SiteTest::testGetFindService
+     *
      * @throws \ErrorException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws \ReflectionException
      */
     public function testFindLocationsMatchAlwaysAvailableLanguage(): void
     {
@@ -245,12 +261,14 @@ final class FindServiceTest extends BaseTest
     /**
      * Test for the findLocations() method.
      *
-     * @see \Netgen\EzPlatformSiteApi\API\FindService::findLocations()
-     * @depends Netgen\EzPlatformSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
-     * @depends Netgen\EzPlatformSiteApi\Tests\Integration\SiteTest::testGetFindService
+     * @see \Netgen\IbexaSiteApi\API\FindService::findLocations()
      *
-     * @throws \ReflectionException
+     * @depends Netgen\IbexaSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
+     * @depends Netgen\IbexaSiteApi\Tests\Integration\SiteTest::testGetFindService
+     *
      * @throws \ErrorException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws \ReflectionException
      */
     public function testFindLocationsTranslationNotMatched(): void
     {
@@ -279,7 +297,9 @@ final class FindServiceTest extends BaseTest
 
         self::assertSame(1, $searchResult->totalCount);
         self::assertSame($languageCode, $searchResult->searchHits[0]->matchedTranslation);
-        $this->assertContent($searchResult->searchHits[0]->valueObject, $data);
+        $content = $searchResult->searchHits[0]->valueObject;
+        self::assertInstanceOf(Content::class, $content);
+        $this->assertContent($content, $data);
     }
 
     protected function assertLocationSearchResult(SearchResult $searchResult, $data): void
@@ -288,6 +308,8 @@ final class FindServiceTest extends BaseTest
 
         self::assertSame(1, $searchResult->totalCount);
         self::assertSame($languageCode, $searchResult->searchHits[0]->matchedTranslation);
-        $this->assertLocation($searchResult->searchHits[0]->valueObject, $data);
+        $location = $searchResult->searchHits[0]->valueObject;
+        self::assertInstanceOf(Location::class, $location);
+        $this->assertLocation($location, $data);
     }
 }

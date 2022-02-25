@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\Tests\QueryType;
+namespace Netgen\Bundle\IbexaSiteApiBundle\Tests\QueryType;
 
-use Netgen\Bundle\EzPlatformSiteApiBundle\QueryType\QueryDefinition;
-use Netgen\Bundle\EzPlatformSiteApiBundle\QueryType\QueryDefinitionCollection;
+use Netgen\Bundle\IbexaSiteApiBundle\QueryType\QueryDefinition;
+use Netgen\Bundle\IbexaSiteApiBundle\QueryType\QueryDefinitionCollection;
 use OutOfBoundsException;
 use PHPUnit\Framework\TestCase;
 

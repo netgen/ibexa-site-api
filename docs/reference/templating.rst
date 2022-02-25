@@ -11,8 +11,8 @@ common use cases. Objects are documented in more detail on :doc:`Objects referen
 
   .. code-block:: twig
 
-    {# content \Netgen\EzPlatformSiteApi\API\Values\Content #}
-    {# location \Netgen\EzPlatformSiteApi\API\Values\Location #}
+    {# content \Netgen\IbexaSiteApi\API\Values\Content #}
+    {# location \Netgen\IbexaSiteApi\API\Values\Location #}
 
   With that, you will get autocompletion and Cmd/Ctrl-click navigation through the Twig code.
 
@@ -37,7 +37,7 @@ Site API provides four Twig functions for content rendering:
 
   Both functions support custom controllers. ``ng_view_content`` can be used for views defined in
   Site API view configuration under ``ng_content_view`` configuration node, and
-  ``ng_ez_view_content`` can be used for views defined in eZ Platform view configuration under
+  ``ng_ez_view_content`` can be used for views defined in Ibexa view configuration under
   ``content_view`` configuration node.
 
   .. note::
@@ -135,7 +135,7 @@ Site API provides four Twig functions for content rendering:
 
 - ``ng_render_field``
 
-  Similar to ``ez_render_field`` from eZ Platform, this function is used to render the Content's
+  Similar to ``ez_render_field`` from Ibexa, this function is used to render the Content's
   field using the configured template:
 
   .. code-block:: twig
@@ -144,7 +144,7 @@ Site API provides four Twig functions for content rendering:
 
 - ``ng_image_alias``
 
-  Similar to ``ez_image_alias`` from eZ Platform, this function provides access to the image
+  Similar to ``ez_image_alias`` from Ibexa, this function provides access to the image
   variation of a ``ezimage`` type field:
 
   .. code-block:: twig
@@ -318,11 +318,11 @@ Working with Content fields
   Typically you would render the field using ``ng_render_field`` Twig function, but if needed you
   can also access field's value directly. Value format varies by the FieldType, so you'll need to
   know about the type of the Field whose value you're accessing. You can find out more about that on
-  the official `FieldType reference page <https://doc.ezplatform.com/en/latest/api/field_type_reference/>`_
+  the official `FieldType reference page <https://doc.ibexa.co/en/latest/api/field_type_reference//>`_
   or even looking at the value's code.
 
   Here we'll assume ``title`` field is of the FieldType ``ezstring``. Latest code for that
-  FieldType's value can be found `here <https://github.com/ezsystems/ezpublish-kernel/blob/master/eZ/Publish/Core/FieldType/TextLine/Value.php>`_.
+  FieldType's value can be found `here <https://github.com/ibexa/core/blob/main/src/lib/FieldType/TextLine/Value.php>`_.
 
   .. code-block:: twig
 

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\API;
+namespace Netgen\IbexaSiteApi\API;
 
-use Netgen\EzPlatformSiteApi\API\Values\Content;
-use Netgen\EzPlatformSiteApi\API\Values\Location;
+use Netgen\IbexaSiteApi\API\Values\Content;
+use Netgen\IbexaSiteApi\API\Values\Location;
 
 /**
  * Relation service provides methods for loading relations.
@@ -26,7 +26,7 @@ interface RelationService
      * Load all related Content from $fieldDefinitionIdentifier field in the given
      * $content, optionally limited by a list of $contentTypeIdentifiers and $limit.
      *
-     * @return \Netgen\EzPlatformSiteApi\API\Values\Content[]
+     * @return \Netgen\IbexaSiteApi\API\Values\Content[]
      */
     public function loadFieldRelations(
         Content $content,
@@ -40,8 +40,6 @@ interface RelationService
      * optionally limited by a list of $contentTypeIdentifiers.
      *
      * Note: only visible main Location of the related Content will be used.
-     *
-     * @return \Netgen\EzPlatformSiteApi\API\Values\Location|null
      */
     public function loadFieldRelationLocation(
         Content $content,
@@ -55,7 +53,7 @@ interface RelationService
      *
      * Note: only visible main Locations of the related Content will be used.
      *
-     * @return \Netgen\EzPlatformSiteApi\API\Values\Location[]
+     * @return \Netgen\IbexaSiteApi\API\Values\Location[]
      */
     public function loadFieldRelationLocations(
         Content $content,

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\EventListener;
+namespace Netgen\Bundle\IbexaSiteApiBundle\EventListener;
 
 use Exception;
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use eZ\Publish\Core\MVC\Symfony\Routing\Generator\UrlAliasGenerator;
-use eZ\Publish\Core\MVC\Symfony\Routing\UrlAliasRouter;
-use eZ\Publish\Core\MVC\Symfony\SiteAccess;
-use EzSystems\EzPlatformAdminUiBundle\EzPlatformAdminUiBundle;
+use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
+use Ibexa\Core\MVC\Symfony\Routing\Generator\UrlAliasGenerator;
+use Ibexa\Core\MVC\Symfony\Routing\UrlAliasRouter;
+use Ibexa\Core\MVC\Symfony\SiteAccess;
+use Ibexa\Bundle\AdminUi\IbexaAdminUiBundle;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,25 +25,10 @@ use function in_array;
 
 class InternalContentViewRouteListener implements EventSubscriberInterface
 {
-    /**
-     * @var \eZ\Publish\Core\MVC\ConfigResolverInterface
-     */
-    private $configResolver;
-
-    /**
-     * @var \Symfony\Component\HttpKernel\Fragment\FragmentHandler
-     */
-    private $fragmentHandler;
-
-    /**
-     * @var \Symfony\Component\Routing\RouterInterface
-     */
-    private $router;
-
-    /**
-     * @var array
-     */
-    private $siteaccessGroups;
+    private ConfigResolverInterface $configResolver;
+    private FragmentHandler $fragmentHandler;
+    private RouterInterface $router;
+    private array $siteaccessGroups;
 
     public function __construct(
         ConfigResolverInterface $configResolver,
@@ -66,7 +51,7 @@ class InternalContentViewRouteListener implements EventSubscriberInterface
 
     public function onKernelRequest(RequestEvent $event): void
     {
-        if (!$event->isMasterRequest()) {
+        if (!$event->isMainRequest()) {
             return;
         }
 
@@ -135,8 +120,8 @@ class InternalContentViewRouteListener implements EventSubscriberInterface
 
     private function getAdminSiteaccessGroupName(): string
     {
-        if (class_exists(EzPlatformAdminUiBundle::class)) {
-            return EzPlatformAdminUiBundle::ADMIN_GROUP_NAME;
+        if (class_exists(IbexaAdminUiBundle::class)) {
+            return IbexaAdminUiBundle::ADMIN_GROUP_NAME;
         }
 
         return 'admin_group';

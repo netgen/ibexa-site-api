@@ -2,25 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\Templating\Twig\Extension;
+namespace Netgen\Bundle\IbexaSiteApiBundle\Templating\Twig\Extension;
 
-use Netgen\Bundle\EzPlatformSiteApiBundle\View\Builder\ContentViewBuilder;
-use Netgen\Bundle\EzPlatformSiteApiBundle\View\ViewRenderer;
+use Netgen\Bundle\IbexaSiteApiBundle\View\Builder\ContentViewBuilder;
+use Netgen\Bundle\IbexaSiteApiBundle\View\ViewRenderer;
 
 /**
  * Twig extension runtime for Site API embedded content view rendering.
  */
 class EmbeddedContentViewRuntime
 {
-    /**
-     * @var \Netgen\Bundle\EzPlatformSiteApiBundle\View\Builder\ContentViewBuilder
-     */
-    private $viewBuilder;
-
-    /**
-     * @var \Netgen\Bundle\EzPlatformSiteApiBundle\View\ViewRenderer
-     */
-    private $viewRenderer;
+    private ContentViewBuilder $viewBuilder;
+    private ViewRenderer $viewRenderer;
 
     public function __construct(
         ContentViewBuilder $viewBuilder,
@@ -33,9 +26,9 @@ class EmbeddedContentViewRuntime
     /**
      * Renders the HTML for a given $content.
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
     public function renderEmbeddedContentView(string $viewType, array $parameters = []): string
     {

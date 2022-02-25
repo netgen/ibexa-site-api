@@ -1,0 +1,6 @@
+system:
+    default:
+        field_templates:
+            - { template: "@NetgenIbexaSiteApi/content_fields.html.twig", priority: 0 }
+        fielddefinition_settings_templates:
+            - { template: "@NetgenIbexaSiteApi/field_definition_settings.html.twig", priority: 0 }

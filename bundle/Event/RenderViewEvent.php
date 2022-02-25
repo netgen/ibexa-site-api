@@ -2,19 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\Event;
+namespace Netgen\Bundle\IbexaSiteApiBundle\Event;
 
-use eZ\Publish\Core\MVC\Symfony\View\View;
+use Ibexa\Core\MVC\Symfony\View\View;
 use Symfony\Contracts\EventDispatcher\Event;
 
 class RenderViewEvent extends Event
 {
-    /**
-     * View object that was rendered.
-     *
-     * @var \eZ\Publish\Core\MVC\Symfony\View\View
-     */
-    private $view;
+    private View $view;
 
     public function __construct(View $view)
     {

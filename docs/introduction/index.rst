@@ -5,7 +5,7 @@ The intention of this page is to give you a short overview of what Site API is. 
 can break the whole package into three main parts:
 
 1. `Dedicated API layer`_
-2. `Integration with eZ Platform`_
+2. `Integration with Ibexa`_
 3. `Query Types`_
 
 Dedicated API layer
@@ -13,7 +13,7 @@ Dedicated API layer
 
 As Repository API was designed to be usable for general purpose, it can come as awkward and too
 verbose when used for building websites. Site API fixes this by implementing a dedicated API layer
-on top of eZ Platform Repository API which is designed for developing websites.
+on top of Ibexa Repository API which is designed for developing websites.
 
 Having a dedicated layer enables us to take an extra step and do things you would not typically want
 to do in Repository API. With Site API we can we can implement lazy loaded properties and methods
@@ -45,7 +45,7 @@ English language as a fallback when Croatian translation does not exist:
 The intention here is that the siteaccess should first show content in Croatian language if it's
 available, fallback to English translation when Croatian is not available and ignore any other
 language. However, this is quite hard to implement correctly with vanilla Repository API, even with
-the newest addition of siteaccess-aware Repository layer introduced in eZ Platform 7.2.
+the introduction of siteaccess-aware Repository layer in eZ Platform 7.2.
 
 With Site API this comes out of the box and you don't have to pay special attention to it. All
 possible ways to get a Content or a Location, whether through loading by ID, as a related Content,
@@ -61,7 +61,7 @@ and mistakes and improves the overall developer experience.
 Objects
 ~~~~~~~
 
-Site API entities and values are similar to their counterparts in eZ Platform's Repository API:
+Site API entities and values are similar to their counterparts in Ibexa's Repository API:
 
 - ``Content``
 
@@ -95,7 +95,7 @@ Site API entities and values are similar to their counterparts in eZ Platform's 
   The purpose of ContentInfo object in Repository API is to provide a lightweight version of Content
   object, containing only metadata (and omitting the fields). Since in Site API Content's fields are
   lazy-loaded, there is no real need for ContentInfo. Still, Site API provides it to keep the usage
-  in templates similar to standard eZ Platform templates and through that make the migration and
+  in templates similar to standard Ibexa templates and through that make the migration and
   comparison easier.
 
   Site ContentInfo also provides access to data that is in Repository API available only through
@@ -177,7 +177,7 @@ The API provides you with a set of **read-only** services:
 
 2. ``FindService``
 
-  Provides methods to find Content and Locations using eZ Platform Repository Search API.
+  Provides methods to find Content and Locations using Ibexa Repository Search API.
 
 3. ``FilterService``
 
@@ -204,16 +204,16 @@ Location. The services will behave as if it does not exist.
 
 .. note::
 
-  All of the Site API services are read-only. If you need to write to the eZ Platform's content
+  All of the Site API services are read-only. If you need to write to the Ibexa's content
   repository, use its existing Repository API.
 
 For more details see :doc:`Services reference </reference/services>` page.
 
-Integration with eZ Platform
-----------------------------
+Integration with Ibexa
+----------------------
 
 You can use the Site API services described above as you would normally do it a Symfony application.
-But these are also integrated into eZ Platform's view layer. There is a Site API version of the view
+But these are also integrated into Ibexa's view layer. There is a Site API version of the view
 configuration, available under ``ng_content_view`` key:
 
 .. code-block:: yaml
@@ -228,10 +228,10 @@ configuration, available under ``ng_content_view`` key:
                             match:
                                 Identifier\ContentType: article
 
-Aside from Query Type configuration described below, the format is exactly the same as eZ Platform's
+Aside from Query Type configuration described below, the format is exactly the same as Ibexa's
 view configuration under ``content_view`` key. Separate view configuration is also needed because we
 need to handle it with code that will inject Site API objects to the template, instead of standard
-eZ Platform objects. Together with this we provide Site API version of the Content View object,
+Ibexa objects. Together with this we provide Site API version of the Content View object,
 which is used by the default Content view controller and :doc:`custom controllers </reference/custom_controllers>`.
 
 With the configuration from above you you will be able to render a line view for an article by
@@ -249,7 +249,7 @@ siteaccess:
 
 .. note::
 
-    You can use the Site API's view configuration and eZ Platform's view configuration at the same
+    You can use the Site API's view configuration and Ibexa's view configuration at the same
     time. However, URL aliases can be handled exclusively by the one or the other.
 
 For more details see :doc:`Configuration reference </reference/configuration>` page.

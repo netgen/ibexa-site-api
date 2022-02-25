@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Core\Site;
+namespace Netgen\IbexaSiteApi\Core\Site;
 
-use eZ\Publish\API\Repository\ContentService;
-use eZ\Publish\API\Repository\SearchService;
-use eZ\Publish\API\Repository\Values\Content\LocationQuery;
-use eZ\Publish\API\Repository\Values\Content\Query;
-use eZ\Publish\API\Repository\Values\Content\Search\SearchResult;
-use Netgen\EzPlatformSiteApi\API\FindService as FindServiceInterface;
-use Netgen\EzPlatformSiteApi\API\Settings as BaseSettings;
+use Ibexa\Contracts\Core\Repository\ContentService;
+use Ibexa\Contracts\Core\Repository\SearchService;
+use Ibexa\Contracts\Core\Repository\Values\Content\LocationQuery;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query;
+use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchResult;
+use Netgen\IbexaSiteApi\API\FindService as FindServiceInterface;
+use Netgen\IbexaSiteApi\API\Settings as BaseSettings;
 
 /**
  * @final
@@ -19,29 +19,14 @@ use Netgen\EzPlatformSiteApi\API\Settings as BaseSettings;
  *
  * Hint against API interface instead of this service:
  *
- * @see \Netgen\EzPlatformSiteApi\API\FindService
+ * @see \Netgen\IbexaSiteApi\API\FindService
  */
 class FindService implements FindServiceInterface
 {
-    /**
-     * @var \Netgen\EzPlatformSiteApi\API\Settings
-     */
-    private $settings;
-
-    /**
-     * @var \Netgen\EzPlatformSiteApi\Core\Site\DomainObjectMapper
-     */
-    private $domainObjectMapper;
-
-    /**
-     * @var \eZ\Publish\API\Repository\SearchService
-     */
-    private $searchService;
-
-    /**
-     * @var \eZ\Publish\API\Repository\ContentService
-     */
-    private $contentService;
+    private BaseSettings $settings;
+    private DomainObjectMapper $domainObjectMapper;
+    private SearchService $searchService;
+    private ContentService $contentService;
 
     public function __construct(
         BaseSettings $settings,
@@ -58,8 +43,8 @@ class FindService implements FindServiceInterface
     /**
      * {@inheritdoc}
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
     public function findContent(Query $query): SearchResult
     {
@@ -72,7 +57,7 @@ class FindService implements FindServiceInterface
         );
 
         foreach ($searchResult->searchHits as $searchHit) {
-            /** @var \eZ\Publish\API\Repository\Values\Content\ContentInfo $contentInfo */
+            /** @var \Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo $contentInfo */
             $contentInfo = $searchHit->valueObject;
             $searchHit->valueObject = $this->domainObjectMapper->mapContent(
                 $this->contentService->loadVersionInfo(
@@ -89,8 +74,8 @@ class FindService implements FindServiceInterface
     /**
      * {@inheritdoc}
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
     public function findLocations(LocationQuery $query): SearchResult
     {
@@ -103,7 +88,7 @@ class FindService implements FindServiceInterface
         );
 
         foreach ($searchResult->searchHits as $searchHit) {
-            /** @var \eZ\Publish\API\Repository\Values\Content\Location $location */
+            /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Location $location */
             $location = $searchHit->valueObject;
             $searchHit->valueObject = $this->domainObjectMapper->mapLocation(
                 $location,

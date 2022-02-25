@@ -2,28 +2,28 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\Core\FieldType\RichText;
+namespace Netgen\Bundle\IbexaSiteApiBundle\Core\FieldType\RichText;
 
-use eZ\Publish\API\Repository\Repository;
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use EzSystems\EzPlatformRichTextBundle\eZ\RichText\Renderer as CoreRenderer;
+use Ibexa\Contracts\Core\Repository\Repository;
+use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
+use Ibexa\FieldTypeRichText\RichText\Renderer as CoreRenderer;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Twig\Environment;
 
 class Renderer extends CoreRenderer
 {
-    private $ngEmbedConfigurationNamespace;
+    private string $ngEmbedConfigurationNamespace;
 
     public function __construct(
         Repository $repository,
         AuthorizationCheckerInterface $authorizationChecker,
         ConfigResolverInterface $configResolver,
         Environment $twig,
-        $tagConfigurationNamespace,
-        $styleConfigurationNamespace,
-        $embedConfigurationNamespace,
-        $ngEmbedConfigurationNamespace,
+        string $tagConfigurationNamespace,
+        string $styleConfigurationNamespace,
+        string $embedConfigurationNamespace,
+        string $ngEmbedConfigurationNamespace,
         ?LoggerInterface $logger = null,
         array $customTagsConfiguration = [],
         array $customStylesConfiguration = []
@@ -44,13 +44,6 @@ class Renderer extends CoreRenderer
         $this->ngEmbedConfigurationNamespace = $ngEmbedConfigurationNamespace;
     }
 
-    /**
-     * Returns configured template reference for the given embed parameters.
-     *
-     * @param $resourceType
-     * @param $isInline
-     * @param $isDenied
-     */
     protected function getEmbedTemplateName($resourceType, $isInline, $isDenied): ?string
     {
         $configurationReference = $this->getConfigurationReference();
@@ -76,7 +69,7 @@ class Renderer extends CoreRenderer
         }
 
         $this->logger->warning(
-            "Embed tag configuration '{$configurationReference}' was not found"
+            "Embed tag configuration '$configurationReference' was not found"
         );
 
         $configurationReference = $this->getConfigurationReference();
@@ -94,7 +87,7 @@ class Renderer extends CoreRenderer
         }
 
         $this->logger->warning(
-            "Embed tag default configuration '{$configurationReference}' was not found"
+            "Embed tag default configuration '$configurationReference' was not found"
         );
 
         return null;

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\API\Exceptions;
+namespace Netgen\IbexaSiteApi\API\Exceptions;
 
-use eZ\Publish\API\Repository\Exceptions\NotFoundException;
+use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 
 /**
  * This exception is thrown if the translation language could not be resolved.

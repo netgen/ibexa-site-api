@@ -2,59 +2,38 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Core\Site;
+namespace Netgen\IbexaSiteApi\Core\Site;
 
-use eZ\Publish\API\Repository\Repository;
-use eZ\Publish\API\Repository\Values\Content\Field as RepoField;
-use eZ\Publish\API\Repository\Values\Content\Location as RepoLocation;
-use eZ\Publish\API\Repository\Values\Content\VersionInfo;
-use Netgen\EzPlatformSiteApi\API\Site as SiteInterface;
-use Netgen\EzPlatformSiteApi\API\Values\Content as SiteContent;
-use Netgen\EzPlatformSiteApi\API\Values\Field as APIField;
-use Netgen\EzPlatformSiteApi\Core\Site\Values\Content;
-use Netgen\EzPlatformSiteApi\Core\Site\Values\ContentInfo;
-use Netgen\EzPlatformSiteApi\Core\Site\Values\Field;
-use Netgen\EzPlatformSiteApi\Core\Site\Values\Location;
+use Ibexa\Contracts\Core\Repository\Repository;
+use Ibexa\Contracts\Core\Repository\Values\Content\Field as RepoField;
+use Ibexa\Contracts\Core\Repository\Values\Content\Location as RepoLocation;
+use Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo;
+use Ibexa\Contracts\Core\Repository\ContentTypeService;
+use Ibexa\Contracts\Core\Repository\FieldTypeService;
+use Netgen\IbexaSiteApi\API\Site as SiteInterface;
+use Netgen\IbexaSiteApi\API\Values\Content as SiteContent;
+use Netgen\IbexaSiteApi\API\Values\Field as APIField;
+use Netgen\IbexaSiteApi\Core\Site\Values\Content;
+use Netgen\IbexaSiteApi\Core\Site\Values\ContentInfo;
+use Netgen\IbexaSiteApi\Core\Site\Values\Field;
+use Netgen\IbexaSiteApi\Core\Site\Values\Location;
 use Psr\Log\LoggerInterface;
-use function array_key_exists;
+use RuntimeException;
 
 /**
  * @internal
  *
- * Domain object mapper is an internal service that maps eZ Platform Repository objects
+ * Domain object mapper is an internal service that maps Ibexa Repository objects
  * to the native domain objects
  */
 final class DomainObjectMapper
 {
-    /**
-     * @var \Netgen\EzPlatformSiteApi\API\Site
-     */
-    private $site;
-
-    /**
-     * @var \eZ\Publish\API\Repository\FieldTypeService
-     */
-    private $fieldTypeService;
-
-    /**
-     * @var \eZ\Publish\API\Repository\ContentTypeService
-     */
-    private $contentTypeService;
-
-    /**
-     * @var \eZ\Publish\API\Repository\Repository
-     */
-    private $repository;
-
-    /**
-     * @var bool
-     */
-    private $failOnMissingField;
-
-    /**
-     * @var \Psr\Log\LoggerInterface
-     */
-    private $logger;
+    private SiteInterface $site;
+    private FieldTypeService $fieldTypeService;
+    private ContentTypeService $contentTypeService;
+    private Repository $repository;
+    private bool $failOnMissingField;
+    private LoggerInterface $logger;
 
     public function __construct(
         SiteInterface $site,
@@ -96,7 +75,7 @@ final class DomainObjectMapper
     /**
      * Maps Repository ContentInfo to the Site ContentInfo.
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     public function mapContentInfo(VersionInfo $versionInfo, string $languageCode): ContentInfo
     {
@@ -137,11 +116,18 @@ final class DomainObjectMapper
     /**
      * Maps Repository Field to the Site Field.
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     public function mapField(RepoField $apiField, SiteContent $content): APIField
     {
         $fieldDefinition = $content->contentInfo->innerContentType->getFieldDefinition($apiField->fieldDefIdentifier);
+
+        if ($fieldDefinition === null) {
+            throw new RuntimeException(
+                "Could not find FieldDefinition for '$apiField->fieldDefIdentifier' field"
+            );
+        }
+
         $fieldTypeIdentifier = $fieldDefinition->fieldTypeIdentifier;
         $isEmpty = $this->fieldTypeService->getFieldType($fieldTypeIdentifier)->isEmptyValue(
             $apiField->value
@@ -171,10 +157,6 @@ final class DomainObjectMapper
 
     private function getTranslatedString(string $languageCode, array $strings)
     {
-        if (array_key_exists($languageCode, $strings)) {
-            return $strings[$languageCode];
-        }
-
-        return null;
+        return $strings[$languageCode] ?? null;
     }
 }

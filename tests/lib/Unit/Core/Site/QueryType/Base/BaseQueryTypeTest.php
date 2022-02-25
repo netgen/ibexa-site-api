@@ -2,29 +2,29 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Tests\Unit\Core\Site\QueryType\Base;
+namespace Netgen\IbexaSiteApi\Tests\Unit\Core\Site\QueryType\Base;
 
-use eZ\Publish\API\Repository\Values\Content\Query;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\ContentTypeIdentifier;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\DateMetadata;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\Field;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\LogicalAnd;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\Operator;
-use eZ\Publish\API\Repository\Values\Content\Query\SortClause\ContentName;
-use eZ\Publish\API\Repository\Values\Content\Query\SortClause\DateModified;
-use eZ\Publish\API\Repository\Values\Content\Query\SortClause\DatePublished;
-use Netgen\EzPlatformSearchExtra\API\Values\Content\Query\Criterion\IsFieldEmpty;
-use Netgen\EzPlatformSearchExtra\API\Values\Content\Query\Criterion\Visible;
-use Netgen\EzPlatformSiteApi\Core\Site\QueryType\QueryType;
-use Netgen\EzPlatformSiteApi\Core\Site\Settings;
-use Netgen\EzPlatformSiteApi\Tests\Unit\Core\Site\QueryType\QueryTypeBaseTest;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ContentTypeIdentifier;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\DateMetadata;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Field;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LogicalAnd;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Operator;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\ContentName;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\DateModified;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\DatePublished;
+use Netgen\IbexaSearchExtra\API\Values\Content\Query\Criterion\IsFieldEmpty;
+use Netgen\IbexaSearchExtra\API\Values\Content\Query\Criterion\Visible;
+use Netgen\IbexaSiteApi\Core\Site\QueryType\QueryType;
+use Netgen\IbexaSiteApi\Core\Site\Settings;
+use Netgen\IbexaSiteApi\Tests\Unit\Core\Site\QueryType\QueryTypeBaseTest;
 
 /**
  * Base QueryType stub test case.
  *
  * @group query-type
  *
- * @see \Netgen\EzPlatformSiteApi\Core\Site\QueryType\Base
+ * @see \Netgen\IbexaSiteApi\Core\Site\QueryType\Base
  *
  * @internal
  */

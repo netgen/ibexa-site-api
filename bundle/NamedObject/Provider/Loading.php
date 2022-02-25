@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\NamedObject\Provider;
+namespace Netgen\Bundle\IbexaSiteApiBundle\NamedObject\Provider;
 
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
+use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use LogicException;
-use Netgen\Bundle\EzPlatformSiteApiBundle\NamedObject\Provider;
-use Netgen\EzPlatformSiteApi\API\LoadService;
-use Netgen\EzPlatformSiteApi\API\Values\Content;
-use Netgen\EzPlatformSiteApi\API\Values\Location;
+use Netgen\Bundle\IbexaSiteApiBundle\NamedObject\Provider;
+use Netgen\IbexaSiteApi\API\LoadService;
+use Netgen\IbexaSiteApi\API\Values\Content;
+use Netgen\IbexaSiteApi\API\Values\Location;
 use Netgen\TagsBundle\API\Repository\TagsService;
 use Netgen\TagsBundle\API\Repository\Values\Tags\Tag;
 use RuntimeException;
@@ -22,25 +22,10 @@ use RuntimeException;
  */
 final class Loading extends Provider
 {
-    /**
-     * @var \Netgen\EzPlatformSiteApi\API\LoadService
-     */
-    private $loadService;
-
-    /**
-     * @var \Netgen\TagsBundle\API\Repository\TagsService|null
-     */
-    private $tagsService;
-
-    /**
-     * @var \eZ\Publish\Core\MVC\ConfigResolverInterface
-     */
-    private $configResolver;
-
-    /**
-     * @var array
-     */
-    private $configuration;
+    private LoadService $loadService;
+    private ?TagsService $tagsService;
+    private ConfigResolverInterface $configResolver;
+    private ?array $configuration = null;
 
     public function __construct(
         LoadService $loadService,
@@ -59,13 +44,6 @@ final class Loading extends Provider
         return isset($this->configuration['content'][$name]);
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @throws \Netgen\EzPlatformSiteApi\API\Exceptions\TranslationNotMatchedException
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
-     */
     public function getContent(string $name): Content
     {
         $contentId = $this->getContentId($name);
@@ -90,13 +68,7 @@ final class Loading extends Provider
         return isset($this->configuration['locations'][$name]);
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @throws \Netgen\EzPlatformSiteApi\API\Exceptions\TranslationNotMatchedException
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
-     */
+
     public function getLocation(string $name): Location
     {
         $locationId = $this->getLocationId($name);
@@ -121,12 +93,6 @@ final class Loading extends Provider
         return isset($this->configuration['tags'][$name]);
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
-     */
     public function getTag(string $name): Tag
     {
         if ($this->tagsService === null) {

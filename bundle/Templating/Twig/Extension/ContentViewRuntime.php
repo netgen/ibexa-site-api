@@ -2,31 +2,24 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\Templating\Twig\Extension;
+namespace Netgen\Bundle\IbexaSiteApiBundle\Templating\Twig\Extension;
 
-use eZ\Publish\API\Repository\Values\Content\Content as APIContent;
-use eZ\Publish\API\Repository\Values\Content\Location as APILocation;
-use eZ\Publish\API\Repository\Values\ValueObject;
+use Ibexa\Contracts\Core\Repository\Values\Content\Content as APIContent;
+use Ibexa\Contracts\Core\Repository\Values\Content\Location as APILocation;
+use Ibexa\Contracts\Core\Repository\Values\ValueObject;
 use LogicException;
-use Netgen\Bundle\EzPlatformSiteApiBundle\View\Builder\ContentViewBuilder;
-use Netgen\Bundle\EzPlatformSiteApiBundle\View\ViewRenderer;
-use Netgen\EzPlatformSiteApi\API\Values\Content;
-use Netgen\EzPlatformSiteApi\API\Values\Location;
+use Netgen\Bundle\IbexaSiteApiBundle\View\Builder\ContentViewBuilder;
+use Netgen\Bundle\IbexaSiteApiBundle\View\ViewRenderer;
+use Netgen\IbexaSiteApi\API\Values\Content;
+use Netgen\IbexaSiteApi\API\Values\Location;
 
 /**
  * Twig extension runtime for Site API content view rendering.
  */
 class ContentViewRuntime
 {
-    /**
-     * @var \Netgen\Bundle\EzPlatformSiteApiBundle\View\Builder\ContentViewBuilder
-     */
-    private $viewBuilder;
-
-    /**
-     * @var \Netgen\Bundle\EzPlatformSiteApiBundle\View\ViewRenderer
-     */
-    private $viewRenderer;
+    private ContentViewBuilder $viewBuilder;
+    private ViewRenderer $viewRenderer;
 
     public function __construct(ContentViewBuilder $viewBuilder, ViewRenderer $viewRenderer)
     {
@@ -37,9 +30,9 @@ class ContentViewRuntime
     /**
      * Renders the HTML for a given $content.
      *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
     public function renderContentView(
         ValueObject $value,
@@ -74,7 +67,7 @@ class ContentViewRuntime
         }
 
         if ($value instanceof Location || $value instanceof APILocation) {
-            // eZ location also has a lazy loaded "content" property
+            // Ibexa also has a lazy loaded "content" property
             return $value->content;
         }
 

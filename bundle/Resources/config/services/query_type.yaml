@@ -1,0 +1,36 @@
+services:
+    # Expression language function providers tagged with
+    # 'netgen.ibexa_site_api.query_type.expression_function_provider'
+    # are registered to this service
+    netgen.ibexa_site_api.query_type.expression_language:
+        class: Symfony\Component\ExpressionLanguage\ExpressionLanguage
+
+    netgen.ibexa_site_api.query_type.expression_function_provider:
+        class: Netgen\Bundle\IbexaSiteApiBundle\QueryType\ExpressionFunctionProvider
+        tags:
+            - { name: netgen.ibexa_site_api.query_type.expression_function_provider }
+
+    netgen.ibexa_site_api.query_type.parameter_processor:
+        class: Netgen\Bundle\IbexaSiteApiBundle\QueryType\ParameterProcessor
+        arguments:
+            - '@netgen.ibexa_site_api.query_type.expression_language'
+            - '@request_stack'
+            - '@ibexa.config.resolver'
+            - '@netgen.ibexa_site_api.named_object_provider'
+        public: false
+
+    netgen.ibexa_site_api.query_type.query_definition_mapper:
+        class: Netgen\Bundle\IbexaSiteApiBundle\QueryType\QueryDefinitionMapper
+        arguments:
+            - '@Ibexa\Core\QueryType\ArrayQueryTypeRegistry'
+            - '@netgen.ibexa_site_api.query_type.parameter_processor'
+            - '@ibexa.config.resolver'
+        public: false
+
+    netgen.ibexa_site_api.query_type.query_executor:
+        class: Netgen\Bundle\IbexaSiteApiBundle\QueryType\QueryExecutor
+        arguments:
+            - '@Ibexa\Core\QueryType\ArrayQueryTypeRegistry'
+            - '@netgen.ibexa_site_api.filter_service'
+            - '@netgen.ibexa_site_api.find_service'
+        public: false

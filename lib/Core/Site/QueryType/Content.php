@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Core\Site\QueryType;
+namespace Netgen\IbexaSiteApi\Core\Site\QueryType;
 
-use eZ\Publish\API\Repository\Values\Content\Query;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**

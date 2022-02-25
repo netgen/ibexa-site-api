@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\API\Values;
+namespace Netgen\IbexaSiteApi\API\Values;
 
-use eZ\Publish\API\Repository\Values\ValueObject;
+use Ibexa\Contracts\Core\Repository\Values\ValueObject;
 
 /**
  * Site ContentInfo object provides meta information of the Site Content object.
  *
- * Corresponds to eZ Platform Repository ContentInfo object.
+ * Corresponds to Ibexa Repository ContentInfo object.
  *
- * @see \eZ\Publish\API\Repository\Values\Content\ContentInfo
+ * @see \Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo
  *
  * @property int $id
  * @property int $contentTypeId
@@ -32,9 +32,9 @@ use eZ\Publish\API\Repository\Values\ValueObject;
  * @property string $contentTypeIdentifier
  * @property string $contentTypeName
  * @property string $contentTypeDescription
- * @property \eZ\Publish\API\Repository\Values\Content\ContentInfo $innerContentInfo
- * @property \eZ\Publish\API\Repository\Values\ContentType\ContentType $innerContentType
- * @property \Netgen\EzPlatformSiteApi\API\Values\Location|null $mainLocation
+ * @property \Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo $innerContentInfo
+ * @property \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType $innerContentType
+ * @property \Netgen\IbexaSiteApi\API\Values\Location|null $mainLocation
  */
 abstract class ContentInfo extends ValueObject
 {

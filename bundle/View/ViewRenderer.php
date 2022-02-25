@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\View;
+namespace Netgen\Bundle\IbexaSiteApiBundle\View;
 
-use eZ\Publish\Core\MVC\Symfony\View\Renderer;
-use eZ\Publish\Core\MVC\Symfony\View\View;
+use Ibexa\Core\MVC\Symfony\View\Renderer;
+use Ibexa\Core\MVC\Symfony\View\View;
 use LogicException;
-use Netgen\Bundle\EzPlatformSiteApiBundle\Event\RenderViewEvent;
-use Netgen\Bundle\EzPlatformSiteApiBundle\Events;
+use Netgen\Bundle\IbexaSiteApiBundle\Event\RenderViewEvent;
+use Netgen\Bundle\IbexaSiteApiBundle\Events;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -25,34 +25,15 @@ use function sprintf;
  *
  * Renders View object using any controller without executing a subrequest
  *
- * @see \eZ\Publish\Core\MVC\Symfony\View\View
+ * @see \Ibexa\Core\MVC\Symfony\View\View
  */
 final class ViewRenderer
 {
-    /**
-     * @var \Symfony\Component\HttpFoundation\RequestStack
-     */
-    private $requestStack;
-
-    /**
-     * @var \Symfony\Component\HttpKernel\Controller\ControllerResolverInterface
-     */
-    private $controllerResolver;
-
-    /**
-     * @var \Symfony\Component\HttpKernel\Controller\ArgumentResolverInterface
-     */
-    private $argumentResolver;
-
-    /**
-     * @var \eZ\Publish\Core\MVC\Symfony\View\Renderer
-     */
-    private $coreViewRenderer;
-
-    /**
-     * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface
-     */
-    private $eventDispatcher;
+    private RequestStack $requestStack;
+    private ControllerResolverInterface $controllerResolver;
+    private ArgumentResolverInterface $argumentResolver;
+    private Renderer $coreViewRenderer;
+    private EventDispatcherInterface $eventDispatcher;
 
     public function __construct(
         RequestStack $requestStack,
@@ -125,17 +106,17 @@ final class ViewRenderer
 
     private function resolveControllerArguments(View $view, callable $controller, array $arguments): array
     {
-        $request = $this->requestStack->getMasterRequest();
+        $masterRequest = $this->requestStack->getMainRequest();
 
-        if ($request === null) {
+        if ($masterRequest === null) {
             throw new LogicException('A Request must be available.');
         }
 
-        $request = $request->duplicate();
-        $request->attributes->set('view', $view);
-        $request->attributes->add($view->getParameters());
-        $request->attributes->add($arguments);
+        $masterRequest = $masterRequest->duplicate();
+        $masterRequest->attributes->set('view', $view);
+        $masterRequest->attributes->add($view->getParameters());
+        $masterRequest->attributes->add($arguments);
 
-        return $this->argumentResolver->getArguments($request, $controller);
+        return $this->argumentResolver->getArguments($masterRequest, $controller);
     }
 }

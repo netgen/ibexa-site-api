@@ -7,7 +7,7 @@
 {% endif %}
 {% if embedParams.dataAttributes is defined %}
     {# Note: intentionally using here new convention for parameter names #}
-    {% set data_attributes_str = ' ' ~ embedParams.dataAttributes|ez_data_attributes_serialize %}
+    {% set data_attributes_str = ' ' ~ embedParams.dataAttributes|ibexa_data_attributes_serialize %}
     {# Note: passing data attributes as param for 3rd party overridden embed views #}
     {% set params = params|merge( { "data_attributes": embedParams.dataAttributes } ) %}
 {% else %}
@@ -16,7 +16,7 @@
 
 <div {% if embedParams.anchor is defined %}id="{{ embedParams.anchor }}"{% endif %} class="{% if embedParams.align is defined %}align-{{ embedParams.align }}{% endif %}{% if embedParams.class is defined %} {{ embedParams.class }}{% endif %}"{{ data_attributes_str|raw }}>
     {{ fos_httpcache_tag('relation-' ~ embedParams.id) }}
-    {% if ezplatform.configResolver.getParameter('ng_site_api.richtext_embed_without_subrequest') == true %}
+    {% if ibexa.configResolver.getParameter('ng_site_api.richtext_embed_without_subrequest') == true %}
         {{ ng_view_content_embedded(embedParams.viewType, params|merge( { "contentId": embedParams.id } )) }}
     {% else %}
         {{ render(

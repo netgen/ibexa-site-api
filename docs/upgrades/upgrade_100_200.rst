@@ -9,7 +9,7 @@ bump to version 2.0.
   however, since all required interfaces are now implemented directly on Site API ``ContentView``
   value object.
 
-- Also, ``Netgen\Bundle\EzPlatformSiteApiBundle\View\ContentValueView`` interface does not contain
+- Also, ``Netgen\Bundle\IbexaSiteApiBundle\View\ContentValueView`` interface does not contain
   ``getSiteLocation`` method any more. It is moved to a new interface, ``LocationValueView``, in the
   same namespace. If you used this method in your code, make sure to check for this new interface.
   This was done to keep in line on how eZ kernel uses its ``ContentView`` value object and its

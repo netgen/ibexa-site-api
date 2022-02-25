@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Core\Site\QueryType\Location;
+namespace Netgen\IbexaSiteApi\Core\Site\QueryType\Location;
 
-use eZ\Publish\API\Repository\Exceptions\NotImplementedException;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\LocationId;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\LogicalNot;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\ParentLocationId;
-use Netgen\EzPlatformSiteApi\API\Settings;
-use Netgen\EzPlatformSiteApi\API\Values\Location as SiteLocation;
-use Netgen\EzPlatformSiteApi\Core\Site\QueryType\Location;
+use Ibexa\Contracts\Core\Repository\Exceptions\NotImplementedException;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LocationId;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LogicalNot;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ParentLocationId;
+use Netgen\IbexaSiteApi\API\Settings;
+use Netgen\IbexaSiteApi\API\Values\Location as SiteLocation;
+use Netgen\IbexaSiteApi\Core\Site\QueryType\Location;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Symfony\Component\OptionsResolver\Options;
@@ -19,7 +19,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * Siblings Location QueryType.
  *
- * @see \Netgen\EzPlatformSiteApi\Core\Site\QueryType\Location
+ * @see \Netgen\IbexaSiteApi\Core\Site\QueryType\Location
  */
 final class Siblings extends Location
 {
@@ -55,7 +55,7 @@ final class Siblings extends Location
         $resolver->setDefault(
             'sort',
             function (Options $options): array {
-                /** @var \Netgen\EzPlatformSiteApi\API\Values\Location $location */
+                /** @var \Netgen\IbexaSiteApi\API\Values\Location $location */
                 $location = $options['location'];
 
                 try {
@@ -74,11 +74,11 @@ final class Siblings extends Location
      *
      * @throws \InvalidArgumentException
      *
-     * @return \eZ\Publish\API\Repository\Values\Content\Query\Criterion[]
+     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion[]
      */
     protected function getFilterCriteria(array $parameters): array
     {
-        /** @var \Netgen\EzPlatformSiteApi\API\Values\Location $location */
+        /** @var \Netgen\IbexaSiteApi\API\Values\Location $location */
         $location = $parameters['location'];
 
         return [

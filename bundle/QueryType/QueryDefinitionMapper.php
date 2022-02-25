@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\QueryType;
+namespace Netgen\Bundle\IbexaSiteApiBundle\QueryType;
 
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use eZ\Publish\Core\QueryType\QueryTypeRegistry;
+use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
+use Ibexa\Core\QueryType\QueryTypeRegistry;
 use InvalidArgumentException;
-use Netgen\Bundle\EzPlatformSiteApiBundle\View\ContentView;
-use Netgen\EzPlatformSiteApi\Core\Site\QueryType\QueryType as SiteQueryType;
+use Netgen\Bundle\IbexaSiteApiBundle\View\ContentView;
+use Netgen\IbexaSiteApi\Core\Site\QueryType\QueryType as SiteQueryType;
 use function array_key_exists;
 use function array_replace;
 use function is_array;
@@ -16,31 +16,16 @@ use function is_array;
 /**
  * QueryDefinitionMapper maps query configuration to a QueryDefinition instance.
  *
- * @see \Netgen\Bundle\EzPlatformSiteApiBundle\QueryType\QueryDefinition
+ * @see \Netgen\Bundle\IbexaSiteApiBundle\QueryType\QueryDefinition
  *
  * @internal do not depend on this service, it can be changed without warning
  */
 final class QueryDefinitionMapper
 {
-    /**
-     * @var \eZ\Publish\Core\QueryType\QueryTypeRegistry
-     */
-    private $queryTypeRegistry;
-
-    /**
-     * @var \Netgen\Bundle\EzPlatformSiteApiBundle\QueryType\ParameterProcessor
-     */
-    private $parameterProcessor;
-
-    /**
-     * @var \eZ\Publish\Core\MVC\ConfigResolverInterface
-     */
-    private $configResolver;
-
-    /**
-     * @var array
-     */
-    private $namedQueryConfiguration;
+    private QueryTypeRegistry $queryTypeRegistry;
+    private ParameterProcessor $parameterProcessor;
+    private ConfigResolverInterface $configResolver;
+    private ?array $namedQueryConfiguration = null;
 
     public function __construct(
         QueryTypeRegistry $queryTypeRegistry,
@@ -57,7 +42,7 @@ final class QueryDefinitionMapper
      *
      * @throws \InvalidArgumentException
      *
-     * @return \Netgen\Bundle\EzPlatformSiteApiBundle\QueryType\QueryDefinition
+     * @return \Netgen\Bundle\IbexaSiteApiBundle\QueryType\QueryDefinition
      */
     public function map(array $configuration, ContentView $view): QueryDefinition
     {
@@ -122,7 +107,7 @@ final class QueryDefinitionMapper
     /**
      * Build QueryDefinition instance from the given arguments.
      *
-     * @return \Netgen\Bundle\EzPlatformSiteApiBundle\QueryType\QueryDefinition
+     * @return \Netgen\Bundle\IbexaSiteApiBundle\QueryType\QueryDefinition
      */
     private function buildQueryDefinition(array $configuration, ContentView $view): QueryDefinition
     {
@@ -162,7 +147,7 @@ final class QueryDefinitionMapper
     /**
      * Recursively process given $parameters using ParameterProcessor.
      *
-     * @see \Netgen\Bundle\EzPlatformSiteApiBundle\QueryType\ParameterProcessor
+     * @see \Netgen\Bundle\IbexaSiteApiBundle\QueryType\ParameterProcessor
      */
     private function processParameters(array $parameters, ContentView $view): array
     {

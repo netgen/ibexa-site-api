@@ -1,5 +1,5 @@
-eZ Platform Site API changelog
-==============================
+Ibexa Site API changelog
+========================
 
 4.1.0 (02.10.2020)
 ------------------

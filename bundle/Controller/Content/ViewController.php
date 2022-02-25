@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\Controller\Content;
+namespace Netgen\Bundle\IbexaSiteApiBundle\Controller\Content;
 
-use eZ\Publish\Core\MVC\Symfony\Controller\Controller;
-use Netgen\Bundle\EzPlatformSiteApiBundle\View\ContentView;
+use Ibexa\Core\MVC\Symfony\Controller\Controller;
+use Netgen\Bundle\IbexaSiteApiBundle\View\ContentView;
 
 /**
  * This controller provides the content view feature.

@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\QueryType;
+namespace Netgen\Bundle\IbexaSiteApiBundle\QueryType;
 
-use eZ\Publish\API\Repository\Values\Content\LocationQuery;
-use eZ\Publish\API\Repository\Values\Content\Query;
-use eZ\Publish\API\Repository\Values\Content\Search\SearchResult;
-use eZ\Publish\Core\QueryType\QueryTypeRegistry;
+use Ibexa\Contracts\Core\Repository\Values\Content\LocationQuery;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query;
+use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchResult;
+use Ibexa\Core\QueryType\QueryTypeRegistry;
 use Netgen\EzPlatformSearchExtra\Core\Pagination\Pagerfanta\BaseAdapter;
-use Netgen\EzPlatformSiteApi\API\FilterService;
-use Netgen\EzPlatformSiteApi\API\FindService;
-use Netgen\EzPlatformSiteApi\Core\Site\Pagination\Pagerfanta\FilterAdapter;
-use Netgen\EzPlatformSiteApi\Core\Site\Pagination\Pagerfanta\FindAdapter;
+use Netgen\IbexaSiteApi\API\FilterService;
+use Netgen\IbexaSiteApi\API\FindService;
+use Netgen\IbexaSiteApi\Core\Site\Pagination\Pagerfanta\FilterAdapter;
+use Netgen\IbexaSiteApi\Core\Site\Pagination\Pagerfanta\FindAdapter;
 use Pagerfanta\Pagerfanta;
 
 /**
@@ -22,20 +22,9 @@ use Pagerfanta\Pagerfanta;
  */
 final class QueryExecutor
 {
-    /**
-     * @var \eZ\Publish\Core\QueryType\QueryTypeRegistry
-     */
-    private $queryTypeRegistry;
-
-    /**
-     * @var \Netgen\EzPlatformSiteApi\API\FilterService
-     */
-    private $filterService;
-
-    /**
-     * @var \Netgen\EzPlatformSiteApi\API\FindService
-     */
-    private $findService;
+    private QueryTypeRegistry $queryTypeRegistry;
+    private FilterService $filterService;
+    private FindService $findService;
 
     public function __construct(
         QueryTypeRegistry $queryTypeRegistry,
@@ -49,8 +38,6 @@ final class QueryExecutor
 
     /**
      * Execute the Query with the given $name and return the result.
-     *
-     * @param \Netgen\Bundle\EzPlatformSiteApiBundle\QueryType\QueryDefinition $queryDefinition
      *
      * @throws \Pagerfanta\Exception\Exception
      */
@@ -69,9 +56,7 @@ final class QueryExecutor
     /**
      * Execute the Query with the given $name and return the result.
      *
-     * @param \Netgen\Bundle\EzPlatformSiteApiBundle\QueryType\QueryDefinition $queryDefinition
-     *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
     public function executeRaw(QueryDefinition $queryDefinition): SearchResult
     {
@@ -98,9 +83,7 @@ final class QueryExecutor
     /**
      * Return search result by the given parameters.
      *
-     * @param \Netgen\Bundle\EzPlatformSiteApiBundle\QueryType\QueryDefinition $queryDefinition
-     *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
     private function getLocationResult(LocationQuery $query, QueryDefinition $queryDefinition): SearchResult
     {
@@ -114,9 +97,7 @@ final class QueryExecutor
     /**
      * Return search result by the given parameters.
      *
-     * @param \Netgen\Bundle\EzPlatformSiteApiBundle\QueryType\QueryDefinition $queryDefinition
-     *
-     * @throws \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
     private function getContentResult(Query $query, QueryDefinition $queryDefinition): SearchResult
     {
@@ -129,8 +110,6 @@ final class QueryExecutor
 
     private function getQuery(QueryDefinition $queryDefinition): Query
     {
-        $queryType = $this->queryTypeRegistry->getQueryType($queryDefinition->name);
-
-        return $queryType->getQuery($queryDefinition->parameters);
+        return $this->queryTypeRegistry->getQueryType($queryDefinition->name)->getQuery($queryDefinition->parameters);
     }
 }

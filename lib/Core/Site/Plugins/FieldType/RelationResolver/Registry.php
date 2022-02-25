@@ -2,26 +2,26 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Core\Site\Plugins\FieldType\RelationResolver;
+namespace Netgen\IbexaSiteApi\Core\Site\Plugins\FieldType\RelationResolver;
 
 use OutOfBoundsException;
 
 /**
  * Registry for field type relation resolvers.
  *
- * @see \Netgen\EzPlatformSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Resolver
+ * @see \Netgen\IbexaSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Resolver
  */
 class Registry
 {
     /**
      * Map of resolvers by field type identifier.
      *
-     * @var \Netgen\EzPlatformSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Resolver[]
+     * @var \Netgen\IbexaSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Resolver[]
      */
     protected $resolverMap = [];
 
     /**
-     * @param \Netgen\EzPlatformSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Resolver[] $resolverMap
+     * @param \Netgen\IbexaSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Resolver[] $resolverMap
      */
     public function __construct(array $resolverMap = [])
     {
@@ -33,7 +33,7 @@ class Registry
     /**
      * Register a $resolver for $fieldTypeIdentifier.
      *
-     * @param \Netgen\EzPlatformSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Resolver $resolver
+     * @param \Netgen\IbexaSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Resolver $resolver
      */
     public function register(string $fieldTypeIdentifier, Resolver $resolver): void
     {
@@ -45,7 +45,7 @@ class Registry
      *
      * @throws \OutOfBoundsException When there is no resolver for the given $fieldTypeIdentifier
      *
-     * @return \Netgen\EzPlatformSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Resolver
+     * @return \Netgen\IbexaSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Resolver
      */
     public function get(string $fieldTypeIdentifier): Resolver
     {

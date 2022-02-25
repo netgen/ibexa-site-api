@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\Templating\Twig\Extension;
+namespace Netgen\Bundle\IbexaSiteApiBundle\Templating\Twig\Extension;
 
-use eZ\Publish\Core\Base\Exceptions\InvalidArgumentException;
-use eZ\Publish\Core\MVC\Symfony\FieldType\View\ParameterProviderRegistryInterface;
-use eZ\Publish\Core\MVC\Symfony\Templating\Twig\FieldBlockRenderer;
-use Netgen\EzPlatformSiteApi\API\Values\Field;
+use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
+use Ibexa\Core\MVC\Symfony\FieldType\View\ParameterProviderRegistryInterface;
+use Ibexa\Core\MVC\Symfony\Templating\Twig\FieldBlockRenderer;
+use Netgen\IbexaSiteApi\API\Values\Field;
 use Twig\Environment;
 
 /**
@@ -15,20 +15,9 @@ use Twig\Environment;
  */
 class FieldRenderingRuntime
 {
-    /**
-     * @var \Twig\Environment
-     */
-    private $environment;
-
-    /**
-     * @var \eZ\Publish\Core\MVC\Symfony\Templating\Twig\FieldBlockRenderer
-     */
-    private $fieldBlockRenderer;
-
-    /**
-     * @var ParameterProviderRegistryInterface
-     */
-    private $parameterProviderRegistry;
+    private Environment $environment;
+    private FieldBlockRenderer $fieldBlockRenderer;
+    private ParameterProviderRegistryInterface $parameterProviderRegistry;
 
     public function __construct(
         Environment $environment,
@@ -65,7 +54,7 @@ class FieldRenderingRuntime
     /**
      * Generates the array of parameter to pass to the field template.
      *
-     * @param \Netgen\EzPlatformSiteApi\API\Values\Field $field the Field to display
+     * @param \Netgen\IbexaSiteApi\API\Values\Field $field the Field to display
      * @param array $params An array of parameters to pass to the field view
      */
     private function getRenderFieldBlockParameters(Field $field, array $params = []): array

@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Core\Site\QueryType;
+namespace Netgen\IbexaSiteApi\Core\Site\QueryType;
 
 use Closure;
-use eZ\Publish\API\Repository\Values\Content\Query;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\LogicalAnd;
-use eZ\Publish\API\Repository\Values\Content\Query\SortClause;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LogicalAnd;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause;
 use InvalidArgumentException;
-use Netgen\EzPlatformSiteApi\API\Settings;
-use Netgen\EzPlatformSiteApi\API\Values\Location as APILocation;
+use Netgen\IbexaSiteApi\API\Settings;
+use Netgen\IbexaSiteApi\API\Values\Location as APILocation;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use function array_key_exists;
@@ -26,40 +26,18 @@ use function is_string;
  *
  * @internal do not extend this class directly, extend abstract Content and Location query types instead
  *
- * @see \Netgen\EzPlatformSiteApi\Core\Site\QueryType\Content
- * @see \Netgen\EzPlatformSiteApi\Core\Site\QueryType\Location
+ * @see \Netgen\IbexaSiteApi\Core\Site\QueryType\Content
+ * @see \Netgen\IbexaSiteApi\Core\Site\QueryType\Location
  */
 abstract class Base implements QueryType
 {
-    /**
-     * @var \Netgen\EzPlatformSiteApi\API\Settings
-     */
-    private $settings;
-
-    /**
-     * @var \Symfony\Component\OptionsResolver\OptionsResolver
-     */
-    private $optionsResolver;
-
-    /**
-     * @var \Netgen\EzPlatformSiteApi\Core\Site\QueryType\CriterionDefinitionResolver
-     */
-    private $criterionDefinitionResolver;
-
-    /**
-     * @var \Netgen\EzPlatformSiteApi\Core\Site\QueryType\CriteriaBuilder
-     */
-    private $criteriaBuilder;
-
-    /**
-     * @var \Netgen\EzPlatformSiteApi\Core\Site\QueryType\SortClauseParser
-     */
-    private $sortClauseParser;
-
-    /**
-     * @var \Closure[]
-     */
-    private $registeredCriterionBuilders;
+    private Settings $settings;
+    private ?OptionsResolver $optionsResolver = null;
+    private ?CriterionDefinitionResolver $criterionDefinitionResolver = null;
+    private ?CriteriaBuilder $criteriaBuilder = null;
+    private ?SortClauseParser $sortClauseParser = null;
+    /** @var \Closure[] */
+    private ?array $registeredCriterionBuilders = null;
 
     public function __construct(Settings $settings)
     {
@@ -142,17 +120,17 @@ abstract class Base implements QueryType
      * Return an array of FacetBuilder instances.
      *
      * Note: facets are supported only with Solr search engine, which will be available
-     * through FindService. By default query types use FilterService, where faceting is
+     * through FindService. By default, query types use FilterService, where faceting is
      * not supported. You can control that behavior with 'use_filter' option of the query
      * configuration (defaulting to false).
      *
-     * @see \Netgen\EzPlatformSiteApi\API\FilterService
-     * @see \Netgen\EzPlatformSiteApi\API\FindService
+     * @see \Netgen\IbexaSiteApi\API\FilterService
+     * @see \Netgen\IbexaSiteApi\API\FindService
      *
      * Return an empty array if you don't need to use facets.
      * Override this method as needed.
      *
-     * @return \eZ\Publish\API\Repository\Values\Content\Query\FacetBuilder[]
+     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\FacetBuilder[]
      */
     protected function getFacetBuilders(array $parameters): array
     {
@@ -179,7 +157,7 @@ abstract class Base implements QueryType
     protected function parseCustomSortString(string $string): ?SortClause
     {
         throw new InvalidArgumentException(
-            "Sort string '{$string}' was not converted to a SortClause"
+            "Sort string '$string' was not converted to a SortClause"
         );
     }
 
@@ -189,7 +167,7 @@ abstract class Base implements QueryType
      * Closure will be called with an instance of CriterionDefinition and an array of QueryType
      * parameters and it must return a Criterion instance.
      *
-     * @see \Netgen\EzPlatformSiteApi\Core\Site\QueryType\CriterionDefinition
+     * @see \Netgen\IbexaSiteApi\Core\Site\QueryType\CriterionDefinition
      */
     final protected function registerCriterionBuilder(string $name, Closure $builder): void
     {
@@ -278,7 +256,7 @@ abstract class Base implements QueryType
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      *
-     * @return \eZ\Publish\API\Repository\Values\Content\Query\Criterion[]
+     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion[]
      */
     private function buildBaseCriteria(array $parameters): array
     {
@@ -298,10 +276,12 @@ abstract class Base implements QueryType
     /**
      * @param mixed $parameters
      *
-     * @return \Netgen\EzPlatformSiteApi\Core\Site\QueryType\CriterionDefinition[]
+     * @return \Netgen\IbexaSiteApi\Core\Site\QueryType\CriterionDefinition[]
      */
     private function resolveCriterionDefinitions(string $name, $parameters): array
     {
+        $criterionDefinitionResolver = $this->getCriterionDefinitionResolver();
+
         switch ($name) {
             case 'content_type':
             case 'depth':
@@ -314,18 +294,18 @@ abstract class Base implements QueryType
             case 'section':
             case 'subtree':
             case 'visible':
-                return $this->getCriterionDefinitionResolver()->resolve($name, $parameters);
+                return $criterionDefinitionResolver->resolve($name, $parameters);
             case 'field':
             case 'state':
             case 'is_field_empty':
-                return $this->getCriterionDefinitionResolver()->resolveTargets($name, $parameters);
+                return $criterionDefinitionResolver->resolveTargets($name, $parameters);
         }
 
         return [];
     }
 
     /**
-     * @return \eZ\Publish\API\Repository\Values\Content\Query\Criterion[]
+     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion[]
      */
     private function buildRegisteredCriteria(array $parameters): array
     {
@@ -344,7 +324,7 @@ abstract class Base implements QueryType
     }
 
     /**
-     * @return \eZ\Publish\API\Repository\Values\Content\Query\Criterion[]
+     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion[]
      */
     private function buildCriteria(Closure $builder, string $name, array $parameters): array
     {
@@ -403,7 +383,7 @@ abstract class Base implements QueryType
      *
      * @throws \InvalidArgumentException
      *
-     * @return \eZ\Publish\API\Repository\Values\Content\Query\SortClause[]
+     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause[]
      */
     private function getSortClauses(array $parameters): array
     {
@@ -425,7 +405,7 @@ abstract class Base implements QueryType
     }
 
     /**
-     * @return \eZ\Publish\API\Repository\Values\Content\Query\SortClause|string
+     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause|string
      */
     private function parseSortString(string $string)
     {

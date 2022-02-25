@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\API;
+namespace Netgen\IbexaSiteApi\API;
 
 /**
  * Site Settings.

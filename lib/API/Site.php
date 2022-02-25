@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\API;
+namespace Netgen\IbexaSiteApi\API;
 
 /**
  * Site interface.
@@ -12,35 +12,35 @@ interface Site
     /**
      * Settings getter.
      *
-     * @return \Netgen\EzPlatformSiteApi\API\Settings
+     * @return \Netgen\IbexaSiteApi\API\Settings
      */
     public function getSettings(): Settings;
 
     /**
      * FilterService getter.
      *
-     * @return \Netgen\EzPlatformSiteApi\API\FilterService
+     * @return \Netgen\IbexaSiteApi\API\FilterService
      */
     public function getFilterService(): FilterService;
 
     /**
      * FindService getter.
      *
-     * @return \Netgen\EzPlatformSiteApi\API\FindService
+     * @return \Netgen\IbexaSiteApi\API\FindService
      */
     public function getFindService(): FindService;
 
     /**
      * LoadService getter.
      *
-     * @return \Netgen\EzPlatformSiteApi\API\LoadService
+     * @return \Netgen\IbexaSiteApi\API\LoadService
      */
     public function getLoadService(): LoadService;
 
     /**
      * RelationService getter.
      *
-     * @return \Netgen\EzPlatformSiteApi\API\RelationService
+     * @return \Netgen\IbexaSiteApi\API\RelationService
      */
     public function getRelationService(): RelationService;
 }

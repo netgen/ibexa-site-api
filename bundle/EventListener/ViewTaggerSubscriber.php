@@ -2,22 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\EventListener;
+namespace Netgen\Bundle\IbexaSiteApiBundle\EventListener;
 
-use EzSystems\PlatformHttpCacheBundle\ResponseTagger\ResponseTagger;
-use Netgen\Bundle\EzPlatformSiteApiBundle\Event\RenderViewEvent;
-use Netgen\Bundle\EzPlatformSiteApiBundle\Events;
+use Ibexa\Contracts\HttpCache\ResponseTagger\ResponseTagger;
+use Netgen\Bundle\IbexaSiteApiBundle\Event\RenderViewEvent;
+use Netgen\Bundle\IbexaSiteApiBundle\Events;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-/**
- * @uses \Netgen\Bundle\EzPlatformSiteApiBundle\Events::RENDER_VIEW
- */
 final class ViewTaggerSubscriber implements EventSubscriberInterface
 {
-    /**
-     * @var \EzSystems\PlatformHttpCacheBundle\ResponseTagger\ResponseTagger
-     */
-    private $responseTagger;
+    private ResponseTagger $responseTagger;
 
     public function __construct(ResponseTagger $responseTagger)
     {

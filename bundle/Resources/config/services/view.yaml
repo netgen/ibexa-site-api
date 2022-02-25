@@ -1,0 +1,102 @@
+services:
+    netgen.ibexa_site_api.view.location_resolver.sudo_main_location_resolver:
+        class: Netgen\Bundle\IbexaSiteApiBundle\View\LocationResolver\SudoMainLocationResolver
+        arguments:
+            - '@ibexa.api.repository'
+            - '@netgen.ibexa_site_api.load_service'
+
+    netgen.ibexa_site_api.view.location_resolver:
+        alias: netgen.ibexa_site_api.view.location_resolver.sudo_main_location_resolver
+
+    netgen.ibexa_site_api.view_builder.content:
+        class: Netgen\Bundle\IbexaSiteApiBundle\View\Builder\ContentViewBuilder
+        public: false
+        arguments:
+            - '@netgen.ibexa_site_api.site'
+            - '@ibexa.api.repository'
+            - '@Ibexa\Core\MVC\Symfony\View\Configurator\ViewProvider'
+            - '@Ibexa\Core\MVC\Symfony\View\ParametersInjector\EventDispatcherInjector'
+            - '@netgen.ibexa_site_api.view.location_resolver'
+
+    netgen.ibexa_site_api.content_view_provider.ngcontent_configured:
+        class: Netgen\Bundle\IbexaSiteApiBundle\View\Provider\Configured
+        arguments:
+            - '@netgen.ibexa_site_api.ngcontent_view.matcher_factory'
+            - '@netgen.ibexa_site_api.query_type.query_definition_mapper'
+            - '@netgen.ibexa_site_api.redirect_resolver'
+            - '@netgen.ibexa_site_api.view_provider.content_view_fallback_resolver'
+        tags:
+            - { name: ibexa.view.provider, type: 'Netgen\Bundle\IbexaSiteApiBundle\View\ContentView', priority: 110 }
+        public: false
+
+    netgen.ibexa_site_api.view_provider.content_view_fallback_resolver:
+        class: Netgen\Bundle\IbexaSiteApiBundle\View\Provider\ContentViewFallbackResolver
+        arguments:
+            - '@ibexa.config.resolver'
+            - '%netgen.ibexa_site_api.content_view_fallback.to_ibexa.embed%'
+            - '%netgen.ibexa_site_api.content_view_fallback.to_ibexa.view%'
+            - '%netgen.ibexa_site_api.content_view_fallback.to_site_api.embed%'
+            - '%netgen.ibexa_site_api.content_view_fallback.to_site_api.view%'
+
+    netgen.ibexa_site_api.content_view_provider.core_override:
+        decorates: ibexa.content_view_provider.configured
+        class: Netgen\Bundle\IbexaSiteApiBundle\View\Provider\CoreOverride
+        arguments:
+            - '@ibexa.content_view.matcher_factory'
+            - '@netgen.ibexa_site_api.view_provider.content_view_fallback_resolver'
+
+    netgen.ibexa_site_api.redirect_resolver:
+        class: Netgen\Bundle\IbexaSiteApiBundle\View\Redirect\Resolver
+        arguments:
+            - '@netgen.ibexa_site_api.redirect.parameter_processor'
+            - '@router'
+        public: false
+
+    netgen.ibexa_site_api.redirect.parameter_processor:
+        class: Netgen\Bundle\IbexaSiteApiBundle\View\Redirect\ParameterProcessor
+        arguments:
+            - '@netgen.ibexa_site_api.named_object_provider'
+        public: false
+
+    netgen.ibexa_site_api.ngcontent_view.matcher_factory:
+        class: Netgen\Bundle\IbexaSiteApiBundle\View\Matcher\MatcherFactory
+        arguments:
+            # todo check optional
+            - '@?Ibexa\Bundle\Core\Matcher\ViewMatcherRegistry'
+            - '@ibexa.api.repository'
+            - 'Ibexa\Core\MVC\Symfony\Matcher\ContentBased'
+            - '@ibexa.config.resolver'
+            - 'ng_content_view'
+        calls:
+            - [setContainer, ["@service_container"]]
+        public: false
+
+    netgen.ibexa_site_api.ngcontent_view_provider.default_configured:
+        class: Ibexa\Bundle\Core\View\Provider\Configured
+        arguments:
+            - '@netgen.ibexa_site_api.ngcontent_view.default_matcher_factory'
+        tags:
+            - { name: ibexa.view.provider, type: 'Netgen\Bundle\IbexaSiteApiBundle\View\ContentView', priority: 90 }
+        public: false
+
+    netgen.ibexa_site_api.ngcontent_view.default_matcher_factory:
+        class: Netgen\Bundle\IbexaSiteApiBundle\View\Matcher\MatcherFactory
+        arguments:
+            # todo check optional
+            - '@?Ibexa\Bundle\Core\Matcher\ViewMatcherRegistry'
+            - '@ibexa.api.repository'
+            - 'Ibexa\Core\MVC\Symfony\Matcher\ContentBased'
+            - '@ibexa.config.resolver'
+            - 'ng_content_view_defaults'
+        calls:
+            - [setContainer, ["@service_container"]]
+        public: false
+
+    netgen.ibexa_site_api.view_renderer:
+        class: Netgen\Bundle\IbexaSiteApiBundle\View\ViewRenderer
+        arguments:
+            - '@request_stack'
+            - '@controller_resolver'
+            - '@argument_resolver'
+            - '@Ibexa\Core\MVC\Symfony\View\Renderer\TemplateRenderer'
+            - '@event_dispatcher'

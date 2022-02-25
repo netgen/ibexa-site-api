@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Core\Site\Plugins\FieldType\RelationResolver;
+namespace Netgen\IbexaSiteApi\Core\Site\Plugins\FieldType\RelationResolver;
 
-use eZ\Publish\SPI\FieldType\Value;
+use Ibexa\Contracts\Core\FieldType\Value;
 use LogicException;
-use Netgen\EzPlatformSiteApi\API\Values\Field;
+use Netgen\IbexaSiteApi\API\Values\Field;
 
 /**
  * Field type relation resolver returns related Content IDs for a Content field
@@ -15,7 +15,7 @@ use Netgen\EzPlatformSiteApi\API\Values\Field;
  * If a field type is to be used for relations, it needs a dedicated implementation
  * of this class to be registered with resolver registry.
  *
- * @see \Netgen\Bundle\EzPlatformSiteApiBundle\DependencyInjection\Compiler\RelationResolverRegistrationPass
+ * @see \Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Compiler\RelationResolverRegistrationPass
  */
 abstract class Resolver
 {

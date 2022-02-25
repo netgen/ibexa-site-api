@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Core\Traits;
+namespace Netgen\IbexaSiteApi\Core\Traits;
 
-use eZ\Publish\API\Repository\Values\Content\Query;
-use Netgen\EzPlatformSiteApi\API\Site;
-use Netgen\EzPlatformSiteApi\Core\Site\Pagination\Pagerfanta\FilterAdapter;
-use Netgen\EzPlatformSiteApi\Core\Site\Pagination\Pagerfanta\FindAdapter;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query;
+use Netgen\IbexaSiteApi\API\Site;
+use Netgen\IbexaSiteApi\Core\Site\Pagination\Pagerfanta\FilterAdapter;
+use Netgen\IbexaSiteApi\Core\Site\Pagination\Pagerfanta\FindAdapter;
 use Pagerfanta\Pagerfanta;
 
 /**

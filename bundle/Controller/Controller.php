@@ -2,17 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\Controller;
+namespace Netgen\Bundle\IbexaSiteApiBundle\Controller;
 
-use eZ\Publish\API\Repository\Repository;
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use eZ\Publish\Core\MVC\Symfony\Templating\GlobalHelper;
-use eZ\Publish\Core\QueryType\QueryTypeRegistry;
-use Netgen\Bundle\EzPlatformSiteApiBundle\NamedObject\Provider;
-use Netgen\EzPlatformSiteApi\API\Site;
-use Netgen\EzPlatformSiteApi\API\Values\Location;
-use Netgen\EzPlatformSiteApi\Core\Traits\PagerfantaTrait;
-use Netgen\EzPlatformSiteApi\Core\Traits\SearchResultExtractorTrait;
+use Ibexa\Contracts\Core\Repository\Repository;
+use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
+use Ibexa\Core\MVC\Symfony\Templating\GlobalHelper;
+use Ibexa\Core\QueryType\ArrayQueryTypeRegistry;
+use Ibexa\Core\QueryType\QueryTypeRegistry;
+use Netgen\Bundle\IbexaSiteApiBundle\NamedObject\Provider;
+use Netgen\IbexaSiteApi\API\Site;
+use Netgen\IbexaSiteApi\API\Values\Location;
+use Netgen\IbexaSiteApi\Core\Traits\PagerfantaTrait;
+use Netgen\IbexaSiteApi\Core\Traits\SearchResultExtractorTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 abstract class Controller extends AbstractController
@@ -21,11 +22,11 @@ abstract class Controller extends AbstractController
     use PagerfantaTrait;
 
     /**
-     * Returns the root location object for current siteaccess configuration.
+     * Returns the root Location object for current siteaccess configuration.
      *
-     * @throws \Netgen\EzPlatformSiteApi\API\Exceptions\TranslationNotMatchedException
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
      */
     public function getRootLocation(): Location
     {
@@ -36,64 +37,46 @@ abstract class Controller extends AbstractController
 
     public function getQueryTypeRegistry(): QueryTypeRegistry
     {
-        /** @var \eZ\Publish\Core\QueryType\QueryTypeRegistry $registry */
-        $registry = $this->container->get('ezpublish.query_type.registry');
-
-        return $registry;
+        return $this->container->get(ArrayQueryTypeRegistry::class);
     }
 
     public function getRepository(): Repository
     {
-        /** @var \eZ\Publish\API\Repository\Repository $repository */
-        $repository = $this->container->get('ezpublish.api.repository');
-
-        return $repository;
+        return $this->container->get('ibexa.api.repository');
     }
 
     /**
-     * Returns the general helper service, exposed in Twig templates as "ezpublish" global variable.
+     * Returns the general helper service, exposed in Twig templates as "ibexa" global variable.
      */
     public function getGlobalHelper(): GlobalHelper
     {
-        /** @var \eZ\Publish\Core\MVC\Symfony\Templating\GlobalHelper $globalHelper */
-        $globalHelper = $this->container->get('ezpublish.templating.global_helper');
-
-        return $globalHelper;
+        return $this->container->get('ibexa.templating.global_helper');
     }
 
-    public static function getSubscribedServices()
+    public static function getSubscribedServices(): array
     {
         return [
-            'netgen.ezplatform_site.site' => Site::class,
-            'netgen.ezplatform_site.named_object_provider' => Provider::class,
-            'ezpublish.query_type.registry' => QueryTypeRegistry::class,
-            'ezpublish.api.repository' => Repository::class,
-            'ezpublish.templating.global_helper' => GlobalHelper::class,
-            'ezpublish.config.resolver' => ConfigResolverInterface::class,
+            'netgen.ibexa_site_api.site' => Site::class,
+            'netgen.ibexa_site_api.named_object_provider' => Provider::class,
+            QueryTypeRegistry::class => QueryTypeRegistry::class,
+            'ibexa.api.repository' => Repository::class,
+            'ibexa.templating.global_helper' => GlobalHelper::class,
+            'ibexa.config.resolver' => ConfigResolverInterface::class,
         ] + parent::getSubscribedServices();
     }
 
     protected function getSite(): Site
     {
-        /** @var \Netgen\EzPlatformSiteApi\API\Site $site */
-        $site = $this->container->get('netgen.ezplatform_site.site');
-
-        return $site;
+        return $this->container->get('netgen.ibexa_site_api.site');
     }
 
     protected function getConfigResolver(): ConfigResolverInterface
     {
-        /** @var \eZ\Publish\Core\MVC\ConfigResolverInterface $configResolver */
-        $configResolver = $this->container->get('ezpublish.config.resolver');
-
-        return $configResolver;
+        return $this->container->get('ibexa.config.resolver');
     }
 
     protected function getNamedObjectProvider(): Provider
     {
-        /** @var \Netgen\Bundle\EzPlatformSiteApiBundle\NamedObject\Provider $namedObjectProvider */
-        $namedObjectProvider = $this->container->get('netgen.ezplatform_site.named_object_provider');
-
-        return $namedObjectProvider;
+        return $this->container->get('netgen.ibexa_site_api.named_object_provider');
     }
 }

@@ -2,17 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\View;
+namespace Netgen\Bundle\IbexaSiteApiBundle\View;
 
-use eZ\Publish\Core\MVC\Symfony\View\LocationValueView as BaseLocationValueView;
-use Netgen\EzPlatformSiteApi\API\Values\Location;
+use Ibexa\Core\MVC\Symfony\View\LocationValueView as BaseLocationValueView;
+use Netgen\IbexaSiteApi\API\Values\Location;
 
 interface LocationValueView extends BaseLocationValueView
 {
-    /**
-     * Returns the Site Location.
-     *
-     * @return \Netgen\EzPlatformSiteApi\API\Values\Location
-     */
     public function getSiteLocation(): ?Location;
 }

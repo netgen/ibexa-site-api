@@ -1,22 +1,22 @@
 Custom controllers
 ==================
 
-Implementing a custom controller is similar to the vanilla eZ Platform. First, you have to implement
+Implementing a custom controller is similar to the vanilla Ibexa. First, you have to implement
 it with extending the Site API base controller:
 
 .. code-block:: php
 
     namespace AppBundle\Controller;
 
-    use Netgen\Bundle\EzPlatformSiteApiBundle\Controller\Controller;
-    use Netgen\Bundle\EzPlatformSiteApiBundle\View\ContentView;
+    use Netgen\Bundle\IbexaSiteApiBundle\Controller\Controller;
+    use Netgen\Bundle\IbexaSiteApiBundle\View\ContentView;
 
     class DemoController extends Controller
     {
         /**
-         * @param \Netgen\Bundle\EzPlatformSiteApiBundle\View\ContentView $view
+         * @param \Netgen\Bundle\IbexaSiteApiBundle\View\ContentView $view
          *
-         * @return \Netgen\Bundle\EzPlatformSiteApiBundle\View\ContentView
+         * @return \Netgen\Bundle\IbexaSiteApiBundle\View\ContentView
          */
         public function viewArticleAction(ContentView $view)
         {

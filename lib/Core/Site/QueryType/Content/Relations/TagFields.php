@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Core\Site\QueryType\Content\Relations;
+namespace Netgen\IbexaSiteApi\Core\Site\QueryType\Content\Relations;
 
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\ContentId;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\LogicalNot;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\MatchNone;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ContentId;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LogicalNot;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\MatchNone;
 use InvalidArgumentException;
-use Netgen\EzPlatformSiteApi\API\Values\Content as SiteContent;
-use Netgen\EzPlatformSiteApi\Core\Site\QueryType\Content;
+use Netgen\IbexaSiteApi\API\Values\Content as SiteContent;
+use Netgen\IbexaSiteApi\Core\Site\QueryType\Content;
 use Netgen\TagsBundle\API\Repository\Values\Content\Query\Criterion\TagId;
 use Netgen\TagsBundle\API\Repository\Values\Tags\Tag;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -58,7 +58,7 @@ final class TagFields extends Content
      */
     protected function getFilterCriteria(array $parameters)
     {
-        /** @var \Netgen\EzPlatformSiteApi\API\Values\Content $content */
+        /** @var \Netgen\IbexaSiteApi\API\Values\Content $content */
         $content = $parameters['content'];
         /** @var string[] $fields */
         $fields = (array) $parameters['relation_field'];

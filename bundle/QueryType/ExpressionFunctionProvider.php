@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\QueryType;
+namespace Netgen\Bundle\IbexaSiteApiBundle\QueryType;
 
 use Symfony\Component\ExpressionLanguage\ExpressionFunction;
 use Symfony\Component\ExpressionLanguage\ExpressionFunctionProviderInterface;
@@ -18,7 +18,7 @@ final class ExpressionFunctionProvider implements ExpressionFunctionProviderInte
                 'viewParam',
                 static function (): void {},
                 static function (array $arguments, string $name, $default) {
-                    /** @var \Netgen\Bundle\EzPlatformSiteApiBundle\View\ContentView $view */
+                    /** @var \Netgen\Bundle\IbexaSiteApiBundle\View\ContentView $view */
                     $view = $arguments['view'];
 
                     if ($view->hasParameter($name)) {
@@ -139,7 +139,7 @@ final class ExpressionFunctionProvider implements ExpressionFunctionProviderInte
                 'config',
                 static function (): void {},
                 static function (array $arguments, string $name, ?string $namespace = null, ?string $scope = null) {
-                    /** @var \Symfony\Component\HttpFoundation\Request $request */
+                    /** @var \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface $configResolver */
                     $configResolver = $arguments['configResolver'];
 
                     return $configResolver->getParameter($name, $namespace, $scope);
@@ -149,7 +149,7 @@ final class ExpressionFunctionProvider implements ExpressionFunctionProviderInte
                 'namedContent',
                 static function (): void {},
                 static function (array $arguments, string $name) {
-                    /** @var \Netgen\Bundle\EzPlatformSiteApiBundle\NamedObject\Provider $namedObjectProvider */
+                    /** @var \Netgen\Bundle\IbexaSiteApiBundle\NamedObject\Provider $namedObjectProvider */
                     $namedObjectProvider = $arguments['namedObject'];
 
                     return $namedObjectProvider->getContent($name);
@@ -159,7 +159,7 @@ final class ExpressionFunctionProvider implements ExpressionFunctionProviderInte
                 'namedLocation',
                 static function (): void {},
                 static function (array $arguments, string $name) {
-                    /** @var \Netgen\Bundle\EzPlatformSiteApiBundle\NamedObject\Provider $namedObjectProvider */
+                    /** @var \Netgen\Bundle\IbexaSiteApiBundle\NamedObject\Provider $namedObjectProvider */
                     $namedObjectProvider = $arguments['namedObject'];
 
                     return $namedObjectProvider->getLocation($name);
@@ -169,7 +169,7 @@ final class ExpressionFunctionProvider implements ExpressionFunctionProviderInte
                 'namedTag',
                 static function (): void {},
                 static function (array $arguments, string $name) {
-                    /** @var \Netgen\Bundle\EzPlatformSiteApiBundle\NamedObject\Provider $namedObjectProvider */
+                    /** @var \Netgen\Bundle\IbexaSiteApiBundle\NamedObject\Provider $namedObjectProvider */
                     $namedObjectProvider = $arguments['namedObject'];
 
                     return $namedObjectProvider->getTag($name);
@@ -201,7 +201,7 @@ final class ExpressionFunctionProvider implements ExpressionFunctionProviderInte
                 'fieldValue',
                 static function (): void {},
                 static function (array $arguments, string $fieldIdentifier) {
-                    /** @var \Netgen\EzPlatformSiteApi\API\Values\Content $content */
+                    /** @var \Netgen\IbexaSiteApi\API\Values\Content $content */
                     $content = $arguments['content'];
 
                     return $content->getFieldValue($fieldIdentifier);

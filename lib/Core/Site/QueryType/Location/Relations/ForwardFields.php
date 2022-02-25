@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Core\Site\QueryType\Location\Relations;
+namespace Netgen\IbexaSiteApi\Core\Site\QueryType\Location\Relations;
 
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\ContentId;
-use eZ\Publish\API\Repository\Values\Content\Query\Criterion\MatchNone;
-use Netgen\EzPlatformSiteApi\API\Values\Content as SiteContent;
-use Netgen\EzPlatformSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Registry as RelationResolverRegistry;
-use Netgen\EzPlatformSiteApi\Core\Site\QueryType\Location;
-use Netgen\EzPlatformSiteApi\API\Settings;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ContentId;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\MatchNone;
+use Netgen\IbexaSiteApi\API\Values\Content as SiteContent;
+use Netgen\IbexaSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Registry as RelationResolverRegistry;
+use Netgen\IbexaSiteApi\Core\Site\QueryType\Location;
+use Netgen\IbexaSiteApi\API\Settings;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -19,10 +19,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 final class ForwardFields extends Location
 {
-    /**
-     * @var \Netgen\EzPlatformSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Registry
-     */
-    private $relationResolverRegistry;
+    private RelationResolverRegistry $relationResolverRegistry;
 
     public function __construct(Settings $settings, RelationResolverRegistry $relationResolverRegistry)
     {
@@ -67,7 +64,7 @@ final class ForwardFields extends Location
      */
     protected function getFilterCriteria(array $parameters)
     {
-        /** @var \Netgen\EzPlatformSiteApi\API\Values\Content $content */
+        /** @var \Netgen\IbexaSiteApi\API\Values\Content $content */
         $content = $parameters['content'];
         $fields = (array) $parameters['relation_field'];
         $idsGrouped = [[]];

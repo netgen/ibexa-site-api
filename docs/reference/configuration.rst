@@ -3,12 +3,12 @@ Configuration
 
 Site API has its own view configuration, available under ``ng_content_view`` key. Aside from
 :doc:`Query Type </reference/query_types>` configuration that is documented separately, this is
-exactly the same as eZ Platform's default view configuration under ``content_view`` key. You can use
+exactly the same as Ibexa's default view configuration under ``content_view`` key. You can use
 this configuration right after the installation, but note that it won't be used for full views
-rendered for eZ Platform URL aliases right away. Until you configure that, it will be used only when
+rendered for Ibexa URL aliases right away. Until you configure that, it will be used only when
 calling its controller explicitly with ``ng_content::viewAction``.
 
-All other configuration is grouped under ``ng_site_api`` key under eZ Platform semantic
+All other configuration is grouped under ``ng_site_api`` key under Ibexa semantic
 configuration. If you need to fetch this configuration directly in your code, combine
 ``ng_site_api`` with the specific key name, for example:
 
@@ -33,7 +33,7 @@ configuration. If you need to fetch this configuration directly in your code, co
 Configure handling of URL aliases
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To use Site API view rules for pages rendered from eZ Platform URL aliases, you have to enable it
+To use Site API view rules for pages rendered from Ibexa URL aliases, you have to enable it
 for a specific siteaccess with the following semantic configuration:
 
 .. code-block:: yaml
@@ -50,7 +50,7 @@ admin or intranet interface.
 
 .. note::
 
-    To use Site API view configuration automatically on pages rendered from eZ Platform URL aliases,
+    To use Site API view configuration automatically on pages rendered from Ibexa URL aliases,
     you need to enable it manually per siteaccess.
 
 Site API Content views
@@ -64,17 +64,17 @@ variables inside Twig templates will be instances of Site API Content and Locati
 variable, and so on.
 
 If needed you can still use ``content_view`` rules. This will allow you to have both Site API
-template override rules as well as original eZ Platform template override rules, so you can rewrite
+template override rules as well as original Ibexa template override rules, so you can rewrite
 your templates bit by bit. You can decide which one to use by directly rendering either
 ``ng_content::viewAction`` or ``ez_content::viewAction`` controller.
 
-It's also possible to configure fallback between Site API and eZ Platform views. With it, if the
+It's also possible to configure fallback between Site API and Ibexa views. With it, if the
 rule is not matched in one view configuration, the fallback mechanism will try to match it in the
 other. Find out more about that in the following section.
 
 .. tip::
 
-    | View configuration is the only eZ Platform configuration regularly edited
+    | View configuration is the only Ibexa configuration regularly edited
     | by frontend developers.
 
 For example, if using the following configuration:
@@ -109,7 +109,7 @@ It is also possible to use custom controllers, this is documented on
 Content View fallback
 ~~~~~~~~~~~~~~~~~~~~~
 
-You can configure fallback between Site API and eZ Platform views. Fallback can be controlled
+You can configure fallback between Site API and Ibexa views. Fallback can be controlled
 through two configuration options (showing default values):
 
 .. code-block:: yaml
@@ -125,7 +125,7 @@ through two configuration options (showing default values):
 
     With this option you control whether **automatic fallback** will be used. By default, automatic
     fallback is disabled. Secondary content view means the fallback can be used both from Site API
-    to eZ Platform views, and from eZ Platform to Site API content views. Which one will be used is
+    to Ibexa views, and from Ibexa to Site API content views. Which one will be used is
     defined by ``site_api_is_primary_content_view`` configuration documented above.
 
 - ``fallback_without_subrequest``
@@ -152,12 +152,12 @@ through two configuration options (showing default values):
 
 
 You can also configure fallback manually, per view. This is done by configuring a view to render one
-of two special templates, depending if the fallback is from Site API to eZ Platform views or the
+of two special templates, depending if the fallback is from Site API to Ibexa views or the
 opposite.
 
-- ``@NetgenEzPlatformSiteApi/content_view_fallback/to_ez_platform.html.twig``
+- ``@NetgenIbexaSiteApi/content_view_fallback/to_ez_platform.html.twig``
 
-  This template is used for fallback from Site API to eZ Platform views. In the following example
+  This template is used for fallback from Site API to Ibexa views. In the following example
   it's used to configure fallback for ``line`` view of ``article`` ContentType:
 
   .. code-block:: yaml
@@ -168,13 +168,13 @@ opposite.
                   ng_content_view:
                       line:
                           article:
-                              template: '@NetgenEzPlatformSiteApi/content_view_fallback/to_ez_platform.html.twig'
+                              template: '@NetgenIbexaSiteApi/content_view_fallback/to_ez_platform.html.twig'
                               match:
                                   Identifier\ContentType: article
 
-- ``@NetgenEzPlatformSiteApi/content_view_fallback/to_site_api.html.twig``
+- ``@NetgenIbexaSiteApi/content_view_fallback/to_site_api.html.twig``
 
-  This template is used for fallback from eZ Platform to Site API views. In the following example
+  This template is used for fallback from Ibexa to Site API views. In the following example
   it's used to configure fallback for all ``full`` views:
 
   .. code-block:: yaml
@@ -185,7 +185,7 @@ opposite.
                   content_view:
                       full:
                           catch_all:
-                              template: '@NetgenEzPlatformSiteApi/content_view_fallback/to_site_api.html.twig'
+                              template: '@NetgenIbexaSiteApi/content_view_fallback/to_site_api.html.twig'
                               match: ~
 
 .. _show_hidden_items_configuration:
@@ -193,7 +193,7 @@ opposite.
 Internal Content View route on frontend siteaccesses
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-eZ Platform allows use of internal Content View route from the admin UI on the frontend
+Ibexa allows use of internal Content View route from the admin UI on the frontend
 siteaccesses. That might not be desirable in all cases, so Site API provides two configuration
 options to control whether the internal route will be enabled on a frontend siteaccess and, if
 enabled, whether it will permanently (HTTP code 308) redirect to the URL alias.

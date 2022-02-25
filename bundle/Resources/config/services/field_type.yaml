@@ -1,0 +1,20 @@
+parameters:
+    # RichText embed templates parameter namespace
+    netgen.ibexa_site_api.ezrichtext.embed.namespace: ng_fieldtypes.ezrichtext.embed
+
+services:
+    netgen.ibexa_site_api.ezrichtext.renderer:
+        class: Netgen\Bundle\IbexaSiteApiBundle\Core\FieldType\RichText\Renderer
+        decorates: Ibexa\FieldTypeRichText\RichText\Renderer
+        arguments:
+            - '@ibexa.api.repository'
+            - '@security.authorization_checker'
+            - '@ibexa.config.resolver'
+            - '@twig'
+            - '%ibexa.field_type.richtext.tag.namespace%'
+            - '%ibexa.field_type.richtext.style.namespace%'
+            - '%ibexa.field_type.richtext.embed.namespace%'
+            - '%netgen.ibexa_site_api.ezrichtext.embed.namespace%'
+            - '@?logger'
+            - '%ibexa.field_type.richtext.custom_tags%'
+            - '%ibexa.field_type.richtext.custom_styles%'

@@ -2,35 +2,25 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\EventListener;
+namespace Netgen\Bundle\IbexaSiteApiBundle\EventListener;
 
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use eZ\Publish\Core\MVC\Symfony\Routing\UrlAliasRouter;
-use Netgen\Bundle\EzPlatformSiteApiBundle\Exception\InvalidRedirectConfiguration;
+use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
+use Ibexa\Core\MVC\Symfony\Routing\UrlAliasRouter;
+use Netgen\Bundle\IbexaSiteApiBundle\Exception\InvalidRedirectConfiguration;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 final class InvalidRedirectConfigurationListener implements EventSubscriberInterface
 {
-    /**
-     * @var \Psr\Log\LoggerInterface
-     */
-    private $logger;
-
-    /**
-     * @var \Symfony\Component\Routing\Generator\UrlGeneratorInterface
-     */
-    private $urlGenerator;
-
-    /**
-     * @var \eZ\Publish\Core\MVC\ConfigResolverInterface
-     */
-    private $configResolver;
+    private LoggerInterface $logger;
+    private UrlGeneratorInterface $urlGenerator;
+    private ConfigResolverInterface $configResolver;
 
     public function __construct(
         UrlGeneratorInterface $urlGenerator,
@@ -61,7 +51,7 @@ final class InvalidRedirectConfigurationListener implements EventSubscriberInter
         $event->setResponse(
             new RedirectResponse(
                 $this->urlGenerator->generate(UrlAliasRouter::URL_ALIAS_ROUTE_NAME, ['locationId' => $rootLocationId]),
-                RedirectResponse::HTTP_FOUND
+                Response::HTTP_FOUND
             )
         );
     }

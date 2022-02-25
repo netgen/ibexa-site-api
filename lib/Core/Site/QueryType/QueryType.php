@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Core\Site\QueryType;
+namespace Netgen\IbexaSiteApi\Core\Site\QueryType;
 
-use eZ\Publish\Core\QueryType\QueryType as BaseQueryTypeInterface;
+use Ibexa\Core\QueryType\QueryType as BaseQueryTypeInterface;
 
 /**
  * Extend the base QueryType interface with detection for a single supported parameter.

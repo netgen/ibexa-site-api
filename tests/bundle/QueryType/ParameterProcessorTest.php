@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\Tests\QueryType;
+namespace Netgen\Bundle\IbexaSiteApiBundle\Tests\QueryType;
 
-use eZ\Publish\Core\FieldType\Integer\Value;
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use eZ\Publish\Core\MVC\Symfony\ExpressionLanguage\ExpressionLanguage;
-use Netgen\Bundle\EzPlatformSiteApiBundle\NamedObject\Provider;
-use Netgen\Bundle\EzPlatformSiteApiBundle\QueryType\ExpressionFunctionProvider;
-use Netgen\Bundle\EzPlatformSiteApiBundle\QueryType\ParameterProcessor;
-use Netgen\Bundle\EzPlatformSiteApiBundle\View\ContentView;
-use Netgen\EzPlatformSiteApi\API\Values\Content;
-use Netgen\EzPlatformSiteApi\API\Values\Location;
+use Ibexa\Core\FieldType\Integer\Value;
+use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
+use Ibexa\Core\MVC\Symfony\ExpressionLanguage\ExpressionLanguage;
+use Netgen\Bundle\IbexaSiteApiBundle\NamedObject\Provider;
+use Netgen\Bundle\IbexaSiteApiBundle\QueryType\ExpressionFunctionProvider;
+use Netgen\Bundle\IbexaSiteApiBundle\QueryType\ParameterProcessor;
+use Netgen\Bundle\IbexaSiteApiBundle\View\ContentView;
+use Netgen\IbexaSiteApi\API\Values\Content;
+use Netgen\IbexaSiteApi\API\Values\Location;
 use Netgen\TagsBundle\API\Repository\Values\Tags\Tag;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -311,7 +311,7 @@ final class ParameterProcessorTest extends TestCase
     }
 
     /**
-     * @return \eZ\Publish\Core\MVC\ConfigResolverInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @return \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     protected function getConfigResolverMock(): MockObject
     {
@@ -342,7 +342,7 @@ final class ParameterProcessorTest extends TestCase
     }
 
     /**
-     * @return \Netgen\Bundle\EzPlatformSiteApiBundle\NamedObject\Provider|\PHPUnit\Framework\MockObject\MockObject
+     * @return \Netgen\Bundle\IbexaSiteApiBundle\NamedObject\Provider|\PHPUnit\Framework\MockObject\MockObject
      */
     protected function getNamedObjectProviderMock(): MockObject
     {
@@ -376,7 +376,7 @@ final class ParameterProcessorTest extends TestCase
     }
 
     /**
-     * @return \Netgen\Bundle\EzPlatformSiteApiBundle\View\ContentView|\PHPUnit\Framework\MockObject\MockObject
+     * @return \Netgen\Bundle\IbexaSiteApiBundle\View\ContentView|\PHPUnit\Framework\MockObject\MockObject
      */
     protected function getViewMock(): MockObject
     {

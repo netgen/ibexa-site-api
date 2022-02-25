@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Core\Site\Values;
+namespace Netgen\IbexaSiteApi\Core\Site\Values;
 
-use Netgen\EzPlatformSiteApi\API\Values\ContentInfo as APIContentInfo;
-use Netgen\EzPlatformSiteApi\API\Values\Location as APILocation;
+use Netgen\IbexaSiteApi\API\Values\ContentInfo as APIContentInfo;
+use Netgen\IbexaSiteApi\API\Values\Location as APILocation;
 use function array_key_exists;
 use function property_exists;
 
@@ -37,22 +37,22 @@ final class ContentInfo extends APIContentInfo
     protected $contentTypeDescription;
 
     /**
-     * @var \eZ\Publish\API\Repository\Values\Content\ContentInfo
+     * @var \Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo
      */
     protected $innerContentInfo;
 
     /**
-     * @var \eZ\Publish\API\Repository\Values\ContentType\ContentType
+     * @var \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType
      */
     protected $innerContentType;
 
     /**
-     * @var \Netgen\EzPlatformSiteApi\API\Site
+     * @var \Netgen\IbexaSiteApi\API\Site
      */
     private $site;
 
     /**
-     * @var \Netgen\EzPlatformSiteApi\API\Values\Location
+     * @var \Netgen\IbexaSiteApi\API\Values\Location
      */
     private $internalMainLocation;
 
@@ -73,9 +73,9 @@ final class ContentInfo extends APIContentInfo
      *
      * @param string $property The name of the property to retrieve
      *
-     * @throws \Netgen\EzPlatformSiteApi\API\Exceptions\TranslationNotMatchedException
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
      */
     public function __get($property)
     {
@@ -139,16 +139,16 @@ final class ContentInfo extends APIContentInfo
             'contentTypeIdentifier' => $this->contentTypeIdentifier,
             'contentTypeName' => $this->contentTypeName,
             'contentTypeDescription' => $this->contentTypeDescription,
-            'innerContentInfo' => '[An instance of eZ\Publish\API\Repository\Values\Content\ContentInfo]',
-            'innerContentType' => '[An instance of eZ\Publish\API\Repository\Values\ContentType\ContentType]',
-            'mainLocation' => '[An instance of Netgen\EzPlatformSiteApi\API\Values\Location]',
+            'innerContentInfo' => '[An instance of Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo]',
+            'innerContentType' => '[An instance of Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType]',
+            'mainLocation' => '[An instance of Netgen\IbexaSiteApi\API\Values\Location]',
         ];
     }
 
     /**
-     * @throws \Netgen\EzPlatformSiteApi\API\Exceptions\TranslationNotMatchedException
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
     private function getMainLocation(): ?APILocation
     {

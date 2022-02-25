@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\Routing;
+namespace Netgen\Bundle\IbexaSiteApiBundle\Routing;
 
-use eZ\Bundle\EzPublishCoreBundle\Routing\UrlAliasRouter as BaseUrlAliasRouter;
+use Ibexa\Bundle\Core\Routing\UrlAliasRouter as BaseUrlAliasRouter;
 use Symfony\Component\HttpFoundation\Request;
 
 class UrlAliasRouter extends BaseUrlAliasRouter

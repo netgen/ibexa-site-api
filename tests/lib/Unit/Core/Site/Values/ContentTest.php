@@ -2,24 +2,24 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Tests\Unit\Core\Site\Values;
+namespace Netgen\IbexaSiteApi\Tests\Unit\Core\Site\Values;
 
-use eZ\Publish\API\Repository\ContentService;
-use eZ\Publish\API\Repository\ContentTypeService;
-use eZ\Publish\API\Repository\FieldTypeService;
-use eZ\Publish\API\Repository\UserService;
-use eZ\Publish\API\Repository\Values\Content\ContentInfo as RepoContentInfo;
-use eZ\Publish\API\Repository\Values\User\User;
-use eZ\Publish\Core\Base\Exceptions\NotFoundException;
-use eZ\Publish\Core\Repository\Repository as CoreRepository;
-use eZ\Publish\Core\Repository\Values\Content\VersionInfo;
-use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
-use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinitionCollection;
-use Netgen\EzPlatformSiteApi\API\LoadService;
-use Netgen\EzPlatformSiteApi\API\Site;
-use Netgen\EzPlatformSiteApi\API\Values\Content as APIContent;
-use Netgen\EzPlatformSiteApi\Core\Site\DomainObjectMapper;
-use Netgen\EzPlatformSiteApi\Core\Site\Values\Content;
+use Ibexa\Contracts\Core\Repository\ContentService;
+use Ibexa\Contracts\Core\Repository\ContentTypeService;
+use Ibexa\Contracts\Core\Repository\FieldTypeService;
+use Ibexa\Contracts\Core\Repository\UserService;
+use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo as RepoContentInfo;
+use Ibexa\Contracts\Core\Repository\Values\User\User;
+use Ibexa\Core\Base\Exceptions\NotFoundException;
+use Ibexa\Core\Repository\Repository as CoreRepository;
+use Ibexa\Core\Repository\Values\Content\VersionInfo;
+use Ibexa\Core\Repository\Values\ContentType\ContentType;
+use Ibexa\Core\Repository\Values\ContentType\FieldDefinitionCollection;
+use Netgen\IbexaSiteApi\API\LoadService;
+use Netgen\IbexaSiteApi\API\Site;
+use Netgen\IbexaSiteApi\API\Values\Content as APIContent;
+use Netgen\IbexaSiteApi\Core\Site\DomainObjectMapper;
+use Netgen\IbexaSiteApi\Core\Site\Values\Content;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
@@ -27,54 +27,54 @@ use Psr\Log\NullLogger;
 /**
  * Content value unit tests.
  *
- * @see \Netgen\EzPlatformSiteApi\API\Values\Content
+ * @see \Netgen\IbexaSiteApi\API\Values\Content
  *
  * @internal
  */
 final class ContentTest extends TestCase
 {
     /**
-     * @var \Netgen\EzPlatformSiteApi\API\Site|\PHPUnit\Framework\MockObject\MockObject
+     * @var \Netgen\IbexaSiteApi\API\Site|\PHPUnit\Framework\MockObject\MockObject
      */
     protected $siteMock;
 
     /**
-     * @var \Netgen\EzPlatformSiteApi\Core\Site\DomainObjectMapper
+     * @var \Netgen\IbexaSiteApi\Core\Site\DomainObjectMapper
      */
     protected $domainObjectMapper;
 
     /**
-     * @var \eZ\Publish\API\Repository\ContentService|\PHPUnit\Framework\MockObject\MockObject
+     * @var \Ibexa\Contracts\Core\Repository\ContentService|\PHPUnit\Framework\MockObject\MockObject
      */
     protected $contentServiceMock;
 
     /**
-     * @var \eZ\Publish\API\Repository\ContentTypeService|\PHPUnit\Framework\MockObject\MockObject
+     * @var \Ibexa\Contracts\Core\Repository\ContentTypeService|\PHPUnit\Framework\MockObject\MockObject
      */
     protected $contentTypeServiceMock;
 
     /**
-     * @var \eZ\Publish\API\Repository\FieldTypeService|\PHPUnit\Framework\MockObject\MockObject
+     * @var \Ibexa\Contracts\Core\Repository\FieldTypeService|\PHPUnit\Framework\MockObject\MockObject
      */
     protected $fieldTypeServiceMock;
 
     /**
-     * @var \Netgen\EzPlatformSiteApi\API\LoadService|\PHPUnit\Framework\MockObject\MockObject
+     * @var \Netgen\IbexaSiteApi\API\LoadService|\PHPUnit\Framework\MockObject\MockObject
      */
     protected $loadServiceMock;
 
     /**
-     * @var \eZ\Publish\API\Repository\UserService|\PHPUnit\Framework\MockObject\MockObject
+     * @var \Ibexa\Contracts\Core\Repository\UserService|\PHPUnit\Framework\MockObject\MockObject
      */
     protected $userServiceMock;
 
     /**
-     * @var \eZ\Publish\API\Repository\Repository|\PHPUnit\Framework\MockObject\MockObject
+     * @var \Ibexa\Contracts\Core\Repository\Repository|\PHPUnit\Framework\MockObject\MockObject
      */
     protected $repositoryMock;
 
     /**
-     * @var \eZ\Publish\Core\QueryType\QueryTypeRegistry|\PHPUnit\Framework\MockObject\MockObject
+     * @var \Ibexa\Core\QueryType\QueryTypeRegistry|\PHPUnit\Framework\MockObject\MockObject
      */
     protected $queryTypeRegistryMock;
 
@@ -205,7 +205,10 @@ final class ContentTest extends TestCase
     {
         return new Content(
             [
+                'id' => 42,
                 'site' => $this->getSiteMock(),
+                'name' => 'Krešo',
+                'mainLocationId' => 123,
                 'domainObjectMapper' => $this->getDomainObjectMapper(),
                 'repository' => $this->getRepositoryMock(),
                 'innerVersionInfo' => new VersionInfo([
@@ -222,7 +225,7 @@ final class ContentTest extends TestCase
     }
 
     /**
-     * @return \Netgen\EzPlatformSiteApi\API\Site|\PHPUnit\Framework\MockObject\MockObject
+     * @return \Netgen\IbexaSiteApi\API\Site|\PHPUnit\Framework\MockObject\MockObject
      */
     protected function getSiteMock(): MockObject
     {
@@ -258,7 +261,7 @@ final class ContentTest extends TestCase
     }
 
     /**
-     * @return \Netgen\EzPlatformSiteApi\API\LoadService|\PHPUnit\Framework\MockObject\MockObject
+     * @return \Netgen\IbexaSiteApi\API\LoadService|\PHPUnit\Framework\MockObject\MockObject
      */
     protected function getLoadServiceMock(): MockObject
     {
@@ -274,7 +277,7 @@ final class ContentTest extends TestCase
     }
 
     /**
-     * @return \eZ\Publish\API\Repository\ContentService|\PHPUnit\Framework\MockObject\MockObject
+     * @return \Ibexa\Contracts\Core\Repository\ContentService|\PHPUnit\Framework\MockObject\MockObject
      */
     protected function getContentServiceMock(): MockObject
     {
@@ -290,7 +293,7 @@ final class ContentTest extends TestCase
     }
 
     /**
-     * @return \eZ\Publish\API\Repository\ContentTypeService|\PHPUnit\Framework\MockObject\MockObject
+     * @return \Ibexa\Contracts\Core\Repository\ContentTypeService|\PHPUnit\Framework\MockObject\MockObject
      */
     protected function getContentTypeServiceMock(): MockObject
     {
@@ -313,7 +316,7 @@ final class ContentTest extends TestCase
     }
 
     /**
-     * @return \eZ\Publish\API\Repository\FieldTypeService|\PHPUnit\Framework\MockObject\MockObject
+     * @return \Ibexa\Contracts\Core\Repository\FieldTypeService|\PHPUnit\Framework\MockObject\MockObject
      */
     protected function getFieldTypeServiceMock(): MockObject
     {
@@ -329,7 +332,7 @@ final class ContentTest extends TestCase
     }
 
     /**
-     * @return \eZ\Publish\API\Repository\UserService|\PHPUnit\Framework\MockObject\MockObject
+     * @return \Ibexa\Contracts\Core\Repository\UserService|\PHPUnit\Framework\MockObject\MockObject
      */
     protected function getUserServiceMock(): MockObject
     {
@@ -345,7 +348,7 @@ final class ContentTest extends TestCase
     }
 
     /**
-     * @return \eZ\Publish\API\Repository\Repository|\PHPUnit\Framework\MockObject\MockObject
+     * @return \Ibexa\Contracts\Core\Repository\Repository|\PHPUnit\Framework\MockObject\MockObject
      */
     protected function getRepositoryMock(): MockObject
     {

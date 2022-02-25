@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\Tests\DependencyInjection\Compiler;
+namespace Netgen\Bundle\IbexaSiteApiBundle\Tests\DependencyInjection\Compiler;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
-use Netgen\Bundle\EzPlatformSiteApiBundle\DependencyInjection\Compiler\QueryTypeExpressionFunctionProviderPass;
+use Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Compiler\QueryTypeExpressionFunctionProviderPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
@@ -14,8 +14,8 @@ use Symfony\Component\DependencyInjection\Definition;
  */
 final class QueryTypeExpressionFunctionProviderPassTest extends AbstractCompilerPassTestCase
 {
-    protected const QueryTypeExpressionLanguageId = 'netgen.ezplatform_site.query_type.expression_language';
-    protected const QueryTypeExpressionFunctionProviderTag = 'netgen.ezplatform_site.query_type.expression_function_provider';
+    protected const QueryTypeExpressionLanguageId = 'netgen.ibexa_site_api.query_type.expression_language';
+    protected const QueryTypeExpressionFunctionProviderTag = 'netgen.ibexa_site_api.query_type.expression_function_provider';
 
     protected function setUp(): void
     {

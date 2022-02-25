@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Tests\Integration\Traits;
+namespace Netgen\IbexaSiteApi\Tests\Integration\Traits;
 
-use eZ\Publish\API\Repository\Values\Content\LocationQuery;
-use eZ\Publish\API\Repository\Values\Content\Query;
-use Netgen\EzPlatformSiteApi\API\Values\Content;
-use Netgen\EzPlatformSiteApi\API\Values\Location;
-use Netgen\EzPlatformSiteApi\Tests\Integration\BaseTest;
+use Ibexa\Contracts\Core\Repository\Values\Content\LocationQuery;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query;
+use Netgen\IbexaSiteApi\API\Values\Content;
+use Netgen\IbexaSiteApi\API\Values\Location;
+use Netgen\IbexaSiteApi\Tests\Integration\BaseTest;
 
 /**
  * @internal
@@ -16,7 +16,7 @@ use Netgen\EzPlatformSiteApi\Tests\Integration\BaseTest;
 final class SearchResultExtractorTraitTest extends BaseTest
 {
     /**
-     * @var \Netgen\EzPlatformSiteApi\Tests\Integration\Traits\SearchResultExtractorStub
+     * @var \Netgen\IbexaSiteApi\Tests\Integration\Traits\SearchResultExtractorStub
      */
     protected $stub;
 

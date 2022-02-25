@@ -2,28 +2,21 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\EzPlatformSiteApiBundle\Controller;
+namespace Netgen\Bundle\IbexaSiteApiBundle\Controller;
 
-use eZ\Publish\API\Repository\Values\Content\Content;
-use eZ\Publish\API\Repository\Values\Content\Location;
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use eZ\Publish\Core\MVC\Symfony\Controller\Content\PreviewController as BasePreviewController;
-use eZ\Publish\Core\MVC\Symfony\SiteAccess;
-use Netgen\Bundle\EzPlatformSiteApiBundle\Routing\UrlAliasRouter;
-use Netgen\EzPlatformSiteApi\Core\Site\Site;
+use Ibexa\Contracts\Core\Repository\Values\Content\Content;
+use Ibexa\Contracts\Core\Repository\Values\Content\Location;
+use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
+use Ibexa\Core\MVC\Symfony\Controller\Content\PreviewController as BasePreviewController;
+use Ibexa\Core\MVC\Symfony\SiteAccess;
+use Netgen\Bundle\IbexaSiteApiBundle\Routing\UrlAliasRouter;
+use Netgen\IbexaSiteApi\Core\Site\Site;
 use Symfony\Component\HttpFoundation\Request;
 
 class PreviewController extends BasePreviewController
 {
-    /**
-     * @var \eZ\Publish\Core\MVC\ConfigResolverInterface
-     */
-    protected $configResolver;
-
-    /**
-     * @var \Netgen\EzPlatformSiteApi\Core\Site\Site
-     */
-    protected $site;
+    protected ConfigResolverInterface $configResolver;
+    protected Site $site;
 
     public function setConfigResolver(ConfigResolverInterface $configResolver): void
     {
@@ -38,9 +31,9 @@ class PreviewController extends BasePreviewController
     /**
      * {@inheritdoc}
      *
-     * @throws \Netgen\EzPlatformSiteApi\API\Exceptions\TranslationNotMatchedException
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
     protected function getForwardRequest(
         Location $location,
@@ -57,21 +50,12 @@ class PreviewController extends BasePreviewController
     }
 
     /**
-     * @throws \Netgen\EzPlatformSiteApi\API\Exceptions\TranslationNotMatchedException
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
     protected function injectAttributes(Request $request, SiteAccess $previewSiteAccess, string $languageCode): void
     {
-        // If the preview siteaccess is configured in legacy_mode
-        // we forward to the LegacyKernelController.
-        // For compatibility with eZ Publish Legacy
-        if ($this->isLegacyModeSiteAccess($previewSiteAccess->name)) {
-            $request->attributes->set('_controller', 'ezpublish_legacy.controller:indexAction');
-
-            return;
-        }
-
         $overrideViewAction = $this->configResolver->getParameter(
             'ng_site_api.site_api_is_primary_content_view',
             null,
@@ -87,16 +71,16 @@ class PreviewController extends BasePreviewController
 
     /**
      * Injects the Site API value objects into request, replacing the original
-     * eZ API value objects.
+     * Ibexa API value objects.
      *
-     * @throws \Netgen\EzPlatformSiteApi\API\Exceptions\TranslationNotMatchedException
-     * @throws \eZ\Publish\API\Repository\Exceptions\NotFoundException
-     * @throws \eZ\Publish\API\Repository\Exceptions\UnauthorizedException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
      */
     protected function injectSiteApiValueObjects(Request $request, string $languageCode): void
     {
-        /** @var \eZ\Publish\API\Repository\Values\Content\Content $content */
-        /** @var \eZ\Publish\API\Repository\Values\Content\Location $location */
+        /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Content $content */
+        /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Location $location */
         $content = $request->attributes->get('content');
         $location = $request->attributes->get('location');
 
@@ -118,17 +102,5 @@ class PreviewController extends BasePreviewController
         $request->attributes->set('content', $siteContent);
         $request->attributes->set('location', $siteLocation);
         $request->attributes->set('params', $requestParams);
-    }
-
-    /**
-     * Returns if the provided siteaccess is running in legacy mode.
-     */
-    protected function isLegacyModeSiteAccess(string $siteAccessName): bool
-    {
-        if (!$this->configResolver->hasParameter('legacy_mode', 'ezsettings', $siteAccessName)) {
-            return false;
-        }
-
-        return $this->configResolver->getParameter('legacy_mode', 'ezsettings', $siteAccessName);
     }
 }

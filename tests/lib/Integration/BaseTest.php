@@ -2,25 +2,25 @@
 
 declare(strict_types=1);
 
-namespace Netgen\EzPlatformSiteApi\Tests\Integration;
+namespace Netgen\IbexaSiteApi\Tests\Integration;
 
-use eZ\Publish\API\Repository\Exceptions\PropertyNotFoundException;
-use eZ\Publish\API\Repository\Tests\BaseTest as APIBaseTest;
-use eZ\Publish\API\Repository\Values\Content\Content as APIContent;
-use eZ\Publish\API\Repository\Values\Content\ContentInfo;
-use eZ\Publish\API\Repository\Values\Content\Field as APIField;
-use eZ\Publish\API\Repository\Values\Content\Location as APILocation;
-use eZ\Publish\API\Repository\Values\Content\VersionInfo;
-use eZ\Publish\API\Repository\Values\ContentType\ContentType;
-use eZ\Publish\API\Repository\Values\User\User;
-use eZ\Publish\SPI\FieldType\Value;
-use Netgen\EzPlatformSiteApi\API\Site;
-use Netgen\EzPlatformSiteApi\API\Values\Content;
-use Netgen\EzPlatformSiteApi\API\Values\ContentInfo as APIContentInfo;
-use Netgen\EzPlatformSiteApi\API\Values\Field;
-use Netgen\EzPlatformSiteApi\API\Values\Fields;
-use Netgen\EzPlatformSiteApi\API\Values\Location;
-use Netgen\EzPlatformSiteApi\Core\Site\Values\Field\SurrogateValue;
+use Ibexa\Contracts\Core\FieldType\Value;
+use Ibexa\Contracts\Core\Repository\Exceptions\PropertyNotFoundException;
+use Ibexa\Contracts\Core\Repository\Values\Content\Content as APIContent;
+use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
+use Ibexa\Contracts\Core\Repository\Values\Content\Field as APIField;
+use Ibexa\Contracts\Core\Repository\Values\Content\Location as APILocation;
+use Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo;
+use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
+use Ibexa\Contracts\Core\Repository\Values\User\User;
+use Ibexa\Tests\Integration\Core\Repository\BaseTest as APIBaseTest;
+use Netgen\IbexaSiteApi\API\Site;
+use Netgen\IbexaSiteApi\API\Values\Content;
+use Netgen\IbexaSiteApi\API\Values\ContentInfo as APIContentInfo;
+use Netgen\IbexaSiteApi\API\Values\Field;
+use Netgen\IbexaSiteApi\API\Values\Fields;
+use Netgen\IbexaSiteApi\API\Values\Location;
+use Netgen\IbexaSiteApi\Core\Site\Values\Field\SurrogateValue;
 use ReflectionProperty;
 use function array_values;
 use function count;
@@ -104,8 +104,8 @@ abstract class BaseTest extends APIBaseTest
      */
     protected function getSite(): Site
     {
-        /** @var \Netgen\EzPlatformSiteApi\API\Site $site */
-        $site = $this->getSetupFactory()->getServiceContainer()->get('netgen.ezplatform_site.site');
+        /** @var \Netgen\IbexaSiteApi\API\Site $site */
+        $site = $this->getSetupFactory()->getServiceContainer()->get('netgen.ibexa_site_api.site');
 
         return $site;
     }
@@ -158,9 +158,9 @@ abstract class BaseTest extends APIBaseTest
                 'isVisible' => $content->isVisible,
                 'contentInfo' => $content->contentInfo,
                 'fields' => $content->fields,
-                'mainLocation' => '[An instance of Netgen\EzPlatformSiteApi\API\Values\Location]',
-                'innerContent' => '[An instance of eZ\Publish\API\Repository\Values\Content\Content]',
-                'innerVersionInfo' => '[An instance of eZ\Publish\API\Repository\Values\Content\VersionInfo]',
+                'mainLocation' => '[An instance of Netgen\IbexaSiteApi\API\Values\Location]',
+                'innerContent' => '[An instance of Ibexa\Contracts\Core\Repository\Values\Content\Content]',
+                'innerVersionInfo' => '[An instance of Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo]',
             ],
             $content->__debugInfo()
         );
@@ -229,9 +229,9 @@ abstract class BaseTest extends APIBaseTest
                 'contentTypeIdentifier' => $contentInfo->contentTypeIdentifier,
                 'contentTypeName' => $contentInfo->contentTypeName,
                 'contentTypeDescription' => $contentInfo->contentTypeDescription,
-                'innerContentInfo' => '[An instance of eZ\Publish\API\Repository\Values\Content\ContentInfo]',
-                'innerContentType' => '[An instance of eZ\Publish\API\Repository\Values\ContentType\ContentType]',
-                'mainLocation' => '[An instance of Netgen\EzPlatformSiteApi\API\Values\Location]',
+                'innerContentInfo' => '[An instance of Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo]',
+                'innerContentType' => '[An instance of Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType]',
+                'mainLocation' => '[An instance of Netgen\IbexaSiteApi\API\Values\Location]',
             ],
             $contentInfo->__debugInfo()
         );
@@ -279,7 +279,7 @@ abstract class BaseTest extends APIBaseTest
 
     protected function assertField(Content $content, string $identifier, string $languageCode, array $data): void
     {
-        /** @var \Netgen\EzPlatformSiteApi\API\Values\Field|\Netgen\EzPlatformSiteApi\Core\Site\Values\Field $field */
+        /** @var \Netgen\IbexaSiteApi\API\Values\Field|\Netgen\IbexaSiteApi\Core\Site\Values\Field $field */
         $field = $content->getField($identifier);
 
         self::assertSame($field->id, $field->innerField->id);
@@ -314,11 +314,11 @@ abstract class BaseTest extends APIBaseTest
                 'fieldTypeIdentifier' => $field->fieldTypeIdentifier,
                 'name' => $field->name,
                 'description' => $field->description,
-                'content' => '[An instance of Netgen\EzPlatformSiteApi\API\Values\Content]',
+                'content' => '[An instance of Netgen\IbexaSiteApi\API\Values\Content]',
                 'contentId' => $field->content->id,
                 'isEmpty' => $field->isEmpty(),
                 'isSurrogate' => $field->isSurrogate(),
-                'innerField' => '[An instance of eZ\Publish\API\Repository\Values\Content\Field]',
+                'innerField' => '[An instance of Ibexa\Contracts\Core\Repository\Values\Content\Field]',
                 'innerFieldDefinition' => $field->innerFieldDefinition,
             ],
             $field->__debugInfo()
@@ -395,10 +395,10 @@ abstract class BaseTest extends APIBaseTest
                 'sortField' => $location->sortField,
                 'sortOrder' => $location->sortOrder,
                 'contentId' => $location->contentId,
-                'innerLocation' => '[An instance of eZ\Publish\API\Repository\Values\Content\Location]',
+                'innerLocation' => '[An instance of Ibexa\Contracts\Core\Repository\Values\Content\Location]',
                 'contentInfo' => $location->contentInfo,
-                'parent' => '[An instance of Netgen\EzPlatformSiteApi\API\Values\Location]',
-                'content' => '[An instance of Netgen\EzPlatformSiteApi\API\Values\Content]',
+                'parent' => '[An instance of Netgen\IbexaSiteApi\API\Values\Location]',
+                'content' => '[An instance of Netgen\IbexaSiteApi\API\Values\Content]',
             ],
             $location->__debugInfo()
         );
