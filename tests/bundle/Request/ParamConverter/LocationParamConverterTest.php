@@ -14,8 +14,8 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class LocationParamConverterTest extends AbstractParamConverterTest
 {
-    const PROPERTY_NAME = 'locationId';
-    const LOCATION_CLASS = Location::class;
+    public const PROPERTY_NAME = 'locationId';
+    public const LOCATION_CLASS = Location::class;
 
     /**
      * @var \Netgen\Bundle\IbexaSiteApiBundle\Request\ParamConverter\LocationParamConverter

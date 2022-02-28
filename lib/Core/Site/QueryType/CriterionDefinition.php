@@ -14,7 +14,7 @@ use Ibexa\Contracts\Core\Repository\Values\ValueObject;
  * @see \Netgen\IbexaSiteApi\Core\Site\QueryType\CriteriaBuilder
  *
  * @property string $name
- * @property string|null $target
+ * @property ?string $target
  * @property mixed|null $operator
  * @property mixed $value
  */
@@ -22,15 +22,11 @@ final class CriterionDefinition extends ValueObject
 {
     /**
      * Mandatory name, needed to build a Criterion instance in CriteriaBuilder.
-     *
-     * @var string
      */
     protected string $name;
 
     /**
      * Optional target.
-     *
-     * @var string|null
      */
     protected ?string $target;
 

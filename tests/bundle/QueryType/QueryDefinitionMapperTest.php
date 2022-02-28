@@ -165,7 +165,7 @@ final class QueryDefinitionMapperTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage(
-            "Could not find query configuration named 'bazooka'"
+            "Could not find query configuration named 'bazooka'",
         );
 
         $queryDefinitionMapper = $this->getQueryDefinitionMapperUnderTest();
@@ -180,7 +180,7 @@ final class QueryDefinitionMapperTest extends TestCase
                 ],
                 'use_filter' => false,
             ],
-            $this->getViewMock()
+            $this->getViewMock(),
         );
     }
 
@@ -189,7 +189,7 @@ final class QueryDefinitionMapperTest extends TestCase
         return new QueryDefinitionMapper(
             $this->getQueryTypeRegistryMock(),
             $this->getParameterProcessor(),
-            $this->getConfigResolverMock()
+            $this->getConfigResolverMock(),
         );
     }
 
@@ -271,8 +271,10 @@ final class QueryDefinitionMapperTest extends TestCase
     {
         /** @var \Symfony\Component\HttpFoundation\RequestStack $requestStack */
         $requestStack = $this->getMockBuilder(RequestStack::class)->getMock();
+
         /** @var \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface $configResolverMock */
         $configResolverMock = $this->getMockBuilder(ConfigResolverInterface::class)->getMock();
+
         /** @var \Netgen\Bundle\IbexaSiteApiBundle\NamedObject\Provider $namedObjectProviderMock */
         $namedObjectProviderMock = $this->getMockBuilder(Provider::class)->getMock();
         $expressionLanguage = new ExpressionLanguage(null, [new ExpressionFunctionProvider()]);

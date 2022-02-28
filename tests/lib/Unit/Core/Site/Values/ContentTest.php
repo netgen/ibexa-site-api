@@ -178,7 +178,7 @@ final class ContentTest extends TestCase
             ->method('loadUser')
             ->with(14)
             ->willThrowException(
-                new NotFoundException('User', 14)
+                new NotFoundException('User', 14),
             );
 
         self::assertNull($content->innerOwnerUser);
@@ -194,7 +194,7 @@ final class ContentTest extends TestCase
             ->method('loadUser')
             ->with(14)
             ->willThrowException(
-                new NotFoundException('User', 14)
+                new NotFoundException('User', 14),
             );
 
         self::assertNull($content->innerOwnerUser);
@@ -220,7 +220,7 @@ final class ContentTest extends TestCase
                 'languageCode' => 'eng-GB',
             ],
             true,
-            new NullLogger()
+            new NullLogger(),
         );
     }
 
@@ -254,7 +254,7 @@ final class ContentTest extends TestCase
             $this->getSiteMock(),
             $this->getRepositoryMock(),
             true,
-            new NullLogger()
+            new NullLogger(),
         );
 
         return $this->domainObjectMapper;

@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Netgen\Bundle\IbexaSiteApiBundle\EventListener;
 
 use Exception;
+use Ibexa\Bundle\AdminUi\IbexaAdminUiBundle;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Core\MVC\Symfony\Routing\Generator\UrlAliasGenerator;
 use Ibexa\Core\MVC\Symfony\Routing\UrlAliasRouter;
 use Ibexa\Core\MVC\Symfony\SiteAccess;
-use Ibexa\Bundle\AdminUi\IbexaAdminUiBundle;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -69,7 +69,7 @@ class InternalContentViewRouteListener implements EventSubscriberInterface
 
         if (!$this->configResolver->getParameter('ng_site_api.enable_internal_view_route')) {
             throw new NotFoundHttpException(
-                'Internal Content view route has been disabled, check your Site API configuration for: "ng_site_api.enable_internal_view_route"'
+                'Internal Content view route has been disabled, check your Site API configuration for: "ng_site_api.enable_internal_view_route"',
             );
         }
 
@@ -100,7 +100,7 @@ class InternalContentViewRouteListener implements EventSubscriberInterface
         }
 
         return $this->fragmentHandler->render(
-            new ControllerReference('ng_content::viewAction', $attributes)
+            new ControllerReference('ng_content::viewAction', $attributes),
         );
     }
 
@@ -109,12 +109,12 @@ class InternalContentViewRouteListener implements EventSubscriberInterface
         return $request->attributes->get('_route') === UrlAliasGenerator::INTERNAL_CONTENT_VIEW_ROUTE;
     }
 
-    private function isAdminSiteaccess(SiteAccess $siteaccess) : bool
+    private function isAdminSiteaccess(SiteAccess $siteaccess): bool
     {
         return in_array(
             $siteaccess->name,
             $this->siteaccessGroups[$this->getAdminSiteaccessGroupName()] ?? [],
-            true
+            true,
         );
     }
 

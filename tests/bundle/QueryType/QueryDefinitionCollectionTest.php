@@ -24,7 +24,7 @@ final class QueryDefinitionCollectionTest extends TestCase
 
         self::assertSame(
             $queryDefinition,
-            $queryDefinitionCollection->get($name)
+            $queryDefinitionCollection->get($name),
         );
     }
 

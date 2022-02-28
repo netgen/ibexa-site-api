@@ -97,7 +97,7 @@ final class ViewRenderer
 
         if ($controller === false) {
             throw new NotFoundHttpException(
-                sprintf('Unable to find the controller "%s".', $controllerReference->controller)
+                sprintf('Unable to find the controller "%s".', $controllerReference->controller),
             );
         }
 

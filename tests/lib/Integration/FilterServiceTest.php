@@ -39,7 +39,7 @@ final class FilterServiceTest extends BaseTest
             [
                 'eng-GB',
                 'ger-DE',
-            ]
+            ],
         );
 
         $filterService = $this->getSite()->getFilterService();
@@ -48,7 +48,7 @@ final class FilterServiceTest extends BaseTest
         $searchResult = $filterService->filterContent(
             new Query([
                 'filter' => new ContentId($data['contentId']),
-            ])
+            ]),
         );
 
         $this->assertContentSearchResult($searchResult, $data);
@@ -72,7 +72,7 @@ final class FilterServiceTest extends BaseTest
             [
                 'eng-US',
                 'ger-DE',
-            ]
+            ],
         );
 
         $filterService = $this->getSite()->getFilterService();
@@ -81,7 +81,7 @@ final class FilterServiceTest extends BaseTest
         $searchResult = $filterService->filterContent(
             new Query([
                 'filter' => new ContentId($data['contentId']),
-            ])
+            ]),
         );
 
         $this->assertContentSearchResult($searchResult, $data);
@@ -104,7 +104,7 @@ final class FilterServiceTest extends BaseTest
             'prioritizedLanguages',
             [
                 'eng-US',
-            ]
+            ],
         );
 
         $filterService = $this->getSite()->getFilterService();
@@ -113,7 +113,7 @@ final class FilterServiceTest extends BaseTest
         $searchResult = $filterService->filterContent(
             new Query([
                 'filter' => new ContentId($data['contentId']),
-            ])
+            ]),
         );
 
         $this->assertContentSearchResult($searchResult, $data);
@@ -137,7 +137,7 @@ final class FilterServiceTest extends BaseTest
             [
                 'eng-GB',
                 'ger-DE',
-            ]
+            ],
         );
 
         $filterService = $this->getSite()->getFilterService();
@@ -145,10 +145,10 @@ final class FilterServiceTest extends BaseTest
         $searchResult = $filterService->filterContent(
             new Query([
                 'filter' => new ContentId(52),
-            ])
+            ]),
         );
 
-        self::assertEquals(0, $searchResult->totalCount);
+        self::assertSame(0, $searchResult->totalCount);
     }
 
     /**
@@ -169,7 +169,7 @@ final class FilterServiceTest extends BaseTest
             [
                 'eng-GB',
                 'ger-DE',
-            ]
+            ],
         );
 
         $filterService = $this->getSite()->getFilterService();
@@ -178,7 +178,7 @@ final class FilterServiceTest extends BaseTest
         $searchResult = $filterService->filterLocations(
             new LocationQuery([
                 'filter' => new ContentId($data['contentId']),
-            ])
+            ]),
         );
 
         $this->assertLocationSearchResult($searchResult, $data);
@@ -202,7 +202,7 @@ final class FilterServiceTest extends BaseTest
             [
                 'eng-US',
                 'ger-DE',
-            ]
+            ],
         );
 
         $filterService = $this->getSite()->getFilterService();
@@ -211,7 +211,7 @@ final class FilterServiceTest extends BaseTest
         $searchResult = $filterService->filterLocations(
             new LocationQuery([
                 'filter' => new ContentId($data['contentId']),
-            ])
+            ]),
         );
 
         $this->assertLocationSearchResult($searchResult, $data);
@@ -234,7 +234,7 @@ final class FilterServiceTest extends BaseTest
             'prioritizedLanguages',
             [
                 'eng-US',
-            ]
+            ],
         );
 
         $filterService = $this->getSite()->getFilterService();
@@ -243,7 +243,7 @@ final class FilterServiceTest extends BaseTest
         $searchResult = $filterService->filterLocations(
             new LocationQuery([
                 'filter' => new ContentId($data['contentId']),
-            ])
+            ]),
         );
 
         $this->assertLocationSearchResult($searchResult, $data);
@@ -267,7 +267,7 @@ final class FilterServiceTest extends BaseTest
             [
                 'eng-GB',
                 'ger-DE',
-            ]
+            ],
         );
 
         $filterService = $this->getSite()->getFilterService();
@@ -275,10 +275,10 @@ final class FilterServiceTest extends BaseTest
         $searchResult = $filterService->filterLocations(
             new LocationQuery([
                 'filter' => new ContentId(52),
-            ])
+            ]),
         );
 
-        self::assertEquals(0, $searchResult->totalCount);
+        self::assertSame(0, $searchResult->totalCount);
     }
 
     protected function assertContentSearchResult(SearchResult $searchResult, $data): void

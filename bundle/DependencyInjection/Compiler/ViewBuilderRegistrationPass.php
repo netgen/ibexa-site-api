@@ -22,7 +22,7 @@ class ViewBuilderRegistrationPass implements CompilerPassInterface
 
         $viewBuilderRegistry->addMethodCall(
             'addToRegistry',
-            [[$contentViewBuilder]]
+            [[$contentViewBuilder]],
         );
     }
 }

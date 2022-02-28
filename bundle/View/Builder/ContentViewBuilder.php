@@ -95,7 +95,7 @@ class ContentViewBuilder implements ViewBuilder
             } else {
                 throw new InvalidArgumentException(
                     'Content',
-                    'No content could be loaded from parameters'
+                    'No content could be loaded from parameters',
                 );
             }
 
@@ -118,7 +118,7 @@ class ContentViewBuilder implements ViewBuilder
             if ($location->contentInfo->id !== $content->id) {
                 throw new InvalidArgumentException(
                     'Location',
-                    'Provided location does not belong to selected content'
+                    'Provided location does not belong to selected content',
                 );
             }
 
@@ -153,9 +153,7 @@ class ContentViewBuilder implements ViewBuilder
     {
         /** @var \Netgen\IbexaSiteApi\API\Values\Content $content */
         $content = $this->repository->sudo(
-            function () use ($contentId): Content {
-                return $this->site->getLoadService()->loadContent($contentId);
-            }
+            fn (): Content => $this->site->getLoadService()->loadContent($contentId),
         );
 
         $versionInfo = $content->versionInfo;
@@ -164,7 +162,7 @@ class ContentViewBuilder implements ViewBuilder
             throw new UnauthorizedException(
                 'content',
                 'read|view_embed',
-                ['contentId' => $contentId, 'locationId' => $location !== null ? $location->id : 'n/a']
+                ['contentId' => $contentId, 'locationId' => $location !== null ? $location->id : 'n/a'],
             );
         }
 
@@ -189,14 +187,12 @@ class ContentViewBuilder implements ViewBuilder
     private function loadLocation(int $locationId, bool $checkVisibility = true): Location
     {
         $location = $this->repository->sudo(
-            function (Repository $repository) use ($locationId): Location {
-                return $this->site->getLoadService()->loadLocation($locationId);
-            }
+            fn (Repository $repository): Location => $this->site->getLoadService()->loadLocation($locationId),
         );
 
         if ($checkVisibility && $location->innerLocation->invisible) {
             throw new NotFoundHttpException(
-                'Location cannot be displayed as it is flagged as invisible.'
+                'Location cannot be displayed as it is flagged as invisible.',
             );
         }
 
@@ -214,8 +210,8 @@ class ContentViewBuilder implements ViewBuilder
         $targets = isset($location) ? [$location->innerLocation] : [];
 
         return
-            $this->repository->getPermissionResolver()->canUser('content', 'read', $contentInfo, $targets) ||
-            $this->repository->getPermissionResolver()->canUser('content', 'view_embed', $contentInfo, $targets);
+            $this->repository->getPermissionResolver()->canUser('content', 'read', $contentInfo, $targets)
+            || $this->repository->getPermissionResolver()->canUser('content', 'view_embed', $contentInfo, $targets);
     }
 
     /**

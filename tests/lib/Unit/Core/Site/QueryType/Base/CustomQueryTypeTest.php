@@ -32,9 +32,9 @@ final class CustomQueryTypeTest extends TestCase
     {
         $queryType = $this->getQueryTypeUnderTest();
 
-        self::assertEquals(
+        self::assertSame(
             'Test:Custom',
-            $queryType::getName()
+            $queryType::getName(),
         );
     }
 
@@ -42,7 +42,7 @@ final class CustomQueryTypeTest extends TestCase
     {
         $queryType = $this->getQueryTypeUnderTest();
 
-        self::assertEquals(
+        self::assertSame(
             [
                 'content_type',
                 'field',
@@ -57,7 +57,7 @@ final class CustomQueryTypeTest extends TestCase
                 'offset',
                 'prefabrication_date',
             ],
-            $queryType->getSupportedParameters()
+            $queryType->getSupportedParameters(),
         );
     }
 
@@ -75,7 +75,7 @@ final class CustomQueryTypeTest extends TestCase
                         new DateMetadata(
                             DateMetadata::MODIFIED,
                             Operator::EQ,
-                            123
+                            123,
                         ),
                         new SectionId(42),
                     ]),
@@ -103,7 +103,7 @@ final class CustomQueryTypeTest extends TestCase
                         new DateMetadata(
                             DateMetadata::MODIFIED,
                             Operator::IN,
-                            [123, 456]
+                            [123, 456],
                         ),
                         new SectionId(42),
                     ]),
@@ -130,12 +130,12 @@ final class CustomQueryTypeTest extends TestCase
                         new DateMetadata(
                             DateMetadata::MODIFIED,
                             Operator::EQ,
-                            123
+                            123,
                         ),
                         new DateMetadata(
                             DateMetadata::MODIFIED,
                             Operator::IN,
-                            [123, 456]
+                            [123, 456],
                         ),
                         new SectionId(42),
                     ]),
@@ -159,7 +159,7 @@ final class CustomQueryTypeTest extends TestCase
 
         self::assertEquals(
             $expectedQuery,
-            $query
+            $query,
         );
     }
 
@@ -171,8 +171,8 @@ final class CustomQueryTypeTest extends TestCase
                 true,
                 2,
                 false,
-                true
-            )
+                true,
+            ),
         );
     }
 }

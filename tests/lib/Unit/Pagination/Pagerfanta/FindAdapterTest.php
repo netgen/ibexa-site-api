@@ -8,7 +8,6 @@ use Ibexa\Contracts\Core\Repository\Values\Content\LocationQuery;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query;
 use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchHit;
 use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchResult;
-use Netgen\IbexaSearchExtra\Core\Pagination\Pagerfanta\Slice;
 use Netgen\IbexaSiteApi\API\FindService;
 use Netgen\IbexaSiteApi\Core\Site\Pagination\Pagerfanta\FindAdapter;
 use PHPUnit\Framework\TestCase;

@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Netgen\IbexaSiteApi\Core\Site;
 
+use Ibexa\Contracts\Core\Repository\ContentTypeService;
+use Ibexa\Contracts\Core\Repository\FieldTypeService;
 use Ibexa\Contracts\Core\Repository\Repository;
 use Ibexa\Contracts\Core\Repository\Values\Content\Field as RepoField;
 use Ibexa\Contracts\Core\Repository\Values\Content\Location as RepoLocation;
 use Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo;
-use Ibexa\Contracts\Core\Repository\ContentTypeService;
-use Ibexa\Contracts\Core\Repository\FieldTypeService;
 use Netgen\IbexaSiteApi\API\Site as SiteInterface;
 use Netgen\IbexaSiteApi\API\Values\Content as SiteContent;
 use Netgen\IbexaSiteApi\API\Values\Field as APIField;
@@ -68,7 +68,7 @@ final class DomainObjectMapper
                 'repository' => $this->repository,
             ],
             $this->failOnMissingField,
-            $this->logger
+            $this->logger,
         );
     }
 
@@ -92,7 +92,7 @@ final class DomainObjectMapper
                 'innerContentInfo' => $versionInfo->contentInfo,
                 'innerContentType' => $contentType,
                 'site' => $this->site,
-            ]
+            ],
         );
     }
 
@@ -109,7 +109,7 @@ final class DomainObjectMapper
                 'site' => $this->site,
                 'domainObjectMapper' => $this,
             ],
-            $this->logger
+            $this->logger,
         );
     }
 
@@ -124,13 +124,13 @@ final class DomainObjectMapper
 
         if ($fieldDefinition === null) {
             throw new RuntimeException(
-                "Could not find FieldDefinition for '$apiField->fieldDefIdentifier' field"
+                "Could not find FieldDefinition for '{$apiField->fieldDefIdentifier}' field",
             );
         }
 
         $fieldTypeIdentifier = $fieldDefinition->fieldTypeIdentifier;
         $isEmpty = $this->fieldTypeService->getFieldType($fieldTypeIdentifier)->isEmptyValue(
-            $apiField->value
+            $apiField->value,
         );
 
         return new Field([
@@ -141,11 +141,11 @@ final class DomainObjectMapper
             'fieldTypeIdentifier' => $fieldTypeIdentifier,
             'name' => $this->getTranslatedString(
                 $content->languageCode,
-                (array) $fieldDefinition->getNames()
+                (array) $fieldDefinition->getNames(),
             ),
             'description' => $this->getTranslatedString(
                 $content->languageCode,
-                (array) $fieldDefinition->getDescriptions()
+                (array) $fieldDefinition->getDescriptions(),
             ),
             'content' => $content,
             'innerField' => $apiField,

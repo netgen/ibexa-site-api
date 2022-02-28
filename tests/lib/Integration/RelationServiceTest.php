@@ -40,7 +40,7 @@ final class RelationServiceTest extends BaseTest
         $content = $relationService->loadFieldRelation($testSiteContent, $identifier);
 
         self::assertInstanceOf(Content::class, $content);
-        self::assertEquals($testRelationId, $content->id);
+        self::assertSame($testRelationId, $content->id);
     }
 
     /**
@@ -67,7 +67,7 @@ final class RelationServiceTest extends BaseTest
         foreach ($testRelationIds as $index => $relationId) {
             $content = $contentItems[$index];
             self::assertInstanceOf(Content::class, $content);
-            self::assertEquals($relationId, $content->id);
+            self::assertSame($relationId, $content->id);
         }
     }
 
@@ -93,7 +93,7 @@ final class RelationServiceTest extends BaseTest
         self::assertCount(1, $contentItems);
 
         self::assertInstanceOf(Content::class, $contentItems[0]);
-        self::assertEquals($testRelationIds[0], $contentItems[0]->id);
+        self::assertSame($testRelationIds[0], $contentItems[0]->id);
     }
 
     /**
@@ -118,7 +118,7 @@ final class RelationServiceTest extends BaseTest
         self::assertCount(1, $contentItems);
 
         self::assertInstanceOf(Content::class, $contentItems[0]);
-        self::assertEquals($testRelationIds[0], $contentItems[0]->id);
+        self::assertSame($testRelationIds[0], $contentItems[0]->id);
     }
 
     /**
@@ -143,7 +143,7 @@ final class RelationServiceTest extends BaseTest
         self::assertCount(1, $contentItems);
 
         self::assertInstanceOf(Content::class, $contentItems[0]);
-        self::assertEquals($testRelationIds[1], $contentItems[0]->id);
+        self::assertSame($testRelationIds[1], $contentItems[0]->id);
     }
 
     /**
@@ -181,7 +181,7 @@ final class RelationServiceTest extends BaseTest
         $location = $relationService->loadFieldRelationLocation($testSiteContent, $identifier);
 
         self::assertInstanceOf(Location::class, $location);
-        self::assertEquals($testRelationId, $location->content->id);
+        self::assertSame($testRelationId, $location->content->id);
     }
 
     /**
@@ -201,7 +201,7 @@ final class RelationServiceTest extends BaseTest
         foreach ($testRelationIds as $index => $relationId) {
             $location = $locations[$index];
             self::assertInstanceOf(Location::class, $location);
-            self::assertEquals($relationId, $location->content->id);
+            self::assertSame($relationId, $location->content->id);
         }
     }
 
@@ -220,7 +220,7 @@ final class RelationServiceTest extends BaseTest
         self::assertCount(1, $locations);
 
         self::assertInstanceOf(Location::class, $locations[0]);
-        self::assertEquals($testRelationIds[0], $locations[0]->content->id);
+        self::assertSame($testRelationIds[0], $locations[0]->content->id);
     }
 
     /**
@@ -238,7 +238,7 @@ final class RelationServiceTest extends BaseTest
         self::assertCount(1, $locations);
 
         self::assertInstanceOf(Location::class, $locations[0]);
-        self::assertEquals($testRelationIds[0], $locations[0]->content->id);
+        self::assertSame($testRelationIds[0], $locations[0]->content->id);
     }
 
     /**
@@ -256,7 +256,7 @@ final class RelationServiceTest extends BaseTest
         self::assertCount(1, $locations);
 
         self::assertInstanceOf(Location::class, $locations[0]);
-        self::assertEquals($testRelationIds[1], $locations[0]->content->id);
+        self::assertSame($testRelationIds[1], $locations[0]->content->id);
     }
 
     /**
@@ -302,7 +302,7 @@ final class RelationServiceTest extends BaseTest
             new FieldDefinitionCreateStruct([
                 'identifier' => $fieldDefinitionIdentifier,
                 'fieldTypeIdentifier' => 'ezobjectrelation',
-            ])
+            ]),
         );
         $contentTypeDraft = $contentTypeService->createContentType($contentTypeCreateStruct, [$contentTypeGroup]);
         $contentTypeService->publishContentTypeDraft($contentTypeDraft);
@@ -319,7 +319,7 @@ final class RelationServiceTest extends BaseTest
             new FieldDefinitionCreateStruct([
                 'identifier' => $fieldDefinitionIdentifier,
                 'fieldTypeIdentifier' => 'ezobjectrelationlist',
-            ])
+            ]),
         );
         $contentTypeDraft = $contentTypeService->createContentType($contentTypeCreateStruct, [$contentTypeGroup]);
         $contentTypeService->publishContentTypeDraft($contentTypeDraft);

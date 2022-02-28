@@ -26,11 +26,11 @@ class PreviewControllerOverridePass implements CompilerPassInterface
             ->setClass(PreviewController::class)
             ->addMethodCall(
                 'setConfigResolver',
-                [new Reference('ibexa.config.resolver')]
+                [new Reference('ibexa.config.resolver')],
             )
             ->addMethodCall(
                 'setSite',
-                [new Reference('netgen.ibexa_site_api.core.site')]
+                [new Reference('netgen.ibexa_site_api.core.site')],
             );
 
         // todo check
@@ -38,7 +38,7 @@ class PreviewControllerOverridePass implements CompilerPassInterface
         // See https://github.com/netgen/ezplatform-site-api/pull/168
         $container->setAlias(
             'ibexa.controller.content.preview',
-            new Alias($corePreviewControllerServiceId, true)
+            new Alias($corePreviewControllerServiceId, true),
         );
     }
 }

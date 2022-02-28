@@ -33,7 +33,7 @@ final class SearchResultExtractorTraitTest extends BaseTest
         $query = new LocationQuery(
             [
                 'filter' => new Query\Criterion\LocationId($locationIds),
-            ]
+            ],
         );
 
         $searchResult = $findService->findLocations($query);
@@ -52,7 +52,7 @@ final class SearchResultExtractorTraitTest extends BaseTest
         $query = new LocationQuery(
             [
                 'filter' => new Query\Criterion\LocationId($locationIds),
-            ]
+            ],
         );
 
         $searchResult = $findService->findLocations($query);
@@ -70,7 +70,7 @@ final class SearchResultExtractorTraitTest extends BaseTest
         $query = new Query(
             [
                 'filter' => new Query\Criterion\ContentId($contentIds),
-            ]
+            ],
         );
 
         $searchResult = $findService->findContent($query);
@@ -89,7 +89,7 @@ final class SearchResultExtractorTraitTest extends BaseTest
         $query = new Query(
             [
                 'filter' => new Query\Criterion\ContentId($contentIds),
-            ]
+            ],
         );
 
         $searchResult = $findService->findContent($query);
@@ -107,7 +107,7 @@ final class SearchResultExtractorTraitTest extends BaseTest
         $query = new Query(
             [
                 'filter' => new Query\Criterion\ContentId($contentIds),
-            ]
+            ],
         );
 
         $searchResult = $findService->findContent($query);
@@ -128,7 +128,7 @@ final class SearchResultExtractorTraitTest extends BaseTest
         $query = new Query(
             [
                 'filter' => new Query\Criterion\ContentId($contentIds),
-            ]
+            ],
         );
 
         $searchResult = $findService->findContent($query);
@@ -146,7 +146,7 @@ final class SearchResultExtractorTraitTest extends BaseTest
         $query = new LocationQuery(
             [
                 'filter' => new Query\Criterion\LocationId($locationIds),
-            ]
+            ],
         );
 
         $searchResult = $findService->findLocations($query);
@@ -167,7 +167,7 @@ final class SearchResultExtractorTraitTest extends BaseTest
         $query = new LocationQuery(
             [
                 'filter' => new Query\Criterion\LocationId($locationIds),
-            ]
+            ],
         );
 
         $searchResult = $findService->findLocations($query);

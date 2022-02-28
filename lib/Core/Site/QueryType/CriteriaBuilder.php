@@ -16,10 +16,10 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LogicalNot;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ParentLocationId;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Subtree;
 use InvalidArgumentException;
-use Netgen\EzPlatformSearchExtra\API\Values\Content\Query\Criterion\IsFieldEmpty;
-use Netgen\EzPlatformSearchExtra\API\Values\Content\Query\Criterion\ObjectStateIdentifier;
-use Netgen\EzPlatformSearchExtra\API\Values\Content\Query\Criterion\SectionIdentifier;
-use Netgen\EzPlatformSearchExtra\API\Values\Content\Query\Criterion\Visible;
+use Netgen\IbexaSearchExtra\API\Values\Content\Query\Criterion\IsFieldEmpty;
+use Netgen\IbexaSearchExtra\API\Values\Content\Query\Criterion\ObjectStateIdentifier;
+use Netgen\IbexaSearchExtra\API\Values\Content\Query\Criterion\SectionIdentifier;
+use Netgen\IbexaSearchExtra\API\Values\Content\Query\Criterion\Visible;
 use function count;
 use function is_array;
 use function is_int;
@@ -69,36 +69,49 @@ final class CriteriaBuilder
         switch ($definition->name) {
             case 'content_type':
                 return $this->buildContentTypeIdentifier($definition);
+
             case 'depth':
                 return $this->buildDepth($definition);
+
             case 'field':
                 return $this->buildField($definition);
+
             case 'main':
                 return $this->buildIsMainLocation($definition);
+
             case 'not':
                 return $this->buildLogicalNot($definition);
+
             case 'parent_location_id':
                 return $this->buildParentLocationId($definition);
+
             case 'priority':
                 return $this->buildPriority($definition);
+
             case 'creation_date':
                 return $this->buildDateMetadataCreated($definition);
+
             case 'modification_date':
                 return $this->buildDateMetadataModified($definition);
+
             case 'section':
                 return $this->buildSection($definition);
+
             case 'state':
                 return $this->buildObjectState($definition);
+
             case 'subtree':
                 return $this->buildSubtree($definition);
+
             case 'visible':
                 return $this->buildVisible($definition);
+
             case 'is_field_empty':
                 return $this->buildIsFieldEmpty($definition);
         }
 
         throw new InvalidArgumentException(
-            "Criterion named '$definition->name' is not handled"
+            "Criterion named '{$definition->name}' is not handled",
         );
     }
 
@@ -134,7 +147,7 @@ final class CriteriaBuilder
         return new Field(
             $definition->target,
             $definition->operator,
-            $definition->value
+            $definition->value,
         );
     }
 
@@ -208,7 +221,7 @@ final class CriteriaBuilder
         return new DateMetadata(
             DateMetadata::CREATED,
             $definition->operator,
-            $this->resolveTimeValues($definition->value)
+            $this->resolveTimeValues($definition->value),
         );
     }
 
@@ -220,7 +233,7 @@ final class CriteriaBuilder
         return new DateMetadata(
             DateMetadata::MODIFIED,
             $definition->operator,
-            $this->resolveTimeValues($definition->value)
+            $this->resolveTimeValues($definition->value),
         );
     }
 
@@ -293,7 +306,7 @@ final class CriteriaBuilder
 
         if ($timestamp === false) {
             throw new InvalidArgumentException(
-                "'$value' is invalid time string"
+                "'{$value}' is invalid time string",
             );
         }
 

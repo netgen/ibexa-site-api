@@ -6,6 +6,10 @@ namespace Netgen\Bundle\IbexaSiteApiBundle\QueryType;
 
 use Symfony\Component\ExpressionLanguage\ExpressionFunction;
 use Symfony\Component\ExpressionLanguage\ExpressionFunctionProviderInterface;
+use function array_filter;
+use function array_map;
+use function array_values;
+use function explode;
 use function in_array;
 use function strtotime;
 
@@ -26,7 +30,7 @@ final class ExpressionFunctionProvider implements ExpressionFunctionProviderInte
                     }
 
                     return $default;
-                }
+                },
             ),
             new ExpressionFunction(
                 'queryParam',
@@ -46,7 +50,7 @@ final class ExpressionFunctionProvider implements ExpressionFunctionProviderInte
                     }
 
                     return $default;
-                }
+                },
             ),
             new ExpressionFunction(
                 'queryParamString',
@@ -66,7 +70,7 @@ final class ExpressionFunctionProvider implements ExpressionFunctionProviderInte
                     }
 
                     return $default;
-                }
+                },
             ),
             new ExpressionFunction(
                 'queryParamInt',
@@ -86,7 +90,7 @@ final class ExpressionFunctionProvider implements ExpressionFunctionProviderInte
                     }
 
                     return $default;
-                }
+                },
             ),
             new ExpressionFunction(
                 'queryParamFloat',
@@ -106,7 +110,7 @@ final class ExpressionFunctionProvider implements ExpressionFunctionProviderInte
                     }
 
                     return $default;
-                }
+                },
             ),
             new ExpressionFunction(
                 'queryParamBool',
@@ -126,14 +130,12 @@ final class ExpressionFunctionProvider implements ExpressionFunctionProviderInte
                     }
 
                     return $default;
-                }
+                },
             ),
             new ExpressionFunction(
                 'timestamp',
                 static function (): void {},
-                static function (array $arguments, string $timeString) {
-                    return strtotime($timeString);
-                }
+                static fn (array $arguments, string $timeString) => strtotime($timeString),
             ),
             new ExpressionFunction(
                 'config',
@@ -143,7 +145,7 @@ final class ExpressionFunctionProvider implements ExpressionFunctionProviderInte
                     $configResolver = $arguments['configResolver'];
 
                     return $configResolver->getParameter($name, $namespace, $scope);
-                }
+                },
             ),
             new ExpressionFunction(
                 'namedContent',
@@ -153,7 +155,7 @@ final class ExpressionFunctionProvider implements ExpressionFunctionProviderInte
                     $namedObjectProvider = $arguments['namedObject'];
 
                     return $namedObjectProvider->getContent($name);
-                }
+                },
             ),
             new ExpressionFunction(
                 'namedLocation',
@@ -163,7 +165,7 @@ final class ExpressionFunctionProvider implements ExpressionFunctionProviderInte
                     $namedObjectProvider = $arguments['namedObject'];
 
                     return $namedObjectProvider->getLocation($name);
-                }
+                },
             ),
             new ExpressionFunction(
                 'namedTag',
@@ -173,7 +175,7 @@ final class ExpressionFunctionProvider implements ExpressionFunctionProviderInte
                     $namedObjectProvider = $arguments['namedObject'];
 
                     return $namedObjectProvider->getTag($name);
-                }
+                },
             ),
             new ExpressionFunction(
                 'split',
@@ -183,8 +185,8 @@ final class ExpressionFunctionProvider implements ExpressionFunctionProviderInte
                         return null;
                     }
 
-                    return \array_map('\trim', \explode($delimiter, $name));
-                }
+                    return array_map('\trim', explode($delimiter, $name));
+                },
             ),
             new ExpressionFunction(
                 'split',
@@ -194,8 +196,8 @@ final class ExpressionFunctionProvider implements ExpressionFunctionProviderInte
                         return null;
                     }
 
-                    return \array_values(\array_filter(\array_map('\trim', \explode($delimiter, $name))));
-                }
+                    return array_values(array_filter(array_map('\trim', explode($delimiter, $name))));
+                },
             ),
             new ExpressionFunction(
                 'fieldValue',
@@ -205,7 +207,7 @@ final class ExpressionFunctionProvider implements ExpressionFunctionProviderInte
                     $content = $arguments['content'];
 
                     return $content->getFieldValue($fieldIdentifier);
-                }
+                },
             ),
         ];
     }

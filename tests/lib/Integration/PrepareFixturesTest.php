@@ -40,7 +40,7 @@ final class PrepareFixturesTest extends APIBaseTest
             'location-remote-id1',
             'eng-GB',
             ['eng-GB'],
-            true
+            true,
         );
         $content = $this->createContent(
             $contentType,
@@ -49,7 +49,7 @@ final class PrepareFixturesTest extends APIBaseTest
             'location-remote-id',
             'eng-GB',
             ['eng-GB', 'ger-DE'],
-            true
+            true,
         );
         $this->createContent(
             $contentType,
@@ -58,7 +58,7 @@ final class PrepareFixturesTest extends APIBaseTest
             'location-remote-id2',
             'eng-GB',
             ['eng-GB'],
-            true
+            true,
         );
         $this->createContent(
             $contentType,
@@ -67,7 +67,7 @@ final class PrepareFixturesTest extends APIBaseTest
             'location-remote-id3',
             'eng-GB',
             ['eng-GB'],
-            true
+            true,
         );
 
         $this->addToAssertionCount(1);
@@ -79,6 +79,8 @@ final class PrepareFixturesTest extends APIBaseTest
     }
 
     /**
+     * @param mixed $parentLocationId
+     *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\BadStateException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentFieldValidationException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentValidationException
@@ -159,7 +161,7 @@ final class PrepareFixturesTest extends APIBaseTest
 
         $fieldCreateStruct = $contentTypeService->newFieldDefinitionCreateStruct(
             'title',
-            'ezstring'
+            'ezstring',
         );
         $fieldCreateStruct->names = [
             'eng-GB' => 'Title',

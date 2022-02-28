@@ -182,7 +182,7 @@ final class FetchTest extends QueryTypeBaseTest
                         new DateMetadata(
                             DateMetadata::CREATED,
                             Operator::EQ,
-                            1525384800
+                            1525384800,
                         ),
                     ]),
                     'sortClauses' => [
@@ -205,7 +205,7 @@ final class FetchTest extends QueryTypeBaseTest
                         new DateMetadata(
                             DateMetadata::CREATED,
                             Operator::EQ,
-                            1525384800
+                            1525384800,
                         ),
                     ]),
                     'sortClauses' => [
@@ -233,7 +233,7 @@ final class FetchTest extends QueryTypeBaseTest
                             [
                                 1525384800,
                                 1563660000,
-                            ]
+                            ],
                         ),
                     ]),
                     'sortClauses' => [
@@ -261,7 +261,7 @@ final class FetchTest extends QueryTypeBaseTest
                             [
                                 1525384800,
                                 1563660000,
-                            ]
+                            ],
                         ),
                     ]),
                     'sortClauses' => [
@@ -283,7 +283,7 @@ final class FetchTest extends QueryTypeBaseTest
                         new DateMetadata(
                             DateMetadata::CREATED,
                             Operator::GTE,
-                            1525384800
+                            1525384800,
                         ),
                     ]),
                     'sortClauses' => [
@@ -369,8 +369,8 @@ final class FetchTest extends QueryTypeBaseTest
                 true,
                 2,
                 $showHiddenItems,
-                true
-            )
+                true,
+            ),
         );
     }
 

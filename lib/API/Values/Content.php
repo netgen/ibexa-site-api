@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Netgen\IbexaSiteApi\API\Values;
 
-use Ibexa\Contracts\Core\Repository\Values\ValueObject;
 use Ibexa\Contracts\Core\FieldType\Value;
+use Ibexa\Contracts\Core\Repository\Values\ValueObject;
 use Pagerfanta\Pagerfanta;
 
 /**
@@ -17,15 +17,15 @@ use Pagerfanta\Pagerfanta;
  * @see \Ibexa\Contracts\Core\Repository\Values\Content\Content
  *
  * @property int $id
- * @property int|null $mainLocationId
+ * @property ?int $mainLocationId
  * @property string $name
  * @property string $languageCode
  * @property bool $isVisible
  * @property \Netgen\IbexaSiteApi\API\Values\ContentInfo $contentInfo
  * @property \Netgen\IbexaSiteApi\API\Values\Field[]|\Netgen\IbexaSiteApi\API\Values\Fields $fields
- * @property \Netgen\IbexaSiteApi\API\Values\Location|null $mainLocation
- * @property \Netgen\IbexaSiteApi\API\Values\Content|null $owner
- * @property \Ibexa\Contracts\Core\Repository\Values\User\User|null $innerOwnerUser
+ * @property ?\Netgen\IbexaSiteApi\API\Values\Location $mainLocation
+ * @property ?\Netgen\IbexaSiteApi\API\Values\Content $owner
+ * @property ?\Ibexa\Contracts\Core\Repository\Values\User\User $innerOwnerUser
  * @property \Ibexa\Contracts\Core\Repository\Values\Content\Content $innerContent
  * @property \Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo $innerVersionInfo
  * @property \Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo $versionInfo
@@ -45,18 +45,16 @@ abstract class Content extends ValueObject
     /**
      * Returns if content has the field with the given field $id.
      *
-     * @param int|string $id
+     * @param int $id
      */
-    abstract public function hasFieldById($id): bool;
+    abstract public function hasFieldById(int $id): bool;
 
     /**
      * Return Field object for the given field $id.
      *
-     * @param int|string $id
-     *
-     * @return \Netgen\IbexaSiteApi\API\Values\Field
+     * @param int $id
      */
-    abstract public function getFieldById($id): Field;
+    abstract public function getFieldById(int $id): Field;
 
     /**
      * Return the first existing and non-empty field.
@@ -74,9 +72,9 @@ abstract class Content extends ValueObject
     /**
      * Returns a field value for the given field $id.
      *
-     * @param int|string $id
+     * @param int $id
      */
-    abstract public function getFieldValueById($id): Value;
+    abstract public function getFieldValueById(int $id): Value;
 
     /**
      * Return an array of Locations, limited by optional $limit.
@@ -95,7 +93,7 @@ abstract class Content extends ValueObject
     /**
      * Return single related Content from $fieldDefinitionIdentifier field.
      */
-    abstract public function getFieldRelation(string $fieldDefinitionIdentifier): ?Content;
+    abstract public function getFieldRelation(string $fieldDefinitionIdentifier): ?self;
 
     /**
      * Return all related Content from $fieldDefinitionIdentifier.
@@ -121,10 +119,6 @@ abstract class Content extends ValueObject
 
     /**
      * Return single related Location from $fieldDefinitionIdentifier field.
-     *
-     * @param string $fieldDefinitionIdentifier
-     *
-     * @return null|\Netgen\IbexaSiteApi\API\Values\Location
      */
     abstract public function getFieldRelationLocation(string $fieldDefinitionIdentifier): ?Location;
 

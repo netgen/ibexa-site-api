@@ -21,7 +21,7 @@ class IbexaEmbeddedContentViewExtension extends AbstractExtension
             new TwigFunction(
                 'ng_ibexa_view_content_embedded',
                 [IbexaEmbeddedContentViewRuntime::class, 'renderEmbeddedContentView'],
-                ['is_safe' => ['html']]
+                ['is_safe' => ['html']],
             ),
         ];
     }

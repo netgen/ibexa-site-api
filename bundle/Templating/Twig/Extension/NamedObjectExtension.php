@@ -20,15 +20,15 @@ class NamedObjectExtension extends AbstractExtension
         return [
             new TwigFunction(
                 'ng_named_content',
-                [NamedObjectRuntime::class, 'getNamedContent']
+                [NamedObjectRuntime::class, 'getNamedContent'],
             ),
             new TwigFunction(
                 'ng_named_location',
-                [NamedObjectRuntime::class, 'getNamedLocation']
+                [NamedObjectRuntime::class, 'getNamedLocation'],
             ),
             new TwigFunction(
                 'ng_named_tag',
-                [NamedObjectRuntime::class, 'getNamedTag']
+                [NamedObjectRuntime::class, 'getNamedTag'],
             ),
         ];
     }

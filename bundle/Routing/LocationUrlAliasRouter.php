@@ -50,7 +50,7 @@ class LocationUrlAliasRouter implements ChainedRouterInterface, RequestMatcherIn
         return $this->generator->generate(
             $location->innerLocation,
             $parameters,
-            $referenceType
+            $referenceType,
         );
     }
 

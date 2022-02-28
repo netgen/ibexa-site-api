@@ -36,6 +36,7 @@ abstract class Base implements QueryType
     private ?CriterionDefinitionResolver $criterionDefinitionResolver = null;
     private ?CriteriaBuilder $criteriaBuilder = null;
     private ?SortClauseParser $sortClauseParser = null;
+
     /** @var \Closure[] */
     private ?array $registeredCriterionBuilders = null;
 
@@ -157,7 +158,7 @@ abstract class Base implements QueryType
     protected function parseCustomSortString(string $string): ?SortClause
     {
         throw new InvalidArgumentException(
-            "Sort string '$string' was not converted to a SortClause"
+            "Sort string '{$string}' was not converted to a SortClause",
         );
     }
 
@@ -215,9 +216,9 @@ abstract class Base implements QueryType
         $resolver->setAllowedTypes('state', ['array']);
         $resolver->setAllowedValues('visible', [true, false, null]);
 
-        $resolver->setNormalizer('limit', static function (Options $options, $value) {return $value ?? 25;});
-        $resolver->setNormalizer('offset', static function (Options $options, $value) {return $value ?? 0;});
-        $resolver->setNormalizer('is_field_empty', static function (Options $options, $value) {return $value ?? [];});
+        $resolver->setNormalizer('limit', static fn (Options $options, $value) => $value ?? 25);
+        $resolver->setNormalizer('offset', static fn (Options $options, $value) => $value ?? 0);
+        $resolver->setNormalizer('is_field_empty', static fn (Options $options, $value) => $value ?? []);
 
         $resolver->setAllowedValues(
             'is_field_empty',
@@ -233,7 +234,7 @@ abstract class Base implements QueryType
                 }
 
                 return true;
-            }
+            },
         );
 
         $resolver->setAllowedTypes('sort', ['string', SortClause::class, APILocation::class, 'array']);
@@ -246,7 +247,7 @@ abstract class Base implements QueryType
                 }
 
                 return $value ?? [];
-            }
+            },
         );
     }
 
@@ -295,6 +296,7 @@ abstract class Base implements QueryType
             case 'subtree':
             case 'visible':
                 return $criterionDefinitionResolver->resolve($name, $parameters);
+
             case 'field':
             case 'state':
             case 'is_field_empty':

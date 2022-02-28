@@ -66,14 +66,14 @@ class ContentView extends BaseView implements ContentValueView, LocationValueVie
     public function setContent(): void
     {
         throw new RuntimeException(
-            'Method setContent() cannot be used with Site API content view. Use setSiteContent() method instead.'
+            'Method setContent() cannot be used with Site API content view. Use setSiteContent() method instead.',
         );
     }
 
     public function setLocation(): void
     {
         throw new RuntimeException(
-            'Method setLocation() cannot be used with Site API content view. Use setSiteLocation() method instead.'
+            'Method setLocation() cannot be used with Site API content view. Use setSiteLocation() method instead.',
         );
     }
 

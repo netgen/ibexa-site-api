@@ -38,7 +38,6 @@ final class CriterionDefinitionResolver
     /**
      * Resolve Criterion $parameters.
      *
-     *
      * @param mixed $parameters
      *
      * @throws \InvalidArgumentException
@@ -70,7 +69,6 @@ final class CriterionDefinitionResolver
 
     /**
      * Return CriterionDefinition instances for the given Field $target and its $parameters.
-     *
      *
      * @param mixed $parameters
      *
@@ -115,7 +113,7 @@ final class CriterionDefinitionResolver
                 'not',
                 null,
                 null,
-                $this->resolveForTarget($name, $target, $value)
+                $this->resolveForTarget($name, $target, $value),
             );
         }
 
@@ -167,7 +165,7 @@ final class CriterionDefinitionResolver
 
         if ($isOperatorMap && $isValueCollection) {
             throw new InvalidArgumentException(
-                'Array of parameters is ambiguous: it should be either an operator map or a value collection'
+                'Array of parameters is ambiguous: it should be either an operator map or a value collection',
             );
         }
 

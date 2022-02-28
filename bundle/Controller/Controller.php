@@ -18,8 +18,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 abstract class Controller extends AbstractController
 {
-    use SearchResultExtractorTrait;
     use PagerfantaTrait;
+    use SearchResultExtractorTrait;
 
     /**
      * Returns the root Location object for current siteaccess configuration.
@@ -31,7 +31,7 @@ abstract class Controller extends AbstractController
     public function getRootLocation(): Location
     {
         return $this->getSite()->getLoadService()->loadLocation(
-            $this->getSite()->getSettings()->rootLocationId
+            $this->getSite()->getSettings()->rootLocationId,
         );
     }
 

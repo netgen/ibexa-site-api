@@ -23,9 +23,9 @@ abstract class QueryTypeBaseTest extends TestCase
     {
         $queryType = $this->getQueryTypeUnderTest();
 
-        self::assertEquals(
+        self::assertSame(
             $this->getQueryTypeName(),
-            $queryType::getName()
+            $queryType::getName(),
         );
     }
 
@@ -33,9 +33,9 @@ abstract class QueryTypeBaseTest extends TestCase
     {
         $queryType = $this->getQueryTypeUnderTest();
 
-        self::assertEquals(
+        self::assertSame(
             $this->getSupportedParameters(),
-            $queryType->getSupportedParameters()
+            $queryType->getSupportedParameters(),
         );
     }
 
@@ -94,7 +94,7 @@ abstract class QueryTypeBaseTest extends TestCase
 
         self::assertEquals(
             $expectedQuery,
-            $query
+            $query,
         );
     }
 
@@ -136,7 +136,7 @@ abstract class QueryTypeBaseTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
         self::matchesRegularExpression(
-            "/Sort string '.*' was not converted to a SortClause/"
+            "/Sort string '.*' was not converted to a SortClause/",
         );
 
         $queryType = $this->getQueryTypeUnderTest();

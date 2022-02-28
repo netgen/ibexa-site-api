@@ -10,7 +10,7 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ContentId;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ContentTypeIdentifier;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Location\IsMainLocation;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LogicalAnd;
-use Netgen\EzPlatformSearchExtra\API\Values\Content\Query\Criterion\Visible;
+use Netgen\IbexaSearchExtra\API\Values\Content\Query\Criterion\Visible;
 use Netgen\IbexaSiteApi\API\RelationService as RelationServiceInterface;
 use Netgen\IbexaSiteApi\API\Site as SiteInterface;
 use Netgen\IbexaSiteApi\API\Values\Content;
@@ -59,7 +59,7 @@ class RelationService implements RelationServiceInterface
         $relatedContentItems = $this->loadFieldRelations(
             $content,
             $fieldDefinitionIdentifier,
-            $contentTypeIdentifiers
+            $contentTypeIdentifiers,
         );
 
         return $relatedContentItems[0] ?? null;
@@ -83,7 +83,7 @@ class RelationService implements RelationServiceInterface
         $relatedContentItems = $this->getRelatedContentItems(
             $relatedContentIds,
             $contentTypeIdentifiers,
-            $limit
+            $limit,
         );
         $this->sortByIdOrder($relatedContentItems, $relatedContentIds);
 
@@ -103,7 +103,7 @@ class RelationService implements RelationServiceInterface
         $relatedLocations = $this->loadFieldRelationLocations(
             $content,
             $fieldDefinitionIdentifier,
-            $contentTypeIdentifiers
+            $contentTypeIdentifiers,
         );
 
         return $relatedLocations[0] ?? null;
@@ -127,7 +127,7 @@ class RelationService implements RelationServiceInterface
         $relatedLocations = $this->getRelatedLocations(
             $relatedContentIds,
             $contentTypeIdentifiers,
-            $limit
+            $limit,
         );
         $this->sortLocationsByIdOrder($relatedLocations, $relatedContentIds);
 
@@ -182,7 +182,7 @@ class RelationService implements RelationServiceInterface
      *
      * @param array $relatedContentIds
      * @param array $contentTypeIdentifiers
-     * @param null|int $limit
+     * @param ?int $limit
      *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      *
@@ -229,9 +229,7 @@ class RelationService implements RelationServiceInterface
     {
         $sortedIdList = array_flip($relatedContentIds);
 
-        $sorter = static function (Content $content1, Content $content2) use ($sortedIdList): int {
-            return $sortedIdList[$content1->id] <=> $sortedIdList[$content2->id];
-        };
+        $sorter = static fn (Content $content1, Content $content2): int => $sortedIdList[$content1->id] <=> $sortedIdList[$content2->id];
 
         usort($relatedContentItems, $sorter);
     }
@@ -246,9 +244,7 @@ class RelationService implements RelationServiceInterface
     {
         $sortedIdList = array_flip($relatedContentIds);
 
-        $sorter = static function (Location $location1, Location $location2) use ($sortedIdList): int {
-            return $sortedIdList[$location1->contentId] <=> $sortedIdList[$location2->contentId];
-        };
+        $sorter = static fn (Location $location1, Location $location2): int => $sortedIdList[$location1->contentId] <=> $sortedIdList[$location2->contentId];
 
         usort($relatedLocations, $sorter);
     }

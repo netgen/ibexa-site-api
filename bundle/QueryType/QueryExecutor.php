@@ -8,7 +8,7 @@ use Ibexa\Contracts\Core\Repository\Values\Content\LocationQuery;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query;
 use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchResult;
 use Ibexa\Core\QueryType\QueryTypeRegistry;
-use Netgen\EzPlatformSearchExtra\Core\Pagination\Pagerfanta\BaseAdapter;
+use Netgen\IbexaSearchExtra\Core\Pagination\Pagerfanta\BaseAdapter;
 use Netgen\IbexaSiteApi\API\FilterService;
 use Netgen\IbexaSiteApi\API\FindService;
 use Netgen\IbexaSiteApi\Core\Site\Pagination\Pagerfanta\FilterAdapter;

@@ -43,7 +43,7 @@ final class SurrogateValueTest extends TestCase
     {
         $value = new SurrogateValue();
 
-        self::assertEquals('', (string) $value);
+        self::assertSame('', (string) $value);
     }
 
     public function testCheckingForPropertyReturnsFalse(): void

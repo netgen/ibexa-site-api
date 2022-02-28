@@ -204,7 +204,7 @@ final class ForwardFieldsTest extends QueryTypeBaseTest
                         new DateMetadata(
                             DateMetadata::CREATED,
                             Operator::EQ,
-                            1525384800
+                            1525384800,
                         ),
                         new ContentId([1, 2, 3, 4]),
                     ]),
@@ -272,7 +272,7 @@ final class ForwardFieldsTest extends QueryTypeBaseTest
                     new DatePublished(Query::SORT_DESC),
                 ],
             ]),
-            $query
+            $query,
         );
     }
 
@@ -370,13 +370,13 @@ final class ForwardFieldsTest extends QueryTypeBaseTest
                 true,
                 2,
                 $showHiddenItems,
-                true
+                true,
             ),
             new Registry([
                 'ezobjectrelation' => new Relation(),
                 'ezobjectrelationlist' => new RelationList(),
                 'ngsurrogate' => new Surrogate(),
-            ])
+            ]),
         );
     }
 
@@ -442,7 +442,7 @@ final class ForwardFieldsTest extends QueryTypeBaseTest
                 'languageCode' => 'eng-GB',
             ],
             $failOnMissingFields,
-            new NullLogger()
+            new NullLogger(),
         );
     }
 

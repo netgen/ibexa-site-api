@@ -80,7 +80,7 @@ class Configured implements ViewProvider
         foreach ($queriesConfiguration as $variableName => $queryConfiguration) {
             $queryDefinitionCollection->add(
                 $variableName,
-                $this->queryDefinitionMapper->map($queryConfiguration, $view)
+                $this->queryDefinitionMapper->map($queryConfiguration, $view),
             );
         }
 
@@ -142,8 +142,8 @@ class Configured implements ViewProvider
 
         $dto->setControllerReference(
             new ControllerReference(
-                sprintf('%s::%s', RedirectController::class, 'urlRedirectAction')
-            )
+                sprintf('%s::%s', RedirectController::class, 'urlRedirectAction'),
+            ),
         );
 
         $redirectConfig = RedirectConfiguration::fromConfigurationArray($viewConfig['redirect']);
@@ -152,7 +152,7 @@ class Configured implements ViewProvider
             [
                 'path' => $this->redirectResolver->resolveTarget($redirectConfig, $view),
                 'permanent' => $redirectConfig->isPermanent(),
-            ]
+            ],
         );
     }
 }

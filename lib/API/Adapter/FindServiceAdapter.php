@@ -10,10 +10,10 @@ use Ibexa\Contracts\Core\Repository\Values\Content\LocationQuery;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion;
 use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchResult;
-use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
-use Ibexa\Core\Base\Exceptions\NotFoundException;
 use Ibexa\Contracts\Core\Search\Capable;
 use Ibexa\Contracts\Core\Search\Handler;
+use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
+use Ibexa\Core\Base\Exceptions\NotFoundException;
 use Netgen\IbexaSiteApi\API\FindService;
 
 /**

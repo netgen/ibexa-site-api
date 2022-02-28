@@ -54,7 +54,7 @@ final class FieldsTest extends TestCase
         self::assertInstanceOf(APIFields::class, $fields);
 
         foreach ($fields as $field) {
-            self::assertEquals($i, $field->id);
+            self::assertSame($i, $field->id);
             ++$i;
         }
     }
@@ -114,7 +114,7 @@ final class FieldsTest extends TestCase
         for ($i = 0; $i < 3; ++$i) {
             $field = $fields[$i];
             self::assertInstanceOf(SiteField::class, $field);
-            self::assertEquals($i + 1, $field->id);
+            self::assertSame($i + 1, $field->id);
         }
     }
 
@@ -126,7 +126,7 @@ final class FieldsTest extends TestCase
         foreach ($identifiers as $identifier) {
             $field = $fields[$identifier];
             self::assertInstanceOf(SiteField::class, $field);
-            self::assertEquals($identifier, $field->fieldDefIdentifier);
+            self::assertSame($identifier, $field->fieldDefIdentifier);
         }
     }
 
@@ -154,8 +154,8 @@ final class FieldsTest extends TestCase
         $field = $fields[$identifier];
 
         self::assertInstanceOf(SiteField::class, $field);
-        self::assertEquals($identifier, $field->fieldDefIdentifier);
-        self::assertEquals('ngsurrogate', $field->fieldTypeIdentifier);
+        self::assertSame($identifier, $field->fieldDefIdentifier);
+        self::assertSame('ngsurrogate', $field->fieldTypeIdentifier);
         self::assertTrue($field->isEmpty());
     }
 
@@ -209,7 +209,7 @@ final class FieldsTest extends TestCase
 
         $field = $fields->getFieldById($id);
 
-        self::assertEquals($id, $field->id);
+        self::assertSame($id, $field->id);
     }
 
     /**
@@ -220,7 +220,7 @@ final class FieldsTest extends TestCase
         $id = 101;
 
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage("Field #$id in Content #1 does not exist");
+        $this->expectExceptionMessage("Field #{$id} in Content #1 does not exist");
 
         $fields = $this->getFieldsUnderTest(true);
 
@@ -238,8 +238,8 @@ final class FieldsTest extends TestCase
 
         $field = $fields->getFieldById($id);
 
-        self::assertEquals((string) $id, $field->fieldDefIdentifier);
-        self::assertEquals('ngsurrogate', $field->fieldTypeIdentifier);
+        self::assertSame((string) $id, $field->fieldDefIdentifier);
+        self::assertSame('ngsurrogate', $field->fieldTypeIdentifier);
         self::assertTrue($field->isEmpty());
     }
 
@@ -253,7 +253,7 @@ final class FieldsTest extends TestCase
 
         $field = $fields->getField($identifier);
 
-        self::assertEquals($identifier, $field->fieldDefIdentifier);
+        self::assertSame($identifier, $field->fieldDefIdentifier);
     }
 
     /**
@@ -282,8 +282,8 @@ final class FieldsTest extends TestCase
 
         $field = $fields->getField($identifier);
 
-        self::assertEquals($identifier, $field->fieldDefIdentifier);
-        self::assertEquals('ngsurrogate', $field->fieldTypeIdentifier);
+        self::assertSame($identifier, $field->fieldDefIdentifier);
+        self::assertSame('ngsurrogate', $field->fieldTypeIdentifier);
         self::assertTrue($field->isEmpty());
     }
 
@@ -298,7 +298,7 @@ final class FieldsTest extends TestCase
 
         $field = $fields->getFirstNonEmptyField($identifier, 'second', 'third', 'fourth');
 
-        self::assertEquals($identifier, $field->fieldDefIdentifier);
+        self::assertSame($identifier, $field->fieldDefIdentifier);
     }
 
     /**
@@ -310,7 +310,7 @@ final class FieldsTest extends TestCase
 
         $field = $fields->getFirstNonEmptyField('1st', 'second', 'third', 'fourth');
 
-        self::assertEquals('third', $field->fieldDefIdentifier);
+        self::assertSame('third', $field->fieldDefIdentifier);
     }
 
     /**
@@ -324,7 +324,7 @@ final class FieldsTest extends TestCase
 
         $field = $fields->getFirstNonEmptyField('1st', '2nd', $identifier, 'fourth');
 
-        self::assertEquals($identifier, $field->fieldDefIdentifier);
+        self::assertSame($identifier, $field->fieldDefIdentifier);
     }
 
     /**
@@ -338,8 +338,8 @@ final class FieldsTest extends TestCase
 
         $field = $fields->getFirstNonEmptyField($identifier, '2nd', '3rd', '4th');
 
-        self::assertEquals($identifier, $field->fieldDefIdentifier);
-        self::assertEquals('ngsurrogate', $field->fieldTypeIdentifier);
+        self::assertSame($identifier, $field->fieldDefIdentifier);
+        self::assertSame('ngsurrogate', $field->fieldTypeIdentifier);
         self::assertTrue($field->isEmpty());
     }
 
@@ -350,9 +350,9 @@ final class FieldsTest extends TestCase
     {
         $fields = $this->getFieldsUnderTest(true);
 
-        self::assertEquals(
+        self::assertSame(
             (array) $fields->getIterator(),
-            $fields->__debugInfo()
+            $fields->__debugInfo(),
         );
     }
 
@@ -362,7 +362,7 @@ final class FieldsTest extends TestCase
             $this->getMockedContent(),
             $this->getDomainObjectMapper(),
             $failOnMissingField,
-            $this->getLoggerMock()
+            $this->getLoggerMock(),
         );
     }
 
@@ -394,7 +394,7 @@ final class FieldsTest extends TestCase
                 'languageCode' => 'eng-GB',
             ],
             true,
-            new NullLogger()
+            new NullLogger(),
         );
     }
 

@@ -50,9 +50,9 @@ final class Resolver
             return $this->router->generate(
                 $redirectConfig->getTarget(),
                 $redirectConfig->getTargetParameters(),
-                $redirectConfig->isAbsolute() ? UrlGeneratorInterface::ABSOLUTE_URL : UrlGeneratorInterface::ABSOLUTE_PATH
+                $redirectConfig->isAbsolute() ? UrlGeneratorInterface::ABSOLUTE_URL : UrlGeneratorInterface::ABSOLUTE_PATH,
             );
-        } catch (RouteNotFoundException | MissingMandatoryParametersException | InvalidParameterException $exception) {
+        } catch (RouteNotFoundException|MissingMandatoryParametersException|InvalidParameterException $exception) {
             throw new InvalidRedirectConfiguration($redirectConfig->getTarget());
         }
     }
@@ -64,14 +64,14 @@ final class Resolver
     {
         $value = $this->parameterProcessor->process(
             $redirectConfig->getTarget(),
-            $view
+            $view,
         );
 
         if ($value instanceof Location || $value instanceof Content || $value instanceof Tag) {
             return $this->router->generate(
                 '',
                 [RouteObjectInterface::ROUTE_OBJECT => $value] + $redirectConfig->getTargetParameters(),
-                $redirectConfig->isAbsolute() ? UrlGeneratorInterface::ABSOLUTE_URL : UrlGeneratorInterface::ABSOLUTE_PATH
+                $redirectConfig->isAbsolute() ? UrlGeneratorInterface::ABSOLUTE_URL : UrlGeneratorInterface::ABSOLUTE_PATH,
             );
         }
 

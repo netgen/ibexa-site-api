@@ -366,7 +366,7 @@ final class CriterionDefinitionResolverTest extends TestCase
 
         self::assertEquals(
             $expectedCriterionDefinitions,
-            $criterionArguments
+            $criterionArguments,
         );
     }
 
@@ -815,7 +815,7 @@ final class CriterionDefinitionResolverTest extends TestCase
 
         self::assertEquals(
             $expectedCriterionDefinitions,
-            $criterionArguments
+            $criterionArguments,
         );
     }
 
@@ -830,7 +830,7 @@ final class CriterionDefinitionResolverTest extends TestCase
             [
                 'smilje' => 'bosilje',
                 'eq' => 2,
-            ]
+            ],
         );
     }
 
@@ -847,7 +847,7 @@ final class CriterionDefinitionResolverTest extends TestCase
                     'šćenac' => 'sikavica',
                     'eq' => 2,
                 ],
-            ]
+            ],
         );
     }
 

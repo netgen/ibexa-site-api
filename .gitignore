@@ -1,6 +1,6 @@
 /vendor/
 /var/
 composer.lock
-.php_cs.cache
+.php-cs-fixer.cache
 docs/_build
 .phpunit.result.cache

@@ -51,8 +51,8 @@ final class InvalidRedirectConfigurationListener implements EventSubscriberInter
         $event->setResponse(
             new RedirectResponse(
                 $this->urlGenerator->generate(UrlAliasRouter::URL_ALIAS_ROUTE_NAME, ['locationId' => $rootLocationId]),
-                Response::HTTP_FOUND
-            )
+                Response::HTTP_FOUND,
+            ),
         );
     }
 }

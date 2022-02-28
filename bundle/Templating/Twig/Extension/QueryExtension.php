@@ -22,12 +22,12 @@ class QueryExtension extends AbstractExtension
             new TwigFunction(
                 'ng_query',
                 [QueryRuntime::class, 'executeQuery'],
-                ['needs_context' => true]
+                ['needs_context' => true],
             ),
             new TwigFunction(
                 'ng_raw_query',
                 [QueryRuntime::class, 'executeRawQuery'],
-                ['needs_context' => true]
+                ['needs_context' => true],
             ),
         ];
     }

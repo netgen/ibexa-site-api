@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Netgen\IbexaSiteApi\Tests\Unit\Core\Site\QueryType\Location;
 
+use Ibexa\Contracts\Core\Repository\Values\Content\Location as APILocation;
 use Ibexa\Contracts\Core\Repository\Values\Content\LocationQuery;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ContentTypeIdentifier;
@@ -19,7 +20,6 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\ContentName;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\DatePublished;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\Location\Depth;
 use Ibexa\Core\Repository\Values\Content\Location as RepositoryLocation;
-use Ibexa\Contracts\Core\Repository\Values\Content\Location as APILocation;
 use Ibexa\Core\Repository\Values\ContentType\FieldDefinitionCollection;
 use Netgen\IbexaSearchExtra\API\Values\Content\Query\Criterion\Visible;
 use Netgen\IbexaSiteApi\API\LoadService;
@@ -230,7 +230,7 @@ final class SiblingsTest extends QueryTypeBaseTest
                         new DateMetadata(
                             DateMetadata::MODIFIED,
                             Operator::EQ,
-                            1525384800
+                            1525384800,
                         ),
                         new Field('title', Operator::EQ, 'Hello'),
                         new Field('title', Operator::GTE, 7),
@@ -255,7 +255,7 @@ final class SiblingsTest extends QueryTypeBaseTest
                         new DateMetadata(
                             DateMetadata::CREATED,
                             Operator::EQ,
-                            1525384800
+                            1525384800,
                         ),
                         new ParentLocationId(42),
                         new LogicalNot(new LocationId(24)),
@@ -336,6 +336,11 @@ final class SiblingsTest extends QueryTypeBaseTest
         ];
     }
 
+    public function internalGetRepoFields(): array
+    {
+        return [];
+    }
+
     protected function getQueryTypeName(): string
     {
         return 'SiteAPI:Location/Siblings';
@@ -349,9 +354,9 @@ final class SiblingsTest extends QueryTypeBaseTest
                 true,
                 2,
                 $showHiddenItems,
-                true
+                true,
             ),
-            new NullLogger()
+            new NullLogger(),
         );
     }
 
@@ -375,7 +380,7 @@ final class SiblingsTest extends QueryTypeBaseTest
                     'sortOrder' => APILocation::SORT_ORDER_ASC,
                 ]),
             ],
-            new NullLogger()
+            new NullLogger(),
         );
 
         $loadServiceMock
@@ -397,7 +402,7 @@ final class SiblingsTest extends QueryTypeBaseTest
                     'contentInfo' => $this->getRepoContentInfo(),
                 ]),
             ],
-            new NullLogger()
+            new NullLogger(),
         );
     }
 
@@ -419,11 +424,6 @@ final class SiblingsTest extends QueryTypeBaseTest
             'priority',
             'location',
         ];
-    }
-
-    public function internalGetRepoFields(): array
-    {
-        return [];
     }
 
     protected function internalGetRepoFieldDefinitions(): FieldDefinitionCollection

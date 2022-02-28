@@ -87,7 +87,7 @@ final class AllTagFields extends Content
 
             /** @var \Netgen\TagsBundle\Core\FieldType\Tags\Value $value */
             $value = $field->value;
-            $tagsIdsGrouped[] = array_map(static function (TagValue $tag) {return $tag->id;}, $value->tags);
+            $tagsIdsGrouped[] = array_map(static fn (TagValue $tag) => $tag->id, $value->tags);
         }
 
         return array_merge(...$tagsIdsGrouped);

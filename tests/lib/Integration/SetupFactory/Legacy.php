@@ -29,7 +29,7 @@ class Legacy extends CoreLegacySetupFactory
         $loader = new YamlFileLoader($containerBuilder, new FileLocator($settingsPath));
         $loader->load('services.yaml');
 
-        $searchExtraSettingsPath = __DIR__ . '/../../../../vendor/netgen/ezplatform-search-extra/lib/Resources/config/search/';
+        $searchExtraSettingsPath = __DIR__ . '/../../../../vendor/netgen/ibexa-search-extra/lib/Resources/config/search/';
         $searchExtraLoader = new YamlFileLoader($containerBuilder, new FileLocator($searchExtraSettingsPath));
         $searchExtraLoader->load('common.yaml');
         $searchExtraLoader->load('legacy.yaml');

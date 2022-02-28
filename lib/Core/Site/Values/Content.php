@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Netgen\IbexaSiteApi\Core\Site\Values;
 
+use Ibexa\Contracts\Core\FieldType\Value;
 use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\Core\Repository\Repository;
@@ -15,8 +16,7 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LogicalAnd;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\Location\Path;
 use Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo;
 use Ibexa\Contracts\Core\Repository\Values\User\User;
-use Ibexa\Contracts\Core\FieldType\Value;
-use Netgen\EzPlatformSearchExtra\API\Values\Content\Query\Criterion\Visible;
+use Netgen\IbexaSearchExtra\API\Values\Content\Query\Criterion\Visible;
 use Netgen\IbexaSiteApi\API\Site;
 use Netgen\IbexaSiteApi\API\Values\Content as APIContent;
 use Netgen\IbexaSiteApi\API\Values\ContentInfo as APIContentInfo;
@@ -100,19 +100,26 @@ final class Content extends APIContent
         switch ($property) {
             case 'fields':
                 return $this->fields;
+
             case 'mainLocation':
                 return $this->getMainLocation();
+
             case 'innerContent':
                 return $this->getInnerContent();
+
             case 'versionInfo':
             case 'innerVersionInfo':
                 return $this->innerVersionInfo;
+
             case 'contentInfo':
                 return $this->getContentInfo();
+
             case 'owner':
                 return $this->getOwner();
+
             case 'innerOwnerUser':
                 return $this->getInnerOwnerUser();
+
             case 'isVisible':
                 return $this->getContentInfo()->isVisible;
         }
@@ -254,8 +261,8 @@ final class Content extends APIContent
                         new Path(),
                     ],
                 ]),
-                $this->site->getFilterService()
-            )
+                $this->site->getFilterService(),
+            ),
         );
 
         $pager->setNormalizeOutOfRangePages(true);
@@ -269,7 +276,7 @@ final class Content extends APIContent
     {
         return $this->site->getRelationService()->loadFieldRelation(
             $this,
-            $fieldDefinitionIdentifier
+            $fieldDefinitionIdentifier,
         );
     }
 
@@ -279,7 +286,7 @@ final class Content extends APIContent
             $this,
             $fieldDefinitionIdentifier,
             [],
-            $limit
+            $limit,
         );
     }
 
@@ -292,7 +299,7 @@ final class Content extends APIContent
         $relations = $this->site->getRelationService()->loadFieldRelations(
             $this,
             $fieldDefinitionIdentifier,
-            $contentTypeIdentifiers
+            $contentTypeIdentifiers,
         );
 
         $pager = new Pagerfanta(new ArrayAdapter($relations));
@@ -308,7 +315,7 @@ final class Content extends APIContent
     {
         return $this->site->getRelationService()->loadFieldRelationLocation(
             $this,
-            $fieldDefinitionIdentifier
+            $fieldDefinitionIdentifier,
         );
     }
 
@@ -318,7 +325,7 @@ final class Content extends APIContent
             $this,
             $fieldDefinitionIdentifier,
             [],
-            $limit
+            $limit,
         );
     }
 
@@ -331,7 +338,7 @@ final class Content extends APIContent
         $relations = $this->site->getRelationService()->loadFieldRelationLocations(
             $this,
             $fieldDefinitionIdentifier,
-            $contentTypeIdentifiers
+            $contentTypeIdentifiers,
         );
 
         $pager = new Pagerfanta(new ArrayAdapter($relations));
@@ -352,7 +359,7 @@ final class Content extends APIContent
     {
         if ($this->internalMainLocation === null && $this->mainLocationId !== null) {
             $this->internalMainLocation = $this->site->getLoadService()->loadLocation(
-                $this->mainLocationId
+                $this->mainLocationId,
             );
         }
 
@@ -370,9 +377,9 @@ final class Content extends APIContent
                     return $this->contentService->loadContent(
                         $this->id,
                         [$this->languageCode],
-                        $this->innerVersionInfo->versionNo
+                        $this->innerVersionInfo->versionNo,
                     );
-                }
+                },
             );
         }
 
@@ -387,7 +394,7 @@ final class Content extends APIContent
         if ($this->contentInfo === null) {
             $this->contentInfo = $this->domainObjectMapper->mapContentInfo(
                 $this->innerVersionInfo,
-                $this->languageCode
+                $this->languageCode,
             );
         }
 
@@ -412,7 +419,7 @@ final class Content extends APIContent
                 }
 
                 return null;
-            }
+            },
         );
 
         $this->isOwnerInitialized = true;

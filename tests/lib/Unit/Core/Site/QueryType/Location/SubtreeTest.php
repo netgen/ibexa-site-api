@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Netgen\IbexaSiteApi\Tests\Unit\Core\Site\QueryType\Location;
 
+use Ibexa\Contracts\Core\Repository\Values\Content\Location as APILocation;
 use Ibexa\Contracts\Core\Repository\Values\Content\LocationQuery;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ContentTypeIdentifier;
@@ -19,7 +20,6 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\ContentName;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\DatePublished;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\Location\Priority;
 use Ibexa\Core\Repository\Values\Content\Location as RepositoryLocation;
-use Ibexa\Contracts\Core\Repository\Values\Content\Location as APILocation;
 use Ibexa\Core\Repository\Values\ContentType\FieldDefinitionCollection;
 use Netgen\IbexaSearchExtra\API\Values\Content\Query\Criterion\Visible;
 use Netgen\IbexaSiteApi\Core\Site\QueryType\Location\Subtree;
@@ -298,7 +298,7 @@ final class SubtreeTest extends QueryTypeBaseTest
                         new DateMetadata(
                             DateMetadata::CREATED,
                             Operator::EQ,
-                            1525384800
+                            1525384800,
                         ),
                         new SubtreeCriterion('/3/5/7/11/'),
                         new LogicalNot(new LocationId(42)),
@@ -393,6 +393,11 @@ final class SubtreeTest extends QueryTypeBaseTest
         ];
     }
 
+    public function internalGetRepoFields(): array
+    {
+        return [];
+    }
+
     protected function getQueryTypeName(): string
     {
         return 'SiteAPI:Location/Subtree';
@@ -406,8 +411,8 @@ final class SubtreeTest extends QueryTypeBaseTest
                 true,
                 2,
                 $showHiddenItems,
-                true
-            )
+                true,
+            ),
         );
     }
 
@@ -428,7 +433,7 @@ final class SubtreeTest extends QueryTypeBaseTest
                     'contentInfo' => $this->getRepoContentInfo(),
                 ]),
             ],
-            new NullLogger()
+            new NullLogger(),
         );
     }
 
@@ -453,11 +458,6 @@ final class SubtreeTest extends QueryTypeBaseTest
             'exclude_self',
             'relative_depth',
         ];
-    }
-
-    public function internalGetRepoFields(): array
-    {
-        return [];
     }
 
     protected function internalGetRepoFieldDefinitions(): FieldDefinitionCollection

@@ -39,7 +39,7 @@ final class LoadServiceTest extends BaseTest
             [
                 'eng-GB',
                 'ger-DE',
-            ]
+            ],
         );
 
         $loadService = $this->getSite()->getLoadService();
@@ -71,7 +71,7 @@ final class LoadServiceTest extends BaseTest
             [
                 'eng-US',
                 'ger-DE',
-            ]
+            ],
         );
 
         $loadService = $this->getSite()->getLoadService();
@@ -102,7 +102,7 @@ final class LoadServiceTest extends BaseTest
             'prioritizedLanguages',
             [
                 'eng-US',
-            ]
+            ],
         );
 
         $loadService = $this->getSite()->getLoadService();
@@ -133,7 +133,7 @@ final class LoadServiceTest extends BaseTest
             'prioritizedLanguages',
             [
                 'eng-US',
-            ]
+            ],
         );
 
         $loadService = $this->getSite()->getLoadService();
@@ -165,7 +165,7 @@ final class LoadServiceTest extends BaseTest
             [
                 'eng-GB',
                 'ger-DE',
-            ]
+            ],
         );
 
         $this->expectException(TranslationNotMatchedException::class);
@@ -196,7 +196,7 @@ final class LoadServiceTest extends BaseTest
             [
                 'eng-GB',
                 'ger-DE',
-            ]
+            ],
         );
 
         $this->expectException(TranslationNotMatchedException::class);
@@ -228,7 +228,7 @@ final class LoadServiceTest extends BaseTest
             [
                 'eng-GB',
                 'ger-DE',
-            ]
+            ],
         );
 
         $loadService = $this->getSite()->getLoadService();
@@ -260,7 +260,7 @@ final class LoadServiceTest extends BaseTest
             [
                 'eng-US',
                 'ger-DE',
-            ]
+            ],
         );
 
         $loadService = $this->getSite()->getLoadService();
@@ -291,7 +291,7 @@ final class LoadServiceTest extends BaseTest
             'prioritizedLanguages',
             [
                 'eng-US',
-            ]
+            ],
         );
 
         $loadService = $this->getSite()->getLoadService();
@@ -323,7 +323,7 @@ final class LoadServiceTest extends BaseTest
             [
                 'eng-GB',
                 'ger-DE',
-            ]
+            ],
         );
 
         $this->expectException(TranslationNotMatchedException::class);
@@ -354,7 +354,7 @@ final class LoadServiceTest extends BaseTest
             [
                 'eng-GB',
                 'ger-DE',
-            ]
+            ],
         );
 
         $loadService = $this->getSite()->getLoadService();
@@ -386,7 +386,7 @@ final class LoadServiceTest extends BaseTest
             [
                 'eng-US',
                 'ger-DE',
-            ]
+            ],
         );
 
         $loadService = $this->getSite()->getLoadService();
@@ -417,7 +417,7 @@ final class LoadServiceTest extends BaseTest
             'prioritizedLanguages',
             [
                 'eng-US',
-            ]
+            ],
         );
 
         $loadService = $this->getSite()->getLoadService();
@@ -449,7 +449,7 @@ final class LoadServiceTest extends BaseTest
             [
                 'eng-GB',
                 'ger-DE',
-            ]
+            ],
         );
 
         $this->expectException(TranslationNotMatchedException::class);
@@ -480,7 +480,7 @@ final class LoadServiceTest extends BaseTest
             [
                 'eng-GB',
                 'ger-DE',
-            ]
+            ],
         );
 
         $loadService = $this->getSite()->getLoadService();
@@ -512,7 +512,7 @@ final class LoadServiceTest extends BaseTest
             [
                 'eng-US',
                 'ger-DE',
-            ]
+            ],
         );
 
         $loadService = $this->getSite()->getLoadService();
@@ -543,7 +543,7 @@ final class LoadServiceTest extends BaseTest
             'prioritizedLanguages',
             [
                 'eng-US',
-            ]
+            ],
         );
 
         $loadService = $this->getSite()->getLoadService();
@@ -575,7 +575,7 @@ final class LoadServiceTest extends BaseTest
             [
                 'eng-GB',
                 'ger-DE',
-            ]
+            ],
         );
 
         $this->expectException(TranslationNotMatchedException::class);

@@ -53,7 +53,7 @@ class FilterService implements FilterServiceInterface
             [
                 'languages' => $this->settings->prioritizedLanguages,
                 'useAlwaysAvailable' => $this->settings->useAlwaysAvailable,
-            ]
+            ],
         );
 
         foreach ($searchResult->searchHits as $searchHit) {
@@ -62,9 +62,9 @@ class FilterService implements FilterServiceInterface
             $searchHit->valueObject = $this->domainObjectMapper->mapContent(
                 $this->contentService->loadVersionInfo(
                     $contentInfo,
-                    $contentInfo->currentVersionNo
+                    $contentInfo->currentVersionNo,
                 ),
-                $searchHit->matchedTranslation
+                $searchHit->matchedTranslation,
             );
         }
 
@@ -84,7 +84,7 @@ class FilterService implements FilterServiceInterface
             [
                 'languages' => $this->settings->prioritizedLanguages,
                 'useAlwaysAvailable' => $this->settings->useAlwaysAvailable,
-            ]
+            ],
         );
 
         foreach ($searchResult->searchHits as $searchHit) {
@@ -94,9 +94,9 @@ class FilterService implements FilterServiceInterface
                 $location,
                 $this->contentService->loadVersionInfo(
                     $location->contentInfo,
-                    $location->contentInfo->currentVersionNo
+                    $location->contentInfo->currentVersionNo,
                 ),
-                $searchHit->matchedTranslation
+                $searchHit->matchedTranslation,
             );
         }
 

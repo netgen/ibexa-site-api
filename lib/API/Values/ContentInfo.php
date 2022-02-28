@@ -34,7 +34,7 @@ use Ibexa\Contracts\Core\Repository\Values\ValueObject;
  * @property string $contentTypeDescription
  * @property \Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo $innerContentInfo
  * @property \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType $innerContentType
- * @property \Netgen\IbexaSiteApi\API\Values\Location|null $mainLocation
+ * @property ?\Netgen\IbexaSiteApi\API\Values\Location $mainLocation
  */
 abstract class ContentInfo extends ValueObject
 {

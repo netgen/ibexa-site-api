@@ -56,7 +56,7 @@ class ContentUrlAliasRouter implements ChainedRouterInterface, RequestMatcherInt
         return $this->generator->generate(
             $content->mainLocation->innerLocation,
             $parameters,
-            $referenceType
+            $referenceType,
         );
     }
 

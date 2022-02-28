@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\IbexaSiteApiBundle\Tests\QueryType;
 
-use Ibexa\Core\FieldType\Integer\Value;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
+use Ibexa\Core\FieldType\Integer\Value;
 use Ibexa\Core\MVC\Symfony\ExpressionLanguage\ExpressionLanguage;
 use Netgen\Bundle\IbexaSiteApiBundle\NamedObject\Provider;
 use Netgen\Bundle\IbexaSiteApiBundle\QueryType\ExpressionFunctionProvider;
@@ -300,7 +300,7 @@ final class ParameterProcessorTest extends TestCase
                 'booleanStringValue2' => '0',
                 'floatStringValue' => '5.7',
                 'stringValue' => 'strand',
-            ])
+            ]),
         );
 
         $configResolver = $this->getConfigResolverMock();

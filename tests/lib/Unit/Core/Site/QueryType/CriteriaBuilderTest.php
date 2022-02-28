@@ -163,7 +163,7 @@ final class CriteriaBuilderTest extends TestCase
                 ],
                 [
                     new LogicalNot(
-                        new ObjectStateIdentifier('ez_lock', 'locked')
+                        new ObjectStateIdentifier('ez_lock', 'locked'),
                     ),
                 ],
             ],
@@ -348,7 +348,7 @@ final class CriteriaBuilderTest extends TestCase
                 ],
                 [
                     new LogicalNot(
-                        new Subtree(['/why/not/subroot/', '/ash/'])
+                        new Subtree(['/why/not/subroot/', '/ash/']),
                     ),
                 ],
             ],
@@ -379,7 +379,7 @@ final class CriteriaBuilderTest extends TestCase
                         new LogicalAnd([
                             new Subtree(['/subroot/tree/', '/ash/']),
                             new Subtree(['/subroot/tree/', '/poplar/']),
-                        ])
+                        ]),
                     ),
                 ],
             ],
@@ -426,7 +426,7 @@ final class CriteriaBuilderTest extends TestCase
 
         self::assertEquals(
             $expectedCriteria,
-            $criteria
+            $criteria,
         );
     }
 

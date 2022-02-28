@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Netgen\IbexaSiteApi\Tests\Unit\Core\Site\QueryType\Location;
 
+use Ibexa\Contracts\Core\Repository\Values\Content\Location as APILocation;
 use Ibexa\Contracts\Core\Repository\Values\Content\LocationQuery;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ContentTypeIdentifier;
@@ -15,9 +16,8 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ParentLocatio
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\ContentName;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\DatePublished;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\Location\Priority;
-use Ibexa\Contracts\Core\Repository\Values\Content\Location as APILocation;
-use Ibexa\Core\Repository\Values\ContentType\FieldDefinitionCollection;
 use Ibexa\Core\Repository\Values\Content\Location as RepositoryLocation;
+use Ibexa\Core\Repository\Values\ContentType\FieldDefinitionCollection;
 use Netgen\IbexaSearchExtra\API\Values\Content\Query\Criterion\Visible;
 use Netgen\IbexaSiteApi\API\Site;
 use Netgen\IbexaSiteApi\Core\Site\QueryType\Location\Children;
@@ -230,7 +230,7 @@ final class ChildrenTest extends QueryTypeBaseTest
                         new DateMetadata(
                             DateMetadata::CREATED,
                             Operator::EQ,
-                            1525384800
+                            1525384800,
                         ),
                         new ParentLocationId(42),
                     ]),
@@ -310,6 +310,11 @@ final class ChildrenTest extends QueryTypeBaseTest
         ];
     }
 
+    public function internalGetRepoFields(): array
+    {
+        return [];
+    }
+
     protected function getQueryTypeName(): string
     {
         return 'SiteAPI:Location/Children';
@@ -323,9 +328,9 @@ final class ChildrenTest extends QueryTypeBaseTest
                 true,
                 2,
                 $showHiddenItems,
-                true
+                true,
             ),
-            new NullLogger()
+            new NullLogger(),
         );
     }
 
@@ -344,7 +349,7 @@ final class ChildrenTest extends QueryTypeBaseTest
                     'contentInfo' => $this->getRepoContentInfo(),
                 ]),
             ],
-            new NullLogger()
+            new NullLogger(),
         );
     }
 
@@ -380,11 +385,6 @@ final class ChildrenTest extends QueryTypeBaseTest
         $this->siteMock = $this->getMockBuilder(Site::class)->getMock();
 
         return $this->siteMock;
-    }
-
-    public function internalGetRepoFields(): array
-    {
-        return [];
     }
 
     protected function internalGetRepoFieldDefinitions(): FieldDefinitionCollection

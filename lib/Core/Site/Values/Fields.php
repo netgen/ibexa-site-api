@@ -35,10 +35,13 @@ final class Fields extends APIFields
     private SiteContent $content;
     private DomainObjectMapper $domainObjectMapper;
     private LoggerInterface $logger;
+
     /** @var \Netgen\IbexaSiteApi\API\Values\Field[] */
     private array $fieldsByIdentifier = [];
+
     /** @var \Netgen\IbexaSiteApi\API\Values\Field[] */
     private array $fieldsById = [];
+
     /** @var \Netgen\IbexaSiteApi\API\Values\Field[] */
     private array $fieldsByNumericSequence = [];
 

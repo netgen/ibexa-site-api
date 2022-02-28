@@ -19,14 +19,14 @@ final class RedirectConfiguration
         $this->absolute = $absolute;
     }
 
-    public static function fromConfigurationArray(array $config): RedirectConfiguration
+    public static function fromConfigurationArray(array $config): self
     {
         $target = $config['target'];
         $targetParameters = $config['target_parameters'];
         $permanent = $config['permanent'];
         $absolute = $config['absolute'];
 
-        return new RedirectConfiguration($target, $targetParameters, $permanent, $absolute);
+        return new self($target, $targetParameters, $permanent, $absolute);
     }
 
     public function getTarget(): string

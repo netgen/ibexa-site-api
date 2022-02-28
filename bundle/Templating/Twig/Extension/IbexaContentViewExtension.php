@@ -21,7 +21,7 @@ class IbexaContentViewExtension extends AbstractExtension
             new TwigFunction(
                 'ng_ibexa_view_content',
                 [IbexaContentViewRuntime::class, 'renderContentView'],
-                ['is_safe' => ['html']]
+                ['is_safe' => ['html']],
             ),
         ];
     }

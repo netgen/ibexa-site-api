@@ -26,7 +26,7 @@ final class QueryTypeExpressionFunctionProviderPass implements CompilerPassInter
         foreach (array_keys($functionProviders) as $functionProviderId) {
             $expressionLanguageDefinition->addMethodCall(
                 'registerProvider',
-                [new Reference($functionProviderId)]
+                [new Reference($functionProviderId)],
             );
         }
     }

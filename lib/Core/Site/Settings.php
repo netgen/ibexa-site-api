@@ -67,12 +67,16 @@ final class Settings extends BaseSettings
         switch ($property) {
             case 'prioritizedLanguages':
                 return $this->prioritizedLanguages;
+
             case 'useAlwaysAvailable':
                 return $this->useAlwaysAvailable;
+
             case 'rootLocationId':
                 return $this->rootLocationId;
+
             case 'showHiddenItems':
                 return $this->showHiddenItems;
+
             case 'failOnMissingField':
                 return $this->failOnMissingField;
         }
