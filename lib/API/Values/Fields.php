@@ -30,18 +30,16 @@ abstract class Fields implements IteratorAggregate, ArrayAccess, Countable
     /**
      * Return whether the collection contains a field with the given $id.
      *
-     * @param int|string $id
+     * @param int $id
      */
-    abstract public function hasFieldById($id): bool;
+    abstract public function hasFieldById(int $id): bool;
 
     /**
      * Return the field with the given $id.
      *
-     * @param int|string $id
-     *
-     * @return \Netgen\IbexaSiteApi\API\Values\Field
+     * @param int $id
      */
-    abstract public function getFieldById($id): Field;
+    abstract public function getFieldById(int $id): Field;
 
     /**
      * Return first existing and non-empty field by the given $firstIdentifier and $identifiers.
@@ -50,8 +48,6 @@ abstract class Fields implements IteratorAggregate, ArrayAccess, Countable
      * If all found fields are empty, the first found field will be returned.
      *
      * @param string ...$otherIdentifiers
-     *
-     * @return \Netgen\IbexaSiteApi\API\Values\Field
      */
     abstract public function getFirstNonEmptyField(string $firstIdentifier, string ...$otherIdentifiers): Field;
 }

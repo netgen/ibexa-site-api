@@ -27,29 +27,35 @@ class QueryRuntime
     }
 
     /**
+     * @param mixed $context
+     *
      * @throws \Pagerfanta\Exception\Exception
      * @throws \Twig\Error\RuntimeError
      */
     public function executeQuery($context, string $name): Pagerfanta
     {
         return $this->queryExecutor->execute(
-            $this->getQueryDefinitionCollection($context)->get($name)
+            $this->getQueryDefinitionCollection($context)->get($name),
         );
     }
 
     /**
+     * @param mixed $context
+     *
      * @throws \Twig\Error\RuntimeError
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
     public function executeRawQuery($context, string $name): SearchResult
     {
         return $this->queryExecutor->executeRaw(
-            $this->getQueryDefinitionCollection($context)->get($name)
+            $this->getQueryDefinitionCollection($context)->get($name),
         );
     }
 
     /**
      * Returns the QueryDefinitionCollection variable from the given $context.
+     *
+     * @param mixed $context
      *
      * @throws \Twig\Error\RuntimeError
      */
@@ -62,7 +68,7 @@ class QueryRuntime
         }
 
         throw new RuntimeError(
-            "Could not find QueryDefinitionCollection variable '{$variableName}'"
+            "Could not find QueryDefinitionCollection variable '{$variableName}'",
         );
     }
 }

@@ -44,7 +44,7 @@ final class ParameterProcessor
                 'location' => $view->getSiteLocation(),
                 'content' => $view->getSiteContent(),
                 'namedObject' => $this->namedObjectProvider,
-            ]
+            ],
         );
     }
 
@@ -56,25 +56,19 @@ final class ParameterProcessor
         $expressionLanguage->register(
             'namedContent',
             static function (): void {},
-            function (array $arguments, string $name) {
-                return $this->namedObjectProvider->getContent($name);
-            }
+            fn (array $arguments, string $name) => $this->namedObjectProvider->getContent($name),
         );
 
         $expressionLanguage->register(
             'namedLocation',
             static function (): void {},
-            function (array $arguments, string $name) {
-                return $this->namedObjectProvider->getLocation($name);
-            }
+            fn (array $arguments, string $name) => $this->namedObjectProvider->getLocation($name),
         );
 
         $expressionLanguage->register(
             'namedTag',
             static function (): void {},
-            function (array $arguments, string $name) {
-                return $this->namedObjectProvider->getTag($name);
-            }
+            fn (array $arguments, string $name) => $this->namedObjectProvider->getTag($name),
         );
     }
 }

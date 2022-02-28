@@ -117,7 +117,7 @@ trait ContentFieldsMockTrait
             $this->getSiteMock(),
             $this->getRepositoryMock(),
             $failOnMissingField,
-            new NullLogger()
+            new NullLogger(),
         );
 
         return $this->domainObjectMapper[$failOnMissingField];
@@ -133,7 +133,7 @@ trait ContentFieldsMockTrait
             $this->getSiteMock(),
             $this->getRepositoryMockForContentWithoutFields(),
             $failOnMissingField,
-            new NullLogger()
+            new NullLogger(),
         );
 
         return $this->domainObjectMapperForContentWithoutFields[$failOnMissingField];
@@ -227,7 +227,7 @@ trait ContentFieldsMockTrait
 
         $this->fieldTypeMock
             ->method('isEmptyValue')
-            ->willReturnCallback(static function ($field) {return empty($field->value);});
+            ->willReturnCallback(static fn ($field) => empty($field->value));
 
         return $this->fieldTypeMock;
     }
@@ -251,7 +251,7 @@ trait ContentFieldsMockTrait
                     'id' => 42,
                     'identifier' => 'test',
                     'fieldDefinitions' => $this->getRepoFieldDefinitions(),
-                ])
+                ]),
             );
 
         return $this->contentTypeServiceMock;

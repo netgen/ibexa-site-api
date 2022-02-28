@@ -42,7 +42,7 @@ final class FindServiceTest extends BaseTest
             [
                 'eng-GB',
                 'ger-DE',
-            ]
+            ],
         );
 
         $findService = $this->getSite()->getFindService();
@@ -51,7 +51,7 @@ final class FindServiceTest extends BaseTest
         $searchResult = $findService->findContent(
             new Query([
                 'filter' => new ContentId($data['contentId']),
-            ])
+            ]),
         );
 
         $this->assertContentSearchResult($searchResult, $data);
@@ -76,7 +76,7 @@ final class FindServiceTest extends BaseTest
             [
                 'eng-US',
                 'ger-DE',
-            ]
+            ],
         );
 
         $findService = $this->getSite()->getFindService();
@@ -85,7 +85,7 @@ final class FindServiceTest extends BaseTest
         $searchResult = $findService->findContent(
             new Query([
                 'filter' => new ContentId($data['contentId']),
-            ])
+            ]),
         );
 
         $this->assertContentSearchResult($searchResult, $data);
@@ -109,7 +109,7 @@ final class FindServiceTest extends BaseTest
             'prioritizedLanguages',
             [
                 'eng-US',
-            ]
+            ],
         );
 
         $findService = $this->getSite()->getFindService();
@@ -118,7 +118,7 @@ final class FindServiceTest extends BaseTest
         $searchResult = $findService->findContent(
             new Query([
                 'filter' => new ContentId($data['contentId']),
-            ])
+            ]),
         );
 
         $this->assertContentSearchResult($searchResult, $data);
@@ -143,7 +143,7 @@ final class FindServiceTest extends BaseTest
             [
                 'eng-GB',
                 'ger-DE',
-            ]
+            ],
         );
 
         $findService = $this->getSite()->getFindService();
@@ -151,10 +151,10 @@ final class FindServiceTest extends BaseTest
         $searchResult = $findService->findContent(
             new Query([
                 'filter' => new ContentId(52),
-            ])
+            ]),
         );
 
-        self::assertEquals(0, $searchResult->totalCount);
+        self::assertSame(0, $searchResult->totalCount);
     }
 
     /**
@@ -176,7 +176,7 @@ final class FindServiceTest extends BaseTest
             [
                 'eng-GB',
                 'ger-DE',
-            ]
+            ],
         );
 
         $findService = $this->getSite()->getFindService();
@@ -185,7 +185,7 @@ final class FindServiceTest extends BaseTest
         $searchResult = $findService->findLocations(
             new LocationQuery([
                 'filter' => new ContentId($data['contentId']),
-            ])
+            ]),
         );
 
         $this->assertLocationSearchResult($searchResult, $data);
@@ -210,7 +210,7 @@ final class FindServiceTest extends BaseTest
             [
                 'eng-US',
                 'ger-DE',
-            ]
+            ],
         );
 
         $findService = $this->getSite()->getFindService();
@@ -219,7 +219,7 @@ final class FindServiceTest extends BaseTest
         $searchResult = $findService->findLocations(
             new LocationQuery([
                 'filter' => new ContentId($data['contentId']),
-            ])
+            ]),
         );
 
         $this->assertLocationSearchResult($searchResult, $data);
@@ -243,7 +243,7 @@ final class FindServiceTest extends BaseTest
             'prioritizedLanguages',
             [
                 'eng-US',
-            ]
+            ],
         );
 
         $findService = $this->getSite()->getFindService();
@@ -252,7 +252,7 @@ final class FindServiceTest extends BaseTest
         $searchResult = $findService->findLocations(
             new LocationQuery([
                 'filter' => new ContentId($data['contentId']),
-            ])
+            ]),
         );
 
         $this->assertLocationSearchResult($searchResult, $data);
@@ -277,7 +277,7 @@ final class FindServiceTest extends BaseTest
             [
                 'eng-GB',
                 'ger-DE',
-            ]
+            ],
         );
 
         $findService = $this->getSite()->getFindService();
@@ -285,10 +285,10 @@ final class FindServiceTest extends BaseTest
         $searchResult = $findService->findLocations(
             new LocationQuery([
                 'filter' => new ContentId(52),
-            ])
+            ]),
         );
 
-        self::assertEquals(0, $searchResult->totalCount);
+        self::assertSame(0, $searchResult->totalCount);
     }
 
     protected function assertContentSearchResult(SearchResult $searchResult, $data): void

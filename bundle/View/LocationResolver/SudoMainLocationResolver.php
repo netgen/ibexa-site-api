@@ -31,9 +31,7 @@ class SudoMainLocationResolver extends LocationResolver
 
         try {
             return $this->repository->sudo(
-                function (Repository $repository) use ($content): Location {
-                    return $this->loadService->loadLocation($content->mainLocationId);
-                }
+                fn (Repository $repository): Location => $this->loadService->loadLocation($content->mainLocationId),
             );
         } catch (Exception $e) {
             throw new NotFoundException('main Location of Content', $content->id);

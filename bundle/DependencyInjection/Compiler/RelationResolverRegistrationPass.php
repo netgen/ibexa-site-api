@@ -59,7 +59,7 @@ final class RelationResolverRegistrationPass implements CompilerPassInterface
         foreach ($attributes as $attribute) {
             if (!isset($attribute['identifier'])) {
                 throw new LogicException(
-                    "'{$this->resolverTag}' service tag needs an 'identifier' attribute to identify the field type"
+                    "'{$this->resolverTag}' service tag needs an 'identifier' attribute to identify the field type",
                 );
             }
 
@@ -68,7 +68,7 @@ final class RelationResolverRegistrationPass implements CompilerPassInterface
                 [
                     $attribute['identifier'],
                     new Reference($id),
-                ]
+                ],
             );
         }
     }

@@ -177,7 +177,7 @@ final class BaseQueryTypeTest extends QueryTypeBaseTest
                         new DateMetadata(
                             DateMetadata::CREATED,
                             Operator::EQ,
-                            1525384800
+                            1525384800,
                         ),
                     ]),
                     'sortClauses' => [
@@ -199,7 +199,7 @@ final class BaseQueryTypeTest extends QueryTypeBaseTest
                         new DateMetadata(
                             DateMetadata::MODIFIED,
                             Operator::EQ,
-                            1570485600
+                            1570485600,
                         ),
                     ]),
                     'sortClauses' => [
@@ -326,8 +326,8 @@ final class BaseQueryTypeTest extends QueryTypeBaseTest
                 true,
                 2,
                 $showHiddenItems,
-                true
-            )
+                true,
+            ),
         );
     }
 

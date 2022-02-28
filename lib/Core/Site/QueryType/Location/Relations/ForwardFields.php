@@ -6,11 +6,12 @@ namespace Netgen\IbexaSiteApi\Core\Site\QueryType\Location\Relations;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ContentId;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\MatchNone;
+use Netgen\IbexaSiteApi\API\Settings;
 use Netgen\IbexaSiteApi\API\Values\Content as SiteContent;
 use Netgen\IbexaSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Registry as RelationResolverRegistry;
 use Netgen\IbexaSiteApi\Core\Site\QueryType\Location;
-use Netgen\IbexaSiteApi\API\Settings;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use function array_merge;
 
 /**
  * QueryType for finding relations from specific relation fields of a Content.
@@ -75,7 +76,7 @@ final class ForwardFields extends Location
             $idsGrouped[] = $relationResolver->getRelationIds($field);
         }
 
-        $relatedContentIds = \array_merge(...$idsGrouped);
+        $relatedContentIds = array_merge(...$idsGrouped);
 
         if (empty($relatedContentIds)) {
             return new MatchNone();

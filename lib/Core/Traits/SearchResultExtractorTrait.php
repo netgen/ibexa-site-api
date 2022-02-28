@@ -26,10 +26,8 @@ trait SearchResultExtractorTrait
     protected function extractValueObjects(SearchResult $searchResult): array
     {
         return array_map(
-            static function (SearchHit $searchHit) {
-                return $searchHit->valueObject;
-            },
-            $searchResult->searchHits
+            static fn (SearchHit $searchHit) => $searchHit->valueObject,
+            $searchResult->searchHits,
         );
     }
 
@@ -47,7 +45,7 @@ trait SearchResultExtractorTrait
 
                 return $content;
             },
-            $searchResult->searchHits
+            $searchResult->searchHits,
         );
     }
 
@@ -65,7 +63,7 @@ trait SearchResultExtractorTrait
 
                 return $location;
             },
-            $searchResult->searchHits
+            $searchResult->searchHits,
         );
     }
 }

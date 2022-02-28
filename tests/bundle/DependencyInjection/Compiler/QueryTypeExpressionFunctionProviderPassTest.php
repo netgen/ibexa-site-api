@@ -23,7 +23,7 @@ final class QueryTypeExpressionFunctionProviderPassTest extends AbstractCompiler
 
         $this->setDefinition(
             self::QueryTypeExpressionLanguageId,
-            new Definition()
+            new Definition(),
         );
     }
 
@@ -39,7 +39,7 @@ final class QueryTypeExpressionFunctionProviderPassTest extends AbstractCompiler
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             self::QueryTypeExpressionLanguageId,
             'registerProvider',
-            [$serviceId]
+            [$serviceId],
         );
     }
 

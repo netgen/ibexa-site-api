@@ -38,7 +38,7 @@ class Renderer extends CoreRenderer
             $embedConfigurationNamespace,
             $logger,
             $customTagsConfiguration,
-            $customStylesConfiguration
+            $customStylesConfiguration,
         );
 
         $this->ngEmbedConfigurationNamespace = $ngEmbedConfigurationNamespace;
@@ -69,7 +69,7 @@ class Renderer extends CoreRenderer
         }
 
         $this->logger->warning(
-            "Embed tag configuration '$configurationReference' was not found"
+            "Embed tag configuration '{$configurationReference}' was not found",
         );
 
         $configurationReference = $this->getConfigurationReference();
@@ -87,7 +87,7 @@ class Renderer extends CoreRenderer
         }
 
         $this->logger->warning(
-            "Embed tag default configuration '$configurationReference' was not found"
+            "Embed tag default configuration '{$configurationReference}' was not found",
         );
 
         return null;

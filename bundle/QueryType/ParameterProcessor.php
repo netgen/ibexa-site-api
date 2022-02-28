@@ -67,7 +67,7 @@ final class ParameterProcessor
                 'request' => $this->requestStack->getCurrentRequest(),
                 'configResolver' => $this->configResolver,
                 'namedObject' => $this->namedObjectProvider,
-            ]
+            ],
         );
     }
 

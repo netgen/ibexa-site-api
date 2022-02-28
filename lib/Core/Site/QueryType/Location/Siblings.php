@@ -65,7 +65,7 @@ final class Siblings extends Location
 
                     return [];
                 }
-            }
+            },
         );
     }
 

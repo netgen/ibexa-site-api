@@ -47,9 +47,9 @@ class CustomQueryType extends Base
                 return new DateMetadata(
                     DateMetadata::MODIFIED,
                     $definition->operator,
-                    $definition->value
+                    $definition->value,
                 );
-            }
+            },
         );
     }
 
@@ -80,6 +80,7 @@ class CustomQueryType extends Base
         switch ($string) {
             case 'section':
                 return new SectionIdentifier();
+
             case 'whatever':
                 return new SectionName();
         }

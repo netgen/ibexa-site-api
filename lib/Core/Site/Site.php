@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Netgen\IbexaSiteApi\Core\Site;
 
-use Ibexa\Contracts\Core\Repository\Repository;
-use Ibexa\Contracts\Core\Repository\SearchService;
 use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\LocationService;
+use Ibexa\Contracts\Core\Repository\Repository;
+use Ibexa\Contracts\Core\Repository\SearchService;
 use Netgen\IbexaSiteApi\API\FilterService as APIFilterService;
 use Netgen\IbexaSiteApi\API\FindService as APIFindService;
 use Netgen\IbexaSiteApi\API\LoadService as APILoadService;
@@ -73,7 +73,7 @@ class Site implements SiteInterface
                 $this->settings,
                 $this->getDomainObjectMapper(),
                 $this->filteringSearchService,
-                $this->contentService
+                $this->contentService,
             );
         }
 
@@ -87,7 +87,7 @@ class Site implements SiteInterface
                 $this->settings,
                 $this->getDomainObjectMapper(),
                 $this->searchService,
-                $this->contentService
+                $this->contentService,
             );
         }
 
@@ -101,7 +101,7 @@ class Site implements SiteInterface
                 $this->settings,
                 $this->getDomainObjectMapper(),
                 $this->contentService,
-                $this->locationService
+                $this->locationService,
             );
         }
 
@@ -113,7 +113,7 @@ class Site implements SiteInterface
         if ($this->relationService === null) {
             $this->relationService = new RelationService(
                 $this,
-                $this->relationResolverRegistry
+                $this->relationResolverRegistry,
             );
         }
 
@@ -132,7 +132,7 @@ class Site implements SiteInterface
                 $this,
                 $this->repository,
                 $this->settings->failOnMissingField,
-                $this->logger
+                $this->logger,
             );
         }
 

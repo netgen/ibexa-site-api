@@ -425,7 +425,7 @@ final class ContentViewTest extends AbstractParserTestCase
     {
         $this->expectException($exceptionClass);
         $exceptionMessage = preg_quote($exceptionMessage, '/');
-        self::matchesRegularExpression("/$exceptionMessage/");
+        self::matchesRegularExpression("/{$exceptionMessage}/");
 
         $this->load([
             'system' => [
@@ -579,7 +579,7 @@ final class ContentViewTest extends AbstractParserTestCase
         $this->assertConfigResolverParameterValue(
             'ng_content_view',
             $expectedConfigurationValues,
-            'ibexa_demo_site'
+            'ibexa_demo_site',
         );
     }
 

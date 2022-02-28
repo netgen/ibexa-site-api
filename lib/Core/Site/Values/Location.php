@@ -6,14 +6,14 @@ namespace Netgen\IbexaSiteApi\Core\Site\Values;
 
 use Ibexa\Contracts\Core\Repository\Exceptions\NotImplementedException;
 use Ibexa\Contracts\Core\Repository\Values\Content\Location as RepoLocation;
-use Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo;
 use Ibexa\Contracts\Core\Repository\Values\Content\LocationQuery;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ContentTypeIdentifier;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LocationId;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LogicalAnd;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LogicalNot;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ParentLocationId;
-use Netgen\EzPlatformSearchExtra\API\Values\Content\Query\Criterion\Visible;
+use Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo;
+use Netgen\IbexaSearchExtra\API\Values\Content\Query\Criterion\Visible;
 use Netgen\IbexaSiteApi\API\Site;
 use Netgen\IbexaSiteApi\API\Values\Content as APIContent;
 use Netgen\IbexaSiteApi\API\Values\ContentInfo as APIContentInfo;
@@ -26,13 +26,12 @@ use function property_exists;
 
 final class Location extends APILocation
 {
+    protected RepoLocation $innerLocation;
     private string $languageCode;
 
     private ?APIContentInfo $contentInfo = null;
     private ?APILocation $internalParent = null;
     private ?APIContent $internalContent = null;
-
-    protected RepoLocation $innerLocation;
 
     private VersionInfo $innerVersionInfo;
     private Site $site;
@@ -76,12 +75,16 @@ final class Location extends APILocation
         switch ($property) {
             case 'contentId':
                 return $this->innerLocation->contentId;
+
             case 'parent':
                 return $this->getParent();
+
             case 'content':
                 return $this->getContent();
+
             case 'contentInfo':
                 return $this->getContentInfo();
+
             case 'isVisible':
                 return !$this->innerLocation->hidden && !$this->innerLocation->invisible;
         }
@@ -197,7 +200,7 @@ final class Location extends APILocation
         $criteria = [
             new ParentLocationId($this->parentLocationId),
             new LogicalNot(
-                new LocationId($this->id)
+                new LocationId($this->id),
             ),
         ];
 
@@ -228,8 +231,8 @@ final class Location extends APILocation
                     'filter' => new LogicalAnd($criteria),
                     'sortClauses' => $sortClauses,
                 ]),
-                $this->site->getFilterService()
-            )
+                $this->site->getFilterService(),
+            ),
         );
 
         $pager->setNormalizeOutOfRangePages(true);
@@ -248,7 +251,7 @@ final class Location extends APILocation
     {
         if ($this->internalParent === null) {
             $this->internalParent = $this->site->getLoadService()->loadLocation(
-                $this->parentLocationId
+                $this->parentLocationId,
             );
         }
 
@@ -260,7 +263,7 @@ final class Location extends APILocation
         if ($this->internalContent === null) {
             $this->internalContent = $this->domainObjectMapper->mapContent(
                 $this->innerVersionInfo,
-                $this->languageCode
+                $this->languageCode,
             );
         }
 
@@ -275,7 +278,7 @@ final class Location extends APILocation
         if ($this->contentInfo === null) {
             $this->contentInfo = $this->domainObjectMapper->mapContentInfo(
                 $this->innerVersionInfo,
-                $this->languageCode
+                $this->languageCode,
             );
         }
 

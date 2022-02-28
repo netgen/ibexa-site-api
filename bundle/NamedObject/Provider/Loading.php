@@ -68,7 +68,6 @@ final class Loading extends Provider
         return isset($this->configuration['locations'][$name]);
     }
 
-
     public function getLocation(string $name): Location
     {
         $locationId = $this->getLocationId($name);

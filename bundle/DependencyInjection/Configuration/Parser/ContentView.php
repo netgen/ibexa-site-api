@@ -65,11 +65,9 @@ class ContentView extends AbstractParser
                             })
                         ->end()
                         ->beforeNormalization()
-                            ->ifTrue(static function ($v): bool {
-                                return !array_key_exists('match', $v) && !array_key_exists('extends', $v);
-                            })
+                            ->ifTrue(static fn ($v): bool => !array_key_exists('match', $v) && !array_key_exists('extends', $v))
                             ->thenInvalid(
-                                'When view configuration is not extending another, match key is required'
+                                'When view configuration is not extending another, match key is required',
                             )
                         ->end()
                         ->children()
@@ -78,9 +76,9 @@ class ContentView extends AbstractParser
                             ->scalarNode('controller')
                                 ->info(
                                     <<<'EOT'
-Use custom controller instead of the default one to display a content matching your rules.
-You can use the controller reference notation supported by Symfony.
-EOT
+                                    Use custom controller instead of the default one to display a content matching your rules.
+                                    You can use the controller reference notation supported by Symfony.
+                                    EOT
                                 )
                                 ->example('MyBundle:MyControllerClass:view')
                             ->end()
@@ -105,16 +103,16 @@ EOT
                             ->scalarNode('permanent_redirect')
                                 ->info(
                                     <<<'EOT'
-Set up permanent redirect. You can use the expression language here as well.
-EOT
+                                    Set up permanent redirect. You can use the expression language here as well.
+                                    EOT
                                 )
                                 ->example('@=location.parent')
                             ->end()
                             ->scalarNode('temporary_redirect')
                                 ->info(
                                     <<<'EOT'
-Set up temporary redirect. You can use the expression language here as well.
-EOT
+                                    Set up temporary redirect. You can use the expression language here as well.
+                                    EOT
                                 )
                                 ->example('@=location.parent')
                             ->end()
@@ -128,15 +126,15 @@ EOT
                             ->arrayNode('params')
                                 ->info(
                                     <<<'EOT'
-Arbitrary params that will be passed in the ContentView object, manageable by ViewProviders.
-Those params will NOT be passed to the resulting view template by default.
-EOT
+                                    Arbitrary params that will be passed in the ContentView object, manageable by ViewProviders.
+                                    Those params will NOT be passed to the resulting view template by default.
+                                    EOT
                                 )
                                 ->example(
                                     [
                                         'foo' => '%some.parameter.reference%',
                                         'osTypes' => ['osx', 'linux', 'windows'],
-                                    ]
+                                    ],
                                 )
                                 ->defaultValue(self::DEFAULT_PARAMS_VALUE)
                                 ->useAttributeAsKey('key')
@@ -152,7 +150,7 @@ EOT
                                 return false;
                             })
                             ->thenInvalid(
-                                'You cannot use both redirect and controller/template configuration at the same time.'
+                                'You cannot use both redirect and controller/template configuration at the same time.',
                             )
                         ->end()
                         ->validate()
@@ -164,15 +162,13 @@ EOT
                                 return false;
                             })
                             ->thenInvalid(
-                                'You cannot use both expanded and shortcut redirect configuration at the same time.'
+                                'You cannot use both expanded and shortcut redirect configuration at the same time.',
                             )
                         ->end()
                         ->validate()
-                            ->ifTrue(static function ($v): bool {
-                                return array_key_exists('temporary_redirect', $v) && array_key_exists('permanent_redirect', $v);
-                            })
+                            ->ifTrue(static fn ($v): bool => array_key_exists('temporary_redirect', $v) && array_key_exists('permanent_redirect', $v))
                             ->thenInvalid(
-                                'You cannot use both "temporary_redirect" and "permanent_redirect" at the same time.'
+                                'You cannot use both "temporary_redirect" and "permanent_redirect" at the same time.',
                             )
                         ->end()
                         ->validate()
@@ -184,7 +180,7 @@ EOT
                                 return false;
                             })
                             ->thenInvalid(
-                                'You cannot use both redirect and controller/template configuration at the same time.'
+                                'You cannot use both redirect and controller/template configuration at the same time.',
                             )
                         ->end()
                     ->end()
@@ -199,7 +195,7 @@ EOT
                 $this->extendViewConfig(
                     $viewConfig,
                     $viewType . '/' . $name,
-                    $scopeSettings['ng_content_view']
+                    $scopeSettings['ng_content_view'],
                 );
             }
         }
@@ -210,7 +206,7 @@ EOT
         $contextualizer->mapConfigArray(
             static::NODE_KEY,
             $config,
-            ContextualizerInterface::MERGE_FROM_SECOND_LEVEL
+            ContextualizerInterface::MERGE_FROM_SECOND_LEVEL,
         );
     }
 
@@ -231,8 +227,8 @@ EOT
                 sprintf(
                     'In %s: extended view configuration "%s" was not found',
                     $viewPath,
-                    $config['extends']
-                )
+                    $config['extends'],
+                ),
             );
         }
 
@@ -244,8 +240,8 @@ EOT
                     'In %s: only one level of view configuration inheritance is allowed, %s already extends %s',
                     $viewPath,
                     $extendedViewType . '/' . $extendedName,
-                    $baseConfig['extends']
-                )
+                    $baseConfig['extends'],
+                ),
             );
         }
 
@@ -299,7 +295,7 @@ EOT
                 ->beforeNormalization()
                     // String value is a shortcut to the named query
                     ->ifString()
-                    ->then(static function ($v): array {return ['named_query' => $v];})
+                    ->then(static fn ($v): array => ['named_query' => $v])
                 ->end()
                 ->children()
                     ->scalarNode('query_type')
@@ -324,23 +320,19 @@ EOT
                     ->end()
                 ->end()
                 ->validate()
-                    ->ifTrue(static function ($v): bool {
-                        return array_key_exists('named_query', $v) && array_key_exists('query_type', $v);
-                    })
+                    ->ifTrue(static fn ($v): bool => array_key_exists('named_query', $v) && array_key_exists('query_type', $v))
                     ->thenInvalid(
-                        'You cannot use both "named_query" and "query_type" at the same time.'
+                        'You cannot use both "named_query" and "query_type" at the same time.',
                     )
                 ->end()
                 ->validate()
-                    ->ifTrue(static function ($v): bool {
-                        return !array_key_exists('named_query', $v) && !array_key_exists('query_type', $v);
-                    })
+                    ->ifTrue(static fn ($v): bool => !array_key_exists('named_query', $v) && !array_key_exists('query_type', $v))
                     ->thenInvalid(
-                        'One of "named_query" or "query_type" must be set.'
+                        'One of "named_query" or "query_type" must be set.',
                     )
                 ->end()
                 ->validate()
-                    ->ifTrue(static function ($v): bool {return array_key_exists('query_type', $v);})
+                    ->ifTrue(static fn ($v): bool => array_key_exists('query_type', $v))
                     ->then(static function ($v): array {
                         if (!array_key_exists('use_filter', $v)) {
                             $v['use_filter'] = true;
@@ -373,7 +365,7 @@ EOT
                     return false;
                 })
                 ->thenInvalid(
-                    'Query key must be a string conforming to a valid Twig variable name.'
+                    'Query key must be a string conforming to a valid Twig variable name.',
                 );
 
         return $queries;

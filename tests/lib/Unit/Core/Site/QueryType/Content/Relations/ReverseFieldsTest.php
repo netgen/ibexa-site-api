@@ -188,7 +188,7 @@ final class ReverseFieldsTest extends QueryTypeBaseTest
                         new DateMetadata(
                             DateMetadata::CREATED,
                             Operator::EQ,
-                            1525384800
+                            1525384800,
                         ),
                         new FieldRelation('relations_a', Operator::CONTAINS, [42]),
                         new FieldRelation('relations_b', Operator::CONTAINS, [42]),
@@ -296,8 +296,8 @@ final class ReverseFieldsTest extends QueryTypeBaseTest
                 true,
                 2,
                 $showHiddenItems,
-                true
-            )
+                true,
+            ),
         );
     }
 
@@ -325,7 +325,7 @@ final class ReverseFieldsTest extends QueryTypeBaseTest
                 'languageCode' => 'eng-GB',
             ],
             true,
-            new NullLogger()
+            new NullLogger(),
         );
     }
 

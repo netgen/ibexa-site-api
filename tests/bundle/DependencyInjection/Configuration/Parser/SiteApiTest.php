@@ -85,7 +85,7 @@ final class SiteApiTest extends AbstractParserTestCase
         $this->assertConfigResolverParameterValue(
             'ng_site_api.' . $name,
             $expectedValue,
-            'ibexa_demo_site'
+            'ibexa_demo_site',
         );
     }
 
@@ -268,13 +268,13 @@ final class SiteApiTest extends AbstractParserTestCase
         $this->assertConfigResolverParameterValue(
             'ng_site_api.named_objects',
             [$name => $expectedValue] + $defaultValues,
-            'ibexa_demo_site'
+            'ibexa_demo_site',
         );
 
         // todo another path
         $this->assertContainerBuilderHasParameter(
             'ibexa.site_access.config.ibexa_demo_group.ng_site_api.named_objects',
-            [$name => $expectedValue] + $defaultValues
+            [$name => $expectedValue] + $defaultValues,
         );
     }
 
@@ -374,7 +374,7 @@ final class SiteApiTest extends AbstractParserTestCase
         $this->assertConfigResolverParameterValue(
             'ng_site_api.named_objects',
             $expectedConfigurationValues,
-            'ibexa_demo_site'
+            'ibexa_demo_site',
         );
     }
 
@@ -448,7 +448,7 @@ final class SiteApiTest extends AbstractParserTestCase
         $this->assertConfigResolverParameterValue(
             'ng_site_api.named_queries',
             [$queryName => $configurationValues + $defaultValues],
-            'ibexa_demo_site'
+            'ibexa_demo_site',
         );
         // Avoid detecting risky tests
         self::assertTrue(true);
@@ -518,7 +518,7 @@ final class SiteApiTest extends AbstractParserTestCase
     {
         $this->expectException(InvalidConfigurationException::class);
         $message = preg_quote($message, '/');
-        self::matchesRegularExpression("/$message/");
+        self::matchesRegularExpression("/{$message}/");
 
         $this->load([
             'system' => [
@@ -571,7 +571,7 @@ final class SiteApiTest extends AbstractParserTestCase
         $this->assertConfigResolverParameterValue(
             'ng_site_api.named_queries',
             $expectedConfigurationValues,
-            'ibexa_demo_site'
+            'ibexa_demo_site',
         );
     }
 

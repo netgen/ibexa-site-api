@@ -37,9 +37,7 @@ class CoreAdapterResolver extends LocationResolver
         $repoLocation = $this->coreLoader->loadLocation($content->contentInfo->innerContentInfo);
 
         return $this->repository->sudo(
-            function (Repository $repository) use ($repoLocation): Location {
-                return $this->loadService->loadLocation($repoLocation->id);
-            }
+            fn (Repository $repository): Location => $this->loadService->loadLocation($repoLocation->id),
         );
     }
 }

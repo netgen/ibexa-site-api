@@ -14,8 +14,8 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class ContentParamConverterTest extends AbstractParamConverterTest
 {
-    const PROPERTY_NAME = 'contentId';
-    const CONTENT_CLASS = Content::class;
+    public const PROPERTY_NAME = 'contentId';
+    public const CONTENT_CLASS = Content::class;
 
     /**
      * @var \Netgen\Bundle\IbexaSiteApiBundle\Request\ParamConverter\ContentParamConverter

@@ -75,7 +75,7 @@ class SiteApi extends AbstractParser
                 $contextualizer->setContextualParameter(
                     static::NODE_KEY . '.' . $parameterName,
                     $currentScope,
-                    $scopeSettings[static::NODE_KEY][$parameterName]
+                    $scopeSettings[static::NODE_KEY][$parameterName],
                 );
             }
         }

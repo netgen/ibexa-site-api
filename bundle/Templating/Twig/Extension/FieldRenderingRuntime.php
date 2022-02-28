@@ -47,7 +47,7 @@ class FieldRenderingRuntime
         return $this->fieldBlockRenderer->renderContentFieldView(
             $field->innerField,
             $field->fieldTypeIdentifier,
-            $params
+            $params,
         );
     }
 

@@ -211,7 +211,7 @@ final class AllTagFieldsTest extends QueryTypeBaseTest
                         new DateMetadata(
                             DateMetadata::CREATED,
                             Operator::EQ,
-                            1525384800
+                            1525384800,
                         ),
                         new TagId([1, 2, 3, 4]),
                         new LogicalNot(new ContentId(42)),
@@ -306,8 +306,8 @@ final class AllTagFieldsTest extends QueryTypeBaseTest
                 true,
                 2,
                 $showHiddenItems,
-                true
-            )
+                true,
+            ),
         );
     }
 
@@ -394,7 +394,7 @@ final class AllTagFieldsTest extends QueryTypeBaseTest
                 'languageCode' => 'eng-GB',
             ],
             true,
-            new NullLogger()
+            new NullLogger(),
         );
     }
 
@@ -412,7 +412,7 @@ final class AllTagFieldsTest extends QueryTypeBaseTest
                 'languageCode' => 'eng-GB',
             ],
             true,
-            new NullLogger()
+            new NullLogger(),
         );
     }
 

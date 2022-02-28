@@ -36,7 +36,7 @@ final class QueryExecutorTest extends TestCase
                 'useFilter' => true,
                 'maxPerPage' => 20,
                 'page' => 2,
-            ])
+            ]),
         );
 
         self::assertEquals($this->getFilterContentResult(), $result);
@@ -55,12 +55,12 @@ final class QueryExecutorTest extends TestCase
                 'useFilter' => true,
                 'maxPerPage' => 20,
                 'page' => 2,
-            ])
+            ]),
         );
 
         self::assertInstanceOf(FilterAdapter::class, $result->getAdapter());
-        self::assertEquals(20, $result->getMaxPerPage());
-        self::assertEquals(2, $result->getCurrentPage());
+        self::assertSame(20, $result->getMaxPerPage());
+        self::assertSame(2, $result->getCurrentPage());
         self::assertTrue($result->getNormalizeOutOfRangePages());
     }
 
@@ -77,7 +77,7 @@ final class QueryExecutorTest extends TestCase
                 'useFilter' => false,
                 'maxPerPage' => 20,
                 'page' => 2,
-            ])
+            ]),
         );
 
         self::assertEquals($this->getFindContentResult(), $result);
@@ -96,12 +96,12 @@ final class QueryExecutorTest extends TestCase
                 'useFilter' => false,
                 'maxPerPage' => 20,
                 'page' => 2,
-            ])
+            ]),
         );
 
         self::assertInstanceOf(FindAdapter::class, $result->getAdapter());
-        self::assertEquals(20, $result->getMaxPerPage());
-        self::assertEquals(2, $result->getCurrentPage());
+        self::assertSame(20, $result->getMaxPerPage());
+        self::assertSame(2, $result->getCurrentPage());
         self::assertTrue($result->getNormalizeOutOfRangePages());
     }
 
@@ -118,7 +118,7 @@ final class QueryExecutorTest extends TestCase
                 'useFilter' => true,
                 'maxPerPage' => 20,
                 'page' => 2,
-            ])
+            ]),
         );
 
         self::assertEquals($this->getFilterLocationsResult(), $result);
@@ -137,12 +137,12 @@ final class QueryExecutorTest extends TestCase
                 'useFilter' => true,
                 'maxPerPage' => 20,
                 'page' => 2,
-            ])
+            ]),
         );
 
         self::assertInstanceOf(FilterAdapter::class, $result->getAdapter());
-        self::assertEquals(20, $result->getMaxPerPage());
-        self::assertEquals(2, $result->getCurrentPage());
+        self::assertSame(20, $result->getMaxPerPage());
+        self::assertSame(2, $result->getCurrentPage());
         self::assertTrue($result->getNormalizeOutOfRangePages());
     }
 
@@ -159,7 +159,7 @@ final class QueryExecutorTest extends TestCase
                 'useFilter' => false,
                 'maxPerPage' => 20,
                 'page' => 2,
-            ])
+            ]),
         );
 
         self::assertEquals($this->getFindLocationsResult(), $result);
@@ -178,12 +178,12 @@ final class QueryExecutorTest extends TestCase
                 'useFilter' => false,
                 'maxPerPage' => 20,
                 'page' => 2,
-            ])
+            ]),
         );
 
         self::assertInstanceOf(FindAdapter::class, $result->getAdapter());
-        self::assertEquals(20, $result->getMaxPerPage());
-        self::assertEquals(2, $result->getCurrentPage());
+        self::assertSame(20, $result->getMaxPerPage());
+        self::assertSame(2, $result->getCurrentPage());
         self::assertTrue($result->getNormalizeOutOfRangePages());
     }
 
@@ -192,7 +192,7 @@ final class QueryExecutorTest extends TestCase
         return new QueryExecutor(
             $this->getQueryTypeRegistryMock(),
             $this->getFilterServiceMock(),
-            $this->getFindServiceMock()
+            $this->getFindServiceMock(),
         );
     }
 

@@ -64,11 +64,11 @@ final class Subtree extends Location
                 $location = $parameters['location'];
                 $relativeDepth = $this->getRelativeDepthValue(
                     $location->depth,
-                    $definition->value
+                    $definition->value,
                 );
 
                 return new Depth($definition->operator, $relativeDepth);
-            }
+            },
         );
     }
 
@@ -103,10 +103,8 @@ final class Subtree extends Location
     {
         if (is_array($value)) {
             return array_map(
-                static function (int $value) use ($startDepth): int {
-                    return $startDepth + $value;
-                },
-                $value
+                static fn (int $value): int => $startDepth + $value,
+                $value,
             );
         }
 

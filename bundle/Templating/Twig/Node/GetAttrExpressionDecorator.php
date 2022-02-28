@@ -206,7 +206,7 @@ final class GetAttrExpressionDecorator extends GetAttrExpression
                 $isDefinedTest,
                 $ignoreStrictCheck,
                 $sandboxed,
-                $lineno
+                $lineno,
             );
         }
 

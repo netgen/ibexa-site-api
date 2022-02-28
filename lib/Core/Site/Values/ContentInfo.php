@@ -82,6 +82,7 @@ final class ContentInfo extends APIContentInfo
         switch ($property) {
             case 'mainLocation':
                 return $this->getMainLocation();
+
             case 'isVisible':
                 return !$this->isHidden;
         }
@@ -154,7 +155,7 @@ final class ContentInfo extends APIContentInfo
     {
         if ($this->internalMainLocation === null && $this->mainLocationId !== null) {
             $this->internalMainLocation = $this->site->getLoadService()->loadLocation(
-                $this->innerContentInfo->mainLocationId
+                $this->innerContentInfo->mainLocationId,
             );
         }
 

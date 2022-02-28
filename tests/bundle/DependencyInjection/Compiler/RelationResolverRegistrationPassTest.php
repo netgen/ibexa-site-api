@@ -21,7 +21,7 @@ final class RelationResolverRegistrationPassTest extends AbstractCompilerPassTes
 
         $this->setDefinition(
             'netgen.ibexa_site_api.plugins.field_type.relation_resolver.registry',
-            new Definition()
+            new Definition(),
         );
     }
 
@@ -32,7 +32,7 @@ final class RelationResolverRegistrationPassTest extends AbstractCompilerPassTes
         $definition = new Definition();
         $definition->addTag(
             'netgen.ibexa_site_api.plugins.field_type.relation_resolver',
-            ['identifier' => $fieldTypeIdentifier]
+            ['identifier' => $fieldTypeIdentifier],
         );
         $this->setDefinition($serviceId, $definition);
 
@@ -41,7 +41,7 @@ final class RelationResolverRegistrationPassTest extends AbstractCompilerPassTes
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'netgen.ibexa_site_api.plugins.field_type.relation_resolver.registry',
             'register',
-            [$fieldTypeIdentifier, $serviceId]
+            [$fieldTypeIdentifier, $serviceId],
         );
     }
 

@@ -117,9 +117,9 @@ abstract class BaseTest extends APIBaseTest
         self::assertSame($contentId, $content->id);
         self::assertSame($locationId, $content->mainLocationId);
         self::assertSame($name, $content->name);
-        self::assertEquals($data['mainLocationId'], $content->mainLocationId);
-        self::assertEquals($data['languageCode'], $content->languageCode);
-        self::assertEquals($data['contentIsVisible'], $content->isVisible);
+        self::assertSame($data['mainLocationId'], $content->mainLocationId);
+        self::assertSame($data['languageCode'], $content->languageCode);
+        self::assertSame($data['contentIsVisible'], $content->isVisible);
         $this->assertContentInfo($content->contentInfo, $data);
         $this->assertFields($content, $data);
         self::assertInstanceOf(Content::class, $content->owner);
@@ -149,7 +149,7 @@ abstract class BaseTest extends APIBaseTest
             // Do nothing
         }
 
-        self::assertEquals(
+        self::assertSame(
             [
                 'id' => $content->id,
                 'mainLocationId' => $content->mainLocationId,
@@ -162,7 +162,7 @@ abstract class BaseTest extends APIBaseTest
                 'innerContent' => '[An instance of Ibexa\Contracts\Core\Repository\Values\Content\Content]',
                 'innerVersionInfo' => '[An instance of Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo]',
             ],
-            $content->__debugInfo()
+            $content->__debugInfo(),
         );
     }
 
@@ -170,26 +170,26 @@ abstract class BaseTest extends APIBaseTest
     {
         [$name, $contentId, $contentRemoteId, $locationId] = array_values($data);
 
-        self::assertEquals($contentId, $contentInfo->id);
-        self::assertEquals($contentRemoteId, $contentInfo->remoteId);
-        self::assertEquals($locationId, $contentInfo->mainLocationId);
-        self::assertEquals($name, $contentInfo->name);
-        self::assertEquals($data['contentTypeIdentifier'], $contentInfo->contentTypeIdentifier);
-        self::assertEquals($data['contentTypeId'], $contentInfo->contentTypeId);
-        self::assertEquals($data['sectionId'], $contentInfo->sectionId);
-        self::assertEquals($data['currentVersionNo'], $contentInfo->currentVersionNo);
-        self::assertEquals($data['published'], $contentInfo->published);
-        self::assertEquals($data['contentIsHidden'], $contentInfo->isHidden);
-        self::assertEquals($data['contentIsVisible'], $contentInfo->isVisible);
-        self::assertEquals($data['ownerId'], $contentInfo->ownerId);
-        self::assertEquals($data['modificationDateTimestamp'], $contentInfo->modificationDate->getTimestamp());
-        self::assertEquals($data['publishedDateTimestamp'], $contentInfo->publishedDate->getTimestamp());
-        self::assertEquals($data['alwaysAvailable'], $contentInfo->alwaysAvailable);
-        self::assertEquals($data['mainLanguageCode'], $contentInfo->mainLanguageCode);
-        self::assertEquals($data['mainLocationId'], $contentInfo->mainLocationId);
-        self::assertEquals($data['contentTypeName'], $contentInfo->contentTypeName);
-        self::assertEquals($data['contentTypeDescription'], $contentInfo->contentTypeDescription);
-        self::assertEquals($data['languageCode'], $contentInfo->languageCode);
+        self::assertSame($contentId, $contentInfo->id);
+        self::assertSame($contentRemoteId, $contentInfo->remoteId);
+        self::assertSame($locationId, $contentInfo->mainLocationId);
+        self::assertSame($name, $contentInfo->name);
+        self::assertSame($data['contentTypeIdentifier'], $contentInfo->contentTypeIdentifier);
+        self::assertSame($data['contentTypeId'], $contentInfo->contentTypeId);
+        self::assertSame($data['sectionId'], $contentInfo->sectionId);
+        self::assertSame($data['currentVersionNo'], $contentInfo->currentVersionNo);
+        self::assertSame($data['published'], $contentInfo->published);
+        self::assertSame($data['contentIsHidden'], $contentInfo->isHidden);
+        self::assertSame($data['contentIsVisible'], $contentInfo->isVisible);
+        self::assertSame($data['ownerId'], $contentInfo->ownerId);
+        self::assertSame($data['modificationDateTimestamp'], $contentInfo->modificationDate->getTimestamp());
+        self::assertSame($data['publishedDateTimestamp'], $contentInfo->publishedDate->getTimestamp());
+        self::assertSame($data['alwaysAvailable'], $contentInfo->alwaysAvailable);
+        self::assertSame($data['mainLanguageCode'], $contentInfo->mainLanguageCode);
+        self::assertSame($data['mainLocationId'], $contentInfo->mainLocationId);
+        self::assertSame($data['contentTypeName'], $contentInfo->contentTypeName);
+        self::assertSame($data['contentTypeDescription'], $contentInfo->contentTypeDescription);
+        self::assertSame($data['languageCode'], $contentInfo->languageCode);
         self::assertInstanceOf(Location::class, $contentInfo->mainLocation);
         self::assertInstanceOf(ContentInfo::class, $contentInfo->innerContentInfo);
         self::assertInstanceOf(ContentType::class, $contentInfo->innerContentType);
@@ -208,7 +208,7 @@ abstract class BaseTest extends APIBaseTest
             // Do nothing
         }
 
-        self::assertEquals(
+        self::assertSame(
             [
                 'id' => $contentInfo->id,
                 'contentTypeId' => $contentInfo->contentTypeId,
@@ -233,7 +233,7 @@ abstract class BaseTest extends APIBaseTest
                 'innerContentType' => '[An instance of Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType]',
                 'mainLocation' => '[An instance of Netgen\IbexaSiteApi\API\Values\Location]',
             ],
-            $contentInfo->__debugInfo()
+            $contentInfo->__debugInfo(),
         );
     }
 
@@ -289,7 +289,7 @@ abstract class BaseTest extends APIBaseTest
         self::assertSame($data['fieldTypeIdentifier'], $field->fieldTypeIdentifier);
         self::assertSame($data['name'], $field->name);
         self::assertSame($data['description'], $field->description);
-        self::assertEquals($languageCode, $field->languageCode);
+        self::assertSame($languageCode, $field->languageCode);
 
         self::assertTrue(isset($field->fieldTypeIdentifier));
         self::assertTrue(isset($field->innerFieldDefinition));
@@ -305,7 +305,7 @@ abstract class BaseTest extends APIBaseTest
             // Do nothing
         }
 
-        self::assertEquals(
+        self::assertSame(
             [
                 'id' => $field->id,
                 'fieldDefIdentifier' => $field->fieldDefIdentifier,
@@ -321,7 +321,7 @@ abstract class BaseTest extends APIBaseTest
                 'innerField' => '[An instance of Ibexa\Contracts\Core\Repository\Values\Content\Field]',
                 'innerFieldDefinition' => $field->innerFieldDefinition,
             ],
-            $field->__debugInfo()
+            $field->__debugInfo(),
         );
     }
 
@@ -329,43 +329,43 @@ abstract class BaseTest extends APIBaseTest
     {
         [, , , $locationId, $locationRemoteId, $parentLocationId] = array_values($data);
 
-        self::assertEquals($locationId, $location->id);
-        self::assertEquals($locationRemoteId, $location->remoteId);
-        self::assertEquals($parentLocationId, $location->parentLocationId);
-        self::assertEquals(APILocation::STATUS_PUBLISHED, $location->status);
-        self::assertEquals($data['locationPriority'], $location->priority);
-        self::assertEquals($data['locationHidden'], $location->hidden);
-        self::assertEquals($data['locationInvisible'], $location->invisible);
-        self::assertEquals($data['locationExplicitlyHidden'], $location->explicitlyHidden);
-        self::assertEquals($data['locationIsVisible'], $location->isVisible);
-        self::assertEquals($data['locationPathString'], $location->pathString);
+        self::assertSame($locationId, $location->id);
+        self::assertSame($locationRemoteId, $location->remoteId);
+        self::assertSame($parentLocationId, $location->parentLocationId);
+        self::assertSame(APILocation::STATUS_PUBLISHED, $location->status);
+        self::assertSame($data['locationPriority'], $location->priority);
+        self::assertSame($data['locationHidden'], $location->hidden);
+        self::assertSame($data['locationInvisible'], $location->invisible);
+        self::assertSame($data['locationExplicitlyHidden'], $location->explicitlyHidden);
+        self::assertSame($data['locationIsVisible'], $location->isVisible);
+        self::assertSame($data['locationPathString'], $location->pathString);
         self::assertEquals($data['locationPath'], $location->path);
-        self::assertEquals($data['locationDepth'], $location->depth);
-        self::assertEquals($data['locationSortField'], $location->sortField);
-        self::assertEquals($data['locationSortOrder'], $location->sortOrder);
-        self::assertEquals($location->contentInfo->id, $location->contentId);
+        self::assertSame($data['locationDepth'], $location->depth);
+        self::assertSame($data['locationSortField'], $location->sortField);
+        self::assertSame($data['locationSortOrder'], $location->sortOrder);
+        self::assertSame($location->contentInfo->id, $location->contentId);
         $this->assertContentInfo($location->contentInfo, $data);
         self::assertInstanceOf(APILocation::class, $location->innerLocation);
         self::assertInstanceOf(Content::class, $location->content);
 
         self::assertInstanceOf(Location::class, $location->parent);
-        self::assertEquals($parentLocationId, $location->parent->id);
+        self::assertSame($parentLocationId, $location->parent->id);
 
         $children = $location->getChildren();
         self::assertIsArray($children);
         self::assertCount(1, $children);
         self::assertInstanceOf(Location::class, $children[0]);
-        self::assertEquals($data['childLocationId'], $children[0]->id);
+        self::assertSame($data['childLocationId'], $children[0]->id);
 
         $firstChild = $location->getFirstChild();
         self::assertInstanceOf(Location::class, $firstChild);
-        self::assertEquals($data['childLocationId'], $firstChild->id);
+        self::assertSame($data['childLocationId'], $firstChild->id);
 
         $siblings = $location->getSiblings();
         self::assertIsArray($siblings);
         self::assertCount(1, $siblings);
         self::assertInstanceOf(Location::class, $siblings[0]);
-        self::assertEquals($data['siblingLocationId'], $siblings[0]->id);
+        self::assertSame($data['siblingLocationId'], $siblings[0]->id);
 
         self::assertTrue(isset($location->contentId));
         self::assertTrue(isset($location->contentInfo));
@@ -378,7 +378,7 @@ abstract class BaseTest extends APIBaseTest
             // Do nothing
         }
 
-        self::assertEquals(
+        self::assertSame(
             [
                 'id' => $location->id,
                 'status' => $location->status,
@@ -400,7 +400,7 @@ abstract class BaseTest extends APIBaseTest
                 'parent' => '[An instance of Netgen\IbexaSiteApi\API\Values\Location]',
                 'content' => '[An instance of Netgen\IbexaSiteApi\API\Values\Content]',
             ],
-            $location->__debugInfo()
+            $location->__debugInfo(),
         );
     }
 }

@@ -21,7 +21,7 @@ class ContentViewExtension extends AbstractExtension
             new TwigFunction(
                 'ng_view_content',
                 [ContentViewRuntime::class, 'renderContentView'],
-                ['is_safe' => ['html']]
+                ['is_safe' => ['html']],
             ),
         ];
     }

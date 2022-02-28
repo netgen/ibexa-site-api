@@ -60,6 +60,7 @@ final class TagFields extends Content
     {
         /** @var \Netgen\IbexaSiteApi\API\Values\Content $content */
         $content = $parameters['content'];
+
         /** @var string[] $fields */
         $fields = (array) $parameters['relation_field'];
 
@@ -101,13 +102,13 @@ final class TagFields extends Content
 
             if ($fieldType !== 'eztags') {
                 throw new InvalidArgumentException(
-                    "Field '{$identifier}' is expected to be of 'eztags' type, '{$fieldType}' found"
+                    "Field '{$identifier}' is expected to be of 'eztags' type, '{$fieldType}' found",
                 );
             }
 
             /** @var \Netgen\TagsBundle\Core\FieldType\Tags\Value $value */
             $value = $field->value;
-            $tagsIdsGrouped[] = array_map(static function (Tag $tag) {return $tag->id;}, $value->tags);
+            $tagsIdsGrouped[] = array_map(static fn (Tag $tag) => $tag->id, $value->tags);
         }
 
         return array_merge(...$tagsIdsGrouped);

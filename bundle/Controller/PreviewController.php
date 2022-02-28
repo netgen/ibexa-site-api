@@ -59,7 +59,7 @@ class PreviewController extends BasePreviewController
         $overrideViewAction = $this->configResolver->getParameter(
             'ng_site_api.site_api_is_primary_content_view',
             null,
-            $previewSiteAccess->name
+            $previewSiteAccess->name,
         );
 
         if ($overrideViewAction) {
@@ -87,12 +87,12 @@ class PreviewController extends BasePreviewController
         $siteContent = $this->site->getLoadService()->loadContent(
             $content->id,
             $content->versionInfo->versionNo,
-            $languageCode
+            $languageCode,
         );
         $siteLocation = $this->site->getDomainObjectMapper()->mapLocation(
             $location,
             $content->versionInfo,
-            $languageCode
+            $languageCode,
         );
 
         $requestParams = $request->attributes->get('params');

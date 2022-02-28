@@ -63,7 +63,7 @@ final class QueryDefinitionMapper
     {
         $configuration['parameters'] = array_replace(
             $configuration['parameters'],
-            $override['parameters']
+            $override['parameters'],
         );
 
         unset($override['parameters']);
@@ -85,7 +85,7 @@ final class QueryDefinitionMapper
         }
 
         throw new InvalidArgumentException(
-            "Could not find query configuration named '{$name}'"
+            "Could not find query configuration named '{$name}'",
         );
     }
 

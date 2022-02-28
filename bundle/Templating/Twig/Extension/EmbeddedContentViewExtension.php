@@ -21,7 +21,7 @@ class EmbeddedContentViewExtension extends AbstractExtension
             new TwigFunction(
                 'ng_view_content_embedded',
                 [EmbeddedContentViewRuntime::class, 'renderEmbeddedContentView'],
-                ['is_safe' => ['html']]
+                ['is_safe' => ['html']],
             ),
         ];
     }

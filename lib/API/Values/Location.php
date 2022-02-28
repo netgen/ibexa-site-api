@@ -31,7 +31,7 @@ use Pagerfanta\Pagerfanta;
  * @property int $contentId
  * @property \Ibexa\Contracts\Core\Repository\Values\Content\Location $innerLocation
  * @property \Netgen\IbexaSiteApi\API\Values\ContentInfo $contentInfo
- * @property \Netgen\IbexaSiteApi\API\Values\Location|null $parent
+ * @property ?\Netgen\IbexaSiteApi\API\Values\Location $parent
  * @property \Netgen\IbexaSiteApi\API\Values\Content $content
  */
 abstract class Location extends ValueObject
@@ -52,7 +52,7 @@ abstract class Location extends ValueObject
     /**
      * Return first child, limited by optional $contentTypeIdentifier.
      */
-    abstract public function getFirstChild(?string $contentTypeIdentifier = null): ?Location;
+    abstract public function getFirstChild(?string $contentTypeIdentifier = null): ?self;
 
     /**
      * Return an array of Location siblings, limited by optional $limit.

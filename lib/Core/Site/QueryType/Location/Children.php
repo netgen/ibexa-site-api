@@ -64,7 +64,7 @@ final class Children extends Location
 
                     return [];
                 }
-            }
+            },
         );
     }
 

@@ -18,7 +18,7 @@ class ImageExtension extends AbstractExtension
             new TwigFunction(
                 'ng_image_alias',
                 [ImageRuntime::class, 'getImageVariation'],
-                ['is_safe' => ['html']]
+                ['is_safe' => ['html']],
             ),
         ];
     }

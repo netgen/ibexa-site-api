@@ -22,7 +22,7 @@ final class SettingsTest extends TestCase
     {
         $settings = $this->getSettingsUnderTest();
 
-        self::assertEquals(['cro-HR'], $settings->prioritizedLanguages);
+        self::assertSame(['cro-HR'], $settings->prioritizedLanguages);
     }
 
     public function testGetUseAlwaysAvailable(): void
@@ -36,7 +36,7 @@ final class SettingsTest extends TestCase
     {
         $settings = $this->getSettingsUnderTest();
 
-        self::assertEquals(42, $settings->rootLocationId);
+        self::assertSame(42, $settings->rootLocationId);
     }
 
     public function testGetFailOnMissingField(): void
@@ -101,7 +101,7 @@ final class SettingsTest extends TestCase
             true,
             42,
             true,
-            false
+            false,
         );
     }
 }

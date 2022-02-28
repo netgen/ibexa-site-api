@@ -61,20 +61,25 @@ final class SortClauseParser
         switch (mb_strtolower($type)) {
             case 'depth':
                 return new Depth($direction);
+
             case 'field':
                 return $this->buildFieldSortClause($values, $direction);
+
             case 'modified':
                 return new DateModified($direction);
+
             case 'name':
                 return new ContentName($direction);
+
             case 'priority':
                 return new Priority($direction);
+
             case 'published':
                 return new DatePublished($direction);
         }
 
         throw new InvalidArgumentException(
-            "Could not handle sort type '$type'"
+            "Could not handle sort type '{$type}'",
         );
     }
 
@@ -89,13 +94,13 @@ final class SortClauseParser
     {
         if (!array_key_exists(1, $values)) {
             throw new InvalidArgumentException(
-                'Field sort clause requires ContentType identifier'
+                'Field sort clause requires ContentType identifier',
             );
         }
 
         if (!array_key_exists(2, $values)) {
             throw new InvalidArgumentException(
-                'Field sort clause requires FieldDefinition identifier'
+                'Field sort clause requires FieldDefinition identifier',
             );
         }
 
@@ -120,12 +125,13 @@ final class SortClauseParser
         switch (mb_strtolower($direction)) {
             case 'asc':
                 return Query::SORT_ASC;
+
             case 'desc':
                 return Query::SORT_DESC;
         }
 
         throw new InvalidArgumentException(
-            "Could not handle sort direction '$direction'"
+            "Could not handle sort direction '{$direction}'",
         );
     }
 }

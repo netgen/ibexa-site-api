@@ -240,7 +240,7 @@ final class LoadingProviderTest extends TestCase
             $this->providerUnderTest = new Loading(
                 $this->getLoadServiceMock(),
                 $this->getTagServiceMock(),
-                $this->getConfigResolverMock()
+                $this->getConfigResolverMock(),
             );
         }
 

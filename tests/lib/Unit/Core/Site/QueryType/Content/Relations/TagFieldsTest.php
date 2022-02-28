@@ -200,7 +200,7 @@ final class TagFieldsTest extends QueryTypeBaseTest
                         new DateMetadata(
                             DateMetadata::CREATED,
                             Operator::EQ,
-                            1525384800
+                            1525384800,
                         ),
                         new TagId([1, 2, 3, 4]),
                         new LogicalNot(new ContentId(42)),
@@ -268,7 +268,7 @@ final class TagFieldsTest extends QueryTypeBaseTest
                     new DatePublished(Query::SORT_DESC),
                 ],
             ]),
-            $query
+            $query,
         );
     }
 
@@ -366,8 +366,8 @@ final class TagFieldsTest extends QueryTypeBaseTest
                 true,
                 2,
                 $showHiddenItems,
-                true
-            )
+                true,
+            ),
         );
     }
 
@@ -447,7 +447,7 @@ final class TagFieldsTest extends QueryTypeBaseTest
                 'languageCode' => 'eng-GB',
             ],
             $failOnMissingField,
-            new NullLogger()
+            new NullLogger(),
         );
     }
 
