@@ -6,7 +6,8 @@ $finder = PhpCsFixer\Finder::create()
     ->files()->name('*.php')
 ;
 
-return (new PhpCsFixer\Config())
+$config = new PhpCsFixer\Config();
+return $config
     ->setRules([
         '@PSR12' => true,
         '@PSR12:risky' => true,
