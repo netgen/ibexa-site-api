@@ -32,13 +32,13 @@ paginate them by 10 per page using URL query parameter ``page``.
 
 .. code-block:: yaml
 
-    ezpublish:
+    ibexa:
         system:
             frontend_group:
                 ng_content_view:
                     full:
                         blog_post:
-                            template: '@ezdesign/content/full/blog_post.html.twig'
+                            template: '@ibexadesign/content/full/blog_post.html.twig'
                             match:
                                 Identifier\ContentType: blog_post
                             queries:

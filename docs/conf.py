@@ -27,14 +27,14 @@ extensions = ['sphinx.ext.autodoc',
 source_suffix = '.rst'
 master_doc = 'index'
 
-project = 'Netgen\'s Site API for eZ Platform'
+project = 'Netgen\'s Site API for Ibexa CMS'
 copyright = 'Netgen'
 author = 'Netgen'
 
 version = ''
 release = ''
 
-exclude_patterns = ['_build']
+exclude_patterns = ['_build', '.virtualenvs']
 
 html_theme = "sphinx_rtd_theme"
 html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]

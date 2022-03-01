@@ -1,4 +1,4 @@
-# Netgen's Site API
+# Netgen's Site API for Ibexa CMS
 
 [![Build Status](https://img.shields.io/github/workflow/status/netgen/ibexa-site-api/Tests/master?style=popout)](https://github.com/netgen/ibexa-site-api/actions?query=workflow%3ATests+branch%3Amaster)
 [![Read the Docs](https://img.shields.io/readthedocs/netgen-ezplatform-site-api?style=popout)](https://docs.netgen.io/projects/site-api/en/latest/)

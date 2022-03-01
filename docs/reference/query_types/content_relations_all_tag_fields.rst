@@ -41,13 +41,13 @@ query parameter ``page``:
 
 .. code-block:: yaml
 
-    ezpublish:
+    ibexa:
         system:
             frontend_group:
                 ng_content_view:
                     full:
                         product:
-                            template: '@ezdesign/content/full/product.html.twig'
+                            template: '@ibexadesign/content/full/product.html.twig'
                             match:
                                 Identifier\ContentType: product
                             queries:

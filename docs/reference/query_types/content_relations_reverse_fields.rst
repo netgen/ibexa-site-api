@@ -32,13 +32,13 @@ sort them by title and paginate them by 10 per page using URL query parameter ``
 
 .. code-block:: yaml
 
-    ezpublish:
+    ibexa:
         system:
             frontend_group:
                 ng_content_view:
                     full:
                         author:
-                            template: '@ezdesign/content/full/author.html.twig'
+                            template: '@ibexadesign/content/full/author.html.twig'
                             match:
                                 Identifier\ContentType: author
                             queries:

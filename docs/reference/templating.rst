@@ -27,7 +27,7 @@ Content rendering
 
 Site API provides four Twig functions for content rendering:
 
-- ``ng_view_content`` and ``ng_ez_view_content``
+- ``ng_view_content`` and ``ng_ibexa_view_content``
 
   These two functions provide a way to render Content view without executing a subrequest. Because
   of profiling that is active in debug mode, having a lots of subrequests on a page can
@@ -37,21 +37,21 @@ Site API provides four Twig functions for content rendering:
 
   Both functions support custom controllers. ``ng_view_content`` can be used for views defined in
   Site API view configuration under ``ng_content_view`` configuration node, and
-  ``ng_ez_view_content`` can be used for views defined in Ibexa view configuration under
+  ``ng_ibexa_view_content`` can be used for views defined in Ibexa CMS view configuration under
   ``content_view`` configuration node.
 
   .. note::
 
       The functions are not a complete replacement for rendering Content views, since it does not
-      dispatch MVC events from eZ Publish Kernel, like ``MVCEvents::PRE_CONTENT_VIEW``. For that
+      dispatch MVC events from Ibexa CMS Core, like ``MVCEvents::PRE_CONTENT_VIEW``. For that
       reason it's safe to use only for those views that don't depend on them. However, that should
       be the case for most of them.
 
       Depending on the use case, you might be able to replace usage of MVC events with
-      ``ViewEvents`` from eZ Publish Kernel, which **are** dispatched by the functions.
+      ``ViewEvents`` from Ibexa CMS Core, which **are** dispatched by the functions.
 
-  The functions accept four parameters, similar as `parameters available for ez_content::viewAction
-  controller <https://doc.ezplatform.com/en/latest/guide/templates/#available-arguments>`_:
+  The functions accept four parameters, similar as parameters available for ``ibexa_content::viewAction``
+  controller action:
 
   1. **required** Content or Location object
   2. **required** string view identifier (e.g. ``line``, ``block``)
@@ -99,11 +99,11 @@ Site API provides four Twig functions for content rendering:
               )
           ) }}
 
-  Example usage of ``ng_ez_view_content``:
+  Example usage of ``ng_ibexa_view_content``:
 
       .. code-block:: twig
 
-          {{ ng_ez_view_content(
+          {{ ng_ibexa_view_content(
               content,
               'line',
               {
@@ -121,7 +121,7 @@ Site API provides four Twig functions for content rendering:
 
           {{ render(
               controller(
-                  'ez_content::viewAction', {
+                  'ibexa_content::viewAction', {
                       'contentId': content.id,
                       'viewType': 'line',
                       'layout': false,
@@ -135,7 +135,7 @@ Site API provides four Twig functions for content rendering:
 
 - ``ng_render_field``
 
-  Similar to ``ez_render_field`` from Ibexa, this function is used to render the Content's
+  Similar to ``ibexa_render_field`` from Ibexa CMS, this function is used to render the Content's
   field using the configured template:
 
   .. code-block:: twig
@@ -144,7 +144,7 @@ Site API provides four Twig functions for content rendering:
 
 - ``ng_image_alias``
 
-  Similar to ``ez_image_alias`` from Ibexa, this function provides access to the image
+  Similar to ``ibexa_image_alias`` from Ibexa CMS, this function provides access to the image
   variation of a ``ezimage`` type field:
 
   .. code-block:: twig
@@ -176,11 +176,11 @@ Basic usage
 
 - **Linking to a Location**
 
-  Linking is done using the ``ez_path()`` Twig function, same as before.
+  Linking is done using the ``ibexa_path()`` Twig function, same as before.
 
   .. code-block:: twig
 
-    <a href="{{ ez_path(location) }}">{{ location.content.name }}</a>
+    <a href="{{ ibexa_path(location) }}">{{ location.content.name }}</a>
 
 - **Linking to a Content**
 
@@ -188,7 +188,7 @@ Basic usage
 
   .. code-block:: twig
 
-    <a href="{{ ez_path(content) }}">{{ content.name }}</a>
+    <a href="{{ ibexa_path(content) }}">{{ content.name }}</a>
 
 Working with Content fields
 ---------------------------
@@ -270,16 +270,15 @@ Working with Content fields
 
 - **Rendering the field using the configured template**
 
-  To render a field in vanilla eZ Platform you would use
-  `ez_render_field <https://doc.ezplatform.com/en/2.2/guide/twig_functions_reference/#ez_render_field>`_ function, which
-  does that using the `configured template block <https://doc.ezplatform.com/en/2.2/guide/templates/#using-the-field-types-template-block>`_.
-  For the same purpose and using the same templates, Site API provides its own function
-  ``ng_render_field``. It has two parameters:
+  To render a field in vanilla Ibexa CMS you would use
+  `ibexa_render_field <https://doc.ibexa.co/en/latest/guide/content_rendering/twig_function_reference/field_twig_functions/#ibexa_render_field>`_ function, which
+  does that using the configured template block. For the same purpose and using the same templates, Site API provides
+  its own function ``ng_render_field``. It has two parameters:
 
   1. **required** Field object
   2. **optional** hash of parameters, by default an empty array ``[]``
 
-     This parameter is exactly the same as you would use with ``ez_render_field``. The only
+     This parameter is exactly the same as you would use with ``ibexa_render_field``. The only
      exception is the ``lang`` parameter, used to override the language of the rendered field, which
      is not used by the ``ng_render_field``.
 
@@ -369,7 +368,7 @@ Content Locations
     <ul>
     {% for location in locations %}
         <li>
-            <a href="{{ ez_path(location) }}">Location #{{ location.id }}</a>
+            <a href="{{ ibexa_path(location) }}">Location #{{ location.id }}</a>
         </li>
     {% endif %}
     </ul>
@@ -393,7 +392,7 @@ Content Locations
     <ul>
     {% for location in locations %}
         <li>
-            <a href="{{ ez_path(location) }}">Location #{{ location.id }}</a>
+            <a href="{{ ibexa_path(location) }}">Location #{{ location.id }}</a>
         </li>
     {% endfor %}
     </ul>
@@ -414,7 +413,7 @@ Content Field relations
     {% set related_content = content.fieldRelation('related_article') %}
 
     {% if related_content is not empty %}
-        <a href="{{ ez_path(related_content) }}">{{ related_content.name }}</a>
+        <a href="{{ ibexa_path(related_content) }}">{{ related_content.name }}</a>
     {% else %}
         <p>There are two possibilities:</p>
         <ol>
@@ -445,7 +444,7 @@ Content Field relations
     <ul>
     {% for article in related_articles %}
         <li>
-            <a href="{{ ez_path(article) }}">{{ article.name }}</a>
+            <a href="{{ ibexa_path(article) }}">{{ article.name }}</a>
         </li>
     {% endfor %}
     </ul>
@@ -468,7 +467,7 @@ Content Field relations
     <ul>
     {% for article in articles %}
         <li>
-            <a href="{{ ez_path(article) }}">{{ article.name }}</a>
+            <a href="{{ ibexa_path(article) }}">{{ article.name }}</a>
         </li>
     {% endfor %}
     </ul>
@@ -493,7 +492,7 @@ Location children
     <ul>
     {% for child in children %}
         <li>
-            <a href="{{ ez_path(child) }}">{{ child.content.name }}</a>
+            <a href="{{ ibexa_path(child) }}">{{ child.content.name }}</a>
         </li>
     {% endfor %}
     </ul>
@@ -513,7 +512,7 @@ Location children
     {% if first_child is not null %}
         <p>
             First blog post, as sorted by the parent Location:
-            <a href="{{ ez_path(first_child) }}">{{ first_child.content.name }}</a>
+            <a href="{{ ibexa_path(first_child) }}">{{ first_child.content.name }}</a>
         </p>
     {% else %}
         <p>There are no blog posts under this Location</p>
@@ -544,7 +543,7 @@ Location children
     <ul>
     {% for document in documents %}
         <li>
-            <a href="{{ ez_path(document) }}">{{ document.content.name }}</a>
+            <a href="{{ ibexa_path(document) }}">{{ document.content.name }}</a>
         </li>
     {% endfor %}
     </ul>
@@ -569,7 +568,7 @@ Location siblings
     <ul>
     {% for sibling in siblings %}
         <li>
-            <a href="{{ ez_path(sibling) }}">{{ sibling.content.name }}</a>
+            <a href="{{ ibexa_path(sibling) }}">{{ sibling.content.name }}</a>
         </li>
     {% endfor %}
     </ul>
@@ -594,7 +593,7 @@ Location siblings
     <ul>
     {% for article in articles %}
         <li>
-            <a href="{{ ez_path(article) }}">{{ article.content.name }}</a>
+            <a href="{{ ibexa_path(article) }}">{{ article.content.name }}</a>
         </li>
     {% endfor %}
     </ul>
@@ -620,7 +619,7 @@ A following named object configuration is given:
 
 .. code-block:: yaml
 
-    ezpublish:
+    ibexa:
         system:
             frontend_group:
                 ng_site_api:

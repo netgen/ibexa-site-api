@@ -5,21 +5,20 @@ To install Site API first add it as a dependency to your project:
 
 .. code-block:: console
 
-    composer require netgen/ezplatform-site-api
+    composer require netgen/ibexa-site-api
 
-Once Site API is installed, activate the bundle in ``app/AppKernel.php`` file by adding it to the
-``$bundles`` array in ``registerBundles()`` method, together with other required bundles:
+Once Site API is installed, activate the bundle in ``config/bundles.php`` file by adding it to the
+returned array, together with other required bundles:
 
 .. code-block:: php
 
-    public function registerBundles()
-    {
+    <?php
+
+    return [
         //...
 
-        $bundles[] = new Netgen\Bundle\IbexaSiteApiBundle\NetgenIbexaSiteApiBundle();
-        $bundles[] = new Netgen\Bundle\EzPlatformSearchExtraBundle\NetgenEzPlatformSearchExtraBundle();
-
-        return $bundles;
+        Netgen\Bundle\IbexaSearchExtraBundle\IbexaSiteApiBundle\NetgenIbexaSiteApiBundle::class => ['all' => true],
+        Netgen\Bundle\IbexaSearchExtraBundle\NetgenIbexaSearchExtraBundle::class => ['all' => true],
     }
 
 And that's it. Once you finish the installation you will be able to use Site API services as you

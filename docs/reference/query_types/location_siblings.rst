@@ -35,13 +35,13 @@ parameter ``page``:
 
 .. code-block:: yaml
 
-    ezpublish:
+    ibexa:
         system:
             frontend_group:
                 ng_content_view:
                     full:
                         article:
-                            template: '@ezdesign/content/full/article.html.twig'
+                            template: '@ibexadesign/content/full/article.html.twig'
                             match:
                                 Identifier\ContentType: article
                             queries:

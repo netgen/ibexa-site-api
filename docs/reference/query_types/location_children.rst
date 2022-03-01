@@ -35,13 +35,13 @@ by 10 per page using URL query parameter ``page``:
 
 .. code-block:: yaml
 
-    ezpublish:
+    ibexa:
         system:
             frontend_group:
                 ng_content_view:
                     full:
                         folder:
-                            template: '@ezdesign/content/full/folder.html.twig'
+                            template: '@ibexadesign/content/full/folder.html.twig'
                             match:
                                 Identifier\ContentType: folder
                             queries:

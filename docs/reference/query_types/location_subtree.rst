@@ -37,13 +37,13 @@ date and paginate them by 10 per page using URL query parameter ``page``:
 
 .. code-block:: yaml
 
-    ezpublish:
+    ibexa:
         system:
             frontend_group:
                 ng_content_view:
                     full:
                         calendar:
-                            template: '@ezdesign/content/full/calendar.html.twig'
+                            template: '@ibexadesign/content/full/calendar.html.twig'
                             match:
                                 Identifier\ContentType: calendar
                             queries:

@@ -1,5 +1,5 @@
-Netgen's Site API for Ibexa
-===========================
+Netgen's Site API for Ibexa CMS
+===============================
 
 .. toctree::
     :hidden:
@@ -28,13 +28,3 @@ Reference
     reference/index
 
 .. include:: /reference/map.rst.inc
-
-Upgrades
---------
-
-.. toctree::
-    :hidden:
-
-    upgrades/index
-
-.. include:: /upgrades/map.rst.inc

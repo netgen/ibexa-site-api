@@ -22,9 +22,9 @@ LoadService
 -----------
 
 +--------------------------------+----------------------------------------------+
-| **Instance of**                | ``Netgen\IbexaSiteApi\API\LoadService`` |
+| **Instance of**                | ``Netgen\IbexaSiteApi\API\LoadService``      |
 +--------------------------------+----------------------------------------------+
-| **Container service ID**       | ``netgen.ezplatform_site.load_service``      |
+| **Container service ID**       | ``netgen.ibexa_site_api.load_service``       |
 +--------------------------------+----------------------------------------------+
 
 The purpose of ``LoadService`` is to load Site Content and Locations by their ID.
@@ -104,12 +104,12 @@ FindService
 -----------
 
 +--------------------------------+----------------------------------------------+
-| **Instance of**                | ``Netgen\IbexaSiteApi\API\FindService`` |
+| **Instance of**                | ``Netgen\IbexaSiteApi\API\FindService``      |
 +--------------------------------+----------------------------------------------+
-| **Container service ID**       | ``netgen.ezplatform_site.find_service``      |
+| **Container service ID**       | ``netgen.ibexa_site_api.find_service``       |
 +--------------------------------+----------------------------------------------+
 
-The purpose of the ``FindService`` is to find Content and Locations by using Ibexa's
+The purpose of the ``FindService`` is to find Content and Locations by using Ibexa CMS
 Repository Search API. This service will use the search engine that is configured for the
 Repository. That can be Legacy search engine or Solr search engine.
 
@@ -128,9 +128,9 @@ Methods
 Find Content by the Content Query.
 
 +----------------------------------------+------------------------------------------------------------------------------------+
-| **Parameters**                         | ``eZ\Publish\API\Repository\Values\Content\Query $query``                          |
+| **Parameters**                         | ``Ibexa\Contracts\Core\Repository\Values\Content\Query $query``                    |
 +----------------------------------------+------------------------------------------------------------------------------------+
-| **Returns**                            | ``eZ\Publish\API\Repository\Values\Content\Search\SearchResult``                   |
+| **Returns**                            | ``Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchResult``             |
 +----------------------------------------+------------------------------------------------------------------------------------+
 | **Example**                            | .. code-block:: php                                                                |
 |                                        |                                                                                    |
@@ -143,27 +143,27 @@ Find Content by the Content Query.
 
 Find Locations by the LocationQuery.
 
-+----------------------------------------+-------------------------------------------------------------------+
-| **Parameters**                         | ``eZ\Publish\API\Repository\Values\Content\LocationQuery $query`` |
-+----------------------------------------+-------------------------------------------------------------------+
-| **Returns**                            | ``eZ\Publish\API\Repository\Values\Content\Search\SearchResult``  |
-+----------------------------------------+-------------------------------------------------------------------+
-| **Example**                            | .. code-block:: php                                               |
-|                                        |                                                                   |
-|                                        |     $locations = $findService->findLocations($locationQuery);     |
-|                                        |                                                                   |
-+----------------------------------------+-------------------------------------------------------------------+
++----------------------------------------+-------------------------------------------------------------------------+
+| **Parameters**                         | ``Ibexa\Contracts\Core\Repository\Values\Content\LocationQuery $query`` |
++----------------------------------------+-------------------------------------------------------------------------+
+| **Returns**                            | ``Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchResult``  |
++----------------------------------------+-------------------------------------------------------------------------+
+| **Example**                            | .. code-block:: php                                                     |
+|                                        |                                                                         |
+|                                        |     $locations = $findService->findLocations($locationQuery);           |
+|                                        |                                                                         |
++----------------------------------------+-------------------------------------------------------------------------+
 
 FilterService
 -------------
 
 +--------------------------------+------------------------------------------------+
-| **Instance of**                | ``Netgen\IbexaSiteApi\API\FilterService`` |
+| **Instance of**                | ``Netgen\IbexaSiteApi\API\FilterService``      |
 +--------------------------------+------------------------------------------------+
-| **Container service ID**       | ``netgen.ezplatform_site.filter_service``      |
+| **Container service ID**       | ``netgen.ibexa_site_api.filter_service``       |
 +--------------------------------+------------------------------------------------+
 
-The purpose of the ``FindService`` is to find Content and Locations by using Ibexa's
+The purpose of the ``FindService`` is to find Content and Locations by using Ibexa CMS
 Repository Search API. That is the same as ``FindService``, but with the difference that it will
 always use Legacy search engine.
 
@@ -205,24 +205,24 @@ Filter Content by the Content Query.
 
 Filter Locations by the LocationQuery.
 
-+----------------------------------------+-------------------------------------------------------------------+
-| **Parameters**                         | ``eZ\Publish\API\Repository\Values\Content\LocationQuery $query`` |
-+----------------------------------------+-------------------------------------------------------------------+
-| **Returns**                            | ``eZ\Publish\API\Repository\Values\Content\Search\SearchResult``  |
-+----------------------------------------+-------------------------------------------------------------------+
-| **Example**                            | .. code-block:: php                                               |
-|                                        |                                                                   |
-|                                        |     $content = $filterService->filterLocations($locationQuery);   |
-|                                        |                                                                   |
-+----------------------------------------+-------------------------------------------------------------------+
++----------------------------------------+-------------------------------------------------------------------------+
+| **Parameters**                         | ``Ibexa\Contracts\Core\Repository\Values\Content\LocationQuery $query`` |
++----------------------------------------+-------------------------------------------------------------------------+
+| **Returns**                            | ``Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchResult``  |
++----------------------------------------+-------------------------------------------------------------------------+
+| **Example**                            | .. code-block:: php                                                     |
+|                                        |                                                                         |
+|                                        |     $content = $filterService->filterLocations($locationQuery);         |
+|                                        |                                                                         |
++----------------------------------------+-------------------------------------------------------------------------+
 
 RelationService
 ---------------
 
 +--------------------------------+--------------------------------------------------+
-| **Instance of**                | ``Netgen\IbexaSiteApi\API\RelationService`` |
+| **Instance of**                | ``Netgen\IbexaSiteApi\API\RelationService``      |
 +--------------------------------+--------------------------------------------------+
-| **Container service ID**       | ``netgen.ezplatform_site.relation_service``      |
+| **Container service ID**       | ``netgen.ibexa_site_api.relation_service``       |
 +--------------------------------+--------------------------------------------------+
 
 The purpose of ``RelationService`` is to provide a way to load field relations. This needs to be
@@ -246,7 +246,7 @@ current user. If the field contains multiple relations, the first one will be re
 supports optional filtering by ContentType.
 
 +----------------------------------------+------------------------------------------------------------------------------------+
-| **Parameters**                         | 1. ``Netgen\IbexaSiteApi\API\Values\Content $content``                        |
+| **Parameters**                         | 1. ``Netgen\IbexaSiteApi\API\Values\Content $content``                             |
 |                                        | 2. ``string $fieldDefinitionIdentifier``                                           |
 |                                        | 3. ``array $contentTypeIdentifiers = []``                                          |
 +----------------------------------------+------------------------------------------------------------------------------------+
@@ -269,7 +269,7 @@ Get all field relation :ref:`Content items<content_object>` from a specific fiel
 filtering by ContentType.
 
 +----------------------------------------+------------------------------------------------------------------------------------+
-| **Parameters**                         | 1. ``Netgen\IbexaSiteApi\API\Values\Content $content``                        |
+| **Parameters**                         | 1. ``Netgen\IbexaSiteApi\API\Values\Content $content``                             |
 |                                        | 2. ``string $fieldDefinitionIdentifier``                                           |
 |                                        | 3. ``array $contentTypeIdentifiers = []``                                          |
 +----------------------------------------+------------------------------------------------------------------------------------+
@@ -295,7 +295,7 @@ current user. If the field contains multiple relations, the first one will be re
 supports optional filtering by ContentType.
 
 +----------------------------------------+------------------------------------------------------------------------------------+
-| **Parameters**                         | 1. ``Netgen\IbexaSiteApi\API\Values\Content $content``                        |
+| **Parameters**                         | 1. ``Netgen\IbexaSiteApi\API\Values\Content $content``                             |
 |                                        | 2. ``string $fieldDefinitionIdentifier``                                           |
 |                                        | 3. ``array $contentTypeIdentifiers = []``                                          |
 +----------------------------------------+------------------------------------------------------------------------------------+
@@ -318,7 +318,7 @@ Get all field relation :ref:`Locations<location_object>` from a specific field o
 filtering by ContentType.
 
 +----------------------------------------+------------------------------------------------------------------------------------+
-| **Parameters**                         | 1. ``Netgen\IbexaSiteApi\API\Values\Content $content``                        |
+| **Parameters**                         | 1. ``Netgen\IbexaSiteApi\API\Values\Content $content``                             |
 |                                        | 2. ``string $fieldDefinitionIdentifier``                                           |
 |                                        | 3. ``array $contentTypeIdentifiers = []``                                          |
 +----------------------------------------+------------------------------------------------------------------------------------+
@@ -340,9 +340,9 @@ Settings
 The purpose of ``Settings`` object is to provide read access to current configuration.
 
 +--------------------------------+-------------------------------------------+
-| **Instance of**                | ``Netgen\IbexaSiteApi\API\Settings`` |
+| **Instance of**                | ``Netgen\IbexaSiteApi\API\Settings``      |
 +--------------------------------+-------------------------------------------+
-| **Container service ID**       | ``netgen.ezplatform_site.settings``       |
+| **Container service ID**       | ``netgen.ibexa_site_api.settings``        |
 +--------------------------------+-------------------------------------------+
 
 Properties
@@ -366,9 +366,9 @@ The purpose of ``Site`` service is to aggregate all other Site API services in o
 implements a getter method for each of the services described above.
 
 +--------------------------------+---------------------------------------+
-| **Instance of**                | ``Netgen\IbexaSiteApi\API\Site`` |
+| **Instance of**                | ``Netgen\IbexaSiteApi\API\Site``      |
 +--------------------------------+---------------------------------------+
-| **Container service ID**       | ``netgen.ezplatform_site.site``       |
+| **Container service ID**       | ``netgen.ibexa_site_api.site``        |
 +--------------------------------+---------------------------------------+
 
 Methods
@@ -397,9 +397,9 @@ The purpose of ``NamedObjectProvider`` service is to provide access to named obj
 of named objects is :ref:`documented on the Configuration page<named_object_configuration>`.
 
 +--------------------------------+----------------------------------------------------------------+
-| **Instance of**                | ``Netgen\Bundle\IbexaSiteApiBundle\NamedObject\Provider`` |
+| **Instance of**                | ``Netgen\Bundle\IbexaSiteApiBundle\NamedObject\Provider``      |
 +--------------------------------+----------------------------------------------------------------+
-| **Container service ID**       | ``netgen.ezplatform_site.named_object_provider``               |
+| **Container service ID**       | ``netgen.ibexa_site_api.named_object_provider``                |
 +--------------------------------+----------------------------------------------------------------+
 
 The purpose of ``NamedObjectProvider`` is to provide access to named objects.

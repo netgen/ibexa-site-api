@@ -54,13 +54,13 @@ by their publication date and paginate them by 10 per page using URL query param
 
 .. code-block:: yaml
 
-    ezpublish:
+    ibexa:
         system:
             frontend_group:
                 ngcontent_view:
                     full:
                         product:
-                            template: '@ezdesign/content/full/product.html.twig'
+                            template: '@ibexadesign/content/full/product.html.twig'
                             match:
                                 Identifier\ContentType: product
                             queries:

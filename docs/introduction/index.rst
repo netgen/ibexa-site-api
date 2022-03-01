@@ -35,7 +35,7 @@ English language as a fallback when Croatian translation does not exist:
 
 .. code-block:: yaml
 
-    ezpublish:
+    ibexa:
         system:
             cro:
                 languages:
@@ -218,7 +218,7 @@ configuration, available under ``ng_content_view`` key:
 
 .. code-block:: yaml
 
-    ezpublish:
+    ibexa:
         system:
             frontend_group:
                 ng_content_view:
@@ -241,7 +241,7 @@ siteaccess:
 
 .. code-block:: yaml
 
-    ezpublish:
+    ibexa:
         system:
             frontend_group:
                 ng_site_api:
@@ -266,13 +266,13 @@ best explained with an example:
 
 .. code-block:: yaml
 
-    ezpublish:
+    ibexa:
         system:
             frontend_group:
                 ng_content_view:
                     full:
                         folder:
-                            template: '@ezdesign/content/full/folder.html.twig'
+                            template: '@ibexadesign/content/full/folder.html.twig'
                             match:
                                 Identifier\ContentType: folder
                             queries:

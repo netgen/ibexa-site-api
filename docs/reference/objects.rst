@@ -2,7 +2,7 @@ Objects
 =======
 
 Site API comes with its own set of entities and values. These are similar, but still different from
-their counterparts in Ibexa's Repository API. Main benefits they provide over them are:
+their counterparts in Ibexa CMS Repository API. Main benefits they provide over them are:
 
 - Content is available in a single translation, this voids the need for various helper services
 - Additional properties otherwise available only through separate entities (like ContentType
@@ -175,8 +175,8 @@ Get the value of the `Field`_ with the given ``$identifier``.
 .. note::
 
     Returned value object depends of the FieldType. Best way to learn about the specific value
-    format is reading the official `FieldType reference <https://doc.ez.no/display/EZP/FieldTypes+reference>`_ documentation,
-    or looking directly at code (for example `the code of TextLine Value <https://github.com/ezsystems/ezpublish-kernel/blob/master/eZ/Publish/Core/FieldType/TextLine/Value.php>`_).
+    format is reading the official `FieldType reference <https://doc.ibexa.co/en/latest/api/field_type_reference/>`_ documentation,
+    or looking directly at code (for example `the code of TextLine Value <https://github.com/ibexa/core/blob/main/src/lib/FieldType/TextLine/Value.php>`_).
 
 +----------------------------------------+------------------------------------------------------------------------------------+
 | **Parameters**                         | ``string $identifier``                                                             |

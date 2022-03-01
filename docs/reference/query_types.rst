@@ -1,9 +1,9 @@
 Query Types
 ===========
 
-Site API Query Types expand upon Query Type feature from eZ Publish Kernel, using the same basic
+Site API Query Types expand upon Query Type feature from Ibexa CMS Core, using the same basic
 interfaces. That will enable using your existing Query Types, but how Site API integrates them with
-the rest of the system differs from eZ Publish Kernel.
+the rest of the system differs from Ibexa CMS Core.
 
 **Content on this page:**
 
@@ -59,13 +59,13 @@ Example below shows how described configuration looks in practice:
 
 .. code-block:: yaml
 
-    ezpublish:
+    ibexa:
         system:
             frontend_group:
                 ng_content_view:
                     full:
                         category:
-                            template: '@ezdesign/content/full/category.html.twig'
+                            template: '@ibexadesign/content/full/category.html.twig'
                             match:
                                 Identifier\ContentType: 'category'
                             queries:
@@ -98,7 +98,7 @@ be referenced in query configuration for a particular content view. They are con
 
 .. code-block:: yaml
 
-    ezpublish:
+    ibexa:
         system:
             frontend_group:
                 ng_site_api:
@@ -113,7 +113,7 @@ be referenced in query configuration for a particular content view. They are con
                 ng_content_view:
                     full:
                         category:
-                            template: '@ezdesign/content/full/category.html.twig'
+                            template: '@ibexadesign/content/full/category.html.twig'
                             match:
                                 Identifier\ContentType: 'category'
                             queries:
@@ -165,8 +165,8 @@ services and functions.
 View object
 ~~~~~~~~~~~
 
-Site API View object is available as ``view``. You can access any `parameters injected into it <https://doc.ez.no/display/EZP/Parameters+injection+in+content+views>`_,
-for example current page value in children query:
+Site API View object is available as ``view``. You can access any parameters injected into it, for
+example current page in the children query:
 
 .. code-block:: yaml
 
@@ -374,7 +374,7 @@ of type ``category`` found below the root Location):
 
 .. code-block:: yaml
 
-    ezpublish:
+    ibexa:
         system:
             frontend_group:
                 ng_site_api:
@@ -384,7 +384,7 @@ of type ``category`` found below the root Location):
 
 .. code-block:: yaml
 
-    ezpublish:
+    ibexa:
         system:
             frontend_group:
                 ng_site_api:
@@ -462,7 +462,7 @@ Extending expressions
 
 You can add you own functions for parameter expression through an expression function provider,
 implementing ``Symfony\Component\ExpressionLanguage\ExpressionFunctionProviderInterface`` interface
-and tagging it with ``netgen.ezplatform_site.query_type.expression_function_provider`` service tag.
+and tagging it with ``netgen.ibexa_site_api.query_type.expression_function_provider`` service tag.
 
 Values that will be provided for evaluation in your custom expression function implementation are:
 
@@ -470,7 +470,7 @@ Values that will be provided for evaluation in your custom expression function i
 - ``location``, :ref:`Site API Location object<location_object>`
 - ``content``, :ref:`Site API Content object<content_object>`
 - ``request``, Symfony's Request object (current request)
-- ``configResolver``, Ibexa ConfigResolver service
+- ``configResolver``, Ibexa CMS ConfigResolver service
 - ``namedObject``, :ref:`Site API NamedObjectProvider service<named_object_php>`
 
 Templating

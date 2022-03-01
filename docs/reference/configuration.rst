@@ -3,18 +3,18 @@ Configuration
 
 Site API has its own view configuration, available under ``ng_content_view`` key. Aside from
 :doc:`Query Type </reference/query_types>` configuration that is documented separately, this is
-exactly the same as Ibexa's default view configuration under ``content_view`` key. You can use
+exactly the same as Ibexa CMS default view configuration under ``content_view`` key. You can use
 this configuration right after the installation, but note that it won't be used for full views
-rendered for Ibexa URL aliases right away. Until you configure that, it will be used only when
+rendered for Ibexa CMS URL aliases right away. Until you configure that, it will be used only when
 calling its controller explicitly with ``ng_content::viewAction``.
 
-All other configuration is grouped under ``ng_site_api`` key under Ibexa semantic
+All other configuration is grouped under ``ng_site_api`` key under Ibexa CMS semantic
 configuration. If you need to fetch this configuration directly in your code, combine
 ``ng_site_api`` with the specific key name, for example:
 
 .. code-block:: yaml
 
-    ezpublish:
+    ibexa:
         system:
             frontend_group:
                 ng_site_api:
@@ -33,12 +33,12 @@ configuration. If you need to fetch this configuration directly in your code, co
 Configure handling of URL aliases
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To use Site API view rules for pages rendered from Ibexa URL aliases, you have to enable it
+To use Site API view rules for pages rendered from Ibexa CMS URL aliases, you have to enable it
 for a specific siteaccess with the following semantic configuration:
 
 .. code-block:: yaml
 
-    ezpublish:
+    ibexa:
         system:
             frontend_group:
                 ng_site_api:
@@ -50,7 +50,7 @@ admin or intranet interface.
 
 .. note::
 
-    To use Site API view configuration automatically on pages rendered from Ibexa URL aliases,
+    To use Site API view configuration automatically on pages rendered from Ibexa CMS URL aliases,
     you need to enable it manually per siteaccess.
 
 Site API Content views
@@ -64,24 +64,24 @@ variables inside Twig templates will be instances of Site API Content and Locati
 variable, and so on.
 
 If needed you can still use ``content_view`` rules. This will allow you to have both Site API
-template override rules as well as original Ibexa template override rules, so you can rewrite
+template override rules as well as original Ibexa CMS template override rules, so you can rewrite
 your templates bit by bit. You can decide which one to use by directly rendering either
-``ng_content::viewAction`` or ``ez_content::viewAction`` controller.
+``ng_content::viewAction`` or ``ibexa_content::viewAction`` controller.
 
-It's also possible to configure fallback between Site API and Ibexa views. With it, if the
+It's also possible to configure fallback between Site API and Ibexa CMS views. With it, if the
 rule is not matched in one view configuration, the fallback mechanism will try to match it in the
 other. Find out more about that in the following section.
 
 .. tip::
 
-    | View configuration is the only Ibexa configuration regularly edited
+    | View configuration is the only Ibexa CMS configuration regularly edited
     | by frontend developers.
 
 For example, if using the following configuration:
 
 .. code-block:: yaml
 
-    ezpublish:
+    ibexa:
         system:
             frontend_group:
                 ng_content_view:
@@ -93,13 +93,13 @@ For example, if using the following configuration:
                 content_view:
                     line:
                         article:
-                            template: '@App/content/line/ez_article.html.twig'
+                            template: '@App/content/line/ibexa_article.html.twig'
                             match:
                                 Identifier\ContentType: article
 
 Rendering a line view for an article with ``ng_content::viewAction`` would use
 ``@App/content/line/article.html.twig`` template, while rendering a line view for an article with
-``ez_content::viewAction`` would use ``@App/content/line/ez_article.html.twig`` template.
+``ibexa_content::viewAction`` would use ``@App/content/line/ibexa_article.html.twig`` template.
 
 It is also possible to use custom controllers, this is documented on
 :doc:`Custom controllers reference</reference/custom_controllers>` documentation page.
@@ -109,12 +109,12 @@ It is also possible to use custom controllers, this is documented on
 Content View fallback
 ~~~~~~~~~~~~~~~~~~~~~
 
-You can configure fallback between Site API and Ibexa views. Fallback can be controlled
+You can configure fallback between Site API and Ibexa CMS views. Fallback can be controlled
 through two configuration options (showing default values):
 
 .. code-block:: yaml
 
-    ezpublish:
+    ibexa:
         system:
             frontend_group:
                 ng_site_api:
@@ -125,7 +125,7 @@ through two configuration options (showing default values):
 
     With this option you control whether **automatic fallback** will be used. By default, automatic
     fallback is disabled. Secondary content view means the fallback can be used both from Site API
-    to Ibexa views, and from Ibexa to Site API content views. Which one will be used is
+    to Ibexa CMS views, and from Ibexa CMS to Site API content views. Which one will be used is
     defined by ``site_api_is_primary_content_view`` configuration documented above.
 
 - ``fallback_without_subrequest``
@@ -138,7 +138,7 @@ through two configuration options (showing default values):
 
 .. warning::
 
-    Because of reverse siteaccess matching limitations, when ``ng_fallback_without_subrequest`` is
+    Because of reverse siteaccess matching limitations, when ``fallback_without_subrequest`` is
     turned off, links in the preview in the admin UI will not be correctly generated. To work around
     that problem, turn the option on.
 
@@ -152,40 +152,40 @@ through two configuration options (showing default values):
 
 
 You can also configure fallback manually, per view. This is done by configuring a view to render one
-of two special templates, depending if the fallback is from Site API to Ibexa views or the
+of two special templates, depending if the fallback is from Site API to Ibexa CMS views or the
 opposite.
 
-- ``@NetgenIbexaSiteApi/content_view_fallback/to_ez_platform.html.twig``
+- ``@NetgenIbexaSiteApi/content_view_fallback/to_ibexa/view.html.twig``
 
-  This template is used for fallback from Site API to Ibexa views. In the following example
+  This template is used for fallback from Site API to Ibexa CMS views. In the following example
   it's used to configure fallback for ``line`` view of ``article`` ContentType:
 
   .. code-block:: yaml
 
-      ezpublish:
+      ibexa:
           system:
               frontend_group:
                   ng_content_view:
                       line:
                           article:
-                              template: '@NetgenIbexaSiteApi/content_view_fallback/to_ez_platform.html.twig'
+                              template: '@NetgenIbexaSiteApi/content_view_fallback/to_ibexa/view.html.twig'
                               match:
                                   Identifier\ContentType: article
 
-- ``@NetgenIbexaSiteApi/content_view_fallback/to_site_api.html.twig``
+- ``@NetgenIbexaSiteApi/content_view_fallback/to_site_api/view.html.twig``
 
-  This template is used for fallback from Ibexa to Site API views. In the following example
+  This template is used for fallback from Ibexa CMS to Site API views. In the following example
   it's used to configure fallback for all ``full`` views:
 
   .. code-block:: yaml
 
-      ezpublish:
+      ibexa:
           system:
               frontend_group:
                   content_view:
                       full:
                           catch_all:
-                              template: '@NetgenIbexaSiteApi/content_view_fallback/to_site_api.html.twig'
+                              template: '@NetgenIbexaSiteApi/content_view_fallback/to_site_api/view.html.twig'
                               match: ~
 
 .. _show_hidden_items_configuration:
@@ -203,7 +203,7 @@ redirect to the URL alias:
 
 .. code-block:: yaml
 
-    ezpublish:
+    ibexa:
         system:
             frontend_group:
                 ng_site_api:
@@ -218,7 +218,7 @@ You can configure whether hidden Content and Location objects will be shown by d
 
 .. code-block:: yaml
 
-    ezpublish:
+    ibexa:
         system:
             frontend_group:
                 ng_site_api:
@@ -241,7 +241,7 @@ Example configuration:
 
 .. code-block:: yaml
 
-    ezpublish:
+    ibexa:
         system:
             frontend_group:
                 ng_content_view:
@@ -287,7 +287,7 @@ There also shortcuts available for simplified configuration:
 
 .. code-block:: yaml
 
-    ezpublish:
+    ibexa:
         system:
             frontend_group:
                 ng_content_view:
@@ -331,7 +331,7 @@ Example configuration:
 
 .. code-block:: yaml
 
-    ezpublish:
+    ibexa:
         system:
             frontend_group:
                 ng_site_api:
@@ -354,7 +354,7 @@ full syntax equivalent to the above would be:
 
 .. code-block:: yaml
 
-    ezpublish:
+    ibexa:
         system:
             frontend_group:
                 ng_site_api:
@@ -396,7 +396,7 @@ To account for this Site API provides the following semantic configuration:
 
 .. code-block:: yaml
 
-    ezpublish:
+    ibexa:
         system:
             frontend_group:
                 ng_site_api:

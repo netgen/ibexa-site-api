@@ -1,7 +1,7 @@
 Custom controllers
 ==================
 
-Implementing a custom controller is similar to the vanilla Ibexa. First, you have to implement
+Implementing a custom controller is similar to the vanilla Ibexa CMS. First, you have to implement
 it with extending the Site API base controller:
 
 .. code-block:: php
@@ -47,7 +47,7 @@ Since autowiring is enabled, this is sufficient to use your controller in the vi
 
 .. code-block:: yaml
 
-    ezpublish:
+    ibexa:
         system:
             frontend_group:
                 ng_content_view:
