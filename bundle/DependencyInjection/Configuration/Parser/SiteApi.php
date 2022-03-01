@@ -71,29 +71,29 @@ class SiteApi extends AbstractParser
         ];
 
         foreach ($booleanKeys as $parameterName) {
-            if (isset($scopeSettings[static::NODE_KEY][$parameterName])) {
+            if (isset($scopeSettings[self::NODE_KEY][$parameterName])) {
                 $contextualizer->setContextualParameter(
-                    static::NODE_KEY . '.' . $parameterName,
+                    self::NODE_KEY . '.' . $parameterName,
                     $currentScope,
-                    $scopeSettings[static::NODE_KEY][$parameterName],
+                    $scopeSettings[self::NODE_KEY][$parameterName],
                 );
             }
         }
 
-        if (isset($scopeSettings[static::NODE_KEY]['named_objects'])) {
-            $scopeSettings[static::NODE_KEY . '.named_objects'] = $scopeSettings[static::NODE_KEY]['named_objects'];
-            unset($scopeSettings[static::NODE_KEY]['named_objects']);
+        if (isset($scopeSettings[self::NODE_KEY]['named_objects'])) {
+            $scopeSettings[self::NODE_KEY . '.named_objects'] = $scopeSettings[self::NODE_KEY]['named_objects'];
+            unset($scopeSettings[self::NODE_KEY]['named_objects']);
         }
 
-        if (isset($scopeSettings[static::NODE_KEY]['named_queries'])) {
-            $scopeSettings[static::NODE_KEY . '.named_queries'] = $scopeSettings[static::NODE_KEY]['named_queries'];
-            unset($scopeSettings[static::NODE_KEY]['named_queries']);
+        if (isset($scopeSettings[self::NODE_KEY]['named_queries'])) {
+            $scopeSettings[self::NODE_KEY . '.named_queries'] = $scopeSettings[self::NODE_KEY]['named_queries'];
+            unset($scopeSettings[self::NODE_KEY]['named_queries']);
         }
     }
 
     public function postMap(array $config, ContextualizerInterface $contextualizer): void
     {
-        $contextualizer->mapConfigArray(static::NODE_KEY . '.named_objects', $config, ContextualizerInterface::MERGE_FROM_SECOND_LEVEL);
-        $contextualizer->mapConfigArray(static::NODE_KEY . '.named_queries', $config, ContextualizerInterface::MERGE_FROM_SECOND_LEVEL);
+        $contextualizer->mapConfigArray(self::NODE_KEY . '.named_objects', $config, ContextualizerInterface::MERGE_FROM_SECOND_LEVEL);
+        $contextualizer->mapConfigArray(self::NODE_KEY . '.named_queries', $config, ContextualizerInterface::MERGE_FROM_SECOND_LEVEL);
     }
 }

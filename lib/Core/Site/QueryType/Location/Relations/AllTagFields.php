@@ -82,7 +82,7 @@ final class AllTagFields extends Location
      *
      * @param \Netgen\IbexaSiteApi\API\Values\Content $content
      *
-     * @return int[]|string[]
+     * @return int[]
      */
     private function extractTagIds(SiteContent $content): array
     {
