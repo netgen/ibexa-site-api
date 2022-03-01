@@ -10,12 +10,12 @@
         }
     ],
     "require": {
-        "php": "^7.4|^8.0",
+        "php": "^7.4 || ^8.0",
         "ext-dom": "*",
         "ibexa/core": "^4.0",
         "ibexa/http-cache": "^4.0",
         "ibexa/fieldtype-richtext": "^4.0",
-        "netgen/ezplatform-search-extra": "^2.6",
+        "netgen/ibexa-search-extra": "^3.0",
         "sensio/framework-extra-bundle": "^6.1.0"
     },
     "require-dev": {
