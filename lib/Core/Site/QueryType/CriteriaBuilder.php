@@ -8,6 +8,7 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ContentTypeIdentifier;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\DateMetadata;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Field;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\IsFieldEmpty;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Location\Depth;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Location\IsMainLocation;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Location\Priority;
@@ -16,7 +17,6 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LogicalNot;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ParentLocationId;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Subtree;
 use InvalidArgumentException;
-use Netgen\IbexaSearchExtra\API\Values\Content\Query\Criterion\IsFieldEmpty;
 use Netgen\IbexaSearchExtra\API\Values\Content\Query\Criterion\ObjectStateIdentifier;
 use Netgen\IbexaSearchExtra\API\Values\Content\Query\Criterion\SectionIdentifier;
 use Netgen\IbexaSearchExtra\API\Values\Content\Query\Criterion\Visible;
@@ -334,8 +334,6 @@ final class CriteriaBuilder
             return null;
         }
 
-        $value = $definition->value ? IsFieldEmpty::IS_EMPTY : IsFieldEmpty::IS_NOT_EMPTY;
-
-        return new IsFieldEmpty($definition->target, $value);
+        return new IsFieldEmpty((string) $definition->target, (bool) $definition->value);
     }
 }

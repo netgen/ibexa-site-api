@@ -8,12 +8,12 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Query;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ContentTypeIdentifier;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\DateMetadata;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Field;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\IsFieldEmpty;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LogicalAnd;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Operator;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\ContentName;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\DateModified;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\DatePublished;
-use Netgen\IbexaSearchExtra\API\Values\Content\Query\Criterion\IsFieldEmpty;
 use Netgen\IbexaSearchExtra\API\Values\Content\Query\Criterion\Visible;
 use Netgen\IbexaSiteApi\Core\Site\QueryType\QueryType;
 use Netgen\IbexaSiteApi\Core\Site\Settings;
@@ -220,8 +220,8 @@ final class BaseQueryTypeTest extends QueryTypeBaseTest
                 new Query([
                     'filter' => new LogicalAnd([
                         new Visible(true),
-                        new IsFieldEmpty('image', IsFieldEmpty::IS_NOT_EMPTY),
-                        new IsFieldEmpty('video', IsFieldEmpty::IS_EMPTY),
+                        new IsFieldEmpty('image', false),
+                        new IsFieldEmpty('video', true),
                     ]),
                     'sortClauses' => [
                         new DatePublished(Query::SORT_DESC),
