@@ -36,7 +36,7 @@ class ContentView extends AbstractParser
     {
         $nodeBuilder
             ->arrayNode(static::NODE_KEY)
-                ->info(static::INFO)
+                ->info(self::INFO)
                 ->useAttributeAsKey('key')
                 ->normalizeKeys(false)
                 ->arrayPrototype()

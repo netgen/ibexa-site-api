@@ -74,7 +74,7 @@ final class AllTagFields extends Content
     /**
      * Extract all Tag IDs from the given $content.
      *
-     * @return int[]|string[]
+     * @return int[]
      */
     private function extractTagIds(SiteContent $content): array
     {
