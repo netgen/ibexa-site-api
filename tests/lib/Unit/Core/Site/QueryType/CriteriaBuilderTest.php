@@ -7,6 +7,7 @@ namespace Netgen\IbexaSiteApi\Tests\Unit\Core\Site\QueryType;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ContentTypeIdentifier;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\DateMetadata;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Field;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\IsFieldEmpty;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Location\Depth;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Location\IsMainLocation;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Location\Priority;
@@ -16,7 +17,6 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Operator;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ParentLocationId;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Subtree;
 use InvalidArgumentException;
-use Netgen\IbexaSearchExtra\API\Values\Content\Query\Criterion\IsFieldEmpty;
 use Netgen\IbexaSearchExtra\API\Values\Content\Query\Criterion\ObjectStateIdentifier;
 use Netgen\IbexaSearchExtra\API\Values\Content\Query\Criterion\SectionIdentifier;
 use Netgen\IbexaSearchExtra\API\Values\Content\Query\Criterion\Visible;
@@ -297,11 +297,11 @@ final class CriteriaBuilderTest extends TestCase
                         'name' => 'parent_location_id',
                         'target' => null,
                         'operator' => null,
-                        'value' => ['pepa', 456],
+                        'value' => [123, 456],
                     ]),
                 ],
                 [
-                    new ParentLocationId(['pepa', 456]),
+                    new ParentLocationId([123, 456]),
                 ],
             ],
             [
@@ -393,7 +393,7 @@ final class CriteriaBuilderTest extends TestCase
                     ]),
                 ],
                 [
-                    new IsFieldEmpty('video', IsFieldEmpty::IS_NOT_EMPTY),
+                    new IsFieldEmpty('video', false),
                 ],
             ],
             [
