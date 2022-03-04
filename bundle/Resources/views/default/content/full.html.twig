@@ -1,9 +1,9 @@
 {# content \Netgen\IbexaSiteApi\API\Values\Content #}
 {# location \Netgen\IbexaSiteApi\API\Values\Location #}
 
-{% extends noLayout == true ? viewbaseLayout : '@NetgenIbexaSiteApi/pagelayout.html.twig' %}
+{% extends no_layout == true ? view_base_layout : '@NetgenIbexaSiteApi/pagelayout.html.twig' %}
 {% block content %}
-    <style type='text/css'>
+    <style>
         body {background: white;}
         summary:hover {background: wheat; cursor: pointer;}
         code {background-color: whitesmoke; padding: 2px; position: relative;}
@@ -19,34 +19,33 @@
         code:not(.empty):active::after {content: "copied"}
         code:not(.empty):hover::after{position: absolute; left: calc(100% + 10px); display: inline}
     </style>
-    <script type='application/javascript'>
-        function copyText(element) {
-            const aux = document.createElement('input');
-            aux.setAttribute('value', element.innerHTML);
-            document.body.appendChild(aux);
-            aux.select();
-            document.execCommand('copy');
-            document.body.removeChild(aux);
-        }
+    <script>
+        const copyToClipboard = element => {
+            if (navigator && navigator.clipboard && navigator.clipboard.writeText) {
+                return navigator.clipboard.writeText(element.innerHTML);
+            }
+
+            return Promise.reject('The Clipboard API is not available.');
+        };
     </script>
 
     <h1>{{ content.name }}</h1>
 
     <dl>
         <dt>ID</dt>
-        <dd><code onclick="copyText(this)">{{ content.id }}</code></dd>
+        <dd><code onclick="copyToClipboard(this)">{{ content.id }}</code></dd>
         <dt>Location ID</dt>
         <dd>
             {% if location is defined %}
-                <code onclick="copyText(this)">{{ location.id }}</code>
+                <code onclick="copyToClipboard(this)">{{ location.id }}</code>
             {% else %}
                 <code class="empty">[empty]</code>
             {% endif %}
         </dd>
         <dt>Current version</dt>
-        <dd><code onclick="copyText(this)">{{ content.innerVersionInfo.versionNo }}</code></dd>
+        <dd><code onclick="copyToClipboard(this)">{{ content.innerVersionInfo.versionNo }}</code></dd>
         <dt>Content type</dt>
-        <dd><code onclick="copyText(this)">{{ content.contentInfo.contentTypeIdentifier }}</code></dd>
+        <dd><code onclick="copyToClipboard(this)">{{ content.contentInfo.contentTypeIdentifier }}</code></dd>
     </dl>
 
     <h3>Fields</h3>
@@ -57,13 +56,13 @@
             <blockquote>
                 <dl>
                     <dt>ID</dt>
-                    <dd><code onclick="copyText(this)">{{ field.id }}</code></dd>
+                    <dd><code onclick="copyToClipboard(this)">{{ field.id }}</code></dd>
                     <dt>Field definition ID</dt>
-                    <dd><code onclick="copyText(this)">{{ field.innerFieldDefinition.id }}</code></dd>
+                    <dd><code onclick="copyToClipboard(this)">{{ field.innerFieldDefinition.id }}</code></dd>
                     <dt>Identifier</dt>
-                    <dd><code onclick="copyText(this)">{{ identifier }}</code></dd>
+                    <dd><code onclick="copyToClipboard(this)">{{ identifier }}</code></dd>
                     <dt>Field type identifier</dt>
-                    <dd><code onclick="copyText(this)">{{ field.fieldTypeIdentifier }}</code></dd>
+                    <dd><code onclick="copyToClipboard(this)">{{ field.fieldTypeIdentifier }}</code></dd>
                     <dt>Description</dt>
                     <dd>
                         {% if field.description is not empty %}
