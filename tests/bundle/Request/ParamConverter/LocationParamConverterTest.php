@@ -17,10 +17,7 @@ final class LocationParamConverterTest extends AbstractParamConverterTest
     public const PROPERTY_NAME = 'locationId';
     public const LOCATION_CLASS = Location::class;
 
-    /**
-     * @var \Netgen\Bundle\IbexaSiteApiBundle\Request\ParamConverter\LocationParamConverter
-     */
-    protected $converter;
+    protected ?LocationParamConverter $converter;
 
     protected function setUp(): void
     {

@@ -193,10 +193,7 @@ final class QueryDefinitionMapperTest extends TestCase
         );
     }
 
-    /**
-     * @return \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getConfigResolverMock(): MockObject
+    protected function getConfigResolverMock(): ConfigResolverInterface
     {
         $configResolverMock = $this->getMockBuilder(ConfigResolverInterface::class)->getMock();
 
@@ -233,10 +230,7 @@ final class QueryDefinitionMapperTest extends TestCase
         return $configResolverMock;
     }
 
-    /**
-     * @return \Ibexa\Core\QueryType\QueryTypeRegistry|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getQueryTypeRegistryMock(): MockObject
+    protected function getQueryTypeRegistryMock(): QueryTypeRegistry
     {
         $queryTypeRegistryMock = $this->getMockBuilder(QueryTypeRegistry::class)->getMock();
         $queryTypeRegistryMock
@@ -282,10 +276,7 @@ final class QueryDefinitionMapperTest extends TestCase
         return new ParameterProcessor($expressionLanguage, $requestStack, $configResolverMock, $namedObjectProviderMock);
     }
 
-    /**
-     * @return \Netgen\Bundle\IbexaSiteApiBundle\View\ContentView|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getViewMock(): MockObject
+    protected function getViewMock(): ContentView
     {
         $viewMock = $this->getMockBuilder(ContentView::class)->getMock();
 

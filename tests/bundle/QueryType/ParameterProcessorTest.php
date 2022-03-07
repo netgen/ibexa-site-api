@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\IbexaSiteApiBundle\Tests\QueryType;
 
+use DateTimeImmutable;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Core\FieldType\Integer\Value;
 use Ibexa\Core\MVC\Symfony\ExpressionLanguage\ExpressionLanguage;
@@ -26,7 +27,7 @@ final class ParameterProcessorTest extends TestCase
 {
     public function providerForTestProcess(): array
     {
-        $date = new \DateTimeImmutable('@1');
+        $date = new DateTimeImmutable('@1');
 
         return [
             [

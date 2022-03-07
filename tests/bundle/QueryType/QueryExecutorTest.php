@@ -15,7 +15,6 @@ use Netgen\IbexaSiteApi\API\FilterService;
 use Netgen\IbexaSiteApi\API\FindService;
 use Netgen\IbexaSiteApi\Core\Site\Pagination\Pagerfanta\FilterAdapter;
 use Netgen\IbexaSiteApi\Core\Site\Pagination\Pagerfanta\FindAdapter;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -228,10 +227,7 @@ final class QueryExecutorTest extends TestCase
         ]);
     }
 
-    /**
-     * @return \Netgen\IbexaSiteApi\API\FilterService|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getFilterServiceMock(): MockObject
+    protected function getFilterServiceMock(): FilterService
     {
         $filterServiceMock = $this->getMockBuilder(FilterService::class)->getMock();
         $filterServiceMock
@@ -244,10 +240,7 @@ final class QueryExecutorTest extends TestCase
         return $filterServiceMock;
     }
 
-    /**
-     * @return \Netgen\IbexaSiteApi\API\FindService|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getFindServiceMock(): MockObject
+    protected function getFindServiceMock(): FindService
     {
         $findServiceMock = $this->getMockBuilder(FindService::class)->getMock();
         $findServiceMock
@@ -260,10 +253,7 @@ final class QueryExecutorTest extends TestCase
         return $findServiceMock;
     }
 
-    /**
-     * @return \Ibexa\Core\QueryType\QueryTypeRegistry|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getQueryTypeRegistryMock(): MockObject
+    protected function getQueryTypeRegistryMock(): QueryTypeRegistry
     {
         $queryTypeRegistryMock = $this->getMockBuilder(QueryTypeRegistry::class)->getMock();
 
@@ -277,7 +267,7 @@ final class QueryExecutorTest extends TestCase
         return $queryTypeRegistryMock;
     }
 
-    protected function getContentQueryTypeMock(): MockObject
+    protected function getContentQueryTypeMock(): QueryType
     {
         $mock = $this->getMockBuilder(QueryType::class)->getMock();
         $mock
@@ -287,7 +277,7 @@ final class QueryExecutorTest extends TestCase
         return $mock;
     }
 
-    protected function getLocationQueryTypeMock(): MockObject
+    protected function getLocationQueryTypeMock(): QueryType
     {
         $mock = $this->getMockBuilder(QueryType::class)->getMock();
         $mock

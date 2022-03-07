@@ -17,10 +17,7 @@ final class ContentParamConverterTest extends AbstractParamConverterTest
     public const PROPERTY_NAME = 'contentId';
     public const CONTENT_CLASS = Content::class;
 
-    /**
-     * @var \Netgen\Bundle\IbexaSiteApiBundle\Request\ParamConverter\ContentParamConverter
-     */
-    protected $converter;
+    protected ContentParamConverter $converter;
 
     protected function setUp(): void
     {
@@ -31,14 +28,18 @@ final class ContentParamConverterTest extends AbstractParamConverterTest
     public function testSupports(): void
     {
         $config = $this->createConfiguration(self::CONTENT_CLASS);
+
         self::assertTrue($this->converter->supports($config));
     }
 
     public function testDoesNotSupport(): void
     {
         $config = $this->createConfiguration(__CLASS__);
+
         self::assertFalse($this->converter->supports($config));
+
         $config = $this->createConfiguration();
+
         self::assertFalse($this->converter->supports($config));
     }
 
@@ -68,6 +69,7 @@ final class ContentParamConverterTest extends AbstractParamConverterTest
         $config->expects(self::once())
             ->method('isOptional')
             ->willReturn(true);
+
         self::assertFalse($this->converter->apply($request, $config));
         self::assertNull($request->attributes->get('content'));
     }
