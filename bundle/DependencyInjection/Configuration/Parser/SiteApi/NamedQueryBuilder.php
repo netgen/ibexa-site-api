@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Configuration\Parser\SiteApi;
 
 use Symfony\Component\Config\Definition\Builder\NodeBuilder;
-use Twig\Lexer;
 use function array_keys;
 use function is_string;
 use function preg_match;
@@ -48,7 +47,7 @@ class NamedQueryBuilder
             ->validate()
                 ->ifTrue(static function ($v): bool {
                     foreach (array_keys($v) as $key) {
-                        if (!is_string($key) || !preg_match(Lexer::REGEX_NAME, $key)) {
+                        if (!is_string($key) || !preg_match('/[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*$/A', $key)) {
                             return true;
                         }
                     }
