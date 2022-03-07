@@ -399,7 +399,7 @@ of named objects is :ref:`documented on the Configuration page<named_object_conf
 +--------------------------------+----------------------------------------------------------------+
 | **Instance of**                | ``Netgen\Bundle\IbexaSiteApiBundle\NamedObject\Provider``      |
 +--------------------------------+----------------------------------------------------------------+
-| **Container service ID**       | ``netgen.ibexa_site_api.named_object_provider``                |
+| **Container service ID**       | ``netgen.ibexa_site_api.named_object.provider``                |
 +--------------------------------+----------------------------------------------------------------+
 
 The purpose of ``NamedObjectProvider`` is to provide access to named objects.

@@ -148,78 +148,14 @@ final class SiteApiTest extends AbstractParserTestCase
     {
         return [
             [
-                [
-                    'napolitanke' => 42,
-                ],
-                [
-                    'napolitanke' => [
-                        'id' => 42,
-                    ],
-                ],
+                'napolitanke' => 42,
             ],
             [
-                [
-                    'napolitanke' => 'qwe5678',
-                ],
-                [
-                    'napolitanke' => [
-                        'remote_id' => 'qwe5678',
-                    ],
-                ],
+                'napolitanke' => 'qwe5678',
             ],
             [
-                [
-                    'napolitanke' => [
-                        'id' => 42,
-                    ],
-                ],
-                [
-                    'napolitanke' => [
-                        'id' => 42,
-                    ],
-                ],
-            ],
-            [
-                [
-                    'napolitanke' => [
-                        'remote_id' => 'asd1234',
-                    ],
-                ],
-                [
-                    'napolitanke' => [
-                        'remote_id' => 'asd1234',
-                    ],
-                ],
-            ],
-            [
-                [
-                    'sardine' => 12,
-                    'napolitanke' => [
-                        'remote_id' => 'asd1234',
-                    ],
-                ],
-                [
-                    'sardine' => [
-                        'id' => 12,
-                    ],
-                    'napolitanke' => [
-                        'remote_id' => 'asd1234',
-                    ],
-                ],
-            ],
-            [
-                [
-                    'sardine' => 12,
-                    'napolitanke' => 'asd1234',
-                ],
-                [
-                    'sardine' => [
-                        'id' => 12,
-                    ],
-                    'napolitanke' => [
-                        'remote_id' => 'asd1234',
-                    ],
-                ],
+                'sardine' => 12,
+                'napolitanke' => 'asd1234',
             ],
         ];
     }
@@ -227,25 +163,23 @@ final class SiteApiTest extends AbstractParserTestCase
     public function providerForTestNamedObjectConfigurationValid(): Generator
     {
         $names = $this->getNamedObjectConfigurationNames();
-        $valuePairs = $this->getValidNamedObjectConfigurationValuePairs();
+        $values = $this->getValidNamedObjectConfigurationValuePairs();
 
         foreach ($names as $name) {
-            foreach ($valuePairs as $valuePair) {
+            foreach ($values as $value) {
                 yield [
                     $name,
-                    $valuePair[0],
-                    $valuePair[1],
+                    $value,
                 ];
             }
         }
     }
 
     /**
+     * @group ooo
      * @dataProvider providerForTestNamedObjectConfigurationValid
-     *
-     * @param mixed $expectedValue
      */
-    public function testNamedObjectConfigurationValid(string $name, array $configuration, $expectedValue): void
+    public function testNamedObjectConfigurationValid(string $name, array $configuration): void
     {
         $this->load([
             'system' => [
@@ -267,14 +201,14 @@ final class SiteApiTest extends AbstractParserTestCase
 
         $this->assertConfigResolverParameterValue(
             'ng_site_api.named_objects',
-            [$name => $expectedValue] + $defaultValues,
+            [$name => $configuration] + $defaultValues,
             'ibexa_demo_site',
         );
 
         // todo another path
         $this->assertContainerBuilderHasParameter(
             'ibexa.site_access.config.ibexa_demo_group.ng_site_api.named_objects',
-            [$name => $expectedValue] + $defaultValues,
+            [$name => $configuration] + $defaultValues,
         );
     }
 

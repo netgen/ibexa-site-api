@@ -1,15 +1,35 @@
 services:
-    netgen.ibexa_site_api.named_object_provider:
-        alias: netgen.ibexa_site_api.named_object_provider.caching
+    # Expression language function providers tagged with
+    # 'netgen.ibexa_site_api.named_object.expression_function_provider'
+    # are registered to this service
+    netgen.ibexa_site_api.named_object.expression_language:
+        class: Symfony\Component\ExpressionLanguage\ExpressionLanguage
 
-    netgen.ibexa_site_api.named_object_provider.caching:
+    netgen.ibexa_site_api.named_object.expression_function_provider:
+        class: Netgen\Bundle\IbexaSiteApiBundle\QueryType\ExpressionFunctionProvider
+        tags:
+            - { name: netgen.ibexa_site_api.query_type.expression_function_provider }
+
+    netgen.ibexa_site_api.named_object.parameter_processor:
+        class: Netgen\Bundle\IbexaSiteApiBundle\NamedObject\ParameterProcessor
+        arguments:
+            - '@netgen.ibexa_site_api.query_type.expression_language'
+            - '@ibexa.config.resolver'
+            - '@Ibexa\Contracts\Core\Repository\PermissionResolver'
+        public: false
+
+    netgen.ibexa_site_api.named_object.provider:
+        alias: netgen.ibexa_site_api.named_object.provider.caching
+
+    netgen.ibexa_site_api.named_object.provider.caching:
         class: Netgen\Bundle\IbexaSiteApiBundle\NamedObject\Provider\Caching
         arguments:
-            - '@netgen.ibexa_site_api.named_object_provider.loading'
+            - '@netgen.ibexa_site_api.named_object.provider.loading'
 
-    netgen.ibexa_site_api.named_object_provider.loading:
+    netgen.ibexa_site_api.named_object.provider.loading:
         class: Netgen\Bundle\IbexaSiteApiBundle\NamedObject\Provider\Loading
         arguments:
             - '@netgen.ibexa_site_api.load_service'
             - '@?netgen_tags.api.service.tags'
+            - '@netgen.ibexa_site_api.named_object.parameter_processor'
             - '@ibexa.config.resolver'

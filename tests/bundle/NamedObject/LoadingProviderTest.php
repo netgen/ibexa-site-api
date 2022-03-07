@@ -4,13 +4,20 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\IbexaSiteApiBundle\Tests\NamedObject;
 
+use Ibexa\Contracts\Core\Repository\PermissionResolver;
+use Ibexa\Contracts\Core\Repository\Values\User\UserReference;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
+use Ibexa\Core\MVC\Symfony\ExpressionLanguage\ExpressionLanguage;
+use InvalidArgumentException;
 use Netgen\Bundle\IbexaSiteApiBundle\NamedObject\Provider\Loading;
+use Netgen\Bundle\IbexaSiteApiBundle\NamedObject\ExpressionFunctionProvider;
+use Netgen\Bundle\IbexaSiteApiBundle\NamedObject\ParameterProcessor;
 use Netgen\IbexaSiteApi\API\LoadService;
 use Netgen\IbexaSiteApi\API\Values\Content;
 use Netgen\IbexaSiteApi\API\Values\Location;
 use Netgen\TagsBundle\API\Repository\TagsService;
 use Netgen\TagsBundle\API\Repository\Values\Tags\Tag;
+use OutOfBoundsException;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
@@ -20,8 +27,6 @@ use RuntimeException;
  */
 final class LoadingProviderTest extends TestCase
 {
-    protected $providerUnderTest;
-
     public function testHasContentReturnsTrue(): void
     {
         $provider = $this->getProviderUnderTest();
@@ -55,14 +60,73 @@ final class LoadingProviderTest extends TestCase
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
-    public function testGetContentThrowsException(): void
+    public function testGetContentByExpression(): void
+    {
+        $provider = $this->getProviderUnderTest();
+
+        $content = $provider->getContent('plume');
+
+        self::assertSame($this->getContentMock(), $content);
+    }
+
+    /**
+     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     */
+    public function testGetContentThrowsBackendException(): void
     {
         $provider = $this->getProviderUnderTest();
 
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('content not found');
+        $this->expectExceptionMessage('content backend throws up');
 
         $provider->getContent('plum');
+    }
+
+    /**
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
+     */
+    public function testGetContentThrowsOutOfBoundsException(): void
+    {
+        $provider = $this->getProviderUnderTest();
+
+        $this->expectException(OutOfBoundsException::class);
+        $this->expectExceptionMessage('Named Content "broom" is not configured');
+
+        $provider->getContent('broom');
+    }
+
+    /**
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
+     */
+    public function testGetContentThrowsInvalidArgumentException(): void
+    {
+        $provider = $this->getProviderUnderTest();
+
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Named Content "zoom" ID is not string or integer');
+
+        $provider->getContent('zoom');
+    }
+
+    /**
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
+     */
+    public function testGetContentByExpressionThrowsInvalidArgumentException(): void
+    {
+        $provider = $this->getProviderUnderTest();
+
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Named Content "grapple" ID is not string or integer');
+
+        $provider->getContent('grapple');
     }
 
     /**
@@ -84,12 +148,26 @@ final class LoadingProviderTest extends TestCase
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
-    public function testGetContentThroughRemoteIdThrowsException(): void
+    public function testGetContentThroughRemoteIdByExpression(): void
+    {
+        $provider = $this->getProviderUnderTest();
+
+        $content = $provider->getContent('wig');
+
+        self::assertSame($this->getContentMock(), $content);
+    }
+
+    /**
+     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     */
+    public function testGetContentThroughRemoteIdThrowsBackendException(): void
     {
         $provider = $this->getProviderUnderTest();
 
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('content not found');
+        $this->expectExceptionMessage('content backend throws up');
 
         $provider->getContent('fig');
     }
@@ -127,14 +205,73 @@ final class LoadingProviderTest extends TestCase
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
-    public function testGetLocationThrowsException(): void
+    public function testGetLocationByExpression(): void
+    {
+        $provider = $this->getProviderUnderTest();
+
+        $location = $provider->getLocation('plume');
+
+        self::assertSame($this->getLocationMock(), $location);
+    }
+
+    /**
+     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     */
+    public function testGetLocationThrowsBackendException(): void
     {
         $provider = $this->getProviderUnderTest();
 
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('location not found');
+        $this->expectExceptionMessage('location backend throws up');
 
         $provider->getLocation('plum');
+    }
+
+    /**
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
+     */
+    public function testGetLocationThrowsOutOfBoundsException(): void
+    {
+        $provider = $this->getProviderUnderTest();
+
+        $this->expectException(OutOfBoundsException::class);
+        $this->expectExceptionMessage('Named Location "broom" is not configured');
+
+        $provider->getLocation('broom');
+    }
+
+    /**
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
+     */
+    public function testGetLocationThrowsInvalidArgumentException(): void
+    {
+        $provider = $this->getProviderUnderTest();
+
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Named Location "zoom" ID is not string or integer');
+
+        $provider->getLocation('zoom');
+    }
+
+    /**
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
+     */
+    public function testGetLocationByExpressionThrowsInvalidArgumentException(): void
+    {
+        $provider = $this->getProviderUnderTest();
+
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Named Location "grapple" ID is not string or integer');
+
+        $provider->getLocation('grapple');
     }
 
     /**
@@ -156,12 +293,26 @@ final class LoadingProviderTest extends TestCase
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
-    public function testGetLocationThroughRemoteIdThrowsException(): void
+    public function testGetLocationThroughRemoteIdByExpression(): void
+    {
+        $provider = $this->getProviderUnderTest();
+
+        $location = $provider->getLocation('wig');
+
+        self::assertSame($this->getLocationMock(), $location);
+    }
+
+    /**
+     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     */
+    public function testGetLocationThroughRemoteIdThrowsBackendException(): void
     {
         $provider = $this->getProviderUnderTest();
 
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('location not found');
+        $this->expectExceptionMessage('location backend throws up');
 
         $provider->getLocation('fig');
     }
@@ -197,14 +348,72 @@ final class LoadingProviderTest extends TestCase
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
-    public function testGetTagThrowsException(): void
+    public function testGetTagByExpression(): void
+    {
+        $provider = $this->getProviderUnderTest();
+
+        $tag = $provider->getTag('plume');
+
+        self::assertSame(42, $tag->id);
+    }
+
+    /**
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     */
+    public function testGetTagThrowsBackendException(): void
     {
         $provider = $this->getProviderUnderTest();
 
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('tag not found');
+        $this->expectExceptionMessage('tag backend throws up');
 
         $provider->getTag('plum');
+    }
+
+    /**
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
+     */
+    public function testGetTagThrowsOutOfBoundsException(): void
+    {
+        $provider = $this->getProviderUnderTest();
+
+        $this->expectException(OutOfBoundsException::class);
+        $this->expectExceptionMessage('Named Tag "broom" is not configured');
+
+        $provider->getTag('broom');
+    }
+
+    /**
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
+     */
+    public function testGetTagThrowsInvalidArgumentException(): void
+    {
+        $provider = $this->getProviderUnderTest();
+
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Named Tag "zoom" ID is not string or integer');
+
+        $provider->getTag('zoom');
+    }
+
+    /**
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
+     */
+    public function testGetTagByExpressionThrowsInvalidArgumentException(): void
+    {
+        $provider = $this->getProviderUnderTest();
+
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Named Tag "grapple" ID is not string or integer');
+
+        $provider->getTag('grapple');
     }
 
     /**
@@ -224,33 +433,42 @@ final class LoadingProviderTest extends TestCase
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
-    public function testGetTagThroughRemoteIdThrowsException(): void
+    public function testGetTagThroughRemoteIdByExpression(): void
+    {
+        $provider = $this->getProviderUnderTest();
+
+        $tag = $provider->getTag('wig');
+
+        self::assertSame('abc', $tag->remoteId);
+    }
+
+    /**
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     */
+    public function testGetTagThroughRemoteIdThrowsBackendException(): void
     {
         $provider = $this->getProviderUnderTest();
 
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('tag not found');
+        $this->expectExceptionMessage('tag backend throws up');
 
         $provider->getTag('fig');
     }
 
     protected function getProviderUnderTest(): Loading
     {
-        if ($this->providerUnderTest === null) {
-            $this->providerUnderTest = new Loading(
-                $this->getLoadServiceMock(),
-                $this->getTagServiceMock(),
-                $this->getConfigResolverMock(),
-            );
-        }
+        $configResolver = $this->getConfigResolverMock();
 
-        return $this->providerUnderTest;
+        return new Loading(
+            $this->getLoadServiceMock(),
+            $this->getTagServiceMock(),
+            $this->getParameterProcessor($configResolver),
+            $configResolver,
+        );
     }
 
-    /**
-     * @return \Netgen\IbexaSiteApi\API\LoadService|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getLoadServiceMock(): MockObject
+    protected function getLoadServiceMock(): LoadService
     {
         $mock = $this->getMockBuilder(LoadService::class)->getMock();
 
@@ -261,7 +479,7 @@ final class LoadingProviderTest extends TestCase
                     return $this->getContentMock();
                 }
 
-                throw new RuntimeException('content not found');
+                throw new RuntimeException('content backend throws up');
             });
 
         $mock
@@ -271,7 +489,7 @@ final class LoadingProviderTest extends TestCase
                     return $this->getContentMock();
                 }
 
-                throw new RuntimeException('content not found');
+                throw new RuntimeException('content backend throws up');
             });
 
         $mock
@@ -281,7 +499,7 @@ final class LoadingProviderTest extends TestCase
                     return $this->getLocationMock();
                 }
 
-                throw new RuntimeException('location not found');
+                throw new RuntimeException('location backend throws up');
             });
 
         $mock
@@ -291,16 +509,13 @@ final class LoadingProviderTest extends TestCase
                     return $this->getLocationMock();
                 }
 
-                throw new RuntimeException('location not found');
+                throw new RuntimeException('location backend throws up');
             });
 
         return $mock;
     }
 
-    /**
-     * @return \Netgen\TagsBundle\API\Repository\TagsService|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getTagServiceMock(): MockObject
+    protected function getTagServiceMock(): TagsService
     {
         $mock = $this->getMockBuilder(TagsService::class)->getMock();
 
@@ -311,7 +526,7 @@ final class LoadingProviderTest extends TestCase
                     return new Tag(['id' => 42]);
                 }
 
-                throw new RuntimeException('tag not found');
+                throw new RuntimeException('tag backend throws up');
             });
 
         $mock
@@ -321,32 +536,25 @@ final class LoadingProviderTest extends TestCase
                     return new Tag(['remoteId' => 'abc']);
                 }
 
-                throw new RuntimeException('tag not found');
+                throw new RuntimeException('tag backend throws up');
             });
 
         return $mock;
     }
 
-    /**
-     * @return \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getConfigResolverMock(): MockObject
+    protected function getConfigResolverMock(): ConfigResolverInterface
     {
         $configResolverMock = $this->getMockBuilder(ConfigResolverInterface::class)->getMock();
 
         $template = [
-            'apple' => [
-                'id' => 42,
-            ],
-            'pear' => [
-                'remote_id' => 'abc',
-            ],
-            'plum' => [
-                'id' => 24,
-            ],
-            'fig' => [
-                'remote_id' => 'cba',
-            ],
+            'apple' => 42,
+            'pear' => 'abc',
+            'plum' => 24,
+            'fig' => 'cba',
+            'zoom' => true,
+            'plume' => "@=config('one', 'namespace', 'scope')",
+            'wig' => "@=config('two', 'namespace', 'scope')",
+            'grapple' => "@=config('four')",
         ];
 
         $getParameterMap = [
@@ -360,6 +568,9 @@ final class LoadingProviderTest extends TestCase
                     'tags' => $template,
                 ],
             ],
+            ['one', 'namespace', 'scope', 42],
+            ['two', 'namespace', 'scope', 'abc'],
+            ['four', null, null, true],
         ];
 
         $configResolverMock
@@ -389,5 +600,17 @@ final class LoadingProviderTest extends TestCase
         }
 
         return $locationMock;
+    }
+
+    protected function getParameterProcessor(ConfigResolverInterface $configResolver): ParameterProcessor
+    {
+        $expressionLanguage = new ExpressionLanguage(null, [new ExpressionFunctionProvider()]);
+        $permissionResolver = $this->getMockBuilder(PermissionResolver::class)->getMock();
+
+        return new ParameterProcessor(
+            $expressionLanguage,
+            $configResolver,
+            $permissionResolver
+        );
     }
 }

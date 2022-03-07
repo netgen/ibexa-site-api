@@ -57,7 +57,7 @@ services:
     netgen.ibexa_site_api.redirect.parameter_processor:
         class: Netgen\Bundle\IbexaSiteApiBundle\View\Redirect\ParameterProcessor
         arguments:
-            - '@netgen.ibexa_site_api.named_object_provider'
+            - '@netgen.ibexa_site_api.named_object.provider'
         public: false
 
     netgen.ibexa_site_api.ngcontent_view.matcher_factory:

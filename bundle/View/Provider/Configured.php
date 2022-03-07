@@ -22,7 +22,7 @@ use function preg_replace;
 use function sprintf;
 
 /**
- * A kind of a plugin to the Configurator, uses view configuration.
+ * Kind of a plugin to the Configurator, uses view configuration.
  *
  * @see \Ibexa\Core\MVC\Symfony\View\Configurator\ViewProvider
  */
