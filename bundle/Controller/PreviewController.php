@@ -61,8 +61,8 @@ class PreviewController extends BasePreviewController
             null,
             $previewSiteAccess->name,
         );
-        /** @var bool $overrideViewAction */
 
+        /** @var bool $overrideViewAction */
         if ($overrideViewAction) {
             $request->attributes->set('_controller', UrlAliasRouter::OVERRIDE_VIEW_ACTION);
 
@@ -84,7 +84,6 @@ class PreviewController extends BasePreviewController
         $location = $request->attributes->get('location');
         /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Content $content */
         /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Location $location */
-
         $siteContent = $this->site->getLoadService()->loadContent(
             $content->id,
             $content->versionInfo->versionNo,
