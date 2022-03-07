@@ -15,6 +15,8 @@ use Netgen\TagsBundle\API\Repository\TagsService;
 use Netgen\TagsBundle\API\Repository\Values\Tags\Tag;
 use OutOfBoundsException;
 use RuntimeException;
+use function is_int;
+use function is_string;
 
 /**
  * Loading named object provider provides named objects by loading them using
@@ -53,7 +55,7 @@ final class Loading extends Provider
     {
         if (!$this->hasContent($name)) {
             throw new OutOfBoundsException(
-                'Named Content "' . $name . '" is not configured'
+                'Named Content "' . $name . '" is not configured',
             );
         }
 
@@ -68,7 +70,7 @@ final class Loading extends Provider
         }
 
         throw new InvalidArgumentException(
-            'Named Content "' . $name . '" ID is not string or integer'
+            'Named Content "' . $name . '" ID is not string or integer',
         );
     }
 
@@ -83,7 +85,7 @@ final class Loading extends Provider
     {
         if (!$this->hasLocation($name)) {
             throw new OutOfBoundsException(
-                'Named Location "' . $name . '" is not configured'
+                'Named Location "' . $name . '" is not configured',
             );
         }
 
@@ -98,7 +100,7 @@ final class Loading extends Provider
         }
 
         throw new InvalidArgumentException(
-            'Named Location "' . $name . '" ID is not string or integer'
+            'Named Location "' . $name . '" ID is not string or integer',
         );
     }
 
@@ -117,7 +119,7 @@ final class Loading extends Provider
 
         if (!$this->hasTag($name)) {
             throw new OutOfBoundsException(
-                'Named Tag "' . $name . '" is not configured'
+                'Named Tag "' . $name . '" is not configured',
             );
         }
 
@@ -132,7 +134,7 @@ final class Loading extends Provider
         }
 
         throw new InvalidArgumentException(
-            'Named Tag "' . $name . '" ID is not string or integer'
+            'Named Tag "' . $name . '" ID is not string or integer',
         );
     }
 

@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace Netgen\Bundle\IbexaSiteApiBundle\Tests\NamedObject;
 
 use Ibexa\Contracts\Core\Repository\PermissionResolver;
-use Ibexa\Contracts\Core\Repository\Values\User\UserReference;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Core\MVC\Symfony\ExpressionLanguage\ExpressionLanguage;
 use InvalidArgumentException;
-use Netgen\Bundle\IbexaSiteApiBundle\NamedObject\Provider\Loading;
 use Netgen\Bundle\IbexaSiteApiBundle\NamedObject\ExpressionFunctionProvider;
 use Netgen\Bundle\IbexaSiteApiBundle\NamedObject\ParameterProcessor;
+use Netgen\Bundle\IbexaSiteApiBundle\NamedObject\Provider\Loading;
 use Netgen\IbexaSiteApi\API\LoadService;
 use Netgen\IbexaSiteApi\API\Values\Content;
 use Netgen\IbexaSiteApi\API\Values\Location;
@@ -610,7 +609,7 @@ final class LoadingProviderTest extends TestCase
         return new ParameterProcessor(
             $expressionLanguage,
             $configResolver,
-            $permissionResolver
+            $permissionResolver,
         );
     }
 }

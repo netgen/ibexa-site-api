@@ -92,7 +92,7 @@ final class ParameterProcessorTest extends TestCase
                 4,
             ],
             [
-                "@=currentUserId",
+                '@=currentUserId',
                 123,
             ],
         ];
@@ -119,7 +119,7 @@ final class ParameterProcessorTest extends TestCase
 
         self::assertInstanceOf(
             ConfigResolverInterface::class,
-            $parameterProcessor->process('@=configResolver')
+            $parameterProcessor->process('@=configResolver'),
         );
     }
 
@@ -128,7 +128,7 @@ final class ParameterProcessorTest extends TestCase
         $configResolver = $this->getConfigResolverMock();
         $expressionLanguage = new ExpressionLanguage(null, [new ExpressionFunctionProvider()]);
         $permissionResolver = $this->getMockBuilder(PermissionResolver::class)->getMock();
-        $userReference =  $this->getMockBuilder(UserReference::class)->getMock();
+        $userReference = $this->getMockBuilder(UserReference::class)->getMock();
 
         $userReference
             ->method('getUserId')
@@ -141,7 +141,7 @@ final class ParameterProcessorTest extends TestCase
         return new ParameterProcessor(
             $expressionLanguage,
             $configResolver,
-            $permissionResolver
+            $permissionResolver,
         );
     }
 

@@ -57,7 +57,7 @@ final class ParameterProcessor
             $this->extractExpression($value),
             [
                 'configResolver' => $this->configResolver,
-                'currentUserId' =>  $this->permissionResolver->getCurrentUserReference()->getUserId(),
+                'currentUserId' => $this->permissionResolver->getCurrentUserReference()->getUserId(),
             ],
         );
     }
