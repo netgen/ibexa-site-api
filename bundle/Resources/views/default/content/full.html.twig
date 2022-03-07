@@ -17,7 +17,8 @@
             font-size: 13px;
         }
         code:not(.empty):active::after {content: "copied"}
-        code:not(.empty):hover::after{position: absolute; left: calc(100% + 10px); display: inline}
+        code:not(.empty):hover::after {position: absolute; left: calc(100% + 10px); display: inline}
+        ins {background-color: yellow;}
     </style>
     <script>
         const copyToClipboard = element => {
@@ -28,6 +29,8 @@
             return Promise.reject('The Clipboard API is not available.');
         };
     </script>
+
+    <ins>This page is rendered using the default Netgen Site API full view template.</ins>
 
     <h1>{{ content.name }}</h1>
 

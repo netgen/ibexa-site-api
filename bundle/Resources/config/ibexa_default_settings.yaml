@@ -71,12 +71,10 @@ parameters:
             default:
                 template: "%netgen.ibexa_site_api.default_view_templates.content.embed_inline%"
                 match: []
-        # Default full view is intentionally disabled because for some cases we depend on Content
-        # redirecting to the homepage when the full view is not configured.
-        #full:
-        #    default:
-        #        template: "%netgen.ibexa_site_api.default_view_templates.content.full%"
-        #        match: []
+        full:
+            default:
+                template: "%netgen.ibexa_site_api.default_view_templates.content.full%"
+                match: []
         line:
             default:
                 template: "%netgen.ibexa_site_api.default_view_templates.content.line%"

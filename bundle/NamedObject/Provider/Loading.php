@@ -5,13 +5,15 @@ declare(strict_types=1);
 namespace Netgen\Bundle\IbexaSiteApiBundle\NamedObject\Provider;
 
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
-use LogicException;
+use InvalidArgumentException;
+use Netgen\Bundle\IbexaSiteApiBundle\NamedObject\ParameterProcessor;
 use Netgen\Bundle\IbexaSiteApiBundle\NamedObject\Provider;
 use Netgen\IbexaSiteApi\API\LoadService;
 use Netgen\IbexaSiteApi\API\Values\Content;
 use Netgen\IbexaSiteApi\API\Values\Location;
 use Netgen\TagsBundle\API\Repository\TagsService;
 use Netgen\TagsBundle\API\Repository\Values\Tags\Tag;
+use OutOfBoundsException;
 use RuntimeException;
 
 /**
@@ -24,16 +26,19 @@ final class Loading extends Provider
 {
     private LoadService $loadService;
     private ?TagsService $tagsService;
+    private ParameterProcessor $parameterProcessor;
     private ConfigResolverInterface $configResolver;
     private ?array $configuration = null;
 
     public function __construct(
         LoadService $loadService,
         ?TagsService $tagsService,
+        ParameterProcessor $parameterProcessor,
         ConfigResolverInterface $configResolver
     ) {
         $this->loadService = $loadService;
         $this->tagsService = $tagsService;
+        $this->parameterProcessor = $parameterProcessor;
         $this->configResolver = $configResolver;
     }
 
@@ -46,19 +51,25 @@ final class Loading extends Provider
 
     public function getContent(string $name): Content
     {
+        if (!$this->hasContent($name)) {
+            throw new OutOfBoundsException(
+                'Named Content "' . $name . '" is not configured'
+            );
+        }
+
         $contentId = $this->getContentId($name);
 
-        if ($contentId !== null) {
+        if (is_int($contentId)) {
             return $this->loadService->loadContent($contentId);
         }
 
-        $contentRemoteId = $this->getContentRemoteId($name);
-
-        if ($contentRemoteId !== null) {
-            return $this->loadService->loadContentByRemoteId($contentRemoteId);
+        if (is_string($contentId)) {
+            return $this->loadService->loadContentByRemoteId($contentId);
         }
 
-        throw new LogicException('Named Content "' . $name . '" is not configured');
+        throw new InvalidArgumentException(
+            'Named Content "' . $name . '" ID is not string or integer'
+        );
     }
 
     public function hasLocation(string $name): bool
@@ -70,19 +81,25 @@ final class Loading extends Provider
 
     public function getLocation(string $name): Location
     {
+        if (!$this->hasLocation($name)) {
+            throw new OutOfBoundsException(
+                'Named Location "' . $name . '" is not configured'
+            );
+        }
+
         $locationId = $this->getLocationId($name);
 
-        if ($locationId !== null) {
+        if (is_int($locationId)) {
             return $this->loadService->loadLocation($locationId);
         }
 
-        $locationRemoteId = $this->getLocationRemoteId($name);
-
-        if ($locationRemoteId !== null) {
-            return $this->loadService->loadLocationByRemoteId($locationRemoteId);
+        if (is_string($locationId)) {
+            return $this->loadService->loadLocationByRemoteId($locationId);
         }
 
-        throw new LogicException('Named Location "' . $name . '" is not configured');
+        throw new InvalidArgumentException(
+            'Named Location "' . $name . '" ID is not string or integer'
+        );
     }
 
     public function hasTag(string $name): bool
@@ -98,61 +115,55 @@ final class Loading extends Provider
             throw new RuntimeException('Missing Netgen TagsBundle package (netgen/tagsbundle)');
         }
 
+        if (!$this->hasTag($name)) {
+            throw new OutOfBoundsException(
+                'Named Tag "' . $name . '" is not configured'
+            );
+        }
+
         $tagId = $this->getTagId($name);
 
-        if ($tagId !== null) {
+        if (is_int($tagId)) {
             return $this->tagsService->loadTag($tagId);
         }
 
-        $tagRemoteId = $this->getTagRemoteId($name);
-
-        if ($tagRemoteId !== null) {
-            return $this->tagsService->loadTagByRemoteId($tagRemoteId);
+        if (is_string($tagId)) {
+            return $this->tagsService->loadTagByRemoteId($tagId);
         }
 
-        throw new LogicException('Named Tag "' . $name . '" is not configured');
+        throw new InvalidArgumentException(
+            'Named Tag "' . $name . '" ID is not string or integer'
+        );
     }
 
-    private function getContentId(string $name): ?int
+    /**
+     * @return string|int
+     */
+    private function getContentId(string $name)
     {
         $this->setConfiguration();
 
-        return $this->configuration['content'][$name]['id'] ?? null;
+        return $this->parameterProcessor->process($this->configuration['content'][$name] ?? null);
     }
 
-    private function getContentRemoteId(string $name): ?string
+    /**
+     * @return string|int
+     */
+    private function getLocationId(string $name)
     {
         $this->setConfiguration();
 
-        return $this->configuration['content'][$name]['remote_id'] ?? null;
+        return $this->parameterProcessor->process($this->configuration['locations'][$name] ?? null);
     }
 
-    private function getLocationId(string $name): ?int
+    /**
+     * @return string|int
+     */
+    private function getTagId(string $name)
     {
         $this->setConfiguration();
 
-        return $this->configuration['locations'][$name]['id'] ?? null;
-    }
-
-    private function getLocationRemoteId(string $name): ?string
-    {
-        $this->setConfiguration();
-
-        return $this->configuration['locations'][$name]['remote_id'] ?? null;
-    }
-
-    private function getTagId(string $name): ?int
-    {
-        $this->setConfiguration();
-
-        return $this->configuration['tags'][$name]['id'] ?? null;
-    }
-
-    private function getTagRemoteId(string $name): ?string
-    {
-        $this->setConfiguration();
-
-        return $this->configuration['tags'][$name]['remote_id'] ?? null;
+        return $this->parameterProcessor->process($this->configuration['tags'][$name] ?? null);
     }
 
     private function setConfiguration(): void

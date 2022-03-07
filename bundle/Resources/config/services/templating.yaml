@@ -120,7 +120,7 @@ services:
         class: Netgen\Bundle\IbexaSiteApiBundle\Templating\Twig\Extension\NamedObjectRuntime
         # public: false
         arguments:
-            - '@netgen.ibexa_site_api.named_object_provider'
+            - '@netgen.ibexa_site_api.named_object.provider'
             - '%kernel.debug%'
             - '@?logger'
         tags:

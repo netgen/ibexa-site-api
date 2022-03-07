@@ -6,6 +6,7 @@ namespace Netgen\Bundle\IbexaSiteApiBundle;
 
 use Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Compiler\DefaultViewActionOverridePass;
 use Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Compiler\InvalidRedirectConfigurationListenerPass;
+use Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Compiler\NamedObjectExpressionFunctionProviderPass;
 use Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Compiler\PreviewControllerOverridePass;
 use Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Compiler\QueryTypeExpressionFunctionProviderPass;
 use Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Compiler\RelationResolverRegistrationPass;
@@ -23,6 +24,7 @@ class NetgenIbexaSiteApiBundle extends Bundle
 
         $container->addCompilerPass(new DefaultViewActionOverridePass());
         $container->addCompilerPass(new InvalidRedirectConfigurationListenerPass());
+        $container->addCompilerPass(new NamedObjectExpressionFunctionProviderPass());
         $container->addCompilerPass(new PreviewControllerOverridePass());
         $container->addCompilerPass(new QueryTypeExpressionFunctionProviderPass());
         $container->addCompilerPass(new RelationResolverRegistrationPass());

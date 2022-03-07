@@ -57,7 +57,7 @@ abstract class Controller extends AbstractController
     {
         return [
             'netgen.ibexa_site_api.site' => Site::class,
-            'netgen.ibexa_site_api.named_object_provider' => Provider::class,
+            'netgen.ibexa_site_api.named_object.provider' => Provider::class,
             QueryTypeRegistry::class => QueryTypeRegistry::class,
             'ibexa.api.repository' => Repository::class,
             'ibexa.templating.global_helper' => GlobalHelper::class,
@@ -77,6 +77,6 @@ abstract class Controller extends AbstractController
 
     protected function getNamedObjectProvider(): Provider
     {
-        return $this->container->get('netgen.ibexa_site_api.named_object_provider');
+        return $this->container->get('netgen.ibexa_site_api.named_object.provider');
     }
 }

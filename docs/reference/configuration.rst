@@ -247,7 +247,7 @@ Example configuration:
                 ng_content_view:
                     container:
                         redirect:
-                            target: "@=location.parent"
+                            target: '@=location.parent'
                             target_parameters:
                                 foo: bar
                             permanent: false
@@ -255,7 +255,7 @@ Example configuration:
                             Identifier\ContentType: container
                     article:
                         redirect:
-                            target: "@=namedObject.getLocation('homepage')"
+                            target: '@=namedLocation("homepage")'
                             target_parameters:
                                 foo: bar
                                 siteaccess: cro
@@ -265,7 +265,7 @@ Example configuration:
                             Identifier\ContentType: article
                     category:
                         redirect:
-                            target: '@=location.getChildren(1)[0]'
+                            target: '@=location.firstChild("article")'
                             permanent: true
                         match:
                             Identifier\ContentType: category
@@ -292,11 +292,11 @@ There also shortcuts available for simplified configuration:
             frontend_group:
                 ng_content_view:
                     container:
-                        temporary_redirect: "@=namedObject.getTag('running')"
+                        temporary_redirect: '@=namedObject.getTag("running")'
                         match:
                             Identifier\ContentType: container
                     category:
-                        permanent_redirect: "@=content.getFieldRelation('internal_redirect')"
+                        permanent_redirect: '@=content.getFieldRelation("internal_redirect")'
                         match:
                             Identifier\ContentType: container
 
@@ -349,8 +349,23 @@ Example configuration:
 From the example, ``certificate`` and ``site_info`` are names of Content objects, ``homepage`` and
 ``articles`` are names of Location objects and ``categories`` and ``colors`` are names of Tag
 objects. The example also shows it's possible to use both a normal ID (integer) or remote ID
-(string). In fact, it shows a short syntax, where the type of ID is inferred from the type, while
-full syntax equivalent to the above would be:
+(string). Hence, these two types of IDs are distinguished by their respective value type.
+
+Configuring IDs through expressions
+-----------------------------------
+
+When defining parameters it's possible to use expressions. These are evaluated by Symfony's
+`Expression Language <https://symfony.com/doc/current/components/expression_language.html>`_
+component, whose syntax is based on Twig and is documented `here <https://symfony.com/doc/current/components/expression_language/syntax.html>`_.
+
+Expression strings are recognized by ``@=`` prefix. Following sections describe available objects,
+services and functions.
+
+Configuration
+~~~~~~~~~~~~~
+
+Ibexa ConfigResolver service is available as ``configResolver``. Through it you can access
+dynamic (per siteaccess) configuration, for example the location tree root:
 
 .. code-block:: yaml
 
@@ -359,21 +374,36 @@ full syntax equivalent to the above would be:
             frontend_group:
                 ng_site_api:
                     named_objects:
-                        content:
-                            certificate:
-                                id: 42
-                            site_info:
-                                remote_id: 'abc123'
                         locations:
-                            homepage:
-                                id: 2
-                            articles:
-                                remote_id: 'zxc456'
-                        tags:
-                            categories:
-                                id: 24
-                            colors:
-                                remote_id: 'bnm789'
+                            homepage: '@=configResolver.getParameter("content.tree_root.location_id")'
+
+Function ``config(name, namespace = null, scope = null)`` is a shortcut to ``getParameter()`` method
+of ``ConfigResolver`` service:
+
+.. code-block:: yaml
+
+    ibexa:
+        system:
+            frontend_group:
+                ng_site_api:
+                    named_objects:
+                        locations:
+                            homepage: '@=config("content.tree_root.location_id")'
+
+Current user ID
+~~~~~~~~~~~~~~~
+
+Repository's current user ID is available as ``currentUserId`` variable:
+
+.. code-block:: yaml
+
+    ibexa:
+        system:
+            frontend_group:
+                ng_site_api:
+                    named_objects:
+                        locations:
+                            current_user: '@=currentUserId'
 
 Accessing named objects
 -----------------------
