@@ -24,6 +24,9 @@
         "netgen/tagsbundle": "^5.0.x-dev",
         "composer/package-versions-deprecated": "*"
     },
+    "replace": {
+        "netgen/ezplatform-site-api": "*"
+    },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "suggest": {
