@@ -56,6 +56,7 @@ class ContentView extends AbstractParser
                                 $v['redirect'] = [
                                     'target' => $value,
                                     'permanent' => $permanent,
+                                    'keep_request_method' => true,
                                     'absolute' => false,
                                 ];
 
@@ -90,6 +91,9 @@ class ContentView extends AbstractParser
                                     ->end()
                                     ->booleanNode('permanent')
                                         ->defaultFalse()
+                                    ->end()
+                                    ->booleanNode('keep_request_method')
+                                        ->defaultTrue()
                                     ->end()
                                     ->booleanNode('absolute')
                                         ->defaultFalse()

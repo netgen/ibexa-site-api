@@ -23,7 +23,7 @@ use Symfony\Component\Routing\RouterInterface;
 use function class_exists;
 use function in_array;
 
-class InternalContentViewRouteListener implements EventSubscriberInterface
+final class InternalContentViewRouteListener implements EventSubscriberInterface
 {
     private ConfigResolverInterface $configResolver;
     private FragmentHandler $fragmentHandler;

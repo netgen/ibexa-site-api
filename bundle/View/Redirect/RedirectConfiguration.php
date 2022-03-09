@@ -9,24 +9,32 @@ final class RedirectConfiguration
     private string $target;
     private array $targetParameters;
     private bool $permanent;
+    private bool $keepRequestMethod;
     private bool $absolute;
 
-    public function __construct(string $target, array $targetParameters, bool $permanent, bool $absolute)
-    {
+    public function __construct(
+        string $target,
+        array $targetParameters,
+        bool $permanent,
+        bool $keepRequestMethod,
+        bool $absolute
+    ) {
         $this->target = $target;
         $this->targetParameters = $targetParameters;
         $this->permanent = $permanent;
+        $this->keepRequestMethod = $keepRequestMethod;
         $this->absolute = $absolute;
     }
 
     public static function fromConfigurationArray(array $config): self
     {
-        $target = $config['target'];
-        $targetParameters = $config['target_parameters'];
-        $permanent = $config['permanent'];
-        $absolute = $config['absolute'];
-
-        return new self($target, $targetParameters, $permanent, $absolute);
+        return new self(
+            $config['target'],
+            $config['target_parameters'],
+            $config['permanent'],
+            $config['keep_request_method'],
+            $config['absolute'],
+        );
     }
 
     public function getTarget(): string
@@ -42,6 +50,11 @@ final class RedirectConfiguration
     public function isPermanent(): bool
     {
         return $this->permanent;
+    }
+
+    public function keepRequestMethod(): bool
+    {
+        return $this->keepRequestMethod;
     }
 
     public function isAbsolute(): bool

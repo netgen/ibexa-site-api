@@ -148,11 +148,10 @@ class Configured implements ViewProvider
 
         $redirectConfig = RedirectConfiguration::fromConfigurationArray($viewConfig['redirect']);
 
-        $dto->addParameters(
-            [
-                'path' => $this->redirectResolver->resolveTarget($redirectConfig, $view),
-                'permanent' => $redirectConfig->isPermanent(),
-            ],
-        );
+        $dto->addParameters([
+            'path' => $this->redirectResolver->resolveTarget($redirectConfig, $view),
+            'permanent' => $redirectConfig->isPermanent(),
+            'keepRequestMethod' => $redirectConfig->keepRequestMethod(),
+        ]);
     }
 }
