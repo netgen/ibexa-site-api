@@ -235,7 +235,7 @@ With Site API, it's also possible to configure redirects directly from the view 
 You can set up temporary or permanent redirect to either ``Content``, ``Location``, ``Tag``, Symfony route or any full url.
 
 For the target configuration you can use expression language, meaning it is easily possible to redirect, for example,
-to the parent of the current location, or to the named object.
+to the parent of the current location, or to a named object.
 
 Example configuration:
 
@@ -251,6 +251,7 @@ Example configuration:
                             target_parameters:
                                 foo: bar
                             permanent: false
+                            keep_request_method: true
                         match:
                             Identifier\ContentType: container
                     article:
@@ -260,6 +261,7 @@ Example configuration:
                                 foo: bar
                                 siteaccess: cro
                             permanent: true
+                            keep_request_method: '%kernel.debug%'
                             absolute: true
                         match:
                             Identifier\ContentType: article
@@ -267,6 +269,7 @@ Example configuration:
                         redirect:
                             target: '@=location.firstChild("article")'
                             permanent: true
+                            keep_request_method: false
                         match:
                             Identifier\ContentType: category
                     news:
@@ -297,6 +300,29 @@ There also shortcuts available for simplified configuration:
                             Identifier\ContentType: container
                     category:
                         permanent_redirect: '@=content.getFieldRelation("internal_redirect")'
+                        match:
+                            Identifier\ContentType: container
+
+Which is functionally identical to:
+
+.. code-block:: yaml
+
+    ibexa:
+        system:
+            frontend_group:
+                ng_content_view:
+                    container:
+                        redirect:
+                            target: '@=namedObject.getTag("running")'
+                            permanent: false
+                            keep_request_method: true
+                        match:
+                            Identifier\ContentType: container
+                    category:
+                        redirect:
+                            target: '@=content.getFieldRelation("internal_redirect")'
+                            permanent: true
+                            keep_request_method: true
                         match:
                             Identifier\ContentType: container
 
