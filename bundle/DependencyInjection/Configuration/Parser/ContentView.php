@@ -105,7 +105,7 @@ class ContentView extends AbstractParser
                                         ->defaultFalse()
                                     ->end()
                                     ->scalarNode('keep_request_method')
-                                        ->defaultTrue()
+                                        ->defaultFalse()
                                     ->end()
                                     ->scalarNode('absolute')
                                         ->defaultFalse()
