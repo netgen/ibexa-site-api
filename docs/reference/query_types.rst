@@ -410,6 +410,23 @@ Shortcut functions are available for accessing each type of named object directl
 
     Provides access to named Tag.
 
+
+With the shortcut functions, the example from the above can be written as:
+
+.. code-block:: yaml
+
+    ibexa:
+        system:
+            frontend_group:
+                ng_site_api:
+                    named_queries:
+                        top_categories:
+                            query_type: 'SiteAPI:Location/Children'
+                            parameters:
+                                location: '@=namedLocation("homepage")'
+                                content_type: 'category'
+                                sort: 'name desc'
+
 Miscellaneous
 ~~~~~~~~~~~~~
 

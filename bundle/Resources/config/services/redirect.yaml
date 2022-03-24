@@ -1,0 +1,27 @@
+services:
+    # Expression language function providers tagged with
+    # 'netgen.ibexa_site_api.redirect.expression_function_provider'
+    # are registered to this service
+    netgen.ibexa_site_api.redirect.expression_language:
+        class: Symfony\Component\ExpressionLanguage\ExpressionLanguage
+
+    netgen.ibexa_site_api.redirect.expression_function_provider:
+        class: Netgen\Bundle\IbexaSiteApiBundle\View\Redirect\ExpressionFunctionProvider
+        arguments:
+            - '@service_container'
+        tags:
+            - { name: netgen.ibexa_site_api.redirect.expression_function_provider }
+
+    netgen.ibexa_site_api.redirect.resolver:
+        class: Netgen\Bundle\IbexaSiteApiBundle\View\Redirect\Resolver
+        arguments:
+            - '@router'
+        public: false
+
+    netgen.ibexa_site_api.redirect.parameter_processor:
+        class: Netgen\Bundle\IbexaSiteApiBundle\View\Redirect\ParameterProcessor
+        arguments:
+            - '@netgen.ibexa_site_api.redirect.expression_language'
+            - '@ibexa.config.resolver'
+            - '@netgen.ibexa_site_api.named_object.provider'
+        public: false

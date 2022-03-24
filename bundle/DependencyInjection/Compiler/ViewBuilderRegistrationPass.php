@@ -12,7 +12,6 @@ class ViewBuilderRegistrationPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container): void
     {
-        // todo check
         if (!$container->has(ViewBuilderRegistry::class)) {
             return;
         }

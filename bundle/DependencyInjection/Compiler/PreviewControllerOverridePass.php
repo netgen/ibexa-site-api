@@ -33,7 +33,6 @@ class PreviewControllerOverridePass implements CompilerPassInterface
                 [new Reference('netgen.ibexa_site_api.core.site')],
             );
 
-        // todo check
         // Redefine the alias as it seems to be mangled in some cases
         // See https://github.com/netgen/ezplatform-site-api/pull/168
         $container->setAlias(

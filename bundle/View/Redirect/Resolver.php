@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Netgen\Bundle\IbexaSiteApiBundle\View\Redirect;
 
 use Netgen\Bundle\IbexaSiteApiBundle\Exception\InvalidRedirectConfiguration;
-use Netgen\Bundle\IbexaSiteApiBundle\View\ContentView;
 use Netgen\IbexaSiteApi\API\Values\Content;
 use Netgen\IbexaSiteApi\API\Values\Location;
 use Netgen\TagsBundle\API\Repository\Values\Tags\Tag;
@@ -20,14 +19,10 @@ use function mb_stripos;
 
 final class Resolver
 {
-    private ParameterProcessor $parameterProcessor;
     private RouterInterface $router;
 
-    public function __construct(
-        ParameterProcessor $parameterProcessor,
-        RouterInterface $router
-    ) {
-        $this->parameterProcessor = $parameterProcessor;
+    public function __construct(RouterInterface $router)
+    {
         $this->router = $router;
     }
 
@@ -36,49 +31,63 @@ final class Resolver
      *
      * @throws \Netgen\Bundle\IbexaSiteApiBundle\Exception\InvalidRedirectConfiguration
      */
-    public function resolveTarget(RedirectConfiguration $redirectConfig, ContentView $view): string
+    public function resolveTarget(RedirectConfiguration $redirectConfig): string
     {
-        if (mb_stripos($redirectConfig->getTarget(), '@=') === 0) {
-            return $this->processExpression($redirectConfig, $view);
+        $target = $redirectConfig->getTarget();
+
+        if (!is_string($target) && !is_object($target)) {
+            throw new InvalidRedirectConfiguration(gettype($target));
         }
 
-        if (mb_stripos($redirectConfig->getTarget(), 'http') === 0) {
-            return $redirectConfig->getTarget();
+        if (is_object($target)) {
+            return $this->resolveForObject($target, $redirectConfig);
         }
 
-        try {
-            return $this->router->generate(
-                $redirectConfig->getTarget(),
-                $redirectConfig->getTargetParameters(),
-                $redirectConfig->isAbsolute() ? UrlGeneratorInterface::ABSOLUTE_URL : UrlGeneratorInterface::ABSOLUTE_PATH,
-            );
-        } catch (RouteNotFoundException|MissingMandatoryParametersException|InvalidParameterException $exception) {
-            throw new InvalidRedirectConfiguration($redirectConfig->getTarget());
+        if (mb_stripos($target, 'http') === 0) {
+            return $target;
         }
+
+        return $this->resolveForRoute($target, $redirectConfig);
     }
 
     /**
      * @throws \Netgen\Bundle\IbexaSiteApiBundle\Exception\InvalidRedirectConfiguration
      */
-    private function processExpression(RedirectConfiguration $redirectConfig, ContentView $view): string
+    private function resolveForObject(object $object, RedirectConfiguration $redirectConfig): string
     {
-        $value = $this->parameterProcessor->process(
-            $redirectConfig->getTarget(),
-            $view,
-        );
-
-        if ($value instanceof Location || $value instanceof Content || $value instanceof Tag) {
+        if ($object instanceof Location || $object instanceof Content || $object instanceof Tag) {
             return $this->router->generate(
                 '',
-                [RouteObjectInterface::ROUTE_OBJECT => $value] + $redirectConfig->getTargetParameters(),
-                $redirectConfig->isAbsolute() ? UrlGeneratorInterface::ABSOLUTE_URL : UrlGeneratorInterface::ABSOLUTE_PATH,
+                [RouteObjectInterface::ROUTE_OBJECT => $object] + $redirectConfig->getTargetParameters(),
+                $this->resolveReferenceType($redirectConfig),
             );
         }
 
-        if (is_string($value) && mb_stripos($value, 'http') === 0) {
-            return $value;
+        throw new InvalidRedirectConfiguration(get_class($object));
+    }
+
+    /**
+     * @throws \Netgen\Bundle\IbexaSiteApiBundle\Exception\InvalidRedirectConfiguration
+     */
+    private function resolveForRoute(string $route, RedirectConfiguration $redirectConfig): string
+    {
+        try {
+            return $this->router->generate(
+                $route,
+                $redirectConfig->getTargetParameters(),
+                $this->resolveReferenceType($redirectConfig),
+            );
+        } catch (RouteNotFoundException|MissingMandatoryParametersException|InvalidParameterException $exception) {
+            throw new InvalidRedirectConfiguration($route, $exception);
+        }
+    }
+
+    private function resolveReferenceType(RedirectConfiguration $redirectConfig): int
+    {
+        if ($redirectConfig->isAbsolute()) {
+            return UrlGeneratorInterface::ABSOLUTE_URL;
         }
 
-        throw new InvalidRedirectConfiguration($redirectConfig->getTarget());
+        return UrlGeneratorInterface::ABSOLUTE_PATH;
     }
 }

@@ -4,20 +4,27 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\IbexaSiteApiBundle\View\Redirect;
 
+use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Netgen\Bundle\IbexaSiteApiBundle\NamedObject\Provider;
+use Netgen\Bundle\IbexaSiteApiBundle\Traits\LanguageExpressionEvaluatorTrait;
 use Netgen\Bundle\IbexaSiteApiBundle\View\ContentView;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
-use function is_string;
-use function mb_stripos;
-use function mb_substr;
 
 final class ParameterProcessor
 {
+    use LanguageExpressionEvaluatorTrait;
+
+    private ExpressionLanguage $expressionLanguage;
+    private ConfigResolverInterface $configResolver;
     private Provider $namedObjectProvider;
 
     public function __construct(
+        ExpressionLanguage $expressionLanguage,
+        ConfigResolverInterface $configResolver,
         Provider $namedObjectProvider
     ) {
+        $this->expressionLanguage = $expressionLanguage;
+        $this->configResolver = $configResolver;
         $this->namedObjectProvider = $namedObjectProvider;
     }
 
@@ -30,45 +37,15 @@ final class ParameterProcessor
      */
     public function process($value, ContentView $view)
     {
-        if (!is_string($value) || mb_stripos($value, '@=') !== 0) {
-            return $value;
-        }
-
-        $language = new ExpressionLanguage();
-
-        $this->registerFunctions($language);
-
-        return $language->evaluate(
-            mb_substr($value, 2),
+        return $this->evaluate(
+            $value,
+            $this->expressionLanguage,
             [
                 'location' => $view->getSiteLocation(),
                 'content' => $view->getSiteContent(),
+                'configResolver' => $this->configResolver,
                 'namedObject' => $this->namedObjectProvider,
-            ],
-        );
-    }
-
-    /**
-     * Register functions with the given $expressionLanguage.
-     */
-    private function registerFunctions(ExpressionLanguage $expressionLanguage): void
-    {
-        $expressionLanguage->register(
-            'namedContent',
-            static function (): void {},
-            fn (array $arguments, string $name) => $this->namedObjectProvider->getContent($name),
-        );
-
-        $expressionLanguage->register(
-            'namedLocation',
-            static function (): void {},
-            fn (array $arguments, string $name) => $this->namedObjectProvider->getLocation($name),
-        );
-
-        $expressionLanguage->register(
-            'namedTag',
-            static function (): void {},
-            fn (array $arguments, string $name) => $this->namedObjectProvider->getTag($name),
+            ]
         );
     }
 }

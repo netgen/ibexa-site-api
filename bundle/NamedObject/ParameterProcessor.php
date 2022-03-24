@@ -6,11 +6,8 @@ namespace Netgen\Bundle\IbexaSiteApiBundle\NamedObject;
 
 use Ibexa\Contracts\Core\Repository\PermissionResolver;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
+use Netgen\Bundle\IbexaSiteApiBundle\Traits\LanguageExpressionEvaluatorTrait;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
-use function is_string;
-use function mb_strlen;
-use function mb_strpos;
-use function mb_substr;
 
 /**
  * ParameterProcessor processes query configuration parameter values using ExpressionLanguage.
@@ -19,10 +16,7 @@ use function mb_substr;
  */
 final class ParameterProcessor
 {
-    /**
-     * @var string
-     */
-    private const ExpressionMarker = '@=';
+    use LanguageExpressionEvaluatorTrait;
 
     private ExpressionLanguage $expressionLanguage;
     private ConfigResolverInterface $configResolver;
@@ -49,26 +43,13 @@ final class ParameterProcessor
      */
     public function process($value)
     {
-        if (!$this->isExpression($value)) {
-            return $value;
-        }
-
-        return $this->expressionLanguage->evaluate(
-            $this->extractExpression($value),
+        return $this->evaluate(
+            $value,
+            $this->expressionLanguage,
             [
                 'configResolver' => $this->configResolver,
                 'currentUserId' => $this->permissionResolver->getCurrentUserReference()->getUserId(),
-            ],
+            ]
         );
-    }
-
-    private function isExpression($value): bool
-    {
-        return is_string($value) && mb_strpos($value, self::ExpressionMarker) === 0;
-    }
-
-    private function extractExpression(string $value): string
-    {
-        return mb_substr($value, mb_strlen(self::ExpressionMarker));
     }
 }

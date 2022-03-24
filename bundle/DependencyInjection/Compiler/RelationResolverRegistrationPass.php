@@ -22,7 +22,7 @@ final class RelationResolverRegistrationPass implements CompilerPassInterface
      *
      * @var string
      */
-    private $resolverRegistryId = 'netgen.ibexa_site_api.plugins.field_type.relation_resolver.registry';
+    private string $resolverRegistryId = 'netgen.ibexa_site_api.plugins.field_type.relation_resolver.registry';
 
     /**
      * Service tag used for field type relation resolvers.
@@ -31,7 +31,7 @@ final class RelationResolverRegistrationPass implements CompilerPassInterface
      *
      * @var string
      */
-    private $resolverTag = 'netgen.ibexa_site_api.plugins.field_type.relation_resolver';
+    private string $resolverTag = 'netgen.ibexa_site_api.plugins.field_type.relation_resolver';
 
     public function process(ContainerBuilder $container): void
     {

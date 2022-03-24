@@ -232,12 +232,53 @@ Redirections
 ~~~~~~~~~~~~
 
 With Site API, it's also possible to configure redirects directly from the view configuration.
-You can set up temporary or permanent redirect to either ``Content``, ``Location``, ``Tag``, Symfony route or any full url.
+Redirections have their own semantic configuration under ``redirect`` key in configuration for a
+particular Content view. Available parameters and their default values are:
 
-For the target configuration you can use expression language, meaning it is easily possible to redirect, for example,
-to the parent of the current location, or to a named object.
+- ``target`` - identifies the redirect target
 
-Example configuration:
+    Redirect target can be a ``Content``, ``Location`` or a ``Tag`` object, a Symfony route, or a
+    full URL.
+
+- ``target_parameters: []`` - Symfony route parameters used when the target is a Symfony route
+- ``permanent: false`` - whether the redirect will be permanent or temporary (``301`` or ``302``)
+- ``keep_request_method: true`` - whether to keep the request method
+
+    If enabled, this will result in ``308`` for a permanent and ``307`` for a temporary redirect.
+
+- ``absolute: false`` - whether the generated URL will be absolute or relative
+
+Parameter expressions
+---------------------
+
+When defining parameters it's possible to use expressions. These are evaluated by Symfony's
+`Expression Language <https://symfony.com/doc/current/components/expression_language.html>`_
+component, whose syntax is based on Twig and is documented `here <https://symfony.com/doc/current/components/expression_language/syntax.html>`_.
+
+Expression strings are recognized by ``@=`` prefix. Following sections describe available objects,
+services and functions.
+
+Content and Location objects
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+:ref:`Site API Content object<content_object>` is available as ``content``. For example you could
+redirect to the main ``Location`` of the related ``Content`` through the ``internal_redirect``
+field:
+
+.. code-block:: yaml
+
+    ibexa:
+        system:
+            frontend_group:
+                ng_content_view:
+                    container:
+                        redirect:
+                            target: '@=content.getFieldRelation("internal_redirect")'
+                        match:
+                            Identifier\ContentType: container
+
+:ref:`Site API Location object<location_object>` is available as ``location``. In the following
+example we use it to redirect to the parent ``Location``:
 
 .. code-block:: yaml
 
@@ -248,62 +289,21 @@ Example configuration:
                     container:
                         redirect:
                             target: '@=location.parent'
-                            target_parameters:
-                                foo: bar
-                            permanent: false
-                            keep_request_method: true
-                        match:
-                            Identifier\ContentType: container
-                    article:
-                        redirect:
-                            target: '@=namedLocation("homepage")'
-                            target_parameters:
-                                foo: bar
-                                siteaccess: cro
-                            permanent: true
-                            keep_request_method: '%kernel.debug%'
-                            absolute: true
-                        match:
-                            Identifier\ContentType: article
-                    category:
-                        redirect:
-                            target: '@=location.firstChild("article")'
                             permanent: true
                             keep_request_method: false
                         match:
-                            Identifier\ContentType: category
-                    news:
-                        redirect:
-                            target: 'login'
-                            target_parameters:
-                                foo: bar
-                            permanent: false
-                        match:
-                            Identifier\ContentType: news
-                    blog:
-                        redirect:
-                            target: 'https://netgen.io'
-                        match:
-                            Identifier\ContentType: blog
+                            Identifier\ContentType: container
 
-There also shortcuts available for simplified configuration:
+Configuration
+^^^^^^^^^^^^^
+
+Ibexa ConfigResolver service is available as ``configResolver``. Through it you can access
+dynamic (per siteaccess) configuration, for example:
 
 .. code-block:: yaml
 
-    ibexa:
-        system:
-            frontend_group:
-                ng_content_view:
-                    container:
-                        temporary_redirect: '@=namedObject.getTag("running")'
-                        match:
-                            Identifier\ContentType: container
-                    category:
-                        permanent_redirect: '@=content.getFieldRelation("internal_redirect")'
-                        match:
-                            Identifier\ContentType: container
-
-Which is functionally identical to:
+    ngsite.eng.redirect: https://netgen.io
+    ngsite.jpn.redirect: some_symfony_route
 
 .. code-block:: yaml
 
@@ -313,22 +313,65 @@ Which is functionally identical to:
                 ng_content_view:
                     container:
                         redirect:
-                            target: '@=namedObject.getTag("running")'
-                            permanent: false
-                            keep_request_method: true
+                            target: '@=configResolver.getParameter("redirect", "ngsite")'
                         match:
                             Identifier\ContentType: container
-                    category:
+
+Function ``config(name, namespace = null, scope = null)`` is a shortcut to ``getParameter()`` method
+of ``ConfigResolver`` service:
+
+.. code-block:: yaml
+
+    ngsite.eng.redirect: https://netgen.io
+    ngsite.jpn.redirect: some_symfony_route
+
+.. code-block:: yaml
+
+    ibexa:
+        system:
+            frontend_group:
+                ng_content_view:
+                    container:
                         redirect:
-                            target: '@=content.getFieldRelation("internal_redirect")'
-                            permanent: true
-                            keep_request_method: true
+                            target: '@=config("redirect", "ngsite")'
                         match:
                             Identifier\ContentType: container
+
+Named Objects
+^^^^^^^^^^^^^
+
+Named objects feature provides a way to configure specific objects (``Content``, ``Location`` and
+``Tag``) by name and ID, and a way to access them by name from PHP, Twig and Query Type
+configuration. Site API NamedObjectProvider service is available as ``namedObject``. Its purpose is
+providing access to configured named objects.
 
 .. note::
 
-    Configuration of named objects is documented in more detail below.
+    Configuration of named objects is documented in more detail :ref:`below<named_object_configuration>`.
+
+The following example shows how to configure redirect to a homepage named ``Location``:
+
+.. code-block:: yaml
+
+    ibexa:
+        system:
+            frontend_group:
+                ng_site_api:
+                    named_objects:
+                        locations:
+                            homepage: 2
+
+.. code-block:: yaml
+
+    ibexa:
+        system:
+            frontend_group:
+                ng_content_view:
+                    container:
+                        redirect:
+                            target: '@=namedObject.getLocation("homepage")'
+                        match:
+                            Identifier\ContentType: container
 
 Shortcut functions are available for accessing each type of named object directly:
 
@@ -343,6 +386,41 @@ Shortcut functions are available for accessing each type of named object directl
 - ``namedTag(name)``
 
     Provides access to named Tag.
+
+With the shortcut functions, the example from the above can be written as:
+
+.. code-block:: yaml
+
+    ibexa:
+        system:
+            frontend_group:
+                ng_content_view:
+                    container:
+                        redirect:
+                            target: '@=namedLocation("homepage")'
+                        match:
+                            Identifier\ContentType: container
+
+Container parameters
+^^^^^^^^^^^^^^^^^^^^
+
+Access to the container parameters is possible both by using the parameter directly, or by using it
+through the ``parameter`` function, which also enables negating a boolean parameter value:
+
+.. code-block:: yaml
+
+    ibexa:
+        system:
+            frontend_group:
+                ng_content_view:
+                    match_all:
+                        redirect:
+                            target: 'login'
+                            target_parameters:
+                                foo: '@=config("bar")'
+                            permanent: '@=!parameter("kernel.debug")'
+                            keep_request_method: '%kernel.debug%'
+                        match: ~
 
 .. _named_object_configuration:
 
@@ -388,7 +466,7 @@ Expression strings are recognized by ``@=`` prefix. Following sections describe 
 services and functions.
 
 Configuration
-~~~~~~~~~~~~~
+-------------
 
 Ibexa ConfigResolver service is available as ``configResolver``. Through it you can access
 dynamic (per siteaccess) configuration, for example the location tree root:
@@ -417,7 +495,7 @@ of ``ConfigResolver`` service:
                             homepage: '@=config("content.tree_root.location_id")'
 
 Current user ID
-~~~~~~~~~~~~~~~
+---------------
 
 Repository's current user ID is available as ``currentUserId`` variable:
 

@@ -6,14 +6,15 @@ namespace Netgen\Bundle\IbexaSiteApiBundle\View\Redirect;
 
 final class RedirectConfiguration
 {
-    private string $target;
+    /** @var object|string */
+    private $target;
     private array $targetParameters;
     private bool $permanent;
     private bool $keepRequestMethod;
     private bool $absolute;
 
     public function __construct(
-        string $target,
+        $target,
         array $targetParameters,
         bool $permanent,
         bool $keepRequestMethod,
@@ -37,7 +38,7 @@ final class RedirectConfiguration
         );
     }
 
-    public function getTarget(): string
+    public function getTarget()
     {
         return $this->target;
     }
