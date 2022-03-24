@@ -242,7 +242,7 @@ particular Content view. Available parameters and their default values are:
 
 - ``target_parameters: []`` - Symfony route parameters used when the target is a Symfony route
 - ``permanent: false`` - whether the redirect will be permanent or temporary (``301`` or ``302``)
-- ``keep_request_method: true`` - whether to keep the request method
+- ``keep_request_method: false`` - whether to keep the request method
 
     If enabled, this will result in ``308`` for a permanent and ``307`` for a temporary redirect.
 
