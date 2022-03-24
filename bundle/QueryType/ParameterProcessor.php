@@ -6,13 +6,10 @@ namespace Netgen\Bundle\IbexaSiteApiBundle\QueryType;
 
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Netgen\Bundle\IbexaSiteApiBundle\NamedObject\Provider;
+use Netgen\Bundle\IbexaSiteApiBundle\Traits\LanguageExpressionEvaluatorTrait;
 use Netgen\Bundle\IbexaSiteApiBundle\View\ContentView;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\HttpFoundation\RequestStack;
-use function is_string;
-use function mb_strlen;
-use function mb_strpos;
-use function mb_substr;
 
 /**
  * ParameterProcessor processes query configuration parameter values using ExpressionLanguage.
@@ -21,10 +18,7 @@ use function mb_substr;
  */
 final class ParameterProcessor
 {
-    /**
-     * @var string
-     */
-    private const ExpressionMarker = '@=';
+    use LanguageExpressionEvaluatorTrait;
 
     private ExpressionLanguage $expressionLanguage;
     private RequestStack $requestStack;
@@ -54,12 +48,9 @@ final class ParameterProcessor
      */
     public function process($value, ContentView $view)
     {
-        if (!$this->isExpression($value)) {
-            return $value;
-        }
-
-        return $this->expressionLanguage->evaluate(
-            $this->extractExpression($value),
+        return $this->evaluate(
+            $value,
+            $this->expressionLanguage,
             [
                 'view' => $view,
                 'location' => $view->getSiteLocation(),
@@ -67,17 +58,7 @@ final class ParameterProcessor
                 'request' => $this->requestStack->getCurrentRequest(),
                 'configResolver' => $this->configResolver,
                 'namedObject' => $this->namedObjectProvider,
-            ],
+            ]
         );
-    }
-
-    private function isExpression($value): bool
-    {
-        return is_string($value) && mb_strpos($value, self::ExpressionMarker) === 0;
-    }
-
-    private function extractExpression(string $value): string
-    {
-        return mb_substr($value, mb_strlen(self::ExpressionMarker));
     }
 }

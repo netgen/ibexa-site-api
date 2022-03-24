@@ -12,6 +12,7 @@ use Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Configuration\Parser\Co
 use Netgen\Bundle\IbexaSiteApiBundle\QueryType\QueryDefinitionCollection;
 use Netgen\Bundle\IbexaSiteApiBundle\QueryType\QueryDefinitionMapper;
 use Netgen\Bundle\IbexaSiteApiBundle\View\ContentView;
+use Netgen\Bundle\IbexaSiteApiBundle\View\Redirect\ParameterProcessor;
 use Netgen\Bundle\IbexaSiteApiBundle\View\Redirect\RedirectConfiguration;
 use Netgen\Bundle\IbexaSiteApiBundle\View\Redirect\Resolver;
 use Symfony\Bundle\FrameworkBundle\Controller\RedirectController;
@@ -28,21 +29,24 @@ use function sprintf;
  */
 class Configured implements ViewProvider
 {
-    protected MatcherFactoryInterface $matcherFactory;
+    private MatcherFactoryInterface $matcherFactory;
     private QueryDefinitionMapper $queryDefinitionMapper;
     private Resolver $redirectResolver;
     private ContentViewFallbackResolver $contentViewFallbackResolver;
+    private ParameterProcessor $parameterProcessor;
 
     public function __construct(
         MatcherFactoryInterface $matcherFactory,
         QueryDefinitionMapper $queryDefinitionMapper,
         Resolver $redirectResolver,
-        ContentViewFallbackResolver $contentViewFallbackResolver
+        ContentViewFallbackResolver $contentViewFallbackResolver,
+        ParameterProcessor $parameterProcessor
     ) {
         $this->matcherFactory = $matcherFactory;
         $this->queryDefinitionMapper = $queryDefinitionMapper;
         $this->redirectResolver = $redirectResolver;
         $this->contentViewFallbackResolver = $contentViewFallbackResolver;
+        $this->parameterProcessor = $parameterProcessor;
     }
 
     /**
@@ -146,10 +150,11 @@ class Configured implements ViewProvider
             ),
         );
 
-        $redirectConfig = RedirectConfiguration::fromConfigurationArray($viewConfig['redirect']);
+        $config = $this->parameterProcessor->process($viewConfig['redirect'], $view);
+        $redirectConfig = RedirectConfiguration::fromConfigurationArray($config);
 
         $dto->addParameters([
-            'path' => $this->redirectResolver->resolveTarget($redirectConfig, $view),
+            'path' => $this->redirectResolver->resolveTarget($redirectConfig),
             'permanent' => $redirectConfig->isPermanent(),
             'keepRequestMethod' => $redirectConfig->keepRequestMethod(),
         ]);

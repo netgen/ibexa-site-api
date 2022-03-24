@@ -8,10 +8,10 @@ use Exception;
 
 final class InvalidRedirectConfiguration extends Exception
 {
-    public function __construct(string $target)
+    public function __construct(string $target, Exception $previous = null)
     {
-        $message = "Not possible to resolve redirect from given target: '{$target}'";
+        $message = "Could not resolve redirect from the given target: '$target'";
 
-        parent::__construct($message);
+        parent::__construct($message, 0, $previous);
     }
 }

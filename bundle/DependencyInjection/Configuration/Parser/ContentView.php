@@ -34,6 +34,18 @@ class ContentView extends AbstractParser
      */
     public function addSemanticConfig(NodeBuilder $nodeBuilder): void
     {
+        $booleanOrExpressionValidator = static function ($value): bool {
+            if (is_bool($value)) {
+                return true;
+            }
+
+            if (!is_string($value)) {
+                return false;
+            }
+
+            return mb_stripos($value, '@=') === 0;
+        };
+
         $nodeBuilder
             ->arrayNode(static::NODE_KEY)
                 ->info(self::INFO)
@@ -42,7 +54,7 @@ class ContentView extends AbstractParser
                 ->arrayPrototype()
                     ->useAttributeAsKey('key')
                     ->normalizeKeys(false)
-                    ->info("View selection rulesets, grouped by view type. Key is the view type (e.g. 'full', 'line', ...)")
+                    ->info("View selection ruleset, grouped by view type. Key is the view type (e.g. 'full', 'line', ...)")
                     ->arrayPrototype()
                         ->beforeNormalization()
                             ->ifTrue(static function ($v) {
@@ -89,13 +101,13 @@ class ContentView extends AbstractParser
                                         ->isRequired()
                                         ->cannotBeEmpty()
                                     ->end()
-                                    ->booleanNode('permanent')
+                                    ->scalarNode('permanent')
                                         ->defaultFalse()
                                     ->end()
-                                    ->booleanNode('keep_request_method')
+                                    ->scalarNode('keep_request_method')
                                         ->defaultTrue()
                                     ->end()
-                                    ->booleanNode('absolute')
+                                    ->scalarNode('absolute')
                                         ->defaultFalse()
                                     ->end()
                                     ->arrayNode('target_parameters')
@@ -144,6 +156,30 @@ class ContentView extends AbstractParser
                                 ->useAttributeAsKey('key')
                                 ->variablePrototype()->end()
                             ->end()
+                        ->end()
+                        ->validate()
+                            ->ifTrue(function ($v) use ($booleanOrExpressionValidator): bool {
+                                return isset($v['redirect']['permanent']) && !$booleanOrExpressionValidator($v['redirect']['permanent']);
+                            })
+                            ->thenInvalid(
+                                'Option "permanent" must be a boolean or a language expression string.',
+                            )
+                        ->end()
+                        ->validate()
+                            ->ifTrue(function ($v) use ($booleanOrExpressionValidator): bool {
+                                return isset($v['redirect']['absolute']) && !$booleanOrExpressionValidator($v['redirect']['absolute']);
+                            })
+                            ->thenInvalid(
+                                'Option "absolute" must be a boolean or a language expression string.',
+                            )
+                        ->end()
+                        ->validate()
+                            ->ifTrue(function ($v) use ($booleanOrExpressionValidator): bool {
+                                return isset($v['redirect']['keep_request_method']) && !$booleanOrExpressionValidator($v['redirect']['keep_request_method']);
+                            })
+                            ->thenInvalid(
+                                'Option "keep_request_method" must be a boolean or a language expression string.',
+                            )
                         ->end()
                         ->validate()
                             ->ifTrue(static function ($v): bool {

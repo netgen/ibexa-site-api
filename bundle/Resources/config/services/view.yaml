@@ -25,8 +25,9 @@ services:
         arguments:
             - '@netgen.ibexa_site_api.ngcontent_view.matcher_factory'
             - '@netgen.ibexa_site_api.query_type.query_definition_mapper'
-            - '@netgen.ibexa_site_api.redirect_resolver'
+            - '@netgen.ibexa_site_api.redirect.resolver'
             - '@netgen.ibexa_site_api.view_provider.content_view_fallback_resolver'
+            - '@netgen.ibexa_site_api.redirect.parameter_processor'
         tags:
             - { name: ibexa.view.provider, type: 'Netgen\Bundle\IbexaSiteApiBundle\View\ContentView', priority: 110 }
         public: false
@@ -47,23 +48,9 @@ services:
             - '@ibexa.content_view.matcher_factory'
             - '@netgen.ibexa_site_api.view_provider.content_view_fallback_resolver'
 
-    netgen.ibexa_site_api.redirect_resolver:
-        class: Netgen\Bundle\IbexaSiteApiBundle\View\Redirect\Resolver
-        arguments:
-            - '@netgen.ibexa_site_api.redirect.parameter_processor'
-            - '@router'
-        public: false
-
-    netgen.ibexa_site_api.redirect.parameter_processor:
-        class: Netgen\Bundle\IbexaSiteApiBundle\View\Redirect\ParameterProcessor
-        arguments:
-            - '@netgen.ibexa_site_api.named_object.provider'
-        public: false
-
     netgen.ibexa_site_api.ngcontent_view.matcher_factory:
         class: Netgen\Bundle\IbexaSiteApiBundle\View\Matcher\MatcherFactory
         arguments:
-            # todo check optional
             - '@?Ibexa\Bundle\Core\Matcher\ViewMatcherRegistry'
             - '@ibexa.api.repository'
             - 'Ibexa\Core\MVC\Symfony\Matcher\ContentBased'
@@ -84,7 +71,6 @@ services:
     netgen.ibexa_site_api.ngcontent_view.default_matcher_factory:
         class: Netgen\Bundle\IbexaSiteApiBundle\View\Matcher\MatcherFactory
         arguments:
-            # todo check optional
             - '@?Ibexa\Bundle\Core\Matcher\ViewMatcherRegistry'
             - '@ibexa.api.repository'
             - 'Ibexa\Core\MVC\Symfony\Matcher\ContentBased'

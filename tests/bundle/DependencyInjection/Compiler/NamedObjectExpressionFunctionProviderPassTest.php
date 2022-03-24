@@ -5,17 +5,17 @@ declare(strict_types=1);
 namespace Netgen\Bundle\IbexaSiteApiBundle\Tests\DependencyInjection\Compiler;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
-use Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Compiler\QueryTypeExpressionFunctionProviderPass;
+use Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Compiler\NamedObjectExpressionFunctionProviderPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
 /**
  * @internal
  */
-final class QueryTypeExpressionFunctionProviderPassTest extends AbstractCompilerPassTestCase
+final class NamedObjectExpressionFunctionProviderPassTest extends AbstractCompilerPassTestCase
 {
-    protected const ExpressionLanguageId = 'netgen.ibexa_site_api.query_type.expression_language';
-    protected const ExpressionFunctionProviderTag = 'netgen.ibexa_site_api.query_type.expression_function_provider';
+    protected const ExpressionLanguageId = 'netgen.ibexa_site_api.named_object.expression_language';
+    protected const ExpressionFunctionProviderTag = 'netgen.ibexa_site_api.named_object.expression_function_provider';
 
     protected function setUp(): void
     {
@@ -45,6 +45,6 @@ final class QueryTypeExpressionFunctionProviderPassTest extends AbstractCompiler
 
     protected function registerCompilerPass(ContainerBuilder $container): void
     {
-        $container->addCompilerPass(new QueryTypeExpressionFunctionProviderPass());
+        $container->addCompilerPass(new NamedObjectExpressionFunctionProviderPass());
     }
 }

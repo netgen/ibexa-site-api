@@ -9,6 +9,7 @@ use Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Compiler\InvalidRedirec
 use Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Compiler\NamedObjectExpressionFunctionProviderPass;
 use Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Compiler\PreviewControllerOverridePass;
 use Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Compiler\QueryTypeExpressionFunctionProviderPass;
+use Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Compiler\RedirectExpressionFunctionProviderPass;
 use Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Compiler\RelationResolverRegistrationPass;
 use Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Compiler\ViewBuilderRegistrationPass;
 use Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Configuration\Parser\ContentView;
@@ -27,6 +28,7 @@ class NetgenIbexaSiteApiBundle extends Bundle
         $container->addCompilerPass(new NamedObjectExpressionFunctionProviderPass());
         $container->addCompilerPass(new PreviewControllerOverridePass());
         $container->addCompilerPass(new QueryTypeExpressionFunctionProviderPass());
+        $container->addCompilerPass(new RedirectExpressionFunctionProviderPass());
         $container->addCompilerPass(new RelationResolverRegistrationPass());
         $container->addCompilerPass(new ViewBuilderRegistrationPass());
 
