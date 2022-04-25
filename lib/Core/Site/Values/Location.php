@@ -12,8 +12,10 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LocationId;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LogicalAnd;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LogicalNot;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ParentLocationId;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\ContentName as CoreContentName;
 use Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo;
 use Netgen\IbexaSearchExtra\API\Values\Content\Query\Criterion\Visible;
+use Netgen\IbexaSearchExtra\API\Values\Content\Query\SortClause\ContentName as SearchExtraContentName;
 use Netgen\IbexaSiteApi\API\Site;
 use Netgen\IbexaSiteApi\API\Values\Content as APIContent;
 use Netgen\IbexaSiteApi\API\Values\ContentInfo as APIContentInfo;
@@ -213,6 +215,27 @@ final class Location extends APILocation
         }
 
         return $this->getFilterPager($criteria, $maxPerPage, $currentPage);
+    }
+
+    /**
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotImplementedException
+     */
+    public function getSortClauses(): array
+    {
+        $sortClauses = [];
+        $coreSortClauses = $this->innerLocation->getSortClauses();
+
+        foreach ($coreSortClauses as $coreSortClause) {
+            if ($coreSortClause instanceof CoreContentName) {
+                $sortClauses[] = new SearchExtraContentName();
+
+                continue;
+            }
+
+            $sortClauses[] = $coreSortClause;
+        }
+
+        return $sortClauses;
     }
 
     private function getFilterPager(array $criteria, int $maxPerPage = 25, int $currentPage = 1): Pagerfanta

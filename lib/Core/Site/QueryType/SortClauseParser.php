@@ -6,13 +6,13 @@ namespace Netgen\IbexaSiteApi\Core\Site\QueryType;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Query;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause;
-use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\ContentName;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\DateModified;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\DatePublished;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\Field;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\Location\Depth;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\Location\Priority;
 use InvalidArgumentException;
+use Netgen\IbexaSearchExtra\API\Values\Content\Query\SortClause\ContentName;
 use function array_key_exists;
 use function explode;
 use function mb_strtolower;

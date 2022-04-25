@@ -6,13 +6,13 @@ namespace Netgen\IbexaSiteApi\Tests\Unit\Core\Site\QueryType;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Query;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause;
-use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\ContentName;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\DateModified;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\DatePublished;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\Field;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\Location\Depth;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\Location\Priority;
 use InvalidArgumentException;
+use Netgen\IbexaSearchExtra\API\Values\Content\Query\SortClause\ContentName;
 use Netgen\IbexaSiteApi\Core\Site\QueryType\SortClauseParser;
 use PHPUnit\Framework\TestCase;
 use function preg_quote;
@@ -152,7 +152,7 @@ final class SortClauseParserTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
         $message = preg_quote($message, '/');
-        self::matchesRegularExpression("/{$message}/");
+        self::matchesRegularExpression("/$message/");
 
         $parser = $this->getParserUnderTest();
         $parser->parse($stringDefinition);
