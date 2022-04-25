@@ -12,10 +12,10 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\FieldRelation
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LogicalAnd;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\MatchNone;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Operator;
-use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\ContentName;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\DatePublished;
 use Ibexa\Core\Repository\Values\ContentType\FieldDefinitionCollection;
 use Netgen\IbexaSearchExtra\API\Values\Content\Query\Criterion\Visible;
+use Netgen\IbexaSearchExtra\API\Values\Content\Query\SortClause\ContentName;
 use Netgen\IbexaSiteApi\Core\Site\QueryType\Content\Relations\ReverseFields;
 use Netgen\IbexaSiteApi\Core\Site\QueryType\QueryType;
 use Netgen\IbexaSiteApi\Core\Site\Settings;

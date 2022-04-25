@@ -68,4 +68,18 @@ abstract class Location extends ValueObject
      * Siblings will not include current Location.
      */
     abstract public function filterSiblings(array $contentTypeIdentifiers = [], int $maxPerPage = 25, int $currentPage = 1): Pagerfanta;
+
+    /**
+     * Get SortClause objects built from Locations' sort options.
+     *
+     * In difference to the sort clauses returned by the Repository Location,
+     * ContentName sort clause from search extra, working on the translated
+     * Content name with both Legacy and Solr search Engines will be used.
+     *
+     * @see \Netgen\IbexaSearchExtra\API\Values\Content\Query\SortClause\ContentName
+     * @see \Ibexa\Contracts\Core\Repository\Values\Content\Location::getSortClauses()
+     *
+     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause[]
+     */
+    abstract public function getSortClauses(): array;
 }

@@ -58,7 +58,7 @@ final class Children extends Location
                 $location = $options['location'];
 
                 try {
-                    return $location->innerLocation->getSortClauses();
+                    return $location->getSortClauses();
                 } catch (NotImplementedException $e) {
                     $this->logger->notice("Cannot use sort clauses from parent location: {$e->getMessage()}");
 

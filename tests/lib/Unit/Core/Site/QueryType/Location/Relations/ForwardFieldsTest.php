@@ -15,7 +15,6 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Location\IsMa
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LogicalAnd;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\MatchNone;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Operator;
-use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\ContentName;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\DatePublished;
 use Ibexa\Core\FieldType\Relation\Value as RelationValue;
 use Ibexa\Core\FieldType\RelationList\Value as RelationListValue;
@@ -23,6 +22,7 @@ use Ibexa\Core\FieldType\TextLine\Value;
 use Ibexa\Core\Repository\Values\ContentType\FieldDefinition;
 use Ibexa\Core\Repository\Values\ContentType\FieldDefinitionCollection;
 use Netgen\IbexaSearchExtra\API\Values\Content\Query\Criterion\Visible;
+use Netgen\IbexaSearchExtra\API\Values\Content\Query\SortClause\ContentName;
 use Netgen\IbexaSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Registry;
 use Netgen\IbexaSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Resolver\Relation;
 use Netgen\IbexaSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Resolver\RelationList;
