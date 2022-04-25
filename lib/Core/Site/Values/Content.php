@@ -42,6 +42,8 @@ final class Content extends APIContent
 
     private ?APIContent $owner = null;
     private ?User $innerOwnerUser = null;
+    private ?APIContent $modifier = null;
+    private ?User $innerModifierUser = null;
     private ?APIContentInfo $contentInfo = null;
     private ?RepoContent $innerContent = null;
     private ?APILocation $internalMainLocation = null;
@@ -56,6 +58,8 @@ final class Content extends APIContent
 
     private bool $isOwnerInitialized = false;
     private bool $isInnerOwnerUserInitialized = false;
+    private bool $isModifierInitialized = false;
+    private bool $isInnerModifierUserInitialized = false;
 
     public function __construct(array $properties, bool $failOnMissingField, LoggerInterface $logger)
     {
@@ -120,6 +124,12 @@ final class Content extends APIContent
             case 'innerOwnerUser':
                 return $this->getInnerOwnerUser();
 
+            case 'modifier':
+                return $this->getModifier();
+
+            case 'innerModifierUser':
+                return $this->getInnerModifierUser();
+
             case 'isVisible':
                 return $this->getContentInfo()->isVisible;
         }
@@ -142,6 +152,8 @@ final class Content extends APIContent
             case 'versionInfo':
             case 'owner':
             case 'innerOwnerUser':
+            case 'modifier':
+            case 'innerModifierUser':
             case 'isVisible':
                 return true;
         }
@@ -442,5 +454,48 @@ final class Content extends APIContent
         $this->isInnerOwnerUserInitialized = true;
 
         return $this->innerOwnerUser;
+    }
+
+    /**
+     * @throws \Exception
+     */
+    private function getModifier(): ?APIContent
+    {
+        if ($this->isModifierInitialized) {
+            return $this->modifier;
+        }
+
+        $this->modifier = $this->repository->sudo(
+            function (Repository $repository): ?APIContent {
+                try {
+                    return $this->site->getLoadService()->loadContent($this->innerVersionInfo->creatorId);
+                } catch (NotFoundException $e) {
+                    // Do nothing
+                }
+
+                return null;
+            },
+        );
+
+        $this->isModifierInitialized = true;
+
+        return $this->modifier;
+    }
+
+    private function getInnerModifierUser(): ?User
+    {
+        if ($this->isInnerModifierUserInitialized) {
+            return $this->innerModifierUser;
+        }
+
+        try {
+            $this->innerModifierUser = $this->userService->loadUser($this->innerVersionInfo->creatorId);
+        } catch (NotFoundException $e) {
+            // Do nothing
+        }
+
+        $this->isInnerModifierUserInitialized = true;
+
+        return $this->innerModifierUser;
     }
 }

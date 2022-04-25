@@ -25,7 +25,9 @@ use Pagerfanta\Pagerfanta;
  * @property \Netgen\IbexaSiteApi\API\Values\Field[]|\Netgen\IbexaSiteApi\API\Values\Fields $fields
  * @property ?\Netgen\IbexaSiteApi\API\Values\Location $mainLocation
  * @property ?\Netgen\IbexaSiteApi\API\Values\Content $owner
+ * @property ?\Netgen\IbexaSiteApi\API\Values\Content $modifier
  * @property ?\Ibexa\Contracts\Core\Repository\Values\User\User $innerOwnerUser
+ * @property ?\Ibexa\Contracts\Core\Repository\Values\User\User $innerModifierUser
  * @property \Ibexa\Contracts\Core\Repository\Values\Content\Content $innerContent
  * @property \Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo $innerVersionInfo
  * @property \Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo $versionInfo

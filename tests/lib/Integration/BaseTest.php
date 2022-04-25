@@ -122,11 +122,15 @@ abstract class BaseTest extends APIBaseTest
         self::assertSame($data['contentIsVisible'], $content->isVisible);
         $this->assertContentInfo($content->contentInfo, $data);
         $this->assertFields($content, $data);
-        self::assertInstanceOf(Content::class, $content->owner);
         self::assertInstanceOf(Location::class, $content->mainLocation);
         self::assertInstanceOf(Content::class, $content->owner);
+        self::assertInstanceOf(Content::class, $content->owner);
         self::assertInstanceOf(User::class, $content->innerOwnerUser);
         self::assertInstanceOf(User::class, $content->innerOwnerUser);
+        self::assertInstanceOf(Content::class, $content->modifier);
+        self::assertInstanceOf(Content::class, $content->modifier);
+        self::assertInstanceOf(User::class, $content->innerModifierUser);
+        self::assertInstanceOf(User::class, $content->innerModifierUser);
         self::assertInstanceOf(APIContent::class, $content->innerContent);
         self::assertInstanceOf(VersionInfo::class, $content->versionInfo);
         self::assertInstanceOf(VersionInfo::class, $content->innerVersionInfo);
