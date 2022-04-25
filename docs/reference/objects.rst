@@ -768,6 +768,33 @@ a Pagerfanta instance.
 |                                        |                                                                                    |
 +----------------------------------------+------------------------------------------------------------------------------------+
 
+``getSortClauses``
+..................
+
+Return SortClause objects built from Locations' sort options.
+
+In difference to the sort clauses returned by the Repository Location, ContentName sort clause from
+Search Extra will be used, working on the translated Content name with both Legacy and Solr search
+engines.
+
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Parameters**                         | None                                                                               |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Returns**                            | An array of SortClause instances                                                   |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Sorting method**                     | As is defined by the parent Location                                               |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Example in PHP**                     | .. code-block:: php                                                                |
+|                                        |                                                                                    |
+|                                        |     $sortClauses = $location->getSortClauses();                                    |
+|                                        |                                                                                    |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Example in Twig**                    | .. code-block:: twig                                                               |
+|                                        |                                                                                    |
+|                                        |     {% set sort_clauses = location.sortClauses() %}                                |
+|                                        |                                                                                    |
++----------------------------------------+------------------------------------------------------------------------------------+
+
 Properties
 ~~~~~~~~~~
 

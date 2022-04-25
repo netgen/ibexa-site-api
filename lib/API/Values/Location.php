@@ -73,8 +73,8 @@ abstract class Location extends ValueObject
      * Get SortClause objects built from Locations' sort options.
      *
      * In difference to the sort clauses returned by the Repository Location,
-     * ContentName sort clause from search extra, working on the translated
-     * Content name with both Legacy and Solr search Engines will be used.
+     * ContentName sort clause from Search Extra will be used, working on the
+     * translated Content name with both Legacy and Solr search engines.
      *
      * @see \Netgen\IbexaSearchExtra\API\Values\Content\Query\SortClause\ContentName
      * @see \Ibexa\Contracts\Core\Repository\Values\Content\Location::getSortClauses()
