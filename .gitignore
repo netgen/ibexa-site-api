@@ -4,3 +4,4 @@ composer.lock
 .php-cs-fixer.cache
 docs/_build
 .phpunit.result.cache
+studio.json
