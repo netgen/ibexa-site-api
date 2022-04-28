@@ -9,7 +9,7 @@ The example above is a shortcut to the example below:
 
 .. code-block:: yaml
 
-    sort: "@=location.innerLocation.getSortClauses()"
+    sort: "@=location.getSortClauses()"
 
 If you define your query in the view configuration, you won't be able to directly instantiate a
 SortClause there. For that reason we provide a way to define the sort clause as a string instead.
