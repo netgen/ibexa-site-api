@@ -288,7 +288,7 @@ like this:
                 max_per_page: 10
                 page: 1
                 parameters:
-                    content_type: '@=content.fields.content_type.value.text'
+                    content_type: '@=content.getField("content_type").value.text'
                     sort: 'published desc'
 
 :ref:`Site API Location object<location_object>` is available as ``location``. In the following
