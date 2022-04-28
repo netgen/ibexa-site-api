@@ -162,6 +162,22 @@ component, whose syntax is based on Twig and is documented `here <https://symfon
 Expression strings are recognized by ``@=`` prefix. Following sections describe available objects,
 services and functions.
 
+.. warning::
+
+    While Expression Language syntax is mostly the same as Twig, some shortcuts that are available
+    in Twig will not be available with Expression syntax, like getter function shorthands. Instead
+    of a shorthand syntax that you would normally use in Twig:
+
+    .. code-block:: yaml
+
+        page: '@=content.fields.page_limit.value'
+
+    Use explicit syntax like this:
+
+    .. code-block:: yaml
+
+        page: '@=content.getField("page_limit").value'
+
 View object
 ~~~~~~~~~~~
 
