@@ -10,6 +10,7 @@ Reference
     query_types
     objects
     services
+    traits
     custom_controllers
     migration
 

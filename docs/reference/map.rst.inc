@@ -4,5 +4,6 @@
 * :doc:`/reference/query_types`
 * :doc:`/reference/objects`
 * :doc:`/reference/services`
+* :doc:`/reference/traits`
 * :doc:`/reference/custom_controllers`
 * :doc:`/reference/migration`
