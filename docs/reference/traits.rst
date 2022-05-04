@@ -35,6 +35,7 @@ Content or Location search will be used depending on the provided ``$query`` par
 | **Example**                            | .. code-block:: php                                                                |
 |                                        |                                                                                    |
 |                                        |     use Ibexa\Contracts\Core\Repository\Values\Content\Query;                      |
+|                                        |                                                                                    |
 |                                        |     use Netgen\IbexaSiteApi\Core\Traits\PagerfantaTrait;                           |
 |                                        |                                                                                    |
 |                                        |     $query = new Query();                                                          |
@@ -59,6 +60,7 @@ Content or Location search will be used depending on the provided ``$query`` par
 | **Example**                            | .. code-block:: php                                                                |
 |                                        |                                                                                    |
 |                                        |     use Ibexa\Contracts\Core\Repository\Values\Content\Query;                      |
+|                                        |                                                                                    |
 |                                        |     use Netgen\IbexaSiteApi\Core\Traits\PagerfantaTrait;                           |
 |                                        |                                                                                    |
 |                                        |     $query = new Query();                                                          |
@@ -94,7 +96,6 @@ This method will extract :ref:`Content items<content_object>` from the given ``S
 +----------------------------------------+-------------------------------------------------------------------------------------------------------+
 | **Example**                            | .. code-block:: php                                                                                   |
 |                                        |                                                                                                       |
-|                                        |     use Ibexa\Contracts\Core\Repository\Values\Content\Query;                                         |
 |                                        |     use Netgen\IbexaSiteApi\Core\Traits\SearchResultExtractorTrait;                                   |
 |                                        |                                                                                                       |
 |                                        |     /** @var $searchResult \Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchResult */     |
@@ -115,7 +116,6 @@ This method will extract :ref:`Locations<location_object>` from the given ``Sear
 +----------------------------------------+-------------------------------------------------------------------------------------------------------+
 | **Example**                            | .. code-block:: php                                                                                   |
 |                                        |                                                                                                       |
-|                                        |     use Ibexa\Contracts\Core\Repository\Values\Content\Query;                                         |
 |                                        |     use Netgen\IbexaSiteApi\Core\Traits\SearchResultExtractorTrait;                                   |
 |                                        |                                                                                                       |
 |                                        |     /** @var $searchResult \Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchResult */     |
@@ -137,7 +137,6 @@ hinting, as it's already hinted in the ``SearchResult``, but it enables you to a
 +----------------------------------------+-------------------------------------------------------------------------------------------------------+
 | **Example**                            | .. code-block:: php                                                                                   |
 |                                        |                                                                                                       |
-|                                        |     use Ibexa\Contracts\Core\Repository\Values\Content\Query;                                         |
 |                                        |     use Netgen\IbexaSiteApi\Core\Traits\SearchResultExtractorTrait;                                   |
 |                                        |                                                                                                       |
 |                                        |     /** @var $searchResult \Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchResult */     |
