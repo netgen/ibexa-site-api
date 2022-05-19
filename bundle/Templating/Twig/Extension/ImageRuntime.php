@@ -29,7 +29,7 @@ class ImageRuntime
     /**
      * Returns the image variation object for $field/$versionInfo.
      */
-    public function getImageVariation(Field $field, string $variationName): ?Variation
+    public function getImageVariation(Field $field, string $variationName): Variation
     {
         /** @var \Ibexa\Core\FieldType\Image\Value $value */
         $value = $field->value;
@@ -52,6 +52,6 @@ class ImageRuntime
             );
         }
 
-        return null;
+        return new Variation();
     }
 }
