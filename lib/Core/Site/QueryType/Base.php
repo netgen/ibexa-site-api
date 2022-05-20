@@ -194,6 +194,7 @@ abstract class Base implements QueryType
             'section',
             'state',
             'visible',
+            'tag_id',
         ]);
         $resolver->setDefaults([
             'sort' => [],
@@ -214,6 +215,8 @@ abstract class Base implements QueryType
         $resolver->setAllowedTypes('creation_date', ['int', 'string', 'array']);
         $resolver->setAllowedTypes('modification_date', ['int', 'string', 'array']);
         $resolver->setAllowedTypes('state', ['array']);
+        $resolver->setAllowedTypes('tag_id', ['int', 'int[]']);
+
         $resolver->setAllowedValues('visible', [true, false, null]);
 
         $resolver->setNormalizer('limit', static fn (Options $options, $value) => $value ?? 25);
@@ -301,6 +304,9 @@ abstract class Base implements QueryType
             case 'state':
             case 'is_field_empty':
                 return $criterionDefinitionResolver->resolveTargets($name, $parameters);
+
+            case 'tag_id':
+                return $criterionDefinitionResolver->resolve($name, $parameters);
         }
 
         return [];
