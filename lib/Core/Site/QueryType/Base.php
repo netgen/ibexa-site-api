@@ -215,7 +215,7 @@ abstract class Base implements QueryType
         $resolver->setAllowedTypes('creation_date', ['int', 'string', 'array']);
         $resolver->setAllowedTypes('modification_date', ['int', 'string', 'array']);
         $resolver->setAllowedTypes('state', ['array']);
-        $resolver->setAllowedTypes('tag_id', ['int', 'int[]']);
+        $resolver->setAllowedTypes('tag_id', ['int', 'array']);
 
         $resolver->setAllowedValues('visible', [true, false, null]);
 
