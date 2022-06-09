@@ -18,6 +18,7 @@ use Netgen\IbexaSearchExtra\API\Values\Content\Query\SortClause\ContentName;
 use Netgen\IbexaSiteApi\Core\Site\QueryType\QueryType;
 use Netgen\IbexaSiteApi\Core\Site\Settings;
 use Netgen\IbexaSiteApi\Tests\Unit\Core\Site\QueryType\QueryTypeBaseTest;
+use Netgen\TagsBundle\API\Repository\Values\Content\Query\Criterion\TagId;
 
 /**
  * Base QueryType stub test case.
@@ -243,6 +244,46 @@ final class BaseQueryTypeTest extends QueryTypeBaseTest
                     ],
                 ]),
             ],
+            [
+                true,
+                [
+                    'tag_id' => 223,
+                ],
+                new Query([
+                    'filter' => new TagId(223),
+                ]),
+            ],
+            [
+                true,
+                [
+                    'tag_id' => [223, 224, 1],
+                ],
+                new Query([
+                    'filter' => new TagId([223, 224, 1]),
+                ]),
+            ],
+            [
+                true,
+                [
+                    'tag_id' => [
+                        'eq' => 225,
+                    ],
+                ],
+                new Query([
+                    'filter' => new TagId(225),
+                ]),
+            ],
+            [
+                true,
+                [
+                    'tag_id' => [
+                        'in' => [225, 226],
+                    ],
+                ],
+                new Query([
+                    'filter' => new TagId([225, 226]),
+                ]),
+            ],
         ];
     }
 
@@ -284,6 +325,11 @@ final class BaseQueryTypeTest extends QueryTypeBaseTest
             [
                 [
                     'is_field_empty' => [true],
+                ],
+            ],
+            [
+                [
+                    'tag_id' => 'ten',
                 ],
             ],
         ];
@@ -342,6 +388,7 @@ final class BaseQueryTypeTest extends QueryTypeBaseTest
             'section',
             'state',
             'visible',
+            'tag_id',
             'sort',
             'limit',
             'offset',

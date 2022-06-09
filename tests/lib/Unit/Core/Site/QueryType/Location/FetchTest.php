@@ -25,6 +25,7 @@ use Netgen\IbexaSiteApi\Core\Site\QueryType\Location\Fetch;
 use Netgen\IbexaSiteApi\Core\Site\QueryType\QueryType;
 use Netgen\IbexaSiteApi\Core\Site\Settings;
 use Netgen\IbexaSiteApi\Tests\Unit\Core\Site\QueryType\QueryTypeBaseTest;
+use Netgen\TagsBundle\API\Repository\Values\Content\Query\Criterion\TagId;
 
 /**
  * Fetch Location QueryType test case.
@@ -225,6 +226,46 @@ final class FetchTest extends QueryTypeBaseTest
                     ]),
                 ]),
             ],
+            [
+                true,
+                [
+                    'tag_id' => 223,
+                ],
+                new LocationQuery([
+                    'filter' => new TagId(223),
+                ]),
+            ],
+            [
+                true,
+                [
+                    'tag_id' => [223, 224, 1],
+                ],
+                new LocationQuery([
+                    'filter' => new TagId([223, 224, 1]),
+                ]),
+            ],
+            [
+                true,
+                [
+                    'tag_id' => [
+                        'eq' => 225,
+                    ],
+                ],
+                new LocationQuery([
+                    'filter' => new TagId(225),
+                ]),
+            ],
+            [
+                true,
+                [
+                    'tag_id' => [
+                        'in' => [225, 226],
+                    ],
+                ],
+                new LocationQuery([
+                    'filter' => new TagId([225, 226]),
+                ]),
+            ],
         ];
     }
 
@@ -254,6 +295,11 @@ final class FetchTest extends QueryTypeBaseTest
             [
                 [
                     'offset' => 'ten',
+                ],
+            ],
+            [
+                [
+                    'tag_id' => '223',
                 ],
             ],
         ];
@@ -312,6 +358,7 @@ final class FetchTest extends QueryTypeBaseTest
             'section',
             'state',
             'visible',
+            'tag_id',
             'sort',
             'limit',
             'offset',

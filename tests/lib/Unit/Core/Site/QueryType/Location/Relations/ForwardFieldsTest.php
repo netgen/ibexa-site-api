@@ -33,6 +33,7 @@ use Netgen\IbexaSiteApi\Core\Site\Settings;
 use Netgen\IbexaSiteApi\Core\Site\Values\Content;
 use Netgen\IbexaSiteApi\Tests\Unit\Core\Site\ContentFieldsMockTrait;
 use Netgen\IbexaSiteApi\Tests\Unit\Core\Site\QueryType\QueryTypeBaseTest;
+use Netgen\TagsBundle\API\Repository\Values\Content\Query\Criterion\TagId;
 use OutOfBoundsException;
 use Psr\Log\NullLogger;
 use RuntimeException;
@@ -214,6 +215,74 @@ final class ForwardFieldsTest extends QueryTypeBaseTest
                     ],
                 ]),
             ],
+            [
+                true,
+                [
+                    'content' => $content,
+                    'relation_field' => ['relations_a', 'relations_b'],
+                    'tag_id' => 223,
+                ],
+                new LocationQuery([
+                    'filter' => new LogicalAnd([
+                        new IsMainLocation(IsMainLocation::MAIN),
+                        new Visible(true),
+                        new TagId(223),
+                        new ContentId([1, 2, 3, 4]),
+                    ]),
+                ]),
+            ],
+            [
+                true,
+                [
+                    'content' => $content,
+                    'relation_field' => ['relations_a', 'relations_b'],
+                    'tag_id' => [223, 224, 1],
+                ],
+                new LocationQuery([
+                    'filter' => new LogicalAnd([
+                        new IsMainLocation(IsMainLocation::MAIN),
+                        new Visible(true),
+                        new TagId([223, 224, 1]),
+                        new ContentId([1, 2, 3, 4]),
+                    ]),
+                ]),
+            ],
+            [
+                true,
+                [
+                    'content' => $content,
+                    'relation_field' => ['relations_a', 'relations_b'],
+                    'tag_id' => [
+                        'eq' => 225,
+                    ],
+                ],
+                new LocationQuery([
+                    'filter' => new LogicalAnd([
+                        new IsMainLocation(IsMainLocation::MAIN),
+                        new Visible(true),
+                        new TagId(225),
+                        new ContentId([1, 2, 3, 4]),
+                    ]),
+                ]),
+            ],
+            [
+                true,
+                [
+                    'content' => $content,
+                    'relation_field' => ['relations_a', 'relations_b'],
+                    'tag_id' => [
+                        'in' => [225, 226],
+                    ],
+                ],
+                new LocationQuery([
+                    'filter' => new LogicalAnd([
+                        new IsMainLocation(IsMainLocation::MAIN),
+                        new Visible(true),
+                        new TagId([225, 226]),
+                        new ContentId([1, 2, 3, 4]),
+                    ]),
+                ]),
+            ],
         ];
     }
 
@@ -320,6 +389,13 @@ final class ForwardFieldsTest extends QueryTypeBaseTest
                 [
                     'content' => $content,
                     'relation_field' => [1],
+                ],
+            ],
+            [
+                [
+                    'content' => $content,
+                    'relation_field' => 'field',
+                    'tag_id' => 'something',
                 ],
             ],
         ];
@@ -457,6 +533,7 @@ final class ForwardFieldsTest extends QueryTypeBaseTest
             'section',
             'state',
             'visible',
+            'tag_id',
             'sort',
             'limit',
             'offset',

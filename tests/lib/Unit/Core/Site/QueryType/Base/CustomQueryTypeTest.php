@@ -52,6 +52,7 @@ final class CustomQueryTypeTest extends TestCase
                 'section',
                 'state',
                 'visible',
+                'tag_id',
                 'sort',
                 'limit',
                 'offset',

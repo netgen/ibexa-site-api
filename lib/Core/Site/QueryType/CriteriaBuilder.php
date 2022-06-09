@@ -20,6 +20,7 @@ use InvalidArgumentException;
 use Netgen\IbexaSearchExtra\API\Values\Content\Query\Criterion\ObjectStateIdentifier;
 use Netgen\IbexaSearchExtra\API\Values\Content\Query\Criterion\SectionIdentifier;
 use Netgen\IbexaSearchExtra\API\Values\Content\Query\Criterion\Visible;
+use Netgen\TagsBundle\API\Repository\Values\Content\Query\Criterion\TagId;
 use function count;
 use function is_array;
 use function is_int;
@@ -108,6 +109,9 @@ final class CriteriaBuilder
 
             case 'is_field_empty':
                 return $this->buildIsFieldEmpty($definition);
+
+            case 'tag_id':
+                return $this->buildTag($definition);
         }
 
         throw new InvalidArgumentException(
@@ -335,5 +339,14 @@ final class CriteriaBuilder
         }
 
         return new IsFieldEmpty((string) $definition->target, (bool) $definition->value);
+    }
+
+    private function buildTag(CriterionDefinition $definition): ?TagId
+    {
+        if ($definition->value === null) {
+            return null;
+        }
+
+        return new TagId($definition->value);
     }
 }

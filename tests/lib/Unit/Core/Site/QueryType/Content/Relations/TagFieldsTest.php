@@ -211,6 +211,70 @@ final class TagFieldsTest extends QueryTypeBaseTest
                     ],
                 ]),
             ],
+            [
+                true,
+                [
+                    'content' => $content,
+                    'relation_field' => ['tags_a', 'tags_b'],
+                    'tag_id' => 223,
+                ],
+                new Query([
+                    'filter' => new LogicalAnd([
+                        new TagId(223),
+                        new TagId([1, 2, 3, 4]),
+                        new LogicalNot(new ContentId(42)),
+                    ]),
+                ]),
+            ],
+            [
+                true,
+                [
+                    'content' => $content,
+                    'relation_field' => ['tags_a', 'tags_b'],
+                    'tag_id' => [223, 224, 1],
+                ],
+                new Query([
+                    'filter' => new LogicalAnd([
+                        new TagId([223, 224, 1]),
+                        new TagId([1, 2, 3, 4]),
+                        new LogicalNot(new ContentId(42)),
+                    ]),
+                ]),
+            ],
+            [
+                true,
+                [
+                    'content' => $content,
+                    'relation_field' => ['tags_a', 'tags_b'],
+                    'tag_id' => [
+                        'eq' => 225,
+                    ],
+                ],
+                new Query([
+                    'filter' => new LogicalAnd([
+                        new TagId(225),
+                        new TagId([1, 2, 3, 4]),
+                        new LogicalNot(new ContentId(42)),
+                    ]),
+                ]),
+            ],
+            [
+                true,
+                [
+                    'content' => $content,
+                    'relation_field' => ['tags_a', 'tags_b'],
+                    'tag_id' => [
+                        'in' => [225, 226],
+                    ],
+                ],
+                new Query([
+                    'filter' => new LogicalAnd([
+                        new TagId([225, 226]),
+                        new TagId([1, 2, 3, 4]),
+                        new LogicalNot(new ContentId(42)),
+                    ]),
+                ]),
+            ],
         ];
     }
 
@@ -316,6 +380,13 @@ final class TagFieldsTest extends QueryTypeBaseTest
                 [
                     'content' => $content,
                     'relation_field' => [1],
+                ],
+            ],
+            [
+                [
+                    'content' => $content,
+                    'relation_field' => 'field',
+                    'tag_id' => 'ten',
                 ],
             ],
         ];
@@ -462,6 +533,7 @@ final class TagFieldsTest extends QueryTypeBaseTest
             'section',
             'state',
             'visible',
+            'tag_id',
             'sort',
             'limit',
             'offset',
