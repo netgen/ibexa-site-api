@@ -28,6 +28,7 @@ use Netgen\IbexaSiteApi\Core\Site\Settings;
 use Netgen\IbexaSiteApi\Core\Site\Values\Location;
 use Netgen\IbexaSiteApi\Tests\Unit\Core\Site\ContentFieldsMockTrait;
 use Netgen\IbexaSiteApi\Tests\Unit\Core\Site\QueryType\QueryTypeBaseTest;
+use Netgen\TagsBundle\API\Repository\Values\Content\Query\Criterion\TagId;
 use Psr\Log\NullLogger;
 
 /**
@@ -322,6 +323,66 @@ final class SubtreeTest extends QueryTypeBaseTest
                     ],
                 ]),
             ],
+            [
+                true,
+                [
+                    'location' => $location,
+                    'tag_id' => 223,
+                ],
+                new LocationQuery([
+                    'filter' => new LogicalAnd([
+                        new TagId(223),
+                        new SubtreeCriterion('/3/5/7/11/'),
+                        new LogicalNot(new LocationId(42)),
+                    ]),
+                ]),
+            ],
+            [
+                true,
+                [
+                    'location' => $location,
+                    'tag_id' => [223, 224, 1],
+                ],
+                new LocationQuery([
+                    'filter' => new LogicalAnd([
+                        new TagId([223, 224, 1]),
+                        new SubtreeCriterion('/3/5/7/11/'),
+                        new LogicalNot(new LocationId(42)),
+                    ]),
+                ]),
+            ],
+            [
+                true,
+                [
+                    'location' => $location,
+                    'tag_id' => [
+                        'eq' => 225,
+                    ],
+                ],
+                new LocationQuery([
+                    'filter' => new LogicalAnd([
+                        new TagId(225),
+                        new SubtreeCriterion('/3/5/7/11/'),
+                        new LogicalNot(new LocationId(42)),
+                    ]),
+                ]),
+            ],
+            [
+                true,
+                [
+                    'location' => $location,
+                    'tag_id' => [
+                        'in' => [225, 226],
+                    ],
+                ],
+                new LocationQuery([
+                    'filter' => new LogicalAnd([
+                        new TagId([225, 226]),
+                        new SubtreeCriterion('/3/5/7/11/'),
+                        new LogicalNot(new LocationId(42)),
+                    ]),
+                ]),
+            ],
         ];
     }
 
@@ -358,6 +419,12 @@ final class SubtreeTest extends QueryTypeBaseTest
                 [
                     'location' => $location,
                     'offset' => 'ten',
+                ],
+            ],
+            [
+                [
+                    'location' => $location,
+                    'tag_id' => '223',
                 ],
             ],
         ];
@@ -448,6 +515,7 @@ final class SubtreeTest extends QueryTypeBaseTest
             'section',
             'state',
             'visible',
+            'tag_id',
             'sort',
             'limit',
             'offset',

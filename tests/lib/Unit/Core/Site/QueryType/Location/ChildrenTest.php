@@ -26,6 +26,7 @@ use Netgen\IbexaSiteApi\Core\Site\Settings;
 use Netgen\IbexaSiteApi\Core\Site\Values\Location;
 use Netgen\IbexaSiteApi\Tests\Unit\Core\Site\ContentFieldsMockTrait;
 use Netgen\IbexaSiteApi\Tests\Unit\Core\Site\QueryType\QueryTypeBaseTest;
+use Netgen\TagsBundle\API\Repository\Values\Content\Query\Criterion\TagId;
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Log\NullLogger;
 
@@ -239,6 +240,74 @@ final class ChildrenTest extends QueryTypeBaseTest
                     ],
                 ]),
             ],
+            [
+                true,
+                [
+                    'location' => $location,
+                    'tag_id' => 223,
+                ],
+                new LocationQuery([
+                    'filter' => new LogicalAnd([
+                        new TagId(223),
+                        new ParentLocationId(42),
+                    ]),
+                    'sortClauses' => [
+                        new Priority(Query::SORT_DESC),
+                    ],
+                ]),
+            ],
+            [
+                true,
+                [
+                    'location' => $location,
+                    'tag_id' => [223, 224, 1],
+                ],
+                new LocationQuery([
+                    'filter' => new LogicalAnd([
+                        new TagId([223, 224, 1]),
+                        new ParentLocationId(42),
+                    ]),
+                    'sortClauses' => [
+                        new Priority(Query::SORT_DESC),
+                    ],
+                ]),
+            ],
+            [
+                true,
+                [
+                    'location' => $location,
+                    'tag_id' => [
+                        'eq' => 225,
+                    ],
+                ],
+                new LocationQuery([
+                    'filter' => new LogicalAnd([
+                        new TagId(225),
+                        new ParentLocationId(42),
+                    ]),
+                    'sortClauses' => [
+                        new Priority(Query::SORT_DESC),
+                    ],
+                ]),
+            ],
+            [
+                true,
+                [
+                    'location' => $location,
+                    'tag_id' => [
+                        'in' => [225, 226],
+                    ],
+                ],
+                new LocationQuery([
+                    'filter' => new LogicalAnd([
+                        new TagId([225, 226]),
+                        new ParentLocationId(42),
+                    ]),
+                    'sortClauses' => [
+                        new Priority(Query::SORT_DESC),
+                    ],
+                ]),
+            ],
         ];
     }
 
@@ -275,6 +344,12 @@ final class ChildrenTest extends QueryTypeBaseTest
                 [
                     'location' => $location,
                     'offset' => 'ten',
+                ],
+            ],
+            [
+                [
+                    'location' => $location,
+                    'tag_id' => 'ten',
                 ],
             ],
         ];
@@ -364,6 +439,7 @@ final class ChildrenTest extends QueryTypeBaseTest
             'section',
             'state',
             'visible',
+            'tag_id',
             'sort',
             'limit',
             'offset',
