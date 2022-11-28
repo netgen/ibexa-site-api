@@ -25,8 +25,7 @@ services:
         class: Netgen\Bundle\IbexaSiteApiBundle\Templating\Twig\Extension\ContentViewRuntime
         # public: false
         arguments:
-            - '@netgen.ibexa_site_api.view_builder.content'
-            - '@netgen.ibexa_site_api.view_renderer'
+            - '@netgen.ibexa_site_api.twig.content_renderer'
         tags:
             - { name: twig.runtime }
 
@@ -40,8 +39,7 @@ services:
         class: Netgen\Bundle\IbexaSiteApiBundle\Templating\Twig\Extension\EmbeddedContentViewRuntime
         # public: false
         arguments:
-            - '@netgen.ibexa_site_api.view_builder.content'
-            - '@netgen.ibexa_site_api.view_renderer'
+            - '@netgen.ibexa_site_api.twig.content_renderer'
         tags:
             - { name: twig.runtime }
 
@@ -55,8 +53,7 @@ services:
         class: Netgen\Bundle\IbexaSiteApiBundle\Templating\Twig\Extension\IbexaContentViewRuntime
         # public: false
         arguments:
-            - '@Ibexa\Core\MVC\Symfony\View\Builder\ContentViewBuilder'
-            - '@netgen.ibexa_site_api.view_renderer'
+            - '@netgen.ibexa_site_api.twig.content_renderer'
         tags:
             - { name: twig.runtime }
 
@@ -70,8 +67,7 @@ services:
         class: Netgen\Bundle\IbexaSiteApiBundle\Templating\Twig\Extension\IbexaEmbeddedContentViewRuntime
         # public: false
         arguments:
-            - '@Ibexa\Core\MVC\Symfony\View\Builder\ContentViewBuilder'
-            - '@netgen.ibexa_site_api.view_renderer'
+            - '@netgen.ibexa_site_api.twig.content_renderer'
         tags:
             - { name: twig.runtime }
 
