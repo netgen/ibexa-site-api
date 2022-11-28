@@ -12,9 +12,9 @@
     "require": {
         "php": "^7.4 || ^8.0",
         "ext-dom": "*",
-        "ibexa/core": "^4.0",
-        "ibexa/http-cache": "^4.0",
-        "ibexa/fieldtype-richtext": "^4.0",
+        "ibexa/core": "~4.0",
+        "ibexa/http-cache": "~4.0",
+        "ibexa/fieldtype-richtext": "~4.0",
         "netgen/ibexa-search-extra": "^3.0",
         "sensio/framework-extra-bundle": "^6.1.0"
     },
