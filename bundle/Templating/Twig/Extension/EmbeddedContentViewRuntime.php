@@ -4,23 +4,18 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\IbexaSiteApiBundle\Templating\Twig\Extension;
 
-use Netgen\Bundle\IbexaSiteApiBundle\View\Builder\ContentViewBuilder;
-use Netgen\Bundle\IbexaSiteApiBundle\View\ViewRenderer;
+use Netgen\Bundle\IbexaSiteApiBundle\View\ContentRenderer;
 
 /**
  * Twig extension runtime for Site API embedded content view rendering.
  */
 class EmbeddedContentViewRuntime
 {
-    private ContentViewBuilder $viewBuilder;
-    private ViewRenderer $viewRenderer;
+    private ContentRenderer $contentRenderer;
 
-    public function __construct(
-        ContentViewBuilder $viewBuilder,
-        ViewRenderer $viewRenderer
-    ) {
-        $this->viewBuilder = $viewBuilder;
-        $this->viewRenderer = $viewRenderer;
+    public function __construct(ContentRenderer $contentRenderer)
+    {
+        $this->contentRenderer = $contentRenderer;
     }
 
     /**
@@ -32,14 +27,6 @@ class EmbeddedContentViewRuntime
      */
     public function renderEmbeddedContentView(string $viewType, array $parameters = []): string
     {
-        $baseParameters = [
-            'viewType' => $viewType,
-            'layout' => false,
-            '_controller' => 'ng_content:embedAction',
-        ];
-
-        $view = $this->viewBuilder->buildView($baseParameters + $parameters);
-
-        return $this->viewRenderer->render($view, $parameters, false);
+        return $this->contentRenderer->renderEmbeddedContent($viewType, $parameters);
     }
 }
