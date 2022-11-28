@@ -230,6 +230,74 @@ final class AllTagFieldsTest extends QueryTypeBaseTest
                     ],
                 ]),
             ],
+            [
+                true,
+                [
+                    'content' => $contentWithTags,
+                    'tag_id' => 223,
+                ],
+                new LocationQuery([
+                    'filter' => new LogicalAnd([
+                        new IsMainLocation(IsMainLocation::MAIN),
+                        new Visible(true),
+                        new TagId(223),
+                        new TagId([1, 2, 3, 4]),
+                        new LogicalNot(new ContentId(42)),
+                    ]),
+                ]),
+            ],
+            [
+                true,
+                [
+                    'content' => $contentWithTags,
+                    'tag_id' => [223, 224, 1],
+                ],
+                new LocationQuery([
+                    'filter' => new LogicalAnd([
+                        new IsMainLocation(IsMainLocation::MAIN),
+                        new Visible(true),
+                        new TagId([223, 224, 1]),
+                        new TagId([1, 2, 3, 4]),
+                        new LogicalNot(new ContentId(42)),
+                    ]),
+                ]),
+            ],
+            [
+                true,
+                [
+                    'content' => $contentWithTags,
+                    'tag_id' => [
+                        'eq' => 225,
+                    ],
+                ],
+                new LocationQuery([
+                    'filter' => new LogicalAnd([
+                        new IsMainLocation(IsMainLocation::MAIN),
+                        new Visible(true),
+                        new TagId(225),
+                        new TagId([1, 2, 3, 4]),
+                        new LogicalNot(new ContentId(42)),
+                    ]),
+                ]),
+            ],
+            [
+                true,
+                [
+                    'content' => $contentWithTags,
+                    'tag_id' => [
+                        'in' => [225, 226],
+                    ],
+                ],
+                new LocationQuery([
+                    'filter' => new LogicalAnd([
+                        new IsMainLocation(IsMainLocation::MAIN),
+                        new Visible(true),
+                        new TagId([225, 226]),
+                        new TagId([1, 2, 3, 4]),
+                        new LogicalNot(new ContentId(42)),
+                    ]),
+                ]),
+            ],
         ];
     }
 
@@ -266,6 +334,12 @@ final class AllTagFieldsTest extends QueryTypeBaseTest
                 [
                     'content' => $content,
                     'offset' => 'ten',
+                ],
+            ],
+            [
+                [
+                    'content' => $content,
+                    'tag_id' => 'ten',
                 ],
             ],
         ];
@@ -435,6 +509,7 @@ final class AllTagFieldsTest extends QueryTypeBaseTest
             'section',
             'state',
             'visible',
+            'tag_id',
             'sort',
             'limit',
             'offset',
