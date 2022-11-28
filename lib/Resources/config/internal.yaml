@@ -31,7 +31,7 @@ services:
             - '@Ibexa\Core\Persistence\Legacy\Filter\Handler\ContentFilteringHandler'
             - '@Ibexa\Core\Persistence\Legacy\Filter\Handler\LocationFilteringHandler'
             - '@Ibexa\Core\Repository\User\PasswordValidatorInterface'
-            - '%languages%'
+            - '@Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface'
         lazy: true
         public: false
 
