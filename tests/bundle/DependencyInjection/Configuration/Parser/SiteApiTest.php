@@ -176,7 +176,6 @@ final class SiteApiTest extends AbstractParserTestCase
     }
 
     /**
-     * @group ooo
      * @dataProvider providerForTestNamedObjectConfigurationValid
      */
     public function testNamedObjectConfigurationValid(string $name, array $configuration): void
@@ -205,7 +204,6 @@ final class SiteApiTest extends AbstractParserTestCase
             'ibexa_demo_site',
         );
 
-        // todo another path
         $this->assertContainerBuilderHasParameter(
             'ibexa.site_access.config.ibexa_demo_group.ng_site_api.named_objects',
             [$name => $configuration] + $defaultValues,

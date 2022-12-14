@@ -248,7 +248,6 @@ final class ContentViewTest extends AbstractParserTestCase
     }
 
     /**
-     * @group xxx
      * @dataProvider providerForTextExtends
      */
     public function testExtends(array $configurationValues, array $expectedValues): void
