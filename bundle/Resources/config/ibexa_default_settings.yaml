@@ -15,7 +15,7 @@ parameters:
     #ibexa.site_access.config.default.pagelayout: '@@NetgenIbexaSiteApi/pagelayout.html.twig'
 
     # We override the default full view template because of the automatic view fallback, to prevent
-    # the default one from extending configured page_layout, which is customized for Site API
+    # the default one from extending configured pagelayout, which is customized for Site API
     # See: @IbexaCore/default/content/full.html.twig
     ibexa.default_view_templates.content.full: '@@NetgenIbexaSiteApi/ibexa_default/content/full.html.twig'
 
