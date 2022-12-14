@@ -152,7 +152,7 @@ final class SortClauseParserTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
         $message = preg_quote($message, '/');
-        self::matchesRegularExpression("/$message/");
+        $this->expectExceptionMessageMatches("/$message/");
 
         $parser = $this->getParserUnderTest();
         $parser->parse($stringDefinition);

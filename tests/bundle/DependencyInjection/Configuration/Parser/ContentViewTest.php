@@ -424,7 +424,7 @@ final class ContentViewTest extends AbstractParserTestCase
     {
         $this->expectException($exceptionClass);
         $exceptionMessage = preg_quote($exceptionMessage, '/');
-        self::matchesRegularExpression("/{$exceptionMessage}/");
+        $this->expectExceptionMessageMatches("/{$exceptionMessage}/");
 
         $this->load([
             'system' => [

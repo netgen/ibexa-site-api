@@ -450,7 +450,7 @@ final class SiteApiTest extends AbstractParserTestCase
     {
         $this->expectException(InvalidConfigurationException::class);
         $message = preg_quote($message, '/');
-        self::matchesRegularExpression("/{$message}/");
+        $this->expectExceptionMessageMatches("/{$message}/");
 
         $this->load([
             'system' => [

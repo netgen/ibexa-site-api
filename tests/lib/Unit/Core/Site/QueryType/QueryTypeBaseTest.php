@@ -135,9 +135,7 @@ abstract class QueryTypeBaseTest extends TestCase
     public function testInvalidSortClauseThrowsException(array $parameters): void
     {
         $this->expectException(InvalidArgumentException::class);
-        self::matchesRegularExpression(
-            "/Sort string '.*' was not converted to a SortClause/",
-        );
+        $this->expectExceptionMessageMatches("/Sort string '.*' was not converted to a SortClause/");
 
         $queryType = $this->getQueryTypeUnderTest();
 
