@@ -1,0 +1,2 @@
+imports:
+    - { resource: ../../../../bundle/Resources/config/ibexa_default_settings.yaml }

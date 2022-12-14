@@ -10,6 +10,8 @@ use Ibexa\Tests\Bundle\Core\DependencyInjection\Configuration\Parser\AbstractPar
 use Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Configuration\Parser\SiteApi;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\Config\Definition\Exception\InvalidTypeException;
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\Yaml\Yaml;
 use function file_get_contents;
 use function preg_quote;
@@ -21,6 +23,44 @@ use function preg_quote;
  */
 final class SiteApiTest extends AbstractParserTestCase
 {
+    /**
+     * @throws \Exception
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $loader = new YamlFileLoader(
+            $this->container,
+            new FileLocator(__DIR__ . '/../../Fixtures')
+        );
+
+        $loader->load('parameters.yaml');
+    }
+
+    public function testDefaultConfiguration(): void
+    {
+        $this->load();
+
+        $this->assertConfigResolverParameterValue('ng_site_api.site_api_is_primary_content_view', false, 'ibexa_demo_site');
+        $this->assertConfigResolverParameterValue('ng_site_api.fallback_to_secondary_content_view', true, 'ibexa_demo_site');
+        $this->assertConfigResolverParameterValue('ng_site_api.fallback_without_subrequest', true, 'ibexa_demo_site');
+        $this->assertConfigResolverParameterValue('ng_site_api.richtext_embed_without_subrequest', false, 'ibexa_demo_site');
+        $this->assertConfigResolverParameterValue('ng_site_api.use_always_available_fallback', true, 'ibexa_demo_site');
+        $this->assertConfigResolverParameterValue('ng_site_api.show_hidden_items', false, 'ibexa_demo_site');
+        $this->assertConfigResolverParameterValue('ng_site_api.fail_on_missing_field', '%kernel.debug%', 'ibexa_demo_site');
+        $this->assertConfigResolverParameterValue('ng_site_api.render_missing_field_info', false, 'ibexa_demo_site');
+        $this->assertConfigResolverParameterValue('ng_site_api.enable_internal_view_route', true, 'ibexa_demo_site');
+        $this->assertConfigResolverParameterValue('ng_site_api.redirect_internal_view_route_to_url_alias', true, 'ibexa_demo_site');
+        $this->assertConfigResolverParameterValue('ng_site_api.named_queries', [], 'ibexa_demo_site');
+        $this->assertConfigResolverParameterValue('ng_site_api.named_objects', [], 'ibexa_demo_site');
+        $this->assertConfigResolverParameterValue('ng_site_api.cross_siteaccess_routing.enabled', false, 'ibexa_demo_site');
+        $this->assertConfigResolverParameterValue('ng_site_api.cross_siteaccess_routing.external_subtree_roots', [], 'ibexa_demo_site');
+        $this->assertConfigResolverParameterValue('ng_site_api.cross_siteaccess_routing.excluded_siteaccesses', [], 'ibexa_demo_site');
+        $this->assertConfigResolverParameterValue('ng_site_api.cross_siteaccess_routing.excluded_siteaccess_groups', [], 'ibexa_demo_site');
+        $this->assertConfigResolverParameterValue('ng_site_api.cross_siteaccess_routing.prefer_main_language', true, 'ibexa_demo_site');
+    }
+
     public function getBooleanConfigurationNames(): array
     {
         return [

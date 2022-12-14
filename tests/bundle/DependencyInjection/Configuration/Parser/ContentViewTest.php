@@ -9,6 +9,8 @@ use Ibexa\Tests\Bundle\Core\DependencyInjection\Configuration\Parser\AbstractPar
 use InvalidArgumentException;
 use Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Configuration\Parser\ContentView;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\Yaml\Yaml;
 use function file_get_contents;
 use function preg_quote;
@@ -20,6 +22,76 @@ use function preg_quote;
  */
 final class ContentViewTest extends AbstractParserTestCase
 {
+    /**
+     * @throws \Exception
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $loader = new YamlFileLoader(
+            $this->container,
+            new FileLocator(__DIR__ . '/../../Fixtures')
+        );
+
+        $loader->load('parameters.yaml');
+    }
+
+    public function testDefaultConfiguration(): void
+    {
+        $this->load();
+
+        $this->assertConfigResolverParameterValue('ng_content_view', [], 'ibexa_demo_site');
+        $this->assertConfigResolverParameterValue(
+            'ng_content_view_defaults',
+            [
+                'asset_image' => [
+                    'default' => [
+                        'template' => '%netgen.ibexa_site_api.default_view_templates.content.asset_image%',
+                        'match' => [],
+                    ],
+                ],
+                'embed' => [
+                    'image' => [
+                        'template' => '%netgen.ibexa_site_api.default_view_templates.content.embed_image%',
+                        'match' => [
+                            'Identifier\ContentType' => '%netgen.ibexa_site_api.content_view.image_embed_content_type_identifiers%',
+                        ],
+                    ],
+                    'default' => [
+                        'template' => "%netgen.ibexa_site_api.default_view_templates.content.embed%",
+                        'match' => [],
+                    ],
+                ],
+                'embed-inline' => [
+                    'default' => [
+                        'template' => "%netgen.ibexa_site_api.default_view_templates.content.embed_inline%",
+                        'match' => [],
+                    ],
+                ],
+                'full' => [
+                    'default' => [
+                        'template' => "%netgen.ibexa_site_api.default_view_templates.content.full%",
+                        'match' => [],
+                    ],
+                ],
+                'line' => [
+                    'default' => [
+                        'template' => "%netgen.ibexa_site_api.default_view_templates.content.line%",
+                        'match' => [],
+                    ],
+                ],
+                'text_linked' => [
+                    'default' => [
+                        'template' => "%netgen.ibexa_site_api.default_view_templates.content.text_linked%",
+                        'match' => [],
+                    ],
+                ],
+            ],
+            'ibexa_demo_site',
+        );
+    }
+
     public function providerForTestValid(): array
     {
         return [
