@@ -35,9 +35,14 @@ class NetgenIbexaSiteApiBundle extends Bundle
         /** @var \Ibexa\Bundle\Core\DependencyInjection\IbexaCoreExtension $coreExtension */
         $coreExtension = $container->getExtension('ibexa');
 
-        $coreExtension->addConfigParser(new SiteApi());
         $coreExtension->addConfigParser(new ContentView());
+        $coreExtension->addConfigParser(new SiteApi());
 
-        $coreExtension->addDefaultSettings(__DIR__ . '/Resources/config', ['ibexa_default_settings.yaml']);
+        $coreExtension->addDefaultSettings(
+            __DIR__ . '/Resources/config',
+            [
+                'ibexa_default_settings.yaml',
+            ]
+        );
     }
 }
