@@ -19,8 +19,6 @@ final class LocationParamConverter extends SiteParamConverter
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
