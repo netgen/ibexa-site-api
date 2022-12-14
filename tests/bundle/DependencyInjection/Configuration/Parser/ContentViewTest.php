@@ -365,7 +365,7 @@ final class ContentViewTest extends AbstractParserTestCase
                     ],
                 ],
                 InvalidConfigurationException::class,
-                'Expected array, but got string',
+                'Expected "array", but got "string"',
             ],
             [
                 [
@@ -378,7 +378,7 @@ final class ContentViewTest extends AbstractParserTestCase
                     ],
                 ],
                 InvalidConfigurationException::class,
-                'Expected scalar, but got array',
+                'Expected "scalar", but got "array"',
             ],
             [
                 [

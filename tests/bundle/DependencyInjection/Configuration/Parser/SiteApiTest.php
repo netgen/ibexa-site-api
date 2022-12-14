@@ -411,7 +411,7 @@ final class SiteApiTest extends AbstractParserTestCase
                         'page' => 2,
                     ],
                 ],
-                'The child node "query_type" at path "ibexa.system.ibexa_demo_group.ng_named_queries.some_key" must be configured',
+                'The child config "query_type" under "ibexa.system.ibexa_demo_group.ng_site_api.named_queries.some_key" must be configured',
             ],
             [
                 [
@@ -420,7 +420,7 @@ final class SiteApiTest extends AbstractParserTestCase
                         'parameters' => 'parameters',
                     ],
                 ],
-                'Expected array, but got string',
+                'Expected "array", but got "string"',
             ],
             [
                 [
@@ -429,7 +429,7 @@ final class SiteApiTest extends AbstractParserTestCase
                         'use_filter' => [],
                     ],
                 ],
-                'Expected scalar, but got array',
+                'Expected "scalar", but got "array"',
             ],
             [
                 [
@@ -438,7 +438,7 @@ final class SiteApiTest extends AbstractParserTestCase
                         'page' => [],
                     ],
                 ],
-                'Expected scalar, but got array',
+                'Expected "scalar", but got "array"',
             ],
         ];
     }
