@@ -138,7 +138,7 @@ class ContentView extends AbstractParser
                                 ->useAttributeAsKey('key')
                                 ->variablePrototype()->end()
                             ->end()
-                            ->append($this->getQueryNode(static::QUERY_KEY))
+                            ->append($this->getQueryNode())
                             ->arrayNode('params')
                                 ->info(
                                     <<<'EOT'
@@ -324,9 +324,9 @@ class ContentView extends AbstractParser
         }
     }
 
-    private function getQueryNode(string $name): ArrayNodeDefinition
+    private function getQueryNode(): ArrayNodeDefinition
     {
-        $queries = new ArrayNodeDefinition($name);
+        $queries = new ArrayNodeDefinition(static::QUERY_KEY);
         $queries
             ->info('Query configuration')
             ->defaultValue(self::DEFAULT_QUERIES_VALUE)
