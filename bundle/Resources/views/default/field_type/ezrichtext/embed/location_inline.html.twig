@@ -6,7 +6,7 @@
     {% set params = params|merge( { "linkParameters": embedParams.link } ) %}
 {% endif %}
 {% if embedParams.dataAttributes is defined %}
-    {# Note: intentionally using here new convention for parameter names #}
+    {# Note: intentionally using new convention for parameter names #}
     {% set params = params|merge( { "data_attributes": embedParams.dataAttributes } ) %}
 {% endif %}
 {% if embedParams.class is defined %}
