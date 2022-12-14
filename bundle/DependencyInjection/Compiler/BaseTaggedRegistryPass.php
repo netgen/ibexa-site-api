@@ -9,7 +9,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 use function array_keys;
 
-abstract class BasedTaggedRegistryPass implements CompilerPassInterface
+abstract class BaseTaggedRegistryPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container): void
     {
