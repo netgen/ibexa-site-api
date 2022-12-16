@@ -6,6 +6,7 @@ namespace Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Configuration\Par
 
 use Ibexa\Bundle\Core\DependencyInjection\Configuration\AbstractParser;
 use Ibexa\Bundle\Core\DependencyInjection\Configuration\SiteAccessAware\ContextualizerInterface;
+use Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Configuration\Parser\SiteApi\CrossSiteaccessRoutingBuilder;
 use Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Configuration\Parser\SiteApi\NamedObjectBuilder;
 use Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Configuration\Parser\SiteApi\NamedQueryBuilder;
 use Symfony\Component\Config\Definition\Builder\NodeBuilder;
@@ -51,6 +52,7 @@ class SiteApi extends AbstractParser
             ->end()
         ->end();
 
+        CrossSiteaccessRoutingBuilder::build($childrenBuilder);
         NamedObjectBuilder::build($childrenBuilder);
         NamedQueryBuilder::build($childrenBuilder);
     }
@@ -78,7 +80,67 @@ class SiteApi extends AbstractParser
                     $scopeSettings[self::NODE_KEY][$parameterName],
                 );
             }
+
+            unset($scopeSettings[self::NODE_KEY][$parameterName]);
         }
+
+        if (isset($scopeSettings[self::NODE_KEY]['cross_siteaccess_routing']['enabled'])) {
+            $contextualizer->setContextualParameter(
+                self::NODE_KEY . '.cross_siteaccess_routing.enabled',
+                $currentScope,
+                $scopeSettings[self::NODE_KEY]['cross_siteaccess_routing']['enabled'],
+            );
+        }
+
+        if (isset($scopeSettings[self::NODE_KEY]['cross_siteaccess_routing']['external_subtree_roots'])) {
+            $contextualizer->setContextualParameter(
+                self::NODE_KEY . '.cross_siteaccess_routing.external_subtree_roots',
+                $currentScope,
+                $scopeSettings[self::NODE_KEY]['cross_siteaccess_routing']['external_subtree_roots'],
+            );
+        }
+
+        if (isset($scopeSettings[self::NODE_KEY]['cross_siteaccess_routing']['included_siteaccesses'])) {
+            $contextualizer->setContextualParameter(
+                self::NODE_KEY . '.cross_siteaccess_routing.included_siteaccesses',
+                $currentScope,
+                $scopeSettings[self::NODE_KEY]['cross_siteaccess_routing']['included_siteaccesses'],
+            );
+        }
+
+        if (isset($scopeSettings[self::NODE_KEY]['cross_siteaccess_routing']['included_siteaccess_groups'])) {
+            $contextualizer->setContextualParameter(
+                self::NODE_KEY . '.cross_siteaccess_routing.included_siteaccess_groups',
+                $currentScope,
+                $scopeSettings[self::NODE_KEY]['cross_siteaccess_routing']['included_siteaccess_groups'],
+            );
+        }
+
+        if (isset($scopeSettings[self::NODE_KEY]['cross_siteaccess_routing']['excluded_siteaccesses'])) {
+            $contextualizer->setContextualParameter(
+                self::NODE_KEY . '.cross_siteaccess_routing.excluded_siteaccesses',
+                $currentScope,
+                $scopeSettings[self::NODE_KEY]['cross_siteaccess_routing']['excluded_siteaccesses'],
+            );
+        }
+
+        if (isset($scopeSettings[self::NODE_KEY]['cross_siteaccess_routing']['excluded_siteaccess_groups'])) {
+            $contextualizer->setContextualParameter(
+                self::NODE_KEY . '.cross_siteaccess_routing.excluded_siteaccess_groups',
+                $currentScope,
+                $scopeSettings[self::NODE_KEY]['cross_siteaccess_routing']['excluded_siteaccess_groups'],
+            );
+        }
+
+        if (isset($scopeSettings[self::NODE_KEY]['cross_siteaccess_routing']['prefer_main_language'])) {
+            $contextualizer->setContextualParameter(
+                self::NODE_KEY . '.cross_siteaccess_routing.prefer_main_language',
+                $currentScope,
+                $scopeSettings[self::NODE_KEY]['cross_siteaccess_routing']['prefer_main_language'],
+            );
+        }
+
+        unset($scopeSettings[self::NODE_KEY]['cross_siteaccess_routing']);
 
         if (isset($scopeSettings[self::NODE_KEY]['named_objects'])) {
             $scopeSettings[self::NODE_KEY . '.named_objects'] = $scopeSettings[self::NODE_KEY]['named_objects'];

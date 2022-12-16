@@ -53,6 +53,227 @@ admin or intranet interface.
     To use Site API view configuration automatically on pages rendered from Ibexa CMS URL aliases,
     you need to enable it manually per siteaccess.
 
+Cross-siteaccess routing
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Cross-siteaccess routing is a feature that enables automatic linking to Locations in the same
+Repository, but in different siteaccesses. It's intended for single Repository multisite
+installations, where multiple siteaccesses are typically configured with different Content tree
+root Location IDs. The feature is implemented at the router level, so it will work automatically
+when enabled, both from PHP and Twig.
+
+Cross-siteaccess routing is disabled by default, but if needed, it can be disabled per siteaccess
+with ``ng_site_api.cross_siteaccess_routing.enabled`` configuration option:
+
+.. code-block:: yaml
+
+    ibexa:
+        system:
+            frontend_group:
+                ng_site_api:
+                    cross_siteaccess_routing:
+                        enabled: true
+
+Or as a shortcut configuration:
+
+.. code-block:: yaml
+
+    ibexa:
+        system:
+            frontend_group:
+                ng_site_api:
+                    cross_siteaccess_routing: true
+
+.. note::
+
+    An abstract class for implementing a custom siteaccess resolver is provided, which means
+    you can implement and configure your own resolver if the provided one does not match your
+    use case.
+
+Matching process
+----------------
+
+The logic for resolving the best matching siteaccess considers the following (not in the given
+order):
+
+- Current siteaccess
+    - Content tree root Location ID
+    - prioritized languages configuration
+    - excluded URI prefixes configuration (as "external subtree roots")
+- Matching siteaccess
+    - Content tree root Location ID
+    - prioritized languages configuration
+- Location
+    - Available siteaccesses by the configured Content tree root Location IDs
+    - Content translations
+    - Content always available flag
+
+.. note::
+
+    The matching process is described below, but the rules could be dense and it might be hard to
+    understand all the implications right away. You should look into the test cases to better
+    understand the matching logic. They were written to simulate the siteaccess configuration and
+    to be easy to read.
+
+Current siteaccess will always be preferred if it matches the given **context**, meaning given the
+Location's subtree, available translations and always available flag. Otherwise, the siteaccess
+will be chosen among the siteaccesses that match the given context.
+
+If no siteaccess matches the Location's subtree, current siteaccess will be used as a fallback.
+
+If Location is under the configured `external subtree roots`_, current siteaccess will be used.
+
+In case when multiple (non-current) siteaccesses match the context, the logic will choose the best
+matching one according to the current siteaccess configured prioritized languages. The matching
+logic will respect the order/priority of the configured prioritized languages for both current and
+potentially matching siteaccess, resulting in the selection of a siteaccess that allows highest
+possible language of the current siteaccess at a highest possible position in the matching
+siteaccess. The important thing to note here is that configured prioritized languages take
+precedence over the available languages of the Location, which means that in some cases, the
+resulting siteaccess will be the best one regarding the prioritized languages, but not the best
+one regarding the Location's main language.
+
+It's possible that matching a siteaccess by the current siteaccess prioritized languages will
+produce no result. In that case all siteaccesses matching the context will be checked. By default,
+the highest positioned match for the Location's main language will be returned if found. This
+behavior can be disabled through the ``prefer_main_language`` option:
+
+.. code-block:: yaml
+
+    ibexa:
+        system:
+            frontend_group:
+                ng_site_api:
+                    cross_siteaccess_routing:
+                        enabled: true
+                        prefer_main_language: false
+
+If the main language was not matched or the option was disabled, the highest match for any of the
+Location's languages will be returned. If multiple siteaccess match the language configuration
+equally well, the first one, according to the configured siteaccess list, will be used. At the same
+time, it's not defined in what order Location's languages will be checked, as this is not defined by
+the Ibexa Content Repository; aside from the main language, there is no information about the
+language priority of a Content item.
+
+Finally, if none of the above matched the Location's context, current siteaccess will be returned if
+it matches Location's subtree, otherwise, the first other siteaccess matching the Location's subtree
+will be returned.
+
+External subtree roots
+----------------------
+
+If ``excluded_uri_prefixes`` option is used on a siteaccess, it should be separately configured for
+cross-siteaccess router with the corresponding Location IDs. That is needed because
+``excluded_uri_prefixes`` is used for matching an URL, and the configured information as such is not
+usable for generating an URL. Counterparts of the "excluded URI prefixes" for generating
+cross-siteaccess links are called "external subtree roots", meaning they are external to tree root
+of the current siteaccess, and can be configured per siteaccess with ``external_subtree_roots``
+option. If the Location is found to be under the configured external tree root, the link to it will
+be generated on the current siteaccess. Example configuration:
+
+.. code-block:: yaml
+
+    ibexa:
+        system:
+            frontend_group:
+                ng_site_api:
+                    cross_siteaccess_routing:
+                        enabled: true
+                        external_subtree_roots:
+                            - 42
+                            - 256
+
+If only a single items needs to be configured, you can also use shortcut configuration:
+
+.. code-block:: yaml
+
+    ibexa:
+        system:
+            frontend_group:
+                ng_site_api:
+                    cross_siteaccess_routing:
+                        enabled: true
+                        external_subtree_roots: 42
+
+Siteaccess and siteaccess group inclusion and exclusion
+-------------------------------------------------------
+
+If needed, you can include and exclude siteaccesses and siteaccess groups from the matching process,
+for example:
+
+.. code-block:: yaml
+
+    ibexa:
+        system:
+            frontend_group:
+                ng_site_api:
+                    cross_siteaccess_routing:
+                        enabled: true
+                        included_siteaccesses:
+                            - sa_a
+                            - sa_b
+                        included_siteaccess_groups:
+                            - group_1
+                            - group_2
+                        excluded_siteaccesses:
+                            - sa_c
+                            - sa_d
+                        excluded_siteaccess_groups:
+                            - group_3
+                            - group_4
+
+If only a single items needs to be configured, you can also use shortcut configuration:
+
+.. code-block:: yaml
+
+    ibexa:
+        system:
+            frontend_group:
+                ng_site_api:
+                    cross_siteaccess_routing:
+                        enabled: true
+                        included_siteaccesses: sa_a
+                        included_siteaccess_groups: group_1
+                        excluded_siteaccesses: sa_c
+                        excluded_siteaccess_groups: group_3
+
+There are several specific rules to have in mind:
+
+1. In case of ambiguous configuration, the exclusion will always win over the inclusion
+
+2. Current siteaccess will be implicitly included, but it can be excluded if needed
+
+3. For inclusion options, an empty array is interpreted as "include everything" instead
+   "include nothing"
+
+Relative and absolute URLs
+--------------------------
+
+Host part of the resulting URL will always be generated if requested, but otherwise only if
+necessary, meaning only if it's different from the current host. This is also valid for ``path``
+function in Twig, as otherwise it would not be possible to correctly link to a Location on a
+siteaccess with a different host configuration.
+
+All configuration options
+-------------------------
+
+All configuration options, showing the defaults:
+
+.. code-block:: yaml
+
+    ibexa:
+        system:
+            frontend_group:
+                ng_site_api:
+                    cross_siteaccess_routing:
+                        enabled: false
+                        external_subtree_roots: []
+                        included_siteaccesses: []
+                        included_siteaccess_groups: []
+                        excluded_siteaccesses: []
+                        excluded_siteaccess_groups: []
+                        prefer_main_language: true
+
 Site API Content views
 ~~~~~~~~~~~~~~~~~~~~~~
 
