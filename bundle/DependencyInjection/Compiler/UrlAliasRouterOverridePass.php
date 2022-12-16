@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Compiler;
 
 use Ibexa\Bundle\Core\Routing\UrlAliasRouter as IbexaUrlAliasRouter;
-use Netgen\Bundle\IbexaSiteApiBundle\Routing\UrlAliasRouter;
+use Netgen\Bundle\IbexaSiteApiBundle\Routing\UrlAliasRouter as SiteApiUrlAliasRouter;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class DefaultViewActionOverridePass implements CompilerPassInterface
+class UrlAliasRouterOverridePass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container): void
     {
@@ -19,6 +19,6 @@ class DefaultViewActionOverridePass implements CompilerPassInterface
 
         $container
             ->findDefinition(IbexaUrlAliasRouter::class)
-            ->setClass(UrlAliasRouter::class);
+            ->setClass(SiteApiUrlAliasRouter::class);
     }
 }

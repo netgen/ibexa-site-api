@@ -56,6 +56,8 @@ final class SiteApiTest extends AbstractParserTestCase
         $this->assertConfigResolverParameterValue('ng_site_api.named_objects', [], 'ibexa_demo_site');
         $this->assertConfigResolverParameterValue('ng_site_api.cross_siteaccess_routing.enabled', false, 'ibexa_demo_site');
         $this->assertConfigResolverParameterValue('ng_site_api.cross_siteaccess_routing.external_subtree_roots', [], 'ibexa_demo_site');
+        $this->assertConfigResolverParameterValue('ng_site_api.cross_siteaccess_routing.included_siteaccesses', [], 'ibexa_demo_site');
+        $this->assertConfigResolverParameterValue('ng_site_api.cross_siteaccess_routing.included_siteaccess_groups', [], 'ibexa_demo_site');
         $this->assertConfigResolverParameterValue('ng_site_api.cross_siteaccess_routing.excluded_siteaccesses', [], 'ibexa_demo_site');
         $this->assertConfigResolverParameterValue('ng_site_api.cross_siteaccess_routing.excluded_siteaccess_groups', [], 'ibexa_demo_site');
         $this->assertConfigResolverParameterValue('ng_site_api.cross_siteaccess_routing.prefer_main_language', true, 'ibexa_demo_site');
@@ -545,6 +547,390 @@ final class SiteApiTest extends AbstractParserTestCase
             $expectedConfigurationValues,
             'ibexa_demo_site',
         );
+    }
+
+    public function providerForTestCrossSiteaccessRoutingBoolConfigurationInvalid(): array
+    {
+        return [
+            [
+                "string",
+                InvalidConfigurationException::class,
+                'Expected "bool", but got "string"',
+            ],
+            [
+                1,
+                InvalidConfigurationException::class,
+                'Expected "bool", but got "int"',
+            ],
+            [
+                [],
+                InvalidConfigurationException::class,
+                'Expected "bool", but got "array"',
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider providerForTestCrossSiteaccessRoutingBoolConfigurationInvalid
+     */
+    public function testCrossSiteaccessRoutingEnabledConfigurationInvalid(
+        $configurationValue,
+        string $exceptionClass,
+        string $exceptionMessage
+    ): void {
+        $this->expectException($exceptionClass);
+        $exceptionMessage = preg_quote($exceptionMessage, '/');
+        $this->expectExceptionMessageMatches("/{$exceptionMessage}/");
+
+        $this->load([
+            'system' => [
+                'ibexa_demo_group' => [
+                    'ng_site_api' => [
+                        'cross_siteaccess_routing' => [
+                            'enabled' => $configurationValue,
+                        ],
+                    ],
+                ],
+            ],
+        ]);
+    }
+
+    /**
+     * @dataProvider providerForTestCrossSiteaccessRoutingBoolConfigurationInvalid
+     */
+    public function testCrossSiteaccessRoutingPreferMainLanguageConfigurationInvalid(
+        $configurationValue,
+        string $exceptionClass,
+        string $exceptionMessage
+    ): void {
+        $this->expectException($exceptionClass);
+        $exceptionMessage = preg_quote($exceptionMessage, '/');
+        $this->expectExceptionMessageMatches("/{$exceptionMessage}/");
+
+        $this->load([
+            'system' => [
+                'ibexa_demo_group' => [
+                    'ng_site_api' => [
+                        'cross_siteaccess_routing' => [
+                            'prefer_main_language' => $configurationValue,
+                        ],
+                    ],
+                ],
+            ],
+        ]);
+    }
+
+    public function providerForTestCrossSiteaccessRoutingExternalSubtreeRootsConfigurationInvalid(): array
+    {
+        return [
+            [
+                "string",
+                InvalidConfigurationException::class,
+                'Expected "array", but got "string"',
+            ],
+            [
+                [
+                    "string",
+                ],
+                InvalidConfigurationException::class,
+                'Expected "int", but got "string"',
+            ],
+            [
+                false,
+                InvalidConfigurationException::class,
+                'Expected "array", but got "bool"',
+            ],
+            [
+                [
+                    true,
+                ],
+                InvalidTypeException::class,
+                'Expected "int", but got "bool"',
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider providerForTestCrossSiteaccessRoutingExternalSubtreeRootsConfigurationInvalid
+     */
+    public function testCrossSiteaccessRoutingExternalSubtreeRootsConfigurationInvalid(
+        $configurationValue,
+        string $exceptionClass,
+        string $exceptionMessage
+    ): void {
+        $this->expectException($exceptionClass);
+        $exceptionMessage = preg_quote($exceptionMessage, '/');
+        $this->expectExceptionMessageMatches("/{$exceptionMessage}/");
+
+        $this->load([
+            'system' => [
+                'ibexa_demo_group' => [
+                    'ng_site_api' => [
+                        'cross_siteaccess_routing' => [
+                            'external_subtree_roots' => $configurationValue,
+                        ],
+                    ],
+                ],
+            ],
+        ]);
+    }
+
+    public function providerForTestCrossSiteaccessRoutingStringsConfigurationInvalid(): array
+    {
+        return [
+            [
+                [
+                    1,
+                ],
+                InvalidConfigurationException::class,
+                'Expected "string", but got "integer"',
+            ],
+            [
+                1,
+                InvalidConfigurationException::class,
+                'Expected "array", but got "int"',
+            ],
+            [
+                false,
+                InvalidConfigurationException::class,
+                'Expected "array", but got "bool"',
+            ],
+            [
+                [
+                    true,
+                ],
+                InvalidTypeException::class,
+                'Expected "string", but got "boolean"',
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider providerForTestCrossSiteaccessRoutingStringsConfigurationInvalid
+     */
+    public function testCrossSiteaccessRoutingIncludedSiteaccessesConfigurationInvalid(
+        $configurationValue,
+        string $exceptionClass,
+        string $exceptionMessage
+    ): void {
+        $this->expectException($exceptionClass);
+        $exceptionMessage = preg_quote($exceptionMessage, '/');
+        $this->expectExceptionMessageMatches("/{$exceptionMessage}/");
+
+        $this->load([
+            'system' => [
+                'ibexa_demo_group' => [
+                    'ng_site_api' => [
+                        'cross_siteaccess_routing' => [
+                            'included_siteaccesses' => $configurationValue,
+                        ],
+                    ],
+                ],
+            ],
+        ]);
+    }
+
+    /**
+     * @dataProvider providerForTestCrossSiteaccessRoutingStringsConfigurationInvalid
+     */
+    public function testCrossSiteaccessRoutingIncludedSiteaccessGroupsConfigurationInvalid(
+        $configurationValue,
+        string $exceptionClass,
+        string $exceptionMessage
+    ): void {
+        $this->expectException($exceptionClass);
+        $exceptionMessage = preg_quote($exceptionMessage, '/');
+        $this->expectExceptionMessageMatches("/{$exceptionMessage}/");
+
+        $this->load([
+            'system' => [
+                'ibexa_demo_group' => [
+                    'ng_site_api' => [
+                        'cross_siteaccess_routing' => [
+                            'included_siteaccess_groups' => $configurationValue,
+                        ],
+                    ],
+                ],
+            ],
+        ]);
+    }
+
+    /**
+     * @dataProvider providerForTestCrossSiteaccessRoutingStringsConfigurationInvalid
+     */
+    public function testCrossSiteaccessRoutingExcludedSiteaccessesConfigurationInvalid(
+        $configurationValue,
+        string $exceptionClass,
+        string $exceptionMessage
+    ): void {
+        $this->expectException($exceptionClass);
+        $exceptionMessage = preg_quote($exceptionMessage, '/');
+        $this->expectExceptionMessageMatches("/{$exceptionMessage}/");
+
+        $this->load([
+            'system' => [
+                'ibexa_demo_group' => [
+                    'ng_site_api' => [
+                        'cross_siteaccess_routing' => [
+                            'excluded_siteaccesses' => $configurationValue,
+                        ],
+                    ],
+                ],
+            ],
+        ]);
+    }
+
+    /**
+     * @dataProvider providerForTestCrossSiteaccessRoutingStringsConfigurationInvalid
+     */
+    public function testCrossSiteaccessRoutingExcludedSiteaccessGroupsConfigurationInvalid(
+        $configurationValue,
+        string $exceptionClass,
+        string $exceptionMessage
+    ): void {
+        $this->expectException($exceptionClass);
+        $exceptionMessage = preg_quote($exceptionMessage, '/');
+        $this->expectExceptionMessageMatches("/{$exceptionMessage}/");
+
+        $this->load([
+            'system' => [
+                'ibexa_demo_group' => [
+                    'ng_site_api' => [
+                        'cross_siteaccess_routing' => [
+                            'excluded_siteaccess_groups' => $configurationValue,
+                        ],
+                    ],
+                ],
+            ],
+        ]);
+    }
+
+    public function providerForTestCrossSiteaccessRoutingConfigurationValid(): array
+    {
+        return [
+            [
+                false,
+                [
+                    'enabled' => false,
+                    'external_subtree_roots' => [],
+                ],
+            ],
+            [
+                true,
+                [
+                    'enabled' => true,
+                    'external_subtree_roots' => [],
+                ],
+            ],
+            [
+                [],
+                [
+                    'enabled' => false,
+                    'external_subtree_roots' => [],
+                ],
+            ],
+            [
+                [
+                    'enabled' => true,
+                ],
+                [
+                    'enabled' => true,
+                    'external_subtree_roots' => [],
+                ],
+            ],
+            [
+                [
+                    'external_subtree_roots' => [],
+                ],
+                [
+                    'external_subtree_roots' => [],
+                    'enabled' => false,
+                ],
+            ],
+            [
+                [
+                    'external_subtree_roots' => [1, 2, 3],
+                ],
+                [
+                    'external_subtree_roots' => [1, 2, 3],
+                    'enabled' => false,
+                ],
+            ],
+            [
+                [
+                    'enabled' => true,
+                    'external_subtree_roots' => 42,
+                ],
+                [
+                    'enabled' => true,
+                    'external_subtree_roots' => [42],
+                ],
+            ],
+            [
+                [
+                    'enabled' => true,
+                    'external_subtree_roots' => [1, 2, 3],
+                    'included_siteaccesses' => 'sa1',
+                    'included_siteaccess_groups' => 'sag1',
+                    'excluded_siteaccesses' => 'sa2',
+                    'excluded_siteaccess_groups' => 'sag2',
+                    'prefer_main_language' => false,
+                ],
+                [
+                    'enabled' => true,
+                    'external_subtree_roots' => [1, 2, 3],
+                    'included_siteaccesses' => ['sa1'],
+                    'included_siteaccess_groups' => ['sag1'],
+                    'excluded_siteaccesses' => ['sa2'],
+                    'excluded_siteaccess_groups' => ['sag2'],
+                    'prefer_main_language' => false,
+                ],
+            ],
+            [
+                [
+                    'enabled' => true,
+                    'external_subtree_roots' => [1, 2, 3],
+                    'included_siteaccesses' => ['sa1'],
+                    'included_siteaccess_groups' => ['sag1'],
+                    'excluded_siteaccesses' => ['sa2'],
+                    'excluded_siteaccess_groups' => ['sag2'],
+                    'prefer_main_language' => false,
+                ],
+                [
+                    'enabled' => true,
+                    'external_subtree_roots' => [1, 2, 3],
+                    'included_siteaccesses' => ['sa1'],
+                    'included_siteaccess_groups' => ['sag1'],
+                    'excluded_siteaccesses' => ['sa2'],
+                    'excluded_siteaccess_groups' => ['sag2'],
+                    'prefer_main_language' => false,
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider providerForTestCrossSiteaccessRoutingConfigurationValid
+     */
+    public function testCrossSiteaccessRoutingConfigurationValid($configurationValues, array $expectedConfigurationValues): void
+    {
+        $this->load([
+            'system' => [
+                'ibexa_demo_group' => [
+                    'ng_site_api' => [
+                        'cross_siteaccess_routing' => $configurationValues,
+                    ],
+                ],
+            ],
+        ]);
+
+        foreach ($expectedConfigurationValues as $key => $value) {
+            $this->assertConfigResolverParameterValue(
+                'ng_site_api.cross_siteaccess_routing.' . $key,
+                $value,
+                'ibexa_demo_site',
+            );
+        }
     }
 
     protected function getContainerExtensions(): array
