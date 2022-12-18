@@ -3,25 +3,21 @@ services:
     # register to Registry through a compiler pass
     netgen.ibexa_site_api.plugins.field_type.relation_resolver.registry:
         class: Netgen\IbexaSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Registry
-        public: false
 
     # Resolver for Relation field type
     netgen.ibexa_site_api.plugins.field_type.relation_resolver.relation:
         class: Netgen\IbexaSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Resolver\Relation
-        public: false
         tags:
             - { name: netgen.ibexa_site_api.plugins.field_type.relation_resolver, identifier: ezobjectrelation }
 
     # Resolver for RelationList field type
     netgen.ibexa_site_api.plugins.field_type.relation_resolver.relation_list:
         class: Netgen\IbexaSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Resolver\RelationList
-        public: false
         tags:
             - { name: netgen.ibexa_site_api.plugins.field_type.relation_resolver, identifier: ezobjectrelationlist }
 
     # Resolver for 'ngsurrogate' field type
     netgen.ibexa_site_api.plugins.field_type.relation_resolver.ngsurrogate:
         class: Netgen\IbexaSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Resolver\Surrogate
-        public: false
         tags:
             - { name: netgen.ibexa_site_api.plugins.field_type.relation_resolver, identifier: ngsurrogate }

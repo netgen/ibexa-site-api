@@ -17,7 +17,6 @@ services:
             - '@request_stack'
             - '@ibexa.config.resolver'
             - '@netgen.ibexa_site_api.named_object.provider'
-        public: false
 
     netgen.ibexa_site_api.query_type.query_definition_mapper:
         class: Netgen\Bundle\IbexaSiteApiBundle\QueryType\QueryDefinitionMapper
@@ -25,7 +24,6 @@ services:
             - '@Ibexa\Core\QueryType\ArrayQueryTypeRegistry'
             - '@netgen.ibexa_site_api.query_type.parameter_processor'
             - '@ibexa.config.resolver'
-        public: false
 
     netgen.ibexa_site_api.query_type.query_executor:
         class: Netgen\Bundle\IbexaSiteApiBundle\QueryType\QueryExecutor
@@ -33,4 +31,3 @@ services:
             - '@Ibexa\Core\QueryType\ArrayQueryTypeRegistry'
             - '@netgen.ibexa_site_api.filter_service'
             - '@netgen.ibexa_site_api.find_service'
-        public: false

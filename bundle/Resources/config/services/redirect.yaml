@@ -16,7 +16,6 @@ services:
         class: Netgen\Bundle\IbexaSiteApiBundle\View\Redirect\Resolver
         arguments:
             - '@router'
-        public: false
 
     netgen.ibexa_site_api.redirect.parameter_processor:
         class: Netgen\Bundle\IbexaSiteApiBundle\View\Redirect\ParameterProcessor
@@ -24,4 +23,3 @@ services:
             - '@netgen.ibexa_site_api.redirect.expression_language'
             - '@ibexa.config.resolver'
             - '@netgen.ibexa_site_api.named_object.provider'
-        public: false

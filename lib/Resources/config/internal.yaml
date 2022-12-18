@@ -34,7 +34,6 @@ services:
             - '@Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface'
             - '%languages%'
         lazy: true
-        public: false
 
     netgen.ibexa_site_api.repository.filtering_search_service:
         class: Ibexa\Core\Repository\SearchService
@@ -42,11 +41,9 @@ services:
             - '@netgen.ibexa_site_api.repository.inner'
             - getSearchService
         lazy: true
-        public: false
 
     netgen.ibexa_site_api.core.settings:
         class: Netgen\IbexaSiteApi\Core\Site\Settings
-        public: false
         arguments:
             - '%netgen.ibexa_site_api.prioritized_languages%'
             - '%netgen.ibexa_site_api.use_always_available%'
@@ -56,7 +53,6 @@ services:
 
     netgen.ibexa_site_api.core.site:
         class: Netgen\IbexaSiteApi\Core\Site\Site
-        public: false
         arguments:
             - '@netgen.ibexa_site_api.core.settings'
             - '@ibexa.api.repository'
@@ -67,7 +63,6 @@ services:
 
     netgen.ibexa_site_api.core.filter_service:
         class: Netgen\IbexaSiteApi\Core\Site\FilterService
-        public: false
         factory:
             - '@netgen.ibexa_site_api.core.site'
             - getFilterService
@@ -75,7 +70,6 @@ services:
 
     netgen.ibexa_site_api.core.find_service:
         class: Netgen\IbexaSiteApi\Core\Site\FindService
-        public: false
         factory:
             - '@netgen.ibexa_site_api.core.site'
             - getFindService
@@ -83,7 +77,6 @@ services:
 
     netgen.ibexa_site_api.core.load_service:
         class: Netgen\IbexaSiteApi\Core\Site\LoadService
-        public: false
         factory:
             - '@netgen.ibexa_site_api.core.site'
             - getLoadService
@@ -91,7 +84,6 @@ services:
 
     netgen.ibexa_site_api.core.relation_service:
         class: Netgen\IbexaSiteApi\Core\Site\RelationService
-        public: false
         factory:
             - '@netgen.ibexa_site_api.core.site'
             - getRelationService

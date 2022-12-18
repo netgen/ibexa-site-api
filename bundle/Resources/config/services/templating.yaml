@@ -1,13 +1,11 @@
 services:
     netgen.ibexa_site_api.twig.extension.field_rendering:
         class: Netgen\Bundle\IbexaSiteApiBundle\Templating\Twig\Extension\FieldRenderingExtension
-        public: false
         tags:
             - { name: twig.extension }
 
     netgen.ibexa_site_api.twig.runtime.field_rendering:
         class: Netgen\Bundle\IbexaSiteApiBundle\Templating\Twig\Extension\FieldRenderingRuntime
-        # public: false
         arguments:
             - '@twig'
             - '@ibexa.templating.field_block_renderer'
@@ -17,13 +15,11 @@ services:
 
     netgen.ibexa_site_api.twig.extension.content_rendering:
         class: Netgen\Bundle\IbexaSiteApiBundle\Templating\Twig\Extension\ContentViewExtension
-        public: false
         tags:
             - { name: twig.extension }
 
     netgen.ibexa_site_api.twig.runtime.content_rendering:
         class: Netgen\Bundle\IbexaSiteApiBundle\Templating\Twig\Extension\ContentViewRuntime
-        # public: false
         arguments:
             - '@netgen.ibexa_site_api.twig.content_renderer'
         tags:
@@ -31,13 +27,11 @@ services:
 
     netgen.ibexa_site_api.twig.extension.embedded_content_rendering:
         class: Netgen\Bundle\IbexaSiteApiBundle\Templating\Twig\Extension\EmbeddedContentViewExtension
-        public: false
         tags:
             - { name: twig.extension }
 
     netgen.ibexa_site_api.twig.runtime.embedded_content_rendering:
         class: Netgen\Bundle\IbexaSiteApiBundle\Templating\Twig\Extension\EmbeddedContentViewRuntime
-        # public: false
         arguments:
             - '@netgen.ibexa_site_api.twig.content_renderer'
         tags:
@@ -45,13 +39,11 @@ services:
 
     netgen.ibexa_site_api.twig.extension.ez_content_rendering:
         class: Netgen\Bundle\IbexaSiteApiBundle\Templating\Twig\Extension\IbexaContentViewExtension
-        public: false
         tags:
             - { name: twig.extension }
 
     netgen.ibexa_site_api.twig.runtime.ez_content_rendering:
         class: Netgen\Bundle\IbexaSiteApiBundle\Templating\Twig\Extension\IbexaContentViewRuntime
-        # public: false
         arguments:
             - '@netgen.ibexa_site_api.twig.content_renderer'
         tags:
@@ -59,13 +51,11 @@ services:
 
     netgen.ibexa_site_api.twig.extension.ez_embedded_content_rendering:
         class: Netgen\Bundle\IbexaSiteApiBundle\Templating\Twig\Extension\IbexaEmbeddedContentViewExtension
-        public: false
         tags:
             - { name: twig.extension }
 
     netgen.ibexa_site_api.twig.runtime.ez_embedded_content_rendering:
         class: Netgen\Bundle\IbexaSiteApiBundle\Templating\Twig\Extension\IbexaEmbeddedContentViewRuntime
-        # public: false
         arguments:
             - '@netgen.ibexa_site_api.twig.content_renderer'
         tags:
@@ -73,13 +63,11 @@ services:
 
     netgen.ibexa_site_api.twig.extension.image:
         class: Netgen\Bundle\IbexaSiteApiBundle\Templating\Twig\Extension\ImageExtension
-        public: false
         tags:
             - { name: twig.extension }
 
     netgen.ibexa_site_api.twig.runtime.image:
         class: Netgen\Bundle\IbexaSiteApiBundle\Templating\Twig\Extension\ImageRuntime
-        # public: false
         arguments:
             - '@Ibexa\Contracts\Core\Variation\VariationHandler'
             - '@?logger'
@@ -90,11 +78,9 @@ services:
         class: Netgen\Bundle\IbexaSiteApiBundle\Templating\Twig\Extension\QueryExtension
         tags:
             - { name: twig.extension }
-        public: false
 
     netgen.ibexa_site_api.twig.runtime.query:
         class: Netgen\Bundle\IbexaSiteApiBundle\Templating\Twig\Extension\QueryRuntime
-        # public: false
         arguments:
             - '@netgen.ibexa_site_api.query_type.query_executor'
         tags:
@@ -104,17 +90,14 @@ services:
         class: Netgen\Bundle\IbexaSiteApiBundle\Templating\Twig\Extension\GetAttrExpressionExtension
         tags:
             - { name: twig.extension }
-        public: false
 
     netgen.ibexa_site_api.twig.extension.named_object:
         class: Netgen\Bundle\IbexaSiteApiBundle\Templating\Twig\Extension\NamedObjectExtension
         tags:
             - { name: twig.extension }
-        public: false
 
     netgen.ibexa_site_api.twig.runtime.named_object:
         class: Netgen\Bundle\IbexaSiteApiBundle\Templating\Twig\Extension\NamedObjectRuntime
-        # public: false
         arguments:
             - '@netgen.ibexa_site_api.named_object.provider'
             - '%kernel.debug%'

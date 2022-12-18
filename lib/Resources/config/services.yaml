@@ -8,23 +8,18 @@ parameters:
 services:
     netgen.ibexa_site_api.settings:
         alias: 'netgen.ibexa_site_api.core.settings'
-        public: false
 
     netgen.ibexa_site_api.filter_service:
         alias: 'netgen.ibexa_site_api.core.filter_service'
-        public: false
 
     netgen.ibexa_site_api.find_service:
         alias: 'netgen.ibexa_site_api.core.find_service'
-        public: false
 
     netgen.ibexa_site_api.load_service:
         alias: 'netgen.ibexa_site_api.core.load_service'
-        public: false
 
     netgen.ibexa_site_api.relation_service:
         alias: 'netgen.ibexa_site_api.core.relation_service'
-        public: false
 
     netgen.ibexa_site_api.site:
         alias: 'netgen.ibexa_site_api.core.site'
@@ -36,14 +31,12 @@ services:
 
     netgen.ibexa_site_api.filter_service.search_adapter:
         class: Netgen\IbexaSiteApi\API\Adapter\FilterServiceAdapter
-        public: false
         arguments:
             - '@netgen.ibexa_site_api.filter_service'
             - '@Ibexa\Core\Search\Legacy\Content\Handler'
 
     netgen.ibexa_site_api.find_service.search_adapter:
         class: Netgen\IbexaSiteApi\API\Adapter\FindServiceAdapter
-        public: false
         arguments:
             - '@netgen.ibexa_site_api.find_service'
             - '@ibexa.spi.search'
