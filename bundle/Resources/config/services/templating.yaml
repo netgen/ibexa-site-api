@@ -21,7 +21,7 @@ services:
     netgen.ibexa_site_api.twig.runtime.content_rendering:
         class: Netgen\Bundle\IbexaSiteApiBundle\Templating\Twig\Extension\ContentViewRuntime
         arguments:
-            - '@netgen.ibexa_site_api.twig.content_renderer'
+            - '@netgen.ibexa_site_api.content_renderer'
         tags:
             - { name: twig.runtime }
 
@@ -33,7 +33,7 @@ services:
     netgen.ibexa_site_api.twig.runtime.embedded_content_rendering:
         class: Netgen\Bundle\IbexaSiteApiBundle\Templating\Twig\Extension\EmbeddedContentViewRuntime
         arguments:
-            - '@netgen.ibexa_site_api.twig.content_renderer'
+            - '@netgen.ibexa_site_api.content_renderer'
         tags:
             - { name: twig.runtime }
 
@@ -45,7 +45,7 @@ services:
     netgen.ibexa_site_api.twig.runtime.ez_content_rendering:
         class: Netgen\Bundle\IbexaSiteApiBundle\Templating\Twig\Extension\IbexaContentViewRuntime
         arguments:
-            - '@netgen.ibexa_site_api.twig.content_renderer'
+            - '@netgen.ibexa_site_api.content_renderer'
         tags:
             - { name: twig.runtime }
 
@@ -57,7 +57,7 @@ services:
     netgen.ibexa_site_api.twig.runtime.ez_embedded_content_rendering:
         class: Netgen\Bundle\IbexaSiteApiBundle\Templating\Twig\Extension\IbexaEmbeddedContentViewRuntime
         arguments:
-            - '@netgen.ibexa_site_api.twig.content_renderer'
+            - '@netgen.ibexa_site_api.content_renderer'
         tags:
             - { name: twig.runtime }
 
