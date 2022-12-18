@@ -1,4 +1,11 @@
 services:
     Ibexa\Core\QueryType\QueryTypeRegistry: '@Ibexa\Core\QueryType\ArrayQueryTypeRegistry'
     Netgen\Bundle\IbexaSiteApiBundle\NamedObject\Provider: '@netgen.ibexa_site_api.named_object.provider'
+    Netgen\Bundle\IbexaSiteApiBundle\View\ContentRenderer: '@netgen.ibexa_site_api.content_renderer'
+    Netgen\Bundle\IbexaSiteApiBundle\View\ViewRenderer: '@netgen.ibexa_site_api.view_renderer'
+    Netgen\IbexaSiteApi\API\FilterService: '@netgen.ibexa_site_api.filter_service'
+    Netgen\IbexaSiteApi\API\FindService: '@netgen.ibexa_site_api.find_service'
+    Netgen\IbexaSiteApi\API\LoadService: '@netgen.ibexa_site_api.load_service'
+    Netgen\IbexaSiteApi\API\RelationService: '@netgen.ibexa_site_api.relation_service'
+    Netgen\IbexaSiteApi\API\Settings: '@netgen.ibexa_site_api.settings'
     Netgen\IbexaSiteApi\API\Site: '@netgen.ibexa_site_api.site'
