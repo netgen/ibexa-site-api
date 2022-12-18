@@ -19,10 +19,10 @@ services:
         tags:
             - { name: ibexa.view.builder }
 
-    netgen.ibexa_site_api.content_view_provider.ngcontent_configured:
+    netgen.ibexa_site_api.content_view_provider.ng_content_configured:
         class: Netgen\Bundle\IbexaSiteApiBundle\View\Provider\Configured
         arguments:
-            - '@netgen.ibexa_site_api.ngcontent_view.matcher_factory'
+            - '@netgen.ibexa_site_api.ng_content_view.matcher_factory'
             - '@netgen.ibexa_site_api.query_type.query_definition_mapper'
             - '@netgen.ibexa_site_api.redirect.resolver'
             - '@netgen.ibexa_site_api.view_provider.content_view_fallback_resolver'
@@ -46,7 +46,7 @@ services:
             - '@ibexa.content_view.matcher_factory'
             - '@netgen.ibexa_site_api.view_provider.content_view_fallback_resolver'
 
-    netgen.ibexa_site_api.ngcontent_view.matcher_factory:
+    netgen.ibexa_site_api.ng_content_view.matcher_factory:
         class: Netgen\Bundle\IbexaSiteApiBundle\View\Matcher\MatcherFactory
         arguments:
             - '@?Ibexa\Bundle\Core\Matcher\ViewMatcherRegistry'
@@ -57,14 +57,14 @@ services:
         calls:
             - [setContainer, ["@service_container"]]
 
-    netgen.ibexa_site_api.ngcontent_view_provider.default_configured:
+    netgen.ibexa_site_api.ng_content_view_provider.default_configured:
         class: Ibexa\Bundle\Core\View\Provider\Configured
         arguments:
-            - '@netgen.ibexa_site_api.ngcontent_view.default_matcher_factory'
+            - '@netgen.ibexa_site_api.ng_content_view.default_matcher_factory'
         tags:
             - { name: ibexa.view.provider, type: 'Netgen\Bundle\IbexaSiteApiBundle\View\ContentView', priority: 90 }
 
-    netgen.ibexa_site_api.ngcontent_view.default_matcher_factory:
+    netgen.ibexa_site_api.ng_content_view.default_matcher_factory:
         class: Netgen\Bundle\IbexaSiteApiBundle\View\Matcher\MatcherFactory
         arguments:
             - '@?Ibexa\Bundle\Core\Matcher\ViewMatcherRegistry'
