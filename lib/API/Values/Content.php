@@ -16,21 +16,21 @@ use Pagerfanta\Pagerfanta;
  *
  * @see \Ibexa\Contracts\Core\Repository\Values\Content\Content
  *
- * @property int $id
- * @property ?int $mainLocationId
- * @property string $name
- * @property string $languageCode
- * @property bool $isVisible
- * @property \Netgen\IbexaSiteApi\API\Values\ContentInfo $contentInfo
- * @property \Netgen\IbexaSiteApi\API\Values\Field[]|\Netgen\IbexaSiteApi\API\Values\Fields $fields
- * @property ?\Netgen\IbexaSiteApi\API\Values\Location $mainLocation
- * @property ?\Netgen\IbexaSiteApi\API\Values\Content $owner
- * @property ?\Netgen\IbexaSiteApi\API\Values\Content $modifier
- * @property ?\Ibexa\Contracts\Core\Repository\Values\User\User $innerOwnerUser
- * @property ?\Ibexa\Contracts\Core\Repository\Values\User\User $innerModifierUser
- * @property \Ibexa\Contracts\Core\Repository\Values\Content\Content $innerContent
- * @property \Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo $innerVersionInfo
- * @property \Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo $versionInfo
+ * @property-read int $id
+ * @property-read ?int $mainLocationId
+ * @property-read string $name
+ * @property-read string $languageCode
+ * @property-read bool $isVisible
+ * @property-read \Netgen\IbexaSiteApi\API\Values\ContentInfo $contentInfo
+ * @property-read \Netgen\IbexaSiteApi\API\Values\Field[]|\Netgen\IbexaSiteApi\API\Values\Fields $fields
+ * @property-read ?\Netgen\IbexaSiteApi\API\Values\Location $mainLocation
+ * @property-read ?\Netgen\IbexaSiteApi\API\Values\Content $owner
+ * @property-read ?\Netgen\IbexaSiteApi\API\Values\Content $modifier
+ * @property-read ?\Ibexa\Contracts\Core\Repository\Values\User\User $innerOwnerUser
+ * @property-read ?\Ibexa\Contracts\Core\Repository\Values\User\User $innerModifierUser
+ * @property-read \Ibexa\Contracts\Core\Repository\Values\Content\Content $innerContent
+ * @property-read \Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo $innerVersionInfo
+ * @property-read \Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo $versionInfo
  */
 abstract class Content extends ValueObject
 {

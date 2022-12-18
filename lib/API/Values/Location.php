@@ -14,25 +14,25 @@ use Pagerfanta\Pagerfanta;
  *
  * @see \Ibexa\Contracts\Core\Repository\Values\Content\Location
  *
- * @property int $id
- * @property int $status
- * @property int $priority
- * @property bool $hidden
- * @property bool $invisible
- * @property bool $explicitlyHidden
- * @property bool $isVisible
- * @property string $remoteId
- * @property int $parentLocationId
- * @property string $pathString
- * @property int[] $path
- * @property int $depth
- * @property int $sortField
- * @property int $sortOrder
- * @property int $contentId
- * @property \Ibexa\Contracts\Core\Repository\Values\Content\Location $innerLocation
- * @property \Netgen\IbexaSiteApi\API\Values\ContentInfo $contentInfo
- * @property ?\Netgen\IbexaSiteApi\API\Values\Location $parent
- * @property \Netgen\IbexaSiteApi\API\Values\Content $content
+ * @property-read int $id
+ * @property-read int $status
+ * @property-read int $priority
+ * @property-read bool $hidden
+ * @property-read bool $invisible
+ * @property-read bool $explicitlyHidden
+ * @property-read bool $isVisible
+ * @property-read string $remoteId
+ * @property-read int $parentLocationId
+ * @property-read string $pathString
+ * @property-read int[] $path
+ * @property-read int $depth
+ * @property-read int $sortField
+ * @property-read int $sortOrder
+ * @property-read int $contentId
+ * @property-read \Netgen\IbexaSiteApi\API\Values\Content $content
+ * @property-read \Netgen\IbexaSiteApi\API\Values\ContentInfo $contentInfo
+ * @property-read ?\Netgen\IbexaSiteApi\API\Values\Location $parent
+ * @property-read \Ibexa\Contracts\Core\Repository\Values\Content\Location $innerLocation
  */
 abstract class Location extends ValueObject
 {

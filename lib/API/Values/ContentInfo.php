@@ -13,28 +13,28 @@ use Ibexa\Contracts\Core\Repository\Values\ValueObject;
  *
  * @see \Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo
  *
- * @property int $id
- * @property int $contentTypeId
- * @property int $sectionId
- * @property int $currentVersionNo
- * @property bool $published
- * @property bool $isHidden
- * @property bool $isVisible
- * @property int $ownerId
- * @property \DateTime $modificationDate
- * @property \DateTime $publishedDate
- * @property bool $alwaysAvailable
- * @property string $remoteId
- * @property string $mainLanguageCode
- * @property int $mainLocationId
- * @property string $name
- * @property string $languageCode
- * @property string $contentTypeIdentifier
- * @property string $contentTypeName
- * @property string $contentTypeDescription
- * @property \Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo $innerContentInfo
- * @property \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType $innerContentType
- * @property ?\Netgen\IbexaSiteApi\API\Values\Location $mainLocation
+ * @property-read int $id
+ * @property-read int $contentTypeId
+ * @property-read int $sectionId
+ * @property-read int $currentVersionNo
+ * @property-read bool $published
+ * @property-read bool $isHidden
+ * @property-read bool $isVisible
+ * @property-read int $ownerId
+ * @property-read \DateTime $modificationDate
+ * @property-read \DateTime $publishedDate
+ * @property-read bool $alwaysAvailable
+ * @property-read string $remoteId
+ * @property-read string $mainLanguageCode
+ * @property-read int $mainLocationId
+ * @property-read string $name
+ * @property-read string $languageCode
+ * @property-read string $contentTypeIdentifier
+ * @property-read string $contentTypeName
+ * @property-read string $contentTypeDescription
+ * @property-read \Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo $innerContentInfo
+ * @property-read \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType $innerContentType
+ * @property-read ?\Netgen\IbexaSiteApi\API\Values\Location $mainLocation
  */
 abstract class ContentInfo extends ValueObject
 {

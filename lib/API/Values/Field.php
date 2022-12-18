@@ -13,16 +13,16 @@ use Ibexa\Contracts\Core\Repository\Values\ValueObject;
  *
  * @see \Ibexa\Contracts\Core\Repository\Values\Content\Field
  *
- * @property int|string $id
- * @property string $fieldDefIdentifier
- * @property \Ibexa\Contracts\Core\FieldType\Value $value
- * @property string $languageCode
- * @property string $fieldTypeIdentifier
- * @property string $name
- * @property string $description
- * @property \Netgen\IbexaSiteApi\API\Values\Content $content
- * @property \Ibexa\Contracts\Core\Repository\Values\Content\Field $innerField
- * @property \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition $innerFieldDefinition
+ * @property-read int|string $id
+ * @property-read string $fieldDefIdentifier
+ * @property-read \Ibexa\Contracts\Core\FieldType\Value $value
+ * @property-read string $languageCode
+ * @property-read string $fieldTypeIdentifier
+ * @property-read string $name
+ * @property-read string $description
+ * @property-read \Netgen\IbexaSiteApi\API\Values\Content $content
+ * @property-read \Ibexa\Contracts\Core\Repository\Values\Content\Field $innerField
+ * @property-read \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition $innerFieldDefinition
  */
 abstract class Field extends ValueObject
 {
