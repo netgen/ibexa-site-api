@@ -169,12 +169,12 @@ class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
 
     public function match(string $pathinfo): array
     {
-        throw new ResourceNotFoundException('Not implemented');
+        throw new ResourceNotFoundException('Pass to the next router');
     }
 
     public function matchRequest(Request $request): array
     {
-        throw new ResourceNotFoundException('Not implemented');
+        throw new ResourceNotFoundException('Pass to the next router');
     }
 
     public function getRouteDebugMessage($name, array $parameters = []): string
@@ -203,7 +203,7 @@ class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
         }
 
         if ($name !== CoreUrlAliasRouter::URL_ALIAS_ROUTE_NAME) {
-            throw new ResourceNotFoundException('Could not match route');
+            throw new ResourceNotFoundException('Pass to the next router');
         }
 
         $object = $parameters['location'] ?? null;
