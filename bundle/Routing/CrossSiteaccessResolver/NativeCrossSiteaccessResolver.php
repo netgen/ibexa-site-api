@@ -19,6 +19,8 @@ use function in_array;
 /**
  * Default implementation of the CrossSiteaccessResolver.
  *
+ * @final
+ *
  * @internal do not depend on this service, it can be changed without warning
  */
 class NativeCrossSiteaccessResolver extends CrossSiteaccessResolver

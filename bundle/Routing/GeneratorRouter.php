@@ -32,7 +32,9 @@ use function strpos;
 use function substr;
 
 /**
- * Do not use directly; use @router instead to keep the chain routing mechanism.
+ * @final
+ *
+ * @internal do not use directly; use @router instead to keep the chain routing mechanism
  */
 class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
 {
