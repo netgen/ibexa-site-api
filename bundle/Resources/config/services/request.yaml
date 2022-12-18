@@ -1,0 +1,14 @@
+services:
+    netgen.ibexa_site_api.param_converter.location:
+        class: Netgen\Bundle\IbexaSiteApiBundle\Request\ParamConverter\ContentParamConverter
+        arguments:
+            - '@netgen.ibexa_site_api.load_service'
+        tags:
+            - { name: request.param_converter, priority: -1 }
+
+    netgen.ibexa_site_api.param_converter.content:
+        class: Netgen\Bundle\IbexaSiteApiBundle\Request\ParamConverter\LocationParamConverter
+        arguments:
+            - '@netgen.ibexa_site_api.load_service'
+        tags:
+            - { name: request.param_converter, priority: -1 }

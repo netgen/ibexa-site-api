@@ -1,0 +1,5 @@
+services:
+    netgen.ibexa_site_api.core.settings:
+        class: Netgen\Bundle\IbexaSiteApiBundle\Core\Site\Settings
+        arguments:
+            - '@ibexa.config.resolver'
