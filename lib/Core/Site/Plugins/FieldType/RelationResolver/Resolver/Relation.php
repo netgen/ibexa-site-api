@@ -10,7 +10,7 @@ use Netgen\IbexaSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Resolver;
 /**
  * Relation field type relation Resolver.
  *
- * @see \Ibexa\Core\FieldType\Relation
+ * @see \Ibexa\Core\FieldType\Relation\Type
  */
 class Relation extends Resolver
 {
