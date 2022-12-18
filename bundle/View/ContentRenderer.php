@@ -12,6 +12,12 @@ use Netgen\Bundle\IbexaSiteApiBundle\View\Builder\ContentViewBuilder;
 use Netgen\IbexaSiteApi\API\Values\Content;
 use Netgen\IbexaSiteApi\API\Values\Location;
 
+/**
+ * ContentRenderer renders a configured content view for the given Content or Location object,
+ * without using a subrequest.
+ *
+ * @uses \Netgen\Bundle\IbexaSiteApiBundle\View\ViewRenderer
+ */
 final class ContentRenderer
 {
     private ContentViewBuilder $viewBuilder;
