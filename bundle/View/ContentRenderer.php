@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\IbexaSiteApiBundle\View;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Content as APIContent;
