@@ -9,6 +9,9 @@ use Ibexa\Contracts\Core\Repository\Exceptions\PropertyReadOnlyException;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Netgen\IbexaSiteApi\API\Settings as BaseSettings;
 
+/**
+ * Site Settings implementation using the current siteaccess configuration.
+ */
 final class Settings extends BaseSettings
 {
     private ConfigResolverInterface $configResolver;
