@@ -198,7 +198,10 @@ class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
     {
         $routeObject = $parameters[RouteObjectInterface::ROUTE_OBJECT] ?? null;
 
-        if ($routeObject !== null && $this->supportsObject($routeObject)) {
+        if (
+            ($name === '' || $name === RouteObjectInterface::OBJECT_BASED_ROUTE_NAME)
+            && $this->supportsObject($routeObject)
+        ) {
             return $this->resolveLocationFromRouteObject($routeObject);
         }
 
