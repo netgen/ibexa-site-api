@@ -247,7 +247,7 @@ class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
             return $this->checkContentLocation($contentInfo->getMainLocation());
         }
 
-        throw new LogicException('Could not resolve Location from the given parameters');
+        throw new RuntimeException('Could not resolve Location from the given parameters');
     }
 
     private function resolveLocationFromRouteObject($object): APILocation
