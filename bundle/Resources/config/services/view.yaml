@@ -84,7 +84,7 @@ services:
             - '@Ibexa\Core\MVC\Symfony\View\Renderer\TemplateRenderer'
             - '@event_dispatcher'
 
-    netgen.ibexa_site_api.twig.content_renderer:
+    netgen.ibexa_site_api.content_renderer:
         class: Netgen\Bundle\IbexaSiteApiBundle\View\ContentRenderer
         arguments:
             - '@netgen.ibexa_site_api.view_builder.content'
