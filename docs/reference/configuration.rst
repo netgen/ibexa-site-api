@@ -62,7 +62,7 @@ installations, where multiple siteaccesses are typically configured with differe
 root Location IDs. The feature is implemented at the router level, so it will work automatically
 when enabled, both from PHP and Twig.
 
-Cross-siteaccess routing is disabled by default, but if needed, it can be disabled per siteaccess
+Cross-siteaccess routing is enabled by default, but if needed, it can be disabled per siteaccess
 with ``ng_site_api.cross_siteaccess_routing.enabled`` configuration option:
 
 .. code-block:: yaml
@@ -72,7 +72,7 @@ with ``ng_site_api.cross_siteaccess_routing.enabled`` configuration option:
             frontend_group:
                 ng_site_api:
                     cross_siteaccess_routing:
-                        enabled: true
+                        enabled: false
 
 Or as a shortcut configuration:
 
@@ -82,7 +82,7 @@ Or as a shortcut configuration:
         system:
             frontend_group:
                 ng_site_api:
-                    cross_siteaccess_routing: true
+                    cross_siteaccess_routing: false
 
 .. note::
 

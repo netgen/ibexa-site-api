@@ -53,7 +53,7 @@ parameters:
     ibexa.site_access.config.default.ng_site_api.redirect_internal_view_route_to_url_alias: true
     ibexa.site_access.config.default.ng_site_api.named_queries: []
     ibexa.site_access.config.default.ng_site_api.named_objects: []
-    ibexa.site_access.config.default.ng_site_api.cross_siteaccess_routing.enabled: false
+    ibexa.site_access.config.default.ng_site_api.cross_siteaccess_routing.enabled: true
     ibexa.site_access.config.default.ng_site_api.cross_siteaccess_routing.external_subtree_roots: []
     ibexa.site_access.config.default.ng_site_api.cross_siteaccess_routing.included_siteaccesses: []
     ibexa.site_access.config.default.ng_site_api.cross_siteaccess_routing.included_siteaccess_groups: []
