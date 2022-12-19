@@ -22,6 +22,7 @@ use Symfony\Cmf\Component\Routing\ChainedRouterInterface;
 use Symfony\Cmf\Component\Routing\RouteObjectInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\Matcher\RequestMatcherInterface;
 use Symfony\Component\Routing\RequestContext;
@@ -206,7 +207,7 @@ class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
         }
 
         if ($name !== CoreUrlAliasRouter::URL_ALIAS_ROUTE_NAME) {
-            throw new ResourceNotFoundException('Pass to the next router');
+            throw new RouteNotFoundException('Pass to the next router');
         }
 
         $object = $parameters['location'] ?? null;
