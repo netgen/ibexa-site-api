@@ -54,7 +54,7 @@ final class SiteApiTest extends AbstractParserTestCase
         $this->assertConfigResolverParameterValue('ng_site_api.redirect_internal_view_route_to_url_alias', true, 'ibexa_demo_site');
         $this->assertConfigResolverParameterValue('ng_site_api.named_queries', [], 'ibexa_demo_site');
         $this->assertConfigResolverParameterValue('ng_site_api.named_objects', [], 'ibexa_demo_site');
-        $this->assertConfigResolverParameterValue('ng_site_api.cross_siteaccess_routing.enabled', false, 'ibexa_demo_site');
+        $this->assertConfigResolverParameterValue('ng_site_api.cross_siteaccess_routing.enabled', true, 'ibexa_demo_site');
         $this->assertConfigResolverParameterValue('ng_site_api.cross_siteaccess_routing.external_subtree_roots', [], 'ibexa_demo_site');
         $this->assertConfigResolverParameterValue('ng_site_api.cross_siteaccess_routing.included_siteaccesses', [], 'ibexa_demo_site');
         $this->assertConfigResolverParameterValue('ng_site_api.cross_siteaccess_routing.included_siteaccess_groups', [], 'ibexa_demo_site');
@@ -825,7 +825,7 @@ final class SiteApiTest extends AbstractParserTestCase
             [
                 [],
                 [
-                    'enabled' => false,
+                    'enabled' => true,
                     'external_subtree_roots' => [],
                 ],
             ],
@@ -844,7 +844,7 @@ final class SiteApiTest extends AbstractParserTestCase
                 ],
                 [
                     'external_subtree_roots' => [],
-                    'enabled' => false,
+                    'enabled' => true,
                 ],
             ],
             [
@@ -853,7 +853,7 @@ final class SiteApiTest extends AbstractParserTestCase
                 ],
                 [
                     'external_subtree_roots' => [1, 2, 3],
-                    'enabled' => false,
+                    'enabled' => true,
                 ],
             ],
             [
