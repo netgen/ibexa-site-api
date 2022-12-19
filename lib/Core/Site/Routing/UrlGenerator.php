@@ -14,7 +14,7 @@ class UrlGenerator extends APIUrlGenerator
 {
     public function generate(
         object $object,
-        string $siteaccess = null,
+        array $parameters = [],
         int $referenceType = APIUrlGenerator::ABSOLUTE_PATH
     ): string {
         throw new RuntimeException(

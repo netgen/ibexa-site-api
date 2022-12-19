@@ -43,7 +43,7 @@ abstract class UrlGenerator
      */
     abstract public function generate(
         object $object,
-        string $siteaccess = null,
+        array $parameters = [],
         int $referenceType = UrlGenerator::ABSOLUTE_PATH
     ): string;
 }
