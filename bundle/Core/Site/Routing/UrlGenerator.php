@@ -26,7 +26,7 @@ class UrlGenerator extends APIUrlGenerator
 
     public function generate(
         object $object,
-        string $siteaccess = null,
+        array $parameters = [],
         int $referenceType = APIUrlGenerator::ABSOLUTE_PATH
     ): string {
         if (!$object instanceof Content && !$object instanceof Location) {
@@ -35,17 +35,11 @@ class UrlGenerator extends APIUrlGenerator
             );
         }
 
-        $parameters = [
-            RouteObjectInterface::ROUTE_OBJECT => $object,
-        ];
-
-        if ($siteaccess !== null) {
-            $parameters['siteaccess'] = $siteaccess;
-        }
+        $parameters = [RouteObjectInterface::ROUTE_OBJECT => $object] + $parameters;
 
         return $this->router->generate(
             RouteObjectInterface::OBJECT_BASED_ROUTE_NAME,
-            $parameters,
+            [RouteObjectInterface::ROUTE_OBJECT => $object] + $parameters,
             $this->mapReferenceType($referenceType),
         );
     }
