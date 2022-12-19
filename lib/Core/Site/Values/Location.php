@@ -88,7 +88,7 @@ final class Location extends APILocation
                 return !$this->innerLocation->hidden && !$this->innerLocation->invisible;
 
             case 'url':
-                return $this->getUrl();
+                return $this->internalGetUrl();
         }
 
         if (property_exists($this, $property)) {
@@ -275,12 +275,17 @@ final class Location extends APILocation
         return $this->contentInfo;
     }
 
-    private function getUrl(): Url
+    private function internalGetUrl(): Url
     {
         if ($this->url === null) {
             $this->url = $this->domainObjectMapper->mapUrl($this);
         }
 
         return $this->url;
+    }
+
+    public function getUrl(array $parameters = []): string
+    {
+        return $this->internalGetUrl()->getAbsolutePath($parameters);
     }
 }

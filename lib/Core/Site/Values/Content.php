@@ -113,7 +113,7 @@ final class Content extends APIContent
             'modifier' => $this->getModifier(),
             'innerModifierUser' => $this->getInnerModifierUser(),
             'isVisible' => $this->getContentInfo()->isVisible,
-            'url' => $this->getUrl(),
+            'url' => $this->internalGetUrl(),
             default => parent::__get($property),
         };
     }
@@ -388,13 +388,18 @@ final class Content extends APIContent
         return $this->contentInfo;
     }
 
-    private function getUrl(): Url
+    private function internalGetUrl(): Url
     {
         if ($this->url === null) {
             $this->url = $this->domainObjectMapper->mapUrl($this);
         }
 
         return $this->url;
+    }
+
+    public function getUrl(array $parameters = []): string
+    {
+        return $this->internalGetUrl()->getAbsolutePath($parameters);
     }
 
     private function getOwner(): ?APIContent
