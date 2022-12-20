@@ -24,11 +24,12 @@ use Pagerfanta\Pagerfanta;
  * @property-read string $remoteId
  * @property-read int $parentLocationId
  * @property-read string $pathString
- * @property-read int[] $path
+ * @property-read int[] $pathArray
  * @property-read int $depth
  * @property-read int $sortField
  * @property-read int $sortOrder
  * @property-read int $contentId
+ * @property-read \Netgen\IbexaSiteApi\API\Values\Path $path
  * @property-read \Netgen\IbexaSiteApi\API\Values\Url $url
  * @property-read \Netgen\IbexaSiteApi\API\Values\Content $content
  * @property-read \Netgen\IbexaSiteApi\API\Values\ContentInfo $contentInfo
