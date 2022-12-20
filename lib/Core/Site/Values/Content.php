@@ -13,7 +13,7 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Content as RepoContent;
 use Ibexa\Contracts\Core\Repository\Values\Content\LocationQuery;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ContentId;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LogicalAnd;
-use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\Location\Path;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\Location\Path as PathSortClause;
 use Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo;
 use Ibexa\Contracts\Core\Repository\Values\User\User;
 use Netgen\IbexaSearchExtra\API\Values\Content\Query\Criterion\Visible;
@@ -22,6 +22,7 @@ use Netgen\IbexaSiteApi\API\Values\Content as APIContent;
 use Netgen\IbexaSiteApi\API\Values\ContentInfo as APIContentInfo;
 use Netgen\IbexaSiteApi\API\Values\Field as APIField;
 use Netgen\IbexaSiteApi\API\Values\Location as APILocation;
+use Netgen\IbexaSiteApi\API\Values\Path;
 use Netgen\IbexaSiteApi\API\Values\Url;
 use Netgen\IbexaSiteApi\Core\Site\DomainObjectMapper;
 use Netgen\IbexaSiteApi\Core\Site\Pagination\Pagerfanta\FilterAdapter;
@@ -48,6 +49,7 @@ final class Content extends APIContent
     private ?APIContentInfo $contentInfo = null;
     private ?RepoContent $innerContent = null;
     private ?APILocation $internalMainLocation = null;
+    private ?Path $path = null;
     private ?Url $url = null;
 
     private Site $site;
@@ -114,6 +116,7 @@ final class Content extends APIContent
             'innerModifierUser' => $this->getInnerModifierUser(),
             'isVisible' => $this->getContentInfo()->isVisible,
             'url' => $this->internalGetUrl(),
+            'path' => $this->internalGetPath(),
             default => parent::__get($property),
         };
     }
@@ -196,7 +199,7 @@ final class Content extends APIContent
                 new LocationQuery([
                     'filter' => new LogicalAnd($criteria),
                     'sortClauses' => [
-                        new Path(),
+                        new PathSortClause(),
                     ],
                 ]),
                 $this->site->getFilterService(),
@@ -388,18 +391,14 @@ final class Content extends APIContent
         return $this->contentInfo;
     }
 
-    private function internalGetUrl(): Url
+    public function getPath(array $parameters = []): string
     {
-        if ($this->url === null) {
-            $this->url = $this->domainObjectMapper->mapUrl($this);
-        }
-
-        return $this->url;
+        return $this->internalGetPath()->getAbsolute($parameters);
     }
 
     public function getUrl(array $parameters = []): string
     {
-        return $this->internalGetUrl()->getAbsolutePath($parameters);
+        return $this->internalGetUrl()->get($parameters);
     }
 
     private function getOwner(): ?APIContent
@@ -480,5 +479,23 @@ final class Content extends APIContent
         $this->isInnerModifierUserInitialized = true;
 
         return $this->innerModifierUser;
+    }
+
+    private function internalGetPath(): Path
+    {
+        if ($this->path === null) {
+            $this->path = $this->domainObjectMapper->mapPath($this);
+        }
+
+        return $this->path;
+    }
+
+    private function internalGetUrl(): Url
+    {
+        if ($this->url === null) {
+            $this->url = $this->domainObjectMapper->mapUrl($this);
+        }
+
+        return $this->url;
     }
 }

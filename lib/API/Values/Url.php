@@ -15,8 +15,6 @@ use Netgen\IbexaSiteApi\Core\Site\Values\Location;
  * When Content is passed, the URL will be generated for Content's main Location.
  *
  * @see \Netgen\IbexaSiteApi\API\Routing\UrlGenerator
- *
- * When cast to string, URL will be generated using UrlGenerator::ABSOLUTE_PATH reference type.
  */
 final class Url
 {
@@ -32,12 +30,10 @@ final class Url
         $this->object = $object;
     }
 
-    public function getAbsolutePath(array $parameters = []): string
-    {
-        return $this->urlGenerator->generate($this->object, $parameters);
-    }
-
-    public function getAbsoluteUrl(array $parameters = []): string
+    /**
+     * @uses UrlGenerator::ABSOLUTE_URL
+     */
+    public function get(array $parameters = []): string
     {
         return $this->urlGenerator->generate(
             $this->object,
@@ -46,26 +42,8 @@ final class Url
         );
     }
 
-    public function getNetworkPath(array $parameters = []): string
-    {
-        return $this->urlGenerator->generate(
-            $this->object,
-            $parameters,
-            UrlGenerator::NETWORK_PATH
-        );
-    }
-
-    public function getRelativePath(array $parameters = []): string
-    {
-        return $this->urlGenerator->generate(
-            $this->object,
-            $parameters,
-            UrlGenerator::RELATIVE_PATH
-        );
-    }
-
     public function __toString(): string
     {
-        return $this->getAbsolutePath();
+        return $this->get();
     }
 }
