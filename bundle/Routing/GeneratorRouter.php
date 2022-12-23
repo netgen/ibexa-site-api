@@ -89,6 +89,8 @@ class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
             $parameters['content'],
             $parameters['contentInfo'],
             $parameters['contentId'],
+            $parameters['viewType'],
+            $parameters['layout'],
             $parameters[RouteObjectInterface::ROUTE_OBJECT],
         );
 
