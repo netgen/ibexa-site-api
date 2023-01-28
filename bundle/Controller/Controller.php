@@ -97,12 +97,12 @@ abstract class Controller extends AbstractController
 
     protected function getContentRenderer(): ContentRenderer
     {
-        return $this->container->get('netgen.ibexa_site_api.named_object.provider');
+        return $this->container->get('netgen.ibexa_site_api.content_renderer');
     }
 
     protected function getViewRenderer(): ViewRenderer
     {
-        return $this->container->get('netgen.ibexa_site_api.named_object.provider');
+        return $this->container->get('netgen.ibexa_site_api.view_renderer');
     }
 
     protected function getLoadService(): LoadService
