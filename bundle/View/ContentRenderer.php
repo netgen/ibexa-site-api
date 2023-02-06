@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\IbexaSiteApiBundle\View;
 
+use Exception;
 use Ibexa\Contracts\Core\Repository\Values\Content\Content as APIContent;
 use Ibexa\Contracts\Core\Repository\Values\Content\Location as APILocation;
 use Ibexa\Contracts\Core\Repository\Values\ValueObject;
@@ -64,10 +65,6 @@ final class ContentRenderer
 
     /**
      * Renders the HTML for a given $content.
-     *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
     public function renderEmbeddedContent(string $viewType, array $parameters = []): string
     {
@@ -77,7 +74,11 @@ final class ContentRenderer
             '_controller' => 'ng_content:embedAction',
         ];
 
-        $view = $this->viewBuilder->buildView($baseParameters + $parameters);
+        try {
+            $view = $this->viewBuilder->buildView($baseParameters + $parameters);
+        } catch (Exception $exception) {
+            return '';
+        }
 
         return $this->viewRenderer->render($view, $parameters, false);
     }
