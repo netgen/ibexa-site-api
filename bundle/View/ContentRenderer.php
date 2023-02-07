@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\IbexaSiteApiBundle\View;
 
-use Exception;
 use Ibexa\Contracts\Core\Repository\Values\Content\Content as APIContent;
 use Ibexa\Contracts\Core\Repository\Values\Content\Location as APILocation;
 use Ibexa\Contracts\Core\Repository\Values\ValueObject;
@@ -12,6 +11,9 @@ use LogicException;
 use Netgen\Bundle\IbexaSiteApiBundle\View\Builder\ContentViewBuilder;
 use Netgen\IbexaSiteApi\API\Values\Content;
 use Netgen\IbexaSiteApi\API\Values\Location;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
+use Throwable;
 
 /**
  * ContentRenderer renders a configured content view for the given Content or Location object,
@@ -23,11 +25,16 @@ final class ContentRenderer
 {
     private ContentViewBuilder $viewBuilder;
     private ViewRenderer $viewRenderer;
+    private LoggerInterface $logger;
 
-    public function __construct(ContentViewBuilder $viewBuilder, ViewRenderer $viewRenderer)
-    {
+    public function __construct(
+        ContentViewBuilder $viewBuilder,
+        ViewRenderer $viewRenderer,
+        ?LoggerInterface $logger
+    ) {
         $this->viewBuilder = $viewBuilder;
         $this->viewRenderer = $viewRenderer;
+        $this->logger = $logger ?? new NullLogger();
     }
 
     /**
@@ -76,7 +83,9 @@ final class ContentRenderer
 
         try {
             $view = $this->viewBuilder->buildView($baseParameters + $parameters);
-        } catch (Exception $exception) {
+        } catch (Throwable $throwable) {
+            $this->logger->error('Could not build the embedded view: ' . $throwable->getMessage());
+
             return '';
         }
 
