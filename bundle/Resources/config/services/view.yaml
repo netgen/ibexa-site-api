@@ -89,3 +89,4 @@ services:
         arguments:
             - '@netgen.ibexa_site_api.view_builder.content'
             - '@netgen.ibexa_site_api.view_renderer'
+            - '@?logger'
