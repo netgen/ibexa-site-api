@@ -22,10 +22,9 @@ services:
     netgen.ibexa_site_api.routing.generator_router:
         class: Netgen\Bundle\IbexaSiteApiBundle\Routing\GeneratorRouter
         arguments:
+            - '@ibexa.api.repository'
             - '@Ibexa\Core\MVC\Symfony\Routing\Generator\UrlAliasGenerator'
             - '@netgen.ibexa_site_api.routing.cross_siteaccess_resolver'
-            - '@ibexa.api.service.location'
-            - '@ibexa.api.service.content'
             - '@router.request_context'
         calls:
             - [ setConfigResolver, [ '@ibexa.config.resolver' ] ]

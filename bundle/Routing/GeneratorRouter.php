@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\IbexaSiteApiBundle\Routing;
 
+use Ibexa\Contracts\Core\Repository\Repository;
 use Ibexa\Core\MVC\Symfony\Routing\UrlAliasRouter as CoreUrlAliasRouter;
-use Ibexa\Contracts\Core\Repository\ContentService;
-use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Content as APIContent;
 use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo as APIContentInfo;
 use Ibexa\Contracts\Core\Repository\Values\Content\Location as APILocation;
@@ -39,25 +38,22 @@ use function substr;
  */
 class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
 {
+    private Repository $repository;
     private UrlAliasGenerator $generator;
     private CrossSiteaccessResolver $siteaccessResolver;
     private ConfigResolverInterface $configResolver;
-    private LocationService $locationService;
-    private ContentService $contentService;
     private RequestContext $requestContext;
     private SiteAccess $currentSiteaccess;
 
     public function __construct(
+        Repository $repository,
         UrlAliasGenerator $generator,
         CrossSiteaccessResolver $siteaccessResolver,
-        LocationService $locationService,
-        ContentService $contentService,
         RequestContext $requestContext
     ) {
+        $this->repository = $repository;
         $this->generator = $generator;
         $this->siteaccessResolver = $siteaccessResolver;
-        $this->locationService = $locationService;
-        $this->contentService = $contentService;
         $this->requestContext = $requestContext;
     }
 
@@ -223,7 +219,9 @@ class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
         }
 
         if (isset($parameters['locationId'])) {
-            return $this->locationService->loadLocation($parameters['locationId']);
+            return $this->repository->sudo(
+                fn (): APILocation => $this->repository->getLocationService()->loadLocation($parameters['locationId'], [], true)
+            );
         }
 
         $object = $parameters['content'] ?? null;
@@ -245,9 +243,13 @@ class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
         }
 
         if (isset($parameters['contentId'])) {
-            $contentInfo = $this->contentService->loadContentInfo($parameters['contentId']);
+            return $this->repository->sudo(
+                function () use ($parameters): APILocation {
+                    $contentInfo = $this->repository->getContentService()->loadContentInfo($parameters['contentId']);
 
-            return $this->checkContentLocation($contentInfo->getMainLocation());
+                    return $this->repository->getLocationService()->loadLocation($contentInfo->mainLocationId);
+                }
+            );
         }
 
         throw new RuntimeException('Could not resolve Location from the given parameters');
