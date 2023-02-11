@@ -21,14 +21,14 @@ final class LanguageResolver extends BaseLanguageResolver
 
     public function resolveFromLanguage(VersionInfo $versionInfo, string $languageCode): string
     {
-        if (!in_array($languageCode, $versionInfo->languageCodes, true)) {
-            throw new TranslationNotMatchedException(
-                $versionInfo->contentInfo->id,
-                $this->getContext($versionInfo, $languageCode)
-            );
+        if (in_array($languageCode, $versionInfo->languageCodes, true)) {
+            return $languageCode;
         }
 
-        return $languageCode;
+        throw new TranslationNotMatchedException(
+            $versionInfo->contentInfo->id,
+            $this->getContext($versionInfo, $languageCode)
+        );
     }
 
     public function resolveFromContent(VersionInfo $versionInfo): string
