@@ -45,7 +45,7 @@ final class LanguageResolver extends BaseLanguageResolver
         $siteaccess = $this->siteaccessResolver->resolveFromContent($versionInfo->contentInfo);
         $prioritizedLanguages = $this->getPrioritizedLanguages($siteaccess);
 
-        foreach ($this->getPrioritizedLanguages($siteaccess) as $languageCode) {
+        foreach ($prioritizedLanguages as $languageCode) {
             if (in_array($languageCode, $versionInfo->languageCodes, true)) {
                 return $languageCode;
             }
@@ -73,7 +73,7 @@ final class LanguageResolver extends BaseLanguageResolver
         $siteaccess = $this->siteaccessResolver->resolveFromLocation($location);
         $prioritizedLanguages = $this->getPrioritizedLanguages($siteaccess);
 
-        foreach ($this->getPrioritizedLanguages($siteaccess) as $languageCode) {
+        foreach ($prioritizedLanguages as $languageCode) {
             if (in_array($languageCode, $versionInfo->languageCodes, true)) {
                 return $languageCode;
             }
