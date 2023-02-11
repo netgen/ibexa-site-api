@@ -19,7 +19,16 @@ interface LoadService
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
      */
-    public function loadContent(int $contentId, ?int $versionNo = null, ?string $languageCode = null): Content;
+    public function loadContent(int $contentId): Content;
+
+    /**
+     * Loads Content object for the given $contentId.
+     *
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
+     */
+    public function loadContentForPreview(int $contentId, int $versionNo, string $languageCode): Content;
 
     /**
      * Loads Content object for the given $remoteId.

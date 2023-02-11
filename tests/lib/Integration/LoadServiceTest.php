@@ -127,7 +127,7 @@ final class LoadServiceTest extends BaseTest
      * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
      * @throws \ReflectionException
      */
-    public function testLoadContentInExplicitVersionAndLanguage(): void
+    public function testLoadContentForPreview(): void
     {
         $this->overrideSettings(
             'prioritizedLanguages',
@@ -139,7 +139,7 @@ final class LoadServiceTest extends BaseTest
         $loadService = $this->getSite()->getLoadService();
 
         $data = $this->getData('ger-DE');
-        $content = $loadService->loadContent($data['contentId'], 1, 'ger-DE');
+        $content = $loadService->loadContentForPreview($data['contentId'], 1, 'ger-DE');
 
         $this->assertContent($content, $data);
     }
@@ -189,7 +189,7 @@ final class LoadServiceTest extends BaseTest
      * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
      * @throws \ReflectionException
      */
-    public function testLoadContentInLanguageThrowsTranslationNotMatchedException(): void
+    public function testLoadContentForPreviewThrowsTranslationNotMatchedException(): void
     {
         $this->overrideSettings(
             'prioritizedLanguages',
@@ -204,7 +204,7 @@ final class LoadServiceTest extends BaseTest
         $data = $this->getData('klingon');
         $loadService = $this->getSite()->getLoadService();
 
-        $loadService->loadContent($data['contentId'], null, 'klingon');
+        $loadService->loadContentForPreview($data['contentId'], 1, 'klingon');
     }
 
     /**

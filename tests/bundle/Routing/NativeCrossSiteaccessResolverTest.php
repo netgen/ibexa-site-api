@@ -12,8 +12,8 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Location;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Core\MVC\Symfony\SiteAccess;
 use Ibexa\Core\Repository\Values\Content\Location as CoreLocation;
-use Netgen\Bundle\IbexaSiteApiBundle\Routing\CrossSiteaccessResolver;
-use Netgen\Bundle\IbexaSiteApiBundle\Routing\CrossSiteaccessResolver\NativeCrossSiteaccessResolver;
+use Netgen\Bundle\IbexaSiteApiBundle\SiteAccess\Resolver;
+use Netgen\Bundle\IbexaSiteApiBundle\SiteAccess\Resolver\NativeResolver;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use function array_filter;
@@ -1033,8 +1033,8 @@ class NativeCrossSiteaccessResolverTest extends TestCase
         $siteaccessResolver = $this->getSiteaccessResolverUnderTest($data);
         $location = $this->getMockedLocation($data);
 
-        self::assertSame($expectedSiteaccessName, $siteaccessResolver->resolve($location));
-        self::assertSame($expectedSiteaccessName, $siteaccessResolver->resolve($location));
+        self::assertSame($expectedSiteaccessName, $siteaccessResolver->resolveFromLocation($location));
+        self::assertSame($expectedSiteaccessName, $siteaccessResolver->resolveFromLocation($location));
     }
 
     protected function getMockedLocation(array $data): Location
@@ -1053,9 +1053,9 @@ class NativeCrossSiteaccessResolverTest extends TestCase
         ]);
     }
 
-    protected function getSiteaccessResolverUnderTest(array $data): CrossSiteaccessResolver
+    protected function getSiteaccessResolverUnderTest(array $data): Resolver
     {
-        $siteaccessResolver = new NativeCrossSiteaccessResolver(
+        $siteaccessResolver = new NativeResolver(
             $this->persistenceHandlerMock($data),
             5,
             $this->getLoggerMock($data)

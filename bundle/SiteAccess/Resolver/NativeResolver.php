@@ -2,13 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\IbexaSiteApiBundle\Routing\CrossSiteaccessResolver;
+namespace Netgen\Bundle\IbexaSiteApiBundle\SiteAccess\Resolver;
 
 use Ibexa\Contracts\Core\Persistence\Handler;
+use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
 use Ibexa\Contracts\Core\Repository\Values\Content\Location;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Core\MVC\Symfony\SiteAccess;
-use Netgen\Bundle\IbexaSiteApiBundle\Routing\CrossSiteaccessResolver;
+use Netgen\Bundle\IbexaSiteApiBundle\SiteAccess\Resolver;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use function array_fill_keys;
@@ -23,7 +24,7 @@ use function in_array;
  *
  * @internal do not depend on this service, it can be changed without warning
  */
-class NativeCrossSiteaccessResolver extends CrossSiteaccessResolver
+class NativeResolver extends Resolver
 {
     private Handler $persistenceHandler;
     private int $recursionLimit;
@@ -69,7 +70,7 @@ class NativeCrossSiteaccessResolver extends CrossSiteaccessResolver
     /**
      * @throws \Exception
      */
-    public function resolve(Location $location): string
+    public function resolveFromLocation(Location $location): string
     {
         $currentSiteaccess = $this->currentSiteaccess->name;
 
@@ -81,6 +82,11 @@ class NativeCrossSiteaccessResolver extends CrossSiteaccessResolver
         $this->cache['resolve'][$currentSiteaccess][$location->id] = $siteaccess;
 
         return $siteaccess;
+    }
+
+    public function resolveFromContent(ContentInfo $contentInfo): string
+    {
+        return $this->currentSiteaccess->name;
     }
 
     /**

@@ -10,6 +10,7 @@ use Ibexa\Contracts\Core\Repository\Repository;
 use Ibexa\Contracts\Core\Repository\SearchService;
 use Netgen\IbexaSiteApi\API\FilterService as APIFilterService;
 use Netgen\IbexaSiteApi\API\FindService as APIFindService;
+use Netgen\IbexaSiteApi\API\LanguageResolver as APILanguageResolver;
 use Netgen\IbexaSiteApi\API\LoadService as APILoadService;
 use Netgen\IbexaSiteApi\API\RelationService as APIRelationService;
 use Netgen\IbexaSiteApi\API\Settings as BaseSettings;
@@ -30,6 +31,7 @@ use Psr\Log\NullLogger;
 class Site implements SiteInterface
 {
     private BaseSettings $settings;
+    private APILanguageResolver $languageResolver;
     private ContentService $contentService;
     private LocationService $locationService;
     private SearchService $searchService;
@@ -46,12 +48,14 @@ class Site implements SiteInterface
 
     public function __construct(
         BaseSettings $settings,
+        APILanguageResolver $languageResolver,
         Repository $repository,
         SearchService $filteringSearchService,
         RelationResolverRegistry $relationResolverRegistry,
         ?LoggerInterface $logger = null
     ) {
         $this->settings = $settings;
+        $this->languageResolver = $languageResolver;
         $this->repository = $repository;
         $this->contentService = $repository->getContentService();
         $this->locationService = $repository->getLocationService();
@@ -98,7 +102,7 @@ class Site implements SiteInterface
     {
         if ($this->loadService === null) {
             $this->loadService = new LoadService(
-                $this->settings,
+                $this->languageResolver,
                 $this->getDomainObjectMapper(),
                 $this->contentService,
                 $this->locationService,

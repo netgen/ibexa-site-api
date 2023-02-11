@@ -5,14 +5,15 @@ declare(strict_types=1);
 namespace Netgen\Bundle\IbexaSiteApiBundle\Routing;
 
 use Ibexa\Contracts\Core\Repository\Repository;
-use Ibexa\Core\MVC\Symfony\Routing\UrlAliasRouter as CoreUrlAliasRouter;
 use Ibexa\Contracts\Core\Repository\Values\Content\Content as APIContent;
 use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo as APIContentInfo;
 use Ibexa\Contracts\Core\Repository\Values\Content\Location as APILocation;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Core\MVC\Symfony\Routing\Generator\UrlAliasGenerator;
+use Ibexa\Core\MVC\Symfony\Routing\UrlAliasRouter as CoreUrlAliasRouter;
 use Ibexa\Core\MVC\Symfony\SiteAccess;
 use LogicException;
+use Netgen\Bundle\IbexaSiteApiBundle\SiteAccess\Resolver;
 use Netgen\IbexaSiteApi\API\Values\Content;
 use Netgen\IbexaSiteApi\API\Values\ContentInfo;
 use Netgen\IbexaSiteApi\API\Values\Location;
@@ -40,16 +41,16 @@ class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
 {
     private Repository $repository;
     private UrlAliasGenerator $generator;
-    private CrossSiteaccessResolver $siteaccessResolver;
+    private Resolver $siteaccessResolver;
     private ConfigResolverInterface $configResolver;
     private RequestContext $requestContext;
     private SiteAccess $currentSiteaccess;
 
     public function __construct(
-        Repository $repository,
+        Repository        $repository,
         UrlAliasGenerator $generator,
-        CrossSiteaccessResolver $siteaccessResolver,
-        RequestContext $requestContext
+        Resolver          $siteaccessResolver,
+        RequestContext    $requestContext
     ) {
         $this->repository = $repository;
         $this->generator = $generator;
@@ -68,8 +69,6 @@ class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
     }
 
     /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      * @throws \Exception
      */
     public function generate(
@@ -106,7 +105,7 @@ class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
      */
     private function crossSiteaccessGenerate(APILocation $location, array $parameters, int $referenceType): string
     {
-        $siteaccessName = $this->siteaccessResolver->resolve($location);
+        $siteaccessName = $this->siteaccessResolver->resolveFromLocation($location);
 
         if ($siteaccessName === $this->currentSiteaccess->name) {
             return $this->generator->generate($location, $parameters, $referenceType);
@@ -189,10 +188,6 @@ class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
         return $name;
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     */
     private function resolveLocation(string $name, array $parameters): APILocation
     {
         $routeObject = $parameters[RouteObjectInterface::ROUTE_OBJECT] ?? null;

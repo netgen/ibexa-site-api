@@ -84,7 +84,7 @@ class PreviewController extends BasePreviewController
         $location = $request->attributes->get('location');
         /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Content $content */
         /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Location $location */
-        $siteContent = $this->site->getLoadService()->loadContent(
+        $siteContent = $this->site->getLoadService()->loadContentForPreview(
             $content->id,
             $content->versionInfo->versionNo,
             $languageCode,
