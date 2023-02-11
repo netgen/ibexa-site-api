@@ -42,7 +42,7 @@ services:
             - getSearchService
         lazy: true
 
-    netgen.ibexa_site_api.core.settings:
+    netgen.ibexa_site_api.settings.core:
         class: Netgen\IbexaSiteApi\Core\Site\Settings
         arguments:
             - '%netgen.ibexa_site_api.prioritized_languages%'
@@ -54,7 +54,8 @@ services:
     netgen.ibexa_site_api.core.site:
         class: Netgen\IbexaSiteApi\Core\Site\Site
         arguments:
-            - '@netgen.ibexa_site_api.core.settings'
+            - '@netgen.ibexa_site_api.settings'
+            - '@netgen.ibexa_site_api.language_resolver'
             - '@ibexa.api.repository'
             - '@netgen.ibexa_site_api.repository.filtering_search_service'
             - '@netgen.ibexa_site_api.plugins.field_type.relation_resolver.registry'
@@ -88,3 +89,8 @@ services:
             - '@netgen.ibexa_site_api.core.site'
             - getRelationService
         lazy: true
+
+    netgen.ibexa_site_api.language_resolver.core:
+        class: Netgen\IbexaSiteApi\Core\Site\LanguageResolver
+        arguments:
+            - '@netgen.ibexa_site_api.settings'

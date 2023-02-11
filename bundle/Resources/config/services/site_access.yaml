@@ -1,0 +1,20 @@
+parameters:
+    netgen.ezplatform_site.routing.excluded_siteaccess_group_names: []
+    netgen.ezplatform_site.routing.excluded_siteaccess_names: []
+    netgen.ezplatform_site.routing.recursion_limit: 2
+
+services:
+    netgen.ibexa_site_api.siteaccess.resolver.native:
+        class: Netgen\Bundle\IbexaSiteApiBundle\SiteAccess\Resolver\NativeResolver
+        arguments:
+            - '@ibexa.api.persistence_handler'
+            - '%netgen.ezplatform_site.routing.recursion_limit%'
+        calls:
+            - [ setConfigResolver, [ '@ibexa.config.resolver' ] ]
+            - [ setSiteaccess, [ '@Ibexa\Core\MVC\Symfony\SiteAccess' ] ]
+            - [ setSiteaccessList, [ '%ibexa.site_access.list%' ] ]
+            - [ setSiteaccessGroupsBySiteaccess, [ '%ibexa.site_access.groups_by_site_access%' ] ]
+        lazy: true
+
+    netgen.ibexa_site_api.siteaccess.resolver:
+        alias: netgen.ibexa_site_api.siteaccess.resolver.native

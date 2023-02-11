@@ -1,5 +1,5 @@
 imports:
-    - {resource: internal.yaml}
+    - {resource: core.yaml}
     - {resource: query_types/base.yaml}
     - {resource: plugins/field_type/relation_resolvers.yaml}
 
@@ -7,7 +7,7 @@ parameters:
 
 services:
     netgen.ibexa_site_api.settings:
-        alias: 'netgen.ibexa_site_api.core.settings'
+        alias: 'netgen.ibexa_site_api.settings.core'
 
     netgen.ibexa_site_api.filter_service:
         alias: 'netgen.ibexa_site_api.core.filter_service'
@@ -24,6 +24,9 @@ services:
     netgen.ibexa_site_api.site:
         alias: 'netgen.ibexa_site_api.core.site'
         public: true
+
+    netgen.ibexa_site_api.language_resolver:
+        alias: netgen.ibexa_site_api.language_resolver.core
 
     # Search adapters for filter and find services to
     # Ibexa\Contracts\Core\Repository\SearchService interface

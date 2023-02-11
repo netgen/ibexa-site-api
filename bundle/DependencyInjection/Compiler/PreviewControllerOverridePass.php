@@ -30,7 +30,7 @@ class PreviewControllerOverridePass implements CompilerPassInterface
             )
             ->addMethodCall(
                 'setSite',
-                [new Reference('netgen.ibexa_site_api.core.site')],
+                [new Reference('netgen.ibexa_site_api.site')],
             );
 
         // Redefine the alias as it seems to be mangled in some cases

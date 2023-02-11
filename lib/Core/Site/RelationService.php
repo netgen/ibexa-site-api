@@ -4,22 +4,15 @@ declare(strict_types=1);
 
 namespace Netgen\IbexaSiteApi\Core\Site;
 
-use Ibexa\Contracts\Core\Repository\Values\Content\LocationQuery;
-use Ibexa\Contracts\Core\Repository\Values\Content\Query;
-use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ContentId;
-use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ContentTypeIdentifier;
-use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Location\IsMainLocation;
-use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LogicalAnd;
-use Netgen\IbexaSearchExtra\API\Values\Content\Query\Criterion\Visible;
 use Netgen\IbexaSiteApi\API\RelationService as RelationServiceInterface;
 use Netgen\IbexaSiteApi\API\Site as SiteInterface;
 use Netgen\IbexaSiteApi\API\Values\Content;
 use Netgen\IbexaSiteApi\API\Values\Location;
 use Netgen\IbexaSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Registry as RelationResolverRegistry;
 use Netgen\IbexaSiteApi\Core\Traits\SearchResultExtractorTrait;
+use Throwable;
 use function array_flip;
 use function array_slice;
-use function count;
 use function usort;
 
 /**
@@ -46,11 +39,6 @@ class RelationService implements RelationServiceInterface
         $this->relationResolverRegistry = $relationResolverRegistry;
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     */
     public function loadFieldRelation(
         Content $content,
         string $fieldDefinitionIdentifier,
@@ -65,11 +53,6 @@ class RelationService implements RelationServiceInterface
         return $relatedContentItems[0] ?? null;
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     */
     public function loadFieldRelations(
         Content $content,
         string $fieldDefinitionIdentifier,
@@ -80,21 +63,16 @@ class RelationService implements RelationServiceInterface
         $relationResolver = $this->relationResolverRegistry->get($field->fieldTypeIdentifier);
 
         $relatedContentIds = $relationResolver->getRelationIds($field);
-        $relatedContentItems = $this->getRelatedContentItems(
-            $relatedContentIds,
-            $contentTypeIdentifiers,
-            $limit,
-        );
+        $relatedContentItems = $this->getRelatedContentItems($relatedContentIds, $contentTypeIdentifiers);
         $this->sortByIdOrder($relatedContentItems, $relatedContentIds);
+
+        if ($limit !== null) {
+            return array_slice($relatedContentItems, 0, $limit);
+        }
 
         return $relatedContentItems;
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     */
     public function loadFieldRelationLocation(
         Content $content,
         string $fieldDefinitionIdentifier,
@@ -109,11 +87,6 @@ class RelationService implements RelationServiceInterface
         return $relatedLocations[0] ?? null;
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     */
     public function loadFieldRelationLocations(
         Content $content,
         string $fieldDefinitionIdentifier,
@@ -124,102 +97,61 @@ class RelationService implements RelationServiceInterface
         $relationResolver = $this->relationResolverRegistry->get($field->fieldTypeIdentifier);
 
         $relatedContentIds = $relationResolver->getRelationIds($field);
-        $relatedLocations = $this->getRelatedLocations(
-            $relatedContentIds,
-            $contentTypeIdentifiers,
-            $limit,
-        );
-        $this->sortLocationsByIdOrder($relatedLocations, $relatedContentIds);
+        $relatedContentItems = $this->getRelatedContentItems($relatedContentIds, $contentTypeIdentifiers);
+        $this->sortByIdOrder($relatedContentItems, $relatedContentIds);
 
-        return $relatedLocations;
+        $locations = array_filter(
+            array_map(
+                static fn (Content $content): Location => $content->mainLocation,
+                $relatedContentItems
+            ),
+            fn (Location $location): bool => $this->site->getSettings()->showHiddenItems || $location->isVisible,
+        );
+
+        if ($limit !== null) {
+            $locations = array_slice($locations, 0, $limit);
+        }
+
+        return $locations;
     }
 
     /**
-     * Return an array of related Content items, optionally limited by $limit.
-     *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * Return an array of related Content items.
      *
      * @return \Netgen\IbexaSiteApi\API\Values\Content[]
      */
-    private function getRelatedContentItems(
-        array $relatedContentIds,
-        array $contentTypeIdentifiers,
-        ?int $limit = null
-    ): array {
-        if (count($relatedContentIds) === 0) {
+    private function getRelatedContentItems(array $relatedContentIds, array $contentTypeIdentifiers): array
+    {
+        if (empty($relatedContentIds)) {
             return [];
         }
 
-        $criteria = [
-            new ContentId($relatedContentIds),
-        ];
+        $contentItems = [];
 
-        if (!empty($contentTypeIdentifiers)) {
-            $criteria[] = new ContentTypeIdentifier($contentTypeIdentifiers);
-        }
+        foreach ($relatedContentIds as $contentId) {
+            try {
+                $content = $this->site->getLoadService()->loadContent($contentId);
+            } catch (Throwable $throwable) {
+                continue;
+            }
 
-        if (!$this->site->getSettings()->showHiddenItems) {
-            $criteria[] = new Visible(true);
-        }
+            if (!empty($contentTypeIdentifiers) && !$this->isContentOfType($content, $contentTypeIdentifiers)) {
+                continue;
+            }
 
-        $query = new Query([
-            'filter' => new LogicalAnd($criteria),
-            'limit' => count($relatedContentIds),
-        ]);
+            if (!$content->isVisible && !$this->site->getSettings()->showHiddenItems) {
+                continue;
+            }
 
-        $searchResult = $this->site->getFilterService()->filterContent($query);
-        $contentItems = $this->extractContentItems($searchResult);
-
-        if ($limit !== null) {
-            return array_slice($contentItems, 0, $limit);
+            $contentItems[] = $content;
         }
 
         return $contentItems;
     }
 
-    /**
-     * Return an array of related Content items, optionally limited by $limit.
-     *
-     * @param array $relatedContentIds
-     * @param array $contentTypeIdentifiers
-     * @param ?int $limit
-     *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     *
-     * @return \Netgen\IbexaSiteApi\API\Values\Content[]
-     */
-    private function getRelatedLocations(
-        array $relatedContentIds,
-        array $contentTypeIdentifiers,
-        ?int $limit = null
-    ): array {
-        if (count($relatedContentIds) === 0) {
-            return [];
-        }
-
-        $criteria = [
-            new ContentId($relatedContentIds),
-            new IsMainLocation(IsMainLocation::MAIN),
-            new Visible(true),
-        ];
-
-        if (!empty($contentTypeIdentifiers)) {
-            $criteria[] = new ContentTypeIdentifier($contentTypeIdentifiers);
-        }
-
-        $query = new LocationQuery([
-            'filter' => new LogicalAnd($criteria),
-            'limit' => count($relatedContentIds),
-        ]);
-
-        $searchResult = $this->site->getFilterService()->filterLocations($query);
-        $locations = $this->extractLocations($searchResult);
-
-        if ($limit !== null) {
-            return array_slice($locations, 0, $limit);
-        }
-
-        return $locations;
+    private function isContentOfType(Content $content, array $contentTypeIdentifiers): bool
+    {
+        return in_array($content->contentInfo->contentTypeIdentifier, $contentTypeIdentifiers, true);
     }
 
     /**
@@ -232,20 +164,5 @@ class RelationService implements RelationServiceInterface
         $sorter = static fn (Content $content1, Content $content2): int => $sortedIdList[$content1->id] <=> $sortedIdList[$content2->id];
 
         usort($relatedContentItems, $sorter);
-    }
-
-    /**
-     * Sorts $relatedLocations to match order from $relatedContentIds.
-     *
-     * @param array $relatedLocations
-     * @param array $relatedContentIds
-     */
-    private function sortLocationsByIdOrder(array &$relatedLocations, array $relatedContentIds): void
-    {
-        $sortedIdList = array_flip($relatedContentIds);
-
-        $sorter = static fn (Location $location1, Location $location2): int => $sortedIdList[$location1->contentId] <=> $sortedIdList[$location2->contentId];
-
-        usort($relatedLocations, $sorter);
     }
 }

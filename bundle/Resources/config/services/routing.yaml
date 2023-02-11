@@ -1,30 +1,10 @@
-parameters:
-    netgen.ezplatform_site.routing.excluded_siteaccess_group_names: []
-    netgen.ezplatform_site.routing.excluded_siteaccess_names: []
-    netgen.ezplatform_site.routing.recursion_limit: 2
-
 services:
-    netgen.ibexa_site_api.routing.cross_siteaccess_resolver.native:
-        class: Netgen\Bundle\IbexaSiteApiBundle\Routing\CrossSiteaccessResolver\NativeCrossSiteaccessResolver
-        arguments:
-            - '@ibexa.api.persistence_handler'
-            - '%netgen.ezplatform_site.routing.recursion_limit%'
-        calls:
-            - [ setConfigResolver, [ '@ibexa.config.resolver' ] ]
-            - [ setSiteaccess, [ '@Ibexa\Core\MVC\Symfony\SiteAccess' ] ]
-            - [ setSiteaccessList, [ '%ibexa.site_access.list%' ] ]
-            - [ setSiteaccessGroupsBySiteaccess, [ '%ibexa.site_access.groups_by_site_access%' ] ]
-        lazy: true
-
-    netgen.ibexa_site_api.routing.cross_siteaccess_resolver:
-        alias: netgen.ibexa_site_api.routing.cross_siteaccess_resolver.native
-
     netgen.ibexa_site_api.routing.generator_router:
         class: Netgen\Bundle\IbexaSiteApiBundle\Routing\GeneratorRouter
         arguments:
             - '@ibexa.api.repository'
             - '@Ibexa\Core\MVC\Symfony\Routing\Generator\UrlAliasGenerator'
-            - '@netgen.ibexa_site_api.routing.cross_siteaccess_resolver'
+            - '@netgen.ibexa_site_api.siteaccess.resolver'
             - '@router.request_context'
         calls:
             - [ setConfigResolver, [ '@ibexa.config.resolver' ] ]
