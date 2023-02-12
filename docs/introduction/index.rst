@@ -58,6 +58,11 @@ That feature alone significantly reduces cognitive load for developers, frees th
 tedious boilerplate code just to respect the language configuration, avoids ridiculous sanity checks
 and mistakes and improves the overall developer experience.
 
+Handling Content from different siteaccesses
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
 Objects
 ~~~~~~~
 
