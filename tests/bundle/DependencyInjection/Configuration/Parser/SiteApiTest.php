@@ -54,13 +54,13 @@ final class SiteApiTest extends AbstractParserTestCase
         $this->assertConfigResolverParameterValue('ng_site_api.redirect_internal_view_route_to_url_alias', true, 'ibexa_demo_site');
         $this->assertConfigResolverParameterValue('ng_site_api.named_queries', [], 'ibexa_demo_site');
         $this->assertConfigResolverParameterValue('ng_site_api.named_objects', [], 'ibexa_demo_site');
-        $this->assertConfigResolverParameterValue('ng_site_api.cross_siteaccess_routing.enabled', true, 'ibexa_demo_site');
-        $this->assertConfigResolverParameterValue('ng_site_api.cross_siteaccess_routing.external_subtree_roots', [], 'ibexa_demo_site');
-        $this->assertConfigResolverParameterValue('ng_site_api.cross_siteaccess_routing.included_siteaccesses', [], 'ibexa_demo_site');
-        $this->assertConfigResolverParameterValue('ng_site_api.cross_siteaccess_routing.included_siteaccess_groups', [], 'ibexa_demo_site');
-        $this->assertConfigResolverParameterValue('ng_site_api.cross_siteaccess_routing.excluded_siteaccesses', [], 'ibexa_demo_site');
-        $this->assertConfigResolverParameterValue('ng_site_api.cross_siteaccess_routing.excluded_siteaccess_groups', [], 'ibexa_demo_site');
-        $this->assertConfigResolverParameterValue('ng_site_api.cross_siteaccess_routing.prefer_main_language', true, 'ibexa_demo_site');
+        $this->assertConfigResolverParameterValue('ng_site_api.cross_siteaccess_content.enabled', true, 'ibexa_demo_site');
+        $this->assertConfigResolverParameterValue('ng_site_api.cross_siteaccess_content.external_subtree_roots', [], 'ibexa_demo_site');
+        $this->assertConfigResolverParameterValue('ng_site_api.cross_siteaccess_content.included_siteaccesses', [], 'ibexa_demo_site');
+        $this->assertConfigResolverParameterValue('ng_site_api.cross_siteaccess_content.included_siteaccess_groups', [], 'ibexa_demo_site');
+        $this->assertConfigResolverParameterValue('ng_site_api.cross_siteaccess_content.excluded_siteaccesses', [], 'ibexa_demo_site');
+        $this->assertConfigResolverParameterValue('ng_site_api.cross_siteaccess_content.excluded_siteaccess_groups', [], 'ibexa_demo_site');
+        $this->assertConfigResolverParameterValue('ng_site_api.cross_siteaccess_content.prefer_main_language', true, 'ibexa_demo_site');
     }
 
     public function getBooleanConfigurationNames(): array
@@ -586,7 +586,7 @@ final class SiteApiTest extends AbstractParserTestCase
             'system' => [
                 'ibexa_demo_group' => [
                     'ng_site_api' => [
-                        'cross_siteaccess_routing' => [
+                        'cross_siteaccess_content' => [
                             'enabled' => $configurationValue,
                         ],
                     ],
@@ -611,7 +611,7 @@ final class SiteApiTest extends AbstractParserTestCase
             'system' => [
                 'ibexa_demo_group' => [
                     'ng_site_api' => [
-                        'cross_siteaccess_routing' => [
+                        'cross_siteaccess_content' => [
                             'prefer_main_language' => $configurationValue,
                         ],
                     ],
@@ -666,7 +666,7 @@ final class SiteApiTest extends AbstractParserTestCase
             'system' => [
                 'ibexa_demo_group' => [
                     'ng_site_api' => [
-                        'cross_siteaccess_routing' => [
+                        'cross_siteaccess_content' => [
                             'external_subtree_roots' => $configurationValue,
                         ],
                     ],
@@ -721,7 +721,7 @@ final class SiteApiTest extends AbstractParserTestCase
             'system' => [
                 'ibexa_demo_group' => [
                     'ng_site_api' => [
-                        'cross_siteaccess_routing' => [
+                        'cross_siteaccess_content' => [
                             'included_siteaccesses' => $configurationValue,
                         ],
                     ],
@@ -746,7 +746,7 @@ final class SiteApiTest extends AbstractParserTestCase
             'system' => [
                 'ibexa_demo_group' => [
                     'ng_site_api' => [
-                        'cross_siteaccess_routing' => [
+                        'cross_siteaccess_content' => [
                             'included_siteaccess_groups' => $configurationValue,
                         ],
                     ],
@@ -771,7 +771,7 @@ final class SiteApiTest extends AbstractParserTestCase
             'system' => [
                 'ibexa_demo_group' => [
                     'ng_site_api' => [
-                        'cross_siteaccess_routing' => [
+                        'cross_siteaccess_content' => [
                             'excluded_siteaccesses' => $configurationValue,
                         ],
                     ],
@@ -796,7 +796,7 @@ final class SiteApiTest extends AbstractParserTestCase
             'system' => [
                 'ibexa_demo_group' => [
                     'ng_site_api' => [
-                        'cross_siteaccess_routing' => [
+                        'cross_siteaccess_content' => [
                             'excluded_siteaccess_groups' => $configurationValue,
                         ],
                     ],
@@ -918,7 +918,7 @@ final class SiteApiTest extends AbstractParserTestCase
             'system' => [
                 'ibexa_demo_group' => [
                     'ng_site_api' => [
-                        'cross_siteaccess_routing' => $configurationValues,
+                        'cross_siteaccess_content' => $configurationValues,
                     ],
                 ],
             ],
@@ -926,7 +926,7 @@ final class SiteApiTest extends AbstractParserTestCase
 
         foreach ($expectedConfigurationValues as $key => $value) {
             $this->assertConfigResolverParameterValue(
-                'ng_site_api.cross_siteaccess_routing.' . $key,
+                'ng_site_api.cross_siteaccess_content.' . $key,
                 $value,
                 'ibexa_demo_site',
             );

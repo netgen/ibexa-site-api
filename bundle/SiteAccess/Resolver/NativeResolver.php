@@ -95,7 +95,7 @@ class NativeResolver extends Resolver
 
     private function isCrossSiteaccessContentEnabled(): bool
     {
-        return $this->configResolver->getParameter('ng_site_api.cross_siteaccess_routing.enabled');
+        return $this->getParameter('enabled');
     }
 
     /**
@@ -473,7 +473,7 @@ class NativeResolver extends Resolver
             return $this->cache['parameters'][$currentSiteaccess][$name];
         }
 
-        $parameter = $this->configResolver->getParameter('ng_site_api.cross_siteaccess_routing.' . $name);
+        $parameter = $this->configResolver->getParameter('ng_site_api.cross_siteaccess_content.' . $name);
         $this->cache['parameters'][$currentSiteaccess][$name] = $parameter;
 
         return $parameter;

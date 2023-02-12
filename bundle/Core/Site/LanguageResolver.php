@@ -94,7 +94,10 @@ final class LanguageResolver extends BaseLanguageResolver
         ];
         $context += $this->getBaseContext($versionInfo);
 
-        throw new TranslationNotMatchedException($versionInfo->contentInfo->id, $context);
+        throw new TranslationNotMatchedException(
+            $versionInfo->contentInfo->id,
+            $context
+        );
     }
 
     private function getPrioritizedLanguages(string $siteaccess): array
