@@ -28,7 +28,7 @@ final class LanguageResolver extends BaseLanguageResolver
         $this->configResolver = $configResolver;
     }
 
-    public function resolveFromLanguage(VersionInfo $versionInfo, string $languageCode): string
+    public function resolveByLanguage(VersionInfo $versionInfo, string $languageCode): string
     {
         if (in_array($languageCode, $versionInfo->languageCodes, true)) {
             return $languageCode;
@@ -40,9 +40,9 @@ final class LanguageResolver extends BaseLanguageResolver
         );
     }
 
-    public function resolveFromContent(VersionInfo $versionInfo): string
+    public function resolveByContent(VersionInfo $versionInfo): string
     {
-        $siteaccess = $this->siteaccessResolver->resolveFromContent($versionInfo->contentInfo);
+        $siteaccess = $this->siteaccessResolver->resolveByContent($versionInfo->contentInfo);
         $prioritizedLanguages = $this->getPrioritizedLanguages($siteaccess);
 
         foreach ($prioritizedLanguages as $languageCode) {
@@ -62,15 +62,18 @@ final class LanguageResolver extends BaseLanguageResolver
         ];
         $context += $this->getBaseContext($versionInfo);
 
-        throw new TranslationNotMatchedException($versionInfo->contentInfo->id, $context);
+        throw new TranslationNotMatchedException(
+            $versionInfo->contentInfo->id,
+            $context
+        );
     }
 
     /**
      * @throws \Netgen\IbexaSiteApi\Core\Site\Exceptions\TranslationNotMatchedException
      */
-    public function resolveFromLocation(Location $location, VersionInfo $versionInfo): string
+    public function resolveByLocation(Location $location, VersionInfo $versionInfo): string
     {
-        $siteaccess = $this->siteaccessResolver->resolveFromLocation($location);
+        $siteaccess = $this->siteaccessResolver->resolveByLocation($location);
         $prioritizedLanguages = $this->getPrioritizedLanguages($siteaccess);
 
         foreach ($prioritizedLanguages as $languageCode) {

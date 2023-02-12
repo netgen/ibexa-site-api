@@ -48,9 +48,9 @@ class LoadService implements LoadServiceInterface
         $location = $mainLocationId ? $this->locationService->loadLocation($mainLocationId, []) : null;
 
         if ($location !== null) {
-            $languageCode = $this->languageResolver->resolveFromLocation($location, $versionInfo);
+            $languageCode = $this->languageResolver->resolveByLocation($location, $versionInfo);
         } else {
-            $languageCode = $this->languageResolver->resolveFromContent($versionInfo);
+            $languageCode = $this->languageResolver->resolveByContent($versionInfo);
         }
 
         return $this->domainObjectMapper->mapContent($versionInfo, $languageCode);
@@ -59,7 +59,7 @@ class LoadService implements LoadServiceInterface
     public function loadContentForPreview(int $contentId, int $versionNo, string $languageCode): Content
     {
         $versionInfo = $this->contentService->loadVersionInfoById($contentId, $versionNo);
-        $languageCode = $this->languageResolver->resolveFromLanguage($versionInfo, $languageCode);
+        $languageCode = $this->languageResolver->resolveByLanguage($versionInfo, $languageCode);
 
         return $this->domainObjectMapper->mapContent($versionInfo, $languageCode);
     }
@@ -95,7 +95,7 @@ class LoadService implements LoadServiceInterface
     private function getSiteLocation(APILocation $location): Location
     {
         $versionInfo = $this->contentService->loadVersionInfoById($location->contentInfo->id);
-        $languageCode = $this->languageResolver->resolveFromLocation($location, $versionInfo);
+        $languageCode = $this->languageResolver->resolveByLocation($location, $versionInfo);
 
         return $this->domainObjectMapper->mapLocation($location, $versionInfo, $languageCode);
     }

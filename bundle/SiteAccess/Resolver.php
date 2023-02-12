@@ -15,10 +15,10 @@ abstract class Resolver
     /**
      * Resolve a siteaccess from the given Location.
      */
-    abstract public function resolveFromLocation(Location $location): string;
+    abstract public function resolveByLocation(Location $location): string;
 
     /**
      * Resolve a siteaccess from the given Content.
      */
-    abstract public function resolveFromContent(ContentInfo $contentInfo): string;
+    abstract public function resolveByContent(ContentInfo $contentInfo): string;
 }
