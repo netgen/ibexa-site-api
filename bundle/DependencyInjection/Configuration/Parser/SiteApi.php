@@ -84,63 +84,63 @@ class SiteApi extends AbstractParser
             unset($scopeSettings[self::NODE_KEY][$parameterName]);
         }
 
-        if (isset($scopeSettings[self::NODE_KEY]['cross_siteaccess_routing']['enabled'])) {
+        if (isset($scopeSettings[self::NODE_KEY]['cross_siteaccess_content']['enabled'])) {
             $contextualizer->setContextualParameter(
-                self::NODE_KEY . '.cross_siteaccess_routing.enabled',
+                self::NODE_KEY . '.cross_siteaccess_content.enabled',
                 $currentScope,
-                $scopeSettings[self::NODE_KEY]['cross_siteaccess_routing']['enabled'],
+                $scopeSettings[self::NODE_KEY]['cross_siteaccess_content']['enabled'],
             );
         }
 
-        if (isset($scopeSettings[self::NODE_KEY]['cross_siteaccess_routing']['external_subtree_roots'])) {
+        if (isset($scopeSettings[self::NODE_KEY]['cross_siteaccess_content']['external_subtree_roots'])) {
             $contextualizer->setContextualParameter(
-                self::NODE_KEY . '.cross_siteaccess_routing.external_subtree_roots',
+                self::NODE_KEY . '.cross_siteaccess_content.external_subtree_roots',
                 $currentScope,
-                $scopeSettings[self::NODE_KEY]['cross_siteaccess_routing']['external_subtree_roots'],
+                $scopeSettings[self::NODE_KEY]['cross_siteaccess_content']['external_subtree_roots'],
             );
         }
 
-        if (isset($scopeSettings[self::NODE_KEY]['cross_siteaccess_routing']['included_siteaccesses'])) {
+        if (isset($scopeSettings[self::NODE_KEY]['cross_siteaccess_content']['included_siteaccesses'])) {
             $contextualizer->setContextualParameter(
-                self::NODE_KEY . '.cross_siteaccess_routing.included_siteaccesses',
+                self::NODE_KEY . '.cross_siteaccess_content.included_siteaccesses',
                 $currentScope,
-                $scopeSettings[self::NODE_KEY]['cross_siteaccess_routing']['included_siteaccesses'],
+                $scopeSettings[self::NODE_KEY]['cross_siteaccess_content']['included_siteaccesses'],
             );
         }
 
-        if (isset($scopeSettings[self::NODE_KEY]['cross_siteaccess_routing']['included_siteaccess_groups'])) {
+        if (isset($scopeSettings[self::NODE_KEY]['cross_siteaccess_content']['included_siteaccess_groups'])) {
             $contextualizer->setContextualParameter(
-                self::NODE_KEY . '.cross_siteaccess_routing.included_siteaccess_groups',
+                self::NODE_KEY . '.cross_siteaccess_content.included_siteaccess_groups',
                 $currentScope,
-                $scopeSettings[self::NODE_KEY]['cross_siteaccess_routing']['included_siteaccess_groups'],
+                $scopeSettings[self::NODE_KEY]['cross_siteaccess_content']['included_siteaccess_groups'],
             );
         }
 
-        if (isset($scopeSettings[self::NODE_KEY]['cross_siteaccess_routing']['excluded_siteaccesses'])) {
+        if (isset($scopeSettings[self::NODE_KEY]['cross_siteaccess_content']['excluded_siteaccesses'])) {
             $contextualizer->setContextualParameter(
-                self::NODE_KEY . '.cross_siteaccess_routing.excluded_siteaccesses',
+                self::NODE_KEY . '.cross_siteaccess_content.excluded_siteaccesses',
                 $currentScope,
-                $scopeSettings[self::NODE_KEY]['cross_siteaccess_routing']['excluded_siteaccesses'],
+                $scopeSettings[self::NODE_KEY]['cross_siteaccess_content']['excluded_siteaccesses'],
             );
         }
 
-        if (isset($scopeSettings[self::NODE_KEY]['cross_siteaccess_routing']['excluded_siteaccess_groups'])) {
+        if (isset($scopeSettings[self::NODE_KEY]['cross_siteaccess_content']['excluded_siteaccess_groups'])) {
             $contextualizer->setContextualParameter(
-                self::NODE_KEY . '.cross_siteaccess_routing.excluded_siteaccess_groups',
+                self::NODE_KEY . '.cross_siteaccess_content.excluded_siteaccess_groups',
                 $currentScope,
-                $scopeSettings[self::NODE_KEY]['cross_siteaccess_routing']['excluded_siteaccess_groups'],
+                $scopeSettings[self::NODE_KEY]['cross_siteaccess_content']['excluded_siteaccess_groups'],
             );
         }
 
-        if (isset($scopeSettings[self::NODE_KEY]['cross_siteaccess_routing']['prefer_main_language'])) {
+        if (isset($scopeSettings[self::NODE_KEY]['cross_siteaccess_content']['prefer_main_language'])) {
             $contextualizer->setContextualParameter(
-                self::NODE_KEY . '.cross_siteaccess_routing.prefer_main_language',
+                self::NODE_KEY . '.cross_siteaccess_content.prefer_main_language',
                 $currentScope,
-                $scopeSettings[self::NODE_KEY]['cross_siteaccess_routing']['prefer_main_language'],
+                $scopeSettings[self::NODE_KEY]['cross_siteaccess_content']['prefer_main_language'],
             );
         }
 
-        unset($scopeSettings[self::NODE_KEY]['cross_siteaccess_routing']);
+        unset($scopeSettings[self::NODE_KEY]['cross_siteaccess_content']);
 
         if (isset($scopeSettings[self::NODE_KEY]['named_objects'])) {
             $scopeSettings[self::NODE_KEY . '.named_objects'] = $scopeSettings[self::NODE_KEY]['named_objects'];

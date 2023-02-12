@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\IbexaSiteApiBundle\Tests\Routing;
+namespace Netgen\Bundle\IbexaSiteApiBundle\Tests\SiteAccess;
 
 use Ibexa\Contracts\Core\Persistence\Content\Handler as ContentHandler;
 use Ibexa\Contracts\Core\Persistence\Content\VersionInfo;
@@ -24,7 +24,7 @@ use function in_array;
 /**
  * @group siteaccess
  */
-class NativeCrossSiteaccessResolverTest extends TestCase
+class NativeResolverTest extends TestCase
 {
     public function providerForTestResolve(): array
     {
@@ -1109,40 +1109,46 @@ class NativeCrossSiteaccessResolverTest extends TestCase
         $siteaccessConfigMap = $this->getSiteaccessConfigMap($data);
         $valueMap = [
             [
-                'ng_site_api.cross_siteaccess_routing.external_subtree_roots',
+                'ng_site_api.cross_siteaccess_content.external_subtree_roots',
                 null,
                 null,
                 $data['_context']['external_subtree_roots'] ?? [],
             ],
             [
-                'ng_site_api.cross_siteaccess_routing.included_siteaccesses',
+                'ng_site_api.cross_siteaccess_content.included_siteaccesses',
                 null,
                 null,
                 $data['_context']['included_siteaccesses'] ?? [],
             ],
             [
-                'ng_site_api.cross_siteaccess_routing.included_siteaccess_groups',
+                'ng_site_api.cross_siteaccess_content.included_siteaccess_groups',
                 null,
                 null,
                 $data['_context']['included_siteaccess_groups'] ?? [],
             ],
             [
-                'ng_site_api.cross_siteaccess_routing.excluded_siteaccesses',
+                'ng_site_api.cross_siteaccess_content.excluded_siteaccesses',
                 null,
                 null,
                 $data['_context']['excluded_siteaccesses'] ?? [],
             ],
             [
-                'ng_site_api.cross_siteaccess_routing.excluded_siteaccess_groups',
+                'ng_site_api.cross_siteaccess_content.excluded_siteaccess_groups',
                 null,
                 null,
                 $data['_context']['excluded_siteaccess_groups'] ?? [],
             ],
             [
-                'ng_site_api.cross_siteaccess_routing.prefer_main_language',
+                'ng_site_api.cross_siteaccess_content.prefer_main_language',
                 null,
                 null,
                 $data['_context']['prefer_main_language'] ?? true,
+            ],
+            [
+                'ng_site_api.cross_siteaccess_content.enabled',
+                null,
+                null,
+                true,
             ],
         ];
 

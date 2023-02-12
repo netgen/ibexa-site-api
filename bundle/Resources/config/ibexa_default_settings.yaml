@@ -53,13 +53,13 @@ parameters:
     ibexa.site_access.config.default.ng_site_api.redirect_internal_view_route_to_url_alias: true
     ibexa.site_access.config.default.ng_site_api.named_queries: []
     ibexa.site_access.config.default.ng_site_api.named_objects: []
-    ibexa.site_access.config.default.ng_site_api.cross_siteaccess_routing.enabled: true
-    ibexa.site_access.config.default.ng_site_api.cross_siteaccess_routing.external_subtree_roots: []
-    ibexa.site_access.config.default.ng_site_api.cross_siteaccess_routing.included_siteaccesses: []
-    ibexa.site_access.config.default.ng_site_api.cross_siteaccess_routing.included_siteaccess_groups: []
-    ibexa.site_access.config.default.ng_site_api.cross_siteaccess_routing.excluded_siteaccesses: []
-    ibexa.site_access.config.default.ng_site_api.cross_siteaccess_routing.excluded_siteaccess_groups: []
-    ibexa.site_access.config.default.ng_site_api.cross_siteaccess_routing.prefer_main_language: true
+    ibexa.site_access.config.default.ng_site_api.cross_siteaccess_content.enabled: true
+    ibexa.site_access.config.default.ng_site_api.cross_siteaccess_content.external_subtree_roots: []
+    ibexa.site_access.config.default.ng_site_api.cross_siteaccess_content.included_siteaccesses: []
+    ibexa.site_access.config.default.ng_site_api.cross_siteaccess_content.included_siteaccess_groups: []
+    ibexa.site_access.config.default.ng_site_api.cross_siteaccess_content.excluded_siteaccesses: []
+    ibexa.site_access.config.default.ng_site_api.cross_siteaccess_content.excluded_siteaccess_groups: []
+    ibexa.site_access.config.default.ng_site_api.cross_siteaccess_content.prefer_main_language: true
     ibexa.site_access.config.default.ng_content_view: []
     ibexa.site_access.config.default.ng_content_view_defaults:
         asset_image:
