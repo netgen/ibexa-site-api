@@ -12,15 +12,15 @@ abstract class LanguageResolver
     /**
      * @throws \Netgen\IbexaSiteApi\Core\Site\Exceptions\TranslationNotMatchedException
      */
-    abstract public function resolveFromLanguage(VersionInfo $versionInfo, string $languageCode): string;
+    abstract public function resolveByLanguage(VersionInfo $versionInfo, string $languageCode): string;
 
     /**
      * @throws \Netgen\IbexaSiteApi\Core\Site\Exceptions\TranslationNotMatchedException
      */
-    abstract public function resolveFromContent(VersionInfo $versionInfo): string;
+    abstract public function resolveByContent(VersionInfo $versionInfo): string;
 
     /**
      * @throws \Netgen\IbexaSiteApi\Core\Site\Exceptions\TranslationNotMatchedException
      */
-    abstract public function resolveFromLocation(Location $location, VersionInfo $versionInfo): string;
+    abstract public function resolveByLocation(Location $location, VersionInfo $versionInfo): string;
 }

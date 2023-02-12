@@ -19,7 +19,7 @@ final class LanguageResolver extends BaseLanguageResolver
         $this->settings = $settings;
     }
 
-    public function resolveFromLanguage(VersionInfo $versionInfo, string $languageCode): string
+    public function resolveByLanguage(VersionInfo $versionInfo, string $languageCode): string
     {
         if (in_array($languageCode, $versionInfo->languageCodes, true)) {
             return $languageCode;
@@ -31,7 +31,7 @@ final class LanguageResolver extends BaseLanguageResolver
         );
     }
 
-    public function resolveFromContent(VersionInfo $versionInfo): string
+    public function resolveByContent(VersionInfo $versionInfo): string
     {
         foreach ($this->settings->prioritizedLanguages as $languageCode) {
             if (in_array($languageCode, $versionInfo->languageCodes, true)) {
@@ -49,9 +49,9 @@ final class LanguageResolver extends BaseLanguageResolver
         );
     }
 
-    public function resolveFromLocation(Location $location, VersionInfo $versionInfo): string
+    public function resolveByLocation(Location $location, VersionInfo $versionInfo): string
     {
-        return $this->resolveFromContent($versionInfo);
+        return $this->resolveByContent($versionInfo);
     }
 
     /**

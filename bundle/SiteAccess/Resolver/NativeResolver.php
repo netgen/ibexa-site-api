@@ -70,7 +70,7 @@ class NativeResolver extends Resolver
     /**
      * @throws \Exception
      */
-    public function resolveFromLocation(Location $location): string
+    public function resolveByLocation(Location $location): string
     {
         $currentSiteaccess = $this->currentSiteaccess->name;
 
@@ -88,7 +88,7 @@ class NativeResolver extends Resolver
         return $siteaccess;
     }
 
-    public function resolveFromContent(ContentInfo $contentInfo): string
+    public function resolveByContent(ContentInfo $contentInfo): string
     {
         return $this->currentSiteaccess->name;
     }

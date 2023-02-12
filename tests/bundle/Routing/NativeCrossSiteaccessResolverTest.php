@@ -1033,8 +1033,8 @@ class NativeCrossSiteaccessResolverTest extends TestCase
         $siteaccessResolver = $this->getSiteaccessResolverUnderTest($data);
         $location = $this->getMockedLocation($data);
 
-        self::assertSame($expectedSiteaccessName, $siteaccessResolver->resolveFromLocation($location));
-        self::assertSame($expectedSiteaccessName, $siteaccessResolver->resolveFromLocation($location));
+        self::assertSame($expectedSiteaccessName, $siteaccessResolver->resolveByLocation($location));
+        self::assertSame($expectedSiteaccessName, $siteaccessResolver->resolveByLocation($location));
     }
 
     protected function getMockedLocation(array $data): Location
