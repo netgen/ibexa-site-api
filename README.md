@@ -1,6 +1,6 @@
 # Netgen's Site API for Ibexa CMS
 
-[![Build Status](https://img.shields.io/github/workflow/status/netgen/ibexa-site-api/Tests/master)](https://github.com/netgen/ibexa-site-api/actions)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/netgen/ibexa-site-api/tests.yml?branch=master)](https://github.com/netgen/ibexa-site-api/actions)
 [![Read the Docs](https://img.shields.io/readthedocs/netgens-site-api-for-ibexa-cms)](https://docs.netgen.io/projects/site-api)
 [![Downloads](https://img.shields.io/packagist/dt/netgen/ibexa-site-api.svg)](https://packagist.org/packages/netgen/ibexa-site-api)
 [![Latest stable](https://img.shields.io/packagist/v/netgen/ibexa-site-api.svg)](https://packagist.org/packages/netgen/ibexa-site-api)
