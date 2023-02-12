@@ -4,8 +4,14 @@ Services
 First thing to know about the Site API services is that all of them handle language configuration in
 a completely transparent way. You can be sure that all objects you work with:
 
-1. can be rendered on the current siteaccess
-2. are loaded in the single correct translation to be rendered on the current siteaccess
+1. can be linked on the current siteaccess
+2. can be rendered on the current siteaccess (provided there is a view to handle the rendering)
+3. are loaded in the single correct translation to be rendered on the current siteaccess
+
+.. warning::
+
+    The above is affected by :ref:`Cross-siteaccess content<cross_siteaccess_content>` feature,
+    study it for more information on how and when that is the case.
 
 This works for both Content and Locations, whether they are obtained through search, loading by the
 ID, as relations or otherwise. If the object doesn't have a translation that can be rendered on a

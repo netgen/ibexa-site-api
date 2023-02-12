@@ -53,17 +53,47 @@ admin or intranet interface.
     To use Site API view configuration automatically on pages rendered from Ibexa CMS URL aliases,
     you need to enable it manually per siteaccess.
 
-Cross-siteaccess routing
+.. _cross_siteaccess_content:
+
+Cross-siteaccess Content
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-Cross-siteaccess routing is a feature that enables automatic linking to Locations in the same
-Repository, but in different siteaccesses. It's intended for single Repository multisite
-installations, where multiple siteaccesses are typically configured with different Content tree
-root Location IDs. The feature is implemented at the router level, so it will work automatically
-when enabled, both from PHP and Twig.
+Cross-siteaccess Content is a feature that enables automatic loading and routing of Content and
+Locations in the same Repository, but across different siteaccesses. It's intended for single
+Repository multisite installations, where single Repository contains Content intended for different
+siteaccesses. Typically, such siteaccesses are configured with different Content tree root
+Location IDs. The feature is implemented at the PHP API and Symfony Router level, and it will
+work automatically when enabled without requiring special considerations from the developer, both
+from PHP and Twig.
 
-Cross-siteaccess routing is enabled by default, but if needed, it can be disabled per siteaccess
-with ``ng_site_api.cross_siteaccess_routing.enabled`` configuration option:
+However, several caveats apply:
+
+.. caution::
+
+    Search is not affected by Cross-siteaccess Content feature. The way search is implemented
+    makes possible to find Content and Locations only for one language configuration, of
+    a single (current) siteaccess.
+
+    You can still search across the whole Repository, but, out of the box, doing that will not
+    take into account the matching siteaccess language configuration of a specific Content item,
+    or whether such Content item can be rendered or linked on a current siteaccess. Trying to
+    take care of that post-search execution would only create inconsistencies in the result set.
+
+.. caution::
+
+    Given search is not the recommended way to obtain the Content from a different siteaccess,
+    it's possible to obtain such Content only by loading it directly or by creating a relation
+    to it.
+
+.. caution::
+
+    No provisions are made out of the box for rendering Content from a different
+    siteaccess. This is possible if you take care of configuring the view to render
+    such Content on a current siteaccess, but otherwise, out of the box, such Content is only
+    safe for linking.
+
+Cross-siteaccess Content is enabled by default, but if needed, it can be disabled per siteaccess
+with ``ng_site_api.cross_siteaccess_content.enabled`` configuration option:
 
 .. code-block:: yaml
 
@@ -71,7 +101,7 @@ with ``ng_site_api.cross_siteaccess_routing.enabled`` configuration option:
         system:
             frontend_group:
                 ng_site_api:
-                    cross_siteaccess_routing:
+                    cross_siteaccess_content:
                         enabled: false
 
 Or as a shortcut configuration:
@@ -82,7 +112,7 @@ Or as a shortcut configuration:
         system:
             frontend_group:
                 ng_site_api:
-                    cross_siteaccess_routing: false
+                    cross_siteaccess_content: false
 
 .. note::
 
@@ -144,7 +174,7 @@ behavior can be disabled through the ``prefer_main_language`` option:
         system:
             frontend_group:
                 ng_site_api:
-                    cross_siteaccess_routing:
+                    cross_siteaccess_content:
                         enabled: true
                         prefer_main_language: false
 
@@ -177,7 +207,7 @@ be generated on the current siteaccess. Example configuration:
         system:
             frontend_group:
                 ng_site_api:
-                    cross_siteaccess_routing:
+                    cross_siteaccess_content:
                         enabled: true
                         external_subtree_roots:
                             - 42
@@ -191,7 +221,7 @@ If only a single items needs to be configured, you can also use shortcut configu
         system:
             frontend_group:
                 ng_site_api:
-                    cross_siteaccess_routing:
+                    cross_siteaccess_content:
                         enabled: true
                         external_subtree_roots: 42
 
@@ -207,7 +237,7 @@ for example:
         system:
             frontend_group:
                 ng_site_api:
-                    cross_siteaccess_routing:
+                    cross_siteaccess_content:
                         enabled: true
                         included_siteaccesses:
                             - sa_a
@@ -230,7 +260,7 @@ If only a single items needs to be configured, you can also use shortcut configu
         system:
             frontend_group:
                 ng_site_api:
-                    cross_siteaccess_routing:
+                    cross_siteaccess_content:
                         enabled: true
                         included_siteaccesses: sa_a
                         included_siteaccess_groups: group_1
@@ -265,7 +295,7 @@ All configuration options, showing the defaults:
         system:
             frontend_group:
                 ng_site_api:
-                    cross_siteaccess_routing:
+                    cross_siteaccess_content:
                         enabled: false
                         external_subtree_roots: []
                         included_siteaccesses: []
