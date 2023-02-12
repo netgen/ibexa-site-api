@@ -8,10 +8,8 @@ use Ibexa\Contracts\Core\Repository\Repository;
 use Ibexa\Contracts\Core\Repository\Values\Content\Content as APIContent;
 use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo as APIContentInfo;
 use Ibexa\Contracts\Core\Repository\Values\Content\Location as APILocation;
-use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Core\MVC\Symfony\Routing\Generator\UrlAliasGenerator;
 use Ibexa\Core\MVC\Symfony\Routing\UrlAliasRouter as CoreUrlAliasRouter;
-use Ibexa\Core\MVC\Symfony\SiteAccess;
 use LogicException;
 use Netgen\Bundle\IbexaSiteApiBundle\SiteAccess\Resolver;
 use Netgen\IbexaSiteApi\API\Values\Content;
@@ -42,30 +40,18 @@ class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
     private Repository $repository;
     private UrlAliasGenerator $generator;
     private Resolver $siteaccessResolver;
-    private ConfigResolverInterface $configResolver;
     private RequestContext $requestContext;
-    private SiteAccess $currentSiteaccess;
 
     public function __construct(
-        Repository        $repository,
+        Repository $repository,
         UrlAliasGenerator $generator,
-        Resolver          $siteaccessResolver,
-        RequestContext    $requestContext
+        Resolver $siteaccessResolver,
+        RequestContext $requestContext
     ) {
         $this->repository = $repository;
         $this->generator = $generator;
         $this->siteaccessResolver = $siteaccessResolver;
         $this->requestContext = $requestContext;
-    }
-
-    public function setSiteaccess(SiteAccess $currentSiteAccess = null): void
-    {
-        $this->currentSiteaccess = $currentSiteAccess;
-    }
-
-    public function setConfigResolver(ConfigResolverInterface $configResolver): void
-    {
-        $this->configResolver = $configResolver;
     }
 
     /**
@@ -89,29 +75,19 @@ class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
             $parameters[RouteObjectInterface::ROUTE_OBJECT],
         );
 
-        $isCrossSiteaccessRoutingEnabled = $this->configResolver->getParameter(
-            'ng_site_api.cross_siteaccess_routing.enabled'
-        );
-
-        if (isset($parameters['siteaccess']) || !$isCrossSiteaccessRoutingEnabled) {
+        if (isset($parameters['siteaccess'])) {
             return $this->generator->generate($location, $parameters, $referenceType);
         }
 
-        return $this->crossSiteaccessGenerate($location, $parameters, $referenceType);
+        return $this->resolveSiteaccessAndGenerate($location, $parameters, $referenceType);
     }
 
     /**
      * @throws \Exception
      */
-    private function crossSiteaccessGenerate(APILocation $location, array $parameters, int $referenceType): string
+    private function resolveSiteaccessAndGenerate(APILocation $location, array $parameters, int $referenceType): string
     {
-        $siteaccessName = $this->siteaccessResolver->resolveFromLocation($location);
-
-        if ($siteaccessName === $this->currentSiteaccess->name) {
-            return $this->generator->generate($location, $parameters, $referenceType);
-        }
-
-        $parameters['siteaccess'] = $siteaccessName;
+        $parameters['siteaccess'] = $this->siteaccessResolver->resolveByLocation($location);
 
         $url = $this->generator->generate($location, $parameters, UrlGeneratorInterface::ABSOLUTE_URL);
 
