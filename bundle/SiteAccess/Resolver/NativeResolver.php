@@ -74,6 +74,10 @@ class NativeResolver extends Resolver
     {
         $currentSiteaccess = $this->currentSiteaccess->name;
 
+        if (!$this->isCrossSiteaccessContentEnabled()) {
+            return $currentSiteaccess;
+        }
+
         if (isset($this->cache['resolve'][$currentSiteaccess][$location->id])) {
             return $this->cache['resolve'][$currentSiteaccess][$location->id];
         }
@@ -87,6 +91,11 @@ class NativeResolver extends Resolver
     public function resolveFromContent(ContentInfo $contentInfo): string
     {
         return $this->currentSiteaccess->name;
+    }
+
+    private function isCrossSiteaccessContentEnabled(): bool
+    {
+        return $this->configResolver->getParameter('ng_site_api.cross_siteaccess_routing.enabled');
     }
 
     /**
