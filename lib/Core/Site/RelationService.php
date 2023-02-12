@@ -100,11 +100,18 @@ class RelationService implements RelationServiceInterface
         $relatedContentItems = $this->getRelatedContentItems($relatedContentIds, $contentTypeIdentifiers);
         $this->sortByIdOrder($relatedContentItems, $relatedContentIds);
 
+        $relatedLocations = [];
+
+        foreach ($relatedContentItems as $relatedContentItem) {
+            try {
+                $relatedLocations[] = $relatedContentItem->mainLocation;
+            } catch (Throwable $throwable) {
+                // do nothing
+            }
+        }
+
         $locations = array_filter(
-            array_map(
-                static fn (Content $content): Location => $content->mainLocation,
-                $relatedContentItems
-            ),
+            $relatedLocations,
             fn (Location $location): bool => $this->site->getSettings()->showHiddenItems || $location->isVisible,
         );
 
