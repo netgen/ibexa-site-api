@@ -59,7 +59,7 @@ class LoadService implements LoadServiceInterface
     public function loadContentForPreview(int $contentId, int $versionNo, string $languageCode): Content
     {
         $versionInfo = $this->contentService->loadVersionInfoById($contentId, $versionNo);
-        $languageCode = $this->languageResolver->resolveByLanguage($versionInfo, $languageCode);
+        $languageCode = $this->languageResolver->resolveForPreview($versionInfo, $languageCode);
 
         return $this->domainObjectMapper->mapContent($versionInfo, $languageCode);
     }
