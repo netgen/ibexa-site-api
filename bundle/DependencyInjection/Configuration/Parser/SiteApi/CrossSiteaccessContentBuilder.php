@@ -7,7 +7,7 @@ namespace Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Configuration\Par
 use Symfony\Component\Config\Definition\Builder\NodeBuilder;
 use Symfony\Component\Config\Definition\Exception\InvalidTypeException;
 
-class CrossSiteaccessRoutingBuilder
+class CrossSiteaccessContentBuilder
 {
     public static function build(NodeBuilder $nodeBuilder): void
     {

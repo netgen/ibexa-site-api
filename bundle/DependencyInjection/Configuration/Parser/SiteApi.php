@@ -6,7 +6,7 @@ namespace Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Configuration\Par
 
 use Ibexa\Bundle\Core\DependencyInjection\Configuration\AbstractParser;
 use Ibexa\Bundle\Core\DependencyInjection\Configuration\SiteAccessAware\ContextualizerInterface;
-use Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Configuration\Parser\SiteApi\CrossSiteaccessRoutingBuilder;
+use Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Configuration\Parser\SiteApi\CrossSiteaccessContentBuilder;
 use Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Configuration\Parser\SiteApi\NamedObjectBuilder;
 use Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Configuration\Parser\SiteApi\NamedQueryBuilder;
 use Symfony\Component\Config\Definition\Builder\NodeBuilder;
@@ -52,7 +52,7 @@ class SiteApi extends AbstractParser
             ->end()
         ->end();
 
-        CrossSiteaccessRoutingBuilder::build($childrenBuilder);
+        CrossSiteaccessContentBuilder::build($childrenBuilder);
         NamedObjectBuilder::build($childrenBuilder);
         NamedQueryBuilder::build($childrenBuilder);
     }
