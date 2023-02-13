@@ -35,7 +35,7 @@ final class LanguageResolver extends BaseLanguageResolver
         $this->currentSiteaccess = $currentSiteAccess;
     }
 
-    public function resolveByLanguage(VersionInfo $versionInfo, string $languageCode): string
+    public function resolveForPreview(VersionInfo $versionInfo, string $languageCode): string
     {
         if (in_array($languageCode, $versionInfo->languageCodes, true)) {
             return $languageCode;
