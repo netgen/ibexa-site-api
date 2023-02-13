@@ -13,6 +13,8 @@ services:
             - '@netgen.ibexa_site_api.settings'
             - '@netgen.ibexa_site_api.siteaccess.resolver'
             - '@ibexa.config.resolver'
+        calls:
+            - [ setSiteaccess, [ '@Ibexa\Core\MVC\Symfony\SiteAccess' ] ]
 
     netgen.ibexa_site_api.language_resolver:
         alias: netgen.ibexa_site_api.language_resolver.symfony
