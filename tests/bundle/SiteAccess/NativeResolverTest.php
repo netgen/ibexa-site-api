@@ -16,10 +16,12 @@ use Netgen\Bundle\IbexaSiteApiBundle\SiteAccess\Resolver;
 use Netgen\Bundle\IbexaSiteApiBundle\SiteAccess\Resolver\NativeResolver;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
+
 use function array_filter;
 use function array_pop;
 use function explode;
 use function in_array;
+use function reset;
 
 /**
  * @group siteaccess
@@ -38,7 +40,7 @@ class NativeResolverTest extends TestCase
                         ],
                     ],
                     'system' => [
-                        'frontend_group' => ['tree_root' =>  4],
+                        'frontend_group' => ['tree_root' => 4],
                         'eng' => ['languages' => ['eng-GB']],
                         'ger' => ['languages' => ['ger-DE']],
                     ],
@@ -88,7 +90,7 @@ class NativeResolverTest extends TestCase
                         ],
                     ],
                     'system' => [
-                        'frontend_group' => ['tree_root' =>  8],
+                        'frontend_group' => ['tree_root' => 8],
                         'eng' => ['languages' => ['eng-GB']],
                         'ger' => ['languages' => ['ger-DE']],
                     ],
@@ -111,7 +113,7 @@ class NativeResolverTest extends TestCase
                         ],
                     ],
                     'system' => [
-                        'frontend_group' => ['tree_root' =>  8],
+                        'frontend_group' => ['tree_root' => 8],
                         'eng' => ['languages' => ['eng-GB', 'por-PT']],
                         'ger' => ['languages' => ['ger-DE']],
                     ],
@@ -134,7 +136,7 @@ class NativeResolverTest extends TestCase
                         ],
                     ],
                     'system' => [
-                        'frontend_group' => ['tree_root' =>  8],
+                        'frontend_group' => ['tree_root' => 8],
                         'eng' => ['languages' => ['eng-GB']],
                         'ger' => ['languages' => ['ger-DE']],
                     ],
@@ -159,19 +161,19 @@ class NativeResolverTest extends TestCase
                     ],
                     'system' => [
                         'eng' => [
-                            'tree_root' =>  4,
+                            'tree_root' => 4,
                             'languages' => ['eng-GB', 'por-PT'],
                         ],
                         'ger' => [
-                            'tree_root' =>  4,
+                            'tree_root' => 4,
                             'languages' => ['ger-DE'],
                         ],
                         'por' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['por-PT'],
                         ],
                         'ita' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['ita-IT'],
                         ],
                     ],
@@ -195,23 +197,23 @@ class NativeResolverTest extends TestCase
                     ],
                     'system' => [
                         'eng' => [
-                            'tree_root' =>  4,
+                            'tree_root' => 4,
                             'languages' => ['eng-GB', 'por-PT'],
                         ],
                         'ger' => [
-                            'tree_root' =>  4,
+                            'tree_root' => 4,
                             'languages' => ['ger-DE'],
                         ],
                         'por' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['por-PT'],
                         ],
                         'por2' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['por-PT'],
                         ],
                         'ita' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['ita-IT'],
                         ],
                     ],
@@ -235,23 +237,23 @@ class NativeResolverTest extends TestCase
                     ],
                     'system' => [
                         'eng' => [
-                            'tree_root' =>  4,
+                            'tree_root' => 4,
                             'languages' => ['eng-GB', 'por-PT'],
                         ],
                         'ger' => [
-                            'tree_root' =>  4,
+                            'tree_root' => 4,
                             'languages' => ['ger-DE'],
                         ],
                         'por' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['por-PT'],
                         ],
                         'por2' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['por-PT'],
                         ],
                         'ita' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['ita-IT'],
                         ],
                     ],
@@ -275,23 +277,23 @@ class NativeResolverTest extends TestCase
                     ],
                     'system' => [
                         'eng' => [
-                            'tree_root' =>  4,
+                            'tree_root' => 4,
                             'languages' => ['eng-GB', 'por-PT', 'ita-IT'],
                         ],
                         'ger' => [
-                            'tree_root' =>  4,
+                            'tree_root' => 4,
                             'languages' => ['ger-DE'],
                         ],
                         'por' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['por-PT'],
                         ],
                         'por2' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['por-PT'],
                         ],
                         'ita' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['ita-IT'],
                         ],
                     ],
@@ -315,23 +317,23 @@ class NativeResolverTest extends TestCase
                     ],
                     'system' => [
                         'eng' => [
-                            'tree_root' =>  4,
+                            'tree_root' => 4,
                             'languages' => ['eng-GB', 'ita-IT', 'por-PT'],
                         ],
                         'ger' => [
-                            'tree_root' =>  4,
+                            'tree_root' => 4,
                             'languages' => ['ger-DE'],
                         ],
                         'por' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['por-PT'],
                         ],
                         'por2' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['por-PT'],
                         ],
                         'ita' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['ita-IT'],
                         ],
                     ],
@@ -355,23 +357,23 @@ class NativeResolverTest extends TestCase
                     ],
                     'system' => [
                         'eng' => [
-                            'tree_root' =>  4,
+                            'tree_root' => 4,
                             'languages' => ['eng-GB', 'ita-IT', 'por-PT'],
                         ],
                         'ger' => [
-                            'tree_root' =>  4,
+                            'tree_root' => 4,
                             'languages' => ['ger-DE'],
                         ],
                         'por' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['por-PT'],
                         ],
                         'por2' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['por-PT'],
                         ],
                         'ita' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['ita-IT'],
                         ],
                     ],
@@ -396,23 +398,23 @@ class NativeResolverTest extends TestCase
                     ],
                     'system' => [
                         'eng' => [
-                            'tree_root' =>  4,
+                            'tree_root' => 4,
                             'languages' => ['eng-GB', 'ita-IT', 'por-PT'],
                         ],
                         'ger' => [
-                            'tree_root' =>  4,
+                            'tree_root' => 4,
                             'languages' => ['ger-DE'],
                         ],
                         'por' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['por-PT'],
                         ],
                         'por2' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['por-PT'],
                         ],
                         'ita' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['ita-IT'],
                         ],
                     ],
@@ -438,23 +440,23 @@ class NativeResolverTest extends TestCase
                     ],
                     'system' => [
                         'eng' => [
-                            'tree_root' =>  4,
+                            'tree_root' => 4,
                             'languages' => ['eng-GB', 'ita-IT', 'por-PT'],
                         ],
                         'ger' => [
-                            'tree_root' =>  4,
+                            'tree_root' => 4,
                             'languages' => ['ger-DE'],
                         ],
                         'por' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['por-PT'],
                         ],
                         'por2' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['por-PT'],
                         ],
                         'ita' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['ita-IT'],
                         ],
                     ],
@@ -480,23 +482,23 @@ class NativeResolverTest extends TestCase
                     ],
                     'system' => [
                         'eng' => [
-                            'tree_root' =>  4,
+                            'tree_root' => 4,
                             'languages' => ['eng-GB', 'ita-IT', 'por-PT'],
                         ],
                         'ger' => [
-                            'tree_root' =>  4,
+                            'tree_root' => 4,
                             'languages' => ['ger-DE'],
                         ],
                         'por' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['por-PT'],
                         ],
                         'por2' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['por-PT'],
                         ],
                         'ita' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['ita-IT'],
                         ],
                     ],
@@ -524,23 +526,23 @@ class NativeResolverTest extends TestCase
                     ],
                     'system' => [
                         'eng' => [
-                            'tree_root' =>  4,
+                            'tree_root' => 4,
                             'languages' => ['eng-GB', 'ita-IT', 'por-PT'],
                         ],
                         'ger' => [
-                            'tree_root' =>  4,
+                            'tree_root' => 4,
                             'languages' => ['ger-DE'],
                         ],
                         'por' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['por-PT'],
                         ],
                         'por2' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['por-PT'],
                         ],
                         'ita' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['ita-IT'],
                         ],
                     ],
@@ -567,23 +569,23 @@ class NativeResolverTest extends TestCase
                     ],
                     'system' => [
                         'eng' => [
-                            'tree_root' =>  4,
+                            'tree_root' => 4,
                             'languages' => ['eng-GB', 'ita-IT', 'por-PT'],
                         ],
                         'ger' => [
-                            'tree_root' =>  4,
+                            'tree_root' => 4,
                             'languages' => ['ger-DE'],
                         ],
                         'por' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['por-PT'],
                         ],
                         'por2' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['por-PT'],
                         ],
                         'ita' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['ita-IT'],
                         ],
                     ],
@@ -611,23 +613,23 @@ class NativeResolverTest extends TestCase
                     ],
                     'system' => [
                         'eng' => [
-                            'tree_root' =>  4,
+                            'tree_root' => 4,
                             'languages' => ['eng-GB', 'ita-IT', 'por-PT'],
                         ],
                         'ger' => [
-                            'tree_root' =>  4,
+                            'tree_root' => 4,
                             'languages' => ['ger-DE'],
                         ],
                         'por' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['por-PT'],
                         ],
                         'por2' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['por-PT'],
                         ],
                         'ita' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['ita-IT'],
                         ],
                     ],
@@ -654,23 +656,23 @@ class NativeResolverTest extends TestCase
                     ],
                     'system' => [
                         'eng' => [
-                            'tree_root' =>  4,
+                            'tree_root' => 4,
                             'languages' => ['eng-GB'],
                         ],
                         'ger' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['ger-DE', 'por-PT', 'ita-IT', 'fre-FR'],
                         ],
                         'por' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['por-PT', 'ger-DE', 'fre-FR', 'ita-IT'],
                         ],
                         'ita' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['ita-IT', 'fre-FR', 'ita-IT', 'ger-DE'],
                         ],
                         'fre' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['fre-FR', 'ger-DE', 'por-PT', 'ita-IT'],
                         ],
                     ],
@@ -694,19 +696,19 @@ class NativeResolverTest extends TestCase
                     ],
                     'system' => [
                         'eng' => [
-                            'tree_root' =>  4,
+                            'tree_root' => 4,
                             'languages' => ['eng-GB'],
                         ],
                         'ger' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['ger-DE', 'por-PT', 'ita-IT', 'fre-FR'],
                         ],
                         'por' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['por-PT', 'ger-DE', 'fre-FR', 'ita-IT'],
                         ],
                         'ita' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['ita-IT', 'fre-FR', 'ita-IT', 'ger-DE'],
                         ],
                     ],
@@ -730,15 +732,15 @@ class NativeResolverTest extends TestCase
                     ],
                     'system' => [
                         'eng' => [
-                            'tree_root' =>  4,
+                            'tree_root' => 4,
                             'languages' => ['eng-GB'],
                         ],
                         'ger' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['ger-DE', 'por-PT', 'ita-IT', 'fre-FR'],
                         ],
                         'por' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['por-PT', 'ger-DE', 'fre-FR', 'ita-IT'],
                         ],
                     ],
@@ -762,11 +764,11 @@ class NativeResolverTest extends TestCase
                     ],
                     'system' => [
                         'eng' => [
-                            'tree_root' =>  4,
+                            'tree_root' => 4,
                             'languages' => ['eng-GB'],
                         ],
                         'ger' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['ger-DE', 'por-PT', 'ita-IT', 'fre-FR'],
                         ],
                     ],
@@ -790,23 +792,23 @@ class NativeResolverTest extends TestCase
                     ],
                     'system' => [
                         'eng' => [
-                            'tree_root' =>  4,
+                            'tree_root' => 4,
                             'languages' => ['eng-GB'],
                         ],
                         'ger' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['ger-DE', 'por-PT', 'ita-IT', 'fre-FR'],
                         ],
                         'por' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['por-PT', 'ger-DE', 'fre-FR', 'ita-IT'],
                         ],
                         'ita' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['ita-IT', 'fre-FR', 'ita-IT', 'ger-DE'],
                         ],
                         'fre' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['fre-FR', 'ger-DE', 'por-PT', 'ita-IT'],
                         ],
                     ],
@@ -832,23 +834,23 @@ class NativeResolverTest extends TestCase
                     ],
                     'system' => [
                         'eng' => [
-                            'tree_root' =>  4,
+                            'tree_root' => 4,
                             'languages' => ['eng-GB'],
                         ],
                         'ger' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['ger-DE', 'por-PT', 'ita-IT', 'fre-FR'],
                         ],
                         'por' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['por-PT', 'ger-DE', 'fre-FR', 'ita-IT'],
                         ],
                         'ita' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['ita-IT', 'fre-FR', 'ita-IT', 'ger-DE'],
                         ],
                         'fre' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['fre-FR', 'ger-DE', 'por-PT', 'ita-IT'],
                         ],
                     ],
@@ -873,23 +875,23 @@ class NativeResolverTest extends TestCase
                     ],
                     'system' => [
                         'eng' => [
-                            'tree_root' =>  4,
+                            'tree_root' => 4,
                             'languages' => ['eng-GB'],
                         ],
                         'ger' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['ger-DE', 'por-PT', 'ita-IT', 'fre-FR'],
                         ],
                         'por' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['por-PT', 'ger-DE', 'fre-FR', 'ita-IT'],
                         ],
                         'ita' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['ita-IT', 'fre-FR', 'ita-IT', 'ger-DE'],
                         ],
                         'fre' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['fre-FR', 'ger-DE', 'por-PT', 'ita-IT'],
                         ],
                     ],
@@ -913,23 +915,23 @@ class NativeResolverTest extends TestCase
                     ],
                     'system' => [
                         'eng' => [
-                            'tree_root' =>  4,
+                            'tree_root' => 4,
                             'languages' => ['eng-GB'],
                         ],
                         'ger' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['ger-DE', 'por-PT', 'ita-IT', 'fre-FR'],
                         ],
                         'por' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['por-PT', 'ger-DE', 'fre-FR', 'ita-IT'],
                         ],
                         'ita' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['ita-IT', 'fre-FR', 'ita-IT', 'ger-DE'],
                         ],
                         'fre' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['fre-FR', 'ger-DE', 'por-PT', 'ita-IT'],
                         ],
                     ],
@@ -954,19 +956,19 @@ class NativeResolverTest extends TestCase
                     ],
                     'system' => [
                         'eng' => [
-                            'tree_root' =>  4,
+                            'tree_root' => 4,
                             'languages' => ['eng-GB'],
                         ],
                         'ger' => [
-                            'tree_root' =>  4,
+                            'tree_root' => 4,
                             'languages' => ['ger-DE'],
                         ],
                         'por' => [
-                            'tree_root' =>  4,
+                            'tree_root' => 4,
                             'languages' => ['por-PT'],
                         ],
                         'ita' => [
-                            'tree_root' =>  4,
+                            'tree_root' => 4,
                             'languages' => ['ita-IT'],
                         ],
                     ],
@@ -992,19 +994,19 @@ class NativeResolverTest extends TestCase
                     ],
                     'system' => [
                         'eng' => [
-                            'tree_root' =>  4,
+                            'tree_root' => 4,
                             'languages' => ['eng-GB'],
                         ],
                         'ger' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['ger-DE'],
                         ],
                         'por' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['por-PT'],
                         ],
                         'ita' => [
-                            'tree_root' =>  8,
+                            'tree_root' => 8,
                             'languages' => ['ita-IT'],
                         ],
                     ],
@@ -1048,7 +1050,7 @@ class NativeResolverTest extends TestCase
             'contentInfo' => new ContentInfo([
                 'id' => 24,
                 'alwaysAvailable' => $data['alwaysAvailable'] ?? false,
-                'mainLanguageCode' => reset($data['languageCodes'])
+                'mainLanguageCode' => reset($data['languageCodes']),
             ]),
         ]);
     }
@@ -1058,7 +1060,7 @@ class NativeResolverTest extends TestCase
         $siteaccessResolver = new NativeResolver(
             $this->persistenceHandlerMock($data),
             5,
-            $this->getLoggerMock($data)
+            $this->getLoggerMock($data),
         );
 
         $siteaccessResolver->setConfigResolver($this->getConfigResolverMock($data));
@@ -1079,6 +1081,7 @@ class NativeResolverTest extends TestCase
 
         return $loggerMock;
     }
+
     protected function persistenceHandlerMock(array $data): Handler
     {
         $versionInfo = new VersionInfo([

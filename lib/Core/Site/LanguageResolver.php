@@ -10,6 +10,8 @@ use Netgen\IbexaSiteApi\API\LanguageResolver as BaseLanguageResolver;
 use Netgen\IbexaSiteApi\API\Settings as BaseSettings;
 use Netgen\IbexaSiteApi\Core\Site\Exceptions\TranslationNotMatchedException;
 
+use function in_array;
+
 final class LanguageResolver extends BaseLanguageResolver
 {
     private BaseSettings $settings;
@@ -27,7 +29,7 @@ final class LanguageResolver extends BaseLanguageResolver
 
         throw new TranslationNotMatchedException(
             $versionInfo->contentInfo->id,
-            $this->getContext($versionInfo, $languageCode)
+            $this->getContext($versionInfo, $languageCode),
         );
     }
 
@@ -45,7 +47,7 @@ final class LanguageResolver extends BaseLanguageResolver
 
         throw new TranslationNotMatchedException(
             $versionInfo->contentInfo->id,
-            $this->getContext($versionInfo)
+            $this->getContext($versionInfo),
         );
     }
 
@@ -59,7 +61,7 @@ final class LanguageResolver extends BaseLanguageResolver
      *
      * To be used when throwing TranslationNotMatchedException.
      */
-    private function getContext(VersionInfo $versionInfo, string $languageCode = null): array
+    private function getContext(VersionInfo $versionInfo, ?string $languageCode = null): array
     {
         $context = [
             'prioritizedLanguages' => $this->settings->prioritizedLanguages,

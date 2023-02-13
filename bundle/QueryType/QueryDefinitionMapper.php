@@ -9,6 +9,7 @@ use Ibexa\Core\QueryType\QueryTypeRegistry;
 use InvalidArgumentException;
 use Netgen\Bundle\IbexaSiteApiBundle\View\ContentView;
 use Netgen\IbexaSiteApi\Core\Site\QueryType\QueryType as SiteQueryType;
+
 use function array_key_exists;
 use function array_replace;
 use function is_array;
@@ -40,9 +41,9 @@ final class QueryDefinitionMapper
     /**
      * Map given $configuration in $view context to a QueryDefinition instance.
      *
-     * @throws \InvalidArgumentException
-     *
      * @return \Netgen\Bundle\IbexaSiteApiBundle\QueryType\QueryDefinition
+     *
+     * @throws \InvalidArgumentException
      */
     public function map(array $configuration, ContentView $view): QueryDefinition
     {

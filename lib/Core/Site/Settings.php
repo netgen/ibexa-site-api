@@ -60,9 +60,9 @@ final class Settings extends BaseSettings
     }
 
     /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\PropertyNotFoundException
-     *
      * @return bool|int|string[]
+     *
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\PropertyNotFoundException
      */
     public function __get(string $property)
     {

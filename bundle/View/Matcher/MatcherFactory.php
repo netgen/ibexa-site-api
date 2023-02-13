@@ -11,6 +11,7 @@ use Ibexa\Core\MVC\Symfony\Matcher\ClassNameMatcherFactory;
 use Ibexa\Core\MVC\Symfony\Matcher\ViewMatcherInterface;
 use Ibexa\Core\MVC\Symfony\View\View;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+
 use function mb_strpos;
 use function mb_substr;
 
@@ -53,9 +54,9 @@ class MatcherFactory extends ClassNameMatcherFactory
     /**
      * @param string $matcherIdentifier
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     *
      * @return \Ibexa\Core\MVC\Symfony\Matcher\ViewMatcherInterface
+     *
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     protected function getMatcher($matcherIdentifier): ViewMatcherInterface
     {

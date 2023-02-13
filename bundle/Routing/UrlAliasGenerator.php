@@ -28,9 +28,7 @@ class UrlAliasGenerator extends BaseUrlAliasGenerator
     public function loadLocation($locationId): Location
     {
         return $this->repository->sudo(
-            static function (Repository $repository) use ($locationId) {
-                return $repository->getLocationService()->loadLocation($locationId, []);
-            }
+            static fn (Repository $repository) => $repository->getLocationService()->loadLocation($locationId, []),
         );
     }
 }

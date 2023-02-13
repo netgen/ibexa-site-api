@@ -12,6 +12,7 @@ use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\Yaml\Yaml;
+
 use function file_get_contents;
 use function preg_quote;
 
@@ -31,7 +32,7 @@ final class ContentViewTest extends AbstractParserTestCase
 
         $loader = new YamlFileLoader(
             $this->container,
-            new FileLocator(__DIR__ . '/../../Fixtures')
+            new FileLocator(__DIR__ . '/../../Fixtures'),
         );
 
         $loader->load('parameters.yaml');
@@ -59,31 +60,31 @@ final class ContentViewTest extends AbstractParserTestCase
                         ],
                     ],
                     'default' => [
-                        'template' => "%netgen.ibexa_site_api.default_view_templates.content.embed%",
+                        'template' => '%netgen.ibexa_site_api.default_view_templates.content.embed%',
                         'match' => [],
                     ],
                 ],
                 'embed-inline' => [
                     'default' => [
-                        'template' => "%netgen.ibexa_site_api.default_view_templates.content.embed_inline%",
+                        'template' => '%netgen.ibexa_site_api.default_view_templates.content.embed_inline%',
                         'match' => [],
                     ],
                 ],
                 'full' => [
                     'default' => [
-                        'template' => "%netgen.ibexa_site_api.default_view_templates.content.full%",
+                        'template' => '%netgen.ibexa_site_api.default_view_templates.content.full%',
                         'match' => [],
                     ],
                 ],
                 'line' => [
                     'default' => [
-                        'template' => "%netgen.ibexa_site_api.default_view_templates.content.line%",
+                        'template' => '%netgen.ibexa_site_api.default_view_templates.content.line%',
                         'match' => [],
                     ],
                 ],
                 'text_linked' => [
                     'default' => [
-                        'template' => "%netgen.ibexa_site_api.default_view_templates.content.text_linked%",
+                        'template' => '%netgen.ibexa_site_api.default_view_templates.content.text_linked%',
                         'match' => [],
                     ],
                 ],

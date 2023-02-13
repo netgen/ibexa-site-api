@@ -20,6 +20,7 @@ use InvalidArgumentException;
 use Netgen\IbexaSearchExtra\API\Values\Content\Query\Criterion\ObjectStateIdentifier;
 use Netgen\IbexaSearchExtra\API\Values\Content\Query\Criterion\SectionIdentifier;
 use Netgen\IbexaSearchExtra\API\Values\Content\Query\Criterion\Visible;
+
 use function count;
 use function is_array;
 use function is_int;
@@ -40,9 +41,9 @@ final class CriteriaBuilder
      *
      * @param \Netgen\IbexaSiteApi\Core\Site\QueryType\CriterionDefinition[] $definitions
      *
-     * @throws \InvalidArgumentException
-     *
      * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion[]
+     *
+     * @throws \InvalidArgumentException
      */
     public function build(array $definitions): array
     {
@@ -272,9 +273,9 @@ final class CriteriaBuilder
     /**
      * @param mixed $valueOrValues
      *
-     * @throws \InvalidArgumentException
-     *
      * @return array|int
+     *
+     * @throws \InvalidArgumentException
      */
     private function resolveTimeValues($valueOrValues)
     {

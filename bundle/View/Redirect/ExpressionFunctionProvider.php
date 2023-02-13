@@ -63,9 +63,7 @@ class ExpressionFunctionProvider implements ExpressionFunctionProviderInterface
             new ExpressionFunction(
                 'parameter',
                 static function (): void {},
-                function (array $arguments, string $name) {
-                    return $this->container->getParameter($name);
-                },
+                fn (array $arguments, string $name) => $this->container->getParameter($name),
             ),
         ];
     }

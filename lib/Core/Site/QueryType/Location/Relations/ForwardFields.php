@@ -11,6 +11,7 @@ use Netgen\IbexaSiteApi\API\Values\Content as SiteContent;
 use Netgen\IbexaSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Registry as RelationResolverRegistry;
 use Netgen\IbexaSiteApi\Core\Site\QueryType\Location;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+
 use function array_merge;
 
 /**

@@ -13,6 +13,7 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\Location\Dep
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\Location\Priority;
 use InvalidArgumentException;
 use Netgen\IbexaSearchExtra\API\Values\Content\Query\SortClause\ContentName;
+
 use function array_key_exists;
 use function explode;
 use function mb_strtolower;

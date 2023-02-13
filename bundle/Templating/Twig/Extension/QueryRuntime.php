@@ -10,6 +10,7 @@ use Netgen\Bundle\IbexaSiteApiBundle\QueryType\QueryExecutor;
 use Netgen\Bundle\IbexaSiteApiBundle\View\ContentView;
 use Pagerfanta\Pagerfanta;
 use Twig\Error\RuntimeError;
+
 use function array_key_exists;
 use function is_array;
 

@@ -12,6 +12,7 @@ use Netgen\IbexaSiteApi\Core\Site\QueryType\Location;
 use Netgen\TagsBundle\API\Repository\Values\Content\Query\Criterion\TagId;
 use Netgen\TagsBundle\API\Repository\Values\Tags\Tag as TagValue;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+
 use function array_map;
 use function array_merge;
 

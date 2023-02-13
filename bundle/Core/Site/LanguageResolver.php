@@ -13,6 +13,8 @@ use Netgen\IbexaSiteApi\API\LanguageResolver as BaseLanguageResolver;
 use Netgen\IbexaSiteApi\API\Settings as BaseSettings;
 use Netgen\IbexaSiteApi\Core\Site\Exceptions\TranslationNotMatchedException;
 
+use function in_array;
+
 final class LanguageResolver extends BaseLanguageResolver
 {
     private BaseSettings $settings;
@@ -30,7 +32,7 @@ final class LanguageResolver extends BaseLanguageResolver
         $this->configResolver = $configResolver;
     }
 
-    public function setSiteaccess(SiteAccess $currentSiteAccess = null): void
+    public function setSiteaccess(?SiteAccess $currentSiteAccess = null): void
     {
         $this->currentSiteaccess = $currentSiteAccess;
     }
@@ -134,7 +136,7 @@ final class LanguageResolver extends BaseLanguageResolver
                     'mainTranslation' => $versionInfo->contentInfo->mainLanguageCode,
                     'alwaysAvailable' => $versionInfo->contentInfo->alwaysAvailable,
                 ],
-            ]
+            ],
         );
     }
 
@@ -148,7 +150,7 @@ final class LanguageResolver extends BaseLanguageResolver
         return $this->configResolver->getParameter(
             'ng_site_api.use_always_available_fallback',
             null,
-            $siteaccess
+            $siteaccess,
         );
     }
 }

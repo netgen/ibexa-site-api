@@ -48,7 +48,7 @@ class Legacy extends CoreLegacySetupFactory
 //    {
 //        if (self::$serviceContainer === null) {
 //            $config = include __DIR__ . '/../../../../vendor/ezsystems/ezplatform-kernel/config.php';
-////            $installDir = $config['install_dir'];
+// //            $installDir = $config['install_dir'];
 //            $installDir = self::getInstallationDir();
 //
 //            /** @var \Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder */

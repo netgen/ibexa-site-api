@@ -6,6 +6,7 @@ namespace Netgen\IbexaSiteApi\Core\Site\QueryType;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Operator;
 use InvalidArgumentException;
+
 use function array_key_exists;
 use function array_keys;
 use function array_merge;
@@ -40,9 +41,9 @@ final class CriterionDefinitionResolver
      *
      * @param mixed $parameters
      *
-     * @throws \InvalidArgumentException
-     *
      * @return \Netgen\IbexaSiteApi\Core\Site\QueryType\CriterionDefinition[]
+     *
+     * @throws \InvalidArgumentException
      */
     public function resolve(string $name, $parameters): array
     {
@@ -52,9 +53,9 @@ final class CriterionDefinitionResolver
     /**
      * Resolve Field Criterion $parameters.
      *
-     * @throws \InvalidArgumentException
-     *
      * @return \Netgen\IbexaSiteApi\Core\Site\QueryType\CriterionDefinition[]
+     *
+     * @throws \InvalidArgumentException
      */
     public function resolveTargets(string $name, array $parameters): array
     {
@@ -72,9 +73,9 @@ final class CriterionDefinitionResolver
      *
      * @param mixed $parameters
      *
-     * @throws \InvalidArgumentException
-     *
      * @return \Netgen\IbexaSiteApi\Core\Site\QueryType\CriterionDefinition[]
+     *
+     * @throws \InvalidArgumentException
      */
     private function resolveForTarget(string $name, ?string $target, $parameters): array
     {

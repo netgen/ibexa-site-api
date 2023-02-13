@@ -11,12 +11,15 @@ use Netgen\IbexaSiteApi\API\Values\Location;
 use Netgen\IbexaSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Registry as RelationResolverRegistry;
 use Netgen\IbexaSiteApi\Core\Traits\SearchResultExtractorTrait;
 use Throwable;
+
+use function array_filter;
 use function array_flip;
 use function array_slice;
+use function in_array;
 use function usort;
 
 /**
- * todo logging
+ * todo logging.
  *
  * @final
  *

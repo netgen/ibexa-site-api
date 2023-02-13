@@ -22,6 +22,7 @@ use Netgen\IbexaSiteApi\API\Site;
 use Netgen\IbexaSiteApi\API\Values\Content;
 use Netgen\IbexaSiteApi\API\Values\Location;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
 use function in_array;
 use function is_string;
 use function mb_strpos;

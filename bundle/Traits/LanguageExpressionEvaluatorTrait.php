@@ -5,6 +5,10 @@ declare(strict_types=1);
 namespace Netgen\Bundle\IbexaSiteApiBundle\Traits;
 
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
+
+use function is_array;
+use function is_string;
+use function mb_strlen;
 use function mb_strpos;
 use function mb_substr;
 
@@ -57,7 +61,7 @@ trait LanguageExpressionEvaluatorTrait
             $processedParameters[$name] = $this->evaluate(
                 $subParameters,
                 $expressionLanguage,
-                $values
+                $values,
             );
         }
 

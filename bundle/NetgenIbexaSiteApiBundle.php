@@ -44,7 +44,7 @@ class NetgenIbexaSiteApiBundle extends Bundle
             __DIR__ . '/Resources/config',
             [
                 'ibexa_default_settings.yaml',
-            ]
+            ],
         );
     }
 }

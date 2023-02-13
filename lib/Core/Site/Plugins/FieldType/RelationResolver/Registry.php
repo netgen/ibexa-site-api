@@ -43,9 +43,9 @@ class Registry
     /**
      * Returns Resolver for $fieldTypeIdentifier.
      *
-     * @throws \OutOfBoundsException When there is no resolver for the given $fieldTypeIdentifier
-     *
      * @return \Netgen\IbexaSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Resolver
+     *
+     * @throws \OutOfBoundsException When there is no resolver for the given $fieldTypeIdentifier
      */
     public function get(string $fieldTypeIdentifier): Resolver
     {

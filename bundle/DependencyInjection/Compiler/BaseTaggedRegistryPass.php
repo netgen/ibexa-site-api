@@ -7,6 +7,7 @@ namespace Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Compiler;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
+
 use function array_keys;
 
 abstract class BaseTaggedRegistryPass implements CompilerPassInterface

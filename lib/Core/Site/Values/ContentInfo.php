@@ -6,6 +6,7 @@ namespace Netgen\IbexaSiteApi\Core\Site\Values;
 
 use Netgen\IbexaSiteApi\API\Values\ContentInfo as APIContentInfo;
 use Netgen\IbexaSiteApi\API\Values\Location as APILocation;
+
 use function array_key_exists;
 use function property_exists;
 

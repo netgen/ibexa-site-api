@@ -49,7 +49,7 @@ final class ParameterProcessor
             [
                 'configResolver' => $this->configResolver,
                 'currentUserId' => $this->permissionResolver->getCurrentUserReference()->getUserId(),
-            ]
+            ],
         );
     }
 }

@@ -8,6 +8,7 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchHit;
 use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchResult;
 use Netgen\IbexaSiteApi\API\Values\Content;
 use Netgen\IbexaSiteApi\API\Values\Location;
+
 use function array_map;
 
 /**

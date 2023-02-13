@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Configuration\Parser\SiteApi;
 
 use Symfony\Component\Config\Definition\Builder\NodeBuilder;
+
 use function array_keys;
 use function is_string;
 use function preg_match;

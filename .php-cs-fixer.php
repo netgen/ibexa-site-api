@@ -27,6 +27,7 @@ return $config
         'php_unit_test_class_requires_covers' => false,
         'phpdoc_align' => false,
         'phpdoc_types_order' => ['null_adjustment' => 'always_last', 'sort_algorithm' => 'none'],
+        'phpdoc_no_alias_tag' => ['replacements' => ['type' => 'var', 'link' => 'see']],
         'single_line_comment_style' => false,
         'trailing_comma_in_multiline' => ['elements' => ['arrays', 'arguments']],
         'yoda_style' => false,

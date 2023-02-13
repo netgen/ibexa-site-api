@@ -72,9 +72,9 @@ final class Siblings extends Location
     /**
      * {@inheritdoc}
      *
-     * @throws \InvalidArgumentException
-     *
      * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion[]
+     *
+     * @throws \InvalidArgumentException
      */
     protected function getFilterCriteria(array $parameters): array
     {

@@ -15,6 +15,7 @@ use Netgen\IbexaSiteApi\Core\Site\Values\Field\SurrogateValue;
 use Psr\Log\LoggerInterface;
 use RuntimeException;
 use Traversable;
+
 use function array_key_exists;
 use function array_merge;
 use function count;
@@ -230,9 +231,9 @@ final class Fields extends APIFields
     /**
      * @param string[] $identifiers
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     *
      * @return \Netgen\IbexaSiteApi\API\Values\Field[]
+     *
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     private function getAvailableFields(array $identifiers): array
     {

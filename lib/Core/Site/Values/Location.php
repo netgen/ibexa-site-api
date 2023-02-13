@@ -24,6 +24,7 @@ use Netgen\IbexaSiteApi\Core\Site\DomainObjectMapper;
 use Netgen\IbexaSiteApi\Core\Site\Pagination\Pagerfanta\FilterAdapter;
 use Pagerfanta\Pagerfanta;
 use Psr\Log\LoggerInterface;
+
 use function property_exists;
 
 final class Location extends APILocation

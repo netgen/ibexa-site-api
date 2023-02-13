@@ -9,6 +9,7 @@ use InvalidArgumentException;
 use Netgen\IbexaSiteApi\Core\Site\QueryType\QueryType;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+
 use function array_flip;
 use function count;
 use function md5;
@@ -102,6 +103,7 @@ abstract class QueryTypeBaseTest extends TestCase
 
     /**
      * @group yyy
+     *
      * @dataProvider providerForTestGetQueryWithInvalidOptions
      */
     public function testGetQueryWithInvalidOptions(array $parameters): void

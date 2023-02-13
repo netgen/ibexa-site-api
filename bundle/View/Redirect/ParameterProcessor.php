@@ -45,7 +45,7 @@ final class ParameterProcessor
                 'content' => $view->getSiteContent(),
                 'configResolver' => $this->configResolver,
                 'namedObject' => $this->namedObjectProvider,
-            ]
+            ],
         );
     }
 }

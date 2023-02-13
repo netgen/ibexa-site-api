@@ -13,6 +13,7 @@ use Twig\Node\Expression\GetAttrExpression;
 use Twig\Node\Node;
 use Twig\Source;
 use Twig\Template;
+
 use function twig_get_attribute;
 
 final class GetAttrExpressionDecorator extends GetAttrExpression

@@ -10,11 +10,14 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\NodeBuilder;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Twig\Lexer;
+
 use function array_key_exists;
 use function array_keys;
 use function array_replace;
 use function explode;
+use function is_bool;
 use function is_string;
+use function mb_stripos;
 use function preg_match;
 use function sprintf;
 
@@ -158,25 +161,19 @@ class ContentView extends AbstractParser
                             ->end()
                         ->end()
                         ->validate()
-                            ->ifTrue(function ($v) use ($booleanOrExpressionValidator): bool {
-                                return isset($v['redirect']['permanent']) && !$booleanOrExpressionValidator($v['redirect']['permanent']);
-                            })
+                            ->ifTrue(static fn ($v): bool => isset($v['redirect']['permanent']) && !$booleanOrExpressionValidator($v['redirect']['permanent']))
                             ->thenInvalid(
                                 'Option "permanent" must be a boolean or a language expression string.',
                             )
                         ->end()
                         ->validate()
-                            ->ifTrue(function ($v) use ($booleanOrExpressionValidator): bool {
-                                return isset($v['redirect']['absolute']) && !$booleanOrExpressionValidator($v['redirect']['absolute']);
-                            })
+                            ->ifTrue(static fn ($v): bool => isset($v['redirect']['absolute']) && !$booleanOrExpressionValidator($v['redirect']['absolute']))
                             ->thenInvalid(
                                 'Option "absolute" must be a boolean or a language expression string.',
                             )
                         ->end()
                         ->validate()
-                            ->ifTrue(function ($v) use ($booleanOrExpressionValidator): bool {
-                                return isset($v['redirect']['keep_request_method']) && !$booleanOrExpressionValidator($v['redirect']['keep_request_method']);
-                            })
+                            ->ifTrue(static fn ($v): bool => isset($v['redirect']['keep_request_method']) && !$booleanOrExpressionValidator($v['redirect']['keep_request_method']))
                             ->thenInvalid(
                                 'Option "keep_request_method" must be a boolean or a language expression string.',
                             )

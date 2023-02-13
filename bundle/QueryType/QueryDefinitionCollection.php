@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Netgen\Bundle\IbexaSiteApiBundle\QueryType;
 
 use OutOfBoundsException;
+
 use function array_key_exists;
 
 /**
@@ -36,9 +37,9 @@ final class QueryDefinitionCollection
     /**
      * Return QueryDefinition by given $name.
      *
-     * @throws \OutOfBoundsException if no QueryDefinition with given $name is found
-     *
      * @return \Netgen\Bundle\IbexaSiteApiBundle\QueryType\QueryDefinition
+     *
+     * @throws \OutOfBoundsException if no QueryDefinition with given $name is found
      */
     public function get(string $name): QueryDefinition
     {

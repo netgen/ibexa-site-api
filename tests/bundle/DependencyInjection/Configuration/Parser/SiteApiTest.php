@@ -13,6 +13,7 @@ use Symfony\Component\Config\Definition\Exception\InvalidTypeException;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\Yaml\Yaml;
+
 use function file_get_contents;
 use function preg_quote;
 
@@ -32,7 +33,7 @@ final class SiteApiTest extends AbstractParserTestCase
 
         $loader = new YamlFileLoader(
             $this->container,
-            new FileLocator(__DIR__ . '/../../Fixtures')
+            new FileLocator(__DIR__ . '/../../Fixtures'),
         );
 
         $loader->load('parameters.yaml');
@@ -553,7 +554,7 @@ final class SiteApiTest extends AbstractParserTestCase
     {
         return [
             [
-                "string",
+                'string',
                 InvalidConfigurationException::class,
                 'Expected "bool", but got "string"',
             ],
@@ -572,6 +573,8 @@ final class SiteApiTest extends AbstractParserTestCase
 
     /**
      * @dataProvider providerForTestCrossSiteaccessRoutingBoolConfigurationInvalid
+     *
+     * @param mixed $configurationValue
      */
     public function testCrossSiteaccessRoutingEnabledConfigurationInvalid(
         $configurationValue,
@@ -597,6 +600,8 @@ final class SiteApiTest extends AbstractParserTestCase
 
     /**
      * @dataProvider providerForTestCrossSiteaccessRoutingBoolConfigurationInvalid
+     *
+     * @param mixed $configurationValue
      */
     public function testCrossSiteaccessRoutingPreferMainLanguageConfigurationInvalid(
         $configurationValue,
@@ -624,13 +629,13 @@ final class SiteApiTest extends AbstractParserTestCase
     {
         return [
             [
-                "string",
+                'string',
                 InvalidConfigurationException::class,
                 'Expected "array", but got "string"',
             ],
             [
                 [
-                    "string",
+                    'string',
                 ],
                 InvalidConfigurationException::class,
                 'Expected "int", but got "string"',
@@ -652,6 +657,8 @@ final class SiteApiTest extends AbstractParserTestCase
 
     /**
      * @dataProvider providerForTestCrossSiteaccessRoutingExternalSubtreeRootsConfigurationInvalid
+     *
+     * @param mixed $configurationValue
      */
     public function testCrossSiteaccessRoutingExternalSubtreeRootsConfigurationInvalid(
         $configurationValue,
@@ -707,6 +714,8 @@ final class SiteApiTest extends AbstractParserTestCase
 
     /**
      * @dataProvider providerForTestCrossSiteaccessRoutingStringsConfigurationInvalid
+     *
+     * @param mixed $configurationValue
      */
     public function testCrossSiteaccessRoutingIncludedSiteaccessesConfigurationInvalid(
         $configurationValue,
@@ -732,6 +741,8 @@ final class SiteApiTest extends AbstractParserTestCase
 
     /**
      * @dataProvider providerForTestCrossSiteaccessRoutingStringsConfigurationInvalid
+     *
+     * @param mixed $configurationValue
      */
     public function testCrossSiteaccessRoutingIncludedSiteaccessGroupsConfigurationInvalid(
         $configurationValue,
@@ -757,6 +768,8 @@ final class SiteApiTest extends AbstractParserTestCase
 
     /**
      * @dataProvider providerForTestCrossSiteaccessRoutingStringsConfigurationInvalid
+     *
+     * @param mixed $configurationValue
      */
     public function testCrossSiteaccessRoutingExcludedSiteaccessesConfigurationInvalid(
         $configurationValue,
@@ -782,6 +795,8 @@ final class SiteApiTest extends AbstractParserTestCase
 
     /**
      * @dataProvider providerForTestCrossSiteaccessRoutingStringsConfigurationInvalid
+     *
+     * @param mixed $configurationValue
      */
     public function testCrossSiteaccessRoutingExcludedSiteaccessGroupsConfigurationInvalid(
         $configurationValue,
@@ -911,6 +926,8 @@ final class SiteApiTest extends AbstractParserTestCase
 
     /**
      * @dataProvider providerForTestCrossSiteaccessRoutingConfigurationValid
+     *
+     * @param mixed $configurationValues
      */
     public function testCrossSiteaccessRoutingConfigurationValid($configurationValues, array $expectedConfigurationValues): void
     {

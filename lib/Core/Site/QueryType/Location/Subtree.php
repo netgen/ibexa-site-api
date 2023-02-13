@@ -12,6 +12,7 @@ use Netgen\IbexaSiteApi\API\Values\Location as SiteLocation;
 use Netgen\IbexaSiteApi\Core\Site\QueryType\CriterionDefinition;
 use Netgen\IbexaSiteApi\Core\Site\QueryType\Location;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+
 use function array_map;
 use function is_array;
 
@@ -75,9 +76,9 @@ final class Subtree extends Location
     /**
      * {@inheritdoc}
      *
-     * @throws \InvalidArgumentException
-     *
      * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion[]
+     *
+     * @throws \InvalidArgumentException
      */
     protected function getFilterCriteria(array $parameters): array
     {

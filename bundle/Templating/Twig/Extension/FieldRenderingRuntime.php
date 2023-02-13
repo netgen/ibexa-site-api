@@ -34,9 +34,9 @@ class FieldRenderingRuntime
      *
      * @param array $params An array of parameters to pass to the field view
      *
-     * @throws InvalidArgumentException
-     *
      * @return string The HTML markup
+     *
+     * @throws InvalidArgumentException
      */
     public function renderField(Field $field, array $params = []): string
     {

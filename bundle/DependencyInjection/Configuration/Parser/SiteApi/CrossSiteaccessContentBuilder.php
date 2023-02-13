@@ -7,6 +7,11 @@ namespace Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Configuration\Par
 use Symfony\Component\Config\Definition\Builder\NodeBuilder;
 use Symfony\Component\Config\Definition\Exception\InvalidTypeException;
 
+use function gettype;
+use function is_bool;
+use function is_int;
+use function is_string;
+
 class CrossSiteaccessContentBuilder
 {
     public static function build(NodeBuilder $nodeBuilder): void
@@ -35,7 +40,7 @@ class CrossSiteaccessContentBuilder
                                 ->always(static function ($v) {
                                     if (!is_string($v)) {
                                         throw new InvalidTypeException(
-                                            'Invalid type for path "ng_site_api.cross_siteaccess_content.included_siteaccesses". Expected "string", but got "' . gettype($v) . '".'
+                                            'Invalid type for path "ng_site_api.cross_siteaccess_content.included_siteaccesses". Expected "string", but got "' . gettype($v) . '".',
                                         );
                                     }
 
@@ -52,7 +57,7 @@ class CrossSiteaccessContentBuilder
                                 ->always(static function ($v) {
                                     if (!is_string($v)) {
                                         throw new InvalidTypeException(
-                                            'Invalid type for path "ng_site_api.cross_siteaccess_content.included_siteaccess_groups". Expected "string", but got "' . gettype($v) . '".'
+                                            'Invalid type for path "ng_site_api.cross_siteaccess_content.included_siteaccess_groups". Expected "string", but got "' . gettype($v) . '".',
                                         );
                                     }
 
@@ -69,7 +74,7 @@ class CrossSiteaccessContentBuilder
                                 ->always(static function ($v) {
                                     if (!is_string($v)) {
                                         throw new InvalidTypeException(
-                                            'Invalid type for path "ng_site_api.cross_siteaccess_content.excluded_siteaccesses". Expected "string", but got "' . gettype($v) . '".'
+                                            'Invalid type for path "ng_site_api.cross_siteaccess_content.excluded_siteaccesses". Expected "string", but got "' . gettype($v) . '".',
                                         );
                                     }
 
@@ -86,7 +91,7 @@ class CrossSiteaccessContentBuilder
                                 ->always(static function ($v) {
                                     if (!is_string($v)) {
                                         throw new InvalidTypeException(
-                                            'Invalid type for path "ng_site_api.cross_siteaccess_content.excluded_siteaccess_groups". Expected "string", but got "' . gettype($v) . '".'
+                                            'Invalid type for path "ng_site_api.cross_siteaccess_content.excluded_siteaccess_groups". Expected "string", but got "' . gettype($v) . '".',
                                         );
                                     }
 

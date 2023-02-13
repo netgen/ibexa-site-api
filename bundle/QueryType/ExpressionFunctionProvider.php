@@ -6,6 +6,7 @@ namespace Netgen\Bundle\IbexaSiteApiBundle\QueryType;
 
 use Symfony\Component\ExpressionLanguage\ExpressionFunction;
 use Symfony\Component\ExpressionLanguage\ExpressionFunctionProviderInterface;
+
 use function array_filter;
 use function array_map;
 use function array_values;

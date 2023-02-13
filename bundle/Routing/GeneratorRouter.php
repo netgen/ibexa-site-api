@@ -26,9 +26,8 @@ use Symfony\Component\Routing\Matcher\RequestMatcherInterface;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\Route as SymfonyRoute;
 use Symfony\Component\Routing\RouteCollection;
-use function strlen;
-use function strpos;
-use function substr;
+
+use function is_object;
 
 /**
  * @final
@@ -82,27 +81,6 @@ class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
         return $this->resolveSiteaccessAndGenerate($location, $parameters, $referenceType);
     }
 
-    /**
-     * @throws \Exception
-     */
-    private function resolveSiteaccessAndGenerate(APILocation $location, array $parameters, int $referenceType): string
-    {
-        $parameters['siteaccess'] = $this->siteaccessResolver->resolveByLocation($location);
-
-        $url = $this->generator->generate($location, $parameters, UrlGeneratorInterface::ABSOLUTE_URL);
-
-        if ($referenceType === UrlGeneratorInterface::RELATIVE_PATH) {
-            $host = $this->requestContext->getHost();
-            $hostLength = strlen($host);
-
-            if (strpos($url, $host) === 0) {
-                return substr($url, $hostLength);
-            }
-        }
-
-        return $url;
-    }
-
     public function supports($name): bool
     {
         if (is_object($name)) {
@@ -112,17 +90,6 @@ class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
         return $name === CoreUrlAliasRouter::URL_ALIAS_ROUTE_NAME
             || $name === RouteObjectInterface::OBJECT_BASED_ROUTE_NAME
             || $name === '';
-    }
-
-    private function supportsObject($object): bool
-    {
-        return
-            $object instanceof Content
-            || $object instanceof ContentInfo
-            || $object instanceof Location
-            || $object instanceof APIContent
-            || $object instanceof APIContentInfo
-            || $object instanceof APILocation;
     }
 
     public function setContext(RequestContext $context): void
@@ -164,6 +131,38 @@ class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
         return $name;
     }
 
+    /**
+     * @throws \Exception
+     */
+    private function resolveSiteaccessAndGenerate(APILocation $location, array $parameters, int $referenceType): string
+    {
+        $parameters['siteaccess'] = $this->siteaccessResolver->resolveByLocation($location);
+
+        $url = $this->generator->generate($location, $parameters, UrlGeneratorInterface::ABSOLUTE_URL);
+
+        if ($referenceType === UrlGeneratorInterface::RELATIVE_PATH) {
+            $host = $this->requestContext->getHost();
+            $hostLength = mb_strlen($host);
+
+            if (mb_strpos($url, $host) === 0) {
+                return mb_substr($url, $hostLength);
+            }
+        }
+
+        return $url;
+    }
+
+    private function supportsObject($object): bool
+    {
+        return
+            $object instanceof Content
+            || $object instanceof ContentInfo
+            || $object instanceof Location
+            || $object instanceof APIContent
+            || $object instanceof APIContentInfo
+            || $object instanceof APILocation;
+    }
+
     private function resolveLocation(string $name, array $parameters): APILocation
     {
         $routeObject = $parameters[RouteObjectInterface::ROUTE_OBJECT] ?? null;
@@ -191,7 +190,7 @@ class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
 
         if (isset($parameters['locationId'])) {
             return $this->repository->sudo(
-                fn (): APILocation => $this->repository->getLocationService()->loadLocation($parameters['locationId'], [])
+                fn (): APILocation => $this->repository->getLocationService()->loadLocation($parameters['locationId'], []),
             );
         }
 
@@ -219,7 +218,7 @@ class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
                     $contentInfo = $this->repository->getContentService()->loadContentInfo($parameters['contentId']);
 
                     return $this->repository->getLocationService()->loadLocation($contentInfo->mainLocationId, []);
-                }
+                },
             );
         }
 
@@ -259,7 +258,7 @@ class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
     {
         if ($location === null) {
             throw new LogicException(
-                'Cannot generate an UrlAlias route for Content without the main Location'
+                'Cannot generate an UrlAlias route for Content without the main Location',
             );
         }
 

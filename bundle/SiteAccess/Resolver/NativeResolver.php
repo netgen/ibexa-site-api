@@ -12,10 +12,16 @@ use Ibexa\Core\MVC\Symfony\SiteAccess;
 use Netgen\Bundle\IbexaSiteApiBundle\SiteAccess\Resolver;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
+
 use function array_fill_keys;
+use function array_key_first;
 use function array_keys;
 use function array_map;
 use function in_array;
+use function ksort;
+use function reset;
+
+use const SORT_NUMERIC;
 
 /**
  * Default implementation of the CrossSiteaccessResolver.
@@ -37,7 +43,7 @@ class NativeResolver extends Resolver
 
     private array $cache = [];
 
-    public function __construct(Handler $persistenceHandler, int $recursionLimit, LoggerInterface $logger = null)
+    public function __construct(Handler $persistenceHandler, int $recursionLimit, ?LoggerInterface $logger = null)
     {
         $this->persistenceHandler = $persistenceHandler;
         $this->recursionLimit = $recursionLimit;
@@ -52,7 +58,7 @@ class NativeResolver extends Resolver
         $this->configResolver = $configResolver;
     }
 
-    public function setSiteaccess(SiteAccess $currentSiteAccess = null): void
+    public function setSiteaccess(?SiteAccess $currentSiteAccess = null): void
     {
         $this->currentSiteaccess = $currentSiteAccess;
     }
@@ -306,9 +312,9 @@ class NativeResolver extends Resolver
     }
 
     /**
-     * @throws \Exception
-     *
      * @return string[]
+     *
+     * @throws \Exception
      */
     private function getLanguageSet(Location $location): array
     {
@@ -316,9 +322,9 @@ class NativeResolver extends Resolver
             $this->cache['location_available_language_set'][$location->id] = array_fill_keys(
                 $this->persistenceHandler->contentHandler()->loadVersionInfo(
                     $location->contentId,
-                    $location->contentInfo->currentVersionNo
+                    $location->contentInfo->currentVersionNo,
                 )->languageCodes,
-                true
+                true,
             );
         }
 
@@ -334,7 +340,7 @@ class NativeResolver extends Resolver
             $this->cache['prioritized_languages'][$siteaccess] = $this->configResolver->getParameter(
                 'languages',
                 null,
-                $siteaccess
+                $siteaccess,
             );
         }
 
@@ -383,7 +389,7 @@ class NativeResolver extends Resolver
             $rootLocationId = $this->configResolver->getParameter(
                 'content.tree_root.location_id',
                 null,
-                $siteaccess
+                $siteaccess,
             );
 
             $this->cache['siteaccess_root_location_id_map'][$currentSiteaccess][$siteaccess] = $rootLocationId;
@@ -442,7 +448,7 @@ class NativeResolver extends Resolver
     {
         $excludedSiteaccessSet = array_fill_keys(
             $this->getParameter('excluded_siteaccesses'),
-            true
+            true,
         );
 
         if (isset($excludedSiteaccessSet[$siteaccess])) {
@@ -451,7 +457,7 @@ class NativeResolver extends Resolver
 
         $excludedSiteaccessGroupSet = array_fill_keys(
             $this->getParameter('excluded_siteaccess_groups'),
-            true
+            true,
         );
 
         $siteaccessGroups = $this->siteaccessGroupsBySiteaccess[$siteaccess] ?? [];

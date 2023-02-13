@@ -17,6 +17,7 @@ use Netgen\Bundle\IbexaSiteApiBundle\View\Redirect\RedirectConfiguration;
 use Netgen\Bundle\IbexaSiteApiBundle\View\Redirect\Resolver;
 use Symfony\Bundle\FrameworkBundle\Controller\RedirectController;
 use Symfony\Component\HttpKernel\Controller\ControllerReference;
+
 use function array_key_exists;
 use function is_array;
 use function preg_replace;

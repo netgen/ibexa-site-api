@@ -15,6 +15,7 @@ use Netgen\TagsBundle\API\Repository\TagsService;
 use Netgen\TagsBundle\API\Repository\Values\Tags\Tag;
 use OutOfBoundsException;
 use RuntimeException;
+
 use function is_int;
 use function is_string;
 

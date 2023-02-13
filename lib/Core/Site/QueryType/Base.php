@@ -14,6 +14,7 @@ use Netgen\IbexaSiteApi\API\Settings;
 use Netgen\IbexaSiteApi\API\Values\Location as APILocation;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+
 use function array_key_exists;
 use function array_merge;
 use function count;
@@ -254,10 +255,10 @@ abstract class Base implements QueryType
     /**
      * Build criteria for the base supported options.
      *
+     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion[]
+     *
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion[]
      */
     private function buildBaseCriteria(array $parameters): array
     {
@@ -383,9 +384,9 @@ abstract class Base implements QueryType
     /**
      * Return an array of SortClause instances from the given $parameters.
      *
-     * @throws \InvalidArgumentException
-     *
      * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause[]
+     *
+     * @throws \InvalidArgumentException
      */
     private function getSortClauses(array $parameters): array
     {
