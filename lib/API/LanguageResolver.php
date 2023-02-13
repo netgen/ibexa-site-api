@@ -12,7 +12,7 @@ abstract class LanguageResolver
     /**
      * @throws \Netgen\IbexaSiteApi\Core\Site\Exceptions\TranslationNotMatchedException
      */
-    abstract public function resolveByLanguage(VersionInfo $versionInfo, string $languageCode): string;
+    abstract public function resolveForPreview(VersionInfo $versionInfo, string $languageCode): string;
 
     /**
      * @throws \Netgen\IbexaSiteApi\Core\Site\Exceptions\TranslationNotMatchedException
