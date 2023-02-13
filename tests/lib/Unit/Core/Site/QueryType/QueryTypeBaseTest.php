@@ -102,8 +102,6 @@ abstract class QueryTypeBaseTest extends TestCase
     abstract public function providerForTestGetQueryWithInvalidOptions();
 
     /**
-     * @group yyy
-     *
      * @dataProvider providerForTestGetQueryWithInvalidOptions
      */
     public function testGetQueryWithInvalidOptions(array $parameters): void
