@@ -63,8 +63,8 @@ Locations in the same Repository, but across different siteaccesses. It's intend
 Repository multisite installations, where single Repository contains Content intended for different
 siteaccesses. Typically, such siteaccesses are configured with different Content tree root
 Location IDs. The feature is implemented at the PHP API and Symfony Router level, and it will
-work automatically when enabled without requiring special considerations from the developer, both
-from PHP and Twig.
+work automatically when enabled (true by default) without requiring special considerations from
+the developer, both from PHP and Twig.
 
 However, several caveats apply:
 
