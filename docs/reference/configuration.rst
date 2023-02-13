@@ -72,25 +72,23 @@ However, several caveats apply:
 
     Search is not affected by Cross-siteaccess Content feature. The way search is implemented
     makes possible to find Content and Locations only for one language configuration, of
-    a single (current) siteaccess.
+    a single (current) siteaccess. Out of the box, it's possible to safely fetch such Content
+    only by loading it directly or by creating a relation to it.
 
     You can still search across the whole Repository, but, out of the box, doing that will not
     take into account the matching siteaccess language configuration of a specific Content item,
     or whether such Content item can be rendered or linked on a current siteaccess. Trying to
     take care of that post-search execution would only create inconsistencies in the result set.
 
-.. caution::
-
-    Given search is not the recommended way to obtain the Content from a different siteaccess,
-    it's possible to obtain such Content only by loading it directly or by creating a relation
-    to it.
+    The above means you can use search across siteaccesses, but if doing that it's best to
+    ensure that all siteaccesses share the same language configuration.
 
 .. caution::
 
     No provisions are made out of the box for rendering Content from a different
     siteaccess. This is possible if you take care of configuring the view to render
-    such Content on a current siteaccess, but otherwise, out of the box, such Content is only
-    safe for linking.
+    such Content on a current siteaccess, but otherwise, out of the box, such Content will only
+    be safe for linking.
 
 Cross-siteaccess Content is enabled by default, but if needed, it can be disabled per siteaccess
 with ``ng_site_api.cross_siteaccess_content.enabled`` configuration option:
