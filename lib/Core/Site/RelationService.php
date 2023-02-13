@@ -19,8 +19,6 @@ use function in_array;
 use function usort;
 
 /**
- * todo logging.
- *
  * @final
  *
  * @internal
