@@ -65,11 +65,6 @@ class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
         array $parameters = [],
         int $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH
     ): string {
-        $isSiteApiPrimaryContentView = $this->configResolver->getParameter('ng_site_api.site_api_is_primary_content_view');
-
-        if (!$isSiteApiPrimaryContentView) {
-            throw new RouteNotFoundException('Pass to the next router');
-        }
 
         $location = $this->resolveLocation($name, $parameters);
 
@@ -84,7 +79,9 @@ class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
             $parameters[RouteObjectInterface::ROUTE_OBJECT],
         );
 
-        if (isset($parameters['siteaccess'])) {
+        $isSiteApiPrimaryContentView = $this->configResolver->getParameter('ng_site_api.site_api_is_primary_content_view');
+
+        if (isset($parameters['siteaccess']) || !$isSiteApiPrimaryContentView) {
             return $this->generator->generate($location, $parameters, $referenceType);
         }
 
