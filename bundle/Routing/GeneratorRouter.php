@@ -140,12 +140,12 @@ class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
 
         $url = $this->generator->generate($location, $parameters, UrlGeneratorInterface::ABSOLUTE_URL);
 
-        if ($referenceType === UrlGeneratorInterface::RELATIVE_PATH) {
-            $host = $this->requestContext->getHost();
-            $hostLength = mb_strlen($host);
+        if ($referenceType === UrlGeneratorInterface::RELATIVE_PATH || $referenceType === UrlGeneratorInterface::ABSOLUTE_PATH) {
+            $prefix = $this->requestContext->getScheme() . '://' . $this->requestContext->getHost();
+            $prefixLength = mb_strlen($prefix);
 
-            if (mb_strpos($url, $host) === 0) {
-                return mb_substr($url, $hostLength);
+            if (mb_strpos($url, $prefix) === 0) {
+                return mb_substr($url, $prefixLength);
             }
         }
 
