@@ -6,6 +6,7 @@ services:
             - '@Ibexa\Core\MVC\Symfony\Routing\Generator\UrlAliasGenerator'
             - '@netgen.ibexa_site_api.siteaccess.resolver'
             - '@router.request_context'
+            - '@ibexa.config.resolver'
         tags:
             - { name: router, priority: 300 }
         lazy: true

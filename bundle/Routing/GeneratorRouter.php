@@ -8,6 +8,7 @@ use Ibexa\Contracts\Core\Repository\Repository;
 use Ibexa\Contracts\Core\Repository\Values\Content\Content as APIContent;
 use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo as APIContentInfo;
 use Ibexa\Contracts\Core\Repository\Values\Content\Location as APILocation;
+use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Core\MVC\Symfony\Routing\Generator\UrlAliasGenerator;
 use Ibexa\Core\MVC\Symfony\Routing\UrlAliasRouter as CoreUrlAliasRouter;
 use LogicException;
@@ -40,17 +41,20 @@ class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
     private UrlAliasGenerator $generator;
     private Resolver $siteaccessResolver;
     private RequestContext $requestContext;
+    private ConfigResolverInterface $configResolver;
 
     public function __construct(
         Repository $repository,
         UrlAliasGenerator $generator,
         Resolver $siteaccessResolver,
-        RequestContext $requestContext
+        RequestContext $requestContext,
+        ConfigResolverInterface $configResolver
     ) {
         $this->repository = $repository;
         $this->generator = $generator;
         $this->siteaccessResolver = $siteaccessResolver;
         $this->requestContext = $requestContext;
+        $this->configResolver = $configResolver;
     }
 
     /**
@@ -61,6 +65,12 @@ class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
         array $parameters = [],
         int $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH
     ): string {
+        $isSiteApiPrimaryContentView = $this->configResolver->getParameter('ng_site_api.site_api_is_primary_content_view');
+
+        if (!$isSiteApiPrimaryContentView) {
+            throw new RouteNotFoundException('Pass to the next router');
+        }
+
         $location = $this->resolveLocation($name, $parameters);
 
         unset(

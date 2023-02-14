@@ -13,6 +13,7 @@ use Symfony\Component\Routing\RouterInterface;
 class UrlAliasGenerator extends BaseUrlAliasGenerator
 {
     private Repository $repository;
+    private ConfigResolverInterface $configResolver;
 
     public function __construct(
         Repository $repository,
@@ -23,10 +24,17 @@ class UrlAliasGenerator extends BaseUrlAliasGenerator
         parent::__construct($repository, $defaultRouter, $configResolver, $unsafeCharMap);
 
         $this->repository = $repository;
+        $this->configResolver = $configResolver;
     }
 
     public function loadLocation($locationId): Location
     {
+        $isSiteApiPrimaryContentView = $this->configResolver->getParameter('ng_site_api.site_api_is_primary_content_view');
+
+        if (!$isSiteApiPrimaryContentView) {
+            return parent::loadLocation($locationId);
+        }
+
         return $this->repository->sudo(
             static fn (Repository $repository) => $repository->getLocationService()->loadLocation($locationId, []),
         );
