@@ -59,6 +59,7 @@ services:
             - '@ibexa.api.repository'
             - '@netgen.ibexa_site_api.repository.filtering_search_service'
             - '@netgen.ibexa_site_api.plugins.field_type.relation_resolver.registry'
+            - '@netgen.ibexa_site_api.url_generator'
             - '@?logger'
         lazy: true
         tags:
@@ -96,3 +97,6 @@ services:
         class: Netgen\IbexaSiteApi\Core\Site\LanguageResolver
         arguments:
             - '@netgen.ibexa_site_api.settings'
+
+    netgen.ibexa_site_api.core.url_generator:
+        class: Netgen\IbexaSiteApi\Core\Site\Routing\UrlGenerator

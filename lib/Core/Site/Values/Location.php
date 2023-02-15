@@ -20,6 +20,7 @@ use Netgen\IbexaSiteApi\API\Site;
 use Netgen\IbexaSiteApi\API\Values\Content as APIContent;
 use Netgen\IbexaSiteApi\API\Values\ContentInfo as APIContentInfo;
 use Netgen\IbexaSiteApi\API\Values\Location as APILocation;
+use Netgen\IbexaSiteApi\API\Values\Url;
 use Netgen\IbexaSiteApi\Core\Site\DomainObjectMapper;
 use Netgen\IbexaSiteApi\Core\Site\Pagination\Pagerfanta\FilterAdapter;
 use Pagerfanta\Pagerfanta;
@@ -38,6 +39,7 @@ final class Location extends APILocation
     private readonly VersionInfo $innerVersionInfo;
     private readonly Site $site;
     private readonly DomainObjectMapper $domainObjectMapper;
+    private ?Url $url = null;
 
     public function __construct(
         array $properties,
@@ -84,6 +86,9 @@ final class Location extends APILocation
 
             case 'isVisible':
                 return !$this->innerLocation->hidden && !$this->innerLocation->invisible;
+
+            case 'url':
+                return $this->getUrl();
         }
 
         if (property_exists($this, $property)) {
@@ -110,6 +115,7 @@ final class Location extends APILocation
             case 'parent':
             case 'content':
             case 'isVisible':
+            case 'url':
                 return true;
         }
 
@@ -267,5 +273,14 @@ final class Location extends APILocation
         }
 
         return $this->contentInfo;
+    }
+
+    private function getUrl(): Url
+    {
+        if ($this->url === null) {
+            $this->url = $this->domainObjectMapper->mapUrl($this);
+        }
+
+        return $this->url;
     }
 }

@@ -22,6 +22,7 @@ use Netgen\IbexaSiteApi\API\Values\Content as APIContent;
 use Netgen\IbexaSiteApi\API\Values\ContentInfo as APIContentInfo;
 use Netgen\IbexaSiteApi\API\Values\Field as APIField;
 use Netgen\IbexaSiteApi\API\Values\Location as APILocation;
+use Netgen\IbexaSiteApi\API\Values\Url;
 use Netgen\IbexaSiteApi\Core\Site\DomainObjectMapper;
 use Netgen\IbexaSiteApi\Core\Site\Pagination\Pagerfanta\FilterAdapter;
 use Pagerfanta\Adapter\ArrayAdapter;
@@ -47,6 +48,7 @@ final class Content extends APIContent
     private ?APIContentInfo $contentInfo = null;
     private ?RepoContent $innerContent = null;
     private ?APILocation $internalMainLocation = null;
+    private ?Url $url = null;
 
     private Site $site;
     private DomainObjectMapper $domainObjectMapper;
@@ -111,6 +113,7 @@ final class Content extends APIContent
             'modifier' => $this->getModifier(),
             'innerModifierUser' => $this->getInnerModifierUser(),
             'isVisible' => $this->getContentInfo()->isVisible,
+            'url' => $this->getUrl(),
             default => parent::__get($property),
         };
     }
@@ -132,7 +135,8 @@ final class Content extends APIContent
             'innerOwnerUser',
             'modifier',
             'innerModifierUser',
-            'isVisible' => true,
+            'isVisible',
+            'url' => true,
             default => parent::__isset($property),
         };
     }
@@ -382,6 +386,15 @@ final class Content extends APIContent
         }
 
         return $this->contentInfo;
+    }
+
+    private function getUrl(): Url
+    {
+        if ($this->url === null) {
+            $this->url = $this->domainObjectMapper->mapUrl($this);
+        }
+
+        return $this->url;
     }
 
     private function getOwner(): ?APIContent

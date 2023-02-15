@@ -23,7 +23,9 @@ services:
 
     netgen.ibexa_site_api.site:
         alias: 'netgen.ibexa_site_api.core.site'
-        public: true
+
+    netgen.ibexa_site_api.url_generator:
+        alias: 'netgen.ibexa_site_api.core.url_generator'
 
     netgen.ibexa_site_api.language_resolver:
         alias: netgen.ibexa_site_api.language_resolver.core
