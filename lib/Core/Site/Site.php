@@ -12,6 +12,7 @@ use Netgen\IbexaSiteApi\API\FilterService as APIFilterService;
 use Netgen\IbexaSiteApi\API\FindService as APIFindService;
 use Netgen\IbexaSiteApi\API\LanguageResolver as APILanguageResolver;
 use Netgen\IbexaSiteApi\API\LoadService as APILoadService;
+use Netgen\IbexaSiteApi\API\Routing\UrlGenerator;
 use Netgen\IbexaSiteApi\API\RelationService as APIRelationService;
 use Netgen\IbexaSiteApi\API\Settings as BaseSettings;
 use Netgen\IbexaSiteApi\API\Site as SiteInterface;
@@ -46,6 +47,7 @@ class Site implements SiteInterface
         private readonly Repository $repository,
         private readonly SearchService $filteringSearchService,
         private readonly RelationResolverRegistry $relationResolverRegistry,
+        private readonly UrlGenerator $urlGenerator,
         private readonly LoggerInterface $logger = new NullLogger(),
     ) {
         $this->contentService = $repository->getContentService();
@@ -122,6 +124,7 @@ class Site implements SiteInterface
             $this->domainObjectMapper = new DomainObjectMapper(
                 $this,
                 $this->repository,
+                $this->urlGenerator,
                 $this->settings->failOnMissingField,
                 $this->logger,
             );

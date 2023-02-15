@@ -10,9 +10,11 @@ use Ibexa\Contracts\Core\Repository\Repository;
 use Ibexa\Contracts\Core\Repository\Values\Content\Field as RepoField;
 use Ibexa\Contracts\Core\Repository\Values\Content\Location as RepoLocation;
 use Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo;
+use Netgen\IbexaSiteApi\API\Routing\UrlGenerator;
 use Netgen\IbexaSiteApi\API\Site as SiteInterface;
 use Netgen\IbexaSiteApi\API\Values\Content as SiteContent;
 use Netgen\IbexaSiteApi\API\Values\Field as APIField;
+use Netgen\IbexaSiteApi\API\Values\Url;
 use Netgen\IbexaSiteApi\Core\Site\Values\Content;
 use Netgen\IbexaSiteApi\Core\Site\Values\ContentInfo;
 use Netgen\IbexaSiteApi\Core\Site\Values\Field;
@@ -36,6 +38,7 @@ final class DomainObjectMapper
     public function __construct(
         private readonly SiteInterface $site,
         private readonly Repository $repository,
+        private readonly UrlGenerator $urlGenerator,
         private readonly bool $failOnMissingField,
         private readonly LoggerInterface $logger,
     ) {
@@ -103,6 +106,11 @@ final class DomainObjectMapper
             ],
             $this->logger,
         );
+    }
+
+    public function mapUrl(Location|Content $object): Url
+    {
+        return new Url($this->urlGenerator, $object);
     }
 
     /**

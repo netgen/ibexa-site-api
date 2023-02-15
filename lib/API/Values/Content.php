@@ -21,6 +21,7 @@ use Pagerfanta\Pagerfanta;
  * @property-read ?string $name
  * @property-read string $languageCode
  * @property-read bool $isVisible
+ * @property-read \Netgen\IbexaSiteApi\API\Values\Url $url
  * @property-read \Netgen\IbexaSiteApi\API\Values\ContentInfo $contentInfo
  * @property-read \Netgen\IbexaSiteApi\API\Values\Field[]|\Netgen\IbexaSiteApi\API\Values\Fields $fields
  * @property-read ?\Netgen\IbexaSiteApi\API\Values\Location $mainLocation

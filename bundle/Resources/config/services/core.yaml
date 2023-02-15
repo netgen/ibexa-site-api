@@ -18,3 +18,11 @@ services:
 
     netgen.ibexa_site_api.language_resolver:
         alias: netgen.ibexa_site_api.language_resolver.symfony
+
+    netgen.ibexa_site_api.url_generator.symfony:
+        class: Netgen\Bundle\IbexaSiteApiBundle\Core\Site\Routing\UrlGenerator
+        arguments:
+            - '@router'
+
+    netgen.ibexa_site_api.url_generator:
+        alias: 'netgen.ibexa_site_api.url_generator.symfony'
