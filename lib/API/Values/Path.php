@@ -32,6 +32,11 @@ final class Path
         $this->object = $object;
     }
 
+    public function __toString(): string
+    {
+        return $this->getAbsolute();
+    }
+
     /**
      * @uses UrlGenerator::ABSOLUTE_PATH
      */
@@ -48,7 +53,7 @@ final class Path
         return $this->urlGenerator->generate(
             $this->object,
             $parameters,
-            UrlGenerator::NETWORK_PATH
+            UrlGenerator::NETWORK_PATH,
         );
     }
 
@@ -60,12 +65,7 @@ final class Path
         return $this->urlGenerator->generate(
             $this->object,
             $parameters,
-            UrlGenerator::RELATIVE_PATH
+            UrlGenerator::RELATIVE_PATH,
         );
-    }
-
-    public function __toString(): string
-    {
-        return $this->getAbsolute();
     }
 }

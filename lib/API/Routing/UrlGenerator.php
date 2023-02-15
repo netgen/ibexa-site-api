@@ -44,6 +44,6 @@ abstract class UrlGenerator
     abstract public function generate(
         object $object,
         array $parameters = [],
-        int $referenceType = UrlGenerator::ABSOLUTE_PATH
+        int $referenceType = self::ABSOLUTE_PATH
     ): string;
 }

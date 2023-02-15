@@ -218,6 +218,16 @@ final class Location extends APILocation
         return $sortClauses;
     }
 
+    public function getPath(array $parameters = []): string
+    {
+        return $this->internalGetPath()->getAbsolute($parameters);
+    }
+
+    public function getUrl(array $parameters = []): string
+    {
+        return $this->internalGetUrl()->get($parameters);
+    }
+
     private function getFilterPager(array $criteria, int $maxPerPage = 25, int $currentPage = 1): Pagerfanta
     {
         try {
@@ -301,15 +311,5 @@ final class Location extends APILocation
         }
 
         return $this->url;
-    }
-
-    public function getPath(array $parameters = []): string
-    {
-        return $this->internalGetPath()->getAbsolute($parameters);
-    }
-
-    public function getUrl(array $parameters = []): string
-    {
-        return $this->internalGetUrl()->get($parameters);
     }
 }

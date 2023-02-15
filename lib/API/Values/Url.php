@@ -30,6 +30,11 @@ final class Url
         $this->object = $object;
     }
 
+    public function __toString(): string
+    {
+        return $this->get();
+    }
+
     /**
      * @uses UrlGenerator::ABSOLUTE_URL
      */
@@ -38,12 +43,7 @@ final class Url
         return $this->urlGenerator->generate(
             $this->object,
             $parameters,
-            UrlGenerator::ABSOLUTE_URL
+            UrlGenerator::ABSOLUTE_URL,
         );
-    }
-
-    public function __toString(): string
-    {
-        return $this->get();
     }
 }
