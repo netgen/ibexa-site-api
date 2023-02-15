@@ -18,7 +18,7 @@ class UrlGenerator extends APIUrlGenerator
         int $referenceType = APIUrlGenerator::ABSOLUTE_PATH
     ): string {
         throw new RuntimeException(
-            'Intentionally not implemented: implement this method in your MVC integration layer'
+            'Intentionally not implemented: implement this method in your MVC integration layer',
         );
     }
 }
