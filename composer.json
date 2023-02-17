@@ -54,8 +54,6 @@
         "test-integration": "@php vendor/bin/phpunit --colors=always -c phpunit-integration-legacy.xml"
     },
     "config": {
-        "allow-plugins": {
-            "php-http/discovery": false
-        }
+        "allow-plugins": false
     }
 }
