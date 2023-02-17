@@ -18,6 +18,8 @@ use Symfony\Cmf\Component\Routing\RouteObjectInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Throwable;
 
+use function preg_match;
+
 class Link implements Converter
 {
     protected Repository $repository;
@@ -60,32 +62,32 @@ class Link implements Converter
                 try {
                     $hrefResolved = $this->generateUrlAliasForContentOrLocation(
                         $this->loadContent((int) $id),
-                        $fragment
+                        $fragment,
                     );
                 } catch (APINotFoundException) {
                     $this->logger->error(
-                        'While generating link for RichText, could not find Content with ID ' . $id
+                        'While generating link for RichText, could not find Content with ID ' . $id,
                     );
                 } catch (Throwable $throwable) {
                     $this->logger->error(
                         'While generating link for RichText, an error occurred when loading Content with ID ' .
-                        $id . ': ' . $throwable->getMessage()
+                        $id . ': ' . $throwable->getMessage(),
                     );
                 }
             } elseif ($scheme === 'ezlocation://') {
                 try {
                     $hrefResolved = $this->generateUrlAliasForContentOrLocation(
                         $this->loadLocation((int) $id),
-                        $fragment
+                        $fragment,
                     );
                 } catch (APINotFoundException) {
                     $this->logger->error(
-                        'While generating link for RichText, could not find Location with ID ' . $id
+                        'While generating link for RichText, could not find Location with ID ' . $id,
                     );
                 } catch (Throwable $throwable) {
                     $this->logger->error(
                         'While generating link for RichText, an error occurred when loading Location with ID ' .
-                        $id . ': ' . $throwable->getMessage()
+                        $id . ': ' . $throwable->getMessage(),
                     );
                 }
             } else {
@@ -134,7 +136,7 @@ class Link implements Converter
             RouteObjectInterface::OBJECT_BASED_ROUTE_NAME,
             [
                 RouteObjectInterface::ROUTE_OBJECT => $object,
-            ]
+            ],
         );
 
         return $urlAlias . $fragment;

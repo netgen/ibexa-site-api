@@ -29,6 +29,9 @@ use Symfony\Component\Routing\Route as SymfonyRoute;
 use Symfony\Component\Routing\RouteCollection;
 
 use function is_object;
+use function mb_strlen;
+use function mb_strpos;
+use function mb_substr;
 
 /**
  * @final
@@ -65,7 +68,6 @@ class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
         array $parameters = [],
         int $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH
     ): string {
-
         $location = $this->resolveLocation($name, $parameters);
 
         unset(
