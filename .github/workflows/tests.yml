@@ -16,20 +16,6 @@ jobs:
             fail-fast: false
             matrix:
                 include:
-                    - php: '7.4'
-                      phpunit: 'phpunit.xml'
-                      coverage: 'unit'
-                    - php: '7.4'
-                      phpunit: 'phpunit-integration-legacy.xml'
-                      coverage: 'integration'
-
-                    - php: '8.0'
-                      phpunit: 'phpunit.xml'
-                      coverage: 'unit'
-                    - php: '8.0'
-                      phpunit: 'phpunit-integration-legacy.xml'
-                      coverage: 'integration'
-
                     - php: '8.1'
                       phpunit: 'phpunit.xml'
                       coverage: 'unit'
