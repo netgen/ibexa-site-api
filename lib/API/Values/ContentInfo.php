@@ -26,12 +26,12 @@ use Ibexa\Contracts\Core\Repository\Values\ValueObject;
  * @property-read bool $alwaysAvailable
  * @property-read string $remoteId
  * @property-read string $mainLanguageCode
- * @property-read int $mainLocationId
- * @property-read string $name
+ * @property-read ?int $mainLocationId
+ * @property-read ?string $name
  * @property-read string $languageCode
  * @property-read string $contentTypeIdentifier
- * @property-read string $contentTypeName
- * @property-read string $contentTypeDescription
+ * @property-read ?string $contentTypeName
+ * @property-read ?string $contentTypeDescription
  * @property-read \Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo $innerContentInfo
  * @property-read \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType $innerContentType
  * @property-read ?\Netgen\IbexaSiteApi\API\Values\Location $mainLocation
