@@ -282,13 +282,7 @@ class ContentView extends AbstractParser
             );
         }
 
-        $replacedConfig = array_replace($baseConfig, $config);
-
-        if ($replacedConfig === null) {
-            throw new InvalidConfigurationException('Could not replace extended config');
-        }
-
-        $config = $replacedConfig;
+        $config = array_replace($baseConfig, $config);
     }
 
     private function restoreDefaultValues(array &$config): void

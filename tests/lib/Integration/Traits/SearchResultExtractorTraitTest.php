@@ -15,10 +15,7 @@ use Netgen\IbexaSiteApi\Tests\Integration\BaseTest;
  */
 final class SearchResultExtractorTraitTest extends BaseTest
 {
-    /**
-     * @var \Netgen\IbexaSiteApi\Tests\Integration\Traits\SearchResultExtractorStub
-     */
-    protected $stub;
+    protected SearchResultExtractorStub $stub;
 
     protected function setUp(): void
     {

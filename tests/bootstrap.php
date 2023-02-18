@@ -9,4 +9,4 @@ if (!\file_exists($file)) {
 
 \date_default_timezone_set('Europe/Zagreb');
 
-$autoload = require_once $file;
+require_once $file;

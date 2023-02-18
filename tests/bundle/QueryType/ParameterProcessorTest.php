@@ -263,11 +263,8 @@ final class ParameterProcessorTest extends TestCase
 
     /**
      * @dataProvider providerForTestProcess
-     *
-     * @param mixed $parameter
-     * @param mixed $expectedProcessedParameter
      */
-    public function testProcess($parameter, $expectedProcessedParameter): void
+    public function testProcess(mixed $parameter, mixed $expectedProcessedParameter): void
     {
         $parameterProcessor = $this->getParameterProcessorUnderTest();
         $viewMock = $this->getViewMock();
@@ -311,10 +308,7 @@ final class ParameterProcessorTest extends TestCase
         return new ParameterProcessor($expressionLanguage, $requestStack, $configResolver, $namedObjectProvider);
     }
 
-    /**
-     * @return \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getConfigResolverMock(): MockObject
+    protected function getConfigResolverMock(): ConfigResolverInterface|MockObject
     {
         $configResolverMock = $this->getMockBuilder(ConfigResolverInterface::class)->getMock();
 
@@ -342,10 +336,7 @@ final class ParameterProcessorTest extends TestCase
         return $configResolverMock;
     }
 
-    /**
-     * @return \Netgen\Bundle\IbexaSiteApiBundle\NamedObject\Provider|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getNamedObjectProviderMock(): MockObject
+    protected function getNamedObjectProviderMock(): Provider|MockObject
     {
         $namedObjectProviderMock = $this->getMockBuilder(Provider::class)->getMock();
 
@@ -376,10 +367,7 @@ final class ParameterProcessorTest extends TestCase
         return $namedObjectProviderMock;
     }
 
-    /**
-     * @return \Netgen\Bundle\IbexaSiteApiBundle\View\ContentView|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getViewMock(): MockObject
+    protected function getViewMock(): ContentView|MockObject
     {
         $viewMock = $this->getMockBuilder(ContentView::class)->getMock();
 

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\IbexaSiteApiBundle\Templating\Twig\Extension;
 
-use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
 use Ibexa\Core\MVC\Symfony\FieldType\View\ParameterProviderRegistryInterface;
 use Ibexa\Core\MVC\Symfony\Templating\Twig\FieldBlockRenderer;
 use Netgen\IbexaSiteApi\API\Values\Field;
@@ -35,8 +34,6 @@ class FieldRenderingRuntime
      * @param array $params An array of parameters to pass to the field view
      *
      * @return string The HTML markup
-     *
-     * @throws InvalidArgumentException
      */
     public function renderField(Field $field, array $params = []): string
     {

@@ -373,10 +373,7 @@ final class ChildrenTest extends QueryTypeBaseTest
         ];
     }
 
-    /**
-     * @return \Netgen\IbexaSiteApi\API\Site|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getSiteMock(): MockObject
+    protected function getSiteMock(): MockObject|Site
     {
         if ($this->siteMock !== null) {
             return $this->siteMock;

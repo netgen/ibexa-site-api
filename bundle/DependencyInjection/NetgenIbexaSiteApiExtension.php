@@ -33,11 +33,6 @@ class NetgenIbexaSiteApiExtension extends Extension implements PrependExtensionI
         return new Configuration($this->getAlias());
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @throws \Exception
-     */
     public function load(array $configs, ContainerBuilder $container): void
     {
         $activatedBundles = array_keys($container->getParameter('kernel.bundles'));

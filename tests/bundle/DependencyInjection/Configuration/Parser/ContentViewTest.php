@@ -23,9 +23,6 @@ use function preg_quote;
  */
 final class ContentViewTest extends AbstractParserTestCase
 {
-    /**
-     * @throws \Exception
-     */
     protected function setUp(): void
     {
         parent::setUp();

@@ -22,9 +22,6 @@ use PHPUnit\Framework\TestCase;
  */
 final class QueryExecutorTest extends TestCase
 {
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     */
     public function testExecuteContentFilterQuery(): void
     {
         $executor = $this->getQueryExecutorUnderTest();
@@ -41,9 +38,6 @@ final class QueryExecutorTest extends TestCase
         self::assertEquals($this->getFilterContentResult(), $result);
     }
 
-    /**
-     * @throws \Pagerfanta\Exception\Exception
-     */
     public function testExecuteContentPagedFilterQuery(): void
     {
         $executor = $this->getQueryExecutorUnderTest();
@@ -63,9 +57,6 @@ final class QueryExecutorTest extends TestCase
         self::assertTrue($result->getNormalizeOutOfRangePages());
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     */
     public function testExecuteContentFindQuery(): void
     {
         $executor = $this->getQueryExecutorUnderTest();
@@ -82,9 +73,6 @@ final class QueryExecutorTest extends TestCase
         self::assertEquals($this->getFindContentResult(), $result);
     }
 
-    /**
-     * @throws \Pagerfanta\Exception\Exception
-     */
     public function testExecuteContentPagedFindQuery(): void
     {
         $executor = $this->getQueryExecutorUnderTest();
@@ -104,9 +92,6 @@ final class QueryExecutorTest extends TestCase
         self::assertTrue($result->getNormalizeOutOfRangePages());
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     */
     public function testExecuteLocationFilterQuery(): void
     {
         $executor = $this->getQueryExecutorUnderTest();
@@ -123,9 +108,6 @@ final class QueryExecutorTest extends TestCase
         self::assertEquals($this->getFilterLocationsResult(), $result);
     }
 
-    /**
-     * @throws \Pagerfanta\Exception\Exception
-     */
     public function testExecuteLocationPagedFilterQuery(): void
     {
         $executor = $this->getQueryExecutorUnderTest();
@@ -145,9 +127,6 @@ final class QueryExecutorTest extends TestCase
         self::assertTrue($result->getNormalizeOutOfRangePages());
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     */
     public function testExecuteLocationFindQuery(): void
     {
         $executor = $this->getQueryExecutorUnderTest();
@@ -164,9 +143,6 @@ final class QueryExecutorTest extends TestCase
         self::assertEquals($this->getFindLocationsResult(), $result);
     }
 
-    /**
-     * @throws \Pagerfanta\Exception\Exception
-     */
     public function testExecuteLocationPagedFindQuery(): void
     {
         $executor = $this->getQueryExecutorUnderTest();

@@ -139,30 +139,21 @@ final class Loading extends Provider
         );
     }
 
-    /**
-     * @return string|int
-     */
-    private function getContentId(string $name)
+    private function getContentId(string $name): mixed
     {
         $this->setConfiguration();
 
         return $this->parameterProcessor->process($this->configuration['content'][$name] ?? null);
     }
 
-    /**
-     * @return string|int
-     */
-    private function getLocationId(string $name)
+    private function getLocationId(string $name): mixed
     {
         $this->setConfiguration();
 
         return $this->parameterProcessor->process($this->configuration['locations'][$name] ?? null);
     }
 
-    /**
-     * @return string|int
-     */
-    private function getTagId(string $name)
+    private function getTagId(string $name): mixed
     {
         $this->setConfiguration();
 

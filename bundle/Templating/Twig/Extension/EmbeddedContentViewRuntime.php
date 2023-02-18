@@ -20,10 +20,6 @@ class EmbeddedContentViewRuntime
 
     /**
      * Renders the HTML for a given $content.
-     *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
     public function renderEmbeddedContentView(string $viewType, array $parameters = []): string
     {

@@ -22,10 +22,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 final class Children extends Location
 {
-    /**
-     * @var \Psr\Log\LoggerInterface
-     */
-    protected $logger;
+    protected LoggerInterface $logger;
 
     public function __construct(Settings $settings, ?LoggerInterface $logger = null)
     {
@@ -39,12 +36,6 @@ final class Children extends Location
         return 'SiteAPI:Location/Children';
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @throws \Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException
-     * @throws \Symfony\Component\OptionsResolver\Exception\AccessException
-     */
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->remove(['depth', 'parent_location_id', 'subtree']);
@@ -68,11 +59,6 @@ final class Children extends Location
         );
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @throws \InvalidArgumentException
-     */
     protected function getFilterCriteria(array $parameters): Criterion
     {
         /** @var \Netgen\IbexaSiteApi\API\Values\Location $location */

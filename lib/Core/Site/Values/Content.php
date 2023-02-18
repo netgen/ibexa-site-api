@@ -96,45 +96,23 @@ final class Content extends APIContent
      * Magic getter for retrieving convenience properties.
      *
      * @param string $property The name of the property to retrieve
-     *
-     * @throws \Exception
      */
     public function __get($property)
     {
-        switch ($property) {
-            case 'fields':
-                return $this->fields;
-
-            case 'mainLocation':
-                return $this->getMainLocation();
-
-            case 'innerContent':
-                return $this->getInnerContent();
-
-            case 'versionInfo':
-            case 'innerVersionInfo':
-                return $this->innerVersionInfo;
-
-            case 'contentInfo':
-                return $this->getContentInfo();
-
-            case 'owner':
-                return $this->getOwner();
-
-            case 'innerOwnerUser':
-                return $this->getInnerOwnerUser();
-
-            case 'modifier':
-                return $this->getModifier();
-
-            case 'innerModifierUser':
-                return $this->getInnerModifierUser();
-
-            case 'isVisible':
-                return $this->getContentInfo()->isVisible;
-        }
-
-        return parent::__get($property);
+        return match ($property) {
+            'fields' => $this->fields,
+            'mainLocation' => $this->getMainLocation(),
+            'innerContent' => $this->getInnerContent(),
+            'versionInfo',
+            'innerVersionInfo' => $this->innerVersionInfo,
+            'contentInfo' => $this->getContentInfo(),
+            'owner' => $this->getOwner(),
+            'innerOwnerUser' => $this->getInnerOwnerUser(),
+            'modifier' => $this->getModifier(),
+            'innerModifierUser' => $this->getInnerModifierUser(),
+            'isVisible' => $this->getContentInfo()->isVisible,
+            default => parent::__get($property),
+        };
     }
 
     /**
@@ -144,26 +122,21 @@ final class Content extends APIContent
      */
     public function __isset($property): bool
     {
-        switch ($property) {
-            case 'contentInfo':
-            case 'fields':
-            case 'mainLocation':
-            case 'innerContent':
-            case 'versionInfo':
-            case 'owner':
-            case 'innerOwnerUser':
-            case 'modifier':
-            case 'innerModifierUser':
-            case 'isVisible':
-                return true;
-        }
-
-        return parent::__isset($property);
+        return match ($property) {
+            'contentInfo',
+            'fields',
+            'mainLocation',
+            'innerContent',
+            'versionInfo',
+            'owner',
+            'innerOwnerUser',
+            'modifier',
+            'innerModifierUser',
+            'isVisible' => true,
+            default => parent::__isset($property),
+        };
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     */
     public function __debugInfo(): array
     {
         return [
@@ -180,71 +153,36 @@ final class Content extends APIContent
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     */
     public function hasField(string $identifier): bool
     {
         return $this->fields->hasField($identifier);
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     */
     public function getField(string $identifier): APIField
     {
         return $this->fields->getField($identifier);
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     */
     public function hasFieldById($id): bool
     {
         return $this->fields->hasFieldById($id);
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     */
     public function getFieldById($id): APIField
     {
         return $this->fields->getFieldById($id);
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     */
     public function getFirstNonEmptyField(string $firstIdentifier, string ...$otherIdentifiers): APIField
     {
         return $this->fields->getFirstNonEmptyField($firstIdentifier, ...$otherIdentifiers);
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     */
     public function getFieldValue(string $identifier): Value
     {
         return $this->getField($identifier)->value;
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     */
     public function getFieldValueById($id): Value
     {
         return $this->getFieldById($id)->value;
@@ -362,11 +300,6 @@ final class Content extends APIContent
         return $pager;
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
-     */
     private function getMainLocation(): ?APILocation
     {
         if ($this->internalMainLocation === null && $this->mainLocationId !== null) {
@@ -378,14 +311,11 @@ final class Content extends APIContent
         return $this->internalMainLocation;
     }
 
-    /**
-     * @throws \Exception
-     */
     private function getInnerContent(): RepoContent
     {
         if ($this->innerContent === null) {
             $this->innerContent = $this->repository->sudo(
-                function (Repository $repository): RepoContent {
+                function (): RepoContent {
                     return $this->contentService->loadContent(
                         $this->id,
                         [$this->languageCode],
@@ -398,9 +328,6 @@ final class Content extends APIContent
         return $this->innerContent;
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     */
     private function getContentInfo(): APIContentInfo
     {
         if ($this->contentInfo === null) {
@@ -413,9 +340,6 @@ final class Content extends APIContent
         return $this->contentInfo;
     }
 
-    /**
-     * @throws \Exception
-     */
     private function getOwner(): ?APIContent
     {
         if ($this->isOwnerInitialized) {
@@ -423,10 +347,10 @@ final class Content extends APIContent
         }
 
         $this->owner = $this->repository->sudo(
-            function (Repository $repository): ?APIContent {
+            function (): ?APIContent {
                 try {
                     return $this->site->getLoadService()->loadContent($this->getContentInfo()->ownerId);
-                } catch (NotFoundException $e) {
+                } catch (NotFoundException) {
                     // Do nothing
                 }
 
@@ -447,7 +371,7 @@ final class Content extends APIContent
 
         try {
             $this->innerOwnerUser = $this->userService->loadUser($this->getContentInfo()->ownerId);
-        } catch (NotFoundException $e) {
+        } catch (NotFoundException) {
             // Do nothing
         }
 
@@ -456,9 +380,6 @@ final class Content extends APIContent
         return $this->innerOwnerUser;
     }
 
-    /**
-     * @throws \Exception
-     */
     private function getModifier(): ?APIContent
     {
         if ($this->isModifierInitialized) {
@@ -466,10 +387,10 @@ final class Content extends APIContent
         }
 
         $this->modifier = $this->repository->sudo(
-            function (Repository $repository): ?APIContent {
+            function (): ?APIContent {
                 try {
                     return $this->site->getLoadService()->loadContent($this->innerVersionInfo->creatorId);
-                } catch (NotFoundException $e) {
+                } catch (NotFoundException) {
                     // Do nothing
                 }
 
@@ -490,7 +411,7 @@ final class Content extends APIContent
 
         try {
             $this->innerModifierUser = $this->userService->loadUser($this->innerVersionInfo->creatorId);
-        } catch (NotFoundException $e) {
+        } catch (NotFoundException) {
             // Do nothing
         }
 

@@ -58,9 +58,6 @@ final class Fields extends APIFields
         $this->logger = $logger;
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     */
     public function __debugInfo(): array
     {
         $this->initialize();
@@ -68,11 +65,6 @@ final class Fields extends APIFields
         return $this->fieldsByIdentifier;
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     */
     public function getIterator(): Traversable
     {
         $this->initialize();
@@ -80,11 +72,6 @@ final class Fields extends APIFields
         return $this->iterator;
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     */
     public function offsetExists($offset): bool
     {
         $this->initialize();
@@ -93,9 +80,6 @@ final class Fields extends APIFields
             || array_key_exists($offset, $this->fieldsByNumericSequence);
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     */
     public function hasField(string $identifier): bool
     {
         $this->initialize();
@@ -103,11 +87,6 @@ final class Fields extends APIFields
         return array_key_exists($identifier, $this->fieldsByIdentifier);
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     */
     public function getField(string $identifier): APIField
     {
         if ($this->hasField($identifier)) {
@@ -125,11 +104,6 @@ final class Fields extends APIFields
         return $this->getSurrogateField($identifier, $this->content);
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     */
     public function offsetGet($offset): APIField
     {
         $this->initialize();
@@ -163,11 +137,6 @@ final class Fields extends APIFields
         throw new RuntimeException('Unsetting the field from the collection is not allowed');
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     */
     public function count(): int
     {
         $this->initialize();
@@ -175,11 +144,6 @@ final class Fields extends APIFields
         return count($this->fieldsByIdentifier);
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     */
     public function hasFieldById($id): bool
     {
         $this->initialize();
@@ -187,11 +151,6 @@ final class Fields extends APIFields
         return array_key_exists($id, $this->fieldsById);
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     */
     public function getFieldById($id): APIField
     {
         if ($this->hasFieldById($id)) {
@@ -209,11 +168,6 @@ final class Fields extends APIFields
         return $this->getSurrogateField((string) $id, $this->content);
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     */
     public function getFirstNonEmptyField(string $firstIdentifier, string ...$otherIdentifiers): APIField
     {
         $identifiers = array_merge([$firstIdentifier], $otherIdentifiers);
@@ -232,8 +186,6 @@ final class Fields extends APIFields
      * @param string[] $identifiers
      *
      * @return \Netgen\IbexaSiteApi\API\Values\Field[]
-     *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     private function getAvailableFields(array $identifiers): array
     {
@@ -248,9 +200,6 @@ final class Fields extends APIFields
         return $fields;
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     */
     private function initialize(): void
     {
         if ($this->areFieldsInitialized) {

@@ -30,8 +30,8 @@ use Symfony\Component\Routing\RouteCollection;
 
 use function is_object;
 use function mb_strlen;
-use function mb_strpos;
 use function mb_substr;
+use function str_starts_with;
 
 /**
  * @final
@@ -60,9 +60,6 @@ class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
         $this->configResolver = $configResolver;
     }
 
-    /**
-     * @throws \Exception
-     */
     public function generate(
         string $name,
         array $parameters = [],
@@ -140,9 +137,6 @@ class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
         return $name;
     }
 
-    /**
-     * @throws \Exception
-     */
     private function resolveSiteaccessAndGenerate(APILocation $location, array $parameters, int $referenceType): string
     {
         $parameters['siteaccess'] = $this->siteaccessResolver->resolveByLocation($location);
@@ -153,7 +147,7 @@ class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
             $prefix = $this->requestContext->getScheme() . '://' . $this->requestContext->getHost();
             $prefixLength = mb_strlen($prefix);
 
-            if (mb_strpos($url, $prefix) === 0) {
+            if (str_starts_with($url, $prefix)) {
                 return mb_substr($url, $prefixLength);
             }
         }

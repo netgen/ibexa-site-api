@@ -4,65 +4,30 @@ declare(strict_types=1);
 
 namespace Netgen\IbexaSiteApi\Core\Site\Values;
 
+use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo as RepositoryContentInfo;
+use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
+use Netgen\IbexaSiteApi\API\Site;
 use Netgen\IbexaSiteApi\API\Values\ContentInfo as APIContentInfo;
 use Netgen\IbexaSiteApi\API\Values\Location as APILocation;
 
-use function array_key_exists;
 use function property_exists;
 
 final class ContentInfo extends APIContentInfo
 {
-    /**
-     * @var string
-     */
-    protected $name;
-
-    /**
-     * @var string
-     */
-    protected $languageCode;
-
-    /**
-     * @var string
-     */
-    protected $contentTypeIdentifier;
-
-    /**
-     * @var string
-     */
-    protected $contentTypeName;
-
-    /**
-     * @var string
-     */
-    protected $contentTypeDescription;
-
-    /**
-     * @var \Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo
-     */
-    protected $innerContentInfo;
-
-    /**
-     * @var \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType
-     */
-    protected $innerContentType;
-
-    /**
-     * @var \Netgen\IbexaSiteApi\API\Site
-     */
-    private $site;
-
-    /**
-     * @var \Netgen\IbexaSiteApi\API\Values\Location
-     */
-    private $internalMainLocation;
+    protected ?string $name;
+    protected string $languageCode;
+    protected string $contentTypeIdentifier;
+    protected ?string $contentTypeName;
+    protected ?string $contentTypeDescription;
+    protected RepositoryContentInfo $innerContentInfo;
+    protected ContentType $innerContentType;
+    private Site $site;
+    private ?APILocation $internalMainLocation = null;
 
     public function __construct(array $properties = [])
     {
-        if (array_key_exists('site', $properties)) {
-            $this->site = $properties['site'];
-            unset($properties['site']);
-        }
+        $this->site = $properties['site'];
+        unset($properties['site']);
 
         parent::__construct($properties);
     }
@@ -72,11 +37,7 @@ final class ContentInfo extends APIContentInfo
      *
      * Magic getter for retrieving convenience properties.
      *
-     * @param string $property The name of the property to retrieve
-     *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
+     * @param string $property Name of the property to retrieve
      */
     public function __get($property)
     {
@@ -147,11 +108,6 @@ final class ContentInfo extends APIContentInfo
         ];
     }
 
-    /**
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     */
     private function getMainLocation(): ?APILocation
     {
         if ($this->internalMainLocation === null && $this->mainLocationId !== null) {

@@ -26,9 +26,6 @@ final class FilterAdapter extends BaseAdapter
         $this->filterService = $filterService;
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     */
     protected function executeQuery(Query $query): SearchResult
     {
         if ($query instanceof LocationQuery) {

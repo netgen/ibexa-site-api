@@ -18,11 +18,6 @@ final class LocationParamConverter extends SiteParamConverter
         return 'locationId';
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
-     */
     protected function loadValueObject(int $id): Location
     {
         return $this->loadService->loadLocation($id);

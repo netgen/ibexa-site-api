@@ -21,10 +21,6 @@ final class IbexaContentViewRuntime
 
     /**
      * Renders the HTML for a given $content.
-     *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     public function renderContentView(
         ValueObject $value,

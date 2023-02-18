@@ -77,14 +77,10 @@ class CustomQueryType extends Base
 
     protected function parseCustomSortString(string $string): ?SortClause
     {
-        switch ($string) {
-            case 'section':
-                return new SectionIdentifier();
-
-            case 'whatever':
-                return new SectionName();
-        }
-
-        return null;
+        return match ($string) {
+            'section' => new SectionIdentifier(),
+            'whatever' => new SectionName(),
+            default => null,
+        };
     }
 }

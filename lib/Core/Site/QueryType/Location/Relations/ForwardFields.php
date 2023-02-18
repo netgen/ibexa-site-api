@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Netgen\IbexaSiteApi\Core\Site\QueryType\Location\Relations;
 
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ContentId;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\MatchNone;
 use Netgen\IbexaSiteApi\API\Settings;
@@ -35,12 +36,6 @@ final class ForwardFields extends Location
         return 'SiteAPI:Location/Relations/ForwardFields';
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @throws \Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException
-     * @throws \Symfony\Component\OptionsResolver\Exception\AccessException
-     */
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setRequired([
@@ -57,14 +52,7 @@ final class ForwardFields extends Location
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @throws \LogicException
-     * @throws \OutOfBoundsException
-     * @throws \InvalidArgumentException
-     */
-    protected function getFilterCriteria(array $parameters)
+    protected function getFilterCriteria(array $parameters): Criterion|array|null
     {
         /** @var \Netgen\IbexaSiteApi\API\Values\Content $content */
         $content = $parameters['content'];
@@ -77,6 +65,7 @@ final class ForwardFields extends Location
             $idsGrouped[] = $relationResolver->getRelationIds($field);
         }
 
+        /** @var array $relatedContentIds */
         $relatedContentIds = array_merge(...$idsGrouped);
 
         if (empty($relatedContentIds)) {

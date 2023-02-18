@@ -20,6 +20,7 @@ final class SurrogateValueTest extends TestCase
 {
     public function testConstructWithArbitraryArguments(): void
     {
+        /** @noinspection PhpMethodParametersCountMismatchInspection */
         $value = new SurrogateValue(1, 2, 'three');
 
         self::assertInstanceOf(SurrogateValue::class, $value);
@@ -36,6 +37,7 @@ final class SurrogateValueTest extends TestCase
     {
         $value = new SurrogateValue();
 
+        /* @noinspection PhpUndefinedMethodInspection */
         self::assertNull($value->method());
     }
 

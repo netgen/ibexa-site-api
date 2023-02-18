@@ -67,11 +67,6 @@ final class Location extends APILocation
      * Magic getter for retrieving convenience properties.
      *
      * @param string $property The name of the property to retrieve
-     *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\PropertyNotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
      */
     public function __get($property)
     {
@@ -126,9 +121,6 @@ final class Location extends APILocation
         return parent::__isset($property);
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     */
     public function __debugInfo(): array
     {
         return [
@@ -218,9 +210,6 @@ final class Location extends APILocation
         return $this->getFilterPager($criteria, $maxPerPage, $currentPage);
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotImplementedException
-     */
     public function getSortClauses(): array
     {
         $sortClauses = [];
@@ -266,11 +255,6 @@ final class Location extends APILocation
         return $pager;
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
-     */
     private function getParent(): APILocation
     {
         if ($this->internalParent === null) {
@@ -294,9 +278,6 @@ final class Location extends APILocation
         return $this->internalContent;
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     */
     private function getContentInfo(): APIContentInfo
     {
         if ($this->contentInfo === null) {

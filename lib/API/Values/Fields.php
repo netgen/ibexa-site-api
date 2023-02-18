@@ -22,8 +22,6 @@ abstract class Fields implements IteratorAggregate, ArrayAccess, Countable
 
     /**
      * Return the field with the given $identifier.
-     *
-     * @return \Netgen\IbexaSiteApi\API\Values\Field
      */
     abstract public function getField(string $identifier): Field;
 

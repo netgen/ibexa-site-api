@@ -24,9 +24,6 @@ use function preg_quote;
  */
 final class SiteApiTest extends AbstractParserTestCase
 {
-    /**
-     * @throws \Exception
-     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -109,11 +106,8 @@ final class SiteApiTest extends AbstractParserTestCase
 
     /**
      * @dataProvider providerForTestBooleanConfigurationValid
-     *
-     * @param mixed $config
-     * @param mixed $expectedValue
      */
-    public function testBooleanConfigurationValid(string $name, $config, $expectedValue): void
+    public function testBooleanConfigurationValid(string $name, mixed $config, mixed $expectedValue): void
     {
         $this->load([
             'system' => [
@@ -160,10 +154,8 @@ final class SiteApiTest extends AbstractParserTestCase
 
     /**
      * @dataProvider providerForTestBooleanConfigurationInvalid
-     *
-     * @param mixed $config
      */
-    public function testBooleanConfigurationInvalid(string $name, $config): void
+    public function testBooleanConfigurationInvalid(string $name, mixed $config): void
     {
         $this->expectException(InvalidTypeException::class);
 
@@ -331,10 +323,8 @@ final class SiteApiTest extends AbstractParserTestCase
 
     /**
      * @dataProvider providerForTestNamedObjectDefaultValues
-     *
-     * @param mixed $configurationValues
      */
-    public function testNamedObjectDefaultValues($configurationValues, array $expectedConfigurationValues): void
+    public function testNamedObjectDefaultValues(mixed $configurationValues, array $expectedConfigurationValues): void
     {
         $this->load([
             'system' => [
@@ -573,11 +563,9 @@ final class SiteApiTest extends AbstractParserTestCase
 
     /**
      * @dataProvider providerForTestCrossSiteaccessRoutingBoolConfigurationInvalid
-     *
-     * @param mixed $configurationValue
      */
     public function testCrossSiteaccessRoutingEnabledConfigurationInvalid(
-        $configurationValue,
+        mixed $configurationValue,
         string $exceptionClass,
         string $exceptionMessage
     ): void {
@@ -600,11 +588,9 @@ final class SiteApiTest extends AbstractParserTestCase
 
     /**
      * @dataProvider providerForTestCrossSiteaccessRoutingBoolConfigurationInvalid
-     *
-     * @param mixed $configurationValue
      */
     public function testCrossSiteaccessRoutingPreferMainLanguageConfigurationInvalid(
-        $configurationValue,
+        mixed $configurationValue,
         string $exceptionClass,
         string $exceptionMessage
     ): void {
@@ -657,11 +643,9 @@ final class SiteApiTest extends AbstractParserTestCase
 
     /**
      * @dataProvider providerForTestCrossSiteaccessRoutingExternalSubtreeRootsConfigurationInvalid
-     *
-     * @param mixed $configurationValue
      */
     public function testCrossSiteaccessRoutingExternalSubtreeRootsConfigurationInvalid(
-        $configurationValue,
+        mixed $configurationValue,
         string $exceptionClass,
         string $exceptionMessage
     ): void {
@@ -714,11 +698,9 @@ final class SiteApiTest extends AbstractParserTestCase
 
     /**
      * @dataProvider providerForTestCrossSiteaccessRoutingStringsConfigurationInvalid
-     *
-     * @param mixed $configurationValue
      */
     public function testCrossSiteaccessRoutingIncludedSiteaccessesConfigurationInvalid(
-        $configurationValue,
+        mixed $configurationValue,
         string $exceptionClass,
         string $exceptionMessage
     ): void {
@@ -741,11 +723,9 @@ final class SiteApiTest extends AbstractParserTestCase
 
     /**
      * @dataProvider providerForTestCrossSiteaccessRoutingStringsConfigurationInvalid
-     *
-     * @param mixed $configurationValue
      */
     public function testCrossSiteaccessRoutingIncludedSiteaccessGroupsConfigurationInvalid(
-        $configurationValue,
+        mixed $configurationValue,
         string $exceptionClass,
         string $exceptionMessage
     ): void {
@@ -768,11 +748,9 @@ final class SiteApiTest extends AbstractParserTestCase
 
     /**
      * @dataProvider providerForTestCrossSiteaccessRoutingStringsConfigurationInvalid
-     *
-     * @param mixed $configurationValue
      */
     public function testCrossSiteaccessRoutingExcludedSiteaccessesConfigurationInvalid(
-        $configurationValue,
+        mixed $configurationValue,
         string $exceptionClass,
         string $exceptionMessage
     ): void {
@@ -795,11 +773,9 @@ final class SiteApiTest extends AbstractParserTestCase
 
     /**
      * @dataProvider providerForTestCrossSiteaccessRoutingStringsConfigurationInvalid
-     *
-     * @param mixed $configurationValue
      */
     public function testCrossSiteaccessRoutingExcludedSiteaccessGroupsConfigurationInvalid(
-        $configurationValue,
+        mixed $configurationValue,
         string $exceptionClass,
         string $exceptionMessage
     ): void {
@@ -926,10 +902,8 @@ final class SiteApiTest extends AbstractParserTestCase
 
     /**
      * @dataProvider providerForTestCrossSiteaccessRoutingConfigurationValid
-     *
-     * @param mixed $configurationValues
      */
-    public function testCrossSiteaccessRoutingConfigurationValid($configurationValues, array $expectedConfigurationValues): void
+    public function testCrossSiteaccessRoutingConfigurationValid(mixed $configurationValues, array $expectedConfigurationValues): void
     {
         $this->load([
             'system' => [

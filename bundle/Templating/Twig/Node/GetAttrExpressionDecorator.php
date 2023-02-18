@@ -147,16 +147,6 @@ final class GetAttrExpressionDecorator extends GetAttrExpression
         return $this->decoratedExpression->getIterator();
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @deprecated
-     */
-    public function setTemplateName($name): void
-    {
-        $this->decoratedExpression->setTemplateName($name);
-    }
-
     public function getTemplateName(): ?string
     {
         return $this->decoratedExpression->getTemplateName();
@@ -180,9 +170,6 @@ final class GetAttrExpressionDecorator extends GetAttrExpression
      * @param int $lineno
      * @param mixed $object
      * @param mixed $item
-     *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Twig\Error\RuntimeError
      */
     public static function twig_get_attribute(
         Environment $env,

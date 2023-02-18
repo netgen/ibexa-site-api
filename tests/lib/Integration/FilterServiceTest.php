@@ -17,6 +17,9 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchResult;
  * @group integration
  * @group filter
  *
+ * @depends Netgen\IbexaSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
+ * @depends Netgen\IbexaSiteApi\Tests\Integration\SiteTest::testGetFilterService
+ *
  * @internal
  */
 final class FilterServiceTest extends BaseTest
@@ -25,12 +28,6 @@ final class FilterServiceTest extends BaseTest
      * Test for the findContent() method.
      *
      * @see \Netgen\IbexaSiteApi\API\FindService::findContent()
-     *
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\SiteTest::testGetFilterService
-     *
-     * @throws \ReflectionException
-     * @throws \ErrorException
      */
     public function testFilterContentMatchPrimaryLanguage(): void
     {
@@ -58,12 +55,6 @@ final class FilterServiceTest extends BaseTest
      * Test for the findContent() method.
      *
      * @see \Netgen\IbexaSiteApi\API\FindService::findContent()
-     *
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\SiteTest::testGetFilterService
-     *
-     * @throws \ReflectionException
-     * @throws \ErrorException
      */
     public function testFilterContentMatchSecondaryLanguage(): void
     {
@@ -91,12 +82,6 @@ final class FilterServiceTest extends BaseTest
      * Test for the findContent() method.
      *
      * @see \Netgen\IbexaSiteApi\API\FindService::findContent()
-     *
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\SiteTest::testGetFilterService
-     *
-     * @throws \ReflectionException
-     * @throws \ErrorException
      */
     public function testFilterContentMatchAlwaysAvailableLanguage(): void
     {
@@ -123,12 +108,6 @@ final class FilterServiceTest extends BaseTest
      * Test for the findContent() method.
      *
      * @see \Netgen\IbexaSiteApi\API\FindService::findContent()
-     *
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\SiteTest::testGetFilterService
-     *
-     * @throws \ReflectionException
-     * @throws \ErrorException
      */
     public function testFilterContentTranslationNotMatched(): void
     {
@@ -155,12 +134,6 @@ final class FilterServiceTest extends BaseTest
      * Test for the findLocations() method.
      *
      * @see \Netgen\IbexaSiteApi\API\FindService::findLocations()
-     *
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\SiteTest::testGetFilterService
-     *
-     * @throws \ReflectionException
-     * @throws \ErrorException
      */
     public function testFilterLocationsMatchPrimaryLanguage(): void
     {
@@ -188,12 +161,6 @@ final class FilterServiceTest extends BaseTest
      * Test for the findLocations() method.
      *
      * @see \Netgen\IbexaSiteApi\API\FindService::findLocations()
-     *
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\SiteTest::testGetFilterService
-     *
-     * @throws \ReflectionException
-     * @throws \ErrorException
      */
     public function testFilterLocationsMatchSecondaryLanguage(): void
     {
@@ -221,12 +188,6 @@ final class FilterServiceTest extends BaseTest
      * Test for the findLocations() method.
      *
      * @see \Netgen\IbexaSiteApi\API\FindService::findLocations()
-     *
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\SiteTest::testGetFilterService
-     *
-     * @throws \ReflectionException
-     * @throws \ErrorException
      */
     public function testFilterLocationsMatchAlwaysAvailableLanguage(): void
     {
@@ -253,12 +214,6 @@ final class FilterServiceTest extends BaseTest
      * Test for the findLocations() method.
      *
      * @see \Netgen\IbexaSiteApi\API\FindService::findLocations()
-     *
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\SiteTest::testGetFilterService
-     *
-     * @throws \ReflectionException
-     * @throws \ErrorException
      */
     public function testFilterLocationsTranslationNotMatched(): void
     {
@@ -287,7 +242,10 @@ final class FilterServiceTest extends BaseTest
 
         self::assertSame(1, $searchResult->totalCount);
         self::assertSame($languageCode, $searchResult->searchHits[0]->matchedTranslation);
-        $this->assertContent($searchResult->searchHits[0]->valueObject, $data);
+
+        /** @var \Netgen\IbexaSiteApi\API\Values\Content $content */
+        $content = $searchResult->searchHits[0]->valueObject;
+        $this->assertContent($content, $data);
     }
 
     protected function assertLocationSearchResult(SearchResult $searchResult, $data): void
@@ -296,6 +254,9 @@ final class FilterServiceTest extends BaseTest
 
         self::assertSame(1, $searchResult->totalCount);
         self::assertSame($languageCode, $searchResult->searchHits[0]->matchedTranslation);
-        $this->assertLocation($searchResult->searchHits[0]->valueObject, $data);
+
+        /** @var \Netgen\IbexaSiteApi\API\Values\Location $location */
+        $location = $searchResult->searchHits[0]->valueObject;
+        $this->assertLocation($location, $data);
     }
 }

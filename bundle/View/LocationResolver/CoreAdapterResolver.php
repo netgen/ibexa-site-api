@@ -27,11 +27,6 @@ class CoreAdapterResolver extends LocationResolver
         $this->coreLoader = $coreLoader;
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @throws \Exception
-     */
     public function getLocation(Content $content): Location
     {
         $repoLocation = $this->coreLoader->loadLocation($content->contentInfo->innerContentInfo);

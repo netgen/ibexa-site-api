@@ -40,13 +40,13 @@ class ImageRuntime
                 $field->content->versionInfo,
                 $variationName,
             );
-        } catch (InvalidVariationException $e) {
+        } catch (InvalidVariationException) {
             $this->logger->error("Couldn't get variation '{$variationName}' for image with id {$value->id}");
-        } catch (SourceImageNotFoundException $e) {
+        } catch (SourceImageNotFoundException) {
             $this->logger->error(
                 "Couldn't create variation '{$variationName}' for image with id {$value->id} because source image can't be found",
             );
-        } catch (InvalidArgumentException $e) {
+        } catch (InvalidArgumentException) {
             $this->logger->error(
                 "Couldn't create variation '{$variationName}' for image with id {$value->id} because an image could not be created from the given input",
             );

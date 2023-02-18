@@ -85,13 +85,7 @@ abstract class BaseTest extends APIBaseTest
         ];
     }
 
-    /**
-     * @param mixed $value
-     *
-     * @throws \ReflectionException
-     * @throws \ErrorException
-     */
-    protected function overrideSettings(string $name, $value): void
+    protected function overrideSettings(string $name, mixed $value): void
     {
         $settings = $this->getSite()->getSettings();
 
@@ -100,9 +94,6 @@ abstract class BaseTest extends APIBaseTest
         $property->setValue($settings, $value);
     }
 
-    /**
-     * @throws \ErrorException
-     */
     protected function getSite(): Site
     {
         /** @var \Netgen\IbexaSiteApi\API\Site $site */
@@ -150,7 +141,7 @@ abstract class BaseTest extends APIBaseTest
         try {
             $content->nonExistentProperty;
             self::fail('This property should not be found');
-        } catch (PropertyNotFoundException $e) {
+        } catch (PropertyNotFoundException) {
             // Do nothing
         }
 
@@ -209,7 +200,7 @@ abstract class BaseTest extends APIBaseTest
         try {
             $contentInfo->nonExistentProperty;
             self::fail('This property should not be found');
-        } catch (PropertyNotFoundException $e) {
+        } catch (PropertyNotFoundException) {
             // Do nothing
         }
 
@@ -275,8 +266,8 @@ abstract class BaseTest extends APIBaseTest
             $this->assertField($content, $identifier, $data['languageCode'], $fieldData);
         }
 
-        self::assertInstanceOf(Field::class, $content->getField('non_existent_field'));
-        self::assertInstanceOf(Field::class, $content->getFieldById('non_existent_field'));
+        $content->getField('non_existent_field');
+        $content->getFieldById('non_existent_field');
         self::assertInstanceOf(SurrogateValue::class, $content->getFieldValue('non_existent_field'));
         self::assertInstanceOf(SurrogateValue::class, $content->getFieldValueById('non_existent_field'));
         self::assertInstanceOf(SurrogateValue::class, $content->getFirstNonEmptyField('non_existent_field')->value);
@@ -306,7 +297,7 @@ abstract class BaseTest extends APIBaseTest
         try {
             $field->nonExistentProperty;
             self::fail('This property should not be found');
-        } catch (PropertyNotFoundException $e) {
+        } catch (PropertyNotFoundException) {
             // Do nothing
         }
 
@@ -379,7 +370,7 @@ abstract class BaseTest extends APIBaseTest
         try {
             $location->nonExistentProperty;
             self::fail('This property should not be found');
-        } catch (PropertyNotFoundException $e) {
+        } catch (PropertyNotFoundException) {
             // Do nothing
         }
 

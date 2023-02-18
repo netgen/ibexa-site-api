@@ -46,12 +46,6 @@ abstract class Base implements QueryType
         $this->settings = $settings;
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @throws \InvalidArgumentException
-     * @throws \RuntimeException
-     */
     final public function getQuery(array $parameters = []): Query
     {
         $parameters = $this->getOptionsResolver()->resolve($parameters);
@@ -102,7 +96,7 @@ abstract class Base implements QueryType
      *
      * @return Criterion|Criterion[]|null
      */
-    protected function getFilterCriteria(array $parameters)
+    protected function getFilterCriteria(array $parameters): Criterion|array|null
     {
         return null;
     }
@@ -167,7 +161,7 @@ abstract class Base implements QueryType
      * Register builder closure for $name Criterion.
      *
      * Closure will be called with an instance of CriterionDefinition and an array of QueryType
-     * parameters and it must return a Criterion instance.
+     * parameters, and it must return a Criterion instance.
      *
      * @see \Netgen\IbexaSiteApi\Core\Site\QueryType\CriterionDefinition
      */
@@ -256,9 +250,6 @@ abstract class Base implements QueryType
      * Build criteria for the base supported options.
      *
      * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion[]
-     *
-     * @throws \InvalidArgumentException
-     * @throws \RuntimeException
      */
     private function buildBaseCriteria(array $parameters): array
     {
@@ -276,35 +267,29 @@ abstract class Base implements QueryType
     }
 
     /**
-     * @param mixed $parameters
-     *
      * @return \Netgen\IbexaSiteApi\Core\Site\QueryType\CriterionDefinition[]
      */
-    private function resolveCriterionDefinitions(string $name, $parameters): array
+    private function resolveCriterionDefinitions(string $name, mixed $parameters): array
     {
         $criterionDefinitionResolver = $this->getCriterionDefinitionResolver();
 
-        switch ($name) {
-            case 'content_type':
-            case 'depth':
-            case 'main':
-            case 'parent_location_id':
-            case 'priority':
-            case 'publication_date':
-            case 'creation_date':
-            case 'modification_date':
-            case 'section':
-            case 'subtree':
-            case 'visible':
-                return $criterionDefinitionResolver->resolve($name, $parameters);
-
-            case 'field':
-            case 'state':
-            case 'is_field_empty':
-                return $criterionDefinitionResolver->resolveTargets($name, $parameters);
-        }
-
-        return [];
+        return match ($name) {
+            'content_type',
+            'depth',
+            'main',
+            'parent_location_id',
+            'priority',
+            'publication_date',
+            'creation_date',
+            'modification_date',
+            'section',
+            'subtree',
+            'visible' => $criterionDefinitionResolver->resolve($name, $parameters),
+            'field',
+            'state',
+            'is_field_empty' => $criterionDefinitionResolver->resolveTargets($name, $parameters),
+            default => [],
+        };
     }
 
     /**
@@ -350,10 +335,6 @@ abstract class Base implements QueryType
         return $criteria;
     }
 
-    /**
-     * @throws \InvalidArgumentException
-     * @throws \RuntimeException
-     */
     private function resolveFilterCriteria(array $parameters): ?Criterion
     {
         $baseCriteria = $this->buildBaseCriteria($parameters);
@@ -385,8 +366,6 @@ abstract class Base implements QueryType
      * Return an array of SortClause instances from the given $parameters.
      *
      * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause[]
-     *
-     * @throws \InvalidArgumentException
      */
     private function getSortClauses(array $parameters): array
     {
@@ -407,14 +386,11 @@ abstract class Base implements QueryType
         return $sortClauses;
     }
 
-    /**
-     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause|string
-     */
-    private function parseSortString(string $string)
+    private function parseSortString(string $string): string|SortClause
     {
         try {
             return $this->getSortClauseParser()->parse($string);
-        } catch (InvalidArgumentException $e) {
+        } catch (InvalidArgumentException) {
             // do nothing
         }
 

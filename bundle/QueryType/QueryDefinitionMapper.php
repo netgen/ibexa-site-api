@@ -6,9 +6,9 @@ namespace Netgen\Bundle\IbexaSiteApiBundle\QueryType;
 
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Core\QueryType\QueryTypeRegistry;
-use InvalidArgumentException;
 use Netgen\Bundle\IbexaSiteApiBundle\View\ContentView;
 use Netgen\IbexaSiteApi\Core\Site\QueryType\QueryType as SiteQueryType;
+use OutOfBoundsException;
 
 use function array_key_exists;
 use function array_replace;
@@ -40,10 +40,6 @@ final class QueryDefinitionMapper
 
     /**
      * Map given $configuration in $view context to a QueryDefinition instance.
-     *
-     * @return \Netgen\Bundle\IbexaSiteApiBundle\QueryType\QueryDefinition
-     *
-     * @throws \InvalidArgumentException
      */
     public function map(array $configuration, ContentView $view): QueryDefinition
     {
@@ -75,7 +71,7 @@ final class QueryDefinitionMapper
     /**
      * Return named query configuration by the given $name.
      *
-     * @throws \InvalidArgumentException if no such configuration exist
+     * @throws \OutOfBoundsException if no such configuration exist
      */
     private function getQueryConfigurationByName(string $name): array
     {
@@ -85,7 +81,7 @@ final class QueryDefinitionMapper
             return $this->namedQueryConfiguration[$name];
         }
 
-        throw new InvalidArgumentException(
+        throw new OutOfBoundsException(
             "Could not find query configuration named '{$name}'",
         );
     }
@@ -107,8 +103,6 @@ final class QueryDefinitionMapper
 
     /**
      * Build QueryDefinition instance from the given arguments.
-     *
-     * @return \Netgen\Bundle\IbexaSiteApiBundle\QueryType\QueryDefinition
      */
     private function buildQueryDefinition(array $configuration, ContentView $view): QueryDefinition
     {

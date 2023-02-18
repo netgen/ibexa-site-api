@@ -33,10 +33,6 @@ class NamedObjectRuntime
         $this->logger = $logger ?? new NullLogger();
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
-     */
     public function getNamedContent(string $name): ?Content
     {
         try {
@@ -52,10 +48,6 @@ class NamedObjectRuntime
         return null;
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
-     */
     public function getNamedLocation(string $name): ?Location
     {
         try {
@@ -71,10 +63,6 @@ class NamedObjectRuntime
         return null;
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
-     */
     public function getNamedTag(string $name): ?Tag
     {
         try {

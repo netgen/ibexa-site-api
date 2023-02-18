@@ -110,9 +110,6 @@ class Link implements Converter
         return $document;
     }
 
-    /**
-     * @throws \Throwable
-     */
     private function loadContent(int $id): Content
     {
         return $this->repository->sudo(
@@ -120,9 +117,6 @@ class Link implements Converter
         );
     }
 
-    /**
-     * @throws \Throwable
-     */
     private function loadLocation(int $id): Location
     {
         return $this->repository->sudo(

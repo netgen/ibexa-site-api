@@ -40,11 +40,6 @@ final class LoadingProviderTest extends TestCase
         self::assertFalse($provider->hasContent('quince'));
     }
 
-    /**
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     */
     public function testGetContent(): void
     {
         $provider = $this->getProviderUnderTest();
@@ -54,11 +49,6 @@ final class LoadingProviderTest extends TestCase
         self::assertSame($this->getContentMock(), $content);
     }
 
-    /**
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     */
     public function testGetContentByExpression(): void
     {
         $provider = $this->getProviderUnderTest();
@@ -68,11 +58,6 @@ final class LoadingProviderTest extends TestCase
         self::assertSame($this->getContentMock(), $content);
     }
 
-    /**
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     */
     public function testGetContentThrowsBackendException(): void
     {
         $provider = $this->getProviderUnderTest();
@@ -83,11 +68,6 @@ final class LoadingProviderTest extends TestCase
         $provider->getContent('plum');
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
-     */
     public function testGetContentThrowsOutOfBoundsException(): void
     {
         $provider = $this->getProviderUnderTest();
@@ -98,11 +78,6 @@ final class LoadingProviderTest extends TestCase
         $provider->getContent('broom');
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
-     */
     public function testGetContentThrowsInvalidArgumentException(): void
     {
         $provider = $this->getProviderUnderTest();
@@ -113,11 +88,6 @@ final class LoadingProviderTest extends TestCase
         $provider->getContent('zoom');
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
-     */
     public function testGetContentByExpressionThrowsInvalidArgumentException(): void
     {
         $provider = $this->getProviderUnderTest();
@@ -128,11 +98,6 @@ final class LoadingProviderTest extends TestCase
         $provider->getContent('grapple');
     }
 
-    /**
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     */
     public function testGetContentThroughRemoteId(): void
     {
         $provider = $this->getProviderUnderTest();
@@ -142,11 +107,6 @@ final class LoadingProviderTest extends TestCase
         self::assertSame($this->getContentMock(), $content);
     }
 
-    /**
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     */
     public function testGetContentThroughRemoteIdByExpression(): void
     {
         $provider = $this->getProviderUnderTest();
@@ -156,11 +116,6 @@ final class LoadingProviderTest extends TestCase
         self::assertSame($this->getContentMock(), $content);
     }
 
-    /**
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     */
     public function testGetContentThroughRemoteIdThrowsBackendException(): void
     {
         $provider = $this->getProviderUnderTest();
@@ -185,11 +140,6 @@ final class LoadingProviderTest extends TestCase
         self::assertFalse($provider->hasLocation('quince'));
     }
 
-    /**
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     */
     public function testGetLocation(): void
     {
         $provider = $this->getProviderUnderTest();
@@ -199,11 +149,6 @@ final class LoadingProviderTest extends TestCase
         self::assertSame($this->getLocationMock(), $location);
     }
 
-    /**
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     */
     public function testGetLocationByExpression(): void
     {
         $provider = $this->getProviderUnderTest();
@@ -213,11 +158,6 @@ final class LoadingProviderTest extends TestCase
         self::assertSame($this->getLocationMock(), $location);
     }
 
-    /**
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     */
     public function testGetLocationThrowsBackendException(): void
     {
         $provider = $this->getProviderUnderTest();
@@ -228,11 +168,6 @@ final class LoadingProviderTest extends TestCase
         $provider->getLocation('plum');
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
-     */
     public function testGetLocationThrowsOutOfBoundsException(): void
     {
         $provider = $this->getProviderUnderTest();
@@ -243,11 +178,6 @@ final class LoadingProviderTest extends TestCase
         $provider->getLocation('broom');
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
-     */
     public function testGetLocationThrowsInvalidArgumentException(): void
     {
         $provider = $this->getProviderUnderTest();
@@ -258,11 +188,6 @@ final class LoadingProviderTest extends TestCase
         $provider->getLocation('zoom');
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
-     */
     public function testGetLocationByExpressionThrowsInvalidArgumentException(): void
     {
         $provider = $this->getProviderUnderTest();
@@ -273,11 +198,6 @@ final class LoadingProviderTest extends TestCase
         $provider->getLocation('grapple');
     }
 
-    /**
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     */
     public function testGetLocationThroughRemoteId(): void
     {
         $provider = $this->getProviderUnderTest();
@@ -287,11 +207,6 @@ final class LoadingProviderTest extends TestCase
         self::assertSame($this->getLocationMock(), $location);
     }
 
-    /**
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     */
     public function testGetLocationThroughRemoteIdByExpression(): void
     {
         $provider = $this->getProviderUnderTest();
@@ -301,11 +216,6 @@ final class LoadingProviderTest extends TestCase
         self::assertSame($this->getLocationMock(), $location);
     }
 
-    /**
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     */
     public function testGetLocationThroughRemoteIdThrowsBackendException(): void
     {
         $provider = $this->getProviderUnderTest();
@@ -330,10 +240,6 @@ final class LoadingProviderTest extends TestCase
         self::assertFalse($provider->hasContent('quince'));
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     */
     public function testGetTag(): void
     {
         $provider = $this->getProviderUnderTest();
@@ -343,10 +249,6 @@ final class LoadingProviderTest extends TestCase
         self::assertSame(42, $tag->id);
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     */
     public function testGetTagByExpression(): void
     {
         $provider = $this->getProviderUnderTest();
@@ -356,10 +258,6 @@ final class LoadingProviderTest extends TestCase
         self::assertSame(42, $tag->id);
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     */
     public function testGetTagThrowsBackendException(): void
     {
         $provider = $this->getProviderUnderTest();
@@ -370,11 +268,6 @@ final class LoadingProviderTest extends TestCase
         $provider->getTag('plum');
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
-     */
     public function testGetTagThrowsOutOfBoundsException(): void
     {
         $provider = $this->getProviderUnderTest();
@@ -385,11 +278,6 @@ final class LoadingProviderTest extends TestCase
         $provider->getTag('broom');
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
-     */
     public function testGetTagThrowsInvalidArgumentException(): void
     {
         $provider = $this->getProviderUnderTest();
@@ -400,11 +288,6 @@ final class LoadingProviderTest extends TestCase
         $provider->getTag('zoom');
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
-     */
     public function testGetTagByExpressionThrowsInvalidArgumentException(): void
     {
         $provider = $this->getProviderUnderTest();
@@ -415,10 +298,6 @@ final class LoadingProviderTest extends TestCase
         $provider->getTag('grapple');
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     */
     public function testGetTagThroughRemoteId(): void
     {
         $provider = $this->getProviderUnderTest();
@@ -428,10 +307,6 @@ final class LoadingProviderTest extends TestCase
         self::assertSame('abc', $tag->remoteId);
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     */
     public function testGetTagThroughRemoteIdByExpression(): void
     {
         $provider = $this->getProviderUnderTest();
@@ -441,10 +316,6 @@ final class LoadingProviderTest extends TestCase
         self::assertSame('abc', $tag->remoteId);
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     */
     public function testGetTagThroughRemoteIdThrowsBackendException(): void
     {
         $provider = $this->getProviderUnderTest();

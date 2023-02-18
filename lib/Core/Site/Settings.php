@@ -17,30 +17,12 @@ use Netgen\IbexaSiteApi\API\Settings as BaseSettings;
  */
 final class Settings extends BaseSettings
 {
-    /**
-     * @var string[]
-     */
-    private $prioritizedLanguages;
-
-    /**
-     * @var bool
-     */
-    private $useAlwaysAvailable;
-
-    /**
-     * @var int
-     */
-    private $rootLocationId;
-
-    /**
-     * @var bool
-     */
-    private $showHiddenItems;
-
-    /**
-     * @var bool
-     */
-    private $failOnMissingField;
+    /** @var string[] */
+    private array $prioritizedLanguages;
+    private bool $useAlwaysAvailable;
+    private int $rootLocationId;
+    private bool $showHiddenItems;
+    private bool $failOnMissingField;
 
     /**
      * @param string[] $prioritizedLanguages
@@ -64,7 +46,7 @@ final class Settings extends BaseSettings
      *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\PropertyNotFoundException
      */
-    public function __get(string $property)
+    public function __get(string $property): bool|int|array
     {
         switch ($property) {
             case 'prioritizedLanguages':
@@ -87,11 +69,9 @@ final class Settings extends BaseSettings
     }
 
     /**
-     * @param mixed $value
-     *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\PropertyReadOnlyException
      */
-    public function __set(string $property, $value): void
+    public function __set(string $property, mixed $value): void
     {
         throw new PropertyReadOnlyException($property, __CLASS__);
     }

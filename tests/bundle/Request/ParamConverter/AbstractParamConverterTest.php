@@ -12,7 +12,7 @@ abstract class AbstractParamConverterTest extends TestCase
 {
     protected MockObject $loadServiceMock;
 
-    public function createConfiguration(?string $class = null, ?string $name = null): MockObject
+    public function createConfiguration(?string $class = null, ?string $name = null): ParamConverter|MockObject
     {
         $config = $this
             ->getMockBuilder(ParamConverter::class)

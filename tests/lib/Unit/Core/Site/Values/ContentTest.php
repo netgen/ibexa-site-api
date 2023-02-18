@@ -33,50 +33,14 @@ use Psr\Log\NullLogger;
  */
 final class ContentTest extends TestCase
 {
-    /**
-     * @var \Netgen\IbexaSiteApi\API\Site|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $siteMock;
-
-    /**
-     * @var \Netgen\IbexaSiteApi\Core\Site\DomainObjectMapper
-     */
-    protected $domainObjectMapper;
-
-    /**
-     * @var \Ibexa\Contracts\Core\Repository\ContentService|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $contentServiceMock;
-
-    /**
-     * @var \Ibexa\Contracts\Core\Repository\ContentTypeService|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $contentTypeServiceMock;
-
-    /**
-     * @var \Ibexa\Contracts\Core\Repository\FieldTypeService|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $fieldTypeServiceMock;
-
-    /**
-     * @var \Netgen\IbexaSiteApi\API\LoadService|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $loadServiceMock;
-
-    /**
-     * @var \Ibexa\Contracts\Core\Repository\UserService|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $userServiceMock;
-
-    /**
-     * @var \Ibexa\Contracts\Core\Repository\Repository|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $repositoryMock;
-
-    /**
-     * @var \Ibexa\Core\QueryType\QueryTypeRegistry|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $queryTypeRegistryMock;
+    protected Site|MockObject|null $siteMock = null;
+    protected ?DomainObjectMapper $domainObjectMapper = null;
+    protected MockObject|ContentService|null $contentServiceMock = null;
+    protected MockObject|ContentTypeService|null $contentTypeServiceMock = null;
+    protected FieldTypeService|MockObject|null $fieldTypeServiceMock = null;
+    protected LoadService|MockObject|null $loadServiceMock = null;
+    protected UserService|MockObject|null $userServiceMock = null;
+    protected CoreRepository|MockObject|null $repositoryMock = null;
 
     protected function setUp(): void
     {
@@ -224,10 +188,7 @@ final class ContentTest extends TestCase
         );
     }
 
-    /**
-     * @return \Netgen\IbexaSiteApi\API\Site|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getSiteMock(): MockObject
+    protected function getSiteMock(): MockObject|Site
     {
         if ($this->siteMock !== null) {
             return $this->siteMock;
@@ -260,10 +221,7 @@ final class ContentTest extends TestCase
         return $this->domainObjectMapper;
     }
 
-    /**
-     * @return \Netgen\IbexaSiteApi\API\LoadService|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getLoadServiceMock(): MockObject
+    protected function getLoadServiceMock(): LoadService|MockObject
     {
         if ($this->loadServiceMock !== null) {
             return $this->loadServiceMock;
@@ -276,10 +234,7 @@ final class ContentTest extends TestCase
         return $this->loadServiceMock;
     }
 
-    /**
-     * @return \Ibexa\Contracts\Core\Repository\ContentService|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getContentServiceMock(): MockObject
+    protected function getContentServiceMock(): ContentService|MockObject
     {
         if ($this->contentServiceMock !== null) {
             return $this->contentServiceMock;
@@ -292,10 +247,7 @@ final class ContentTest extends TestCase
         return $this->contentServiceMock;
     }
 
-    /**
-     * @return \Ibexa\Contracts\Core\Repository\ContentTypeService|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getContentTypeServiceMock(): MockObject
+    protected function getContentTypeServiceMock(): ContentTypeService|MockObject
     {
         if ($this->contentTypeServiceMock !== null) {
             return $this->contentTypeServiceMock;
@@ -309,16 +261,14 @@ final class ContentTest extends TestCase
             ->method('loadContentType')
             ->with(42)
             ->willReturn(new ContentType([
+                'identifier' => 'content_type_identifier',
                 'fieldDefinitions' => new FieldDefinitionCollection(),
             ]));
 
         return $this->contentTypeServiceMock;
     }
 
-    /**
-     * @return \Ibexa\Contracts\Core\Repository\FieldTypeService|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getFieldTypeServiceMock(): MockObject
+    protected function getFieldTypeServiceMock(): FieldTypeService|MockObject
     {
         if ($this->fieldTypeServiceMock !== null) {
             return $this->fieldTypeServiceMock;
@@ -331,10 +281,7 @@ final class ContentTest extends TestCase
         return $this->fieldTypeServiceMock;
     }
 
-    /**
-     * @return \Ibexa\Contracts\Core\Repository\UserService|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getUserServiceMock(): MockObject
+    protected function getUserServiceMock(): MockObject|UserService
     {
         if ($this->userServiceMock !== null) {
             return $this->userServiceMock;
@@ -347,10 +294,7 @@ final class ContentTest extends TestCase
         return $this->userServiceMock;
     }
 
-    /**
-     * @return \Ibexa\Contracts\Core\Repository\Repository|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getRepositoryMock(): MockObject
+    protected function getRepositoryMock(): CoreRepository|MockObject
     {
         if ($this->repositoryMock !== null) {
             return $this->repositoryMock;

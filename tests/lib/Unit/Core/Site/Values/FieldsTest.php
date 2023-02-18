@@ -60,9 +60,6 @@ final class FieldsTest extends TestCase
         }
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     */
     public function testExistenceOfExistingFieldCanBeCheckedByIdentifier(): void
     {
         $fields = $this->getFieldsUnderTest(true);
@@ -70,9 +67,6 @@ final class FieldsTest extends TestCase
         self::assertTrue($fields->hasField('first'));
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     */
     public function testExistenceOfNonExistingFieldCanBeCheckedByIdentifier(): void
     {
         $fields = $this->getFieldsUnderTest(true);
@@ -151,7 +145,6 @@ final class FieldsTest extends TestCase
             ->method('critical')
             ->with('Field "fourth" in Content #1 does not exist, using surrogate field instead');
 
-        /** @var \Netgen\IbexaSiteApi\API\Values\Field $field */
         $field = $fields[$identifier];
 
         self::assertInstanceOf(SiteField::class, $field);
@@ -180,9 +173,6 @@ final class FieldsTest extends TestCase
         unset($fields['first']);
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     */
     public function testExistenceOfExistingFieldCanBeCheckedById(): void
     {
         $fields = $this->getFieldsUnderTest(true);
@@ -190,9 +180,6 @@ final class FieldsTest extends TestCase
         self::assertTrue($fields->hasFieldById(1));
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     */
     public function testExistenceOfNonExistingFieldCanBeCheckedById(): void
     {
         $fields = $this->getFieldsUnderTest(true);
@@ -200,9 +187,6 @@ final class FieldsTest extends TestCase
         self::assertFalse($fields->hasFieldById(101));
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     */
     public function testExistingFieldCanBeAccessedById(): void
     {
         $fields = $this->getFieldsUnderTest(true);
@@ -213,9 +197,6 @@ final class FieldsTest extends TestCase
         self::assertSame($id, $field->id);
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     */
     public function testNonExistentFieldCanNotBeAccessedById(): void
     {
         $id = 101;
@@ -228,9 +209,6 @@ final class FieldsTest extends TestCase
         $fields->getFieldById($id);
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     */
     public function testAccessingNonExistentFieldByIdReturnsNullField(): void
     {
         $id = 101;
@@ -244,9 +222,6 @@ final class FieldsTest extends TestCase
         self::assertTrue($field->isEmpty());
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     */
     public function testExistingFieldCanBeAccessedByIdentifier(): void
     {
         $fields = $this->getFieldsUnderTest(true);
@@ -257,9 +232,6 @@ final class FieldsTest extends TestCase
         self::assertSame($identifier, $field->fieldDefIdentifier);
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     */
     public function testNonExistentFieldCanNotBeAccessedByIdentifier(): void
     {
         $identifier = 'fourth';
@@ -272,9 +244,6 @@ final class FieldsTest extends TestCase
         $fields->getField($identifier);
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     */
     public function testAccessingNonExistentFieldByIdentifierReturnsNullField(): void
     {
         $identifier = 'fourth';
@@ -288,9 +257,6 @@ final class FieldsTest extends TestCase
         self::assertTrue($field->isEmpty());
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     */
     public function testFirstNonEmptyFieldReturnsFirstField(): void
     {
         $identifier = 'first';
@@ -302,9 +268,6 @@ final class FieldsTest extends TestCase
         self::assertSame($identifier, $field->fieldDefIdentifier);
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     */
     public function testFirstNonEmptyFieldReturnsFirstNonEmptyField(): void
     {
         $fields = $this->getFieldsUnderTest(false);
@@ -314,9 +277,6 @@ final class FieldsTest extends TestCase
         self::assertSame('third', $field->fieldDefIdentifier);
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     */
     public function testFirstNonEmptyFieldReturnsThirdField(): void
     {
         $identifier = 'third';
@@ -328,9 +288,6 @@ final class FieldsTest extends TestCase
         self::assertSame($identifier, $field->fieldDefIdentifier);
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     */
     public function testFirstNonEmptyFieldReturnsSurrogateField(): void
     {
         $identifier = '1st';
@@ -344,9 +301,6 @@ final class FieldsTest extends TestCase
         self::assertTrue($field->isEmpty());
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     */
     public function testDebugInfo(): void
     {
         $fields = $this->getFieldsUnderTest(true);
@@ -367,10 +321,7 @@ final class FieldsTest extends TestCase
         );
     }
 
-    /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|\Psr\Log\LoggerInterface
-     */
-    protected function getLoggerMock(): MockObject
+    protected function getLoggerMock(): LoggerInterface|MockObject
     {
         if ($this->loggerMock !== null) {
             return $this->loggerMock;

@@ -49,11 +49,9 @@ final class Settings extends BaseSettings
     }
 
     /**
-     * @param mixed $value
-     *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\PropertyReadOnlyException
      */
-    public function __set(string $property, $value): void
+    public function __set(string $property, mixed $value): void
     {
         throw new PropertyReadOnlyException($property, __CLASS__);
     }

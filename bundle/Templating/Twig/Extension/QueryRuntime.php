@@ -27,26 +27,14 @@ class QueryRuntime
         $this->queryExecutor = $queryExecutor;
     }
 
-    /**
-     * @param mixed $context
-     *
-     * @throws \Pagerfanta\Exception\Exception
-     * @throws \Twig\Error\RuntimeError
-     */
-    public function executeQuery($context, string $name): Pagerfanta
+    public function executeQuery(mixed $context, string $name): Pagerfanta
     {
         return $this->queryExecutor->execute(
             $this->getQueryDefinitionCollection($context)->get($name),
         );
     }
 
-    /**
-     * @param mixed $context
-     *
-     * @throws \Twig\Error\RuntimeError
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     */
-    public function executeRawQuery($context, string $name): SearchResult
+    public function executeRawQuery(mixed $context, string $name): SearchResult
     {
         return $this->queryExecutor->executeRaw(
             $this->getQueryDefinitionCollection($context)->get($name),
@@ -56,11 +44,9 @@ class QueryRuntime
     /**
      * Returns the QueryDefinitionCollection variable from the given $context.
      *
-     * @param mixed $context
-     *
      * @throws \Twig\Error\RuntimeError
      */
-    private function getQueryDefinitionCollection($context): QueryDefinitionCollection
+    private function getQueryDefinitionCollection(mixed $context): QueryDefinitionCollection
     {
         $variableName = ContentView::QUERY_DEFINITION_COLLECTION_NAME;
 

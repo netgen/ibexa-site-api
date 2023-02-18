@@ -58,15 +58,9 @@ final class Field extends APIField
      */
     protected $innerFieldDefinition;
 
-    /**
-     * @var bool
-     */
-    private $isEmpty;
+    private bool $isEmpty;
 
-    /**
-     * @var bool
-     */
-    private $isSurrogate;
+    private bool $isSurrogate;
 
     public function __construct(array $properties = [])
     {

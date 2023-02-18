@@ -21,7 +21,7 @@ interface FilterService
      *
      * @see \Netgen\IbexaSiteApi\API\Values\Content
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException If $query is not valid
      */
     public function filterContent(Query $query): SearchResult;
 
@@ -30,7 +30,7 @@ interface FilterService
      *
      * @see \Netgen\IbexaSiteApi\API\Values\Location
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException If $query is not valid
      */
     public function filterLocations(LocationQuery $query): SearchResult;
 }

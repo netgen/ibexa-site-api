@@ -10,6 +10,7 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchHit;
 use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchResult;
 use Netgen\IbexaSiteApi\API\FindService;
 use Netgen\IbexaSiteApi\Core\Site\Pagination\Pagerfanta\FindAdapter;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -19,10 +20,7 @@ use PHPUnit\Framework\TestCase;
  */
 final class FindAdapterTest extends TestCase
 {
-    /**
-     * @var \Netgen\IbexaSiteApi\API\FindService|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $findService;
+    protected FindService|MockObject $findService;
 
     protected function setUp(): void
     {

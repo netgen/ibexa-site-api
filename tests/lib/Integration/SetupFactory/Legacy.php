@@ -17,9 +17,6 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
  */
 class Legacy extends CoreLegacySetupFactory
 {
-    /**
-     * @throws \Exception
-     */
     protected function externalBuildContainer(ContainerBuilder $containerBuilder): void
     {
         $containerBuilder->addCompilerPass(new RelationResolverRegistrationPass());

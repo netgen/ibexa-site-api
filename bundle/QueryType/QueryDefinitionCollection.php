@@ -22,12 +22,10 @@ final class QueryDefinitionCollection
      *
      * @var \Netgen\Bundle\IbexaSiteApiBundle\QueryType\QueryDefinition[]
      */
-    private $queryDefinitionMap = [];
+    private array $queryDefinitionMap = [];
 
     /**
      * Add $queryDefinition by $name to the internal map.
-     *
-     * @param \Netgen\Bundle\IbexaSiteApiBundle\QueryType\QueryDefinition $queryDefinition
      */
     public function add(string $name, QueryDefinition $queryDefinition): void
     {
@@ -36,8 +34,6 @@ final class QueryDefinitionCollection
 
     /**
      * Return QueryDefinition by given $name.
-     *
-     * @return \Netgen\Bundle\IbexaSiteApiBundle\QueryType\QueryDefinition
      *
      * @throws \OutOfBoundsException if no QueryDefinition with given $name is found
      */

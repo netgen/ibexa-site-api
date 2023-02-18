@@ -21,15 +21,6 @@ use Ibexa\Tests\Integration\Core\Repository\BaseTest as APIBaseTest;
  */
 final class PrepareFixturesTest extends APIBaseTest
 {
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\BadStateException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentFieldValidationException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentTypeFieldDefinitionValidationException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentValidationException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     */
     public function testPrepareTestFixtures(): array
     {
         $contentType = $this->createContentType();
@@ -78,19 +69,9 @@ final class PrepareFixturesTest extends APIBaseTest
         ];
     }
 
-    /**
-     * @param mixed $parentLocationId
-     *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\BadStateException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentFieldValidationException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentValidationException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     */
     protected function createContent(
         ContentType $contentType,
-        $parentLocationId,
+        mixed $parentLocationId,
         string $contentRemoteId,
         string $locationRemoteId,
         string $mainLanguageCode,
@@ -132,13 +113,6 @@ final class PrepareFixturesTest extends APIBaseTest
         return $contentService->loadContent($content->id);
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\BadStateException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentTypeFieldDefinitionValidationException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     */
     protected function createContentType(): ContentType
     {
         $contentTypeService = $this->getRepository(false)->getContentTypeService();

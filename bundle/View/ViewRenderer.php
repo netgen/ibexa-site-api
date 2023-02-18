@@ -9,7 +9,6 @@ use Ibexa\Core\MVC\Symfony\View\View;
 use LogicException;
 use Netgen\Bundle\IbexaSiteApiBundle\Event\RenderViewEvent;
 use Netgen\Bundle\IbexaSiteApiBundle\Events;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,6 +16,7 @@ use Symfony\Component\HttpKernel\Controller\ArgumentResolverInterface;
 use Symfony\Component\HttpKernel\Controller\ControllerReference;
 use Symfony\Component\HttpKernel\Controller\ControllerResolverInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 use function call_user_func_array;
 use function sprintf;

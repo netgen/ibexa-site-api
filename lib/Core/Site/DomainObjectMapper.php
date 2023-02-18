@@ -74,8 +74,6 @@ final class DomainObjectMapper
 
     /**
      * Maps Repository ContentInfo to the Site ContentInfo.
-     *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     public function mapContentInfo(VersionInfo $versionInfo, string $languageCode): ContentInfo
     {
@@ -115,8 +113,6 @@ final class DomainObjectMapper
 
     /**
      * Maps Repository Field to the Site Field.
-     *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     public function mapField(RepoField $apiField, SiteContent $content): APIField
     {

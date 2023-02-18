@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Netgen\IbexaSiteApi\Core\Site\QueryType\Location\Relations;
 
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ContentId;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LogicalNot;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\MatchNone;
@@ -28,12 +29,6 @@ final class AllTagFields extends Location
         return 'SiteAPI:Location/Relations/AllTagFields';
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @throws \Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException
-     * @throws \Symfony\Component\OptionsResolver\Exception\AccessException
-     */
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setRequired('content');
@@ -49,15 +44,7 @@ final class AllTagFields extends Location
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @throws \LogicException
-     * @throws \OutOfBoundsException
-     * @throws \InvalidArgumentException
-     * @throws \RuntimeException
-     */
-    protected function getFilterCriteria(array $parameters)
+    protected function getFilterCriteria(array $parameters): Criterion|array|null
     {
         /** @var \Netgen\IbexaSiteApi\API\Values\Content $content */
         $content = $parameters['content'];
@@ -79,10 +66,6 @@ final class AllTagFields extends Location
     }
 
     /**
-     * Extract all Tag IDs from the given $content.
-     *
-     * @param \Netgen\IbexaSiteApi\API\Values\Content $content
-     *
      * @return int[]
      */
     private function extractTagIds(SiteContent $content): array

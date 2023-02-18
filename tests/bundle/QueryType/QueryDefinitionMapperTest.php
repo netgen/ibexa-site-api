@@ -8,7 +8,6 @@ use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Core\MVC\Symfony\ExpressionLanguage\ExpressionLanguage;
 use Ibexa\Core\QueryType\QueryType;
 use Ibexa\Core\QueryType\QueryTypeRegistry;
-use InvalidArgumentException;
 use Netgen\Bundle\IbexaSiteApiBundle\NamedObject\Provider;
 use Netgen\Bundle\IbexaSiteApiBundle\QueryType\ExpressionFunctionProvider;
 use Netgen\Bundle\IbexaSiteApiBundle\QueryType\ParameterProcessor;
@@ -18,6 +17,7 @@ use Netgen\Bundle\IbexaSiteApiBundle\View\ContentView;
 use Netgen\IbexaSiteApi\API\Values\Content;
 use Netgen\IbexaSiteApi\API\Values\Location;
 use Netgen\IbexaSiteApi\Core\Site\QueryType\QueryType as SiteQueryType;
+use OutOfBoundsException;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -163,7 +163,7 @@ final class QueryDefinitionMapperTest extends TestCase
 
     public function testMapNonexistentNamedQueryThrowsException(): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(OutOfBoundsException::class);
         $this->expectExceptionMessage(
             "Could not find query configuration named 'bazooka'",
         );

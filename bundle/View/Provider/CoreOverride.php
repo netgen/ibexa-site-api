@@ -21,11 +21,6 @@ final class CoreOverride extends CoreConfigured
         $this->contentViewFallbackResolver = $contentViewFallbackResolver;
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     */
     public function getView(View $view): ?View
     {
         // Service is dispatched by the configured view class, so this should be safe

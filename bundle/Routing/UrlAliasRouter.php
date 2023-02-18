@@ -9,7 +9,7 @@ use Ibexa\Core\MVC\Symfony\Routing\UrlAliasRouter as CoreUrlAliasRouter;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Do not use directly; use @router instead to keep the chain routing machanism.
+ * Do not use directly; use @router instead to keep the chain routing mechanism.
  */
 class UrlAliasRouter extends BaseUrlAliasRouter
 {

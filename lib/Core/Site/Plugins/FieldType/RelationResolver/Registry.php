@@ -18,7 +18,7 @@ class Registry
      *
      * @var \Netgen\IbexaSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Resolver[]
      */
-    protected $resolverMap = [];
+    protected array $resolverMap = [];
 
     /**
      * @param \Netgen\IbexaSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Resolver[] $resolverMap
@@ -32,8 +32,6 @@ class Registry
 
     /**
      * Register a $resolver for $fieldTypeIdentifier.
-     *
-     * @param \Netgen\IbexaSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Resolver $resolver
      */
     public function register(string $fieldTypeIdentifier, Resolver $resolver): void
     {
@@ -42,10 +40,6 @@ class Registry
 
     /**
      * Returns Resolver for $fieldTypeIdentifier.
-     *
-     * @return \Netgen\IbexaSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Resolver
-     *
-     * @throws \OutOfBoundsException When there is no resolver for the given $fieldTypeIdentifier
      */
     public function get(string $fieldTypeIdentifier): Resolver
     {

@@ -49,8 +49,6 @@ final class SortClauseParser
 {
     /**
      * Return new sort clause instance by the given $definition string.
-     *
-     * @throws \InvalidArgumentException
      */
     public function parse(string $definition): SortClause
     {
@@ -86,12 +84,8 @@ final class SortClauseParser
 
     /**
      * Build a new Field sort clause from the given arguments.
-     *
-     * @param mixed $direction
-     *
-     * @throws \InvalidArgumentException
      */
-    private function buildFieldSortClause(array $values, $direction): Field
+    private function buildFieldSortClause(array $values, string $direction): Field
     {
         if (!array_key_exists(1, $values)) {
             throw new InvalidArgumentException(
@@ -112,8 +106,6 @@ final class SortClauseParser
      * Resolve direction constant value from the given array of $values.
      *
      * @param string[] $values
-     *
-     * @throws \InvalidArgumentException
      */
     private function getDirection(array $values): string
     {

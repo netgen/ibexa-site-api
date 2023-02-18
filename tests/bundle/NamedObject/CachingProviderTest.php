@@ -18,8 +18,6 @@ use RuntimeException;
  */
 final class CachingProviderTest extends TestCase
 {
-    protected $mockedProvider;
-
     public function testHasContentReturnsTrue(): void
     {
         $providerMock = $this->getProviderMock();
@@ -200,10 +198,7 @@ final class CachingProviderTest extends TestCase
         return new Caching($mockerProvider);
     }
 
-    /**
-     * @return \Netgen\Bundle\IbexaSiteApiBundle\NamedObject\Provider|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getProviderMock(): MockObject
+    protected function getProviderMock(): Provider|MockObject
     {
         return $this->getMockBuilder(Provider::class)->getMockForAbstractClass();
     }

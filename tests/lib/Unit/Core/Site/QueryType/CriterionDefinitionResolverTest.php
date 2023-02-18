@@ -356,9 +356,8 @@ final class CriterionDefinitionResolverTest extends TestCase
      * @dataProvider providerForTestResolve
      *
      * @param \Netgen\IbexaSiteApi\Core\Site\QueryType\CriterionDefinition[] $expectedCriterionDefinitions
-     * @param mixed $parameters
      */
-    public function testResolve($parameters, array $expectedCriterionDefinitions): void
+    public function testResolve(mixed $parameters, array $expectedCriterionDefinitions): void
     {
         $criterionDefinitionResolver = $this->getCriterionDefinitionResolverUnderTest();
 
@@ -805,9 +804,8 @@ final class CriterionDefinitionResolverTest extends TestCase
      * @dataProvider providerForTestResolveTargets
      *
      * @param \Netgen\IbexaSiteApi\Core\Site\QueryType\CriterionDefinition[] $expectedCriterionDefinitions
-     * @param mixed $parameters
      */
-    public function testResolveTargets($parameters, array $expectedCriterionDefinitions): void
+    public function testResolveTargets(mixed $parameters, array $expectedCriterionDefinitions): void
     {
         $criterionDefinitionResolver = $this->getCriterionDefinitionResolverUnderTest();
 

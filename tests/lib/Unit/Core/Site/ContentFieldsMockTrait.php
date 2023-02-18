@@ -25,63 +25,25 @@ use Psr\Log\NullLogger;
  */
 trait ContentFieldsMockTrait
 {
-    /**
-     * @var \Netgen\IbexaSiteApi\API\Site|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $siteMock;
+    protected Site|MockObject|null $siteMock = null;
 
-    /**
-     * @var \Netgen\IbexaSiteApi\Core\Site\DomainObjectMapper[]
-     */
-    protected $domainObjectMapper = [];
+    /** @var \Netgen\IbexaSiteApi\Core\Site\DomainObjectMapper[] */
+    protected array $domainObjectMapper = [];
 
-    /**
-     * @var \Netgen\IbexaSiteApi\Core\Site\DomainObjectMapper[]
-     */
-    protected $domainObjectMapperForContentWithoutFields = [];
-
-    /**
-     * @var \Ibexa\Contracts\Core\Repository\Repository|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $repositoryMock;
-
-    /**
-     * @var \Ibexa\Contracts\Core\Repository\Repository|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $repositoryMockForContentWithoutFields;
-
-    /**
-     * @var \Ibexa\Core\Repository\Values\Content\VersionInfo
-     */
-    protected $repoVersionInfo;
-
+    /** @var \Netgen\IbexaSiteApi\Core\Site\DomainObjectMapper[] */
+    protected array $domainObjectMapperForContentWithoutFields = [];
+    protected CoreRepository|MockObject|null $repositoryMock = null;
+    protected CoreRepository|MockObject|null $repositoryMockForContentWithoutFields = null;
+    protected ?VersionInfo $repoVersionInfo = null;
     protected ?RepoContent $repoContent = null;
     protected ?RepoContent $repoContentWithoutFields = null;
 
-    /**
-     * @var \Ibexa\Contracts\Core\Repository\Values\Content\Field[]
-     */
+    /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Field[] */
     protected ?array $internalFields = null;
-
-    /**
-     * @var \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinitionCollection
-     */
-    protected $fieldDefinitions;
-
-    /**
-     * @var \Ibexa\Contracts\Core\Repository\ContentTypeService|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $contentTypeServiceMock;
-
-    /**
-     * @var \Ibexa\Contracts\Core\Repository\FieldTypeService|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $fieldTypeServiceMock;
-
-    /**
-     * @var \Ibexa\Core\FieldType\FieldType|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $fieldTypeMock;
+    protected FieldDefinitionCollection|null $fieldDefinitions = null;
+    protected ContentTypeService|MockObject|null $contentTypeServiceMock = null;
+    protected FieldTypeService|MockObject|null $fieldTypeServiceMock = null;
+    protected FieldType|MockObject|null $fieldTypeMock = null;
 
     /**
      * @see \PHPUnit\Framework\TestCase
@@ -93,10 +55,7 @@ trait ContentFieldsMockTrait
      */
     abstract public function internalGetRepoFields(): array;
 
-    /**
-     * @return \Netgen\IbexaSiteApi\API\Site|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getSiteMock(): MockObject
+    protected function getSiteMock(): MockObject|Site
     {
         if ($this->siteMock !== null) {
             return $this->siteMock;
@@ -139,10 +98,7 @@ trait ContentFieldsMockTrait
         return $this->domainObjectMapperForContentWithoutFields[$failOnMissingField];
     }
 
-    /**
-     * @return \Ibexa\Contracts\Core\Repository\Repository|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getRepositoryMock(): MockObject
+    protected function getRepositoryMock(): CoreRepository|MockObject
     {
         if ($this->repositoryMock !== null) {
             return $this->repositoryMock;
@@ -165,10 +121,7 @@ trait ContentFieldsMockTrait
         return $this->repositoryMock;
     }
 
-    /**
-     * @return \Ibexa\Contracts\Core\Repository\Repository|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getRepositoryMockForContentWithoutFields(): MockObject
+    protected function getRepositoryMockForContentWithoutFields(): CoreRepository|MockObject
     {
         if ($this->repositoryMockForContentWithoutFields !== null) {
             return $this->repositoryMockForContentWithoutFields;
@@ -191,10 +144,7 @@ trait ContentFieldsMockTrait
         return $this->repositoryMockForContentWithoutFields;
     }
 
-    /**
-     * @return \Ibexa\Contracts\Core\Repository\FieldTypeService|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getFieldTypeServiceMock(): MockObject
+    protected function getFieldTypeServiceMock(): FieldTypeService|MockObject
     {
         if ($this->fieldTypeServiceMock !== null) {
             return $this->fieldTypeServiceMock;
@@ -212,10 +162,7 @@ trait ContentFieldsMockTrait
         return $this->fieldTypeServiceMock;
     }
 
-    /**
-     * @return \Ibexa\Contracts\Core\Repository\FieldType|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getFieldTypeMock(): MockObject
+    protected function getFieldTypeMock(): FieldType|MockObject
     {
         if ($this->fieldTypeMock !== null) {
             return $this->fieldTypeMock;
@@ -232,10 +179,7 @@ trait ContentFieldsMockTrait
         return $this->fieldTypeMock;
     }
 
-    /**
-     * @return \Ibexa\Contracts\Core\Repository\ContentTypeService|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getContentTypeServiceMock(): MockObject
+    protected function getContentTypeServiceMock(): ContentTypeService|MockObject
     {
         if ($this->contentTypeServiceMock !== null) {
             return $this->contentTypeServiceMock;
@@ -270,9 +214,6 @@ trait ContentFieldsMockTrait
 
     abstract protected function internalGetRepoFieldDefinitions(): FieldDefinitionCollection;
 
-    /**
-     * @return \Ibexa\Core\Repository\Values\Content\Content|\PHPUnit\Framework\MockObject\MockObject
-     */
     protected function getRepoContent(): Content
     {
         if ($this->repoContent !== null) {
@@ -289,9 +230,6 @@ trait ContentFieldsMockTrait
         return $this->repoContent;
     }
 
-    /**
-     * @return \Ibexa\Core\Repository\Values\Content\Content|\PHPUnit\Framework\MockObject\MockObject
-     */
     protected function getRepoContentWithoutFields(): Content
     {
         if ($this->repoContentWithoutFields !== null) {

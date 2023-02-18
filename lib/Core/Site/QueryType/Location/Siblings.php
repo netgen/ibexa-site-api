@@ -23,10 +23,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 final class Siblings extends Location
 {
-    /**
-     * @var \Psr\Log\LoggerInterface
-     */
-    protected $logger;
+    protected LoggerInterface $logger;
 
     public function __construct(Settings $settings, ?LoggerInterface $logger = null)
     {
@@ -40,12 +37,6 @@ final class Siblings extends Location
         return 'SiteAPI:Location/Siblings';
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @throws \Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException
-     * @throws \Symfony\Component\OptionsResolver\Exception\AccessException
-     */
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->remove(['depth', 'parent_location_id', 'subtree']);
@@ -73,8 +64,6 @@ final class Siblings extends Location
      * {@inheritdoc}
      *
      * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion[]
-     *
-     * @throws \InvalidArgumentException
      */
     protected function getFilterCriteria(array $parameters): array
     {

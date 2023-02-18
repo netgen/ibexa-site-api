@@ -26,9 +26,6 @@ final class FindAdapter extends BaseAdapter
         $this->findService = $findService;
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     */
     protected function executeQuery(Query $query): SearchResult
     {
         if ($query instanceof LocationQuery) {

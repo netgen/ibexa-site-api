@@ -14,6 +14,9 @@ use Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException;
  * @group integration
  * @group load
  *
+ * @depends Netgen\IbexaSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
+ * @depends Netgen\IbexaSiteApi\Tests\Integration\SiteTest::testGetLoadService
+ *
  * @internal
  */
 final class LoadServiceTest extends BaseTest
@@ -22,15 +25,6 @@ final class LoadServiceTest extends BaseTest
      * Test for the loadContent() method.
      *
      * @see \Netgen\IbexaSiteApi\API\LoadService::loadContent()
-     *
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\SiteTest::testGetLoadService
-     *
-     * @throws \ErrorException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
-     * @throws \ReflectionException
      */
     public function testLoadContentMatchPrimaryLanguage(): void
     {
@@ -54,15 +48,6 @@ final class LoadServiceTest extends BaseTest
      * Test for the loadContent() method.
      *
      * @see \Netgen\IbexaSiteApi\API\LoadService::loadContent()
-     *
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\SiteTest::testGetLoadService
-     *
-     * @throws \ErrorException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
-     * @throws \ReflectionException
      */
     public function testLoadContentMatchSecondaryLanguage(): void
     {
@@ -86,15 +71,6 @@ final class LoadServiceTest extends BaseTest
      * Test for the loadContent() method.
      *
      * @see \Netgen\IbexaSiteApi\API\LoadService::loadContent()
-     *
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\SiteTest::testGetLoadService
-     *
-     * @throws \ErrorException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
-     * @throws \ReflectionException
      */
     public function testLoadContentMatchAlwaysAvailableLanguage(): void
     {
@@ -117,15 +93,6 @@ final class LoadServiceTest extends BaseTest
      * Test for the loadContent() method.
      *
      * @see \Netgen\IbexaSiteApi\API\LoadService::loadContent()
-     *
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\SiteTest::testGetLoadService
-     *
-     * @throws \ErrorException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
-     * @throws \ReflectionException
      */
     public function testLoadContentForPreview(): void
     {
@@ -148,15 +115,6 @@ final class LoadServiceTest extends BaseTest
      * Test for the loadContent() method.
      *
      * @see \Netgen\IbexaSiteApi\API\LoadService::loadContent()
-     *
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\SiteTest::testGetLoadService
-     *
-     * @throws \ErrorException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
-     * @throws \ReflectionException
      */
     public function testLoadContentThrowsTranslationNotMatchedException(): void
     {
@@ -179,15 +137,6 @@ final class LoadServiceTest extends BaseTest
      * Test for the loadContent() method.
      *
      * @see \Netgen\IbexaSiteApi\API\LoadService::loadContent()
-     *
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\SiteTest::testGetLoadService
-     *
-     * @throws \ErrorException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
-     * @throws \ReflectionException
      */
     public function testLoadContentForPreviewThrowsTranslationNotMatchedException(): void
     {
@@ -211,15 +160,6 @@ final class LoadServiceTest extends BaseTest
      * Test for the loadContentByRemoteId() method.
      *
      * @see \Netgen\IbexaSiteApi\API\LoadService::loadContent()
-     *
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\SiteTest::testGetLoadService
-     *
-     * @throws \ErrorException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
-     * @throws \ReflectionException
      */
     public function testLoadContentByRemoteIdMatchPrimaryLanguage(): void
     {
@@ -243,15 +183,6 @@ final class LoadServiceTest extends BaseTest
      * Test for the loadContentByRemoteId() method.
      *
      * @see \Netgen\IbexaSiteApi\API\LoadService::loadContent()
-     *
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\SiteTest::testGetLoadService
-     *
-     * @throws \ErrorException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
-     * @throws \ReflectionException
      */
     public function testLoadContentByRemoteIdMatchSecondaryLanguage(): void
     {
@@ -275,15 +206,6 @@ final class LoadServiceTest extends BaseTest
      * Test for the loadContentByRemoteId() method.
      *
      * @see \Netgen\IbexaSiteApi\API\LoadService::loadContent()
-     *
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\SiteTest::testGetLoadService
-     *
-     * @throws \ErrorException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
-     * @throws \ReflectionException
      */
     public function testLoadContentByRemoteIdMatchAlwaysAvailableLanguage(): void
     {
@@ -306,15 +228,6 @@ final class LoadServiceTest extends BaseTest
      * Test for the loadContentByRemoteId() method.
      *
      * @see \Netgen\IbexaSiteApi\API\LoadService::loadContent()
-     *
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\SiteTest::testGetLoadService
-     *
-     * @throws \ErrorException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
-     * @throws \ReflectionException
      */
     public function testLoadContentByRemoteIdThrowsTranslationNotMatchedException(): void
     {
@@ -337,15 +250,6 @@ final class LoadServiceTest extends BaseTest
      * Test for the loadLocation() method.
      *
      * @see \Netgen\IbexaSiteApi\API\LoadService::loadContent()
-     *
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\SiteTest::testGetLoadService
-     *
-     * @throws \ErrorException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
-     * @throws \ReflectionException
      */
     public function testLoadLocationMatchPrimaryLanguage(): void
     {
@@ -369,15 +273,6 @@ final class LoadServiceTest extends BaseTest
      * Test for the loadLocation() method.
      *
      * @see \Netgen\IbexaSiteApi\API\LoadService::loadContent()
-     *
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\SiteTest::testGetLoadService
-     *
-     * @throws \ErrorException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
-     * @throws \ReflectionException
      */
     public function testLoadLocationMatchSecondaryLanguage(): void
     {
@@ -401,15 +296,6 @@ final class LoadServiceTest extends BaseTest
      * Test for the loadLocation() method.
      *
      * @see \Netgen\IbexaSiteApi\API\LoadService::loadContent()
-     *
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\SiteTest::testGetLoadService
-     *
-     * @throws \ErrorException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
-     * @throws \ReflectionException
      */
     public function testLoadLocationMatchAlwaysAvailableLanguage(): void
     {
@@ -432,15 +318,6 @@ final class LoadServiceTest extends BaseTest
      * Test for the loadLocation() method.
      *
      * @see \Netgen\IbexaSiteApi\API\LoadService::loadContent()
-     *
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\SiteTest::testGetLoadService
-     *
-     * @throws \ErrorException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
-     * @throws \ReflectionException
      */
     public function testLoadLocationThrowsTranslationNotMatchedException(): void
     {
@@ -463,15 +340,6 @@ final class LoadServiceTest extends BaseTest
      * Test for the loadLocationByRemoteId() method.
      *
      * @see \Netgen\IbexaSiteApi\API\LoadService::loadContent()
-     *
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\SiteTest::testGetLoadService
-     *
-     * @throws \ErrorException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
-     * @throws \ReflectionException
      */
     public function testLoadLocationByRemoteIdMatchPrimaryLanguage(): void
     {
@@ -495,15 +363,6 @@ final class LoadServiceTest extends BaseTest
      * Test for the loadLocationByRemoteId() method.
      *
      * @see \Netgen\IbexaSiteApi\API\LoadService::loadContent()
-     *
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\SiteTest::testGetLoadService
-     *
-     * @throws \ErrorException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
-     * @throws \ReflectionException
      */
     public function testLoadLocationByRemoteIdMatchSecondaryLanguage(): void
     {
@@ -527,15 +386,6 @@ final class LoadServiceTest extends BaseTest
      * Test for the loadLocationByRemoteId() method.
      *
      * @see \Netgen\IbexaSiteApi\API\LoadService::loadContent()
-     *
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\SiteTest::testGetLoadService
-     *
-     * @throws \ErrorException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
-     * @throws \ReflectionException
      */
     public function testLoadLocationByRemoteIdMatchAlwaysAvailableLanguage(): void
     {
@@ -558,15 +408,6 @@ final class LoadServiceTest extends BaseTest
      * Test for the loadLocationByRemoteId() method.
      *
      * @see \Netgen\IbexaSiteApi\API\LoadService::loadContent()
-     *
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
-     * @depends Netgen\IbexaSiteApi\Tests\Integration\SiteTest::testGetLoadService
-     *
-     * @throws \ErrorException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
-     * @throws \ReflectionException
      */
     public function testLoadLocationByRemoteIdThrowsTranslationNotMatchedException(): void
     {

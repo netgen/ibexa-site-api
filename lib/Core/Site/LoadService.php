@@ -87,10 +87,6 @@ class LoadService implements LoadServiceInterface
 
     /**
      * Returns Site Location object for the given Repository $location.
-     *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Netgen\IbexaSiteApi\Core\Site\Exceptions\TranslationNotMatchedException
      */
     private function getSiteLocation(APILocation $location): Location
     {

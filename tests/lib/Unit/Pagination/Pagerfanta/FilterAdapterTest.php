@@ -10,6 +10,7 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchHit;
 use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchResult;
 use Netgen\IbexaSiteApi\API\FilterService;
 use Netgen\IbexaSiteApi\Core\Site\Pagination\Pagerfanta\FilterAdapter;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -19,10 +20,7 @@ use PHPUnit\Framework\TestCase;
  */
 final class FilterAdapterTest extends TestCase
 {
-    /**
-     * @var \Netgen\IbexaSiteApi\API\FilterService|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $filterService;
+    protected FilterService|MockObject $filterService;
 
     protected function setUp(): void
     {

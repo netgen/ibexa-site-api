@@ -1027,8 +1027,6 @@ class NativeResolverTest extends TestCase
 
     /**
      * @dataProvider providerForTestResolve
-     *
-     * @throws \Exception
      */
     public function testResolve(array $data, string $expectedSiteaccessName): void
     {

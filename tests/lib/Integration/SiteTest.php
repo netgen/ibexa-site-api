@@ -19,8 +19,6 @@ final class SiteTest extends BaseTest
      * Test for the getSettings() method.
      *
      * @see \Netgen\IbexaSiteApi\API\Site::getSettings()
-     *
-     * @throws \ErrorException
      */
     public function testGetSettings(): void
     {
@@ -35,8 +33,6 @@ final class SiteTest extends BaseTest
      * @group filter
      *
      * @see \Netgen\IbexaSiteApi\API\Site::getFilterService()
-     *
-     * @throws \ErrorException
      */
     public function testGetFilterService(): void
     {
@@ -51,8 +47,6 @@ final class SiteTest extends BaseTest
      * @group find
      *
      * @see \Netgen\IbexaSiteApi\API\Site::getFindService()
-     *
-     * @throws \ErrorException
      */
     public function testGetFindService(): void
     {
@@ -67,8 +61,6 @@ final class SiteTest extends BaseTest
      * @group load
      *
      * @see \Netgen\IbexaSiteApi\API\Site::getLoadService()
-     *
-     * @throws \ErrorException
      */
     public function testGetLoadService(): void
     {

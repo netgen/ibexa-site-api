@@ -31,7 +31,7 @@ class BaseQueryType extends Base
         // do nothing
     }
 
-    protected function getFilterCriteria(array $parameters)
+    protected function getFilterCriteria(array $parameters): Criterion|array|null
     {
         return null;
     }

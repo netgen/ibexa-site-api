@@ -25,7 +25,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 use function in_array;
 use function is_string;
-use function mb_strpos;
+use function str_contains;
 
 /**
  * Builds ContentView objects.
@@ -54,14 +54,11 @@ class ContentViewBuilder implements ViewBuilder
 
     public function matches($argument): bool
     {
-        return is_string($argument) && mb_strpos($argument, 'ng_content:') !== false;
+        return is_string($argument) && str_contains($argument, 'ng_content:');
     }
 
     /**
-     * @throws \Exception
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentException When Content can't be resolved for the given parameters
      */
     public function buildView(array $parameters): ContentView
     {
@@ -76,7 +73,7 @@ class ContentViewBuilder implements ViewBuilder
             $location = $this->loadLocation($parameters['locationId']);
         } elseif (isset($parameters['location'])) {
             $location = $parameters['location'];
-            if (!$location instanceof Location && $location instanceof APILocation) {
+            if ($location instanceof APILocation) {
                 $location = $this->loadLocation($location->id, false);
             }
         } else {
@@ -85,7 +82,7 @@ class ContentViewBuilder implements ViewBuilder
 
         if (isset($parameters['content'])) {
             $content = $parameters['content'];
-            if (!$content instanceof Content && $content instanceof APIContent) {
+            if ($content instanceof APIContent) {
                 $content = $this->loadContent($content->contentInfo->id);
             }
         } else {
@@ -96,7 +93,7 @@ class ContentViewBuilder implements ViewBuilder
             } else {
                 throw new InvalidArgumentException(
                     'Content',
-                    'No content could be loaded from parameters',
+                    'No Content could be resolved from parameters',
                 );
             }
 
@@ -110,7 +107,7 @@ class ContentViewBuilder implements ViewBuilder
         if ($location === null) {
             try {
                 $location = $this->locationResolver->getLocation($content);
-            } catch (NotFoundException $e) {
+            } catch (NotFoundException) {
                 // do nothing
             }
         }
@@ -119,7 +116,7 @@ class ContentViewBuilder implements ViewBuilder
             if ($location->contentInfo->id !== $content->id) {
                 throw new InvalidArgumentException(
                     'Location',
-                    'Provided location does not belong to selected content',
+                    'Provided Location does not belong to selected content',
                 );
             }
 
@@ -132,11 +129,6 @@ class ContentViewBuilder implements ViewBuilder
         return $view;
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
-     */
     private function loadContent(int $contentId): Content
     {
         return $this->site->getLoadService()->loadContent($contentId);
@@ -147,7 +139,6 @@ class ContentViewBuilder implements ViewBuilder
      * Will load the content with sudo(), and check if the user can view_embed this content, for the given location
      * if provided.
      *
-     * @throws \Exception
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
     private function loadEmbeddedContent(int $contentId, ?Location $location = null): Content
@@ -182,8 +173,6 @@ class ContentViewBuilder implements ViewBuilder
      * Loads a Location with visibility check.
      *
      * @todo Do we need to handle permissions here ?
-     *
-     * @throws \Exception
      */
     private function loadLocation(int $locationId, bool $checkVisibility = true): Location
     {
@@ -202,9 +191,6 @@ class ContentViewBuilder implements ViewBuilder
 
     /**
      * Checks if a user can read a content, or view it as an embed.
-     *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\BadStateException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
     private function canReadOrViewEmbed(ContentInfo $contentInfo, ?Location $location = null): bool
     {

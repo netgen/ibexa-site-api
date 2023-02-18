@@ -28,13 +28,6 @@ class PreviewController extends BasePreviewController
         $this->site = $site;
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     */
     protected function getForwardRequest(
         Location $location,
         Content $content,
@@ -49,11 +42,6 @@ class PreviewController extends BasePreviewController
         return $request;
     }
 
-    /**
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     */
     protected function injectAttributes(Request $request, SiteAccess $previewSiteAccess, string $languageCode): void
     {
         $overrideViewAction = $this->configResolver->getParameter(
@@ -73,10 +61,6 @@ class PreviewController extends BasePreviewController
     /**
      * Injects the Site API value objects into request, replacing the original
      * Ibexa API value objects.
-     *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException
      */
     protected function injectSiteApiValueObjects(Request $request, string $languageCode): void
     {

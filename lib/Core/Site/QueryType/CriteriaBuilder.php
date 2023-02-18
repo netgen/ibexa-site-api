@@ -42,8 +42,6 @@ final class CriteriaBuilder
      * @param \Netgen\IbexaSiteApi\Core\Site\QueryType\CriterionDefinition[] $definitions
      *
      * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion[]
-     *
-     * @throws \InvalidArgumentException
      */
     public function build(array $definitions): array
     {
@@ -62,8 +60,6 @@ final class CriteriaBuilder
 
     /**
      * Build criterion $name from the given criterion $definition.
-     *
-     * @throws \InvalidArgumentException
      */
     private function dispatchBuild(CriterionDefinition $definition): ?Criterion
     {
@@ -116,9 +112,6 @@ final class CriteriaBuilder
         );
     }
 
-    /**
-     * @throws \InvalidArgumentException
-     */
     private function buildContentTypeIdentifier(CriterionDefinition $definition): ?ContentTypeIdentifier
     {
         if ($definition->value === null) {
@@ -128,9 +121,6 @@ final class CriteriaBuilder
         return new ContentTypeIdentifier($definition->value);
     }
 
-    /**
-     * @throws \InvalidArgumentException
-     */
     private function buildDepth(CriterionDefinition $definition): ?Depth
     {
         if ($definition->value === null) {
@@ -140,9 +130,6 @@ final class CriteriaBuilder
         return new Depth($definition->operator, $definition->value);
     }
 
-    /**
-     * @throws \InvalidArgumentException
-     */
     private function buildField(CriterionDefinition $definition): Field
     {
         return new Field(
@@ -152,9 +139,6 @@ final class CriteriaBuilder
         );
     }
 
-    /**
-     * @throws \InvalidArgumentException
-     */
     private function buildIsMainLocation(CriterionDefinition $definition): ?IsMainLocation
     {
         if ($definition->value === null) {
@@ -166,9 +150,6 @@ final class CriteriaBuilder
         return new IsMainLocation($isMainLocation);
     }
 
-    /**
-     * @throws \InvalidArgumentException
-     */
     private function buildLogicalNot(CriterionDefinition $definition): ?LogicalNot
     {
         if ($definition->value === null) {
@@ -190,9 +171,6 @@ final class CriteriaBuilder
         return new LogicalAnd($criteria);
     }
 
-    /**
-     * @throws \InvalidArgumentException
-     */
     private function buildParentLocationId(CriterionDefinition $definition): ?ParentLocationId
     {
         if ($definition->value === null) {
@@ -202,9 +180,6 @@ final class CriteriaBuilder
         return new ParentLocationId($definition->value);
     }
 
-    /**
-     * @throws \InvalidArgumentException
-     */
     private function buildPriority(CriterionDefinition $definition): ?Priority
     {
         if ($definition->value === null) {
@@ -214,9 +189,6 @@ final class CriteriaBuilder
         return new Priority($definition->operator, $definition->value);
     }
 
-    /**
-     * @throws \InvalidArgumentException
-     */
     private function buildDateMetadataCreated(CriterionDefinition $definition): DateMetadata
     {
         return new DateMetadata(
@@ -226,9 +198,6 @@ final class CriteriaBuilder
         );
     }
 
-    /**
-     * @throws \InvalidArgumentException
-     */
     private function buildDateMetadataModified(CriterionDefinition $definition): DateMetadata
     {
         return new DateMetadata(
@@ -238,9 +207,6 @@ final class CriteriaBuilder
         );
     }
 
-    /**
-     * @throws \InvalidArgumentException
-     */
     private function buildSection(CriterionDefinition $definition): ?SectionIdentifier
     {
         if ($definition->value === null) {
@@ -250,17 +216,11 @@ final class CriteriaBuilder
         return new SectionIdentifier($definition->value);
     }
 
-    /**
-     * @throws \InvalidArgumentException
-     */
     private function buildObjectState(CriterionDefinition $definition): ObjectStateIdentifier
     {
         return new ObjectStateIdentifier($definition->target, $definition->value);
     }
 
-    /**
-     * @throws \InvalidArgumentException
-     */
     private function buildSubtree(CriterionDefinition $definition): ?Subtree
     {
         if ($definition->value === null) {
@@ -270,14 +230,7 @@ final class CriteriaBuilder
         return new Subtree($definition->value);
     }
 
-    /**
-     * @param mixed $valueOrValues
-     *
-     * @return array|int
-     *
-     * @throws \InvalidArgumentException
-     */
-    private function resolveTimeValues($valueOrValues)
+    private function resolveTimeValues(mixed $valueOrValues): int|array
     {
         if (!is_array($valueOrValues)) {
             return $this->resolveTimeValue($valueOrValues);
@@ -292,12 +245,7 @@ final class CriteriaBuilder
         return $returnValues;
     }
 
-    /**
-     * @param int|string $value
-     *
-     * @throws \InvalidArgumentException
-     */
-    private function resolveTimeValue($value): int
+    private function resolveTimeValue(int|string $value): int
     {
         if (is_int($value)) {
             return $value;
@@ -314,9 +262,6 @@ final class CriteriaBuilder
         return $timestamp;
     }
 
-    /**
-     * @throws \InvalidArgumentException
-     */
     private function buildVisible(CriterionDefinition $definition): ?Visible
     {
         if ($definition->value === null) {
@@ -326,9 +271,6 @@ final class CriteriaBuilder
         return new Visible($definition->value);
     }
 
-    /**
-     * @throws \InvalidArgumentException
-     */
     private function buildIsFieldEmpty(CriterionDefinition $definition): ?IsFieldEmpty
     {
         if ($definition->value === null) {

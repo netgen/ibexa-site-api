@@ -141,7 +141,7 @@ class RelationService implements RelationServiceInterface
         foreach ($relatedContentIds as $contentId) {
             try {
                 $content = $this->site->getLoadService()->loadContent($contentId);
-            } catch (Throwable $throwable) {
+            } catch (Throwable) {
                 continue;
             }
 

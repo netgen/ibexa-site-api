@@ -20,16 +20,6 @@ use Netgen\IbexaSiteApi\API\Values\Location;
  */
 final class RelationServiceTest extends BaseTest
 {
-    /**
-     * @throws \ErrorException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\BadStateException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentFieldValidationException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentTypeFieldDefinitionValidationException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentValidationException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     */
     public function testLoadFieldRelation(): void
     {
         [$identifier, $testApiContent, $testRelationId] = $this->prepareTestContent();
@@ -43,16 +33,6 @@ final class RelationServiceTest extends BaseTest
         self::assertSame($testRelationId, $content->id);
     }
 
-    /**
-     * @throws \ErrorException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\BadStateException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentFieldValidationException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentTypeFieldDefinitionValidationException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentValidationException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     */
     public function testLoadFieldRelations(): void
     {
         [$identifier, , , $testApiContent, $testRelationIds] = $this->prepareTestContent();
@@ -71,16 +51,6 @@ final class RelationServiceTest extends BaseTest
         }
     }
 
-    /**
-     * @throws \ErrorException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\BadStateException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentFieldValidationException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentTypeFieldDefinitionValidationException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentValidationException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     */
     public function testLoadFieldRelationsWithTypeFilter(): void
     {
         [$identifier, , , $testApiContent, $testRelationIds] = $this->prepareTestContent();
@@ -96,16 +66,6 @@ final class RelationServiceTest extends BaseTest
         self::assertSame($testRelationIds[0], $contentItems[0]->id);
     }
 
-    /**
-     * @throws \ErrorException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\BadStateException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentFieldValidationException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentTypeFieldDefinitionValidationException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentValidationException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     */
     public function testLoadFieldRelationsWithLimit(): void
     {
         [$identifier, , , $testApiContent, $testRelationIds] = $this->prepareTestContent();
@@ -121,16 +81,6 @@ final class RelationServiceTest extends BaseTest
         self::assertSame($testRelationIds[0], $contentItems[0]->id);
     }
 
-    /**
-     * @throws \ErrorException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\BadStateException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentFieldValidationException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentTypeFieldDefinitionValidationException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentValidationException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     */
     public function testLoadFieldRelationsWithTypeFilterAndLimit(): void
     {
         [$identifier, , , $testApiContent, $testRelationIds] = $this->prepareTestContent();
@@ -146,16 +96,6 @@ final class RelationServiceTest extends BaseTest
         self::assertSame($testRelationIds[1], $contentItems[0]->id);
     }
 
-    /**
-     * @throws \ErrorException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\BadStateException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentFieldValidationException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentTypeFieldDefinitionValidationException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentValidationException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     */
     public function testLoadFieldRelationsForNonexistentField(): void
     {
         [, , , $testApiContent] = $this->prepareTestContent();
@@ -168,9 +108,6 @@ final class RelationServiceTest extends BaseTest
         self::assertCount(0, $contentItems);
     }
 
-    /**
-     * @throws \Exception
-     */
     public function testLoadFieldRelationLocation(): void
     {
         [$identifier, $testApiContent, $testRelationId] = $this->prepareTestContent();
@@ -184,9 +121,6 @@ final class RelationServiceTest extends BaseTest
         self::assertSame($testRelationId, $location->content->id);
     }
 
-    /**
-     * @throws \Exception
-     */
     public function testLoadFieldRelationLocations(): void
     {
         [$identifier, , , $testApiContent, $testRelationIds] = $this->prepareTestContent();
@@ -205,9 +139,6 @@ final class RelationServiceTest extends BaseTest
         }
     }
 
-    /**
-     * @throws \Exception
-     */
     public function testLoadFieldRelationLocationsWithTypeFilter(): void
     {
         [$identifier, , , $testApiContent, $testRelationIds] = $this->prepareTestContent();
@@ -223,9 +154,6 @@ final class RelationServiceTest extends BaseTest
         self::assertSame($testRelationIds[0], $locations[0]->content->id);
     }
 
-    /**
-     * @throws \Exception
-     */
     public function testLoadFieldRelationLocationsWithLimit(): void
     {
         [$identifier, , , $testApiContent, $testRelationIds] = $this->prepareTestContent();
@@ -241,9 +169,6 @@ final class RelationServiceTest extends BaseTest
         self::assertSame($testRelationIds[0], $locations[0]->content->id);
     }
 
-    /**
-     * @throws \Exception
-     */
     public function testLoadFieldRelationLocationsWithTypeFilterAndLimit(): void
     {
         [$identifier, , , $testApiContent, $testRelationIds] = $this->prepareTestContent();
@@ -259,9 +184,6 @@ final class RelationServiceTest extends BaseTest
         self::assertSame($testRelationIds[1], $locations[0]->content->id);
     }
 
-    /**
-     * @throws \Exception
-     */
     public function testLoadFieldRelationLocationsForNonexistentField(): void
     {
         [, , , $testApiContent] = $this->prepareTestContent();
@@ -274,15 +196,6 @@ final class RelationServiceTest extends BaseTest
         self::assertCount(0, $locations);
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\BadStateException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentFieldValidationException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentTypeFieldDefinitionValidationException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentValidationException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     */
     protected function prepareTestContent(): array
     {
         $repository = $this->getRepository();

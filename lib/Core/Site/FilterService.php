@@ -40,12 +40,6 @@ class FilterService implements FilterServiceInterface
         $this->contentService = $contentService;
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     */
     public function filterContent(Query $query): SearchResult
     {
         $searchResult = $this->searchService->findContentInfo(
@@ -71,12 +65,6 @@ class FilterService implements FilterServiceInterface
         return $searchResult;
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     */
     public function filterLocations(LocationQuery $query): SearchResult
     {
         $searchResult = $this->searchService->findLocations(

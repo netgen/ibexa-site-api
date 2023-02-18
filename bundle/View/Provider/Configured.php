@@ -51,12 +51,7 @@ class Configured implements ViewProvider
     }
 
     /**
-     * {@inheritdoc}
-     *
      * Returns view as a data transfer object.
-     *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     * @throws \Netgen\Bundle\IbexaSiteApiBundle\Exception\InvalidRedirectConfiguration
      */
     public function getView(View $view): ?View
     {
@@ -103,9 +98,6 @@ class Configured implements ViewProvider
 
     /**
      * Builds a ContentView object from $viewConfig.
-     *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     * @throws \Netgen\Bundle\IbexaSiteApiBundle\Exception\InvalidRedirectConfiguration
      */
     private function getDTO(array $viewConfig, ContentView $view): CoreContentView
     {
@@ -136,9 +128,6 @@ class Configured implements ViewProvider
         return preg_replace('/{content_type}/', $contentTypeIdentifier, $identifier) ?? $identifier;
     }
 
-    /**
-     * @throws \Netgen\Bundle\IbexaSiteApiBundle\Exception\InvalidRedirectConfiguration
-     */
     private function processRedirects(CoreContentView $dto, array $viewConfig, ContentView $view): void
     {
         if (!isset($viewConfig['redirect'])) {
