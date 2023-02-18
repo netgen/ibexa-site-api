@@ -31,11 +31,9 @@ final class Location extends APILocation
 {
     protected RepoLocation $innerLocation;
     private string $languageCode;
-
     private ?APIContentInfo $contentInfo = null;
     private ?APILocation $internalParent = null;
     private ?APIContent $internalContent = null;
-
     private VersionInfo $innerVersionInfo;
     private Site $site;
     private DomainObjectMapper $domainObjectMapper;
