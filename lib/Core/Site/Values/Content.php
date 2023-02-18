@@ -36,7 +36,7 @@ use Psr\Log\LoggerInterface;
 final class Content extends APIContent
 {
     protected int $id;
-    protected string $name;
+    protected ?string $name;
     protected string $languageCode;
     protected ?int $mainLocationId;
 

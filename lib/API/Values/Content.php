@@ -18,7 +18,7 @@ use Pagerfanta\Pagerfanta;
  *
  * @property-read int $id
  * @property-read ?int $mainLocationId
- * @property-read string $name
+ * @property-read ?string $name
  * @property-read string $languageCode
  * @property-read bool $isVisible
  * @property-read \Netgen\IbexaSiteApi\API\Values\ContentInfo $contentInfo
