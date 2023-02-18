@@ -4,62 +4,25 @@ declare(strict_types=1);
 
 namespace Netgen\IbexaSiteApi\Core\Site\Values;
 
+use Ibexa\Contracts\Core\FieldType\Value;
+use Ibexa\Contracts\Core\Repository\Values\Content\Field as RepositoryField;
+use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition;
+use Netgen\IbexaSiteApi\API\Values\Content as APIContent;
 use Netgen\IbexaSiteApi\API\Values\Field as APIField;
 
 final class Field extends APIField
 {
-    /**
-     * @var int
-     */
-    protected $id;
-
-    /**
-     * @var string
-     */
-    protected $fieldDefIdentifier;
-
-    /**
-     * @var \Ibexa\Contracts\Core\FieldType\Value
-     */
-    protected $value;
-
-    /**
-     * @var string
-     */
-    protected $languageCode;
-
-    /**
-     * @var string
-     */
-    protected $fieldTypeIdentifier;
-
-    /**
-     * @var string
-     */
-    protected $name;
-
-    /**
-     * @var string
-     */
-    protected $description;
-
-    /**
-     * @var \Netgen\IbexaSiteApi\API\Values\Content
-     */
-    protected $content;
-
-    /**
-     * @var \Ibexa\Contracts\Core\Repository\Values\Content\Field
-     */
-    protected $innerField;
-
-    /**
-     * @var \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition
-     */
-    protected $innerFieldDefinition;
-
+    protected int $id;
+    protected string $fieldDefIdentifier;
+    protected Value $value;
+    protected string $languageCode;
+    protected string $fieldTypeIdentifier;
+    protected ?string $name;
+    protected ?string $description;
+    protected APIContent $content;
+    protected RepositoryField $innerField;
+    protected FieldDefinition $innerFieldDefinition;
     private bool $isEmpty;
-
     private bool $isSurrogate;
 
     public function __construct(array $properties = [])

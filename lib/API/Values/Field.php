@@ -13,13 +13,13 @@ use Ibexa\Contracts\Core\Repository\Values\ValueObject;
  *
  * @see \Ibexa\Contracts\Core\Repository\Values\Content\Field
  *
- * @property-read int|string $id
+ * @property-read int $id
  * @property-read string $fieldDefIdentifier
  * @property-read \Ibexa\Contracts\Core\FieldType\Value $value
  * @property-read string $languageCode
  * @property-read string $fieldTypeIdentifier
- * @property-read string $name
- * @property-read string $description
+ * @property-read ?string $name
+ * @property-read ?string $description
  * @property-read \Netgen\IbexaSiteApi\API\Values\Content $content
  * @property-read \Ibexa\Contracts\Core\Repository\Values\Content\Field $innerField
  * @property-read \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition $innerFieldDefinition
