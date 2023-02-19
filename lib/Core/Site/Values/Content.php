@@ -244,7 +244,7 @@ final class Content extends APIContent
         string $fieldDefinitionIdentifier,
         array $contentTypeIdentifiers = [],
         int $maxPerPage = 25,
-        int $currentPage = 1
+        int $currentPage = 1,
     ): Pagerfanta {
         $relations = $this->site->getRelationService()->loadFieldRelations(
             $this,
@@ -283,7 +283,7 @@ final class Content extends APIContent
         string $fieldDefinitionIdentifier,
         array $contentTypeIdentifiers = [],
         int $maxPerPage = 25,
-        int $currentPage = 1
+        int $currentPage = 1,
     ): Pagerfanta {
         $relations = $this->site->getRelationService()->loadFieldRelationLocations(
             $this,

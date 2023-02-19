@@ -31,7 +31,7 @@ class Link implements Converter
         Repository $repository,
         LoadService $loadService,
         RouterInterface $router,
-        ?LoggerInterface $logger = null
+        ?LoggerInterface $logger = null,
     ) {
         $this->repository = $repository;
         $this->loadService = $loadService;

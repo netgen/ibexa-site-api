@@ -19,7 +19,7 @@ class UrlAliasGenerator extends BaseUrlAliasGenerator
         Repository $repository,
         RouterInterface $defaultRouter,
         ConfigResolverInterface $configResolver,
-        array $unsafeCharMap = []
+        array $unsafeCharMap = [],
     ) {
         parent::__construct($repository, $defaultRouter, $configResolver, $unsafeCharMap);
 

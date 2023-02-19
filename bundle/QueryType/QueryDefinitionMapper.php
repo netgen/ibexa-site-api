@@ -31,7 +31,7 @@ final class QueryDefinitionMapper
     public function __construct(
         QueryTypeRegistry $queryTypeRegistry,
         ParameterProcessor $parameterProcessor,
-        ConfigResolverInterface $configResolver
+        ConfigResolverInterface $configResolver,
     ) {
         $this->queryTypeRegistry = $queryTypeRegistry;
         $this->parameterProcessor = $parameterProcessor;

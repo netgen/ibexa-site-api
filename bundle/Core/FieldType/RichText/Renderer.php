@@ -26,7 +26,7 @@ class Renderer extends CoreRenderer
         string $ngEmbedConfigurationNamespace,
         ?LoggerInterface $logger = null,
         array $customTagsConfiguration = [],
-        array $customStylesConfiguration = []
+        array $customStylesConfiguration = [],
     ) {
         parent::__construct(
             $repository,

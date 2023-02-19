@@ -32,7 +32,7 @@ class MatcherFactory extends ClassNameMatcherFactory
         ConfigResolverInterface $configResolver,
         string $parameterName,
         ?string $namespace = null,
-        ?string $scope = null
+        ?string $scope = null,
     ) {
         $this->viewMatcherRegistry = $viewMatcherRegistry;
         $this->configResolver = $configResolver;

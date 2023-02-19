@@ -26,7 +26,7 @@ final class IbexaContentViewRuntime
         ValueObject $value,
         string $viewType,
         array $parameters = [],
-        bool $layout = false
+        bool $layout = false,
     ): string {
         return $this->contentRenderer->renderIbexaContent($value, $viewType, $parameters, $layout);
     }

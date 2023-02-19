@@ -98,7 +98,7 @@ final class CriterionDefinitionResolver
         string $name,
         ?string $target,
         string $operator,
-        mixed $value
+        mixed $value,
     ): CriterionDefinition {
         if ($operator === 'not') {
             return $this->buildDefinition(
@@ -119,7 +119,7 @@ final class CriterionDefinitionResolver
         string $name,
         ?string $target,
         ?string $operator,
-        mixed $value
+        mixed $value,
     ): CriterionDefinition {
         return new CriterionDefinition([
             'name' => $name,

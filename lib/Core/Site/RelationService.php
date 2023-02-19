@@ -36,7 +36,7 @@ class RelationService implements RelationServiceInterface
 
     public function __construct(
         SiteInterface $site,
-        RelationResolverRegistry $relationResolverRegistry
+        RelationResolverRegistry $relationResolverRegistry,
     ) {
         $this->site = $site;
         $this->relationResolverRegistry = $relationResolverRegistry;
@@ -45,7 +45,7 @@ class RelationService implements RelationServiceInterface
     public function loadFieldRelation(
         Content $content,
         string $fieldDefinitionIdentifier,
-        array $contentTypeIdentifiers = []
+        array $contentTypeIdentifiers = [],
     ): ?Content {
         $relatedContentItems = $this->loadFieldRelations(
             $content,
@@ -60,7 +60,7 @@ class RelationService implements RelationServiceInterface
         Content $content,
         string $fieldDefinitionIdentifier,
         array $contentTypeIdentifiers = [],
-        ?int $limit = null
+        ?int $limit = null,
     ): array {
         $field = $content->getField($fieldDefinitionIdentifier);
         $relationResolver = $this->relationResolverRegistry->get($field->fieldTypeIdentifier);
@@ -79,7 +79,7 @@ class RelationService implements RelationServiceInterface
     public function loadFieldRelationLocation(
         Content $content,
         string $fieldDefinitionIdentifier,
-        array $contentTypeIdentifiers = []
+        array $contentTypeIdentifiers = [],
     ): ?Location {
         $relatedLocations = $this->loadFieldRelationLocations(
             $content,
@@ -94,7 +94,7 @@ class RelationService implements RelationServiceInterface
         Content $content,
         string $fieldDefinitionIdentifier,
         array $contentTypeIdentifiers = [],
-        ?int $limit = null
+        ?int $limit = null,
     ): array {
         $field = $content->getField($fieldDefinitionIdentifier);
         $relationResolver = $this->relationResolverRegistry->get($field->fieldTypeIdentifier);

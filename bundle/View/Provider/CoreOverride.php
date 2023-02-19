@@ -14,7 +14,7 @@ final class CoreOverride extends CoreConfigured
 
     public function __construct(
         MatcherFactoryInterface $matcherFactory,
-        ContentViewFallbackResolver $contentViewFallbackResolver
+        ContentViewFallbackResolver $contentViewFallbackResolver,
     ) {
         parent::__construct($matcherFactory);
 

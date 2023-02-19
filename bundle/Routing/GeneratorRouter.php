@@ -51,7 +51,7 @@ class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
         UrlAliasGenerator $generator,
         Resolver $siteaccessResolver,
         RequestContext $requestContext,
-        ConfigResolverInterface $configResolver
+        ConfigResolverInterface $configResolver,
     ) {
         $this->repository = $repository;
         $this->generator = $generator;
@@ -63,7 +63,7 @@ class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
     public function generate(
         string $name,
         array $parameters = [],
-        int $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH
+        int $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH,
     ): string {
         $location = $this->resolveLocation($name, $parameters);
 

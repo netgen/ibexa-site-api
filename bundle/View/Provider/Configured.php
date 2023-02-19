@@ -41,7 +41,7 @@ class Configured implements ViewProvider
         QueryDefinitionMapper $queryDefinitionMapper,
         Resolver $redirectResolver,
         ContentViewFallbackResolver $contentViewFallbackResolver,
-        ParameterProcessor $parameterProcessor
+        ParameterProcessor $parameterProcessor,
     ) {
         $this->matcherFactory = $matcherFactory;
         $this->queryDefinitionMapper = $queryDefinitionMapper;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 $finder = PhpCsFixer\Finder::create()
     ->in(__DIR__)
     ->exclude(['var', 'vendor'])
@@ -29,7 +31,7 @@ return $config
         'phpdoc_types_order' => ['null_adjustment' => 'always_last', 'sort_algorithm' => 'none'],
         'phpdoc_no_alias_tag' => ['replacements' => ['type' => 'var', 'link' => 'see']],
         'single_line_comment_style' => false,
-        'trailing_comma_in_multiline' => ['elements' => ['arrays', 'arguments']],
+        'trailing_comma_in_multiline' => ['elements' => ['arrays', 'arguments', 'match', 'parameters']],
         'yoda_style' => false,
         'php_unit_strict' => false,
         'php_unit_test_annotation' => false,
@@ -51,6 +53,7 @@ return $config
         'static_lambda' => true,
         'ternary_to_null_coalescing' => true,
         'use_arrow_functions' => true,
+        'no_alias_language_construct_call' => true,
    ])
     ->setRiskyAllowed(true)
     ->setFinder($finder)

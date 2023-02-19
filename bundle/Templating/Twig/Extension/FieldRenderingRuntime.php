@@ -21,7 +21,7 @@ class FieldRenderingRuntime
     public function __construct(
         Environment $environment,
         FieldBlockRenderer $fieldBlockRenderer,
-        ParameterProviderRegistryInterface $parameterProviderRegistry
+        ParameterProviderRegistryInterface $parameterProviderRegistry,
     ) {
         $this->environment = $environment;
         $this->fieldBlockRenderer = $fieldBlockRenderer;

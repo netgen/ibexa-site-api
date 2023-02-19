@@ -32,7 +32,7 @@ final class Settings extends BaseSettings
         bool $useAlwaysAvailable,
         int $rootLocationId,
         bool $showHiddenItems,
-        bool $failOnMissingField
+        bool $failOnMissingField,
     ) {
         $this->prioritizedLanguages = $prioritizedLanguages;
         $this->useAlwaysAvailable = $useAlwaysAvailable;

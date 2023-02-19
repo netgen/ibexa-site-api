@@ -41,7 +41,7 @@ final class ViewRenderer
         ControllerResolverInterface $controllerResolver,
         ArgumentResolverInterface $argumentResolver,
         Renderer $coreViewRenderer,
-        EventDispatcherInterface $eventDispatcher
+        EventDispatcherInterface $eventDispatcher,
     ) {
         $this->requestStack = $requestStack;
         $this->controllerResolver = $controllerResolver;

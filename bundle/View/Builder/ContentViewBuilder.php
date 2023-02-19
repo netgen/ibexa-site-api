@@ -43,7 +43,7 @@ class ContentViewBuilder implements ViewBuilder
         Repository $repository,
         Configurator $viewConfigurator,
         ParametersInjector $viewParametersInjector,
-        LocationResolver $locationResolver
+        LocationResolver $locationResolver,
     ) {
         $this->site = $site;
         $this->repository = $repository;

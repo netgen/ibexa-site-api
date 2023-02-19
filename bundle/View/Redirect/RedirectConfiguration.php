@@ -17,7 +17,7 @@ final class RedirectConfiguration
         array $targetParameters,
         bool $permanent,
         bool $keepRequestMethod,
-        bool $absolute
+        bool $absolute,
     ) {
         $this->target = $target;
         $this->targetParameters = $targetParameters;

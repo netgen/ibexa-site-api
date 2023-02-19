@@ -181,7 +181,7 @@ final class GetAttrExpressionDecorator extends GetAttrExpression
         $isDefinedTest = false,
         $ignoreStrictCheck = false,
         $sandboxed = false,
-        $lineno = -1
+        $lineno = -1,
     ) {
         if (!$object instanceof Fields) {
             return twig_get_attribute(

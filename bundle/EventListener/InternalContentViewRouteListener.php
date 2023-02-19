@@ -35,7 +35,7 @@ final class InternalContentViewRouteListener implements EventSubscriberInterface
         ConfigResolverInterface $configResolver,
         FragmentHandler $fragmentHandler,
         RouterInterface $router,
-        array $siteaccessGroups
+        array $siteaccessGroups,
     ) {
         $this->configResolver = $configResolver;
         $this->fragmentHandler = $fragmentHandler;

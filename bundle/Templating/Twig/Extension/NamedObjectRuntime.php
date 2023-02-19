@@ -26,7 +26,7 @@ class NamedObjectRuntime
     public function __construct(
         Provider $specialObjectProvider,
         bool $isDebug,
-        ?LoggerInterface $logger = null
+        ?LoggerInterface $logger = null,
     ) {
         $this->namedObjectProvider = $specialObjectProvider;
         $this->isDebug = $isDebug;

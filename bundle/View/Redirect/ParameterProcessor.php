@@ -21,7 +21,7 @@ final class ParameterProcessor
     public function __construct(
         ExpressionLanguage $expressionLanguage,
         ConfigResolverInterface $configResolver,
-        Provider $namedObjectProvider
+        Provider $namedObjectProvider,
     ) {
         $this->expressionLanguage = $expressionLanguage;
         $this->configResolver = $configResolver;

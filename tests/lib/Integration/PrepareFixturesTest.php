@@ -76,7 +76,7 @@ final class PrepareFixturesTest extends APIBaseTest
         string $locationRemoteId,
         string $mainLanguageCode,
         array $languageCodes,
-        bool $alwaysAvailable = false
+        bool $alwaysAvailable = false,
     ): Content {
         $repository = $this->getRepository(false);
 

@@ -29,7 +29,7 @@ final class ParameterProcessor
         ExpressionLanguage $expressionLanguage,
         RequestStack $requestStack,
         ConfigResolverInterface $configResolver,
-        Provider $namedObjectProvider
+        Provider $namedObjectProvider,
     ) {
         $this->expressionLanguage = $expressionLanguage;
         $this->requestStack = $requestStack;

@@ -20,7 +20,7 @@ class CoreAdapterResolver extends LocationResolver
     public function __construct(
         Repository $repository,
         LoadService $loadService,
-        ContentInfoLocationLoader $coreLoader
+        ContentInfoLocationLoader $coreLoader,
     ) {
         $this->repository = $repository;
         $this->loadService = $loadService;

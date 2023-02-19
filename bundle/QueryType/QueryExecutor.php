@@ -29,7 +29,7 @@ final class QueryExecutor
     public function __construct(
         QueryTypeRegistry $queryTypeRegistry,
         FilterService $filterService,
-        FindService $findService
+        FindService $findService,
     ) {
         $this->queryTypeRegistry = $queryTypeRegistry;
         $this->filterService = $filterService;

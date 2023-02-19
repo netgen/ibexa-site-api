@@ -30,7 +30,7 @@ final class ContentRenderer
     public function __construct(
         ContentViewBuilder $viewBuilder,
         ViewRenderer $viewRenderer,
-        ?LoggerInterface $logger
+        ?LoggerInterface $logger,
     ) {
         $this->viewBuilder = $viewBuilder;
         $this->viewRenderer = $viewRenderer;
@@ -44,7 +44,7 @@ final class ContentRenderer
         ValueObject $value,
         string $viewType,
         array $parameters = [],
-        bool $layout = false
+        bool $layout = false,
     ): string {
         /** @var APIContent|Content $content */
         $content = $this->getContent($value);
@@ -95,7 +95,7 @@ final class ContentRenderer
         ValueObject $value,
         string $viewType,
         array $parameters = [],
-        bool $layout = false
+        bool $layout = false,
     ): string {
         $content = $this->getIbexaContent($value);
         $location = $this->getIbexaLocation($value);

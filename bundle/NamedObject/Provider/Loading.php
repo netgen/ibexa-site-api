@@ -37,7 +37,7 @@ final class Loading extends Provider
         LoadService $loadService,
         ?TagsService $tagsService,
         ParameterProcessor $parameterProcessor,
-        ConfigResolverInterface $configResolver
+        ConfigResolverInterface $configResolver,
     ) {
         $this->loadService = $loadService;
         $this->tagsService = $tagsService;

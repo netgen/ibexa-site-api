@@ -21,7 +21,7 @@ final class ContentViewFallbackResolver
         string $toIbexaPlatformEmbedFallbackTemplate,
         string $toIbexaPlatformViewFallbackTemplate,
         string $toSiteApiEmbedFallbackTemplate,
-        string $toSiteApiViewFallbackTemplate
+        string $toSiteApiViewFallbackTemplate,
     ) {
         $this->configResolver = $configResolver;
         $this->toIbexaPlatformEmbedFallbackTemplate = $toIbexaPlatformEmbedFallbackTemplate;

@@ -39,7 +39,7 @@ final class DomainObjectMapper
         SiteInterface $site,
         Repository $repository,
         bool $failOnMissingField,
-        LoggerInterface $logger
+        LoggerInterface $logger,
     ) {
         $this->site = $site;
         $this->repository = $repository;

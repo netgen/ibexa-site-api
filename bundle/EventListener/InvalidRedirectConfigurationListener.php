@@ -25,7 +25,7 @@ final class InvalidRedirectConfigurationListener implements EventSubscriberInter
     public function __construct(
         UrlGeneratorInterface $urlGenerator,
         ConfigResolverInterface $configResolver,
-        ?LoggerInterface $logger = null
+        ?LoggerInterface $logger = null,
     ) {
         $this->urlGenerator = $urlGenerator;
         $this->configResolver = $configResolver;

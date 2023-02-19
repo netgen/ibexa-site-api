@@ -50,7 +50,7 @@ final class Fields extends APIFields
         SiteContent $content,
         DomainObjectMapper $domainObjectMapper,
         bool $failOnMissingField,
-        LoggerInterface $logger
+        LoggerInterface $logger,
     ) {
         $this->content = $content;
         $this->domainObjectMapper = $domainObjectMapper;

@@ -32,7 +32,7 @@ class LoadService implements LoadServiceInterface
         APILanguageResolver $languageResolver,
         DomainObjectMapper $domainObjectMapper,
         ContentService $contentService,
-        LocationService $locationService
+        LocationService $locationService,
     ) {
         $this->languageResolver = $languageResolver;
         $this->domainObjectMapper = $domainObjectMapper;

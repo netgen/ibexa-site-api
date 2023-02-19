@@ -116,7 +116,7 @@ abstract class Content extends ValueObject
         string $fieldDefinitionIdentifier,
         array $contentTypeIdentifiers = [],
         int $maxPerPage = 25,
-        int $currentPage = 1
+        int $currentPage = 1,
     ): Pagerfanta;
 
     /**
@@ -149,6 +149,6 @@ abstract class Content extends ValueObject
         string $fieldDefinitionIdentifier,
         array $contentTypeIdentifiers = [],
         int $maxPerPage = 25,
-        int $currentPage = 1
+        int $currentPage = 1,
     ): Pagerfanta;
 }

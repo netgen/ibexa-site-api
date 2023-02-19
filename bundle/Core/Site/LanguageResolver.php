@@ -25,7 +25,7 @@ final class LanguageResolver extends BaseLanguageResolver
     public function __construct(
         BaseSettings $settings,
         Resolver $siteaccessResolver,
-        ConfigResolverInterface $configResolver
+        ConfigResolverInterface $configResolver,
     ) {
         $this->settings = $settings;
         $this->siteaccessResolver = $siteaccessResolver;

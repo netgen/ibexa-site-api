@@ -32,7 +32,7 @@ class FilterService implements FilterServiceInterface
         BaseSettings $settings,
         DomainObjectMapper $domainObjectMapper,
         SearchService $searchService,
-        ContentService $contentService
+        ContentService $contentService,
     ) {
         $this->settings = $settings;
         $this->domainObjectMapper = $domainObjectMapper;

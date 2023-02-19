@@ -33,7 +33,7 @@ class PreviewController extends BasePreviewController
         Content $content,
         SiteAccess $previewSiteAccess,
         Request $request,
-        $language
+        $language,
     ): Request {
         $request = parent::getForwardRequest($location, $content, $previewSiteAccess, $request, $language);
 

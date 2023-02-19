@@ -27,7 +27,7 @@ trait LanguageExpressionEvaluatorTrait
     protected function evaluate(
         mixed $value,
         ExpressionLanguage $expressionLanguage,
-        array $values
+        array $values,
     ) {
         if (is_array($value)) {
             return $this->evaluateParameters($value, $expressionLanguage, $values);
@@ -51,7 +51,7 @@ trait LanguageExpressionEvaluatorTrait
     private function evaluateParameters(
         array $parameters,
         ExpressionLanguage $expressionLanguage,
-        array $values
+        array $values,
     ): array {
         $processedParameters = [];
 
