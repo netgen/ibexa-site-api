@@ -14,11 +14,9 @@ use function in_array;
 
 final class LanguageResolver extends BaseLanguageResolver
 {
-    private BaseSettings $settings;
-
-    public function __construct(BaseSettings $settings)
-    {
-        $this->settings = $settings;
+    public function __construct(
+        private readonly BaseSettings $settings
+    ) {
     }
 
     public function resolveForPreview(VersionInfo $versionInfo, string $languageCode): string

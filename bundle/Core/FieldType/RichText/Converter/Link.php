@@ -22,21 +22,12 @@ use function preg_match;
 
 class Link implements Converter
 {
-    protected Repository $repository;
-    protected LoadService $loadService;
-    protected RouterInterface $router;
-    protected LoggerInterface $logger;
-
     public function __construct(
-        Repository $repository,
-        LoadService $loadService,
-        RouterInterface $router,
-        ?LoggerInterface $logger = null,
+        private readonly Repository $repository,
+        private readonly LoadService $loadService,
+        private readonly RouterInterface $router,
+        private readonly LoggerInterface $logger = new NullLogger(),
     ) {
-        $this->repository = $repository;
-        $this->loadService = $loadService;
-        $this->router = $router;
-        $this->logger = $logger ?? new NullLogger();
     }
 
     public function convert(DOMDocument $xmlDoc): DOMDocument

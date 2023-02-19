@@ -23,18 +23,11 @@ use Throwable;
  */
 final class ContentRenderer
 {
-    private ContentViewBuilder $viewBuilder;
-    private ViewRenderer $viewRenderer;
-    private LoggerInterface $logger;
-
     public function __construct(
-        ContentViewBuilder $viewBuilder,
-        ViewRenderer $viewRenderer,
-        ?LoggerInterface $logger,
+        private readonly ContentViewBuilder $viewBuilder,
+        private readonly ViewRenderer $viewRenderer,
+        private readonly LoggerInterface $logger = new NullLogger(),
     ) {
-        $this->viewBuilder = $viewBuilder;
-        $this->viewRenderer = $viewRenderer;
-        $this->logger = $logger ?? new NullLogger();
     }
 
     /**

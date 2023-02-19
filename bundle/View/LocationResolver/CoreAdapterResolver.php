@@ -13,18 +13,11 @@ use Netgen\IbexaSiteApi\API\Values\Location;
 
 class CoreAdapterResolver extends LocationResolver
 {
-    private Repository $repository;
-    private LoadService $loadService;
-    private ContentInfoLocationLoader $coreLoader;
-
     public function __construct(
-        Repository $repository,
-        LoadService $loadService,
-        ContentInfoLocationLoader $coreLoader,
+        private readonly Repository $repository,
+        private readonly LoadService $loadService,
+        private readonly ContentInfoLocationLoader $coreLoader
     ) {
-        $this->repository = $repository;
-        $this->loadService = $loadService;
-        $this->coreLoader = $coreLoader;
     }
 
     public function getLocation(Content $content): Location

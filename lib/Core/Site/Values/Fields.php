@@ -28,14 +28,9 @@ use function sprintf;
  */
 final class Fields extends APIFields
 {
-    private bool $failOnMissingField;
     private bool $areFieldsInitialized = false;
 
     private ?ArrayIterator $iterator = null;
-
-    private SiteContent $content;
-    private DomainObjectMapper $domainObjectMapper;
-    private LoggerInterface $logger;
 
     /** @var \Netgen\IbexaSiteApi\API\Values\Field[] */
     private array $fieldsByIdentifier = [];
@@ -47,15 +42,11 @@ final class Fields extends APIFields
     private array $fieldsByNumericSequence = [];
 
     public function __construct(
-        SiteContent $content,
-        DomainObjectMapper $domainObjectMapper,
-        bool $failOnMissingField,
-        LoggerInterface $logger,
+        private readonly SiteContent $content,
+        private readonly DomainObjectMapper $domainObjectMapper,
+        private readonly bool $failOnMissingField,
+        private readonly LoggerInterface $logger
     ) {
-        $this->content = $content;
-        $this->domainObjectMapper = $domainObjectMapper;
-        $this->failOnMissingField = $failOnMissingField;
-        $this->logger = $logger;
     }
 
     public function __debugInfo(): array

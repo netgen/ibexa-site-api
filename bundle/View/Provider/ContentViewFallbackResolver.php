@@ -10,24 +10,13 @@ use Netgen\Bundle\IbexaSiteApiBundle\View\ContentView as SiteContentView;
 
 final class ContentViewFallbackResolver
 {
-    private ConfigResolverInterface $configResolver;
-    private string $toIbexaPlatformEmbedFallbackTemplate;
-    private string $toIbexaPlatformViewFallbackTemplate;
-    private string $toSiteApiEmbedFallbackTemplate;
-    private string $toSiteApiViewFallbackTemplate;
-
     public function __construct(
-        ConfigResolverInterface $configResolver,
-        string $toIbexaPlatformEmbedFallbackTemplate,
-        string $toIbexaPlatformViewFallbackTemplate,
-        string $toSiteApiEmbedFallbackTemplate,
-        string $toSiteApiViewFallbackTemplate,
+        private readonly ConfigResolverInterface $configResolver,
+        private readonly string $toIbexaPlatformEmbedFallbackTemplate,
+        private readonly string $toIbexaPlatformViewFallbackTemplate,
+        private readonly string $toSiteApiEmbedFallbackTemplate,
+        private readonly string $toSiteApiViewFallbackTemplate
     ) {
-        $this->configResolver = $configResolver;
-        $this->toIbexaPlatformEmbedFallbackTemplate = $toIbexaPlatformEmbedFallbackTemplate;
-        $this->toIbexaPlatformViewFallbackTemplate = $toIbexaPlatformViewFallbackTemplate;
-        $this->toSiteApiEmbedFallbackTemplate = $toSiteApiEmbedFallbackTemplate;
-        $this->toSiteApiViewFallbackTemplate = $toSiteApiViewFallbackTemplate;
     }
 
     public function getIbexaPlatformFallbackDto(SiteContentView $view): ?ContentView

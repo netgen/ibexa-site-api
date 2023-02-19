@@ -15,15 +15,10 @@ use Psr\Log\NullLogger;
 
 class ImageRuntime
 {
-    private VariationHandler $imageVariationService;
-    private LoggerInterface $logger;
-
     public function __construct(
-        VariationHandler $imageVariationService,
-        ?LoggerInterface $logger = null,
+        private readonly VariationHandler $imageVariationService,
+        private readonly LoggerInterface $logger = new NullLogger(),
     ) {
-        $this->imageVariationService = $imageVariationService;
-        $this->logger = $logger ?? new NullLogger();
     }
 
     /**

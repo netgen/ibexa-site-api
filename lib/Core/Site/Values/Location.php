@@ -37,16 +37,16 @@ final class Location extends APILocation
     private VersionInfo $innerVersionInfo;
     private Site $site;
     private DomainObjectMapper $domainObjectMapper;
-    private LoggerInterface $logger;
 
-    public function __construct(array $properties, LoggerInterface $logger)
-    {
+    public function __construct(
+        array $properties,
+        private readonly LoggerInterface $logger
+    ) {
         $this->site = $properties['site'];
         $this->domainObjectMapper = $properties['domainObjectMapper'];
         $this->innerVersionInfo = $properties['innerVersionInfo'];
         $this->innerLocation = $properties['innerLocation'];
         $this->languageCode = $properties['languageCode'];
-        $this->logger = $logger;
 
         unset(
             $properties['site'],

@@ -18,18 +18,11 @@ final class ParameterProcessor
 {
     use LanguageExpressionEvaluatorTrait;
 
-    private ExpressionLanguage $expressionLanguage;
-    private ConfigResolverInterface $configResolver;
-    private PermissionResolver $permissionResolver;
-
     public function __construct(
-        ExpressionLanguage $expressionLanguage,
-        ConfigResolverInterface $configResolver,
-        PermissionResolver $permissionResolver,
+        private readonly ExpressionLanguage $expressionLanguage,
+        private readonly ConfigResolverInterface $configResolver,
+        private readonly PermissionResolver $permissionResolver
     ) {
-        $this->expressionLanguage = $expressionLanguage;
-        $this->configResolver = $configResolver;
-        $this->permissionResolver = $permissionResolver;
     }
 
     /**

@@ -49,9 +49,9 @@ services:
     netgen.ibexa_site_api.ng_content_view.matcher_factory:
         class: Netgen\Bundle\IbexaSiteApiBundle\View\Matcher\MatcherFactory
         arguments:
-            - '@?Ibexa\Bundle\Core\Matcher\ViewMatcherRegistry'
             - '@ibexa.api.repository'
             - 'Ibexa\Core\MVC\Symfony\Matcher\ContentBased'
+            - '@?Ibexa\Bundle\Core\Matcher\ViewMatcherRegistry'
             - '@ibexa.config.resolver'
             - 'ng_content_view'
         calls:
@@ -67,9 +67,9 @@ services:
     netgen.ibexa_site_api.ng_content_view.default_matcher_factory:
         class: Netgen\Bundle\IbexaSiteApiBundle\View\Matcher\MatcherFactory
         arguments:
-            - '@?Ibexa\Bundle\Core\Matcher\ViewMatcherRegistry'
             - '@ibexa.api.repository'
             - 'Ibexa\Core\MVC\Symfony\Matcher\ContentBased'
+            - '@?Ibexa\Bundle\Core\Matcher\ViewMatcherRegistry'
             - '@ibexa.config.resolver'
             - 'ng_content_view_defaults'
         calls:

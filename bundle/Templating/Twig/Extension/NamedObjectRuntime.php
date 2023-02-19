@@ -19,18 +19,11 @@ use Psr\Log\NullLogger;
  */
 class NamedObjectRuntime
 {
-    private Provider $namedObjectProvider;
-    private bool $isDebug;
-    private LoggerInterface $logger;
-
     public function __construct(
-        Provider $specialObjectProvider,
-        bool $isDebug,
-        ?LoggerInterface $logger = null,
+        private readonly Provider $namedObjectProvider,
+        private readonly bool $isDebug,
+        private readonly LoggerInterface $logger = new NullLogger(),
     ) {
-        $this->namedObjectProvider = $specialObjectProvider;
-        $this->isDebug = $isDebug;
-        $this->logger = $logger ?? new NullLogger();
     }
 
     public function getNamedContent(string $name): ?Content

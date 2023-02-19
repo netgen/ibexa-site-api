@@ -32,7 +32,6 @@ use function is_string;
  */
 abstract class Base implements QueryType
 {
-    private Settings $settings;
     private ?OptionsResolver $optionsResolver = null;
     private ?CriterionDefinitionResolver $criterionDefinitionResolver = null;
     private ?CriteriaBuilder $criteriaBuilder = null;
@@ -41,9 +40,9 @@ abstract class Base implements QueryType
     /** @var \Closure[] */
     private ?array $registeredCriterionBuilders = null;
 
-    public function __construct(Settings $settings)
-    {
-        $this->settings = $settings;
+    public function __construct(
+        private readonly Settings $settings
+    ) {
     }
 
     final public function getQuery(array $parameters = []): Query

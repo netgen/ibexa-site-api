@@ -18,14 +18,12 @@ use function twig_get_attribute;
 
 final class GetAttrExpressionDecorator extends GetAttrExpression
 {
-    private GetAttrExpression $decoratedExpression;
-
     /** @noinspection MagicMethodsValidityInspection */
 
     /** @noinspection PhpMissingParentConstructorInspection */
-    public function __construct(GetAttrExpression $decoratedExpression)
-    {
-        $this->decoratedExpression = $decoratedExpression;
+    public function __construct(
+        private readonly GetAttrExpression $decoratedExpression
+    ) {
     }
 
     public function __toString(): string

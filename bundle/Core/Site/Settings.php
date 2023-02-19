@@ -14,11 +14,9 @@ use Netgen\IbexaSiteApi\API\Settings as BaseSettings;
  */
 final class Settings extends BaseSettings
 {
-    private ConfigResolverInterface $configResolver;
-
-    public function __construct(ConfigResolverInterface $configResolver)
-    {
-        $this->configResolver = $configResolver;
+    public function __construct(
+        private readonly ConfigResolverInterface $configResolver
+    ) {
     }
 
     /**

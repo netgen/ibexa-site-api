@@ -40,24 +40,13 @@ use function str_starts_with;
  */
 class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
 {
-    private Repository $repository;
-    private UrlAliasGenerator $generator;
-    private Resolver $siteaccessResolver;
-    private RequestContext $requestContext;
-    private ConfigResolverInterface $configResolver;
-
     public function __construct(
-        Repository $repository,
-        UrlAliasGenerator $generator,
-        Resolver $siteaccessResolver,
-        RequestContext $requestContext,
-        ConfigResolverInterface $configResolver,
+        private readonly Repository $repository,
+        private readonly UrlAliasGenerator $generator,
+        private readonly Resolver $siteaccessResolver,
+        private readonly ConfigResolverInterface $configResolver,
+        private RequestContext $requestContext,
     ) {
-        $this->repository = $repository;
-        $this->generator = $generator;
-        $this->siteaccessResolver = $siteaccessResolver;
-        $this->requestContext = $requestContext;
-        $this->configResolver = $configResolver;
     }
 
     public function generate(
@@ -78,7 +67,9 @@ class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
             $parameters[RouteObjectInterface::ROUTE_OBJECT],
         );
 
-        $isSiteApiPrimaryContentView = $this->configResolver->getParameter('ng_site_api.site_api_is_primary_content_view');
+        $isSiteApiPrimaryContentView = $this->configResolver->getParameter(
+            'ng_site_api.site_api_is_primary_content_view'
+        );
 
         if (isset($parameters['siteaccess']) || !$isSiteApiPrimaryContentView) {
             return $this->generator->generate($location, $parameters, $referenceType);

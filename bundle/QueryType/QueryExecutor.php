@@ -22,18 +22,11 @@ use Pagerfanta\Pagerfanta;
  */
 final class QueryExecutor
 {
-    private QueryTypeRegistry $queryTypeRegistry;
-    private FilterService $filterService;
-    private FindService $findService;
-
     public function __construct(
-        QueryTypeRegistry $queryTypeRegistry,
-        FilterService $filterService,
-        FindService $findService,
+        private readonly QueryTypeRegistry $queryTypeRegistry,
+        private readonly FilterService $filterService,
+        private readonly FindService $findService
     ) {
-        $this->queryTypeRegistry = $queryTypeRegistry;
-        $this->filterService = $filterService;
-        $this->findService = $findService;
     }
 
     /**

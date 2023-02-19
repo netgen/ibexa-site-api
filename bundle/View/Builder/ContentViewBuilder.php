@@ -32,24 +32,13 @@ use function str_contains;
  */
 class ContentViewBuilder implements ViewBuilder
 {
-    private Site $site;
-    private Repository $repository;
-    private Configurator $viewConfigurator;
-    private ParametersInjector $viewParametersInjector;
-    private LocationResolver $locationResolver;
-
     public function __construct(
-        Site $site,
-        Repository $repository,
-        Configurator $viewConfigurator,
-        ParametersInjector $viewParametersInjector,
-        LocationResolver $locationResolver,
+        private readonly Site $site,
+        private readonly Repository $repository,
+        private readonly Configurator $viewConfigurator,
+        private readonly ParametersInjector $viewParametersInjector,
+        private readonly LocationResolver $locationResolver
     ) {
-        $this->site = $site;
-        $this->repository = $repository;
-        $this->viewConfigurator = $viewConfigurator;
-        $this->viewParametersInjector = $viewParametersInjector;
-        $this->locationResolver = $locationResolver;
     }
 
     public function matches($argument): bool

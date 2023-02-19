@@ -22,13 +22,11 @@ use function array_merge;
  */
 final class ForwardFields extends Location
 {
-    private RelationResolverRegistry $relationResolverRegistry;
-
-    public function __construct(Settings $settings, RelationResolverRegistry $relationResolverRegistry)
-    {
+    public function __construct(
+        Settings $settings,
+        private readonly RelationResolverRegistry $relationResolverRegistry
+    ) {
         parent::__construct($settings);
-
-        $this->relationResolverRegistry = $relationResolverRegistry;
     }
 
     public static function getName(): string

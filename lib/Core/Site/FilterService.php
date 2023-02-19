@@ -23,21 +23,12 @@ use Netgen\IbexaSiteApi\API\Settings as BaseSettings;
  */
 class FilterService implements FilterServiceInterface
 {
-    private BaseSettings $settings;
-    private DomainObjectMapper $domainObjectMapper;
-    private SearchService $searchService;
-    private ContentService $contentService;
-
     public function __construct(
-        BaseSettings $settings,
-        DomainObjectMapper $domainObjectMapper,
-        SearchService $searchService,
-        ContentService $contentService,
+        private readonly BaseSettings $settings,
+        private readonly DomainObjectMapper $domainObjectMapper,
+        private readonly SearchService $searchService,
+        private readonly ContentService $contentService
     ) {
-        $this->settings = $settings;
-        $this->domainObjectMapper = $domainObjectMapper;
-        $this->searchService = $searchService;
-        $this->contentService = $contentService;
     }
 
     public function filterContent(Query $query): SearchResult

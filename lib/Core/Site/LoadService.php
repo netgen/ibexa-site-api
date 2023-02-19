@@ -23,21 +23,12 @@ use Netgen\IbexaSiteApi\API\Values\Location;
  */
 class LoadService implements LoadServiceInterface
 {
-    private APILanguageResolver $languageResolver;
-    private DomainObjectMapper $domainObjectMapper;
-    private ContentService $contentService;
-    private LocationService $locationService;
-
     public function __construct(
-        APILanguageResolver $languageResolver,
-        DomainObjectMapper $domainObjectMapper,
-        ContentService $contentService,
-        LocationService $locationService,
+        private readonly APILanguageResolver $languageResolver,
+        private readonly DomainObjectMapper $domainObjectMapper,
+        private readonly ContentService $contentService,
+        private readonly LocationService $locationService
     ) {
-        $this->languageResolver = $languageResolver;
-        $this->domainObjectMapper = $domainObjectMapper;
-        $this->contentService = $contentService;
-        $this->locationService = $locationService;
     }
 
     public function loadContent(int $contentId): Content

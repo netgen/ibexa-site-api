@@ -17,28 +17,17 @@ use Netgen\IbexaSiteApi\API\Settings as BaseSettings;
  */
 final class Settings extends BaseSettings
 {
-    /** @var string[] */
-    private array $prioritizedLanguages;
-    private bool $useAlwaysAvailable;
-    private int $rootLocationId;
-    private bool $showHiddenItems;
-    private bool $failOnMissingField;
-
     /**
      * @param string[] $prioritizedLanguages
+     * @noinspection PhpPropertyCanBeReadonlyInspection
      */
     public function __construct(
-        array $prioritizedLanguages,
-        bool $useAlwaysAvailable,
-        int $rootLocationId,
-        bool $showHiddenItems,
-        bool $failOnMissingField,
+        private array $prioritizedLanguages,
+        private readonly bool $useAlwaysAvailable,
+        private readonly int $rootLocationId,
+        private readonly bool $showHiddenItems,
+        private readonly bool $failOnMissingField
     ) {
-        $this->prioritizedLanguages = $prioritizedLanguages;
-        $this->useAlwaysAvailable = $useAlwaysAvailable;
-        $this->rootLocationId = $rootLocationId;
-        $this->showHiddenItems = $showHiddenItems;
-        $this->failOnMissingField = $failOnMissingField;
     }
 
     /**

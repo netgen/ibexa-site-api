@@ -32,10 +32,6 @@ use const SORT_NUMERIC;
  */
 class NativeResolver extends Resolver
 {
-    private Handler $persistenceHandler;
-    private int $recursionLimit;
-    private LoggerInterface $logger;
-
     private ConfigResolverInterface $configResolver;
     private SiteAccess $currentSiteaccess;
     private array $siteaccesses;
@@ -43,11 +39,11 @@ class NativeResolver extends Resolver
 
     private array $cache = [];
 
-    public function __construct(Handler $persistenceHandler, int $recursionLimit, ?LoggerInterface $logger = null)
-    {
-        $this->persistenceHandler = $persistenceHandler;
-        $this->recursionLimit = $recursionLimit;
-        $this->logger = $logger ?? new NullLogger();
+    public function __construct(
+        private readonly Handler $persistenceHandler,
+        private readonly int $recursionLimit,
+        private readonly LoggerInterface $logger = new NullLogger(),
+    ) {
     }
 
     /**

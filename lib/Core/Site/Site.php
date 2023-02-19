@@ -30,14 +30,9 @@ use Psr\Log\NullLogger;
  */
 class Site implements SiteInterface
 {
-    private BaseSettings $settings;
-    private APILanguageResolver $languageResolver;
     private ContentService $contentService;
     private LocationService $locationService;
     private SearchService $searchService;
-    private SearchService $filteringSearchService;
-    private RelationResolverRegistry $relationResolverRegistry;
-    private Repository $repository;
     private LoggerInterface $logger;
 
     private ?DomainObjectMapper $domainObjectMapper = null;
@@ -47,21 +42,16 @@ class Site implements SiteInterface
     private ?APIRelationService $relationService = null;
 
     public function __construct(
-        BaseSettings $settings,
-        APILanguageResolver $languageResolver,
-        Repository $repository,
-        SearchService $filteringSearchService,
-        RelationResolverRegistry $relationResolverRegistry,
+        private readonly BaseSettings $settings,
+        private readonly APILanguageResolver $languageResolver,
+        private readonly Repository $repository,
+        private readonly SearchService $filteringSearchService,
+        private readonly RelationResolverRegistry $relationResolverRegistry,
         ?LoggerInterface $logger = null,
     ) {
-        $this->settings = $settings;
-        $this->languageResolver = $languageResolver;
-        $this->repository = $repository;
         $this->contentService = $repository->getContentService();
         $this->locationService = $repository->getLocationService();
         $this->searchService = $repository->getSearchService();
-        $this->filteringSearchService = $filteringSearchService;
-        $this->relationResolverRegistry = $relationResolverRegistry;
         $this->logger = $logger ?? new NullLogger();
     }
 

@@ -30,24 +30,13 @@ use function sprintf;
  */
 class Configured implements ViewProvider
 {
-    private MatcherFactoryInterface $matcherFactory;
-    private QueryDefinitionMapper $queryDefinitionMapper;
-    private Resolver $redirectResolver;
-    private ContentViewFallbackResolver $contentViewFallbackResolver;
-    private ParameterProcessor $parameterProcessor;
-
     public function __construct(
-        MatcherFactoryInterface $matcherFactory,
-        QueryDefinitionMapper $queryDefinitionMapper,
-        Resolver $redirectResolver,
-        ContentViewFallbackResolver $contentViewFallbackResolver,
-        ParameterProcessor $parameterProcessor,
+        private readonly MatcherFactoryInterface $matcherFactory,
+        private readonly QueryDefinitionMapper $queryDefinitionMapper,
+        private readonly Resolver $redirectResolver,
+        private readonly ContentViewFallbackResolver $contentViewFallbackResolver,
+        private readonly ParameterProcessor $parameterProcessor
     ) {
-        $this->matcherFactory = $matcherFactory;
-        $this->queryDefinitionMapper = $queryDefinitionMapper;
-        $this->redirectResolver = $redirectResolver;
-        $this->contentViewFallbackResolver = $contentViewFallbackResolver;
-        $this->parameterProcessor = $parameterProcessor;
     }
 
     /**

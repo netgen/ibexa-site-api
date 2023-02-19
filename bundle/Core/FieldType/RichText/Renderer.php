@@ -13,8 +13,6 @@ use Twig\Environment;
 
 class Renderer extends CoreRenderer
 {
-    private string $ngEmbedConfigurationNamespace;
-
     public function __construct(
         Repository $repository,
         AuthorizationCheckerInterface $authorizationChecker,
@@ -23,7 +21,7 @@ class Renderer extends CoreRenderer
         string $tagConfigurationNamespace,
         string $styleConfigurationNamespace,
         string $embedConfigurationNamespace,
-        string $ngEmbedConfigurationNamespace,
+        private readonly string $ngEmbedConfigurationNamespace,
         ?LoggerInterface $logger = null,
         array $customTagsConfiguration = [],
         array $customStylesConfiguration = [],
@@ -40,8 +38,6 @@ class Renderer extends CoreRenderer
             $customTagsConfiguration,
             $customStylesConfiguration,
         );
-
-        $this->ngEmbedConfigurationNamespace = $ngEmbedConfigurationNamespace;
     }
 
     protected function getEmbedTemplateName($resourceType, $isInline, $isDenied): ?string

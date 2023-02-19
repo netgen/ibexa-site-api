@@ -17,13 +17,11 @@ use Netgen\IbexaSiteApi\API\FindService;
  */
 final class FindAdapter extends BaseAdapter
 {
-    private FindService $findService;
-
-    public function __construct(Query $query, FindService $findService)
-    {
+    public function __construct(
+        Query $query,
+        private readonly FindService $findService
+    ) {
         parent::__construct($query);
-
-        $this->findService = $findService;
     }
 
     protected function executeQuery(Query $query): SearchResult

@@ -23,19 +23,13 @@ use function is_array;
  */
 final class QueryDefinitionMapper
 {
-    private QueryTypeRegistry $queryTypeRegistry;
-    private ParameterProcessor $parameterProcessor;
-    private ConfigResolverInterface $configResolver;
     private ?array $namedQueryConfiguration = null;
 
     public function __construct(
-        QueryTypeRegistry $queryTypeRegistry,
-        ParameterProcessor $parameterProcessor,
-        ConfigResolverInterface $configResolver,
+        private readonly QueryTypeRegistry $queryTypeRegistry,
+        private readonly ParameterProcessor $parameterProcessor,
+        private readonly ConfigResolverInterface $configResolver
     ) {
-        $this->queryTypeRegistry = $queryTypeRegistry;
-        $this->parameterProcessor = $parameterProcessor;
-        $this->configResolver = $configResolver;
     }
 
     /**

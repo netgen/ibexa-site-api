@@ -28,25 +28,17 @@ use RuntimeException;
  */
 final class DomainObjectMapper
 {
-    private SiteInterface $site;
     private FieldTypeService $fieldTypeService;
     private ContentTypeService $contentTypeService;
-    private Repository $repository;
-    private bool $failOnMissingField;
-    private LoggerInterface $logger;
 
     public function __construct(
-        SiteInterface $site,
-        Repository $repository,
-        bool $failOnMissingField,
-        LoggerInterface $logger,
+        private readonly SiteInterface $site,
+        private readonly Repository $repository,
+        private readonly bool $failOnMissingField,
+        private readonly LoggerInterface $logger,
     ) {
-        $this->site = $site;
-        $this->repository = $repository;
         $this->contentTypeService = $repository->getContentTypeService();
         $this->fieldTypeService = $repository->getFieldTypeService();
-        $this->failOnMissingField = $failOnMissingField;
-        $this->logger = $logger;
     }
 
     /**

@@ -9,11 +9,9 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 class Configuration implements ConfigurationInterface
 {
-    protected string $rootNodeName;
-
-    public function __construct(string $rootNodeName)
-    {
-        $this->rootNodeName = $rootNodeName;
+    public function __construct(
+        protected readonly string $rootNodeName
+    ) {
     }
 
     public function getConfigTreeBuilder(): TreeBuilder

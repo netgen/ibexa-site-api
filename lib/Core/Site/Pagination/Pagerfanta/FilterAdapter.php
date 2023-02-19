@@ -17,13 +17,11 @@ use Netgen\IbexaSiteApi\API\FilterService;
  */
 final class FilterAdapter extends BaseAdapter
 {
-    private FilterService $filterService;
-
-    public function __construct(Query $query, FilterService $filterService)
-    {
+    public function __construct(
+        Query $query,
+        private readonly FilterService $filterService
+    ) {
         parent::__construct($query);
-
-        $this->filterService = $filterService;
     }
 
     protected function executeQuery(Query $query): SearchResult

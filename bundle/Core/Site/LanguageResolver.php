@@ -17,19 +17,13 @@ use function in_array;
 
 final class LanguageResolver extends BaseLanguageResolver
 {
-    private BaseSettings $settings;
-    private Resolver $siteaccessResolver;
-    private ConfigResolverInterface $configResolver;
     private SiteAccess $currentSiteaccess;
 
     public function __construct(
-        BaseSettings $settings,
-        Resolver $siteaccessResolver,
-        ConfigResolverInterface $configResolver,
+        private readonly BaseSettings $settings,
+        private readonly Resolver $siteaccessResolver,
+        private readonly ConfigResolverInterface $configResolver
     ) {
-        $this->settings = $settings;
-        $this->siteaccessResolver = $siteaccessResolver;
-        $this->configResolver = $configResolver;
     }
 
     public function setSiteaccess(?SiteAccess $currentSiteAccess = null): void

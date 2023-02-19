@@ -20,11 +20,9 @@ use function is_array;
  */
 class QueryRuntime
 {
-    private QueryExecutor $queryExecutor;
-
-    public function __construct(QueryExecutor $queryExecutor)
-    {
-        $this->queryExecutor = $queryExecutor;
+    public function __construct(
+        private readonly QueryExecutor $queryExecutor
+    ) {
     }
 
     public function executeQuery(mixed $context, string $name): Pagerfanta

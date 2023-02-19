@@ -10,11 +10,9 @@ use Symfony\Component\ExpressionLanguage\ExpressionFunctionProviderInterface;
 
 class ExpressionFunctionProvider implements ExpressionFunctionProviderInterface
 {
-    private ContainerInterface $container;
-
-    public function __construct(ContainerInterface $container)
-    {
-        $this->container = $container;
+    public function __construct(
+        private readonly ContainerInterface $container
+    ) {
     }
 
     public function getFunctions(): array

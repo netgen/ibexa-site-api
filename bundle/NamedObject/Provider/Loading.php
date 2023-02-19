@@ -27,22 +27,14 @@ use function is_string;
  */
 final class Loading extends Provider
 {
-    private LoadService $loadService;
-    private ?TagsService $tagsService;
-    private ParameterProcessor $parameterProcessor;
-    private ConfigResolverInterface $configResolver;
     private ?array $configuration = null;
 
     public function __construct(
-        LoadService $loadService,
-        ?TagsService $tagsService,
-        ParameterProcessor $parameterProcessor,
-        ConfigResolverInterface $configResolver,
+        private readonly LoadService $loadService,
+        private readonly ?TagsService $tagsService,
+        private readonly ParameterProcessor $parameterProcessor,
+        private readonly ConfigResolverInterface $configResolver
     ) {
-        $this->loadService = $loadService;
-        $this->tagsService = $tagsService;
-        $this->parameterProcessor = $parameterProcessor;
-        $this->configResolver = $configResolver;
     }
 
     public function hasContent(string $name): bool

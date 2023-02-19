@@ -19,27 +19,15 @@ class MatcherFactory extends ClassNameMatcherFactory
 {
     use ContainerAwareTrait;
 
-    private ?ViewMatcherRegistry $viewMatcherRegistry;
-    private ConfigResolverInterface $configResolver;
-    private string $parameterName;
-    private ?string $namespace;
-    private ?string $scope;
-
     public function __construct(
-        ?ViewMatcherRegistry $viewMatcherRegistry,
         Repository $repository,
         string $relativeNamespace,
-        ConfigResolverInterface $configResolver,
-        string $parameterName,
-        ?string $namespace = null,
-        ?string $scope = null,
+        private readonly ?ViewMatcherRegistry $viewMatcherRegistry,
+        private readonly ConfigResolverInterface $configResolver,
+        private readonly string $parameterName,
+        private readonly ?string $namespace = null,
+        private readonly ?string $scope = null,
     ) {
-        $this->viewMatcherRegistry = $viewMatcherRegistry;
-        $this->configResolver = $configResolver;
-        $this->parameterName = $parameterName;
-        $this->namespace = $namespace;
-        $this->scope = $scope;
-
         parent::__construct($repository, $relativeNamespace);
     }
 

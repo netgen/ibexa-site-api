@@ -14,18 +14,11 @@ use Twig\Environment;
  */
 class FieldRenderingRuntime
 {
-    private Environment $environment;
-    private FieldBlockRenderer $fieldBlockRenderer;
-    private ParameterProviderRegistryInterface $parameterProviderRegistry;
-
     public function __construct(
-        Environment $environment,
-        FieldBlockRenderer $fieldBlockRenderer,
-        ParameterProviderRegistryInterface $parameterProviderRegistry,
+        private readonly Environment $environment,
+        private readonly FieldBlockRenderer $fieldBlockRenderer,
+        private readonly ParameterProviderRegistryInterface $parameterProviderRegistry
     ) {
-        $this->environment = $environment;
-        $this->fieldBlockRenderer = $fieldBlockRenderer;
-        $this->parameterProviderRegistry = $parameterProviderRegistry;
     }
 
     /**
