@@ -1,49 +1,45 @@
 Custom controllers
 ==================
 
-Implementing a custom controller is similar to the vanilla Ibexa CMS. First, you have to implement
-it with extending the Site API base controller:
+Implementing a custom controller is quite similar to how you would do it with the vanilla Ibexa CMS.
+The only difference would be using Site API version of the ``ContentView`` object, as shown in the example below.
+
+Site API comes with a base controller implementation that contains a number of subscribed services that
+you will frequently need in development. To take advantage of it, implement your own controller by extending it:
 
 .. code-block:: php
 
-    namespace AppBundle\Controller;
+    namespace App\Controller;
 
     use Netgen\Bundle\IbexaSiteApiBundle\Controller\Controller;
     use Netgen\Bundle\IbexaSiteApiBundle\View\ContentView;
 
     class DemoController extends Controller
     {
-        /**
-         * @param \Netgen\Bundle\IbexaSiteApiBundle\View\ContentView $view
-         *
-         * @return \Netgen\Bundle\IbexaSiteApiBundle\View\ContentView
-         */
-        public function viewArticleAction(ContentView $view)
+        public function __invoke(ContentView $view): ContentView
         {
             $content = $view->getSiteContent();
             $location = $view->getSiteLocation();
 
-            $filterService = $this->getSite()->getFilterService();
-
-            $hasRelatedItems = false;
-
-            if ($content->hasField('related') && !$content->getField('related')->isEmpty()) {
-                $hasRelatedItems = true;
-            }
-
-            // Your other custom logic here
+            // Your custom logic here
             // ...
-
-            // Add variables to the view
-            $view->addParameters([
-                'has_related_items' => $hasRelatedItems,
-            ]);
 
             return $view;
         }
     }
 
-Since autowiring is enabled, this is sufficient to use your controller in the view configuration:
+And if you have autoconfiguration enabled, this is already sufficient to use your controller
+in the Content view configuration:
+
+.. code-block:: yaml
+
+    services:
+        _defaults:
+            autowire: true
+            autoconfigure: true
+
+        App\Controller\:
+            resource: '../src/Controller/*'
 
 .. code-block:: yaml
 
@@ -54,6 +50,28 @@ Since autowiring is enabled, this is sufficient to use your controller in the vi
                     full:
                         article:
                             template: "@App/content/full/article.html.twig"
-                            controller: AppBundle\Controller\DemoController:viewArticleAction
+                            controller: App\Controller\DemoController
                             match:
                                 Identifier\ContentType: article
+
+If you are not using container automation, here's an example relying on the base controller service definition:
+
+.. code-block:: yaml
+
+    services:
+        App\Controller\DemoController:
+            parent: netgen.ibexa_site_api.controller.base
+            tags:
+                - { name: 'container.service_subscriber' }
+
+And a fully expanded example:
+
+.. code-block:: yaml
+
+    services:
+        App\Controller\DemoController:
+            calls:
+                - setContainer: ['@Psr\Container\ContainerInterface']
+            tags:
+                - { name: 'container.service_subscriber' }
+            public: true

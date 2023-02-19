@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection PhpUnused */
 
 declare(strict_types=1);
 
@@ -7,9 +7,8 @@ namespace Netgen\Bundle\IbexaSiteApiBundle\Controller;
 use Ibexa\Contracts\Core\Repository\Repository;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Core\MVC\Symfony\Templating\GlobalHelper;
-use Ibexa\Core\QueryType\ArrayQueryTypeRegistry;
 use Ibexa\Core\QueryType\QueryTypeRegistry;
-use Netgen\Bundle\IbexaSiteApiBundle\NamedObject\Provider;
+use Netgen\Bundle\IbexaSiteApiBundle\NamedObject\Provider as NamedObjectProvider;
 use Netgen\Bundle\IbexaSiteApiBundle\View\ContentRenderer;
 use Netgen\Bundle\IbexaSiteApiBundle\View\ViewRenderer;
 use Netgen\IbexaSiteApi\API\FilterService;
@@ -30,21 +29,25 @@ abstract class Controller extends AbstractController
 
     public static function getSubscribedServices(): array
     {
-        return [
-            'ibexa.api.repository' => Repository::class,
-            'ibexa.config.resolver' => ConfigResolverInterface::class,
-            'ibexa.templating.global_helper' => GlobalHelper::class,
-            'netgen.ibexa_site_api.content_renderer' => ContentRenderer::class,
-            'netgen.ibexa_site_api.filter_service' => FilterService::class,
-            'netgen.ibexa_site_api.find_service' => FindService::class,
-            'netgen.ibexa_site_api.load_service' => LoadService::class,
-            'netgen.ibexa_site_api.named_object.provider' => Provider::class,
-            'netgen.ibexa_site_api.relation_service' => RelationService::class,
-            'netgen.ibexa_site_api.site' => Site::class,
-            'netgen.ibexa_site_api.settings' => Settings::class,
-            'netgen.ibexa_site_api.view_renderer' => ViewRenderer::class,
-            QueryTypeRegistry::class => QueryTypeRegistry::class,
-        ] + parent::getSubscribedServices();
+        $subscribedServices = [
+            // Ibexa
+            Repository::class,
+            ConfigResolverInterface::class,
+            QueryTypeRegistry::class,
+            GlobalHelper::class,
+            // Netgen
+            ContentRenderer::class,
+            FilterService::class,
+            FindService::class,
+            LoadService::class,
+            NamedObjectProvider::class,
+            RelationService::class,
+            Site::class,
+            Settings::class,
+            ViewRenderer::class,
+        ];
+
+        return $subscribedServices + parent::getSubscribedServices();
     }
 
     /**
@@ -59,12 +62,12 @@ abstract class Controller extends AbstractController
 
     protected function getQueryTypeRegistry(): QueryTypeRegistry
     {
-        return $this->container->get(ArrayQueryTypeRegistry::class);
+        return $this->container->get(QueryTypeRegistry::class);
     }
 
     protected function getRepository(): Repository
     {
-        return $this->container->get('ibexa.api.repository');
+        return $this->container->get(Repository::class);
     }
 
     /**
@@ -72,56 +75,56 @@ abstract class Controller extends AbstractController
      */
     protected function getGlobalHelper(): GlobalHelper
     {
-        return $this->container->get('ibexa.templating.global_helper');
+        return $this->container->get(GlobalHelper::class);
     }
 
     protected function getSite(): Site
     {
-        return $this->container->get('netgen.ibexa_site_api.site');
+        return $this->container->get(Site::class);
     }
 
     protected function getSiteSettings(): Settings
     {
-        return $this->container->get('netgen.ibexa_site_api.settings');
+        return $this->container->get(Settings::class);
     }
 
     protected function getConfigResolver(): ConfigResolverInterface
     {
-        return $this->container->get('ibexa.config.resolver');
+        return $this->container->get(ConfigResolverInterface::class);
     }
 
-    protected function getNamedObjectProvider(): Provider
+    protected function getNamedObjectProvider(): NamedObjectProvider
     {
-        return $this->container->get('netgen.ibexa_site_api.named_object.provider');
+        return $this->container->get(NamedObjectProvider::class);
     }
 
     protected function getContentRenderer(): ContentRenderer
     {
-        return $this->container->get('netgen.ibexa_site_api.content_renderer');
+        return $this->container->get(ContentRenderer::class);
     }
 
     protected function getViewRenderer(): ViewRenderer
     {
-        return $this->container->get('netgen.ibexa_site_api.view_renderer');
+        return $this->container->get(ViewRenderer::class);
     }
 
     protected function getLoadService(): LoadService
     {
-        return $this->container->get('netgen.ibexa_site_api.load_service');
+        return $this->container->get(LoadService::class);
     }
 
     protected function getFilterService(): FilterService
     {
-        return $this->container->get('netgen.ibexa_site_api.filter_service');
+        return $this->container->get(FilterService::class);
     }
 
     protected function getFindService(): FindService
     {
-        return $this->container->get('netgen.ibexa_site_api.find_service');
+        return $this->container->get(FindService::class);
     }
 
     protected function getRelationService(): RelationService
     {
-        return $this->container->get('netgen.ibexa_site_api.relation_service');
+        return $this->container->get(RelationService::class);
     }
 }
