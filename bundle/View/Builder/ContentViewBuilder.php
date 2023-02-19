@@ -37,7 +37,7 @@ class ContentViewBuilder implements ViewBuilder
         private readonly Repository $repository,
         private readonly Configurator $viewConfigurator,
         private readonly ParametersInjector $viewParametersInjector,
-        private readonly LocationResolver $locationResolver
+        private readonly LocationResolver $locationResolver,
     ) {
     }
 

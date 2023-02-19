@@ -10,7 +10,7 @@ use Symfony\Contracts\EventDispatcher\Event;
 class RenderViewEvent extends Event
 {
     public function __construct(
-        private readonly View $view
+        private readonly View $view,
     ) {
     }
 

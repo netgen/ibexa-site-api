@@ -11,7 +11,7 @@ final class RedirectConfiguration
         private readonly array $targetParameters,
         private readonly bool $permanent,
         private readonly bool $keepRequestMethod,
-        private readonly bool $absolute
+        private readonly bool $absolute,
     ) {
     }
 

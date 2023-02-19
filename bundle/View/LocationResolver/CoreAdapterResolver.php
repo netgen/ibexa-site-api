@@ -16,7 +16,7 @@ class CoreAdapterResolver extends LocationResolver
     public function __construct(
         private readonly Repository $repository,
         private readonly LoadService $loadService,
-        private readonly ContentInfoLocationLoader $coreLoader
+        private readonly ContentInfoLocationLoader $coreLoader,
     ) {
     }
 

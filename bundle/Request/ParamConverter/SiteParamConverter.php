@@ -14,7 +14,7 @@ use function is_a;
 abstract class SiteParamConverter implements ParamConverterInterface
 {
     public function __construct(
-        protected readonly LoadService $loadService
+        protected readonly LoadService $loadService,
     ) {
     }
 

@@ -15,7 +15,7 @@ final class ContentViewFallbackResolver
         private readonly string $toIbexaPlatformEmbedFallbackTemplate,
         private readonly string $toIbexaPlatformViewFallbackTemplate,
         private readonly string $toSiteApiEmbedFallbackTemplate,
-        private readonly string $toSiteApiViewFallbackTemplate
+        private readonly string $toSiteApiViewFallbackTemplate,
     ) {
     }
 

@@ -35,7 +35,7 @@ final class ViewRenderer
         private readonly ControllerResolverInterface $controllerResolver,
         private readonly ArgumentResolverInterface $argumentResolver,
         private readonly Renderer $coreViewRenderer,
-        private readonly EventDispatcherInterface $eventDispatcher
+        private readonly EventDispatcherInterface $eventDispatcher,
     ) {
     }
 

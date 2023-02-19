@@ -35,7 +35,7 @@ class Configured implements ViewProvider
         private readonly QueryDefinitionMapper $queryDefinitionMapper,
         private readonly Resolver $redirectResolver,
         private readonly ContentViewFallbackResolver $contentViewFallbackResolver,
-        private readonly ParameterProcessor $parameterProcessor
+        private readonly ParameterProcessor $parameterProcessor,
     ) {
     }
 

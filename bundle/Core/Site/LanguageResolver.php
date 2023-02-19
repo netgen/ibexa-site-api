@@ -22,7 +22,7 @@ final class LanguageResolver extends BaseLanguageResolver
     public function __construct(
         private readonly BaseSettings $settings,
         private readonly Resolver $siteaccessResolver,
-        private readonly ConfigResolverInterface $configResolver
+        private readonly ConfigResolverInterface $configResolver,
     ) {
     }
 

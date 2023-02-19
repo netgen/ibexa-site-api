@@ -33,7 +33,7 @@ class RelationService implements RelationServiceInterface
 
     public function __construct(
         private readonly SiteInterface $site,
-        private readonly RelationResolverRegistry $relationResolverRegistry
+        private readonly RelationResolverRegistry $relationResolverRegistry,
     ) {
     }
 

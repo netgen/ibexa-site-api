@@ -17,7 +17,7 @@ class FieldRenderingRuntime
     public function __construct(
         private readonly Environment $environment,
         private readonly FieldBlockRenderer $fieldBlockRenderer,
-        private readonly ParameterProviderRegistryInterface $parameterProviderRegistry
+        private readonly ParameterProviderRegistryInterface $parameterProviderRegistry,
     ) {
     }
 

@@ -12,7 +12,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 final class ViewTaggerSubscriber implements EventSubscriberInterface
 {
     public function __construct(
-        private readonly ResponseTagger $responseTagger
+        private readonly ResponseTagger $responseTagger,
     ) {
     }
 

@@ -27,7 +27,7 @@ class FindService implements FindServiceInterface
         private readonly BaseSettings $settings,
         private readonly DomainObjectMapper $domainObjectMapper,
         private readonly SearchService $searchService,
-        private readonly ContentService $contentService
+        private readonly ContentService $contentService,
     ) {
     }
 

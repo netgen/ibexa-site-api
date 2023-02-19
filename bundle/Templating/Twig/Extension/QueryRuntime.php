@@ -21,7 +21,7 @@ use function is_array;
 class QueryRuntime
 {
     public function __construct(
-        private readonly QueryExecutor $queryExecutor
+        private readonly QueryExecutor $queryExecutor,
     ) {
     }
 

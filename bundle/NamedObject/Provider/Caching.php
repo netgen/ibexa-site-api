@@ -21,7 +21,7 @@ final class Caching extends Provider
     private array $cache = [];
 
     public function __construct(
-        private readonly Provider $provider
+        private readonly Provider $provider,
     ) {
     }
 

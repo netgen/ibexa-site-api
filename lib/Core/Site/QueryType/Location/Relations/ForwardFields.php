@@ -24,7 +24,7 @@ final class ForwardFields extends Location
 {
     public function __construct(
         Settings $settings,
-        private readonly RelationResolverRegistry $relationResolverRegistry
+        private readonly RelationResolverRegistry $relationResolverRegistry,
     ) {
         parent::__construct($settings);
     }

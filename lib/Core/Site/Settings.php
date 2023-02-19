@@ -19,6 +19,7 @@ final class Settings extends BaseSettings
 {
     /**
      * @param string[] $prioritizedLanguages
+     *
      * @noinspection PhpPropertyCanBeReadonlyInspection
      */
     public function __construct(
@@ -26,7 +27,7 @@ final class Settings extends BaseSettings
         private readonly bool $useAlwaysAvailable,
         private readonly int $rootLocationId,
         private readonly bool $showHiddenItems,
-        private readonly bool $failOnMissingField
+        private readonly bool $failOnMissingField,
     ) {
     }
 

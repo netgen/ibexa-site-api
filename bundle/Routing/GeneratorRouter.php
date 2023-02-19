@@ -68,7 +68,7 @@ class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
         );
 
         $isSiteApiPrimaryContentView = $this->configResolver->getParameter(
-            'ng_site_api.site_api_is_primary_content_view'
+            'ng_site_api.site_api_is_primary_content_view',
         );
 
         if (isset($parameters['siteaccess']) || !$isSiteApiPrimaryContentView) {

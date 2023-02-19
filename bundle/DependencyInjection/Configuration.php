@@ -10,7 +10,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 class Configuration implements ConfigurationInterface
 {
     public function __construct(
-        protected readonly string $rootNodeName
+        protected readonly string $rootNodeName,
     ) {
     }
 

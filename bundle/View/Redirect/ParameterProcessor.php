@@ -17,7 +17,7 @@ final class ParameterProcessor
     public function __construct(
         private readonly ExpressionLanguage $expressionLanguage,
         private readonly ConfigResolverInterface $configResolver,
-        private readonly Provider $namedObjectProvider
+        private readonly Provider $namedObjectProvider,
     ) {
     }
 

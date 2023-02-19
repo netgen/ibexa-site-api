@@ -22,7 +22,7 @@ final class GetAttrExpressionDecorator extends GetAttrExpression
 
     /** @noinspection PhpMissingParentConstructorInspection */
     public function __construct(
-        private readonly GetAttrExpression $decoratedExpression
+        private readonly GetAttrExpression $decoratedExpression,
     ) {
     }
 

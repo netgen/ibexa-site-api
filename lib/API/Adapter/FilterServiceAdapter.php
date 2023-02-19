@@ -30,7 +30,7 @@ final class FilterServiceAdapter implements SearchService
 {
     public function __construct(
         private readonly FilterService $filterService,
-        private readonly Handler $searchHandler
+        private readonly Handler $searchHandler,
     ) {
     }
 

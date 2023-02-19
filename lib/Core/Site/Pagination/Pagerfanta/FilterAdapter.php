@@ -19,7 +19,7 @@ final class FilterAdapter extends BaseAdapter
 {
     public function __construct(
         Query $query,
-        private readonly FilterService $filterService
+        private readonly FilterService $filterService,
     ) {
         parent::__construct($query);
     }

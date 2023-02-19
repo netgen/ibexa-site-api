@@ -15,7 +15,6 @@ use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-use function get_class;
 use function gettype;
 use function is_object;
 use function is_string;
@@ -24,7 +23,7 @@ use function mb_stripos;
 final class Resolver
 {
     public function __construct(
-        private readonly RouterInterface $router
+        private readonly RouterInterface $router,
     ) {
     }
 

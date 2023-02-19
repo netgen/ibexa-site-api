@@ -41,7 +41,7 @@ abstract class Base implements QueryType
     private ?array $registeredCriterionBuilders = null;
 
     public function __construct(
-        private readonly Settings $settings
+        private readonly Settings $settings,
     ) {
     }
 

@@ -40,7 +40,7 @@ final class Location extends APILocation
 
     public function __construct(
         array $properties,
-        private readonly LoggerInterface $logger
+        private readonly LoggerInterface $logger,
     ) {
         $this->site = $properties['site'];
         $this->domainObjectMapper = $properties['domainObjectMapper'];

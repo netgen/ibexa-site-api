@@ -45,7 +45,7 @@ final class Fields extends APIFields
         private readonly SiteContent $content,
         private readonly DomainObjectMapper $domainObjectMapper,
         private readonly bool $failOnMissingField,
-        private readonly LoggerInterface $logger
+        private readonly LoggerInterface $logger,
     ) {
     }
 

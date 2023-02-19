@@ -27,7 +27,7 @@ class FilterService implements FilterServiceInterface
         private readonly BaseSettings $settings,
         private readonly DomainObjectMapper $domainObjectMapper,
         private readonly SearchService $searchService,
-        private readonly ContentService $contentService
+        private readonly ContentService $contentService,
     ) {
     }
 

@@ -25,7 +25,7 @@ final class QueryExecutor
     public function __construct(
         private readonly QueryTypeRegistry $queryTypeRegistry,
         private readonly FilterService $filterService,
-        private readonly FindService $findService
+        private readonly FindService $findService,
     ) {
     }
 

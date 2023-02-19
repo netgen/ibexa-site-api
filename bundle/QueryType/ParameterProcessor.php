@@ -24,7 +24,7 @@ final class ParameterProcessor
         private readonly ExpressionLanguage $expressionLanguage,
         private readonly RequestStack $requestStack,
         private readonly ConfigResolverInterface $configResolver,
-        private readonly Provider $namedObjectProvider
+        private readonly Provider $namedObjectProvider,
     ) {
     }
 
