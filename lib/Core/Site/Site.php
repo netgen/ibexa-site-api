@@ -30,10 +30,9 @@ use Psr\Log\NullLogger;
  */
 class Site implements SiteInterface
 {
-    private ContentService $contentService;
-    private LocationService $locationService;
-    private SearchService $searchService;
-    private LoggerInterface $logger;
+    private readonly ContentService $contentService;
+    private readonly LocationService $locationService;
+    private readonly SearchService $searchService;
 
     private ?DomainObjectMapper $domainObjectMapper = null;
     private ?APIFilterService $filterService = null;
@@ -47,12 +46,11 @@ class Site implements SiteInterface
         private readonly Repository $repository,
         private readonly SearchService $filteringSearchService,
         private readonly RelationResolverRegistry $relationResolverRegistry,
-        ?LoggerInterface $logger = null,
+        private readonly LoggerInterface $logger = new NullLogger(),
     ) {
         $this->contentService = $repository->getContentService();
         $this->locationService = $repository->getLocationService();
         $this->searchService = $repository->getSearchService();
-        $this->logger = $logger ?? new NullLogger();
     }
 
     public function getSettings(): BaseSettings
@@ -116,8 +114,6 @@ class Site implements SiteInterface
 
     /**
      * @internal for Site API internal use only
-     *
-     * @return \Netgen\IbexaSiteApi\Core\Site\DomainObjectMapper
      */
     public function getDomainObjectMapper(): DomainObjectMapper
     {

@@ -65,7 +65,7 @@ final class Resolver
             );
         }
 
-        throw new InvalidRedirectConfiguration(get_class($object));
+        throw new InvalidRedirectConfiguration($object::class);
     }
 
     /**

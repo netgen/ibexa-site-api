@@ -30,13 +30,13 @@ use function property_exists;
 final class Location extends APILocation
 {
     protected RepoLocation $innerLocation;
-    private string $languageCode;
+    private readonly string $languageCode;
     private ?APIContentInfo $contentInfo = null;
     private ?APILocation $internalParent = null;
     private ?APIContent $internalContent = null;
-    private VersionInfo $innerVersionInfo;
-    private Site $site;
-    private DomainObjectMapper $domainObjectMapper;
+    private readonly VersionInfo $innerVersionInfo;
+    private readonly Site $site;
+    private readonly DomainObjectMapper $domainObjectMapper;
 
     public function __construct(
         array $properties,

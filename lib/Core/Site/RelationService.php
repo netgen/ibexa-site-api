@@ -103,7 +103,7 @@ class RelationService implements RelationServiceInterface
         foreach ($relatedContentItems as $relatedContentItem) {
             try {
                 $relatedLocations[] = $relatedContentItem->mainLocation;
-            } catch (Throwable $throwable) {
+            } catch (Throwable) {
                 // do nothing
             }
         }

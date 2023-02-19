@@ -46,9 +46,6 @@ class NativeResolver extends Resolver
     ) {
     }
 
-    /**
-     * @param ConfigResolverInterface $configResolver
-     */
     public function setConfigResolver(ConfigResolverInterface $configResolver): void
     {
         $this->configResolver = $configResolver;

@@ -37,24 +37,14 @@ final class Settings extends BaseSettings
      */
     public function __get(string $property): bool|int|array
     {
-        switch ($property) {
-            case 'prioritizedLanguages':
-                return $this->prioritizedLanguages;
-
-            case 'useAlwaysAvailable':
-                return $this->useAlwaysAvailable;
-
-            case 'rootLocationId':
-                return $this->rootLocationId;
-
-            case 'showHiddenItems':
-                return $this->showHiddenItems;
-
-            case 'failOnMissingField':
-                return $this->failOnMissingField;
-        }
-
-        throw new PropertyNotFoundException($property, __CLASS__);
+        return match ($property) {
+            'prioritizedLanguages' => $this->prioritizedLanguages,
+            'useAlwaysAvailable' => $this->useAlwaysAvailable,
+            'rootLocationId' => $this->rootLocationId,
+            'showHiddenItems' => $this->showHiddenItems,
+            'failOnMissingField' => $this->failOnMissingField,
+            default => throw new PropertyNotFoundException($property, self::class),
+        };
     }
 
     /**
@@ -62,7 +52,7 @@ final class Settings extends BaseSettings
      */
     public function __set(string $property, mixed $value): void
     {
-        throw new PropertyReadOnlyException($property, __CLASS__);
+        throw new PropertyReadOnlyException($property, self::class);
     }
 
     /**
@@ -70,15 +60,13 @@ final class Settings extends BaseSettings
      */
     public function __isset(string $property): bool
     {
-        switch ($property) {
-            case 'prioritizedLanguages':
-            case 'useAlwaysAvailable':
-            case 'rootLocationId':
-            case 'showHiddenItems':
-            case 'failOnMissingField':
-                return true;
-        }
-
-        throw new PropertyNotFoundException($property, __CLASS__);
+        return match ($property) {
+            'prioritizedLanguages',
+            'useAlwaysAvailable',
+            'rootLocationId',
+            'showHiddenItems',
+            'failOnMissingField' => true,
+            default => throw new PropertyNotFoundException($property, self::class),
+        };
     }
 }

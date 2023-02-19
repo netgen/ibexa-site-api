@@ -28,8 +28,8 @@ use RuntimeException;
  */
 final class DomainObjectMapper
 {
-    private FieldTypeService $fieldTypeService;
-    private ContentTypeService $contentTypeService;
+    private readonly FieldTypeService $fieldTypeService;
+    private readonly ContentTypeService $contentTypeService;
 
     public function __construct(
         private readonly SiteInterface $site,

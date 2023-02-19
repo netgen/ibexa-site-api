@@ -166,14 +166,12 @@ final class GetAttrExpressionDecorator extends GetAttrExpression
      * @param bool $ignoreStrictCheck
      * @param bool $sandboxed
      * @param int $lineno
-     * @param mixed $object
-     * @param mixed $item
      */
     public static function twig_get_attribute(
         Environment $env,
         Source $source,
-        $object,
-        $item,
+        mixed $object,
+        mixed $item,
         array $arguments = [],
         $type = 'any',
         $isDefinedTest = false,
