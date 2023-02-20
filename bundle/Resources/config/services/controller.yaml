@@ -1,5 +1,4 @@
 services:
-    # To
     netgen.ibexa_site_api.controller.base:
         class: Netgen\Bundle\IbexaSiteApiBundle\Controller\Controller
         abstract: true
