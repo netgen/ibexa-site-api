@@ -26,7 +26,7 @@ final class ParameterProcessor
      *
      * Parameter $view is used to provide values for evaluation.
      */
-    public function process(mixed $value, ContentView $view)
+    public function process(mixed $value, ContentView $view): mixed
     {
         return $this->evaluate(
             $value,

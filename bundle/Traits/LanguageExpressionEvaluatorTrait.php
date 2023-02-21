@@ -28,7 +28,7 @@ trait LanguageExpressionEvaluatorTrait
         mixed $value,
         ExpressionLanguage $expressionLanguage,
         array $values,
-    ) {
+    ): mixed {
         if (is_array($value)) {
             return $this->evaluateParameters($value, $expressionLanguage, $values);
         }
@@ -66,7 +66,7 @@ trait LanguageExpressionEvaluatorTrait
         return $processedParameters;
     }
 
-    private function isExpression($value): bool
+    private function isExpression(mixed $value): bool
     {
         return is_string($value) && str_starts_with($value, self::$expressionMarker);
     }

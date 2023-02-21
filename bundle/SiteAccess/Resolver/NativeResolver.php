@@ -445,7 +445,7 @@ class NativeResolver extends Resolver
         return false;
     }
 
-    private function getParameter(string $name)
+    private function getParameter(string $name): mixed
     {
         $currentSiteaccess = $this->currentSiteaccess->name;
 

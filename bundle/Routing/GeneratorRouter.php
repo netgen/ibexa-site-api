@@ -225,7 +225,7 @@ class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
         throw new RuntimeException('Could not resolve Location from the given parameters');
     }
 
-    private function resolveLocationFromRouteObject($object): APILocation
+    private function resolveLocationFromRouteObject(mixed $object): APILocation
     {
         if ($object instanceof Location) {
             return $object->innerLocation;

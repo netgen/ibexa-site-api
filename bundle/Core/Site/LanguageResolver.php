@@ -131,6 +131,9 @@ final class LanguageResolver extends BaseLanguageResolver
         );
     }
 
+    /**
+     * @return string[]
+     */
     private function getPrioritizedLanguages(string $siteaccess): array
     {
         return $this->configResolver->getParameter('languages', null, $siteaccess);
