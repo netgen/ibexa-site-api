@@ -18,7 +18,6 @@ use Netgen\Bundle\IbexaSiteApiBundle\View\Redirect\Resolver;
 use Symfony\Bundle\FrameworkBundle\Controller\RedirectController;
 use Symfony\Component\HttpKernel\Controller\ControllerReference;
 
-use function array_key_exists;
 use function is_array;
 use function preg_replace;
 use function sprintf;
@@ -78,11 +77,7 @@ class Configured implements ViewProvider
 
     private function getQueriesConfiguration(array $configHash): array
     {
-        if (array_key_exists(ContentViewParser::QUERY_KEY, $configHash)) {
-            return $configHash[ContentViewParser::QUERY_KEY];
-        }
-
-        return [];
+        return $configHash[ContentViewParser::QUERY_KEY] ?? [];
     }
 
     /**
