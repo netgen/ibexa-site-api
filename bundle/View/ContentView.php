@@ -25,7 +25,7 @@ class ContentView extends BaseView implements ContentValueView, LocationValueVie
      */
     public const QUERY_DEFINITION_COLLECTION_NAME = 'ng_query_definition_collection';
 
-    private ?Content $content;
+    private Content $content;
     private ?Location $location = null;
     private ?bool $isEmbed = false;
 
