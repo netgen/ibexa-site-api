@@ -76,10 +76,12 @@ class FieldRenderingRuntime
 
         // make sure we can easily add class="<fieldtypeidentifier>-field" to the
         // generated HTML
+        $class = sprintf("%s-field", $field->fieldTypeIdentifier);
+
         if (isset($params['attr']['class'])) {
-            $params['attr']['class'] .= " {$field->fieldTypeIdentifier}-field";
+            $params['attr']['class'] .= ' ' . $class;
         } else {
-            $params['attr']['class'] = "{$field->fieldTypeIdentifier}-field";
+            $params['attr']['class'] = $class;
         }
 
         return $params;
