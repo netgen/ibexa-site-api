@@ -387,7 +387,7 @@ class NativeResolver extends Resolver
             return $this->isSiteaccessSiteaccessIncluded($siteaccess);
         }
 
-        if (empty($includedSiteaccesses) && !empty($includedSiteaccessGroups)) {
+        if (empty($includedSiteaccesses)) {
             return $this->isSiteaccessSiteaccessGroupIncluded($siteaccess);
         }
 
