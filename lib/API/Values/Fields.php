@@ -27,15 +27,11 @@ abstract class Fields implements IteratorAggregate, ArrayAccess, Countable
 
     /**
      * Return whether the collection contains a field with the given $id.
-     *
-     * @param int $id
      */
     abstract public function hasFieldById(int $id): bool;
 
     /**
      * Return the field with the given $id.
-     *
-     * @param int $id
      */
     abstract public function getFieldById(int $id): Field;
 
@@ -44,8 +40,6 @@ abstract class Fields implements IteratorAggregate, ArrayAccess, Countable
      *
      * If no field is found in the Content, a surrogate field will be returned.
      * If all found fields are empty, the first found field will be returned.
-     *
-     * @param string ...$otherIdentifiers
      */
     abstract public function getFirstNonEmptyField(string $firstIdentifier, string ...$otherIdentifiers): Field;
 }

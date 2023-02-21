@@ -21,7 +21,7 @@ return $config
         'method_chaining_indentation' => false,
         'multiline_whitespace_before_semicolons' => false,
         'native_function_invocation' => ['include' => ['@all']],
-        'no_superfluous_phpdoc_tags' => false,
+        'no_superfluous_phpdoc_tags' => true,
         'no_unset_on_property' => false,
         'ordered_imports' => ['imports_order' => ['class', 'function', 'const'], 'sort_algorithm' => 'alpha'],
         'php_unit_internal_class' => false,

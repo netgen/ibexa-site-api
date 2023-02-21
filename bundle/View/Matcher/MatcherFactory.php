@@ -41,8 +41,6 @@ class MatcherFactory extends ClassNameMatcherFactory
 
     /**
      * @param string $matcherIdentifier
-     *
-     * @return \Ibexa\Core\MVC\Symfony\Matcher\ViewMatcherInterface
      */
     protected function getMatcher($matcherIdentifier): ViewMatcherInterface
     {

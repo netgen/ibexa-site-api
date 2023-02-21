@@ -142,9 +142,6 @@ final class ParameterProcessorTest extends TestCase
         );
     }
 
-    /**
-     * @return \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface
-     */
     protected function getConfigResolverMock(): ConfigResolverInterface
     {
         $configResolverMock = $this->getMockBuilder(ConfigResolverInterface::class)->getMock();

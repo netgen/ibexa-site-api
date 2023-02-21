@@ -21,8 +21,6 @@ final class CriterionDefinitionResolver
 {
     /**
      * Set of available operator names.
-     *
-     * @var array
      */
     private static array $operatorMap = [
         'eq' => Operator::EQ,
