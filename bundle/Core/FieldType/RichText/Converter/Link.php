@@ -58,12 +58,15 @@ class Link implements Converter
                     );
                 } catch (APINotFoundException) {
                     $this->logger->error(
-                        'While generating link for RichText, could not find Content with ID ' . $id,
+                        sprintf('While generating link for RichText, could not find Content #%s', $id),
                     );
                 } catch (Throwable $throwable) {
                     $this->logger->error(
-                        'While generating link for RichText, an error occurred when loading Content with ID ' .
-                        $id . ': ' . $throwable->getMessage(),
+                        sprintf(
+                            'While generating link for RichText, an error occurred when loading Content #%s: %s',
+                            $id,
+                            $throwable->getMessage(),
+                        ),
                     );
                 }
             } elseif ($scheme === 'ezlocation://') {
@@ -74,12 +77,15 @@ class Link implements Converter
                     );
                 } catch (APINotFoundException) {
                     $this->logger->error(
-                        'While generating link for RichText, could not find Location with ID ' . $id,
+                        sprintf('While generating link for RichText, could not find Location #%s', $id),
                     );
                 } catch (Throwable $throwable) {
                     $this->logger->error(
-                        'While generating link for RichText, an error occurred when loading Location with ID ' .
-                        $id . ': ' . $throwable->getMessage(),
+                        sprintf(
+                            'While generating link for RichText, an error occurred when loading Location #%s: %s',
+                            $id,
+                            $throwable->getMessage(),
+                        ),
                     );
                 }
             } else {

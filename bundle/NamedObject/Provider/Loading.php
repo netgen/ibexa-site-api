@@ -18,6 +18,7 @@ use RuntimeException;
 
 use function is_int;
 use function is_string;
+use function sprintf;
 
 /**
  * Loading named object provider provides named objects by loading them using
@@ -48,7 +49,7 @@ final class Loading extends Provider
     {
         if (!$this->hasContent($name)) {
             throw new OutOfBoundsException(
-                'Named Content "' . $name . '" is not configured',
+                sprintf('Named Content "%s" is not configured', $name),
             );
         }
 
@@ -63,7 +64,7 @@ final class Loading extends Provider
         }
 
         throw new InvalidArgumentException(
-            'Named Content "' . $name . '" ID is not string or integer',
+            sprintf('Named Content "%s" ID is not string or integer', $name),
         );
     }
 
@@ -78,7 +79,7 @@ final class Loading extends Provider
     {
         if (!$this->hasLocation($name)) {
             throw new OutOfBoundsException(
-                'Named Location "' . $name . '" is not configured',
+                sprintf('Named Location "%s" is not configured', $name),
             );
         }
 
@@ -93,7 +94,7 @@ final class Loading extends Provider
         }
 
         throw new InvalidArgumentException(
-            'Named Location "' . $name . '" ID is not string or integer',
+            sprintf('Named Location "%s" ID is not string or integer', $name),
         );
     }
 
@@ -112,7 +113,7 @@ final class Loading extends Provider
 
         if (!$this->hasTag($name)) {
             throw new OutOfBoundsException(
-                'Named Tag "' . $name . '" is not configured',
+                sprintf('Named Tag "%s" is not configured', $name),
             );
         }
 
@@ -127,7 +128,7 @@ final class Loading extends Provider
         }
 
         throw new InvalidArgumentException(
-            'Named Tag "' . $name . '" ID is not string or integer',
+            sprintf('Named Tag "%s" ID is not string or integer', $name),
         );
     }
 

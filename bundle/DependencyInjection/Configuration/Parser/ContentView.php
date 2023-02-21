@@ -274,9 +274,10 @@ class ContentView extends AbstractParser
         if (array_key_exists('extends', $baseConfig)) {
             throw new InvalidConfigurationException(
                 sprintf(
-                    'In %s: only one level of view configuration inheritance is allowed, %s already extends %s',
+                    'In %s: only one level of view configuration inheritance is allowed, %s/%s already extends %s',
                     $viewPath,
-                    $extendedViewType . '/' . $extendedName,
+                    $extendedViewType,
+                    $extendedName,
                     $baseConfig['extends'],
                 ),
             );

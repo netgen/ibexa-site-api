@@ -15,6 +15,8 @@ use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Throwable;
 
+use function sprintf;
+
 /**
  * ContentRenderer renders a configured content view for the given Content or Location object,
  * without using a subrequest.
@@ -73,7 +75,12 @@ final class ContentRenderer
         try {
             $view = $this->viewBuilder->buildView($baseParameters + $parameters);
         } catch (Throwable $throwable) {
-            $this->logger->error('Could not build the embedded view: ' . $throwable->getMessage());
+            $this->logger->error(
+                sprintf(
+                    'Could not build the embedded view: %s',
+                    $throwable->getMessage(),
+                ),
+            );
 
             return '';
         }

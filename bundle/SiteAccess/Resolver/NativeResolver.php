@@ -20,6 +20,7 @@ use function array_map;
 use function in_array;
 use function ksort;
 use function reset;
+use function sprintf;
 
 use const SORT_NUMERIC;
 
@@ -101,7 +102,7 @@ class NativeResolver extends Resolver
 
         // Error: No siteaccesses were found for the Location, return the current siteaccess
         if (empty($siteaccessSet)) {
-            $this->logger->error('Found no siteaccesses for Location #' . $location->id);
+            $this->logger->error(sprintf('Found no siteaccesses for Location #%d', $location->id));
 
             return $currentSiteaccess;
         }
@@ -140,7 +141,7 @@ class NativeResolver extends Resolver
         }
 
         // Error: Nothing matched
-        $this->logger->error('No siteaccess matched Location #' . $location->id);
+        $this->logger->error(sprintf('No siteaccess matched Location #%s', $location->id));
 
         // Return the current SA if it was found
         if (isset($siteaccessSet[$currentSiteaccess])) {
