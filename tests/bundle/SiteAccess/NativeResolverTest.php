@@ -1058,10 +1058,10 @@ class NativeResolverTest extends TestCase
         $siteaccessResolver = new NativeResolver(
             $this->persistenceHandlerMock($data),
             5,
+            $this->getConfigResolverMock($data),
             $this->getLoggerMock($data),
         );
 
-        $siteaccessResolver->setConfigResolver($this->getConfigResolverMock($data));
         $siteaccessResolver->setSiteaccess($this->getSiteaccess($data));
         $siteaccessResolver->setSiteaccessGroupsBySiteaccess($this->getSiteaccessGroupsBySiteaccess($data));
         $siteaccessResolver->setSiteaccessList($this->getSiteaccessList($data));

@@ -9,8 +9,8 @@ services:
         arguments:
             - '@ibexa.api.persistence_handler'
             - '%netgen.ezplatform_site.routing.recursion_limit%'
+            - '@ibexa.config.resolver'
         calls:
-            - [ setConfigResolver, [ '@ibexa.config.resolver' ] ]
             - [ setSiteaccess, [ '@Ibexa\Core\MVC\Symfony\SiteAccess' ] ]
             - [ setSiteaccessList, [ '%ibexa.site_access.list%' ] ]
             - [ setSiteaccessGroupsBySiteaccess, [ '%ibexa.site_access.groups_by_site_access%' ] ]

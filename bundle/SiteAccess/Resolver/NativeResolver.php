@@ -33,7 +33,6 @@ use const SORT_NUMERIC;
  */
 class NativeResolver extends Resolver
 {
-    private ConfigResolverInterface $configResolver;
     private SiteAccess $currentSiteaccess;
     private array $siteaccesses;
     private array $siteaccessGroupsBySiteaccess;
@@ -43,13 +42,9 @@ class NativeResolver extends Resolver
     public function __construct(
         private readonly Handler $persistenceHandler,
         private readonly int $recursionLimit,
+        private readonly ConfigResolverInterface $configResolver,
         private readonly LoggerInterface $logger = new NullLogger(),
     ) {
-    }
-
-    public function setConfigResolver(ConfigResolverInterface $configResolver): void
-    {
-        $this->configResolver = $configResolver;
     }
 
     public function setSiteaccess(?SiteAccess $currentSiteAccess = null): void
