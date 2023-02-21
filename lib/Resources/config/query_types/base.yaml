@@ -40,7 +40,7 @@ services:
         class: Netgen\IbexaSiteApi\Core\Site\QueryType\Location\Children
         arguments:
             - '@netgen.ibexa_site_api.settings'
-            - '@logger'
+            - '@?logger'
         tags:
             - { name: ibexa.query_type }
 
@@ -48,7 +48,7 @@ services:
         class: Netgen\IbexaSiteApi\Core\Site\QueryType\Location\Siblings
         arguments:
             - '@netgen.ibexa_site_api.settings'
-            - '@logger'
+            - '@?logger'
         tags:
             - { name: ibexa.query_type }
 
