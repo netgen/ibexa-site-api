@@ -24,13 +24,11 @@ use function sprintf;
  */
 final class Children extends Location
 {
-    protected LoggerInterface $logger;
-
-    public function __construct(Settings $settings, ?LoggerInterface $logger = null)
-    {
+    public function __construct(
+        Settings $settings,
+        private readonly LoggerInterface $logger = new NullLogger()
+    ) {
         parent::__construct($settings);
-
-        $this->logger = $logger ?? new NullLogger();
     }
 
     public static function getName(): string
