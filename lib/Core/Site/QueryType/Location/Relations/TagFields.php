@@ -17,6 +17,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use function array_map;
 use function array_merge;
+use function sprintf;
 
 /**
  * QueryType for finding specific Tag fields relations in a given Content.
@@ -98,7 +99,7 @@ final class TagFields extends Location
                     sprintf(
                         "Field '%s' is expected to be of 'eztags' type, '%s' found",
                         $identifier,
-                        $fieldType
+                        $fieldType,
                     ),
                 );
             }

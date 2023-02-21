@@ -14,6 +14,8 @@ use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Throwable;
 
+use function sprintf;
+
 class ImageRuntime
 {
     public function __construct(
@@ -43,7 +45,7 @@ class ImageRuntime
                     $variationName,
                     $value->id,
                     $exception->getMessage(),
-                )
+                ),
             );
         } catch (SourceImageNotFoundException $exception) {
             $this->logger->error(

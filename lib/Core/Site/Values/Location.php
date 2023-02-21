@@ -26,6 +26,7 @@ use Pagerfanta\Pagerfanta;
 use Psr\Log\LoggerInterface;
 
 use function property_exists;
+use function sprintf;
 
 final class Location extends APILocation
 {
@@ -233,9 +234,9 @@ final class Location extends APILocation
         } catch (NotImplementedException $e) {
             $this->logger->notice(
                 sprintf(
-                    "Cannot use sort clauses from parent location: %s",
-                    $e->getMessage()
-                )
+                    'Cannot use sort clauses from parent location: %s',
+                    $e->getMessage(),
+                ),
             );
 
             $sortClauses = [];

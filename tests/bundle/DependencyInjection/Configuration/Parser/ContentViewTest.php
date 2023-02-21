@@ -15,6 +15,7 @@ use Symfony\Component\Yaml\Yaml;
 
 use function file_get_contents;
 use function preg_quote;
+use function sprintf;
 
 /**
  * @group config
@@ -494,7 +495,7 @@ final class ContentViewTest extends AbstractParserTestCase
     {
         $this->expectException($exceptionClass);
         $exceptionMessage = preg_quote($exceptionMessage, '/');
-        $this->expectExceptionMessageMatches(sprintf("/%s/", $exceptionMessage));
+        $this->expectExceptionMessageMatches(sprintf('/%s/', $exceptionMessage));
 
         $this->load([
             'system' => [

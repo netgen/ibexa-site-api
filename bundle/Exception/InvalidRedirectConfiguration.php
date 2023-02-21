@@ -6,6 +6,8 @@ namespace Netgen\Bundle\IbexaSiteApiBundle\Exception;
 
 use Exception;
 
+use function sprintf;
+
 final class InvalidRedirectConfiguration extends Exception
 {
     public function __construct(string $target, ?Exception $previous = null)

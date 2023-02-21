@@ -20,6 +20,8 @@ use Netgen\IbexaSiteApi\Core\Site\Values\Location;
 use Psr\Log\LoggerInterface;
 use RuntimeException;
 
+use function sprintf;
+
 /**
  * @internal
  *
@@ -114,7 +116,7 @@ final class DomainObjectMapper
             throw new RuntimeException(
                 sprintf(
                     "Could not find FieldDefinition for '%s' field",
-                    $apiField->fieldDefIdentifier
+                    $apiField->fieldDefIdentifier,
                 ),
             );
         }

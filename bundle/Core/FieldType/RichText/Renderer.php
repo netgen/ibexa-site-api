@@ -11,6 +11,8 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Twig\Environment;
 
+use function sprintf;
+
 class Renderer extends CoreRenderer
 {
     public function __construct(

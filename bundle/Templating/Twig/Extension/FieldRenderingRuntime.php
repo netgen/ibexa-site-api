@@ -9,6 +9,8 @@ use Ibexa\Core\MVC\Symfony\Templating\Twig\FieldBlockRenderer;
 use Netgen\IbexaSiteApi\API\Values\Field;
 use Twig\Environment;
 
+use function sprintf;
+
 /**
  * Twig extension runtime for content fields rendering (view).
  */
@@ -76,7 +78,7 @@ class FieldRenderingRuntime
 
         // make sure we can easily add class="<fieldtypeidentifier>-field" to the
         // generated HTML
-        $class = sprintf("%s-field", $field->fieldTypeIdentifier);
+        $class = sprintf('%s-field', $field->fieldTypeIdentifier);
 
         if (isset($params['attr']['class'])) {
             $params['attr']['class'] .= ' ' . $class;

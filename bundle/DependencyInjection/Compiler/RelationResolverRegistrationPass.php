@@ -10,6 +10,8 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
+use function sprintf;
+
 /**
  * This compiler pass will register field type relation resolver plugins.
  */
@@ -54,7 +56,7 @@ final class RelationResolverRegistrationPass implements CompilerPassInterface
                 throw new LogicException(
                     sprintf(
                         "'%s' service tag needs an 'identifier' attribute to identify the field type",
-                        $this->resolverTag
+                        $this->resolverTag,
                     ),
                 );
             }

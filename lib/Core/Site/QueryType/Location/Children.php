@@ -15,6 +15,8 @@ use Psr\Log\NullLogger;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+use function sprintf;
+
 /**
  * Children Location QueryType.
  *
@@ -53,9 +55,9 @@ final class Children extends Location
                 } catch (NotImplementedException $e) {
                     $this->logger->notice(
                         sprintf(
-                            "Cannot use sort clauses from parent location: %s",
-                            $e->getMessage()
-                        )
+                            'Cannot use sort clauses from parent location: %s',
+                            $e->getMessage(),
+                        ),
                     );
 
                     return [];

@@ -8,6 +8,8 @@ use Ibexa\Contracts\Core\FieldType\Value;
 use LogicException;
 use Netgen\IbexaSiteApi\API\Values\Field;
 
+use function sprintf;
+
 /**
  * Field type relation resolver returns related Content IDs for a Content field
  * of a specific field type.

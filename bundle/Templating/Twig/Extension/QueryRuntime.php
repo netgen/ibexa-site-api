@@ -11,6 +11,8 @@ use Netgen\Bundle\IbexaSiteApiBundle\View\ContentView;
 use Pagerfanta\Pagerfanta;
 use Twig\Error\RuntimeError;
 
+use function sprintf;
+
 /**
  * Twig extension runtime for executing queries from the QueryDefinitionCollection injected
  * into the template.

@@ -6,6 +6,8 @@ namespace Netgen\IbexaSiteApi\Core\Site\Plugins\FieldType\RelationResolver;
 
 use OutOfBoundsException;
 
+use function sprintf;
+
 /**
  * Registry for field type relation resolvers.
  *
@@ -46,7 +48,7 @@ class Registry
         return $this->resolverMap[$fieldTypeIdentifier] ?? throw new OutOfBoundsException(
             sprintf(
                 "No relation resolver is registered for field type identifier '%s'",
-                $fieldTypeIdentifier
+                $fieldTypeIdentifier,
             ),
         );
     }

@@ -13,6 +13,7 @@ use OutOfBoundsException;
 use function array_key_exists;
 use function array_replace;
 use function is_array;
+use function sprintf;
 
 /**
  * QueryDefinitionMapper maps query configuration to a QueryDefinition instance.

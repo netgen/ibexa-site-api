@@ -17,6 +17,7 @@ use Netgen\IbexaSearchExtra\API\Values\Content\Query\SortClause\ContentName;
 use function array_key_exists;
 use function explode;
 use function mb_strtolower;
+use function sprintf;
 
 /**
  * Sort clause parser parses string representation of the SortClause

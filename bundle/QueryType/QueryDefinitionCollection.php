@@ -6,6 +6,8 @@ namespace Netgen\Bundle\IbexaSiteApiBundle\QueryType;
 
 use OutOfBoundsException;
 
+use function sprintf;
+
 /**
  * QueryDefinitionCollection contains a map of QueryDefinitions by their name string.
  *
@@ -40,7 +42,7 @@ final class QueryDefinitionCollection
         return $this->queryDefinitionMap[$name] ?? throw new OutOfBoundsException(
             sprintf(
                 "Could not find QueryDefinition with name '%s'",
-                $name
+                $name,
             ),
         );
     }

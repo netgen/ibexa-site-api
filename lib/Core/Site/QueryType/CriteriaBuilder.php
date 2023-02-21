@@ -25,6 +25,7 @@ use function count;
 use function is_array;
 use function is_int;
 use function reset;
+use function sprintf;
 use function strtotime;
 
 /**
