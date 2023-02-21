@@ -71,11 +71,7 @@ final class QueryDefinitionMapper
     {
         $this->setNamedQueryConfiguration();
 
-        if (array_key_exists($name, $this->namedQueryConfiguration)) {
-            return $this->namedQueryConfiguration[$name];
-        }
-
-        throw new OutOfBoundsException(
+        return $this->namedQueryConfiguration[$name] ?? throw new OutOfBoundsException(
             sprintf("Could not find query configuration named '%s'", $name),
         );
     }

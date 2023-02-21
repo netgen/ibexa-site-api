@@ -250,12 +250,8 @@ class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
 
     private function checkContentLocation(?APILocation $location): APILocation
     {
-        if ($location === null) {
-            throw new LogicException(
-                'Cannot generate an UrlAlias route for Content without the main Location',
-            );
-        }
-
-        return $location;
+        return $location ?? throw new LogicException(
+            'Cannot generate an UrlAlias route for Content without the main Location',
+        );
     }
 }

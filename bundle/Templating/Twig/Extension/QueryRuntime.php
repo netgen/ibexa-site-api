@@ -11,9 +11,6 @@ use Netgen\Bundle\IbexaSiteApiBundle\View\ContentView;
 use Pagerfanta\Pagerfanta;
 use Twig\Error\RuntimeError;
 
-use function array_key_exists;
-use function is_array;
-
 /**
  * Twig extension runtime for executing queries from the QueryDefinitionCollection injected
  * into the template.
@@ -46,13 +43,7 @@ class QueryRuntime
      */
     private function getQueryDefinitionCollection(mixed $context): QueryDefinitionCollection
     {
-        $variableName = ContentView::QUERY_DEFINITION_COLLECTION_NAME;
-
-        if (is_array($context) && array_key_exists($variableName, $context)) {
-            return $context[$variableName];
-        }
-
-        throw new RuntimeError(
+        return $context[ContentView::QUERY_DEFINITION_COLLECTION_NAME] ?? throw new RuntimeError(
             sprintf(
                 "Could not find QueryDefinitionCollection variable '%s'",
                 ContentView::QUERY_DEFINITION_COLLECTION_NAME,
