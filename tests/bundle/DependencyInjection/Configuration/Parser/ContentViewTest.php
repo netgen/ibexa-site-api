@@ -494,7 +494,7 @@ final class ContentViewTest extends AbstractParserTestCase
     {
         $this->expectException($exceptionClass);
         $exceptionMessage = preg_quote($exceptionMessage, '/');
-        $this->expectExceptionMessageMatches("/{$exceptionMessage}/");
+        $this->expectExceptionMessageMatches(sprintf("/%s/", $exceptionMessage));
 
         $this->load([
             'system' => [

@@ -53,7 +53,10 @@ class QueryRuntime
         }
 
         throw new RuntimeError(
-            "Could not find QueryDefinitionCollection variable '{$variableName}'",
+            sprintf(
+                "Could not find QueryDefinitionCollection variable '%s'",
+                ContentView::QUERY_DEFINITION_COLLECTION_NAME,
+            ),
         );
     }
 }

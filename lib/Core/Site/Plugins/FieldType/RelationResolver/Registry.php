@@ -48,7 +48,10 @@ class Registry
         }
 
         throw new OutOfBoundsException(
-            "No relation resolver is registered for field type identifier '{$fieldTypeIdentifier}'",
+            sprintf(
+                "No relation resolver is registered for field type identifier '%s'",
+                $fieldTypeIdentifier
+            ),
         );
     }
 }

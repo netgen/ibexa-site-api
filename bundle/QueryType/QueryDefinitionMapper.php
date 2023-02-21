@@ -76,7 +76,7 @@ final class QueryDefinitionMapper
         }
 
         throw new OutOfBoundsException(
-            "Could not find query configuration named '{$name}'",
+            sprintf("Could not find query configuration named '%s'", $name),
         );
     }
 

@@ -44,7 +44,10 @@ final class QueryDefinitionCollection
         }
 
         throw new OutOfBoundsException(
-            "Could not find QueryDefinition with name '{$name}'",
+            sprintf(
+                "Could not find QueryDefinition with name '%s'",
+                $name
+            ),
         );
     }
 }

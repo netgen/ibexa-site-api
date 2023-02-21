@@ -89,7 +89,11 @@ final class TagFields extends Content
 
             if ($fieldType !== 'eztags') {
                 throw new InvalidArgumentException(
-                    "Field '{$identifier}' is expected to be of 'eztags' type, '{$fieldType}' found",
+                    sprintf(
+                        "Field '%s' is expected to be of 'eztags' type, '%s' found",
+                        $identifier,
+                        $fieldType
+                    ),
                 );
             }
 

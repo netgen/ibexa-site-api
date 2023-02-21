@@ -65,7 +65,7 @@ class Renderer extends CoreRenderer
         }
 
         $this->logger->warning(
-            "Embed tag configuration '{$configurationReference}' was not found",
+            sprintf("Embed tag configuration '%s' was not found", $configurationReference),
         );
 
         $configurationReference = $this->getConfigurationReference();
@@ -83,7 +83,7 @@ class Renderer extends CoreRenderer
         }
 
         $this->logger->warning(
-            "Embed tag default configuration '{$configurationReference}' was not found",
+            sprintf("Embed tag default configuration '%s' was not found", $configurationReference),
         );
 
         return null;

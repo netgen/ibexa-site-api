@@ -152,7 +152,7 @@ abstract class Base implements QueryType
     protected function parseCustomSortString(string $string): ?SortClause
     {
         throw new InvalidArgumentException(
-            "Sort string '{$string}' was not converted to a SortClause",
+            sprintf("Sort string '%s' was not converted to a SortClause", $string),
         );
     }
 

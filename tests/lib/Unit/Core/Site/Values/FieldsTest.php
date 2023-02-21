@@ -202,7 +202,7 @@ final class FieldsTest extends TestCase
         $id = 101;
 
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage("Field #{$id} in Content #1 does not exist");
+        $this->expectExceptionMessage(sprintf("Field #%s in Content #1 does not exist", $id));
 
         $fields = $this->getFieldsUnderTest(true);
 

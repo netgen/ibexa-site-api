@@ -10,7 +10,7 @@ final class InvalidRedirectConfiguration extends Exception
 {
     public function __construct(string $target, ?Exception $previous = null)
     {
-        $message = "Could not resolve redirect from the given target: '{$target}'";
+        $message = sprintf("Could not resolve redirect from the given target: '%s'", $target);
 
         parent::__construct($message, 0, $previous);
     }

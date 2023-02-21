@@ -39,7 +39,7 @@ class Link implements Converter
         $xpath->registerNamespace('xlink', 'http://www.w3.org/1999/xlink');
 
         $linkAttributeExpression = "starts-with( @xlink:href, 'ezlocation://' ) or starts-with( @xlink:href, 'ezcontent://' )";
-        $xpathExpression = "//docbook:link[{$linkAttributeExpression}]|//docbook:ezlink";
+        $xpathExpression = sprintf("//docbook:link[%s]|//docbook:ezlink", $linkAttributeExpression);
 
         /** @var \DOMElement $link */
         foreach ($xpath->query($xpathExpression) as $link) {

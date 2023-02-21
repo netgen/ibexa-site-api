@@ -483,7 +483,7 @@ final class SiteApiTest extends AbstractParserTestCase
     {
         $this->expectException(InvalidConfigurationException::class);
         $message = preg_quote($message, '/');
-        $this->expectExceptionMessageMatches("/{$message}/");
+        $this->expectExceptionMessageMatches(sprintf("/%s/", $message));
 
         $this->load([
             'system' => [
@@ -571,7 +571,7 @@ final class SiteApiTest extends AbstractParserTestCase
     ): void {
         $this->expectException($exceptionClass);
         $exceptionMessage = preg_quote($exceptionMessage, '/');
-        $this->expectExceptionMessageMatches("/{$exceptionMessage}/");
+        $this->expectExceptionMessageMatches(sprintf("/%s/", $exceptionMessage));
 
         $this->load([
             'system' => [
@@ -596,7 +596,7 @@ final class SiteApiTest extends AbstractParserTestCase
     ): void {
         $this->expectException($exceptionClass);
         $exceptionMessage = preg_quote($exceptionMessage, '/');
-        $this->expectExceptionMessageMatches("/{$exceptionMessage}/");
+        $this->expectExceptionMessageMatches(sprintf("/%s/", $exceptionMessage));
 
         $this->load([
             'system' => [
@@ -651,7 +651,7 @@ final class SiteApiTest extends AbstractParserTestCase
     ): void {
         $this->expectException($exceptionClass);
         $exceptionMessage = preg_quote($exceptionMessage, '/');
-        $this->expectExceptionMessageMatches("/{$exceptionMessage}/");
+        $this->expectExceptionMessageMatches(sprintf("/%s/", $exceptionMessage));
 
         $this->load([
             'system' => [
@@ -706,7 +706,7 @@ final class SiteApiTest extends AbstractParserTestCase
     ): void {
         $this->expectException($exceptionClass);
         $exceptionMessage = preg_quote($exceptionMessage, '/');
-        $this->expectExceptionMessageMatches("/{$exceptionMessage}/");
+        $this->expectExceptionMessageMatches(sprintf("/%s/", $exceptionMessage));
 
         $this->load([
             'system' => [
@@ -731,7 +731,7 @@ final class SiteApiTest extends AbstractParserTestCase
     ): void {
         $this->expectException($exceptionClass);
         $exceptionMessage = preg_quote($exceptionMessage, '/');
-        $this->expectExceptionMessageMatches("/{$exceptionMessage}/");
+        $this->expectExceptionMessageMatches(sprintf("/%s/", $exceptionMessage));
 
         $this->load([
             'system' => [
@@ -756,7 +756,7 @@ final class SiteApiTest extends AbstractParserTestCase
     ): void {
         $this->expectException($exceptionClass);
         $exceptionMessage = preg_quote($exceptionMessage, '/');
-        $this->expectExceptionMessageMatches("/{$exceptionMessage}/");
+        $this->expectExceptionMessageMatches(sprintf("/%s/", $exceptionMessage));
 
         $this->load([
             'system' => [
@@ -781,7 +781,7 @@ final class SiteApiTest extends AbstractParserTestCase
     ): void {
         $this->expectException($exceptionClass);
         $exceptionMessage = preg_quote($exceptionMessage, '/');
-        $this->expectExceptionMessageMatches("/{$exceptionMessage}/");
+        $this->expectExceptionMessageMatches(sprintf("/%s/", $exceptionMessage));
 
         $this->load([
             'system' => [

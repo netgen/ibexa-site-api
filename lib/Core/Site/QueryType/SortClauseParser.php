@@ -78,7 +78,7 @@ final class SortClauseParser
         }
 
         throw new InvalidArgumentException(
-            "Could not handle sort type '{$type}'",
+            sprintf("Could not handle sort type '%s'", $type),
         );
     }
 
@@ -124,7 +124,7 @@ final class SortClauseParser
         }
 
         throw new InvalidArgumentException(
-            "Could not handle sort direction '{$direction}'",
+            sprintf("Could not handle sort direction '%s'", $direction),
         );
     }
 }

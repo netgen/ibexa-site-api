@@ -231,7 +231,12 @@ final class Location extends APILocation
         try {
             $sortClauses = $this->innerLocation->getSortClauses();
         } catch (NotImplementedException $e) {
-            $this->logger->notice("Cannot use sort clauses from parent location: {$e->getMessage()}");
+            $this->logger->notice(
+                sprintf(
+                    "Cannot use sort clauses from parent location: %s",
+                    $e->getMessage()
+                )
+            );
 
             $sortClauses = [];
         }

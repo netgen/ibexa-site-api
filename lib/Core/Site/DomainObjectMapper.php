@@ -112,7 +112,10 @@ final class DomainObjectMapper
 
         if ($fieldDefinition === null) {
             throw new RuntimeException(
-                "Could not find FieldDefinition for '{$apiField->fieldDefIdentifier}' field",
+                sprintf(
+                    "Could not find FieldDefinition for '%s' field",
+                    $apiField->fieldDefIdentifier
+                ),
             );
         }
 

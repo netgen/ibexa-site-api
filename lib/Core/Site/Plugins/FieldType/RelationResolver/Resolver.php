@@ -30,7 +30,7 @@ abstract class Resolver
             $identifier = $this->getSupportedFieldTypeIdentifier();
 
             throw new LogicException(
-                "This resolver can only handle fields of '{$identifier}' type",
+                sprintf("This resolver can only handle fields of '%s' type", $identifier),
             );
         }
 

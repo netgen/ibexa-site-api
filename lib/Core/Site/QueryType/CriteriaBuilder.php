@@ -108,7 +108,7 @@ final class CriteriaBuilder
         }
 
         throw new InvalidArgumentException(
-            "Criterion named '{$definition->name}' is not handled",
+            sprintf("Criterion named '%s' is not handled", $definition->name),
         );
     }
 
@@ -255,7 +255,7 @@ final class CriteriaBuilder
 
         if ($timestamp === false) {
             throw new InvalidArgumentException(
-                "'{$value}' is invalid time string",
+                sprintf("'%s' is invalid time string", $value),
             );
         }
 
