@@ -12,6 +12,7 @@ use InvalidArgumentException;
 use Netgen\IbexaSiteApi\API\Values\Field;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
+use Throwable;
 
 class ImageRuntime
 {
@@ -35,15 +36,41 @@ class ImageRuntime
                 $field->content->versionInfo,
                 $variationName,
             );
-        } catch (InvalidVariationException) {
-            $this->logger->error("Couldn't get variation '{$variationName}' for image with id {$value->id}");
-        } catch (SourceImageNotFoundException) {
+        } catch (InvalidVariationException $exception) {
             $this->logger->error(
-                "Couldn't create variation '{$variationName}' for image with id {$value->id} because source image can't be found",
+                sprintf(
+                    "Couldn't get variation '%s' for image with id %s: %s",
+                    $variationName,
+                    $value->id,
+                    $exception->getMessage(),
+                )
             );
-        } catch (InvalidArgumentException) {
+        } catch (SourceImageNotFoundException $exception) {
             $this->logger->error(
-                "Couldn't create variation '{$variationName}' for image with id {$value->id} because an image could not be created from the given input",
+                sprintf(
+                    "Couldn't create variation '%s' for image with id %s because source image can't be found: %s",
+                    $variationName,
+                    $value->id,
+                    $exception->getMessage(),
+                ),
+            );
+        } catch (InvalidArgumentException $exception) {
+            $this->logger->error(
+                sprintf(
+                    "Couldn't create variation '%s' for image with id %s because an image could not be created from the given input: %s",
+                    $variationName,
+                    $value->id,
+                    $exception->getMessage(),
+                ),
+            );
+        } catch (Throwable $throwable) {
+            $this->logger->error(
+                sprintf(
+                    "Couldn't get variation '%s' for image with id %s: %s",
+                    $variationName,
+                    $value->id,
+                    $throwable->getMessage(),
+                ),
             );
         }
 
