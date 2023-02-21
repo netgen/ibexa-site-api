@@ -10,6 +10,7 @@ services:
             - '@ibexa.api.persistence_handler'
             - '%netgen.ezplatform_site.routing.recursion_limit%'
             - '@ibexa.config.resolver'
+            - '@?logger'
         calls:
             - [ setSiteaccess, [ '@Ibexa\Core\MVC\Symfony\SiteAccess' ] ]
             - [ setSiteaccessList, [ '%ibexa.site_access.list%' ] ]
