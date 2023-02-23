@@ -41,9 +41,13 @@ final class InvalidRedirectConfigurationListener implements EventSubscriberInter
         $this->logger->critical($exception->getMessage());
 
         $rootLocationId = $this->configResolver->getParameter('content.tree_root.location_id');
+
         $event->setResponse(
             new RedirectResponse(
-                $this->urlGenerator->generate(UrlAliasRouter::URL_ALIAS_ROUTE_NAME, ['locationId' => $rootLocationId]),
+                $this->urlGenerator->generate(
+                    UrlAliasRouter::URL_ALIAS_ROUTE_NAME,
+                    ['locationId' => $rootLocationId],
+                ),
                 Response::HTTP_FOUND,
             ),
         );

@@ -143,7 +143,10 @@ class ContentViewBuilder implements ViewBuilder
             throw new UnauthorizedException(
                 'content',
                 'read|view_embed',
-                ['contentId' => $contentId, 'locationId' => $location !== null ? $location->id : 'n/a'],
+                [
+                    'contentId' => $contentId,
+                    'locationId' => $location !== null ? $location->id : 'n/a',
+                ],
             );
         }
 
@@ -152,7 +155,13 @@ class ContentViewBuilder implements ViewBuilder
             $versionInfo->status !== VersionInfo::STATUS_PUBLISHED
             && !$this->repository->getPermissionResolver()->canUser('content', 'versionread', $versionInfo)
         ) {
-            throw new UnauthorizedException('content', 'versionread', ['contentId' => $contentId]);
+            throw new UnauthorizedException(
+                'content',
+                'versionread',
+                [
+                    'contentId' => $contentId,
+                ],
+            );
         }
 
         return $content;

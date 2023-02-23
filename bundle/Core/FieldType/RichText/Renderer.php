@@ -93,9 +93,11 @@ class Renderer extends CoreRenderer
 
     private function getConfigurationReference(): string
     {
-        $isSiteApiPrimaryContentView = $this->configResolver->getParameter('ng_site_api.site_api_is_primary_content_view');
-
         /** @var bool $isSiteApiPrimaryContentView */
+        $isSiteApiPrimaryContentView = $this->configResolver->getParameter(
+            'ng_site_api.site_api_is_primary_content_view'
+        );
+
         if ($isSiteApiPrimaryContentView) {
             return $this->ngEmbedConfigurationNamespace;
         }
