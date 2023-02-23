@@ -127,7 +127,18 @@ final class ContentRenderer
             '_controller' => 'ibexa_content:embedAction',
         ];
 
-        $view = $this->viewBuilder->buildView($baseParameters + $parameters);
+        try {
+            $view = $this->viewBuilder->buildView($baseParameters + $parameters);
+        } catch (Exception $exception) {
+            $this->logger->error(
+                sprintf(
+                    'Could not build the embedded view: %s',
+                    $exception->getMessage(),
+                ),
+            );
+
+            return '';
+        }
 
         return $this->viewRenderer->render($view, $parameters, false);
     }
