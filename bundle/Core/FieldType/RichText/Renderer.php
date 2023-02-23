@@ -95,7 +95,7 @@ class Renderer extends CoreRenderer
     {
         /** @var bool $isSiteApiPrimaryContentView */
         $isSiteApiPrimaryContentView = $this->configResolver->getParameter(
-            'ng_site_api.site_api_is_primary_content_view'
+            'ng_site_api.site_api_is_primary_content_view',
         );
 
         if ($isSiteApiPrimaryContentView) {

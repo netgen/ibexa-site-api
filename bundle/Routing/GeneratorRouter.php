@@ -31,6 +31,7 @@ use Symfony\Component\Routing\RouteCollection;
 use function is_object;
 use function mb_strlen;
 use function mb_substr;
+use function sprintf;
 use function str_starts_with;
 
 /**
@@ -135,7 +136,7 @@ class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
         $url = $this->generator->generate($location, $parameters, UrlGeneratorInterface::ABSOLUTE_URL);
 
         if ($referenceType === UrlGeneratorInterface::RELATIVE_PATH || $referenceType === UrlGeneratorInterface::ABSOLUTE_PATH) {
-            $prefix = sprintf("%s://%s", $this->requestContext->getScheme(), $this->requestContext->getHost());
+            $prefix = sprintf('%s://%s', $this->requestContext->getScheme(), $this->requestContext->getHost());
             $prefixLength = mb_strlen($prefix);
 
             if (str_starts_with($url, $prefix)) {
