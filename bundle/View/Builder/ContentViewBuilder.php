@@ -211,10 +211,6 @@ class ContentViewBuilder implements ViewBuilder
             return true;
         }
 
-        if (in_array($parameters['viewType'], ['embed', 'embed-inline'], true)) {
-            return true;
-        }
-
-        return false;
+        return in_array($parameters['viewType'], ['embed', 'embed-inline'], true);
     }
 }
