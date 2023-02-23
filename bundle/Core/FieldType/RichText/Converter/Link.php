@@ -16,7 +16,6 @@ use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Symfony\Cmf\Component\Routing\RouteObjectInterface;
 use Symfony\Component\Routing\RouterInterface;
-use Throwable;
 
 use function preg_match;
 use function sprintf;
@@ -60,14 +59,6 @@ class Link implements Converter
                     $this->logger->error(
                         sprintf('While generating link for RichText, could not find Content #%s', $id),
                     );
-                } catch (Throwable $throwable) {
-                    $this->logger->error(
-                        sprintf(
-                            'While generating link for RichText, an error occurred when loading Content #%s: %s',
-                            $id,
-                            $throwable->getMessage(),
-                        ),
-                    );
                 }
             } elseif ($scheme === 'ezlocation://') {
                 try {
@@ -78,14 +69,6 @@ class Link implements Converter
                 } catch (APINotFoundException) {
                     $this->logger->error(
                         sprintf('While generating link for RichText, could not find Location #%s', $id),
-                    );
-                } catch (Throwable $throwable) {
-                    $this->logger->error(
-                        sprintf(
-                            'While generating link for RichText, an error occurred when loading Location #%s: %s',
-                            $id,
-                            $throwable->getMessage(),
-                        ),
                     );
                 }
             } else {

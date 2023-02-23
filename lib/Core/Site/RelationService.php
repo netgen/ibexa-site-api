@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Netgen\IbexaSiteApi\Core\Site;
 
+use Exception;
 use Netgen\IbexaSiteApi\API\RelationService as RelationServiceInterface;
 use Netgen\IbexaSiteApi\API\Site as SiteInterface;
 use Netgen\IbexaSiteApi\API\Values\Content;
 use Netgen\IbexaSiteApi\API\Values\Location;
 use Netgen\IbexaSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Registry as RelationResolverRegistry;
 use Netgen\IbexaSiteApi\Core\Traits\SearchResultExtractorTrait;
-use Throwable;
 
 use function array_filter;
 use function array_flip;
@@ -102,8 +102,12 @@ class RelationService implements RelationServiceInterface
 
         foreach ($relatedContentItems as $relatedContentItem) {
             try {
+                if ($relatedContentItem->mainLocation === null) {
+                    continue;
+                }
+
                 $relatedLocations[] = $relatedContentItem->mainLocation;
-            } catch (Throwable) {
+            } catch (Exception) {
                 // do nothing
             }
         }
@@ -136,7 +140,7 @@ class RelationService implements RelationServiceInterface
         foreach ($relatedContentIds as $contentId) {
             try {
                 $content = $this->site->getLoadService()->loadContent($contentId);
-            } catch (Throwable) {
+            } catch (Exception) {
                 continue;
             }
 

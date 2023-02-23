@@ -12,7 +12,6 @@ use InvalidArgumentException;
 use Netgen\IbexaSiteApi\API\Values\Field;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
-use Throwable;
 
 use function sprintf;
 
@@ -63,15 +62,6 @@ class ImageRuntime
                     $variationName,
                     $value->id,
                     $exception->getMessage(),
-                ),
-            );
-        } catch (Throwable $throwable) {
-            $this->logger->error(
-                sprintf(
-                    "Couldn't get variation '%s' for image with id %s: %s",
-                    $variationName,
-                    $value->id,
-                    $throwable->getMessage(),
                 ),
             );
         }

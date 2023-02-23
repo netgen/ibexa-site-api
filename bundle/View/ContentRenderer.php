@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\IbexaSiteApiBundle\View;
 
+use Exception;
 use Ibexa\Contracts\Core\Repository\Values\Content\Content as APIContent;
 use Ibexa\Contracts\Core\Repository\Values\Content\Location as APILocation;
 use Ibexa\Contracts\Core\Repository\Values\ValueObject;
@@ -13,7 +14,6 @@ use Netgen\IbexaSiteApi\API\Values\Content;
 use Netgen\IbexaSiteApi\API\Values\Location;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
-use Throwable;
 
 use function sprintf;
 
@@ -74,11 +74,11 @@ final class ContentRenderer
 
         try {
             $view = $this->viewBuilder->buildView($baseParameters + $parameters);
-        } catch (Throwable $throwable) {
+        } catch (Exception $exception) {
             $this->logger->error(
                 sprintf(
                     'Could not build the embedded view: %s',
-                    $throwable->getMessage(),
+                    $exception->getMessage(),
                 ),
             );
 
