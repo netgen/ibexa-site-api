@@ -207,22 +207,27 @@ class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
         }
 
         if (isset($parameters['contentId'])) {
-            return $this->repository->sudo(
-                function () use ($parameters): APILocation {
-                    $contentInfo = $this->repository->getContentService()->loadContentInfo($parameters['contentId']);
-
-                    if ($contentInfo->mainLocationId === null) {
-                        throw new LogicException(
-                            'Cannot generate an UrlAlias route for Content without the main Location',
-                        );
-                    }
-
-                    return $this->repository->getLocationService()->loadLocation($contentInfo->mainLocationId, []);
-                },
-            );
+            return $this->loadLocationByContentId($parameters['contentId']);
         }
 
         throw new RuntimeException('Could not resolve Location from the given parameters');
+    }
+
+    private function loadLocationByContentId(int $contentId): APILocation
+    {
+        return $this->repository->sudo(
+            function () use ($contentId): APILocation {
+                $contentInfo = $this->repository->getContentService()->loadContentInfo($contentId);
+
+                if ($contentInfo->mainLocationId === null) {
+                    throw new LogicException(
+                        'Cannot generate an UrlAlias route for Content without the main Location',
+                    );
+                }
+
+                return $this->repository->getLocationService()->loadLocation($contentInfo->mainLocationId, []);
+            },
+        );
     }
 
     private function resolveLocationFromRouteObject(mixed $object): APILocation
