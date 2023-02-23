@@ -118,11 +118,11 @@ class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
     public function getRouteDebugMessage($name, array $parameters = []): string
     {
         if ($name instanceof RouteObjectInterface) {
-            return 'Route with key ' . $name->getRouteKey();
+            return sprintf('Route with key "%s"', $name->getRouteKey());
         }
 
         if ($name instanceof SymfonyRoute) {
-            return 'Route with pattern ' . $name->getPath();
+            return sprintf('Route with pattern "%s"', $name->getPath());
         }
 
         return $name;
@@ -135,7 +135,7 @@ class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
         $url = $this->generator->generate($location, $parameters, UrlGeneratorInterface::ABSOLUTE_URL);
 
         if ($referenceType === UrlGeneratorInterface::RELATIVE_PATH || $referenceType === UrlGeneratorInterface::ABSOLUTE_PATH) {
-            $prefix = $this->requestContext->getScheme() . '://' . $this->requestContext->getHost();
+            $prefix = sprintf("%s://%s", $this->requestContext->getScheme(), $this->requestContext->getHost());
             $prefixLength = mb_strlen($prefix);
 
             if (str_starts_with($url, $prefix)) {
