@@ -9,5 +9,5 @@ use Netgen\IbexaSiteApi\API\Values\Content;
 
 interface ContentValueView extends BaseContentValueView
 {
-    public function getSiteContent(): ?Content;
+    public function getSiteContent(): Content;
 }
