@@ -133,8 +133,8 @@ final class InternalContentViewRouteListener implements EventSubscriberInterface
 
         try {
             return $this->router->generate(UrlAliasRouter::URL_ALIAS_ROUTE_NAME, $parameters);
-        } catch (Exception) {
-            throw new NotFoundHttpException('URL alias could not be generated');
+        } catch (Exception $exception) {
+            throw new NotFoundHttpException('URL alias could not be generated', $exception);
         }
     }
 }
