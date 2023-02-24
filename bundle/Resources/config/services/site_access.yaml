@@ -1,14 +1,9 @@
-parameters:
-    netgen.ezplatform_site.routing.excluded_siteaccess_group_names: []
-    netgen.ezplatform_site.routing.excluded_siteaccess_names: []
-    netgen.ezplatform_site.routing.recursion_limit: 2
-
 services:
     netgen.ibexa_site_api.siteaccess.resolver.native:
         class: Netgen\Bundle\IbexaSiteApiBundle\SiteAccess\Resolver\NativeResolver
         arguments:
             - '@ibexa.api.persistence_handler'
-            - '%netgen.ezplatform_site.routing.recursion_limit%'
+            - '%netgen.ibexa_site_api.cross_siteaccess_content.recursion_limit%'
             - '@ibexa.config.resolver'
             - '@?logger'
         calls:

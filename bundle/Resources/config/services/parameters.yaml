@@ -4,3 +4,6 @@ parameters:
     netgen.ibexa_site_api.content_view_fallback.to_ibexa.view: '@@NetgenIbexaSiteApi/content_view_fallback/to_ibexa/view.html.twig'
     netgen.ibexa_site_api.content_view_fallback.to_site_api.embed: '@@NetgenIbexaSiteApi/content_view_fallback/to_site_api/embed.html.twig'
     netgen.ibexa_site_api.content_view_fallback.to_site_api.view: '@@NetgenIbexaSiteApi/content_view_fallback/to_site_api/view.html.twig'
+
+    # Cross-siteaccess Content parameters
+    netgen.ibexa_site_api.cross_siteaccess_content.recursion_limit: 2
