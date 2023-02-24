@@ -61,6 +61,8 @@ services:
             - '@netgen.ibexa_site_api.plugins.field_type.relation_resolver.registry'
             - '@?logger'
         lazy: true
+        tags:
+            - { name: monolog.logger, channel: ngsiteapi }
 
     netgen.ibexa_site_api.core.filter_service:
         class: Netgen\IbexaSiteApi\Core\Site\FilterService

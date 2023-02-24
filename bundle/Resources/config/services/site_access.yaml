@@ -16,6 +16,8 @@ services:
             - [ setSiteaccessList, [ '%ibexa.site_access.list%' ] ]
             - [ setSiteaccessGroupsBySiteaccess, [ '%ibexa.site_access.groups_by_site_access%' ] ]
         lazy: true
+        tags:
+            - { name: monolog.logger, channel: ngsiteapi }
 
     netgen.ibexa_site_api.siteaccess.resolver:
         alias: netgen.ibexa_site_api.siteaccess.resolver.native

@@ -18,6 +18,8 @@ services:
             - '@?logger'
             - '%ibexa.field_type.richtext.custom_tags%'
             - '%ibexa.field_type.richtext.custom_styles%'
+        tags:
+            - { name: monolog.logger, channel: ngsiteapi }
 
     netgen.ibexa_site_api.ezrichtext.converter.link:
         class: Netgen\Bundle\IbexaSiteApiBundle\Core\FieldType\RichText\Converter\Link
@@ -27,3 +29,5 @@ services:
             - '@netgen.ibexa_site_api.load_service'
             - '@router'
             - '@?logger'
+        tags:
+            - { name: monolog.logger, channel: ngsiteapi }

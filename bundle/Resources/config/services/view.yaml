@@ -90,3 +90,5 @@ services:
             - '@netgen.ibexa_site_api.view_builder.content'
             - '@netgen.ibexa_site_api.view_renderer'
             - '@?logger'
+        tags:
+            - { name: monolog.logger, channel: ngsiteapi }

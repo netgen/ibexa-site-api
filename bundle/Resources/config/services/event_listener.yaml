@@ -24,3 +24,4 @@ services:
             - '@?logger'
         tags:
             - { name: kernel.event_subscriber }
+            - { name: monolog.logger, channel: ngsiteapi }

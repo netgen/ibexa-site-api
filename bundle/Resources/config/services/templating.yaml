@@ -73,6 +73,7 @@ services:
             - '@?logger'
         tags:
             - { name: twig.runtime }
+            - { name: monolog.logger, channel: ngsiteapi }
 
     netgen.ibexa_site_api.twig.extension.query:
         class: Netgen\Bundle\IbexaSiteApiBundle\Templating\Twig\Extension\QueryExtension
