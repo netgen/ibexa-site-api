@@ -97,7 +97,12 @@ class NativeResolver extends Resolver
 
         // Error: No siteaccesses were found for the Location, return the current siteaccess
         if (empty($siteaccessSet)) {
-            $this->logger->error(sprintf('Found no siteaccesses for Location #%d', $location->id));
+            $this->logger->debug(
+                sprintf(
+                    'Found no siteaccesses for Location #%d',
+                    $location->id
+                ),
+            );
 
             return $currentSiteaccess;
         }
