@@ -12,10 +12,10 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Location;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Core\MVC\Symfony\SiteAccess;
 use Ibexa\Core\Repository\Values\Content\Location as CoreLocation;
+use Netgen\Bundle\IbexaSiteApiBundle\Exception\SiteAccessResolver\SiteAccessMatchException;
 use Netgen\Bundle\IbexaSiteApiBundle\SiteAccess\Resolver;
 use Netgen\Bundle\IbexaSiteApiBundle\SiteAccess\Resolver\NativeResolver;
 use PHPUnit\Framework\TestCase;
-use Psr\Log\LoggerInterface;
 
 use function array_filter;
 use function array_pop;
@@ -51,9 +51,9 @@ class NativeResolverTest extends TestCase
                             'languageCodes' => ['ita-IT'],
                         ],
                     ],
-                    '_error' => 'Found no siteaccesses for Location #42',
+                    '_exception' => 'No siteaccess matched Location #42',
                 ],
-                'eng',
+                null,
             ],
             '#2.1 Location is in the configured external subtree' => [
                 [
@@ -602,7 +602,7 @@ class NativeResolverTest extends TestCase
                 ],
                 'por',
             ],
-            '#4.12 Siteaccess is matched by the prioritized languages of the current siteaccess with siteaccess group exclusion and siteaccess inclusion' => [
+            '#4.12 Siteaccess is not matched with siteaccess group exclusion and siteaccess inclusion' => [
                 [
                     'siteaccess' => [
                         'list' => ['eng', 'ger', 'por2', 'por', 'ita'],
@@ -643,8 +643,9 @@ class NativeResolverTest extends TestCase
                             'alwaysAvailable' => true,
                         ],
                     ],
+                    '_exception' => 'No siteaccess matched Location #42',
                 ],
-                'eng',
+                null,
             ],
             '#5.1 Siteaccess with the highest configured language is used' => [
                 [
@@ -980,9 +981,9 @@ class NativeResolverTest extends TestCase
                             'languageCodes' => ['fre-FR'],
                         ],
                     ],
-                    '_error' => 'No siteaccess matched Location #42',
+                    '_exception' => 'No siteaccess matched Location #42',
                 ],
-                'eng',
+                null,
             ],
             '#6.2 Nothing matched, current siteaccess was not found' => [
                 [
@@ -1018,9 +1019,9 @@ class NativeResolverTest extends TestCase
                             'languageCodes' => ['fre-FR'],
                         ],
                     ],
-                    '_error' => 'No siteaccess matched Location #42',
+                    '_exception' => 'No siteaccess matched Location #42',
                 ],
-                'ger',
+                null,
             ],
         ];
     }
@@ -1028,7 +1029,7 @@ class NativeResolverTest extends TestCase
     /**
      * @dataProvider providerForTestResolve
      */
-    public function testResolve(array $data, string $expectedSiteaccessName): void
+    public function testResolve(array $data, ?string $expectedSiteaccessName): void
     {
         $siteaccessResolver = $this->getSiteaccessResolverUnderTest($data);
         $location = $this->getMockedLocation($data);
@@ -1059,25 +1060,18 @@ class NativeResolverTest extends TestCase
             $this->persistenceHandlerMock($data),
             5,
             $this->getConfigResolverMock($data),
-            $this->getLoggerMock($data),
         );
 
         $siteaccessResolver->setSiteaccess($this->getSiteaccess($data));
         $siteaccessResolver->setSiteaccessGroupsBySiteaccess($this->getSiteaccessGroupsBySiteaccess($data));
         $siteaccessResolver->setSiteaccessList($this->getSiteaccessList($data));
 
-        return $siteaccessResolver;
-    }
-
-    protected function getLoggerMock(array $data): LoggerInterface
-    {
-        $loggerMock = $this->createMock(LoggerInterface::class);
-
-        if (isset($data['_error'])) {
-            $loggerMock->method('error')->with($data['_error']);
+        if (isset($data['_exception'])) {
+            $this->expectException(SiteAccessMatchException::class);
+            $this->expectExceptionMessage($data['_exception']);
         }
 
-        return $loggerMock;
+        return $siteaccessResolver;
     }
 
     protected function persistenceHandlerMock(array $data): Handler

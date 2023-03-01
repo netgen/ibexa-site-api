@@ -8,12 +8,16 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Location;
 use Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Core\MVC\Symfony\SiteAccess;
+use Netgen\Bundle\IbexaSiteApiBundle\Exception\SiteAccessResolver\SiteAccessMatchException;
 use Netgen\Bundle\IbexaSiteApiBundle\SiteAccess\Resolver;
 use Netgen\IbexaSiteApi\API\LanguageResolver as BaseLanguageResolver;
 use Netgen\IbexaSiteApi\API\Settings as BaseSettings;
 use Netgen\IbexaSiteApi\Core\Site\Exceptions\TranslationNotMatchedException;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 
 use function in_array;
+use function sprintf;
 
 final class LanguageResolver extends BaseLanguageResolver
 {
@@ -23,9 +27,11 @@ final class LanguageResolver extends BaseLanguageResolver
         private readonly BaseSettings $settings,
         private readonly Resolver $siteaccessResolver,
         private readonly ConfigResolverInterface $configResolver,
+        private readonly LoggerInterface $logger = new NullLogger(),
     ) {
     }
 
+    /** @noinspection PhpUnused */
     public function setSiteaccess(?SiteAccess $currentSiteAccess = null): void
     {
         $this->currentSiteaccess = $currentSiteAccess;
@@ -54,7 +60,20 @@ final class LanguageResolver extends BaseLanguageResolver
 
     public function resolveByContent(VersionInfo $versionInfo): string
     {
-        $siteaccess = $this->siteaccessResolver->resolveByContent($versionInfo->contentInfo);
+        try {
+            $siteaccess = $this->siteaccessResolver->resolveByContent($versionInfo->contentInfo);
+        } catch (SiteAccessMatchException $exception) {
+            $this->logger->debug(
+                sprintf(
+                    'Could not resolve siteaccess for Location #%s, falling back to the current siteaccess: %s',
+                    $location->id,
+                    $exception->getMessage(),
+                ),
+            );
+
+            $siteaccess = $this->currentSiteaccess->name;
+        }
+
         $prioritizedLanguages = $this->getPrioritizedLanguages($siteaccess);
 
         foreach ($prioritizedLanguages as $languageCode) {
@@ -93,7 +112,20 @@ final class LanguageResolver extends BaseLanguageResolver
 
     public function resolveByLocation(Location $location, VersionInfo $versionInfo): string
     {
-        $siteaccess = $this->siteaccessResolver->resolveByLocation($location);
+        try {
+            $siteaccess = $this->siteaccessResolver->resolveByLocation($location);
+        } catch (SiteAccessMatchException $exception) {
+            $this->logger->debug(
+                sprintf(
+                    'Could not resolve siteaccess for Location #%s, falling back to the current siteaccess: %s',
+                    $location->id,
+                    $exception->getMessage(),
+                ),
+            );
+
+            $siteaccess = $this->currentSiteaccess->name;
+        }
+
         $prioritizedLanguages = $this->getPrioritizedLanguages($siteaccess);
 
         foreach ($prioritizedLanguages as $languageCode) {

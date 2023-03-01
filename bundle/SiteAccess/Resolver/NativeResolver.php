@@ -9,18 +9,15 @@ use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
 use Ibexa\Contracts\Core\Repository\Values\Content\Location;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Core\MVC\Symfony\SiteAccess;
+use Netgen\Bundle\IbexaSiteApiBundle\Exception\SiteAccessResolver\SiteAccessMatchException;
 use Netgen\Bundle\IbexaSiteApiBundle\SiteAccess\Resolver;
-use Psr\Log\LoggerInterface;
-use Psr\Log\NullLogger;
 
 use function array_fill_keys;
-use function array_key_first;
 use function array_keys;
 use function array_map;
 use function in_array;
 use function ksort;
 use function reset;
-use function sprintf;
 
 use const SORT_NUMERIC;
 
@@ -43,7 +40,6 @@ class NativeResolver extends Resolver
         private readonly Handler $persistenceHandler,
         private readonly int $recursionLimit,
         private readonly ConfigResolverInterface $configResolver,
-        private readonly LoggerInterface $logger = new NullLogger(),
     ) {
     }
 
@@ -90,21 +86,17 @@ class NativeResolver extends Resolver
         return $this->getParameter('enabled');
     }
 
+    /**
+     * @throws \Netgen\Bundle\IbexaSiteApiBundle\Exception\SiteAccessResolver\SiteAccessMatchException
+     */
     private function internalResolve(Location $location): string
     {
         $siteaccessSet = $this->getSiteaccessSet($location);
         $currentSiteaccess = $this->currentSiteaccess->name;
 
-        // Error: No siteaccesses were found for the Location, return the current siteaccess
+        // Error: No siteaccess found for the Location
         if (empty($siteaccessSet)) {
-            $this->logger->debug(
-                sprintf(
-                    'Found no siteaccesses for Location #%d',
-                    $location->id
-                ),
-            );
-
-            return $currentSiteaccess;
+            throw SiteAccessMatchException::locationNotMatched($location);
         }
 
         // The Location is in the configured external subtree, use the current siteaccess
@@ -140,16 +132,8 @@ class NativeResolver extends Resolver
             return $match;
         }
 
-        // Error: Nothing matched
-        $this->logger->error(sprintf('No siteaccess matched Location #%s', $location->id));
-
-        // Return the current SA if it was found
-        if (isset($siteaccessSet[$currentSiteaccess])) {
-            return $currentSiteaccess;
-        }
-
-        // Return the first SA from the found set
-        return array_key_first($siteaccessSet);
+        // Error: Nothing that was found matched
+        throw SiteAccessMatchException::locationNotMatched($location);
     }
 
     private function matchByHighestPositionedLanguage(Location $location): ?string
