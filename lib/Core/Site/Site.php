@@ -106,6 +106,7 @@ class Site implements SiteInterface
             $this->relationService = new RelationService(
                 $this,
                 $this->relationResolverRegistry,
+                $this->logger,
             );
         }
 

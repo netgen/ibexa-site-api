@@ -11,11 +11,13 @@ use Netgen\IbexaSiteApi\API\Values\Content;
 use Netgen\IbexaSiteApi\API\Values\Location;
 use Netgen\IbexaSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Registry as RelationResolverRegistry;
 use Netgen\IbexaSiteApi\Core\Traits\SearchResultExtractorTrait;
+use Psr\Log\LoggerInterface;
 
 use function array_filter;
 use function array_flip;
 use function array_slice;
 use function in_array;
+use function sprintf;
 use function usort;
 
 /**
@@ -34,6 +36,7 @@ class RelationService implements RelationServiceInterface
     public function __construct(
         private readonly SiteInterface $site,
         private readonly RelationResolverRegistry $relationResolverRegistry,
+        private readonly LoggerInterface $logger,
     ) {
     }
 
@@ -102,13 +105,26 @@ class RelationService implements RelationServiceInterface
 
         foreach ($relatedContentItems as $relatedContentItem) {
             try {
-                if ($relatedContentItem->mainLocation === null) {
+                if ($relatedContentItem->mainLocationId === null) {
+                    $this->logger->debug(
+                        sprintf(
+                            'Could not load related Location: Content #%s has no Locations',
+                            $relatedContentItem->id,
+                        ),
+                    );
+
                     continue;
                 }
 
                 $relatedLocations[] = $relatedContentItem->mainLocation;
-            } catch (Exception) {
-                // do nothing
+            } catch (Exception $exception) {
+                $this->logger->debug(
+                    sprintf(
+                        'Could not load related Location #%s: %s',
+                        $relatedContentItem->mainLocationId,
+                        $exception->getMessage(),
+                    ),
+                );
             }
         }
 
@@ -140,7 +156,15 @@ class RelationService implements RelationServiceInterface
         foreach ($relatedContentIds as $contentId) {
             try {
                 $content = $this->site->getLoadService()->loadContent($contentId);
-            } catch (Exception) {
+            } catch (Exception $exception) {
+                $this->logger->debug(
+                    sprintf(
+                        'Could not load related Content #%s: %s',
+                        $contentId,
+                        $exception->getMessage(),
+                    ),
+                );
+
                 continue;
             }
 
