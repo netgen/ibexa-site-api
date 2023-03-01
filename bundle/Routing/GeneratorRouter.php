@@ -11,11 +11,15 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Location as APILocation;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Core\MVC\Symfony\Routing\Generator\UrlAliasGenerator;
 use Ibexa\Core\MVC\Symfony\Routing\UrlAliasRouter as CoreUrlAliasRouter;
+use Ibexa\Core\MVC\Symfony\SiteAccess;
 use LogicException;
+use Netgen\Bundle\IbexaSiteApiBundle\Exception\SiteAccessResolver\SiteAccessMatchException;
 use Netgen\Bundle\IbexaSiteApiBundle\SiteAccess\Resolver;
 use Netgen\IbexaSiteApi\API\Values\Content;
 use Netgen\IbexaSiteApi\API\Values\ContentInfo;
 use Netgen\IbexaSiteApi\API\Values\Location;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use RuntimeException;
 use Symfony\Cmf\Component\Routing\ChainedRouterInterface;
 use Symfony\Cmf\Component\Routing\RouteObjectInterface;
@@ -41,13 +45,22 @@ use function str_starts_with;
  */
 class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
 {
+    private SiteAccess $currentSiteaccess;
+
     public function __construct(
         private readonly Repository $repository,
         private readonly UrlAliasGenerator $generator,
         private readonly Resolver $siteaccessResolver,
         private readonly ConfigResolverInterface $configResolver,
         private RequestContext $requestContext,
+        private readonly LoggerInterface $logger = new NullLogger(),
     ) {
+    }
+
+    /** @noinspection PhpUnused */
+    public function setSiteaccess(?SiteAccess $currentSiteAccess = null): void
+    {
+        $this->currentSiteaccess = $currentSiteAccess;
     }
 
     public function generate(
@@ -131,9 +144,31 @@ class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
 
     private function resolveSiteaccessAndGenerate(APILocation $location, array $parameters, int $referenceType): string
     {
-        $parameters['siteaccess'] = $this->siteaccessResolver->resolveByLocation($location);
+        try {
+            $siteaccess = $this->siteaccessResolver->resolveByLocation($location);
+        } catch (SiteAccessMatchException $exception) {
+            $this->logger->error(
+                sprintf(
+                    'Could not resolve siteaccess for Location #%s, falling back to the current siteaccess: %s',
+                    $location->id,
+                    $exception->getMessage(),
+                ),
+            );
 
-        $url = $this->generator->generate($location, $parameters, UrlGeneratorInterface::ABSOLUTE_URL);
+            $siteaccess = $this->currentSiteaccess->name;
+        }
+
+        if ($siteaccess === $this->currentSiteaccess->name) {
+            return $this->generator->generate($location, $parameters, $referenceType);
+        }
+
+        $parameters['siteaccess'] = $siteaccess;
+
+        $url = $this->generator->generate(
+            $location,
+            $parameters,
+            UrlGeneratorInterface::ABSOLUTE_URL,
+        );
 
         if ($referenceType === UrlGeneratorInterface::RELATIVE_PATH || $referenceType === UrlGeneratorInterface::ABSOLUTE_PATH) {
             $prefix = sprintf('%s://%s', $this->requestContext->getScheme(), $this->requestContext->getHost());
@@ -149,8 +184,7 @@ class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
 
     private function supportsObject($object): bool
     {
-        return
-            $object instanceof Content
+        return $object instanceof Content
             || $object instanceof ContentInfo
             || $object instanceof Location
             || $object instanceof APIContent
