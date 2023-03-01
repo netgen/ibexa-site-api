@@ -170,16 +170,47 @@ class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
             UrlGeneratorInterface::ABSOLUTE_URL,
         );
 
-        if ($referenceType === UrlGeneratorInterface::RELATIVE_PATH || $referenceType === UrlGeneratorInterface::ABSOLUTE_PATH) {
-            $prefix = sprintf('%s://%s', $this->requestContext->getScheme(), $this->requestContext->getHost());
+        if (
+            $referenceType === UrlGeneratorInterface::RELATIVE_PATH
+            || $referenceType === UrlGeneratorInterface::ABSOLUTE_PATH
+        ) {
+            $prefix = $this->getUrlPrefix();
             $prefixLength = mb_strlen($prefix);
 
             if (str_starts_with($url, $prefix)) {
                 return mb_substr($url, $prefixLength);
             }
+
+            $this->logger->error(
+                sprintf(
+                    'Could not generate path by stripping prefix: URL "%s" does not start with "%s"',
+                    $url,
+                    $prefix,
+                ),
+            );
         }
 
         return $url;
+    }
+
+    private function getUrlPrefix(): string
+    {
+        $scheme = $this->requestContext->getScheme();
+        $port = '';
+
+        if ($scheme === 'http' && $this->requestContext->getHttpPort() !== 80) {
+            $port = ':' . $this->requestContext->getHttpPort();
+        } elseif ($scheme === 'https' && $this->requestContext->getHttpsPort() !== 443) {
+            $port = ':' . $this->requestContext->getHttpsPort();
+        }
+
+        return sprintf(
+            '%s://%s%s%s',
+            $scheme,
+            $this->requestContext->getHost(),
+            $port,
+            $this->requestContext->getBaseUrl(),
+        );
     }
 
     private function supportsObject($object): bool
