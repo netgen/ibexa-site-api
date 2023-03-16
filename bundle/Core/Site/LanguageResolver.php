@@ -65,8 +65,8 @@ final class LanguageResolver extends BaseLanguageResolver
         } catch (SiteAccessMatchException $exception) {
             $this->logger->debug(
                 sprintf(
-                    'Could not resolve siteaccess for Location #%s, falling back to the current siteaccess: %s',
-                    $location->id,
+                    'Could not resolve siteaccess for Content #%s, falling back to the current siteaccess: %s',
+                    $versionInfo->contentInfo->id,
                     $exception->getMessage(),
                 ),
             );
