@@ -63,7 +63,7 @@ final class ForwardFields extends Location
             $idsGrouped[] = $relationResolver->getRelationIds($field);
         }
 
-        /** @var array $relatedContentIds */
+        /** @var int[] $relatedContentIds */
         $relatedContentIds = array_merge(...$idsGrouped);
 
         if (empty($relatedContentIds)) {
