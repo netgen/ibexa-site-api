@@ -22,6 +22,7 @@
         "phpunit/phpunit": "^9.0",
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
         "netgen/tagsbundle": "^5.0.x-dev",
+        "netgen/ibexa-fieldtype-enhanced-link": "^1.0",
         "composer/package-versions-deprecated": "*"
     },
     "replace": {
@@ -30,7 +31,8 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "suggest": {
-        "netgen/tagsbundle": "Allows using Tag relation Query Types and named Tag objects"
+        "netgen/tagsbundle": "Allows using Tag relation Query Types and named Tag objects",
+        "netgen/ibexa-fieldtype-enhanced-link": "Field Type supporting internal/external links with rendering options"
     },
     "autoload": {
         "psr-4": {
@@ -46,7 +48,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "5.2-dev"
+            "dev-master": "5.3-dev"
         }
     },
     "scripts": {
