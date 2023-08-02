@@ -16,6 +16,12 @@ services:
         tags:
             - { name: netgen.ibexa_site_api.plugins.field_type.relation_resolver, identifier: ezobjectrelationlist }
 
+    # Resolver for 'ngenhancedlink' field type
+    netgen.ibexa_site_api.plugins.field_type.relation_resolver.ngenhancedlink:
+        class: Netgen\IbexaSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Resolver\EnhancedLink
+        tags:
+            - { name: netgen.ibexa_site_api.plugins.field_type.relation_resolver, identifier: ngenhancedlink }
+
     # Resolver for 'ngsurrogate' field type
     netgen.ibexa_site_api.plugins.field_type.relation_resolver.ngsurrogate:
         class: Netgen\IbexaSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Resolver\Surrogate
