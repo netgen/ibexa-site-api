@@ -56,7 +56,7 @@ final class ForwardFields extends Content
             $idsGrouped[] = $relationResolver->getRelationIds($field);
         }
 
-        /** @var array $relatedContentIds */
+        /** @var int[] $relatedContentIds */
         $relatedContentIds = array_merge(...$idsGrouped);
 
         if (empty($relatedContentIds)) {
