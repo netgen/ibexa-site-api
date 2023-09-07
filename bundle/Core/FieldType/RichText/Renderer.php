@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\IbexaSiteApiBundle\Core\FieldType\RichText;
 
+use Ibexa\Contracts\Core\Repository\PermissionResolver;
 use Ibexa\Contracts\Core\Repository\Repository;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\FieldTypeRichText\RichText\Renderer as CoreRenderer;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Twig\Environment;
 
 use function sprintf;
@@ -17,9 +17,9 @@ class Renderer extends CoreRenderer
 {
     public function __construct(
         Repository $repository,
-        AuthorizationCheckerInterface $authorizationChecker,
         ConfigResolverInterface $configResolver,
-        Environment $twig,
+        Environment $templateEngine,
+        PermissionResolver $permissionResolver,
         string $tagConfigurationNamespace,
         string $styleConfigurationNamespace,
         string $embedConfigurationNamespace,
@@ -30,9 +30,9 @@ class Renderer extends CoreRenderer
     ) {
         parent::__construct(
             $repository,
-            $authorizationChecker,
             $configResolver,
-            $twig,
+            $templateEngine,
+            $permissionResolver,
             $tagConfigurationNamespace,
             $styleConfigurationNamespace,
             $embedConfigurationNamespace,

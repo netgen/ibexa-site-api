@@ -8,9 +8,9 @@ services:
         decorates: Ibexa\FieldTypeRichText\RichText\Renderer
         arguments:
             - '@ibexa.api.repository'
-            - '@security.authorization_checker'
             - '@ibexa.config.resolver'
             - '@twig'
+            - '@Ibexa\Contracts\Core\Repository\PermissionResolver'
             - '%ibexa.field_type.richtext.tag.namespace%'
             - '%ibexa.field_type.richtext.style.namespace%'
             - '%ibexa.field_type.richtext.embed.namespace%'
