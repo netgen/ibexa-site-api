@@ -703,12 +703,12 @@ a Pagerfanta instance.
 +----------------------------------------+------------------------------------------------------------------------------------+
 | **Example in PHP**                     | .. code-block:: php                                                                |
 |                                        |                                                                                    |
-|                                        |     $children = $content->filterChildren(['articles'], 10, 2);                     |
+|                                        |     $children = $location->filterChildren(['articles'], 10, 2);                    |
 |                                        |                                                                                    |
 +----------------------------------------+------------------------------------------------------------------------------------+
 | **Example in Twig**                    | .. code-block:: twig                                                               |
 |                                        |                                                                                    |
-|                                        |     {% set relation = content.filterChildren(                                      |
+|                                        |     {% set relation = location.filterChildren(                                     |
 |                                        |         ['articles'],                                                              |
 |                                        |         10,                                                                        |
 |                                        |         2                                                                          |
