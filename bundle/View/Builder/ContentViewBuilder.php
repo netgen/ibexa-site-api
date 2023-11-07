@@ -59,7 +59,7 @@ class ContentViewBuilder implements ViewBuilder
         }
 
         if (isset($parameters['locationId'])) {
-            $location = $this->loadLocation($parameters['locationId']);
+            $location = $this->loadLocation((int) $parameters['locationId']);
         } elseif (isset($parameters['location'])) {
             $location = $parameters['location'];
             if ($location instanceof APILocation) {
@@ -76,7 +76,7 @@ class ContentViewBuilder implements ViewBuilder
             }
         } else {
             if (isset($parameters['contentId'])) {
-                $contentId = $parameters['contentId'];
+                $contentId = (int) $parameters['contentId'];
             } elseif (isset($location)) {
                 $contentId = $location->contentInfo->id;
             } else {
