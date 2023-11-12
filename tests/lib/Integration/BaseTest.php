@@ -144,22 +144,6 @@ abstract class BaseTest extends APIBaseTest
         } catch (PropertyNotFoundException) {
             // Do nothing
         }
-
-        self::assertSame(
-            [
-                'id' => $content->id,
-                'mainLocationId' => $content->mainLocationId,
-                'name' => $content->name,
-                'languageCode' => $content->languageCode,
-                'isVisible' => $content->isVisible,
-                'contentInfo' => $content->contentInfo,
-                'fields' => $content->fields,
-                'mainLocation' => '[An instance of Netgen\IbexaSiteApi\API\Values\Location]',
-                'innerContent' => '[An instance of Ibexa\Contracts\Core\Repository\Values\Content\Content]',
-                'innerVersionInfo' => '[An instance of Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo]',
-            ],
-            $content->__debugInfo(),
-        );
     }
 
     protected function assertContentInfo(APIContentInfo $contentInfo, array $data): void
@@ -203,34 +187,6 @@ abstract class BaseTest extends APIBaseTest
         } catch (PropertyNotFoundException) {
             // Do nothing
         }
-
-        self::assertSame(
-            [
-                'id' => $contentInfo->id,
-                'contentTypeId' => $contentInfo->contentTypeId,
-                'sectionId' => $contentInfo->sectionId,
-                'currentVersionNo' => $contentInfo->currentVersionNo,
-                'published' => $contentInfo->published,
-                'isHidden' => $contentInfo->isHidden,
-                'isVisible' => !$contentInfo->isHidden,
-                'ownerId' => $contentInfo->ownerId,
-                'modificationDate' => $contentInfo->modificationDate,
-                'publishedDate' => $contentInfo->publishedDate,
-                'alwaysAvailable' => $contentInfo->alwaysAvailable,
-                'remoteId' => $contentInfo->remoteId,
-                'mainLanguageCode' => $contentInfo->mainLanguageCode,
-                'mainLocationId' => $contentInfo->mainLocationId,
-                'name' => $contentInfo->name,
-                'languageCode' => $contentInfo->languageCode,
-                'contentTypeIdentifier' => $contentInfo->contentTypeIdentifier,
-                'contentTypeName' => $contentInfo->contentTypeName,
-                'contentTypeDescription' => $contentInfo->contentTypeDescription,
-                'innerContentInfo' => '[An instance of Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo]',
-                'innerContentType' => '[An instance of Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType]',
-                'mainLocation' => '[An instance of Netgen\IbexaSiteApi\API\Values\Location]',
-            ],
-            $contentInfo->__debugInfo(),
-        );
     }
 
     protected function assertFields(Content $content, array $data): void
@@ -300,25 +256,6 @@ abstract class BaseTest extends APIBaseTest
         } catch (PropertyNotFoundException) {
             // Do nothing
         }
-
-        self::assertSame(
-            [
-                'id' => $field->id,
-                'fieldDefIdentifier' => $field->fieldDefIdentifier,
-                'value' => $field->value,
-                'languageCode' => $field->languageCode,
-                'fieldTypeIdentifier' => $field->fieldTypeIdentifier,
-                'name' => $field->name,
-                'description' => $field->description,
-                'content' => '[An instance of Netgen\IbexaSiteApi\API\Values\Content]',
-                'contentId' => $field->content->id,
-                'isEmpty' => $field->isEmpty(),
-                'isSurrogate' => $field->isSurrogate(),
-                'innerField' => '[An instance of Ibexa\Contracts\Core\Repository\Values\Content\Field]',
-                'innerFieldDefinition' => $field->innerFieldDefinition,
-            ],
-            $field->__debugInfo(),
-        );
     }
 
     protected function assertLocation(Location $location, array $data): void
@@ -373,30 +310,5 @@ abstract class BaseTest extends APIBaseTest
         } catch (PropertyNotFoundException) {
             // Do nothing
         }
-
-        self::assertSame(
-            [
-                'id' => $location->id,
-                'status' => $location->status,
-                'priority' => $location->priority,
-                'hidden' => $location->hidden,
-                'invisible' => $location->invisible,
-                'explicitlyHidden' => $location->explicitlyHidden,
-                'isVisible' => $location->isVisible,
-                'remoteId' => $location->remoteId,
-                'parentLocationId' => $location->parentLocationId,
-                'pathString' => $location->pathString,
-                'path' => $location->path,
-                'depth' => $location->depth,
-                'sortField' => $location->sortField,
-                'sortOrder' => $location->sortOrder,
-                'contentId' => $location->contentId,
-                'innerLocation' => '[An instance of Ibexa\Contracts\Core\Repository\Values\Content\Location]',
-                'contentInfo' => $location->contentInfo,
-                'parent' => '[An instance of Netgen\IbexaSiteApi\API\Values\Location]',
-                'content' => '[An instance of Netgen\IbexaSiteApi\API\Values\Content]',
-            ],
-            $location->__debugInfo(),
-        );
     }
 }

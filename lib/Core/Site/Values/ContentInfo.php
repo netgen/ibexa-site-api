@@ -80,34 +80,6 @@ final class ContentInfo extends APIContentInfo
         return parent::__isset($property);
     }
 
-    public function __debugInfo(): array
-    {
-        return [
-            'id' => $this->innerContentInfo->id,
-            'contentTypeId' => $this->innerContentInfo->contentTypeId,
-            'sectionId' => $this->innerContentInfo->sectionId,
-            'currentVersionNo' => $this->innerContentInfo->currentVersionNo,
-            'published' => $this->innerContentInfo->published,
-            'isHidden' => $this->innerContentInfo->isHidden,
-            'isVisible' => !$this->innerContentInfo->isHidden,
-            'ownerId' => $this->innerContentInfo->ownerId,
-            'modificationDate' => $this->innerContentInfo->modificationDate,
-            'publishedDate' => $this->innerContentInfo->publishedDate,
-            'alwaysAvailable' => $this->innerContentInfo->alwaysAvailable,
-            'remoteId' => $this->innerContentInfo->remoteId,
-            'mainLanguageCode' => $this->innerContentInfo->mainLanguageCode,
-            'mainLocationId' => $this->innerContentInfo->mainLocationId,
-            'name' => $this->name,
-            'languageCode' => $this->languageCode,
-            'contentTypeIdentifier' => $this->contentTypeIdentifier,
-            'contentTypeName' => $this->contentTypeName,
-            'contentTypeDescription' => $this->contentTypeDescription,
-            'innerContentInfo' => '[An instance of Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo]',
-            'innerContentType' => '[An instance of Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType]',
-            'mainLocation' => '[An instance of Netgen\IbexaSiteApi\API\Values\Location]',
-        ];
-    }
-
     private function getMainLocation(): ?APILocation
     {
         if ($this->internalMainLocation === null && $this->mainLocationId !== null) {

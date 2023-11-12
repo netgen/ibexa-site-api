@@ -301,16 +301,6 @@ final class FieldsTest extends TestCase
         self::assertTrue($field->isEmpty());
     }
 
-    public function testDebugInfo(): void
-    {
-        $fields = $this->getFieldsUnderTest(true);
-
-        self::assertSame(
-            (array) $fields->getIterator(),
-            $fields->__debugInfo(),
-        );
-    }
-
     protected function getFieldsUnderTest(bool $failOnMissingField): Fields
     {
         return new Fields(

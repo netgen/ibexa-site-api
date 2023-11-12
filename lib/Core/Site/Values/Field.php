@@ -35,25 +35,6 @@ final class Field extends APIField
         parent::__construct($properties);
     }
 
-    public function __debugInfo(): array
-    {
-        return [
-            'id' => $this->id,
-            'fieldDefIdentifier' => $this->fieldDefIdentifier,
-            'value' => $this->value,
-            'languageCode' => $this->languageCode,
-            'fieldTypeIdentifier' => $this->fieldTypeIdentifier,
-            'name' => $this->name,
-            'description' => $this->description,
-            'content' => '[An instance of Netgen\IbexaSiteApi\API\Values\Content]',
-            'contentId' => $this->content->id,
-            'isEmpty' => $this->isEmpty,
-            'isSurrogate' => $this->isSurrogate,
-            'innerField' => '[An instance of Ibexa\Contracts\Core\Repository\Values\Content\Field]',
-            'innerFieldDefinition' => $this->innerFieldDefinition,
-        ];
-    }
-
     public function isEmpty(): bool
     {
         return $this->isEmpty;
