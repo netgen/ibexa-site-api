@@ -49,13 +49,6 @@ final class Fields extends APIFields
     ) {
     }
 
-    public function __debugInfo(): array
-    {
-        $this->initialize();
-
-        return $this->fieldsByIdentifier;
-    }
-
     public function getIterator(): Traversable
     {
         $this->initialize();

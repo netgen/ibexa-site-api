@@ -120,31 +120,6 @@ final class Location extends APILocation
         return parent::__isset($property);
     }
 
-    public function __debugInfo(): array
-    {
-        return [
-            'id' => $this->innerLocation->id,
-            'status' => $this->innerLocation->status,
-            'priority' => $this->innerLocation->priority,
-            'hidden' => $this->innerLocation->hidden,
-            'invisible' => $this->innerLocation->invisible,
-            'explicitlyHidden' => $this->innerLocation->explicitlyHidden,
-            'isVisible' => !$this->innerLocation->hidden && !$this->innerLocation->invisible,
-            'remoteId' => $this->innerLocation->remoteId,
-            'parentLocationId' => $this->innerLocation->parentLocationId,
-            'pathString' => $this->innerLocation->pathString,
-            'path' => $this->innerLocation->path,
-            'depth' => $this->innerLocation->depth,
-            'sortField' => $this->innerLocation->sortField,
-            'sortOrder' => $this->innerLocation->sortOrder,
-            'contentId' => $this->innerLocation->contentId,
-            'innerLocation' => '[An instance of Ibexa\Contracts\Core\Repository\Values\Content\Location]',
-            'contentInfo' => $this->getContentInfo(),
-            'parent' => '[An instance of Netgen\IbexaSiteApi\API\Values\Location]',
-            'content' => '[An instance of Netgen\IbexaSiteApi\API\Values\Content]',
-        ];
-    }
-
     public function getChildren(int $limit = 25): array
     {
         return $this->filterChildren([], $limit)->getIterator()->getArrayCopy();

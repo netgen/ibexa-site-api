@@ -137,22 +137,6 @@ final class Content extends APIContent
         };
     }
 
-    public function __debugInfo(): array
-    {
-        return [
-            'id' => $this->id,
-            'mainLocationId' => $this->mainLocationId,
-            'name' => $this->name,
-            'languageCode' => $this->languageCode,
-            'isVisible' => $this->getContentInfo()->isVisible,
-            'contentInfo' => $this->getContentInfo(),
-            'fields' => $this->fields,
-            'mainLocation' => '[An instance of Netgen\IbexaSiteApi\API\Values\Location]',
-            'innerContent' => '[An instance of Ibexa\Contracts\Core\Repository\Values\Content\Content]',
-            'innerVersionInfo' => '[An instance of Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo]',
-        ];
-    }
-
     public function hasField(string $identifier): bool
     {
         return $this->fields->hasField($identifier);
