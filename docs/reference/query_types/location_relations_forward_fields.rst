@@ -43,7 +43,7 @@ paginate them by 10 per page using URL query parameter ``page``.
     ibexa:
         system:
             frontend_group:
-                ngcontent_view:
+                ng_content_view:
                     full:
                         blog_post:
                             template: '@ibexadesign/content/full/blog_post.html.twig'

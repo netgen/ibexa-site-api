@@ -57,7 +57,7 @@ by their publication date and paginate them by 10 per page using URL query param
     ibexa:
         system:
             frontend_group:
-                ngcontent_view:
+                ng_content_view:
                     full:
                         product:
                             template: '@ibexadesign/content/full/product.html.twig'

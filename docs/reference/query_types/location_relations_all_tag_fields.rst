@@ -52,7 +52,7 @@ page using URL query parameter ``page``:
     ibexa:
         system:
             frontend_group:
-                ngcontent_view:
+                ng_content_view:
                     full:
                         product:
                             template: '@ibexadesign/content/full/product.html.twig'

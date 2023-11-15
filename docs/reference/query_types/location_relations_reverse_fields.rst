@@ -43,7 +43,7 @@ sort them by title and paginate them by 10 per page using URL query parameter ``
     ibexa:
         system:
             frontend_group:
-                ngcontent_view:
+                ng_content_view:
                     full:
                         author:
                             template: '@ibexadesign/content/full/author.html.twig'
