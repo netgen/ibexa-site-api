@@ -31,3 +31,4 @@ services:
             - '@Ibexa\Core\QueryType\ArrayQueryTypeRegistry'
             - '@netgen.ibexa_site_api.filter_service'
             - '@netgen.ibexa_site_api.find_service'
+            - '@ibexa.api.repository'

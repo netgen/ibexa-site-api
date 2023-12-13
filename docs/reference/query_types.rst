@@ -509,18 +509,18 @@ Values that will be provided for evaluation in your custom expression function i
 Templating
 --------------------------------------------------------------------------------
 
-Configured queries will be available in Twig templates, through ``ng_query`` or ``ng_raw_query``.
+Configured queries will be available in Twig templates, through ``ng_query``, ``ng_sudo_query``, ``ng_raw_query`` or ``ng_sudo_raw_query``.
 The difference it that the former will return a ``Pagerfanta`` instance, while the latter will
-return an instance of ``SearchResult``. That also means ``ng_query`` will use ``max_per_page`` and
-``page`` parameters to configure the pager, while ``ng_raw_query`` ignores them and executes the
+return an instance of ``SearchResult``. That also means ``ng_query`` and ``ng_sudo_query`` will use ``max_per_page`` and
+``page`` parameters to configure the pager, while ``ng_raw_query`` and ``ng_sudo_raw_query`` ignore them and execute the
 configured query directly.
 
 .. note::
 
-    Queries are only executed as you access them through ``ng_query`` or ``ng_raw_query``. If you
-    don't call those functions on any of the configured queries, none of them will be executed.
+    Queries are only executed as you access them through ``ng_query``, ``ng_sudo_query``, ``ng_raw_query`` or ``ng_sudo_raw_query``.
+    If you don't call those functions on any of the configured queries, none of them will be executed.
 
-Both ``ng_query`` and ``ng_raw_query`` accept a single argument. This is the identifier of the
+``ng_query``, ``ng_sudo_query``, ``ng_raw_query`` and ``ng_sudo_raw_query`` accept a single argument. This is the identifier of the
 query, which is the key under the ``queries`` section, under which the query is configured.
 
 Example usage of ``ng_query``:
@@ -537,6 +537,20 @@ Example usage of ``ng_query``:
 
     {{ pagerfanta( images, 'twitter_bootstrap' ) }}
 
+Example usage of ``ng_sudo_query``:
+
+.. code-block:: twig
+
+    {% set users = ng_sudo_query( 'users' ) %}
+
+    <p>Total users: {{ users.nbResults }}</p>
+
+    {% for user in users %}
+        <p>{{ user.content.name }}</p>
+    {% endfor %}
+
+    {{ pagerfanta( users, 'twitter_bootstrap' ) }}
+
 Example usage of ``ng_raw_query``:
 
 .. code-block:: twig
@@ -547,6 +561,16 @@ Example usage of ``ng_raw_query``:
         <p>{{ categoryHit.valueObject.content.name }}: {{ categoryHit.valueObject.score }}</p>
     {% endfor %}
 
+Example usage of ``ng_sudo_raw_query``:
+
+.. code-block:: twig
+
+    {% set searchResult = ng_sudo_raw_query( 'users' ) %}
+
+    {% for userHit in searchResult.searchHits %}
+        <p>{{ userHit.valueObject.content.name }}: {{ userHit.valueObject.score }}</p>
+    {% endfor %}
+
 .. note::
 
     You can't execute named queries. They are only available for referencing in concrete query
@@ -554,6 +578,6 @@ Example usage of ``ng_raw_query``:
 
 .. hint::
 
-    Execution of queries is **not cached**. If you call ``ng_query`` or ``ng_raw_query`` on the same
-    query multiple times, the same query will be executed multiple times. If you need to access the
+    Execution of queries is **not cached**. If you call ``ng_query``, ``ng_sudo_query``, ``ng_raw_query`` or ``ng_sudo_raw_query``
+    on the same query multiple times, the same query will be executed multiple times. If you need to access the
     query result multiple times, store it in a variable and access the variable instead.

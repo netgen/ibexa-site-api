@@ -214,6 +214,13 @@ final class Content extends APIContent
         );
     }
 
+    public function getSudoFieldRelation(string $fieldDefinitionIdentifier): ?APIContent
+    {
+        return $this->repository->sudo(
+            fn () => $this->getFieldRelation($fieldDefinitionIdentifier),
+        );
+    }
+
     public function getFieldRelations(string $fieldDefinitionIdentifier, int $limit = 25): array
     {
         return $this->site->getRelationService()->loadFieldRelations(
@@ -221,6 +228,13 @@ final class Content extends APIContent
             $fieldDefinitionIdentifier,
             [],
             $limit,
+        );
+    }
+
+    public function getSudoFieldRelations(string $fieldDefinitionIdentifier, int $limit = 25): array
+    {
+        return $this->repository->sudo(
+            fn () => $this->getFieldRelations($fieldDefinitionIdentifier, $limit),
         );
     }
 
@@ -245,11 +259,34 @@ final class Content extends APIContent
         return $pager;
     }
 
+    public function filterSudoFieldRelations(
+        string $fieldDefinitionIdentifier,
+        array $contentTypeIdentifiers = [],
+        int $maxPerPage = 25,
+        int $currentPage = 1,
+    ): Pagerfanta {
+        return $this->repository->sudo(
+            fn () => $this->filterFieldRelations(
+                $fieldDefinitionIdentifier,
+                $contentTypeIdentifiers,
+                $maxPerPage,
+                $currentPage,
+            ),
+        );
+    }
+
     public function getFieldRelationLocation(string $fieldDefinitionIdentifier): ?APILocation
     {
         return $this->site->getRelationService()->loadFieldRelationLocation(
             $this,
             $fieldDefinitionIdentifier,
+        );
+    }
+
+    public function getSudoFieldRelationLocation(string $fieldDefinitionIdentifier): ?APILocation
+    {
+        return $this->repository->sudo(
+            fn () => $this->getFieldRelationLocation($fieldDefinitionIdentifier),
         );
     }
 
@@ -260,6 +297,13 @@ final class Content extends APIContent
             $fieldDefinitionIdentifier,
             [],
             $limit,
+        );
+    }
+
+    public function getSudoFieldRelationLocations(string $fieldDefinitionIdentifier, int $limit = 25): array
+    {
+        return $this->repository->sudo(
+            fn () => $this->getFieldRelationLocations($fieldDefinitionIdentifier, $limit),
         );
     }
 
@@ -282,6 +326,22 @@ final class Content extends APIContent
         $pager->setCurrentPage($currentPage);
 
         return $pager;
+    }
+
+    public function filterSudoFieldRelationLocations(
+        string $fieldDefinitionIdentifier,
+        array $contentTypeIdentifiers = [],
+        int $maxPerPage = 25,
+        int $currentPage = 1,
+    ): Pagerfanta {
+        return $this->repository->sudo(
+            fn () => $this->filterFieldRelationLocations(
+                $fieldDefinitionIdentifier,
+                $contentTypeIdentifiers,
+                $maxPerPage,
+                $currentPage,
+            ),
+        );
     }
 
     private function getMainLocation(): ?APILocation

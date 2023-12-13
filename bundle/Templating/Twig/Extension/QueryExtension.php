@@ -25,8 +25,18 @@ class QueryExtension extends AbstractExtension
                 ['needs_context' => true],
             ),
             new TwigFunction(
+                'ng_sudo_query',
+                [QueryRuntime::class, 'sudoExecuteQuery'],
+                ['needs_context' => true],
+            ),
+            new TwigFunction(
                 'ng_raw_query',
                 [QueryRuntime::class, 'executeRawQuery'],
+                ['needs_context' => true],
+            ),
+            new TwigFunction(
+                'ng_sudo_raw_query',
+                [QueryRuntime::class, 'sudoExecuteRawQuery'],
                 ['needs_context' => true],
             ),
         ];
