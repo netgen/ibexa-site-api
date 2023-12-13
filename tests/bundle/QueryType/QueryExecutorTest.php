@@ -9,12 +9,14 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Query;
 use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchResult;
 use Ibexa\Core\QueryType\QueryType;
 use Ibexa\Core\QueryType\QueryTypeRegistry;
+use Ibexa\Contracts\Core\Repository\Repository;
 use Netgen\Bundle\IbexaSiteApiBundle\QueryType\QueryDefinition;
 use Netgen\Bundle\IbexaSiteApiBundle\QueryType\QueryExecutor;
 use Netgen\IbexaSiteApi\API\FilterService;
 use Netgen\IbexaSiteApi\API\FindService;
 use Netgen\IbexaSiteApi\Core\Site\Pagination\Pagerfanta\FilterAdapter;
 use Netgen\IbexaSiteApi\Core\Site\Pagination\Pagerfanta\FindAdapter;
+use Netgen\IbexaSiteApi\Core\Site\Pagination\Pagerfanta\SudoFilterAdapter;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -162,12 +164,48 @@ final class QueryExecutorTest extends TestCase
         self::assertTrue($result->getNormalizeOutOfRangePages());
     }
 
+    public function testSudoExecuteRaw(): void
+    {
+        $executor = $this->getQueryExecutorUnderTest();
+        $result = $executor->sudoExecuteRaw(
+            new QueryDefinition([
+                'name' => 'content_query_type',
+                'parameters' => ['parameters'],
+                'useFilter' => true,
+                'maxPerPage' => 20,
+                'page' => 2,
+            ]),
+        );
+
+        self::assertEquals($this->getFilterContentResult(), $result);
+    }
+
+    public function testSudoExecute(): void
+    {
+        $executor = $this->getQueryExecutorUnderTest();
+        $result = $executor->sudoExecute(
+            new QueryDefinition([
+                'name' => 'content_query_type',
+                'parameters' => ['parameters'],
+                'useFilter' => true,
+                'maxPerPage' => 20,
+                'page' => 2,
+            ]),
+        );
+
+        self::assertInstanceOf(SudoFilterAdapter::class, $result->getAdapter());
+        self::assertSame(20, $result->getMaxPerPage());
+        self::assertSame(2, $result->getCurrentPage());
+        self::assertTrue($result->getNormalizeOutOfRangePages());
+    }
+
     protected function getQueryExecutorUnderTest(): QueryExecutor
     {
         return new QueryExecutor(
             $this->getQueryTypeRegistryMock(),
             $this->getFilterServiceMock(),
             $this->getFindServiceMock(),
+            $this->getRepositoryMock(),
         );
     }
 
@@ -261,5 +299,18 @@ final class QueryExecutorTest extends TestCase
             ->willReturn(new LocationQuery());
 
         return $mock;
+    }
+
+    protected function getRepositoryMock(): Repository
+    {
+        $repositoryMock = $this->getMockBuilder(Repository::class)->getMock();
+        $repositoryMock
+            ->method('sudo')
+            ->with(self::anything())
+            ->willReturnCallback(
+                fn (callable $callback) => $callback($repositoryMock),
+            );
+
+        return $repositoryMock;
     }
 }

@@ -152,8 +152,8 @@ Site API provides four Twig functions for content rendering:
     <img src="{{ ng_image_alias( content.fields.image, 'large' ).uri }}" />
 
 ``ng_render_field`` and ``ng_image_alias`` are shown in more detail in the examples below. There are
-two other Twig functions, ``ng_query`` and ``ng_raw_query``. These are used with Query Types and are
-documented separately on :doc:`Query Types reference</reference/query_types>` documentation page.
+four other Twig functions, ``ng_query``, ``ng_sudo_query``, ``ng_raw_query`` and ``ng_sudo_raw_query``. These are used
+with Query Types and are documented separately on :doc:`Query Types reference</reference/query_types>` documentation page.
 
 Basic usage
 -----------

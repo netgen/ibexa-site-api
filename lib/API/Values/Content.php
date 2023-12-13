@@ -92,11 +92,23 @@ abstract class Content extends ValueObject
     abstract public function getFieldRelation(string $fieldDefinitionIdentifier): ?self;
 
     /**
+     * Return single related Content from $fieldDefinitionIdentifier field using repository sudo.
+     */
+    abstract public function getSudoFieldRelation(string $fieldDefinitionIdentifier): ?self;
+
+    /**
      * Return all related Content from $fieldDefinitionIdentifier.
      *
      * @return \Netgen\IbexaSiteApi\API\Values\Content[]
      */
     abstract public function getFieldRelations(string $fieldDefinitionIdentifier, int $limit = 25): array;
+
+    /**
+     * Return all related Content from $fieldDefinitionIdentifier using repository sudo.
+     *
+     * @return \Netgen\IbexaSiteApi\API\Values\Content[]
+     */
+    abstract public function getSudoFieldRelations(string $fieldDefinitionIdentifier, int $limit = 25): array;
 
     /**
      * Return related Content from $fieldDefinitionIdentifier field,
@@ -114,9 +126,29 @@ abstract class Content extends ValueObject
     ): Pagerfanta;
 
     /**
+     * Return related Content from $fieldDefinitionIdentifier field using repository sudo,
+     * optionally limited by a list of $contentTypeIdentifiers.
+     *
+     * @param string[] $contentTypeIdentifiers
+     *
+     * @return \Pagerfanta\Pagerfanta Pagerfanta instance iterating over Site API Content items
+     */
+    abstract public function filterSudoFieldRelations(
+        string $fieldDefinitionIdentifier,
+        array $contentTypeIdentifiers = [],
+        int $maxPerPage = 25,
+        int $currentPage = 1,
+    ): Pagerfanta;
+
+    /**
      * Return single related Location from $fieldDefinitionIdentifier field.
      */
     abstract public function getFieldRelationLocation(string $fieldDefinitionIdentifier): ?Location;
+
+    /**
+     * Return single related Location from $fieldDefinitionIdentifier field using repository sudo.
+     */
+    abstract public function getSudoFieldRelationLocation(string $fieldDefinitionIdentifier): ?Location;
 
     /**
      * Return all related Locations from $fieldDefinitionIdentifier.
@@ -124,6 +156,13 @@ abstract class Content extends ValueObject
      * @return \Netgen\IbexaSiteApi\API\Values\Location[]
      */
     abstract public function getFieldRelationLocations(string $fieldDefinitionIdentifier, int $limit = 25): array;
+
+    /**
+     * Return all related Locations from $fieldDefinitionIdentifier using repository sudo.
+     *
+     * @return \Netgen\IbexaSiteApi\API\Values\Location[]
+     */
+    abstract public function getSudoFieldRelationLocations(string $fieldDefinitionIdentifier, int $limit = 25): array;
 
     /**
      * Return related Locations from $fieldDefinitionIdentifier field,
@@ -134,6 +173,21 @@ abstract class Content extends ValueObject
      * @return \Pagerfanta\Pagerfanta Pagerfanta instance iterating over Site API Locations
      */
     abstract public function filterFieldRelationLocations(
+        string $fieldDefinitionIdentifier,
+        array $contentTypeIdentifiers = [],
+        int $maxPerPage = 25,
+        int $currentPage = 1,
+    ): Pagerfanta;
+
+    /**
+     * Return related Locations from $fieldDefinitionIdentifier field using repository sudo,
+     * optionally limited by a list of $contentTypeIdentifiers.
+     *
+     * @param string[] $contentTypeIdentifiers
+     *
+     * @return \Pagerfanta\Pagerfanta Pagerfanta instance iterating over Site API Locations
+     */
+    abstract public function filterSudoFieldRelationLocations(
         string $fieldDefinitionIdentifier,
         array $contentTypeIdentifiers = [],
         int $maxPerPage = 25,
