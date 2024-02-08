@@ -434,6 +434,72 @@ Used to filter field relation Locations from the `Field`_ with the given ``$iden
 |                                        |                                                                                    |
 +----------------------------------------+------------------------------------------------------------------------------------+
 
+``getPath``
+...........
+
+Return absolute URL path of Content's main Location.
+
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Parameters**                         | ``array $parameters = []``                                                         |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Returns**                            | ``string``                                                                         |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Example return value**               | ``/netgen-stack-for-ibexa-ez-platform``                                            |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Example in PHP**                     | .. code-block:: php                                                                |
+|                                        |                                                                                    |
+|                                        |     $absolutePath = $content->getPath();                                           |
+|                                        |     $absolutePath = $content->getPath([                                            |
+|                                        |         'siteaccess' => 'adminui',                                                 |
+|                                        |         'page' => 1,                                                               |
+|                                        |         '_fragment' => 'frag'                                                      |
+|                                        |     ]);                                                                            |
+|                                        |                                                                                    |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Example in Twig**                    | .. code-block:: twig                                                               |
+|                                        |                                                                                    |
+|                                        |     {% set absolute_path = content.path() %}                                       |
+|                                        |     {% set absolute_path = content.path({                                          |
+|                                        |         siteaccess: 'adminui',                                                     |
+|                                        |         page: 1,                                                                   |
+|                                        |         _fragment: 'frag'                                                          |
+|                                        |     }) %}                                                                          |
+|                                        |                                                                                    |
++----------------------------------------+------------------------------------------------------------------------------------+
+
+``getUrl``
+..........
+
+Return absolute URL of Content's main Location.
+
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Parameters**                         | ``array $parameters = []``                                                         |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Returns**                            | ``string``                                                                         |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Example return value**               | ``https://netgen.io/netgen-stack-for-ibexa-ez-platform``                           |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Example in PHP**                     | .. code-block:: php                                                                |
+|                                        |                                                                                    |
+|                                        |     $absoluteUrl = $content->getUrl();                                             |
+|                                        |     $absoluteUrl = $content->getUrl([                                              |
+|                                        |         'siteaccess' => 'adminui',                                                 |
+|                                        |         'page' => 1,                                                               |
+|                                        |         '_fragment' => 'frag'                                                      |
+|                                        |     ]);                                                                            |
+|                                        |                                                                                    |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Example in Twig**                    | .. code-block:: twig                                                               |
+|                                        |                                                                                    |
+|                                        |     {% set absolute_url = content.url() %}                                         |
+|                                        |     {% set absolute_url = content.url({                                            |
+|                                        |         siteaccess: 'adminui',                                                     |
+|                                        |         page: 1,                                                                   |
+|                                        |         _fragment: 'frag'                                                          |
+|                                        |     }) %}                                                                          |
+|                                        |                                                                                    |
++----------------------------------------+------------------------------------------------------------------------------------+
+
 Properties
 ~~~~~~~~~~
 
@@ -472,6 +538,10 @@ Properties
 | ``$modifier``            | `Content`_          | Optional modifier user's Content object                                     |
 +--------------------------+---------------------+-----------------------------------------------------------------------------+
 | ``$innerModifierUser``   | ``User``            | Optional modifier user's Repository User object                             |
++--------------------------+---------------------+-----------------------------------------------------------------------------+
+| ``$path``                | `Path`_             | Content's main Location absolute URL path                                   |
++--------------------------+---------------------+-----------------------------------------------------------------------------+
+| ``$url``                 | `Url`_              | Content's main Location absolute URL                                        |
 +--------------------------+---------------------+-----------------------------------------------------------------------------+
 
 ``ContentInfo``
@@ -803,6 +873,72 @@ engines.
 |                                        |                                                                                    |
 +----------------------------------------+------------------------------------------------------------------------------------+
 
+``getPath``
+...........
+
+Return Location's absolute URL path.
+
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Parameters**                         | ``array $parameters = []``                                                         |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Returns**                            | ``string``                                                                         |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Example return value**               | ``/netgen-stack-for-ibexa-ez-platform``                                            |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Example in PHP**                     | .. code-block:: php                                                                |
+|                                        |                                                                                    |
+|                                        |     $absolutePath = $location->getPath();                                          |
+|                                        |     $absolutePath = $location->getPath([                                           |
+|                                        |         'siteaccess' => 'adminui',                                                 |
+|                                        |         'page' => 1,                                                               |
+|                                        |         '_fragment' => 'frag'                                                      |
+|                                        |     ]);                                                                            |
+|                                        |                                                                                    |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Example in Twig**                    | .. code-block:: twig                                                               |
+|                                        |                                                                                    |
+|                                        |     {% set absolute_path = location.path() %}                                      |
+|                                        |     {% set absolute_path = location.path({                                         |
+|                                        |         siteaccess: 'adminui',                                                     |
+|                                        |         page: 1,                                                                   |
+|                                        |         _fragment: 'frag'                                                          |
+|                                        |     }) %}                                                                          |
+|                                        |                                                                                    |
++----------------------------------------+------------------------------------------------------------------------------------+
+
+``getUrl``
+..........
+
+Return Location's absolute URL.
+
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Parameters**                         | ``array $parameters = []``                                                         |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Returns**                            | ``string``                                                                         |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Example return value**               | ``https://netgen.io/netgen-stack-for-ibexa-ez-platform``                           |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Example in PHP**                     | .. code-block:: php                                                                |
+|                                        |                                                                                    |
+|                                        |     $absoluteUrl = $location->getUrl();                                            |
+|                                        |     $absoluteUrl = $location->getUrl([                                             |
+|                                        |         'siteaccess' => 'adminui',                                                 |
+|                                        |         'page' => 1,                                                               |
+|                                        |         '_fragment' => 'frag'                                                      |
+|                                        |     ]);                                                                            |
+|                                        |                                                                                    |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Example in Twig**                    | .. code-block:: twig                                                               |
+|                                        |                                                                                    |
+|                                        |     {% set absolute_url = location.url() %}                                        |
+|                                        |     {% set absolute_url = location.url({                                           |
+|                                        |         siteaccess: 'adminui',                                                     |
+|                                        |         page: 1,                                                                   |
+|                                        |         _fragment: 'frag'                                                          |
+|                                        |     }) %}                                                                          |
+|                                        |                                                                                    |
++----------------------------------------+------------------------------------------------------------------------------------+
+
 Properties
 ~~~~~~~~~~
 
@@ -852,3 +988,245 @@ Properties
 +-----------------------+----------------+------------------------------------------------------------------------------------+
 | ``$content``          | `Content`_     | Content object (lazy loaded)                                                       |
 +-----------------------+----------------+------------------------------------------------------------------------------------+
+| ``$path``             | `Path`_        | Location's absolute URL path                                                       |
++-----------------------+----------------+------------------------------------------------------------------------------------+
+| ``$url``              | `Url`_         | Location's absolute URL                                                            |
++-----------------------+----------------+------------------------------------------------------------------------------------+
+
+.. _path_object:
+
+``Path``
+--------
+
+Site ``Path`` represents `Content`_ or  `Location`_ URL path.
+
+.. note::
+
+    ``Path`` object can be casted to string, in which case it will return the absolute URL path.
+
+Methods
+~~~~~~~
+
+.. contents::
+    :depth: 1
+    :local:
+
+``getAbsolute``
+...............
+
+Return absolute URL path.
+
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Parameters**                         | ``array $parameters = []``                                                         |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Returns**                            | ``string``                                                                         |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Example return value**               | ``/netgen-stack-for-ibexa-ez-platform``                                            |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Example in PHP**                     | .. code-block:: php                                                                |
+|                                        |                                                                                    |
+|                                        |     $absolutePath = (string) $content->path;                                       |
+|                                        |     $absolutePath = $content->path->getAbsolute();                                 |
+|                                        |     $absolutePath = $content->path->getAbsolute([                                  |
+|                                        |         'siteaccess' => 'adminui',                                                 |
+|                                        |         'page' => 1,                                                               |
+|                                        |         '_fragment' => 'frag'                                                      |
+|                                        |     ]);                                                                            |
+|                                        |                                                                                    |
+|                                        |     $absolutePath = (string) $location->path;                                      |
+|                                        |     $absolutePath = $location->path->getAbsolute();                                |
+|                                        |     $absolutePath = $location->path->getAbsolute([                                 |
+|                                        |         'siteaccess' => 'adminui',                                                 |
+|                                        |         'page' => 1,                                                               |
+|                                        |         '_fragment' => 'frag'                                                      |
+|                                        |     ]);                                                                            |
+|                                        |                                                                                    |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Example in Twig**                    | .. code-block:: twig                                                               |
+|                                        |                                                                                    |
+|                                        |     {% set absolute_path = content.path.absolute %}                                |
+|                                        |     {% set absolute_path = content.path.absolute({                                 |
+|                                        |         siteaccess: 'adminui',                                                     |
+|                                        |         page: 1,                                                                   |
+|                                        |         _fragment: 'frag'                                                          |
+|                                        |     }) %}                                                                          |
+|                                        |                                                                                    |
+|                                        |     {% set absolute_path = location.path.absolute %}                               |
+|                                        |     {% set absolute_path = location.path.absolute({                                |
+|                                        |         siteaccess: 'adminui',                                                     |
+|                                        |         page: 1,                                                                   |
+|                                        |         _fragment: 'frag'                                                          |
+|                                        |     }) %}                                                                          |
+|                                        |                                                                                    |
++----------------------------------------+------------------------------------------------------------------------------------+
+
+``getNetwork``
+..............
+
+Return absolute URL path.
+
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Parameters**                         | ``array $parameters = []``                                                         |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Returns**                            | ``string``                                                                         |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Example return value**               | ``//netgen.io/netgen-stack-for-ibexa-ez-platform``                                 |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Example in PHP**                     | .. code-block:: php                                                                |
+|                                        |                                                                                    |
+|                                        |     $networkPath = $content->path->getNetwork();                                   |
+|                                        |     $networkPath = $content->path->getNetwork([                                    |
+|                                        |         'siteaccess' => 'adminui',                                                 |
+|                                        |         'page' => 1,                                                               |
+|                                        |         '_fragment' => 'frag'                                                      |
+|                                        |     ]);                                                                            |
+|                                        |                                                                                    |
+|                                        |     $networkPath = $location->path->getNetwork();                                  |
+|                                        |     $networkPath = $location->path->getNetwork([                                   |
+|                                        |         'siteaccess' => 'adminui',                                                 |
+|                                        |         'page' => 1,                                                               |
+|                                        |         '_fragment' => 'frag'                                                      |
+|                                        |     ]);                                                                            |
+|                                        |                                                                                    |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Example in Twig**                    | .. code-block:: twig                                                               |
+|                                        |                                                                                    |
+|                                        |     {% set network_path = content.path.network %}                                  |
+|                                        |     {% set network_path = content.path.network({                                   |
+|                                        |         siteaccess: 'adminui',                                                     |
+|                                        |         page: 1,                                                                   |
+|                                        |         _fragment: 'frag'                                                          |
+|                                        |     }) %}                                                                          |
+|                                        |                                                                                    |
+|                                        |     {% set network_path = location.path.network %}                                 |
+|                                        |     {% set network_path = location.path.network({                                  |
+|                                        |         siteaccess: 'adminui',                                                     |
+|                                        |         page: 1,                                                                   |
+|                                        |         _fragment: 'frag'                                                          |
+|                                        |     }) %}                                                                          |
+|                                        |                                                                                    |
++----------------------------------------+------------------------------------------------------------------------------------+
+
+``getRelative``
+...............
+
+Return absolute URL path.
+
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Parameters**                         | ``array $parameters = []``                                                         |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Returns**                            | ``string``                                                                         |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Example return value**               | ``../netgen-stack-for-ibexa-ez-platform``                                          |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Example in PHP**                     | .. code-block:: php                                                                |
+|                                        |                                                                                    |
+|                                        |     $relativePath = $content->path->getRelative();                                 |
+|                                        |     $relativePath = $content->path->getRelative([                                  |
+|                                        |         'siteaccess' => 'adminui',                                                 |
+|                                        |         'page' => 1,                                                               |
+|                                        |         '_fragment' => 'frag'                                                      |
+|                                        |     ]);                                                                            |
+|                                        |                                                                                    |
+|                                        |     $relativePath = $location->path->getRelative();                                |
+|                                        |     $relativePath = $location->path->getRelative([                                 |
+|                                        |         'siteaccess' => 'adminui',                                                 |
+|                                        |         'page' => 1,                                                               |
+|                                        |         '_fragment' => 'frag'                                                      |
+|                                        |     ]);                                                                            |
+|                                        |                                                                                    |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Example in Twig**                    | .. code-block:: twig                                                               |
+|                                        |                                                                                    |
+|                                        |     {% set relative_path = content.path.relative %}                                |
+|                                        |     {% set relative_path = content.path.relative({                                 |
+|                                        |         siteaccess: 'adminui',                                                     |
+|                                        |         page: 1,                                                                   |
+|                                        |         _fragment: 'frag'                                                          |
+|                                        |     }) %}                                                                          |
+|                                        |                                                                                    |
+|                                        |     {% set relative_path = location.path.relative %}                               |
+|                                        |     {% set relative_path = location.path.relative({                                |
+|                                        |         siteaccess: 'adminui',                                                     |
+|                                        |         page: 1,                                                                   |
+|                                        |         _fragment: 'frag'                                                          |
+|                                        |     }) %}                                                                          |
+|                                        |                                                                                    |
++----------------------------------------+------------------------------------------------------------------------------------+
+
+Properties
+~~~~~~~~~~
+
+Site ``Path`` has no publicly accessible properties.
+
+.. _url_object:
+
+``Url``
+-------
+
+Site ``Url`` represents `Content`_ or  `Location`_ URL.
+
+.. note::
+
+    ``Url`` object can be casted to string, in which case it will return the absolute URL.
+
+Methods
+~~~~~~~
+
+.. contents::
+    :depth: 1
+    :local:
+
+``get``
+.......
+
+Return absolute URL.
+
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Parameters**                         | ``array $parameters = []``                                                         |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Returns**                            | ``string``                                                                         |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Example return value**               | ``https://netgen.io/netgen-stack-for-ibexa-ez-platform``                           |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Example in PHP**                     | .. code-block:: php                                                                |
+|                                        |                                                                                    |
+|                                        |     $absoluteUrl = (string) $content->url;                                         |
+|                                        |     $absoluteUrl = $content->get();                                                |
+|                                        |     $absoluteUrl = $content->get([                                                 |
+|                                        |         'siteaccess' => 'adminui',                                                 |
+|                                        |         'page' => 1,                                                               |
+|                                        |         '_fragment' => 'frag'                                                      |
+|                                        |     ]);                                                                            |
+|                                        |                                                                                    |
+|                                        |     $absoluteUrl = (string) $location->url;                                        |
+|                                        |     $absoluteUrl = $location->get();                                               |
+|                                        |     $absoluteUrl = $location->get([                                                |
+|                                        |         'siteaccess' => 'adminui',                                                 |
+|                                        |         'page' => 1,                                                               |
+|                                        |         '_fragment' => 'frag'                                                      |
+|                                        |     ]);                                                                            |
+|                                        |                                                                                    |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Example in Twig**                    | .. code-block:: twig                                                               |
+|                                        |                                                                                    |
+|                                        |     {% set absolute_url = content.url %}                                           |
+|                                        |     {% set absolute_url = content.url({                                            |
+|                                        |         siteaccess: 'adminui',                                                     |
+|                                        |         page: 1,                                                                   |
+|                                        |         _fragment: 'frag'                                                          |
+|                                        |     }) %}                                                                          |
+|                                        |                                                                                    |
+|                                        |     {% set absolute_url = location.url %}                                          |
+|                                        |     {% set absolute_url = location.url({                                           |
+|                                        |         siteaccess: 'adminui',                                                     |
+|                                        |         page: 1,                                                                   |
+|                                        |         _fragment: 'frag'                                                          |
+|                                        |     }) %}                                                                          |
+|                                        |                                                                                    |
++----------------------------------------+------------------------------------------------------------------------------------+
+
+Properties
+~~~~~~~~~~
+
+Site ``Path`` has no publicly accessible properties.

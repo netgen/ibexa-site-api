@@ -176,19 +176,36 @@ Basic usage
 
 - **Linking to a Location**
 
-  Linking is done using the ``ibexa_path()`` Twig function, same as before.
+  Linking can be done using the ``ibexa_path()`` Twig function, same as before.
 
   .. code-block:: twig
 
     <a href="{{ ibexa_path(location) }}">{{ location.content.name }}</a>
 
+  :ref:`Location<location_object>` object also contains :ref:`Url<url_object>` and :ref:`Path<path_object>` objects,
+  which enable generating links without using helper functions
+
+  .. code-block:: twig
+
+    <a href="{{ location.url }}">{{ location.content.name }}</a>
+    <a href="{{ location.path }}">{{ location.content.name }}</a>
+
 - **Linking to a Content**
 
   Linking to Content will create a link to Content's main Location.
+  It can be done using the ``ibexa_path()`` Twig function, same as before.
 
   .. code-block:: twig
 
     <a href="{{ ibexa_path(content) }}">{{ content.name }}</a>
+
+  :ref:`Content<content_object>`  object also contains :ref:`Url<url_object>` and :ref:`Path<path_object>` objects,
+  which enable generating links without using helper functions
+
+  .. code-block:: twig
+
+    <a href="{{ content.url }}">{{ content.name }}</a>
+    <a href="{{ content.path }}">{{ content.name }}</a>
 
 Working with Content fields
 ---------------------------
