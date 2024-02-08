@@ -5,7 +5,7 @@
 <html lang="{{ app.request.locale|replace({'_': '-'}) }}">
 <head>
     <meta charset="utf-8">
-    <title>{{ content.name }}</title>
+    <title>{{ content.name ?? 'Netgen Site API' }}</title>
     <meta name="generator" content="Netgen Site API"/>
     {% if location is defined %}
         <link rel="canonical" href="{{ location.path }}" />
