@@ -14,6 +14,7 @@ use Ibexa\Core\Repository\Values\Content\Content;
 use Ibexa\Core\Repository\Values\Content\Content as RepoContent;
 use Ibexa\Core\Repository\Values\Content\VersionInfo;
 use Ibexa\Core\Repository\Values\ContentType\ContentType;
+use Netgen\IbexaSiteApi\API\Routing\UrlGenerator;
 use Netgen\IbexaSiteApi\API\Site;
 use Netgen\IbexaSiteApi\Core\Site\DomainObjectMapper;
 use PHPUnit\Framework\MockObject\MockBuilder;
@@ -33,6 +34,7 @@ trait ContentFieldsMockTrait
     /** @var \Netgen\IbexaSiteApi\Core\Site\DomainObjectMapper[] */
     protected array $domainObjectMapperForContentWithoutFields = [];
     protected CoreRepository|MockObject|null $repositoryMock = null;
+    protected UrlGenerator|MockObject|null $urlGeneratorMock = null;
     protected CoreRepository|MockObject|null $repositoryMockForContentWithoutFields = null;
     protected ?VersionInfo $repoVersionInfo = null;
     protected ?RepoContent $repoContent = null;
@@ -75,6 +77,7 @@ trait ContentFieldsMockTrait
         $this->domainObjectMapper[$failOnMissingField] = new DomainObjectMapper(
             $this->getSiteMock(),
             $this->getRepositoryMock(),
+            $this->getUrlGeneratorMock(),
             $failOnMissingField,
             new NullLogger(),
         );
@@ -91,6 +94,7 @@ trait ContentFieldsMockTrait
         $this->domainObjectMapperForContentWithoutFields[$failOnMissingField] = new DomainObjectMapper(
             $this->getSiteMock(),
             $this->getRepositoryMockForContentWithoutFields(),
+            $this->getUrlGeneratorMock(),
             $failOnMissingField,
             new NullLogger(),
         );
@@ -119,6 +123,19 @@ trait ContentFieldsMockTrait
         $this->repositoryMock->method('getFieldTypeService')->willReturn($fieldTypeServiceMock);
 
         return $this->repositoryMock;
+    }
+
+    protected function getUrlGeneratorMock(): UrlGenerator|MockObject
+    {
+        if ($this->urlGeneratorMock !== null) {
+            return $this->urlGeneratorMock;
+        }
+
+        $this->urlGeneratorMock = $this
+            ->getMockBuilder(UrlGenerator::class)
+            ->getMock();
+
+        return $this->urlGeneratorMock;
     }
 
     protected function getRepositoryMockForContentWithoutFields(): CoreRepository|MockObject
