@@ -21,12 +21,9 @@ use Netgen\IbexaSiteApi\Core\Site\Values\Location;
 final class Path
 {
     private UrlGenerator $urlGenerator;
-    private $object;
+    private Location|Content $object;
 
-    /**
-     * @param Content|Location $object
-     */
-    public function __construct(UrlGenerator $urlGenerator, $object)
+    public function __construct(UrlGenerator $urlGenerator, Location|Content $object)
     {
         $this->urlGenerator = $urlGenerator;
         $this->object = $object;
@@ -38,7 +35,7 @@ final class Path
     }
 
     /**
-     * @uses UrlGenerator::ABSOLUTE_PATH
+     * @uses \Netgen\IbexaSiteApi\API\Routing\UrlGenerator::ABSOLUTE_PATH
      */
     public function getAbsolute(array $parameters = []): string
     {
@@ -46,7 +43,7 @@ final class Path
     }
 
     /**
-     * @uses UrlGenerator::NETWORK_PATH
+     * @uses \Netgen\IbexaSiteApi\API\Routing\UrlGenerator::NETWORK_PATH
      */
     public function getNetwork(array $parameters = []): string
     {
@@ -58,7 +55,7 @@ final class Path
     }
 
     /**
-     * @uses UrlGenerator::RELATIVE_PATH
+     * @uses \Netgen\IbexaSiteApi\API\Routing\UrlGenerator::RELATIVE_PATH
      */
     public function getRelative(array $parameters = []): string
     {

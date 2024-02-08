@@ -19,12 +19,9 @@ use Netgen\IbexaSiteApi\Core\Site\Values\Location;
 final class Url
 {
     private UrlGenerator $urlGenerator;
-    private $object;
+    private Location|Content $object;
 
-    /**
-     * @param Content|Location $object
-     */
-    public function __construct(UrlGenerator $urlGenerator, $object)
+    public function __construct(UrlGenerator $urlGenerator, Location|Content $object)
     {
         $this->urlGenerator = $urlGenerator;
         $this->object = $object;
@@ -36,7 +33,7 @@ final class Url
     }
 
     /**
-     * @uses UrlGenerator::ABSOLUTE_URL
+     * @uses \Netgen\IbexaSiteApi\API\Routing\UrlGenerator::ABSOLUTE_URL
      */
     public function get(array $parameters = []): string
     {
