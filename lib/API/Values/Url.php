@@ -5,16 +5,13 @@ declare(strict_types=1);
 namespace Netgen\IbexaSiteApi\API\Values;
 
 use Netgen\IbexaSiteApi\API\Routing\UrlGenerator;
-use Netgen\IbexaSiteApi\Core\Site\Values\Content;
-use Netgen\IbexaSiteApi\Core\Site\Values\Location;
 
 /**
- * Site Url represents Location's URL.
- *
- * URL is generated for a Location, but both Content and Location can be passed to the generator.
- * When Content is passed, the URL will be generated for Content's main Location.
+ * Site Url represents Content or Location URL.
  *
  * @see \Netgen\IbexaSiteApi\API\Routing\UrlGenerator
+ * @see \Netgen\IbexaSiteApi\API\Values\Content
+ * @see \Netgen\IbexaSiteApi\API\Values\Location
  */
 final class Url
 {

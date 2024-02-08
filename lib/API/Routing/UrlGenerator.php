@@ -28,7 +28,7 @@ abstract class UrlGenerator
     public const ABSOLUTE_PATH = 1;
 
     /**
-     * Generates a relative path based on the current request path, e.g. "../layouts".
+     * Generates a relative path based on the current request path, e.g. "../netgen-stack-for-ibexa-ez-platform".
      */
     public const RELATIVE_PATH = 2;
 
