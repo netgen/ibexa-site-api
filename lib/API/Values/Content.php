@@ -37,7 +37,7 @@ use Pagerfanta\Pagerfanta;
 abstract class Content extends ValueObject
 {
     /**
-     * Returns if content has the field with the given field definition $identifier.
+     * Returns if Content has the field with the given field definition $identifier.
      */
     abstract public function hasField(string $identifier): bool;
 
@@ -47,7 +47,7 @@ abstract class Content extends ValueObject
     abstract public function getField(string $identifier): Field;
 
     /**
-     * Returns if content has the field with the given field $id.
+     * Returns if Content has the field with the given field $id.
      */
     abstract public function hasFieldById(int $id): bool;
 
@@ -195,4 +195,18 @@ abstract class Content extends ValueObject
         int $maxPerPage = 25,
         int $currentPage = 1,
     ): Pagerfanta;
+
+    /**
+     * Return absolute path for the Content.
+     *
+     * @see \Netgen\IbexaSiteApi\API\Routing\UrlGenerator::ABSOLUTE_PATH
+     */
+    abstract public function getPath(array $parameters = []): string;
+
+    /**
+     * Return absolute URL for the Content.
+     *
+     * @see \Netgen\IbexaSiteApi\API\Routing\UrlGenerator::ABSOLUTE_URL
+     */
+    abstract public function getUrl(array $parameters = []): string;
 }
