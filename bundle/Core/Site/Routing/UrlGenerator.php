@@ -37,8 +37,6 @@ class UrlGenerator extends APIUrlGenerator
             );
         }
 
-        $parameters = [RouteObjectInterface::ROUTE_OBJECT => $object] + $parameters;
-
         return $this->router->generate(
             RouteObjectInterface::OBJECT_BASED_ROUTE_NAME,
             [RouteObjectInterface::ROUTE_OBJECT => $object] + $parameters,
