@@ -272,7 +272,7 @@ abstract class BaseTest extends APIBaseTest
         self::assertSame($data['locationExplicitlyHidden'], $location->explicitlyHidden);
         self::assertSame($data['locationIsVisible'], $location->isVisible);
         self::assertSame($data['locationPathString'], $location->pathString);
-        self::assertEquals($data['locationPath'], $location->path);
+        self::assertEquals($data['locationPath'], $location->pathArray);
         self::assertSame($data['locationDepth'], $location->depth);
         self::assertSame($data['locationSortField'], $location->sortField);
         self::assertSame($data['locationSortOrder'], $location->sortOrder);
