@@ -12,7 +12,7 @@ use Symfony\Cmf\Component\Routing\RouteObjectInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-use function get_class;
+use function sprintf;
 
 /**
  * UrlAliasUrlGenerator generates an Ibexa URL alias for the given object.
@@ -33,7 +33,10 @@ class UrlGenerator extends APIUrlGenerator
     ): string {
         if (!$object instanceof Content && !$object instanceof Location) {
             throw new RuntimeException(
-                'Unsupported object, expected Site API Content or Location, got "' . get_class($object) . '"',
+                sprintf(
+                    'Unsupported object, expected Site API Content or Location, got "%s"',
+                    $object::class,
+                ),
             );
         }
 
@@ -61,7 +64,10 @@ class UrlGenerator extends APIUrlGenerator
         }
 
         throw new RuntimeException(
-            'Unsupported reference type "' . $referenceType . '"',
+            sprintf(
+                'Unsupported reference type "%d"',
+                $referenceType,
+            ),
         );
     }
 }
