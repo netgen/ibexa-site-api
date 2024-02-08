@@ -450,7 +450,7 @@ Return absolute URL path of Content's main Location.
 |                                        |                                                                                    |
 |                                        |     $absolutePath = $content->getPath();                                           |
 |                                        |     $absolutePath = $content->getPath([                                            |
-|                                        |         'siteaccess' => 'adminui',                                                 |
+|                                        |         'siteaccess' => 'admin',                                                   |
 |                                        |         'page' => 1,                                                               |
 |                                        |         '_fragment' => 'frag'                                                      |
 |                                        |     ]);                                                                            |
@@ -460,7 +460,7 @@ Return absolute URL path of Content's main Location.
 |                                        |                                                                                    |
 |                                        |     {% set absolute_path = content.path() %}                                       |
 |                                        |     {% set absolute_path = content.path({                                          |
-|                                        |         siteaccess: 'adminui',                                                     |
+|                                        |         siteaccess: 'admin',                                                       |
 |                                        |         page: 1,                                                                   |
 |                                        |         _fragment: 'frag'                                                          |
 |                                        |     }) %}                                                                          |
@@ -483,7 +483,7 @@ Return absolute URL of Content's main Location.
 |                                        |                                                                                    |
 |                                        |     $absoluteUrl = $content->getUrl();                                             |
 |                                        |     $absoluteUrl = $content->getUrl([                                              |
-|                                        |         'siteaccess' => 'adminui',                                                 |
+|                                        |         'siteaccess' => 'admin',                                                   |
 |                                        |         'page' => 1,                                                               |
 |                                        |         '_fragment' => 'frag'                                                      |
 |                                        |     ]);                                                                            |
@@ -493,7 +493,7 @@ Return absolute URL of Content's main Location.
 |                                        |                                                                                    |
 |                                        |     {% set absolute_url = content.url() %}                                         |
 |                                        |     {% set absolute_url = content.url({                                            |
-|                                        |         siteaccess: 'adminui',                                                     |
+|                                        |         siteaccess: 'admin',                                                       |
 |                                        |         page: 1,                                                                   |
 |                                        |         _fragment: 'frag'                                                          |
 |                                        |     }) %}                                                                          |
@@ -889,7 +889,7 @@ Return Location's absolute URL path.
 |                                        |                                                                                    |
 |                                        |     $absolutePath = $location->getPath();                                          |
 |                                        |     $absolutePath = $location->getPath([                                           |
-|                                        |         'siteaccess' => 'adminui',                                                 |
+|                                        |         'siteaccess' => 'admin',                                                   |
 |                                        |         'page' => 1,                                                               |
 |                                        |         '_fragment' => 'frag'                                                      |
 |                                        |     ]);                                                                            |
@@ -899,7 +899,7 @@ Return Location's absolute URL path.
 |                                        |                                                                                    |
 |                                        |     {% set absolute_path = location.path() %}                                      |
 |                                        |     {% set absolute_path = location.path({                                         |
-|                                        |         siteaccess: 'adminui',                                                     |
+|                                        |         siteaccess: 'admin',                                                       |
 |                                        |         page: 1,                                                                   |
 |                                        |         _fragment: 'frag'                                                          |
 |                                        |     }) %}                                                                          |
@@ -922,7 +922,7 @@ Return Location's absolute URL.
 |                                        |                                                                                    |
 |                                        |     $absoluteUrl = $location->getUrl();                                            |
 |                                        |     $absoluteUrl = $location->getUrl([                                             |
-|                                        |         'siteaccess' => 'adminui',                                                 |
+|                                        |         'siteaccess' => 'admin',                                                   |
 |                                        |         'page' => 1,                                                               |
 |                                        |         '_fragment' => 'frag'                                                      |
 |                                        |     ]);                                                                            |
@@ -932,7 +932,7 @@ Return Location's absolute URL.
 |                                        |                                                                                    |
 |                                        |     {% set absolute_url = location.url() %}                                        |
 |                                        |     {% set absolute_url = location.url({                                           |
-|                                        |         siteaccess: 'adminui',                                                     |
+|                                        |         siteaccess: 'admin',                                                       |
 |                                        |         page: 1,                                                                   |
 |                                        |         _fragment: 'frag'                                                          |
 |                                        |     }) %}                                                                          |
@@ -1028,7 +1028,7 @@ Return absolute URL path.
 |                                        |     $absolutePath = (string) $content->path;                                       |
 |                                        |     $absolutePath = $content->path->getAbsolute();                                 |
 |                                        |     $absolutePath = $content->path->getAbsolute([                                  |
-|                                        |         'siteaccess' => 'adminui',                                                 |
+|                                        |         'siteaccess' => 'admin',                                                   |
 |                                        |         'page' => 1,                                                               |
 |                                        |         '_fragment' => 'frag'                                                      |
 |                                        |     ]);                                                                            |
@@ -1036,7 +1036,7 @@ Return absolute URL path.
 |                                        |     $absolutePath = (string) $location->path;                                      |
 |                                        |     $absolutePath = $location->path->getAbsolute();                                |
 |                                        |     $absolutePath = $location->path->getAbsolute([                                 |
-|                                        |         'siteaccess' => 'adminui',                                                 |
+|                                        |         'siteaccess' => 'admin',                                                   |
 |                                        |         'page' => 1,                                                               |
 |                                        |         '_fragment' => 'frag'                                                      |
 |                                        |     ]);                                                                            |
@@ -1046,14 +1046,14 @@ Return absolute URL path.
 |                                        |                                                                                    |
 |                                        |     {% set absolute_path = content.path.absolute %}                                |
 |                                        |     {% set absolute_path = content.path.absolute({                                 |
-|                                        |         siteaccess: 'adminui',                                                     |
+|                                        |         siteaccess: 'admin',                                                       |
 |                                        |         page: 1,                                                                   |
 |                                        |         _fragment: 'frag'                                                          |
 |                                        |     }) %}                                                                          |
 |                                        |                                                                                    |
 |                                        |     {% set absolute_path = location.path.absolute %}                               |
 |                                        |     {% set absolute_path = location.path.absolute({                                |
-|                                        |         siteaccess: 'adminui',                                                     |
+|                                        |         siteaccess: 'admin',                                                       |
 |                                        |         page: 1,                                                                   |
 |                                        |         _fragment: 'frag'                                                          |
 |                                        |     }) %}                                                                          |
@@ -1076,14 +1076,14 @@ Return absolute URL path.
 |                                        |                                                                                    |
 |                                        |     $networkPath = $content->path->getNetwork();                                   |
 |                                        |     $networkPath = $content->path->getNetwork([                                    |
-|                                        |         'siteaccess' => 'adminui',                                                 |
+|                                        |         'siteaccess' => 'admin',                                                   |
 |                                        |         'page' => 1,                                                               |
 |                                        |         '_fragment' => 'frag'                                                      |
 |                                        |     ]);                                                                            |
 |                                        |                                                                                    |
 |                                        |     $networkPath = $location->path->getNetwork();                                  |
 |                                        |     $networkPath = $location->path->getNetwork([                                   |
-|                                        |         'siteaccess' => 'adminui',                                                 |
+|                                        |         'siteaccess' => 'admin',                                                   |
 |                                        |         'page' => 1,                                                               |
 |                                        |         '_fragment' => 'frag'                                                      |
 |                                        |     ]);                                                                            |
@@ -1093,14 +1093,14 @@ Return absolute URL path.
 |                                        |                                                                                    |
 |                                        |     {% set network_path = content.path.network %}                                  |
 |                                        |     {% set network_path = content.path.network({                                   |
-|                                        |         siteaccess: 'adminui',                                                     |
+|                                        |         siteaccess: 'admin',                                                       |
 |                                        |         page: 1,                                                                   |
 |                                        |         _fragment: 'frag'                                                          |
 |                                        |     }) %}                                                                          |
 |                                        |                                                                                    |
 |                                        |     {% set network_path = location.path.network %}                                 |
 |                                        |     {% set network_path = location.path.network({                                  |
-|                                        |         siteaccess: 'adminui',                                                     |
+|                                        |         siteaccess: 'admin',                                                       |
 |                                        |         page: 1,                                                                   |
 |                                        |         _fragment: 'frag'                                                          |
 |                                        |     }) %}                                                                          |
@@ -1123,14 +1123,14 @@ Return absolute URL path.
 |                                        |                                                                                    |
 |                                        |     $relativePath = $content->path->getRelative();                                 |
 |                                        |     $relativePath = $content->path->getRelative([                                  |
-|                                        |         'siteaccess' => 'adminui',                                                 |
+|                                        |         'siteaccess' => 'admin',                                                   |
 |                                        |         'page' => 1,                                                               |
 |                                        |         '_fragment' => 'frag'                                                      |
 |                                        |     ]);                                                                            |
 |                                        |                                                                                    |
 |                                        |     $relativePath = $location->path->getRelative();                                |
 |                                        |     $relativePath = $location->path->getRelative([                                 |
-|                                        |         'siteaccess' => 'adminui',                                                 |
+|                                        |         'siteaccess' => 'admin',                                                   |
 |                                        |         'page' => 1,                                                               |
 |                                        |         '_fragment' => 'frag'                                                      |
 |                                        |     ]);                                                                            |
@@ -1140,14 +1140,14 @@ Return absolute URL path.
 |                                        |                                                                                    |
 |                                        |     {% set relative_path = content.path.relative %}                                |
 |                                        |     {% set relative_path = content.path.relative({                                 |
-|                                        |         siteaccess: 'adminui',                                                     |
+|                                        |         siteaccess: 'admin',                                                       |
 |                                        |         page: 1,                                                                   |
 |                                        |         _fragment: 'frag'                                                          |
 |                                        |     }) %}                                                                          |
 |                                        |                                                                                    |
 |                                        |     {% set relative_path = location.path.relative %}                               |
 |                                        |     {% set relative_path = location.path.relative({                                |
-|                                        |         siteaccess: 'adminui',                                                     |
+|                                        |         siteaccess: 'admin',                                                       |
 |                                        |         page: 1,                                                                   |
 |                                        |         _fragment: 'frag'                                                          |
 |                                        |     }) %}                                                                          |
@@ -1194,7 +1194,7 @@ Return absolute URL.
 |                                        |     $absoluteUrl = (string) $content->url;                                         |
 |                                        |     $absoluteUrl = $content->get();                                                |
 |                                        |     $absoluteUrl = $content->get([                                                 |
-|                                        |         'siteaccess' => 'adminui',                                                 |
+|                                        |         'siteaccess' => 'admin',                                                   |
 |                                        |         'page' => 1,                                                               |
 |                                        |         '_fragment' => 'frag'                                                      |
 |                                        |     ]);                                                                            |
@@ -1202,7 +1202,7 @@ Return absolute URL.
 |                                        |     $absoluteUrl = (string) $location->url;                                        |
 |                                        |     $absoluteUrl = $location->get();                                               |
 |                                        |     $absoluteUrl = $location->get([                                                |
-|                                        |         'siteaccess' => 'adminui',                                                 |
+|                                        |         'siteaccess' => 'admin',                                                   |
 |                                        |         'page' => 1,                                                               |
 |                                        |         '_fragment' => 'frag'                                                      |
 |                                        |     ]);                                                                            |
@@ -1212,14 +1212,14 @@ Return absolute URL.
 |                                        |                                                                                    |
 |                                        |     {% set absolute_url = content.url %}                                           |
 |                                        |     {% set absolute_url = content.url({                                            |
-|                                        |         siteaccess: 'adminui',                                                     |
+|                                        |         siteaccess: 'admin',                                                       |
 |                                        |         page: 1,                                                                   |
 |                                        |         _fragment: 'frag'                                                          |
 |                                        |     }) %}                                                                          |
 |                                        |                                                                                    |
 |                                        |     {% set absolute_url = location.url %}                                          |
 |                                        |     {% set absolute_url = location.url({                                           |
-|                                        |         siteaccess: 'adminui',                                                     |
+|                                        |         siteaccess: 'admin',                                                       |
 |                                        |         page: 1,                                                                   |
 |                                        |         _fragment: 'frag'                                                          |
 |                                        |     }) %}                                                                          |
