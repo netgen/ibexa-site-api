@@ -16,6 +16,7 @@ use Ibexa\Core\Repository\Values\Content\VersionInfo;
 use Ibexa\Core\Repository\Values\ContentType\ContentType;
 use Ibexa\Core\Repository\Values\ContentType\FieldDefinitionCollection;
 use Netgen\IbexaSiteApi\API\LoadService;
+use Netgen\IbexaSiteApi\API\Routing\UrlGenerator;
 use Netgen\IbexaSiteApi\API\Site;
 use Netgen\IbexaSiteApi\API\Values\Content as APIContent;
 use Netgen\IbexaSiteApi\Core\Site\DomainObjectMapper;
@@ -41,6 +42,7 @@ final class ContentTest extends TestCase
     protected LoadService|MockObject|null $loadServiceMock = null;
     protected UserService|MockObject|null $userServiceMock = null;
     protected CoreRepository|MockObject|null $repositoryMock = null;
+    protected UrlGenerator|MockObject|null $urlGeneratorMock = null;
 
     protected function setUp(): void
     {
@@ -214,6 +216,7 @@ final class ContentTest extends TestCase
         $this->domainObjectMapper = new DomainObjectMapper(
             $this->getSiteMock(),
             $this->getRepositoryMock(),
+            $this->getUrlGeneratorMock(),
             true,
             new NullLogger(),
         );
@@ -311,5 +314,18 @@ final class ContentTest extends TestCase
         $this->repositoryMock->method('getUserService')->willReturn($this->getUserServiceMock());
 
         return $this->repositoryMock;
+    }
+
+    protected function getUrlGeneratorMock(): UrlGenerator|MockObject
+    {
+        if ($this->urlGeneratorMock !== null) {
+            return $this->urlGeneratorMock;
+        }
+
+        $this->urlGeneratorMock = $this
+            ->getMockBuilder(UrlGenerator::class)
+            ->getMock();
+
+        return $this->urlGeneratorMock;
     }
 }
