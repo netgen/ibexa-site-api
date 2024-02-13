@@ -33,7 +33,7 @@ final class ReverseFields extends Content
         $resolver->setAllowedTypes('relation_field', ['string', 'string[]']);
     }
 
-    protected function getFilterCriteria(array $parameters): Criterion|array|null
+    protected function getFilterCriteria(array $parameters): null|array|Criterion
     {
         $fields = (array) $parameters['relation_field'];
 

@@ -22,8 +22,7 @@ final class Caching extends Provider
 
     public function __construct(
         private readonly Provider $provider,
-    ) {
-    }
+    ) {}
 
     public function hasContent(string $name): bool
     {

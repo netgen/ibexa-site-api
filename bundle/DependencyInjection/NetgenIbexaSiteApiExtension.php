@@ -25,8 +25,6 @@ class NetgenIbexaSiteApiExtension extends Extension implements PrependExtensionI
 
     /**
      * {@inheritdoc}
-     *
-     * @return \Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Configuration
      */
     public function getConfiguration(array $config, ContainerBuilder $container): Configuration
     {

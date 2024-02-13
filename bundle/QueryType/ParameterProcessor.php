@@ -25,8 +25,7 @@ final class ParameterProcessor
         private readonly RequestStack $requestStack,
         private readonly ConfigResolverInterface $configResolver,
         private readonly Provider $namedObjectProvider,
-    ) {
-    }
+    ) {}
 
     /**
      * Return given $value processed with ExpressionLanguage if needed.

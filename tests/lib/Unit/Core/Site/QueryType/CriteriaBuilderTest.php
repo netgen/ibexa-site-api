@@ -37,7 +37,7 @@ final class CriteriaBuilderTest extends TestCase
 {
     protected ?CriteriaBuilder $criteriaBuilder = null;
 
-    public function providerForTestBuild(): array
+    public function provideBuildCases(): iterable
     {
         return [
             [
@@ -413,7 +413,7 @@ final class CriteriaBuilderTest extends TestCase
     }
 
     /**
-     * @dataProvider providerForTestBuild
+     * @dataProvider provideBuildCases
      *
      * @param \Netgen\IbexaSiteApi\Core\Site\QueryType\CriterionDefinition[] $arguments
      * @param \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion[] $expectedCriteria

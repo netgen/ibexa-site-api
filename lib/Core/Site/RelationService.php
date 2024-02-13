@@ -37,8 +37,7 @@ class RelationService implements RelationServiceInterface
         private readonly SiteInterface $site,
         private readonly RelationResolverRegistry $relationResolverRegistry,
         private readonly LoggerInterface $logger,
-    ) {
-    }
+    ) {}
 
     public function loadFieldRelation(
         Content $content,

@@ -54,8 +54,7 @@ class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
         private readonly ConfigResolverInterface $configResolver,
         private RequestContext $requestContext,
         private readonly LoggerInterface $logger = new NullLogger(),
-    ) {
-    }
+    ) {}
 
     /** @noinspection PhpUnused */
     public function setSiteaccess(?SiteAccess $currentSiteAccess = null): void

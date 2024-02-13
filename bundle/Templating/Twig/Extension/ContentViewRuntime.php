@@ -14,8 +14,7 @@ class ContentViewRuntime
 {
     public function __construct(
         private readonly ContentRenderer $contentRenderer,
-    ) {
-    }
+    ) {}
 
     /**
      * Renders the HTML for a given $content.

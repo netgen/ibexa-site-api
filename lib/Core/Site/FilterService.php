@@ -28,8 +28,7 @@ class FilterService implements FilterServiceInterface
         private readonly DomainObjectMapper $domainObjectMapper,
         private readonly SearchService $searchService,
         private readonly ContentService $contentService,
-    ) {
-    }
+    ) {}
 
     public function filterContent(Query $query): SearchResult
     {

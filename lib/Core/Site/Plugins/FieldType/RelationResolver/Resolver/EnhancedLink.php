@@ -21,8 +21,7 @@ class EnhancedLink extends Resolver
 
     protected function getRelationIdsFromValue(Value $value): array
     {
-        /* @var \Netgen\IbexaFieldTypeEnhancedLink\FieldType\Value $value */
-
+        /** @var \Netgen\IbexaFieldTypeEnhancedLink\FieldType\Value $value */
         if ($value->isTypeInternal()) {
             return [$value->reference];
         }

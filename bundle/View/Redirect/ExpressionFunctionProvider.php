@@ -12,8 +12,7 @@ class ExpressionFunctionProvider implements ExpressionFunctionProviderInterface
 {
     public function __construct(
         private readonly ContainerInterface $container,
-    ) {
-    }
+    ) {}
 
     public function getFunctions(): array
     {

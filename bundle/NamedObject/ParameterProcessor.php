@@ -22,8 +22,7 @@ final class ParameterProcessor
         private readonly ExpressionLanguage $expressionLanguage,
         private readonly ConfigResolverInterface $configResolver,
         private readonly PermissionResolver $permissionResolver,
-    ) {
-    }
+    ) {}
 
     /**
      * Return given $value processed with ExpressionLanguage if needed.

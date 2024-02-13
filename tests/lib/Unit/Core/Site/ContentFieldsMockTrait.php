@@ -26,26 +26,26 @@ use Psr\Log\NullLogger;
  */
 trait ContentFieldsMockTrait
 {
-    protected Site|MockObject|null $siteMock = null;
+    protected null|MockObject|Site $siteMock = null;
 
     /** @var \Netgen\IbexaSiteApi\Core\Site\DomainObjectMapper[] */
     protected array $domainObjectMapper = [];
 
     /** @var \Netgen\IbexaSiteApi\Core\Site\DomainObjectMapper[] */
     protected array $domainObjectMapperForContentWithoutFields = [];
-    protected CoreRepository|MockObject|null $repositoryMock = null;
-    protected UrlGenerator|MockObject|null $urlGeneratorMock = null;
-    protected CoreRepository|MockObject|null $repositoryMockForContentWithoutFields = null;
+    protected null|CoreRepository|MockObject $repositoryMock = null;
+    protected null|MockObject|UrlGenerator $urlGeneratorMock = null;
+    protected null|CoreRepository|MockObject $repositoryMockForContentWithoutFields = null;
     protected ?VersionInfo $repoVersionInfo = null;
     protected ?RepoContent $repoContent = null;
     protected ?RepoContent $repoContentWithoutFields = null;
 
     /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Field[] */
     protected ?array $internalFields = null;
-    protected FieldDefinitionCollection|null $fieldDefinitions = null;
-    protected ContentTypeService|MockObject|null $contentTypeServiceMock = null;
-    protected FieldTypeService|MockObject|null $fieldTypeServiceMock = null;
-    protected FieldType|MockObject|null $fieldTypeMock = null;
+    protected null|FieldDefinitionCollection $fieldDefinitions = null;
+    protected null|ContentTypeService|MockObject $contentTypeServiceMock = null;
+    protected null|FieldTypeService|MockObject $fieldTypeServiceMock = null;
+    protected null|FieldType|MockObject $fieldTypeMock = null;
 
     /**
      * @see \PHPUnit\Framework\TestCase
@@ -125,7 +125,7 @@ trait ContentFieldsMockTrait
         return $this->repositoryMock;
     }
 
-    protected function getUrlGeneratorMock(): UrlGenerator|MockObject
+    protected function getUrlGeneratorMock(): MockObject|UrlGenerator
     {
         if ($this->urlGeneratorMock !== null) {
             return $this->urlGeneratorMock;

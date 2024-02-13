@@ -9,6 +9,4 @@ use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 /**
  * This exception is thrown if the translation language could not be resolved.
  */
-abstract class TranslationNotMatchedException extends NotFoundException
-{
-}
+abstract class TranslationNotMatchedException extends NotFoundException {}

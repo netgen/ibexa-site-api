@@ -17,8 +17,7 @@ class CoreAdapterResolver extends LocationResolver
         private readonly Repository $repository,
         private readonly LoadService $loadService,
         private readonly ContentInfoLocationLoader $coreLoader,
-    ) {
-    }
+    ) {}
 
     public function getLocation(Content $content): Location
     {

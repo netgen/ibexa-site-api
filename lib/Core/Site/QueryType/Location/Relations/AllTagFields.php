@@ -44,7 +44,7 @@ final class AllTagFields extends Location
         ]);
     }
 
-    protected function getFilterCriteria(array $parameters): Criterion|array|null
+    protected function getFilterCriteria(array $parameters): null|array|Criterion
     {
         /** @var \Netgen\IbexaSiteApi\API\Values\Content $content */
         $content = $parameters['content'];

@@ -16,8 +16,7 @@ final class LanguageResolver extends BaseLanguageResolver
 {
     public function __construct(
         private readonly BaseSettings $settings,
-    ) {
-    }
+    ) {}
 
     public function resolveForPreview(VersionInfo $versionInfo, string $languageCode): string
     {

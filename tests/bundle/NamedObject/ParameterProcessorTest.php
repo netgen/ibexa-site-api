@@ -18,7 +18,7 @@ use PHPUnit\Framework\TestCase;
  */
 final class ParameterProcessorTest extends TestCase
 {
-    public function providerForTestProcess(): array
+    public function provideProcessCases(): iterable
     {
         $date = new DateTimeImmutable('@1');
 
@@ -99,7 +99,7 @@ final class ParameterProcessorTest extends TestCase
     }
 
     /**
-     * @dataProvider providerForTestProcess
+     * @dataProvider provideProcessCases
      */
     public function testProcess(mixed $parameter, mixed $expectedProcessedParameter): void
     {

@@ -16,8 +16,7 @@ final class Settings extends BaseSettings
 {
     public function __construct(
         private readonly ConfigResolverInterface $configResolver,
-    ) {
-    }
+    ) {}
 
     /**
      * @return bool|int|string[]

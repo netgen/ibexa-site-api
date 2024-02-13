@@ -28,8 +28,7 @@ final class LanguageResolver extends BaseLanguageResolver
         private readonly Resolver $siteaccessResolver,
         private readonly ConfigResolverInterface $configResolver,
         private readonly LoggerInterface $logger = new NullLogger(),
-    ) {
-    }
+    ) {}
 
     /** @noinspection PhpUnused */
     public function setSiteaccess(?SiteAccess $currentSiteAccess = null): void

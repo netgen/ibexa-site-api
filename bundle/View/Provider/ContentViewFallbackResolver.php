@@ -16,8 +16,7 @@ final class ContentViewFallbackResolver
         private readonly string $toIbexaPlatformViewFallbackTemplate,
         private readonly string $toSiteApiEmbedFallbackTemplate,
         private readonly string $toSiteApiViewFallbackTemplate,
-    ) {
-    }
+    ) {}
 
     public function getIbexaPlatformFallbackDto(SiteContentView $view): ?ContentView
     {

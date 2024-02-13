@@ -35,8 +35,7 @@ final class Loading extends Provider
         private readonly ?TagsService $tagsService,
         private readonly ParameterProcessor $parameterProcessor,
         private readonly ConfigResolverInterface $configResolver,
-    ) {
-    }
+    ) {}
 
     public function hasContent(string $name): bool
     {

@@ -40,8 +40,7 @@ class NativeResolver extends Resolver
         private readonly Handler $persistenceHandler,
         private readonly int $recursionLimit,
         private readonly ConfigResolverInterface $configResolver,
-    ) {
-    }
+    ) {}
 
     public function setSiteaccess(?SiteAccess $currentSiteAccess = null): void
     {

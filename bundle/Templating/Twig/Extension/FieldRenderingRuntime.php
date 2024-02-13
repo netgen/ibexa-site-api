@@ -20,8 +20,7 @@ class FieldRenderingRuntime
         private readonly Environment $environment,
         private readonly FieldBlockRenderer $fieldBlockRenderer,
         private readonly ParameterProviderRegistryInterface $parameterProviderRegistry,
-    ) {
-    }
+    ) {}
 
     /**
      * Renders the HTML for a given field.

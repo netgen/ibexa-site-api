@@ -43,7 +43,7 @@ final class AllTagFieldsTest extends QueryTypeBaseTest
 {
     use ContentFieldsMockTrait;
 
-    public function providerForTestGetQuery(): array
+    public function provideGetQueryCases(): array
     {
         $contentWithTags = $this->getTestContentWithTags();
         $contentWithoutTags = $this->getTestContentWithoutTags();
@@ -225,7 +225,7 @@ final class AllTagFieldsTest extends QueryTypeBaseTest
         ];
     }
 
-    public function providerForTestGetQueryWithInvalidOptions(): array
+    public function provideGetQueryWithInvalidOptionsCases(): array
     {
         $content = $this->getTestContentWithTags();
 
@@ -263,7 +263,7 @@ final class AllTagFieldsTest extends QueryTypeBaseTest
         ];
     }
 
-    public function providerForTestGetQueryWithInvalidCriteria(): array
+    public function provideGetQueryWithInvalidCriteriaCases(): array
     {
         $content = $this->getTestContentWithTags();
 
@@ -279,7 +279,7 @@ final class AllTagFieldsTest extends QueryTypeBaseTest
         ];
     }
 
-    public function providerForTestInvalidSortClauseThrowsException(): array
+    public function provideInvalidSortClauseThrowsExceptionCases(): array
     {
         $content = $this->getTestContentWithTags();
 

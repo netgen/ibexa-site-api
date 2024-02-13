@@ -22,8 +22,7 @@ final class InvalidRedirectConfigurationListener implements EventSubscriberInter
         private readonly UrlGeneratorInterface $urlGenerator,
         private readonly ConfigResolverInterface $configResolver,
         private readonly LoggerInterface $logger = new NullLogger(),
-    ) {
-    }
+    ) {}
 
     public static function getSubscribedEvents(): array
     {

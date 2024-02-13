@@ -13,8 +13,7 @@ final class ViewTaggerSubscriber implements EventSubscriberInterface
 {
     public function __construct(
         private readonly ResponseTagger $responseTagger,
-    ) {
-    }
+    ) {}
 
     public static function getSubscribedEvents(): array
     {

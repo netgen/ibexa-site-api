@@ -36,8 +36,7 @@ final class ViewRenderer
         private readonly ArgumentResolverInterface $argumentResolver,
         private readonly Renderer $coreViewRenderer,
         private readonly EventDispatcherInterface $eventDispatcher,
-    ) {
-    }
+    ) {}
 
     public function render(View $view, array $parameters, bool $layout): string
     {

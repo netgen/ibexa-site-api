@@ -25,7 +25,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
  */
 final class ParameterProcessorTest extends TestCase
 {
-    public function providerForTestProcess(): array
+    public function provideProcessCases(): iterable
     {
         $date = new DateTimeImmutable('@1');
 
@@ -262,7 +262,7 @@ final class ParameterProcessorTest extends TestCase
     }
 
     /**
-     * @dataProvider providerForTestProcess
+     * @dataProvider provideProcessCases
      */
     public function testProcess(mixed $parameter, mixed $expectedProcessedParameter): void
     {
@@ -336,7 +336,7 @@ final class ParameterProcessorTest extends TestCase
         return $configResolverMock;
     }
 
-    protected function getNamedObjectProviderMock(): Provider|MockObject
+    protected function getNamedObjectProviderMock(): MockObject|Provider
     {
         $namedObjectProviderMock = $this->getMockBuilder(Provider::class)->getMock();
 

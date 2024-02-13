@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\IbexaSiteApiBundle\QueryType;
 
+use Ibexa\Contracts\Core\Repository\Repository;
 use Ibexa\Contracts\Core\Repository\Values\Content\LocationQuery;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query;
 use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchResult;
 use Ibexa\Core\QueryType\QueryTypeRegistry;
-use Ibexa\Contracts\Core\Repository\Repository;
 use Netgen\IbexaSearchExtra\Core\Pagination\Pagerfanta\BaseAdapter;
 use Netgen\IbexaSiteApi\API\FilterService;
 use Netgen\IbexaSiteApi\API\FindService;
@@ -30,8 +30,7 @@ final class QueryExecutor
         private readonly FilterService $filterService,
         private readonly FindService $findService,
         private readonly Repository $repository,
-    ) {
-    }
+    ) {}
 
     /**
      * Execute the Query with the given $name and return the result.

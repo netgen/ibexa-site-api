@@ -11,8 +11,7 @@ class RenderViewEvent extends Event
 {
     public function __construct(
         private readonly View $view,
-    ) {
-    }
+    ) {}
 
     public function getView(): View
     {

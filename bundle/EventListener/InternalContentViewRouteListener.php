@@ -31,8 +31,7 @@ final class InternalContentViewRouteListener implements EventSubscriberInterface
         private readonly FragmentHandler $fragmentHandler,
         private readonly RouterInterface $router,
         private readonly array $siteaccessGroups,
-    ) {
-    }
+    ) {}
 
     public static function getSubscribedEvents(): array
     {

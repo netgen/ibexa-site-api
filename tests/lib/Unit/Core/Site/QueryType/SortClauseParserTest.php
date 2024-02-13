@@ -31,7 +31,7 @@ use function sprintf;
  */
 final class SortClauseParserTest extends TestCase
 {
-    public function providerForTestParseValid(): array
+    public function provideParseValidCases(): iterable
     {
         return [
             [
@@ -110,7 +110,7 @@ final class SortClauseParserTest extends TestCase
     }
 
     /**
-     * @dataProvider providerForTestParseValid
+     * @dataProvider provideParseValidCases
      */
     public function testParseValid(string $stringDefinition, SortClause $expectedSortClause): void
     {
@@ -121,7 +121,7 @@ final class SortClauseParserTest extends TestCase
         self::assertEquals($sortClause, $expectedSortClause);
     }
 
-    public function providerForTestParseInvalid(): array
+    public function provideParseInvalidCases(): iterable
     {
         return [
             [
@@ -148,7 +148,7 @@ final class SortClauseParserTest extends TestCase
     }
 
     /**
-     * @dataProvider providerForTestParseInvalid
+     * @dataProvider provideParseInvalidCases
      */
     public function testParseInvalid(string $stringDefinition, string $message): void
     {

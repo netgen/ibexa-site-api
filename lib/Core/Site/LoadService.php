@@ -28,8 +28,7 @@ class LoadService implements LoadServiceInterface
         private readonly DomainObjectMapper $domainObjectMapper,
         private readonly ContentService $contentService,
         private readonly LocationService $locationService,
-    ) {
-    }
+    ) {}
 
     public function loadContent(int $contentId): Content
     {

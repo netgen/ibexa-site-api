@@ -24,8 +24,7 @@ final class Resolver
 {
     public function __construct(
         private readonly RouterInterface $router,
-    ) {
-    }
+    ) {}
 
     /**
      * Builds a path to the redirect target.
@@ -78,7 +77,7 @@ final class Resolver
                 $redirectConfig->getTargetParameters(),
                 $this->resolveReferenceType($redirectConfig),
             );
-        } catch (RouteNotFoundException|MissingMandatoryParametersException|InvalidParameterException $exception) {
+        } catch (InvalidParameterException|MissingMandatoryParametersException|RouteNotFoundException $exception) {
             throw new InvalidRedirectConfiguration($route, $exception);
         }
     }

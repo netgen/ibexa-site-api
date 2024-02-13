@@ -12,8 +12,7 @@ final class RedirectConfiguration
         private readonly bool $permanent,
         private readonly bool $keepRequestMethod,
         private readonly bool $absolute,
-    ) {
-    }
+    ) {}
 
     public static function fromConfigurationArray(array $config): self
     {

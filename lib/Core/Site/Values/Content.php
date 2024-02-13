@@ -351,6 +351,16 @@ final class Content extends APIContent
         );
     }
 
+    public function getPath(array $parameters = []): string
+    {
+        return $this->internalGetPath()->getAbsolute($parameters);
+    }
+
+    public function getUrl(array $parameters = []): string
+    {
+        return $this->internalGetUrl()->get($parameters);
+    }
+
     private function getMainLocation(): ?APILocation
     {
         if ($this->internalMainLocation === null && $this->mainLocationId !== null) {
@@ -389,16 +399,6 @@ final class Content extends APIContent
         }
 
         return $this->contentInfo;
-    }
-
-    public function getPath(array $parameters = []): string
-    {
-        return $this->internalGetPath()->getAbsolute($parameters);
-    }
-
-    public function getUrl(array $parameters = []): string
-    {
-        return $this->internalGetUrl()->get($parameters);
     }
 
     private function getOwner(): ?APIContent

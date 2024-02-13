@@ -40,7 +40,7 @@ final class ChildrenTest extends QueryTypeBaseTest
 {
     use ContentFieldsMockTrait;
 
-    public function providerForTestGetQuery(): array
+    public function provideGetQueryCases(): array
     {
         $location = $this->getTestLocation();
 
@@ -242,7 +242,7 @@ final class ChildrenTest extends QueryTypeBaseTest
         ];
     }
 
-    public function providerForTestGetQueryWithInvalidOptions(): array
+    public function provideGetQueryWithInvalidOptionsCases(): array
     {
         $location = $this->getTestLocation();
 
@@ -280,7 +280,7 @@ final class ChildrenTest extends QueryTypeBaseTest
         ];
     }
 
-    public function providerForTestGetQueryWithInvalidCriteria(): array
+    public function provideGetQueryWithInvalidCriteriaCases(): array
     {
         $location = $this->getTestLocation();
 
@@ -296,7 +296,7 @@ final class ChildrenTest extends QueryTypeBaseTest
         ];
     }
 
-    public function providerForTestInvalidSortClauseThrowsException(): array
+    public function provideInvalidSortClauseThrowsExceptionCases(): array
     {
         $location = $this->getTestLocation();
 

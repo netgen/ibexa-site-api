@@ -20,8 +20,7 @@ class ImageRuntime
     public function __construct(
         private readonly VariationHandler $imageVariationService,
         private readonly LoggerInterface $logger = new NullLogger(),
-    ) {
-    }
+    ) {}
 
     /**
      * Returns the image variation object for $field/$versionInfo.

@@ -17,8 +17,7 @@ class SudoMainLocationResolver extends LocationResolver
     public function __construct(
         private readonly Repository $repository,
         private readonly LoadService $loadService,
-    ) {
-    }
+    ) {}
 
     public function getLocation(Content $content): Location
     {

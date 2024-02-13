@@ -29,8 +29,7 @@ final class ContentRenderer
         private readonly ContentViewBuilder $viewBuilder,
         private readonly ViewRenderer $viewRenderer,
         private readonly LoggerInterface $logger = new NullLogger(),
-    ) {
-    }
+    ) {}
 
     /**
      * Renders the HTML for a given $content.

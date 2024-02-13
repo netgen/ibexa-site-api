@@ -21,8 +21,7 @@ class QueryRuntime
 {
     public function __construct(
         private readonly QueryExecutor $queryExecutor,
-    ) {
-    }
+    ) {}
 
     public function executeQuery(mixed $context, string $name): Pagerfanta
     {

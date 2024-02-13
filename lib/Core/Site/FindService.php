@@ -28,8 +28,7 @@ class FindService implements FindServiceInterface
         private readonly DomainObjectMapper $domainObjectMapper,
         private readonly SearchService $searchService,
         private readonly ContentService $contentService,
-    ) {
-    }
+    ) {}
 
     public function findContent(Query $query): SearchResult
     {

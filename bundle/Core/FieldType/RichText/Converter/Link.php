@@ -27,8 +27,7 @@ class Link implements Converter
         private readonly LoadService $loadService,
         private readonly RouterInterface $router,
         private readonly LoggerInterface $logger = new NullLogger(),
-    ) {
-    }
+    ) {}
 
     public function convert(DOMDocument $xmlDoc): DOMDocument
     {

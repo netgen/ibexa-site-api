@@ -15,7 +15,7 @@ class UrlGenerator extends APIUrlGenerator
     public function generate(
         object $object,
         array $parameters = [],
-        int $referenceType = APIUrlGenerator::ABSOLUTE_PATH
+        int $referenceType = APIUrlGenerator::ABSOLUTE_PATH,
     ): string {
         throw new RuntimeException(
             'Intentionally not implemented: implement this method in your MVC integration layer',

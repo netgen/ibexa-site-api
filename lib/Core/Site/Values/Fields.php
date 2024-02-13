@@ -46,8 +46,7 @@ final class Fields extends APIFields
         private readonly DomainObjectMapper $domainObjectMapper,
         private readonly bool $failOnMissingField,
         private readonly LoggerInterface $logger,
-    ) {
-    }
+    ) {}
 
     public function getIterator(): Traversable
     {

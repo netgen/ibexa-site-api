@@ -40,7 +40,7 @@ final class ReverseFields extends Location
         ]);
     }
 
-    protected function getFilterCriteria(array $parameters): Criterion|array|null
+    protected function getFilterCriteria(array $parameters): null|array|Criterion
     {
         $fields = (array) $parameters['relation_field'];
 

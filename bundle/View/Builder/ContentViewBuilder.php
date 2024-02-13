@@ -38,8 +38,7 @@ class ContentViewBuilder implements ViewBuilder
         private readonly Configurator $viewConfigurator,
         private readonly ParametersInjector $viewParametersInjector,
         private readonly LocationResolver $locationResolver,
-    ) {
-    }
+    ) {}
 
     public function matches($argument): bool
     {

@@ -27,7 +27,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
  */
 final class QueryDefinitionMapperTest extends TestCase
 {
-    public function providerForTestMap(): array
+    public function provideMapCases(): iterable
     {
         $locationMock = $this->getMockBuilder(Location::class)->getMock();
         $contentMock = $this->getMockBuilder(Content::class)->getMock();
@@ -150,7 +150,7 @@ final class QueryDefinitionMapperTest extends TestCase
     }
 
     /**
-     * @dataProvider providerForTestMap
+     * @dataProvider provideMapCases
      */
     public function testMap(array $configuration, QueryDefinition $expectedQueryDefinition): void
     {

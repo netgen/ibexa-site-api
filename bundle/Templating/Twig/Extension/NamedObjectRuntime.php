@@ -23,8 +23,7 @@ class NamedObjectRuntime
         private readonly Provider $namedObjectProvider,
         private readonly bool $isDebug,
         private readonly LoggerInterface $logger = new NullLogger(),
-    ) {
-    }
+    ) {}
 
     public function getNamedContent(string $name): ?Content
     {

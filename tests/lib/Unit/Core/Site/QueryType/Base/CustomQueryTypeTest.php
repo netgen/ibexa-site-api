@@ -61,7 +61,7 @@ final class CustomQueryTypeTest extends TestCase
         );
     }
 
-    public function providerForTestGetQuery(): array
+    public function provideGetQueryCases(): iterable
     {
         return [
             [
@@ -149,7 +149,7 @@ final class CustomQueryTypeTest extends TestCase
     }
 
     /**
-     * @dataProvider providerForTestGetQuery
+     * @dataProvider provideGetQueryCases
      */
     public function testGetQuery(array $parameters, Query $expectedQuery): void
     {

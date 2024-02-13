@@ -29,7 +29,7 @@ class UrlGenerator extends APIUrlGenerator
     public function generate(
         object $object,
         array $parameters = [],
-        int $referenceType = APIUrlGenerator::ABSOLUTE_PATH
+        int $referenceType = APIUrlGenerator::ABSOLUTE_PATH,
     ): string {
         if (!$object instanceof Content && !$object instanceof Location) {
             throw new RuntimeException(

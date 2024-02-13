@@ -29,7 +29,7 @@ use Netgen\IbexaSiteApi\Tests\Unit\Core\Site\QueryType\QueryTypeBaseTest;
  */
 final class FetchTest extends QueryTypeBaseTest
 {
-    public function providerForTestGetQuery(): array
+    public function provideGetQueryCases(): array
     {
         return [
             [
@@ -294,7 +294,7 @@ final class FetchTest extends QueryTypeBaseTest
         ];
     }
 
-    public function providerForTestGetQueryWithInvalidOptions(): array
+    public function provideGetQueryWithInvalidOptionsCases(): array
     {
         return [
             [
@@ -332,7 +332,7 @@ final class FetchTest extends QueryTypeBaseTest
         ];
     }
 
-    public function providerForTestGetQueryWithInvalidCriteria(): array
+    public function provideGetQueryWithInvalidCriteriaCases(): array
     {
         return [
             [
@@ -345,7 +345,7 @@ final class FetchTest extends QueryTypeBaseTest
         ];
     }
 
-    public function providerForTestInvalidSortClauseThrowsException(): array
+    public function provideInvalidSortClauseThrowsExceptionCases(): array
     {
         return [
             [

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\IbexaSiteApiBundle\Tests\DependencyInjection\Configuration\Parser;
 
-use Generator;
 use Ibexa\Bundle\Core\DependencyInjection\IbexaCoreExtension;
 use Ibexa\Tests\Bundle\Core\DependencyInjection\Configuration\Parser\AbstractParserTestCase;
 use Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Configuration\Parser\SiteApi;
@@ -89,7 +88,7 @@ final class SiteApiTest extends AbstractParserTestCase
         ];
     }
 
-    public function providerForTestBooleanConfigurationValid(): Generator
+    public function provideBooleanConfigurationValidCases(): iterable
     {
         $names = $this->getBooleanConfigurationNames();
         $valuePairs = $this->getBooleanConfigurationValidValuePairs();
@@ -106,7 +105,7 @@ final class SiteApiTest extends AbstractParserTestCase
     }
 
     /**
-     * @dataProvider providerForTestBooleanConfigurationValid
+     * @dataProvider provideBooleanConfigurationValidCases
      */
     public function testBooleanConfigurationValid(string $name, mixed $config, mixed $expectedValue): void
     {
@@ -138,7 +137,7 @@ final class SiteApiTest extends AbstractParserTestCase
         ];
     }
 
-    public function providerForTestBooleanConfigurationInvalid(): Generator
+    public function provideBooleanConfigurationInvalidCases(): iterable
     {
         $names = $this->getBooleanConfigurationNames();
         $values = $this->getBooleanConfigurationInvalidValues();
@@ -154,7 +153,7 @@ final class SiteApiTest extends AbstractParserTestCase
     }
 
     /**
-     * @dataProvider providerForTestBooleanConfigurationInvalid
+     * @dataProvider provideBooleanConfigurationInvalidCases
      */
     public function testBooleanConfigurationInvalid(string $name, mixed $config): void
     {
@@ -196,7 +195,7 @@ final class SiteApiTest extends AbstractParserTestCase
         ];
     }
 
-    public function providerForTestNamedObjectConfigurationValid(): Generator
+    public function provideNamedObjectConfigurationValidCases(): iterable
     {
         $names = $this->getNamedObjectConfigurationNames();
         $values = $this->getValidNamedObjectConfigurationValuePairs();
@@ -212,7 +211,7 @@ final class SiteApiTest extends AbstractParserTestCase
     }
 
     /**
-     * @dataProvider providerForTestNamedObjectConfigurationValid
+     * @dataProvider provideNamedObjectConfigurationValidCases
      */
     public function testNamedObjectConfigurationValid(string $name, array $configuration): void
     {
@@ -267,7 +266,7 @@ final class SiteApiTest extends AbstractParserTestCase
         ];
     }
 
-    public function providerForTestNamedObjectConfigurationInvalid(): Generator
+    public function provideNamedObjectConfigurationInvalidCases(): iterable
     {
         $names = $this->getNamedObjectConfigurationNames();
         $configurations = $this->getNamedObjectInvalidConfigurations();
@@ -283,7 +282,7 @@ final class SiteApiTest extends AbstractParserTestCase
     }
 
     /**
-     * @dataProvider providerForTestNamedObjectConfigurationInvalid
+     * @dataProvider provideNamedObjectConfigurationInvalidCases
      */
     public function testNamedObjectConfigurationInvalid(string $name, array $configuration): void
     {
@@ -302,7 +301,7 @@ final class SiteApiTest extends AbstractParserTestCase
         ]);
     }
 
-    public function providerForTestNamedObjectDefaultValues(): array
+    public function provideNamedObjectDefaultValuesCases(): iterable
     {
         $defaultValues = [
             'content' => [],
@@ -323,7 +322,7 @@ final class SiteApiTest extends AbstractParserTestCase
     }
 
     /**
-     * @dataProvider providerForTestNamedObjectDefaultValues
+     * @dataProvider provideNamedObjectDefaultValuesCases
      */
     public function testNamedObjectDefaultValues(mixed $configurationValues, array $expectedConfigurationValues): void
     {
@@ -344,7 +343,7 @@ final class SiteApiTest extends AbstractParserTestCase
         );
     }
 
-    public function providerForTestNamedQueryConfigurationValid(): array
+    public function provideNamedQueryConfigurationValidCases(): iterable
     {
         return [
             [
@@ -386,7 +385,7 @@ final class SiteApiTest extends AbstractParserTestCase
     }
 
     /**
-     * @dataProvider providerForTestNamedQueryConfigurationValid
+     * @dataProvider provideNamedQueryConfigurationValidCases
      */
     public function testNamedQueryConfigurationValid(array $configurationValues): void
     {
@@ -420,7 +419,7 @@ final class SiteApiTest extends AbstractParserTestCase
         self::assertTrue(true);
     }
 
-    public function providerForTestNamedQueryConfigurationInvalid(): array
+    public function provideNamedQueryConfigurationInvalidCases(): iterable
     {
         return [
             [
@@ -478,7 +477,7 @@ final class SiteApiTest extends AbstractParserTestCase
     }
 
     /**
-     * @dataProvider providerForTestNamedQueryConfigurationInvalid
+     * @dataProvider provideNamedQueryConfigurationInvalidCases
      */
     public function testNamedQueryConfigurationInvalid(array $configurationValues, string $message): void
     {
@@ -497,7 +496,7 @@ final class SiteApiTest extends AbstractParserTestCase
         ]);
     }
 
-    public function providerForTestNamedQueryConfigurationDefaultValues(): array
+    public function provideNamedQueryConfigurationDefaultValuesCases(): iterable
     {
         return [
             [
@@ -520,7 +519,7 @@ final class SiteApiTest extends AbstractParserTestCase
     }
 
     /**
-     * @dataProvider providerForTestNamedQueryConfigurationDefaultValues
+     * @dataProvider provideNamedQueryConfigurationDefaultValuesCases
      */
     public function testNamedQueryConfigurationDefaultValues(array $configurationValues, array $expectedConfigurationValues): void
     {
@@ -541,7 +540,7 @@ final class SiteApiTest extends AbstractParserTestCase
         );
     }
 
-    public function providerForTestCrossSiteaccessRoutingBoolConfigurationInvalid(): array
+    public function providerForTestCrossSiteaccessRoutingBoolConfigurationInvalid(): iterable
     {
         return [
             [
@@ -612,7 +611,7 @@ final class SiteApiTest extends AbstractParserTestCase
         ]);
     }
 
-    public function providerForTestCrossSiteaccessRoutingExternalSubtreeRootsConfigurationInvalid(): array
+    public function provideCrossSiteaccessRoutingExternalSubtreeRootsConfigurationInvalidCases(): iterable
     {
         return [
             [
@@ -643,7 +642,7 @@ final class SiteApiTest extends AbstractParserTestCase
     }
 
     /**
-     * @dataProvider providerForTestCrossSiteaccessRoutingExternalSubtreeRootsConfigurationInvalid
+     * @dataProvider provideCrossSiteaccessRoutingExternalSubtreeRootsConfigurationInvalidCases
      */
     public function testCrossSiteaccessRoutingExternalSubtreeRootsConfigurationInvalid(
         mixed $configurationValue,
@@ -667,7 +666,7 @@ final class SiteApiTest extends AbstractParserTestCase
         ]);
     }
 
-    public function providerForTestCrossSiteaccessRoutingStringsConfigurationInvalid(): array
+    public function providerForTestCrossSiteaccessRoutingStringsConfigurationInvalid(): iterable
     {
         return [
             [
@@ -797,7 +796,7 @@ final class SiteApiTest extends AbstractParserTestCase
         ]);
     }
 
-    public function providerForTestCrossSiteaccessRoutingConfigurationValid(): array
+    public function provideCrossSiteaccessRoutingConfigurationValidCases(): iterable
     {
         return [
             [
@@ -902,7 +901,7 @@ final class SiteApiTest extends AbstractParserTestCase
     }
 
     /**
-     * @dataProvider providerForTestCrossSiteaccessRoutingConfigurationValid
+     * @dataProvider provideCrossSiteaccessRoutingConfigurationValidCases
      */
     public function testCrossSiteaccessRoutingConfigurationValid(mixed $configurationValues, array $expectedConfigurationValues): void
     {

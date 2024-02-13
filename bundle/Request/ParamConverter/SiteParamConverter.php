@@ -15,8 +15,7 @@ abstract class SiteParamConverter implements ParamConverterInterface
 {
     public function __construct(
         protected readonly LoadService $loadService,
-    ) {
-    }
+    ) {}
 
     public function supports(ParamConverter $configuration): bool
     {

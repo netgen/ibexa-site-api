@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\IbexaSiteApiBundle\Tests\QueryType;
 
+use Ibexa\Contracts\Core\Repository\Repository;
 use Ibexa\Contracts\Core\Repository\Values\Content\LocationQuery;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query;
 use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchResult;
 use Ibexa\Core\QueryType\QueryType;
 use Ibexa\Core\QueryType\QueryTypeRegistry;
-use Ibexa\Contracts\Core\Repository\Repository;
 use Netgen\Bundle\IbexaSiteApiBundle\QueryType\QueryDefinition;
 use Netgen\Bundle\IbexaSiteApiBundle\QueryType\QueryExecutor;
 use Netgen\IbexaSiteApi\API\FilterService;
@@ -308,7 +308,7 @@ final class QueryExecutorTest extends TestCase
             ->method('sudo')
             ->with(self::anything())
             ->willReturnCallback(
-                fn (callable $callback) => $callback($repositoryMock),
+                static fn (callable $callback) => $callback($repositoryMock),
             );
 
         return $repositoryMock;

@@ -82,10 +82,10 @@ abstract class QueryTypeBaseTest extends TestCase
         }
     }
 
-    abstract public function providerForTestGetQuery();
+    abstract public function provideGetQueryCases(): iterable;
 
     /**
-     * @dataProvider providerForTestGetQuery
+     * @dataProvider provideGetQueryCases
      */
     public function testGetQuery(bool $showHiddenItems, array $parameters, Query $expectedQuery): void
     {
@@ -99,10 +99,10 @@ abstract class QueryTypeBaseTest extends TestCase
         );
     }
 
-    abstract public function providerForTestGetQueryWithInvalidOptions();
+    abstract public function provideGetQueryWithInvalidOptionsCases(): iterable;
 
     /**
-     * @dataProvider providerForTestGetQueryWithInvalidOptions
+     * @dataProvider provideGetQueryWithInvalidOptionsCases
      */
     public function testGetQueryWithInvalidOptions(array $parameters): void
     {
@@ -113,10 +113,10 @@ abstract class QueryTypeBaseTest extends TestCase
         $queryType->getQuery($parameters);
     }
 
-    abstract public function providerForTestGetQueryWithInvalidCriteria();
+    abstract public function provideGetQueryWithInvalidCriteriaCases(): iterable;
 
     /**
-     * @dataProvider providerForTestGetQueryWithInvalidCriteria
+     * @dataProvider provideGetQueryWithInvalidCriteriaCases
      */
     public function testGetQueryWithInvalidCriteria(array $parameters): void
     {
@@ -127,10 +127,10 @@ abstract class QueryTypeBaseTest extends TestCase
         $queryType->getQuery($parameters);
     }
 
-    abstract public function providerForTestInvalidSortClauseThrowsException();
+    abstract public function provideInvalidSortClauseThrowsExceptionCases(): iterable;
 
     /**
-     * @dataProvider providerForTestInvalidSortClauseThrowsException
+     * @dataProvider provideInvalidSortClauseThrowsExceptionCases
      */
     public function testInvalidSortClauseThrowsException(array $parameters): void
     {

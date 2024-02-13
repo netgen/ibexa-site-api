@@ -231,7 +231,7 @@ final class CriteriaBuilder
         return new Subtree($definition->value);
     }
 
-    private function resolveTimeValues(mixed $valueOrValues): int|array
+    private function resolveTimeValues(mixed $valueOrValues): array|int
     {
         if (!is_array($valueOrValues)) {
             return $this->resolveTimeValue($valueOrValues);

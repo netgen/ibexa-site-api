@@ -43,8 +43,7 @@ abstract class Base implements QueryType
 
     public function __construct(
         private readonly Settings $settings,
-    ) {
-    }
+    ) {}
 
     final public function getQuery(array $parameters = []): Query
     {
@@ -96,7 +95,7 @@ abstract class Base implements QueryType
      *
      * @return Criterion|Criterion[]|null
      */
-    protected function getFilterCriteria(array $parameters): Criterion|array|null
+    protected function getFilterCriteria(array $parameters): null|array|Criterion
     {
         return null;
     }
@@ -386,7 +385,7 @@ abstract class Base implements QueryType
         return $sortClauses;
     }
 
-    private function parseSortString(string $string): string|SortClause
+    private function parseSortString(string $string): SortClause|string
     {
         try {
             return $this->getSortClauseParser()->parse($string);

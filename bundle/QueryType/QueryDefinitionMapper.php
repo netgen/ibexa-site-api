@@ -30,8 +30,7 @@ final class QueryDefinitionMapper
         private readonly QueryTypeRegistry $queryTypeRegistry,
         private readonly ParameterProcessor $parameterProcessor,
         private readonly ConfigResolverInterface $configResolver,
-    ) {
-    }
+    ) {}
 
     /**
      * Map given $configuration in $view context to a QueryDefinition instance.

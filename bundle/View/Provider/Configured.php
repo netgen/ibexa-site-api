@@ -35,8 +35,7 @@ class Configured implements ViewProvider
         private readonly Resolver $redirectResolver,
         private readonly ContentViewFallbackResolver $contentViewFallbackResolver,
         private readonly ParameterProcessor $parameterProcessor,
-    ) {
-    }
+    ) {}
 
     /**
      * Returns view as a data transfer object.

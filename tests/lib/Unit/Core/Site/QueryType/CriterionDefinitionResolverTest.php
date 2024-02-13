@@ -23,7 +23,7 @@ final class CriterionDefinitionResolverTest extends TestCase
 {
     protected ?CriterionDefinitionResolver $criterionDefinitionResolver = null;
 
-    public function providerForTestResolve(): array
+    public function provideResolveCases(): iterable
     {
         return [
             [
@@ -353,7 +353,7 @@ final class CriterionDefinitionResolverTest extends TestCase
     }
 
     /**
-     * @dataProvider providerForTestResolve
+     * @dataProvider provideResolveCases
      *
      * @param \Netgen\IbexaSiteApi\Core\Site\QueryType\CriterionDefinition[] $expectedCriterionDefinitions
      */
@@ -369,7 +369,7 @@ final class CriterionDefinitionResolverTest extends TestCase
         );
     }
 
-    public function providerForTestResolveTargets(): array
+    public function provideResolveTargetsCases(): iterable
     {
         return [
             [
@@ -801,7 +801,7 @@ final class CriterionDefinitionResolverTest extends TestCase
     }
 
     /**
-     * @dataProvider providerForTestResolveTargets
+     * @dataProvider provideResolveTargetsCases
      *
      * @param \Netgen\IbexaSiteApi\Core\Site\QueryType\CriterionDefinition[] $expectedCriterionDefinitions
      */

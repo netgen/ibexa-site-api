@@ -28,7 +28,7 @@ use function reset;
  */
 class NativeResolverTest extends TestCase
 {
-    public function providerForTestResolve(): array
+    public function provideResolveCases(): iterable
     {
         return [
             '#1.1 Nothing matches the subtree, current siteaccess is used as a fallback' => [
@@ -1027,7 +1027,7 @@ class NativeResolverTest extends TestCase
     }
 
     /**
-     * @dataProvider providerForTestResolve
+     * @dataProvider provideResolveCases
      */
     public function testResolve(array $data, ?string $expectedSiteaccessName): void
     {

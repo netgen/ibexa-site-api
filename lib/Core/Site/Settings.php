@@ -28,15 +28,14 @@ final class Settings extends BaseSettings
         private readonly int $rootLocationId,
         private readonly bool $showHiddenItems,
         private readonly bool $failOnMissingField,
-    ) {
-    }
+    ) {}
 
     /**
      * @return bool|int|string[]
      *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\PropertyNotFoundException
      */
-    public function __get(string $property): bool|int|array
+    public function __get(string $property): array|bool|int
     {
         return match ($property) {
             'prioritizedLanguages' => $this->prioritizedLanguages,

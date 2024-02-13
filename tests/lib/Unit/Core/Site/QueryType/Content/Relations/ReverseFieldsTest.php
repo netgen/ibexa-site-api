@@ -37,7 +37,7 @@ final class ReverseFieldsTest extends QueryTypeBaseTest
 {
     use ContentFieldsMockTrait;
 
-    public function providerForTestGetQuery(): array
+    public function provideGetQueryCases(): array
     {
         $content = $this->getTestContent();
 
@@ -202,7 +202,7 @@ final class ReverseFieldsTest extends QueryTypeBaseTest
         ];
     }
 
-    public function providerForTestGetQueryWithInvalidOptions(): array
+    public function provideGetQueryWithInvalidOptionsCases(): array
     {
         $content = $this->getTestContent();
 
@@ -251,7 +251,7 @@ final class ReverseFieldsTest extends QueryTypeBaseTest
         ];
     }
 
-    public function providerForTestGetQueryWithInvalidCriteria(): array
+    public function provideGetQueryWithInvalidCriteriaCases(): array
     {
         $content = $this->getTestContent();
 
@@ -268,7 +268,7 @@ final class ReverseFieldsTest extends QueryTypeBaseTest
         ];
     }
 
-    public function providerForTestInvalidSortClauseThrowsException(): array
+    public function provideInvalidSortClauseThrowsExceptionCases(): array
     {
         $content = $this->getTestContent();
 

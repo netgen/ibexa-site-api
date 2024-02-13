@@ -11,8 +11,7 @@ class Configuration implements ConfigurationInterface
 {
     public function __construct(
         protected readonly string $rootNodeName,
-    ) {
-    }
+    ) {}
 
     public function getConfigTreeBuilder(): TreeBuilder
     {

@@ -91,7 +91,7 @@ final class ContentViewTest extends AbstractParserTestCase
         );
     }
 
-    public function providerForTestValid(): array
+    public function provideValidCases(): iterable
     {
         return [
             [
@@ -196,7 +196,7 @@ final class ContentViewTest extends AbstractParserTestCase
     }
 
     /**
-     * @dataProvider providerForTestValid
+     * @dataProvider provideValidCases
      */
     public function testValid(array $configurationValues): void
     {
@@ -220,7 +220,7 @@ final class ContentViewTest extends AbstractParserTestCase
         $this->addToAssertionCount(1);
     }
 
-    public function providerForTextExtends(): array
+    public function provideExtendsCases(): iterable
     {
         return [
             [
@@ -319,7 +319,7 @@ final class ContentViewTest extends AbstractParserTestCase
     }
 
     /**
-     * @dataProvider providerForTextExtends
+     * @dataProvider provideExtendsCases
      */
     public function testExtends(array $configurationValues, array $expectedValues): void
     {
@@ -392,7 +392,7 @@ final class ContentViewTest extends AbstractParserTestCase
         $this->addToAssertionCount(1);
     }
 
-    public function providerForTestInvalid(): array
+    public function provideInvalidCases(): iterable
     {
         return [
             [
@@ -489,7 +489,7 @@ final class ContentViewTest extends AbstractParserTestCase
     }
 
     /**
-     * @dataProvider providerForTestInvalid
+     * @dataProvider provideInvalidCases
      */
     public function testInvalid(array $configurationValues, string $exceptionClass, string $exceptionMessage): void
     {
@@ -520,7 +520,7 @@ final class ContentViewTest extends AbstractParserTestCase
         ]);
     }
 
-    public function providerForTestDefaultValues(): array
+    public function provideDefaultValuesCases(): iterable
     {
         return [
             [
@@ -625,7 +625,7 @@ final class ContentViewTest extends AbstractParserTestCase
     }
 
     /**
-     * @dataProvider providerForTestDefaultValues
+     * @dataProvider provideDefaultValuesCases
      */
     public function testDefaultValues(array $configurationValues, array $expectedConfigurationValues): void
     {
