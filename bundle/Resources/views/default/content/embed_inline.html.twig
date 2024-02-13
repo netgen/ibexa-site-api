@@ -2,7 +2,7 @@
 {# location \Netgen\IbexaSiteApi\API\Values\Location #}
 
 {% if location is defined %}
-    <a href="{{ ibexa_path(location) }}"{% if class is defined %} class="{{ class }}"{% endif %}>{{ content.name }}</a>
+    <a href="{{ location.path }}"{% if class is defined %} class="{{ class }}"{% endif %}>{{ content.name }}</a>
 {% else %}
-    <a href="{{ ibexa_path(content) }}"{% if class is defined %} class="{{ class }}"{% endif %}>{{ content.name }}</a>
+    <a href="{{ content.path }}"{% if class is defined %} class="{{ class }}"{% endif %}>{{ content.name }}</a>
 {% endif %}
