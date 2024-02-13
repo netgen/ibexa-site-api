@@ -1194,16 +1194,16 @@ Return absolute URL.
 | **Example in PHP**                     | .. code-block:: php                                                                |
 |                                        |                                                                                    |
 |                                        |     $absoluteUrl = (string) $content->url;                                         |
-|                                        |     $absoluteUrl = $content->get();                                                |
-|                                        |     $absoluteUrl = $content->get([                                                 |
+|                                        |     $absoluteUrl = $content->url->get();                                           |
+|                                        |     $absoluteUrl = $content->url->get([                                            |
 |                                        |         'siteaccess' => 'admin',                                                   |
 |                                        |         'page' => 1,                                                               |
 |                                        |         '_fragment' => 'frag'                                                      |
 |                                        |     ]);                                                                            |
 |                                        |                                                                                    |
 |                                        |     $absoluteUrl = (string) $location->url;                                        |
-|                                        |     $absoluteUrl = $location->get();                                               |
-|                                        |     $absoluteUrl = $location->get([                                                |
+|                                        |     $absoluteUrl = $location->url->get();                                          |
+|                                        |     $absoluteUrl = $location->url->get([                                           |
 |                                        |         'siteaccess' => 'admin',                                                   |
 |                                        |         'page' => 1,                                                               |
 |                                        |         '_fragment' => 'frag'                                                      |
