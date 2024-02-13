@@ -539,9 +539,9 @@ Properties
 +--------------------------+---------------------+-----------------------------------------------------------------------------+
 | ``$innerModifierUser``   | ``User``            | Optional modifier user's Repository User object                             |
 +--------------------------+---------------------+-----------------------------------------------------------------------------+
-| ``$path``                | `Path`_             | Content's main Location absolute URL path                                   |
+| ``$path``                | `Path`_             | Content's Path object                                                       |
 +--------------------------+---------------------+-----------------------------------------------------------------------------+
-| ``$url``                 | `Url`_              | Content's main Location absolute URL                                        |
+| ``$url``                 | `Url`_              | Content's URL object                                                        |
 +--------------------------+---------------------+-----------------------------------------------------------------------------+
 
 ``ContentInfo``
@@ -988,9 +988,9 @@ Properties
 +-----------------------+----------------+------------------------------------------------------------------------------------+
 | ``$content``          | `Content`_     | Content object (lazy loaded)                                                       |
 +-----------------------+----------------+------------------------------------------------------------------------------------+
-| ``$path``             | `Path`_        | Location's absolute URL path                                                       |
+| ``$path``             | `Path`_        | Location's Path object                                                             |
 +-----------------------+----------------+------------------------------------------------------------------------------------+
-| ``$url``              | `Url`_         | Location's absolute URL                                                            |
+| ``$url``              | `Url`_         | Location's URL object                                                              |
 +-----------------------+----------------+------------------------------------------------------------------------------------+
 
 .. _path_object:
@@ -1044,6 +1044,7 @@ Return absolute URL path.
 +----------------------------------------+------------------------------------------------------------------------------------+
 | **Example in Twig**                    | .. code-block:: twig                                                               |
 |                                        |                                                                                    |
+|                                        |     {% set absolute_path = content.path %}                                         |
 |                                        |     {% set absolute_path = content.path.absolute %}                                |
 |                                        |     {% set absolute_path = content.path.absolute({                                 |
 |                                        |         siteaccess: 'admin',                                                       |
@@ -1051,6 +1052,7 @@ Return absolute URL path.
 |                                        |         _fragment: 'frag'                                                          |
 |                                        |     }) %}                                                                          |
 |                                        |                                                                                    |
+|                                        |     {% set absolute_path = location.path %}                                        |
 |                                        |     {% set absolute_path = location.path.absolute %}                               |
 |                                        |     {% set absolute_path = location.path.absolute({                                |
 |                                        |         siteaccess: 'admin',                                                       |
