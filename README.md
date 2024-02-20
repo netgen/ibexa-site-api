@@ -5,7 +5,7 @@
 [![Downloads](https://img.shields.io/packagist/dt/netgen/ibexa-site-api.svg)](https://packagist.org/packages/netgen/ibexa-site-api)
 [![Latest stable](https://img.shields.io/packagist/v/netgen/ibexa-site-api.svg)](https://packagist.org/packages/netgen/ibexa-site-api)
 [![PHP](https://img.shields.io/badge/PHP-8.1+-%238892BF.svg)](https://www.php.net)
-[![Ibexa](https://img.shields.io/badge/Ibexa-4.5+-orange.svg)](https://www.ibexa.co)
+[![Ibexa](https://img.shields.io/badge/Ibexa-4.6+-orange.svg)](https://www.ibexa.co)
 
 **Netgen's Site API** is a productivity layer built for Ibexa CMS developers, designed to
 remove the need for boilerplate code and make the development of Ibexa CMS sites more accessible
