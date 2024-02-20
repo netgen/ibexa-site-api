@@ -32,6 +32,7 @@ services:
             - '@Ibexa\Core\Persistence\Legacy\Filter\Handler\LocationFilteringHandler'
             - '@Ibexa\Core\Repository\User\PasswordValidatorInterface'
             - '@Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface'
+            - '@Ibexa\Contracts\Core\Repository\NameSchema\NameSchemaServiceInterface'
             - '%languages%'
         lazy: true
 
