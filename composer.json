@@ -16,7 +16,8 @@
         "ibexa/http-cache": "^4.6",
         "ibexa/fieldtype-richtext": "^4.6",
         "netgen/ibexa-search-extra": "^3.0",
-        "sensio/framework-extra-bundle": "^6.1.0"
+        "sensio/framework-extra-bundle": "^6.1.0",
+        "twig/twig": "^3.9"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.0",
