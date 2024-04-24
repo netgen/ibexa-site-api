@@ -8,13 +8,12 @@ use Netgen\IbexaSiteApi\Core\Site\Values\Fields;
 use Traversable;
 use Twig\Compiler;
 use Twig\Environment;
+use Twig\Extension\CoreExtension;
 use Twig\Extension\SandboxExtension;
 use Twig\Node\Expression\GetAttrExpression;
 use Twig\Node\Node;
 use Twig\Source;
 use Twig\Template;
-
-use function twig_get_attribute;
 
 final class GetAttrExpressionDecorator extends GetAttrExpression
 {
@@ -58,7 +57,7 @@ final class GetAttrExpressionDecorator extends GetAttrExpression
             return;
         }
 
-        $compiler->raw(self::class . '::twig_get_attribute($this->env, $this->source, ');
+        $compiler->raw(self::class . '::twigGetAttribute($this->env, $this->source, ');
 
         if ($this->getAttribute('ignore_strict_check')) {
             $this->getNode('node')->setAttribute('ignore_strict_check', true);
@@ -166,7 +165,7 @@ final class GetAttrExpressionDecorator extends GetAttrExpression
      * @param bool $sandboxed
      * @param int $lineno
      */
-    public static function twig_get_attribute(
+    public static function twigGetAttribute(
         Environment $env,
         Source $source,
         mixed $object,
@@ -179,7 +178,7 @@ final class GetAttrExpressionDecorator extends GetAttrExpression
         $lineno = -1,
     ) {
         if (!$object instanceof Fields) {
-            return twig_get_attribute(
+            return CoreExtension::getAttribute(
                 $env,
                 $source,
                 $object,
