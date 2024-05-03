@@ -157,6 +157,10 @@ class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
             $siteaccess = $this->currentSiteaccess->name;
         }
 
+        if ($siteaccess === $this->currentSiteaccess->name) {
+            return $this->generator->generate($location, $parameters, $referenceType);
+        }
+
         $parameters['siteaccess'] = $siteaccess;
 
         $url = $this->generator->generate(
