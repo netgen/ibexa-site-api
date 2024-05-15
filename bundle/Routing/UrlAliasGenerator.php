@@ -27,16 +27,21 @@ class UrlAliasGenerator extends BaseUrlAliasGenerator
         $this->configResolver = $configResolver;
     }
 
-    public function loadLocation($locationId): Location
+    public function loadLocation($locationId, ?array $languages = null): Location
     {
-        $isSiteApiPrimaryContentView = $this->configResolver->getParameter('ng_site_api.site_api_is_primary_content_view');
+        $isSiteApiPrimaryContentView = $this->configResolver->getParameter(
+            'ng_site_api.site_api_is_primary_content_view',
+        );
 
         if (!$isSiteApiPrimaryContentView) {
-            return parent::loadLocation($locationId);
+            return parent::loadLocation($locationId, $languages);
         }
 
         return $this->repository->sudo(
-            static fn (Repository $repository) => $repository->getLocationService()->loadLocation($locationId, []),
+            static fn (Repository $repository) => $repository->getLocationService()->loadLocation(
+                $locationId,
+                $languages,
+            ),
         );
     }
 }
