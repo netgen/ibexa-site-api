@@ -498,4 +498,23 @@ final class Content extends APIContent
 
         return $this->url;
     }
+
+    public function getDebugInfo(): array
+    {
+        return [
+            'id' => $this->id,
+            'mainLocationId' => $this->mainLocationId,
+            'name' => $this->name,
+            'languageCode' => $this->languageCode,
+            'isVisible' => $this->getContentInfo()->isVisible,
+            'url' => $this->getUrl(),
+            'path' => $this->getPath(),
+            'owner' => $this->getOwner(),
+            'modifier' => $this->getModifier(),
+            'mainLocation' => $this->getMainLocation(),
+            'locations' => $this->getLocations(),
+            'contentInfo' => $this->getContentInfo(),
+            'fields' => $this->fields,
+        ];
+    }
 }

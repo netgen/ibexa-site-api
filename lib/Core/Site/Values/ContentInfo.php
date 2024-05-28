@@ -90,4 +90,27 @@ final class ContentInfo extends APIContentInfo
 
         return $this->internalMainLocation;
     }
+
+    public function getDebugInfo(): array
+    {
+        return [
+            'id' => $this->innerContentInfo->id,
+            'mainLocationId' => $this->innerContentInfo->mainLocationId,
+            'remoteId' => $this->innerContentInfo->remoteId,
+            'name' => $this->name,
+            'published' => $this->innerContentInfo->published,
+            'currentVersionNo' => $this->innerContentInfo->currentVersionNo,
+            'publicationDate' => $this->innerContentInfo->publishedDate,
+            'modificationDate' => $this->innerContentInfo->modificationDate,
+            'languageCode' => $this->languageCode,
+            'mainLanguageCode' => $this->innerContentInfo->mainLanguageCode,
+            'alwaysAvailable' => $this->innerContentInfo->alwaysAvailable,
+            'isVisible' => !$this->innerContentInfo->isHidden,
+            'isHidden' => $this->innerContentInfo->isHidden,
+            'sectionId' => $this->innerContentInfo->sectionId,
+            'ownerId' => $this->innerContentInfo->ownerId,
+            'contentType' => $this->innerContentType,
+            'mainLocation' => $this->getMainLocation(),
+        ];
+    }
 }

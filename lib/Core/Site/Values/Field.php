@@ -44,4 +44,22 @@ final class Field extends APIField
     {
         return $this->isSurrogate;
     }
+
+    public function getDebugInfo(): array
+    {
+        return [
+            'id' => $this->id,
+            'contentId' => $this->content->id,
+            'fieldDefIdentifier' => $this->fieldDefIdentifier,
+            'fieldTypeIdentifier' => $this->fieldTypeIdentifier,
+            'languageCode' => $this->languageCode,
+            'name' => $this->name,
+            'description' => $this->description,
+            'isEmpty' => $this->isEmpty,
+            'isSurrogate' => $this->isSurrogate,
+            'content' => $this->content,
+            'fieldDefinition' => $this->innerFieldDefinition,
+            'value' => $this->value,
+        ];
+    }
 }

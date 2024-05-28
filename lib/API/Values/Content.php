@@ -34,7 +34,7 @@ use Pagerfanta\Pagerfanta;
  * @property-read \Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo $innerVersionInfo
  * @property-read \Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo $versionInfo
  */
-abstract class Content extends ValueObject
+abstract class Content extends ValueObject implements DebugInfo
 {
     /**
      * Returns if Content has the field with the given field definition $identifier.

@@ -245,4 +245,11 @@ final class Fields extends APIFields
             'isSurrogate' => true,
         ]);
     }
+
+    public function getDebugInfo(): array
+    {
+        $this->initialize();
+
+        return $this->fieldsByIdentifier;
+    }
 }
