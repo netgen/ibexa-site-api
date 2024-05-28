@@ -58,7 +58,7 @@ final class Field extends APIField
             'isEmpty' => $this->isEmpty,
             'isSurrogate' => $this->isSurrogate,
             'content' => $this->content,
-            'fieldDefinition' => $this->innerFieldDefinition,
+            'innerFieldDefinition' => $this->innerFieldDefinition,
             'value' => $this->value,
         ];
     }

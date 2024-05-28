@@ -100,7 +100,7 @@ final class ContentInfo extends APIContentInfo
             'name' => $this->name,
             'published' => $this->innerContentInfo->published,
             'currentVersionNo' => $this->innerContentInfo->currentVersionNo,
-            'publicationDate' => $this->innerContentInfo->publishedDate,
+            'publishedDate' => $this->innerContentInfo->publishedDate,
             'modificationDate' => $this->innerContentInfo->modificationDate,
             'languageCode' => $this->languageCode,
             'mainLanguageCode' => $this->innerContentInfo->mainLanguageCode,
@@ -109,7 +109,7 @@ final class ContentInfo extends APIContentInfo
             'isHidden' => $this->innerContentInfo->isHidden,
             'sectionId' => $this->innerContentInfo->sectionId,
             'ownerId' => $this->innerContentInfo->ownerId,
-            'contentType' => $this->innerContentType,
+            'innerContentType' => $this->innerContentType,
             'mainLocation' => $this->getMainLocation(),
         ];
     }
