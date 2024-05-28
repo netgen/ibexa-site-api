@@ -268,4 +268,27 @@ final class Location extends APILocation
 
         return $this->contentInfo;
     }
+
+    public function getDebugInfo(): array
+    {
+        return [
+            'id' => $this->innerLocation->id,
+            'contentId' => $this->innerLocation->contentId,
+            'remoteId' => $this->innerLocation->remoteId,
+            'status' => $this->innerLocation->status,
+            'priority' => $this->innerLocation->priority,
+            'hidden' => $this->innerLocation->hidden,
+            'invisible' => $this->innerLocation->invisible,
+            'explicitlyHidden' => $this->innerLocation->explicitlyHidden,
+            'isVisible' => !$this->innerLocation->hidden && !$this->innerLocation->invisible,
+            'pathString' => $this->innerLocation->pathString,
+            'pathArray' => $this->innerLocation->path,
+            'depth' => $this->innerLocation->depth,
+            'sortField' => $this->innerLocation->sortField,
+            'sortOrder' => $this->innerLocation->sortOrder,
+            'content' => $this->getContent(),
+            'contentInfo' => $this->getContentInfo(),
+            'parent' => $this->getParent(),
+        ];
+    }
 }

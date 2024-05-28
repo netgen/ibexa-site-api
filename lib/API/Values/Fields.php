@@ -13,7 +13,7 @@ use IteratorAggregate;
  *
  * @see \Netgen\IbexaSiteApi\API\Values\Field
  */
-abstract class Fields implements IteratorAggregate, ArrayAccess, Countable
+abstract class Fields implements IteratorAggregate, ArrayAccess, Countable, DebugInfo
 {
     /**
      * Return whether the collection contains a field with the given $identifier.

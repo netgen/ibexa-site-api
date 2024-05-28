@@ -34,7 +34,7 @@ use Pagerfanta\Pagerfanta;
  * @property-read ?\Netgen\IbexaSiteApi\API\Values\Location $parent
  * @property-read \Ibexa\Contracts\Core\Repository\Values\Content\Location $innerLocation
  */
-abstract class Location extends ValueObject
+abstract class Location extends ValueObject implements DebugInfo
 {
     /**
      * Return an array of children Locations, limited by optional $limit.

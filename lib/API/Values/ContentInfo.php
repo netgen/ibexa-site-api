@@ -36,6 +36,4 @@ use Ibexa\Contracts\Core\Repository\Values\ValueObject;
  * @property-read \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType $innerContentType
  * @property-read ?\Netgen\IbexaSiteApi\API\Values\Location $mainLocation
  */
-abstract class ContentInfo extends ValueObject
-{
-}
+abstract class ContentInfo extends ValueObject implements DebugInfo {}

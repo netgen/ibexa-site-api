@@ -12,6 +12,7 @@ use Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Compiler\RedirectExpres
 use Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Compiler\RelationResolverRegistrationPass;
 use Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Compiler\UrlAliasGeneratorOverridePass;
 use Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Compiler\UrlAliasRouterOverridePass;
+use Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Compiler\VarDumperPass;
 use Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Compiler\ViewBuilderRegistrationPass;
 use Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Configuration\Parser\ContentView;
 use Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Configuration\Parser\SiteApi;
@@ -32,6 +33,7 @@ class NetgenIbexaSiteApiBundle extends Bundle
         $container->addCompilerPass(new QueryTypeExpressionFunctionProviderPass());
         $container->addCompilerPass(new RedirectExpressionFunctionProviderPass());
         $container->addCompilerPass(new RelationResolverRegistrationPass());
+        $container->addCompilerPass(new VarDumperPass());
         $container->addCompilerPass(new ViewBuilderRegistrationPass());
 
         /** @var \Ibexa\Bundle\Core\DependencyInjection\IbexaCoreExtension $coreExtension */
