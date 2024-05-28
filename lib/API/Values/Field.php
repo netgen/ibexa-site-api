@@ -24,7 +24,7 @@ use Ibexa\Contracts\Core\Repository\Values\ValueObject;
  * @property-read \Ibexa\Contracts\Core\Repository\Values\Content\Field $innerField
  * @property-read \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition $innerFieldDefinition
  */
-abstract class Field extends ValueObject
+abstract class Field extends ValueObject implements DebugInfo
 {
     abstract public function isEmpty(): bool;
 
