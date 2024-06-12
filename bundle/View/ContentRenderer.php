@@ -8,6 +8,7 @@ use Exception;
 use Ibexa\Contracts\Core\Repository\Values\Content\Content as APIContent;
 use Ibexa\Contracts\Core\Repository\Values\Content\Location as APILocation;
 use Ibexa\Contracts\Core\Repository\Values\ValueObject;
+use Ibexa\Core\MVC\Symfony\View\Builder\ContentViewBuilder as CoreContentViewBuilder;
 use LogicException;
 use Netgen\Bundle\IbexaSiteApiBundle\View\Builder\ContentViewBuilder;
 use Netgen\IbexaSiteApi\API\Values\Content;
@@ -27,6 +28,7 @@ final class ContentRenderer
 {
     public function __construct(
         private readonly ContentViewBuilder $viewBuilder,
+        private readonly CoreContentViewBuilder $coreViewBuilder,
         private readonly ViewRenderer $viewRenderer,
         private readonly LoggerInterface $logger = new NullLogger(),
     ) {}
@@ -110,7 +112,7 @@ final class ContentRenderer
             $baseParameters['location'] = $location;
         }
 
-        $view = $this->viewBuilder->buildView($baseParameters + $parameters);
+        $view = $this->coreViewBuilder->buildView($baseParameters + $parameters);
 
         return $this->viewRenderer->render($view, $parameters, $layout);
     }
@@ -127,7 +129,7 @@ final class ContentRenderer
         ];
 
         try {
-            $view = $this->viewBuilder->buildView($baseParameters + $parameters);
+            $view = $this->coreViewBuilder->buildView($baseParameters + $parameters);
         } catch (Exception $exception) {
             $this->logger->error(
                 sprintf(
