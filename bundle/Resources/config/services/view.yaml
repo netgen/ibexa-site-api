@@ -88,6 +88,7 @@ services:
         class: Netgen\Bundle\IbexaSiteApiBundle\View\ContentRenderer
         arguments:
             - '@netgen.ibexa_site_api.view_builder.content'
+            - '@Ibexa\Core\MVC\Symfony\View\Builder\ContentViewBuilder'
             - '@netgen.ibexa_site_api.view_renderer'
             - '@?logger'
         tags:
