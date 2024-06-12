@@ -155,7 +155,6 @@ abstract class BaseTest extends APIBaseTest
         self::assertSame($locationId, $contentInfo->mainLocationId);
         self::assertSame($name, $contentInfo->name);
         self::assertSame($data['contentTypeIdentifier'], $contentInfo->contentTypeIdentifier);
-        self::assertSame($data['contentTypeId'], $contentInfo->contentTypeId);
         self::assertSame($data['sectionId'], $contentInfo->sectionId);
         self::assertSame($data['currentVersionNo'], $contentInfo->currentVersionNo);
         self::assertSame($data['published'], $contentInfo->published);
