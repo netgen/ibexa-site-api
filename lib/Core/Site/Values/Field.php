@@ -12,7 +12,7 @@ use Netgen\IbexaSiteApi\API\Values\Field as APIField;
 
 final class Field extends APIField
 {
-    protected int $id;
+    protected ?int $id;
     protected string $fieldDefIdentifier;
     protected Value $value;
     protected string $languageCode;
