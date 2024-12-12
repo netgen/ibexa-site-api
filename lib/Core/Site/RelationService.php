@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Netgen\IbexaSiteApi\Core\Site;
 
 use Exception;
+use Ibexa\Contracts\Core\Repository\Values\Content\LocationQuery;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion;
 use Netgen\IbexaSiteApi\API\RelationService as RelationServiceInterface;
 use Netgen\IbexaSiteApi\API\Site as SiteInterface;
 use Netgen\IbexaSiteApi\API\Values\Content;
@@ -137,6 +140,61 @@ class RelationService implements RelationServiceInterface
         }
 
         return $locations;
+    }
+
+    public function loadReverseRelations(
+        Content $content,
+        string $fieldDefinitionIdentifier,
+        array $contentTypeIdentifiers = [],
+        ?int $limit = null,
+    ): array {
+        $query = new Query();
+
+        $criteria = [
+            new Criterion\FieldRelation($fieldDefinitionIdentifier, Criterion\Operator::CONTAINS, [$content->id])
+        ];
+
+        if (count($contentTypeIdentifiers) > 0) {
+            $criteria[] = new Criterion\ContentTypeIdentifier($contentTypeIdentifiers);
+        }
+
+        $query->filter = new Criterion\LogicalAnd($criteria);
+
+        if ($limit !== null && $limit > 0) {
+            $query->limit = $limit;
+        }
+
+        $result = $this->site->getFindService()->findContent($query);
+
+        return $this->extractContentItems($result);
+    }
+
+    public function loadReverseRelationLocations(
+        Content $content,
+        string $fieldDefinitionIdentifier,
+        array $contentTypeIdentifiers = [],
+        ?int $limit = null,
+    ): array {
+        $query = new LocationQuery();
+
+        $criteria = [
+            new Criterion\FieldRelation($fieldDefinitionIdentifier, Criterion\Operator::CONTAINS, [$content->id]),
+            new Criterion\Location\IsMainLocation(Criterion\Location\IsMainLocation::MAIN),
+        ];
+
+        if (count($contentTypeIdentifiers) > 0) {
+            $criteria[] = new Criterion\ContentTypeIdentifier($contentTypeIdentifiers);
+        }
+
+        $query->filter = new Criterion\LogicalAnd($criteria);
+
+        if ($limit !== null && $limit > 0) {
+            $query->limit = $limit;
+        }
+
+        $result = $this->site->getFindService()->findLocations($query);
+
+        return $this->extractLocations($result);
     }
 
     /**
