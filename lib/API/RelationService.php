@@ -61,4 +61,32 @@ interface RelationService
         array $contentTypeIdentifiers = [],
         ?int $limit = null,
     ): array;
+
+    /**
+     * Load all reverse related Content from $fieldDefinitionIdentifier field to the given
+     * $content, optionally limited by a list of $contentTypeIdentifiers and $limit.
+     *
+     * @return \Netgen\IbexaSiteApi\API\Values\Content[]
+     */
+    public function loadReverseRelations(
+        Content $content,
+        string $fieldDefinitionIdentifier,
+        array $contentTypeIdentifiers = [],
+        ?int $limit = null,
+    ): array;
+
+    /**
+     * Load all reverse related Locations from $fieldDefinitionIdentifier field to the given
+     * $content, optionally limited by a list of $contentTypeIdentifiers and $limit.
+     *
+     * Note: only visible main Locations of the reverse related Content will be used.
+     *
+     * @return \Netgen\IbexaSiteApi\API\Values\Location[]
+     */
+    public function loadReverseRelationLocations(
+        Content $content,
+        string $fieldDefinitionIdentifier,
+        array $contentTypeIdentifiers = [],
+        ?int $limit = null,
+    ): array;
 }
