@@ -142,7 +142,7 @@ class RelationService implements RelationServiceInterface
         return $locations;
     }
 
-    public function loadReverseRelations(
+    public function loadReverseFieldRelations(
         Content $content,
         string $fieldDefinitionIdentifier,
         array $contentTypeIdentifiers = [],
@@ -169,7 +169,7 @@ class RelationService implements RelationServiceInterface
         return $this->extractContentItems($result);
     }
 
-    public function loadReverseRelationLocations(
+    public function loadReverseFieldRelationLocations(
         Content $content,
         string $fieldDefinitionIdentifier,
         array $contentTypeIdentifiers = [],
