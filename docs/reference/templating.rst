@@ -491,6 +491,54 @@ Content Field relations
 
     {{ pagerfanta( events, 'twitter_bootstrap' ) }}
 
+Content Field reverse relations
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- **Accessing all field relations**
+
+  This is done by calling the method ``getReverseFieldRelations()``, also available as
+  ``reverseFieldRelations()`` in Twig. It returns an array of Content items and has two parameters:
+
+  1. **required** identifier of the reverse relation field
+  2. **optional** maximum number of items returned, by default ``25``
+
+  .. code-block:: twig
+
+    {% set reverse_related_articles = content.reverseFieldRelations('related_articles', 10) %}
+
+    <ul>
+    {% for article in reverse_related_articles %}
+        <li>
+            <a href="{{ ibexa_path(article) }}">{{ article.name }}</a>
+        </li>
+    {% endfor %}
+    </ul>
+
+- **Filtering through reverse field relations**
+
+  This is done by calling the method ``filterReverseFieldRelations()``, which returns a Pagerfanta
+  instance and has four parameters:
+
+  1. **required** identifier of the reverse relation field
+  2. **optional** array of ContentType identifiers that will be used to filter the result, by
+     default an empty array ``[]``
+  3. **optional** maximum number of items per page, by default ``25``
+  4. **optional** current page, by default ``1``
+
+  .. code-block:: twig
+
+    {% set articles = content.filterReverseFieldRelations('related_items', ['article'], 10, 1) %}
+
+    <ul>
+    {% for article in articles %}
+        <li>
+            <a href="{{ ibexa_path(article) }}">{{ article.name }}</a>
+        </li>
+    {% endfor %}
+    </ul>
+
+    {{ pagerfanta( events, 'twitter_bootstrap' ) }}
+
 Location children
 ~~~~~~~~~~~~~~~~~
 

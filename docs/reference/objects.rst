@@ -434,6 +434,124 @@ Used to filter field relation Locations from the `Field`_ with the given ``$iden
 |                                        |                                                                                    |
 +----------------------------------------+------------------------------------------------------------------------------------+
 
+``getReverseFieldRelations``
+............................
+
+Used to get ``$limit`` reverse field relation Content items from the `Field`_ with the given ``$identifier``. Relations
+will be sorted as is defined by the relation field.
+
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Parameters**                         | 1. ``string $identifier``                                                          |
+|                                        | 2. ``int $limit = 25``                                                             |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Returns**                            | An array of reverse related `Content`_ items                                       |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Sorting method**                     | Sorted as is defined by the relation `Field`_                                      |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Example in PHP**                     | .. code-block:: php                                                                |
+|                                        |                                                                                    |
+|                                        |     $relations = $content->getReverseFieldRelations('images', 10);                 |
+|                                        |                                                                                    |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Example in Twig**                    | .. code-block:: twig                                                               |
+|                                        |                                                                                    |
+|                                        |     {% set relations = content.reverseFieldRelations('images') %}                  |
+|                                        |                                                                                    |
++----------------------------------------+------------------------------------------------------------------------------------+
+
+``filterReverseFieldRelations``
+...............................
+
+Used to filter reverse field relation Content items from the `Field`_ with the given ``$identifier``.
+
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Parameters**                         | 1. ``string $identifier``                                                          |
+|                                        | 2. ``array $contentTypeIdentifiers = []``                                          |
+|                                        | 3. ``int $maxPerPage = 25``                                                        |
+|                                        | 4. ``int $currentPage = 1``                                                        |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Returns**                            | Pagerfanta instance with reverse related `Content`_ items                          |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Example in PHP**                     | .. code-block:: php                                                                |
+|                                        |                                                                                    |
+|                                        |     $relations = $content->filterReverseFieldRelations(                            |
+|                                        |         'related_items',                                                           |
+|                                        |         ['images', 'videos'],                                                      |
+|                                        |         10,                                                                        |
+|                                        |         2                                                                          |
+|                                        |     );                                                                             |
+|                                        |                                                                                    |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Example in Twig**                    | .. code-block:: twig                                                               |
+|                                        |                                                                                    |
+|                                        |     {% set relations = content.filterReverseFieldRelations(                        |
+|                                        |         'related_items'                                                            |
+|                                        |         ['images', 'videos']                                                       |
+|                                        |         10,                                                                        |
+|                                        |         2                                                                          |
+|                                        |     ) %}                                                                           |
+|                                        |                                                                                    |
++----------------------------------------+------------------------------------------------------------------------------------+
+
+``getReverseFieldRelationLocations``
+....................................
+
+Used to get ``$limit`` reverse field relation Locations from the `Field`_ with the given ``$identifier``. Relations
+will be sorted as is defined by the relation field.
+
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Parameters**                         | 1. ``string $identifier``                                                          |
+|                                        | 2. ``int $limit = 25``                                                             |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Returns**                            | An array of related `Location`_ items                                              |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Sorting method**                     | Sorted as is defined by the relation `Field`_                                      |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Example in PHP**                     | .. code-block:: php                                                                |
+|                                        |                                                                                    |
+|                                        |     $relations = $content->getReverseFieldRelationLocations('images', 10);         |
+|                                        |                                                                                    |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Example in Twig**                    | .. code-block:: twig                                                               |
+|                                        |                                                                                    |
+|                                        |     {% set relations = content.reverseFieldRelationLocations('images') %}          |
+|                                        |                                                                                    |
++----------------------------------------+------------------------------------------------------------------------------------+
+
+``filterReverseFieldRelationLocations``
+.......................................
+
+Used to filter reverse field relation Locations from the `Field`_ with the given ``$identifier``.
+
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Parameters**                         | 1. ``string $identifier``                                                          |
+|                                        | 2. ``array $contentTypeIdentifiers = []``                                          |
+|                                        | 3. ``int $maxPerPage = 25``                                                        |
+|                                        | 4. ``int $currentPage = 1``                                                        |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Returns**                            | Pagerfanta instance with reverse related `Location`_ items                         |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Example in PHP**                     | .. code-block:: php                                                                |
+|                                        |                                                                                    |
+|                                        |     $relations = $content->filterReverseFieldRelationLocations(                    |
+|                                        |         'related_items',                                                           |
+|                                        |         ['images', 'videos'],                                                      |
+|                                        |         10,                                                                        |
+|                                        |         2                                                                          |
+|                                        |     );                                                                             |
+|                                        |                                                                                    |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Example in Twig**                    | .. code-block:: twig                                                               |
+|                                        |                                                                                    |
+|                                        |     {% set relations = content.filterReverseFieldRelationLocations(                |
+|                                        |         'related_items'                                                            |
+|                                        |         ['images', 'videos']                                                       |
+|                                        |         10,                                                                        |
+|                                        |         2                                                                          |
+|                                        |     ) %}                                                                           |
+|                                        |                                                                                    |
++----------------------------------------+------------------------------------------------------------------------------------+
+
 ``getPath``
 ...........
 

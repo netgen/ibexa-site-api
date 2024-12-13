@@ -344,6 +344,52 @@ filtering by ContentType.
 |                                        |                                                                                    |
 +----------------------------------------+------------------------------------------------------------------------------------+
 
+``loadReverseFieldRelations()``
+...............................
+
+Get all reverse relation :ref:`Content items<content_object>` from a specific field to a given Content. The method supports optional
+filtering by ContentType.
+
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Parameters**                         | 1. ``Netgen\IbexaSiteApi\API\Values\Content $content``                             |
+|                                        | 2. ``string $fieldDefinitionIdentifier``                                           |
+|                                        | 3. ``array $contentTypeIdentifiers = []``                                          |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Returns**                            | An array of :ref:`Content items<content_object>`                                   |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Example**                            | .. code-block:: php                                                                |
+|                                        |                                                                                    |
+|                                        |     $contentItems = $relationService->loadReverseFieldRelations(                   |
+|                                        |         $content,                                                                  |
+|                                        |         'relations',                                                               |
+|                                        |         ['articles']                                                               |
+|                                        |     );                                                                             |
+|                                        |                                                                                    |
++----------------------------------------+------------------------------------------------------------------------------------+
+
+``loadReverseFieldRelationLocations()``
+.......................................
+
+Get all reverse relation :ref:`Locations<location_object>` from a specific field to a given Content. The method supports optional
+filtering by ContentType.
+
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Parameters**                         | 1. ``Netgen\IbexaSiteApi\API\Values\Content $content``                             |
+|                                        | 2. ``string $fieldDefinitionIdentifier``                                           |
+|                                        | 3. ``array $contentTypeIdentifiers = []``                                          |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Returns**                            | An array of :ref:`Locations<location_object>`                                      |
++----------------------------------------+------------------------------------------------------------------------------------+
+| **Example**                            | .. code-block:: php                                                                |
+|                                        |                                                                                    |
+|                                        |     $contentItems = $relationService->loadReverseFieldRelationLocations(           |
+|                                        |         $content,                                                                  |
+|                                        |         'relations',                                                               |
+|                                        |         ['articles']                                                               |
+|                                        |     );                                                                             |
+|                                        |                                                                                    |
++----------------------------------------+------------------------------------------------------------------------------------+
+
 Settings
 --------
 
