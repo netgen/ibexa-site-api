@@ -201,14 +201,14 @@ abstract class Content extends ValueObject implements DebugInfo
      *
      * @return \Netgen\IbexaSiteApi\API\Values\Content[]
      */
-    abstract public function getReverseRelations(string $fieldDefinitionIdentifier, int $limit = 25): array;
+    abstract public function getReverseFieldRelations(string $fieldDefinitionIdentifier, int $limit = 25): array;
 
     /**
      * Return all reverse related Content from $fieldDefinitionIdentifier using repository sudo.
      *
      * @return \Netgen\IbexaSiteApi\API\Values\Content[]
      */
-    abstract public function getSudoReverseRelations(string $fieldDefinitionIdentifier, int $limit = 25): array;
+    abstract public function getSudoReverseFieldRelations(string $fieldDefinitionIdentifier, int $limit = 25): array;
 
     /**
      * Return reverse related Content from $fieldDefinitionIdentifier field,
@@ -218,7 +218,7 @@ abstract class Content extends ValueObject implements DebugInfo
      *
      * @return \Pagerfanta\Pagerfanta Pagerfanta instance iterating over Site API Content items
      */
-    abstract public function filterReverseRelations(
+    abstract public function filterReverseFieldRelations(
         string $fieldDefinitionIdentifier,
         array $contentTypeIdentifiers = [],
         int $maxPerPage = 25,
@@ -233,7 +233,7 @@ abstract class Content extends ValueObject implements DebugInfo
      *
      * @return \Pagerfanta\Pagerfanta Pagerfanta instance iterating over Site API Content items
      */
-    abstract public function filterSudoReverseRelations(
+    abstract public function filterSudoReverseFieldRelations(
         string $fieldDefinitionIdentifier,
         array $contentTypeIdentifiers = [],
         int $maxPerPage = 25,
@@ -245,14 +245,14 @@ abstract class Content extends ValueObject implements DebugInfo
      *
      * @return \Netgen\IbexaSiteApi\API\Values\Location[]
      */
-    abstract public function getReverseRelationLocations(string $fieldDefinitionIdentifier, int $limit = 25): array;
+    abstract public function getReverseFieldRelationLocations(string $fieldDefinitionIdentifier, int $limit = 25): array;
 
     /**
      * Return all reverse related Locations from $fieldDefinitionIdentifier using repository sudo.
      *
      * @return \Netgen\IbexaSiteApi\API\Values\Location[]
      */
-    abstract public function getSudoReverseRelationLocations(string $fieldDefinitionIdentifier, int $limit = 25): array;
+    abstract public function getSudoReverseFieldRelationLocations(string $fieldDefinitionIdentifier, int $limit = 25): array;
 
     /**
      * Return reverse related Locations from $fieldDefinitionIdentifier field,
@@ -262,7 +262,7 @@ abstract class Content extends ValueObject implements DebugInfo
      *
      * @return \Pagerfanta\Pagerfanta Pagerfanta instance iterating over Site API Locations
      */
-    abstract public function filterReverseRelationLocations(
+    abstract public function filterReverseFieldRelationLocations(
         string $fieldDefinitionIdentifier,
         array $contentTypeIdentifiers = [],
         int $maxPerPage = 25,
@@ -277,7 +277,7 @@ abstract class Content extends ValueObject implements DebugInfo
      *
      * @return \Pagerfanta\Pagerfanta Pagerfanta instance iterating over Site API Locations
      */
-    abstract public function filterSudoReverseRelationLocations(
+    abstract public function filterSudoReverseFieldRelationLocations(
         string $fieldDefinitionIdentifier,
         array $contentTypeIdentifiers = [],
         int $maxPerPage = 25,

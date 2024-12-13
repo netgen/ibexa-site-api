@@ -68,7 +68,7 @@ interface RelationService
      *
      * @return \Netgen\IbexaSiteApi\API\Values\Content[]
      */
-    public function loadReverseRelations(
+    public function loadReverseFieldRelations(
         Content $content,
         string $fieldDefinitionIdentifier,
         array $contentTypeIdentifiers = [],
@@ -83,7 +83,7 @@ interface RelationService
      *
      * @return \Netgen\IbexaSiteApi\API\Values\Location[]
      */
-    public function loadReverseRelationLocations(
+    public function loadReverseFieldRelationLocations(
         Content $content,
         string $fieldDefinitionIdentifier,
         array $contentTypeIdentifiers = [],

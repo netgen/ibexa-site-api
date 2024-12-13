@@ -351,9 +351,9 @@ final class Content extends APIContent
         );
     }
 
-    public function getReverseRelations(string $fieldDefinitionIdentifier, int $limit = 25): array
+    public function getReverseFieldRelations(string $fieldDefinitionIdentifier, int $limit = 25): array
     {
-        return $this->site->getRelationService()->loadReverseRelations(
+        return $this->site->getRelationService()->loadReverseFieldRelations(
             $this,
             $fieldDefinitionIdentifier,
             [],
@@ -361,20 +361,20 @@ final class Content extends APIContent
         );
     }
 
-    public function getSudoReverseRelations(string $fieldDefinitionIdentifier, int $limit = 25): array
+    public function getSudoReverseFieldRelations(string $fieldDefinitionIdentifier, int $limit = 25): array
     {
         return $this->repository->sudo(
-            fn () => $this->getReverseRelations($fieldDefinitionIdentifier, $limit),
+            fn () => $this->getReverseFieldRelations($fieldDefinitionIdentifier, $limit),
         );
     }
 
-    public function filterReverseRelations(
+    public function filterReverseFieldRelations(
         string $fieldDefinitionIdentifier,
         array $contentTypeIdentifiers = [],
         int $maxPerPage = 25,
         int $currentPage = 1,
     ): Pagerfanta {
-        $relations = $this->site->getRelationService()->loadReverseRelations(
+        $relations = $this->site->getRelationService()->loadReverseFieldRelations(
             $this,
             $fieldDefinitionIdentifier,
             $contentTypeIdentifiers,
@@ -389,14 +389,14 @@ final class Content extends APIContent
         return $pager;
     }
 
-    public function filterSudoReverseRelations(
+    public function filterSudoReverseFieldRelations(
         string $fieldDefinitionIdentifier,
         array $contentTypeIdentifiers = [],
         int $maxPerPage = 25,
         int $currentPage = 1,
     ): Pagerfanta {
         return $this->repository->sudo(
-            fn () => $this->filterReverseRelations(
+            fn () => $this->filterReverseFieldRelations(
                 $fieldDefinitionIdentifier,
                 $contentTypeIdentifiers,
                 $maxPerPage,
@@ -405,9 +405,9 @@ final class Content extends APIContent
         );
     }
 
-    public function getReverseRelationLocations(string $fieldDefinitionIdentifier, int $limit = 25): array
+    public function getReverseFieldRelationLocations(string $fieldDefinitionIdentifier, int $limit = 25): array
     {
-        return $this->site->getRelationService()->loadReverseRelationLocations(
+        return $this->site->getRelationService()->loadReverseFieldRelationLocations(
             $this,
             $fieldDefinitionIdentifier,
             [],
@@ -415,20 +415,20 @@ final class Content extends APIContent
         );
     }
 
-    public function getSudoReverseRelationLocations(string $fieldDefinitionIdentifier, int $limit = 25): array
+    public function getSudoReverseFieldRelationLocations(string $fieldDefinitionIdentifier, int $limit = 25): array
     {
         return $this->repository->sudo(
-            fn () => $this->getReverseRelationLocations($fieldDefinitionIdentifier, $limit),
+            fn () => $this->getReverseFieldRelationLocations($fieldDefinitionIdentifier, $limit),
         );
     }
 
-    public function filterReverseRelationLocations(
+    public function filterReverseFieldRelationLocations(
         string $fieldDefinitionIdentifier,
         array $contentTypeIdentifiers = [],
         int $maxPerPage = 25,
         int $currentPage = 1,
     ): Pagerfanta {
-        $relations = $this->site->getRelationService()->loadReverseRelationLocations(
+        $relations = $this->site->getRelationService()->loadReverseFieldRelationLocations(
             $this,
             $fieldDefinitionIdentifier,
             $contentTypeIdentifiers,
@@ -443,14 +443,14 @@ final class Content extends APIContent
         return $pager;
     }
 
-    public function filterSudoReverseRelationLocations(
+    public function filterSudoReverseFieldRelationLocations(
         string $fieldDefinitionIdentifier,
         array $contentTypeIdentifiers = [],
         int $maxPerPage = 25,
         int $currentPage = 1,
     ): Pagerfanta {
         return $this->repository->sudo(
-            fn () => $this->filterReverseRelationLocations(
+            fn () => $this->filterReverseFieldRelationLocations(
                 $fieldDefinitionIdentifier,
                 $contentTypeIdentifiers,
                 $maxPerPage,
