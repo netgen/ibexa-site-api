@@ -28,6 +28,20 @@ final class QueryDefinitionCollectionTest extends TestCase
         );
     }
 
+    public function testAll(): void
+    {
+        $queryDefinitionCollection = $this->getQueryDefinitionCollectionUnderTest();
+        $queryDefinition = new QueryDefinition();
+        $name = 'test';
+
+        $queryDefinitionCollection->add($name, $queryDefinition);
+
+        self::assertSame(
+            ['test' => $queryDefinition],
+            $queryDefinitionCollection->all(),
+        );
+    }
+
     public function testGetQueryDefinitionThrowsException(): void
     {
         $this->expectException(OutOfBoundsException::class);

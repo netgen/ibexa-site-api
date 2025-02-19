@@ -46,4 +46,14 @@ final class QueryDefinitionCollection
             ),
         );
     }
+
+    /**
+     * Returns all QueryDefinitions.
+     *
+     * @return array<string, \Netgen\Bundle\IbexaSiteApiBundle\QueryType\QueryDefinition>
+     */
+    public function all(): array
+    {
+        return $this->queryDefinitionMap;
+    }
 }
