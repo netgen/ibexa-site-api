@@ -151,7 +151,7 @@ class RelationService implements RelationServiceInterface
         $query = new Query();
 
         $criteria = [
-            new Criterion\FieldRelation($fieldDefinitionIdentifier, Criterion\Operator::CONTAINS, [$content->id])
+            new Criterion\FieldRelation($fieldDefinitionIdentifier, Criterion\Operator::IN, [$content->id])
         ];
 
         if (count($contentTypeIdentifiers) > 0) {
@@ -178,7 +178,7 @@ class RelationService implements RelationServiceInterface
         $query = new LocationQuery();
 
         $criteria = [
-            new Criterion\FieldRelation($fieldDefinitionIdentifier, Criterion\Operator::CONTAINS, [$content->id]),
+            new Criterion\FieldRelation($fieldDefinitionIdentifier, Criterion\Operator::IN, [$content->id]),
             new Criterion\Location\IsMainLocation(Criterion\Location\IsMainLocation::MAIN),
         ];
 
