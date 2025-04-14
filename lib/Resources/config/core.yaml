@@ -33,6 +33,7 @@ services:
             - '@Ibexa\Core\Repository\User\PasswordValidatorInterface'
             - '@Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface'
             - '@Ibexa\Contracts\Core\Repository\NameSchema\NameSchemaServiceInterface'
+            - '@Ibexa\Core\Repository\Collector\ContentCollector'
             - '%languages%'
         lazy: true
 
