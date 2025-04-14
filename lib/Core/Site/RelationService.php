@@ -8,6 +8,7 @@ use Exception;
 use Ibexa\Contracts\Core\Repository\Values\Content\LocationQuery;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion;
+use Netgen\IbexaSearchExtra\API\Values\Content\Query\Criterion\Visible;
 use Netgen\IbexaSiteApi\API\RelationService as RelationServiceInterface;
 use Netgen\IbexaSiteApi\API\Site as SiteInterface;
 use Netgen\IbexaSiteApi\API\Values\Content;
@@ -158,6 +159,10 @@ class RelationService implements RelationServiceInterface
             $criteria[] = new Criterion\ContentTypeIdentifier($contentTypeIdentifiers);
         }
 
+        if (!$this->site->getSettings()->showHiddenItems) {
+            $criteria[] = new Visible(true);
+        }
+
         $query->filter = new Criterion\LogicalAnd($criteria);
 
         if ($limit !== null && $limit > 0) {
@@ -184,6 +189,10 @@ class RelationService implements RelationServiceInterface
 
         if (count($contentTypeIdentifiers) > 0) {
             $criteria[] = new Criterion\ContentTypeIdentifier($contentTypeIdentifiers);
+        }
+
+        if (!$this->site->getSettings()->showHiddenItems) {
+            $criteria[] = new Visible(true);
         }
 
         $query->filter = new Criterion\LogicalAnd($criteria);
