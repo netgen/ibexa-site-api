@@ -169,7 +169,7 @@ class RelationService implements RelationServiceInterface
             $query->limit = $limit;
         }
 
-        $result = $this->site->getFindService()->findContent($query);
+        $result = $this->site->getFilterService()->filterContent($query);
 
         return $this->extractContentItems($result);
     }
@@ -201,7 +201,7 @@ class RelationService implements RelationServiceInterface
             $query->limit = $limit;
         }
 
-        $result = $this->site->getFindService()->findLocations($query);
+        $result = $this->site->getFilterService()->filterLocations($query);
 
         return $this->extractLocations($result);
     }
