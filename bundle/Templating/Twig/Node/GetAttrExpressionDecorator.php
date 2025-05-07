@@ -29,14 +29,25 @@ final class GetAttrExpressionDecorator extends GetAttrExpression
         return $this->decoratedExpression->__toString();
     }
 
+    public function enableDefinedTest(): void
+    {
+        $this->decoratedExpression->enableDefinedTest();
+    }
+
+    public function isDefinedTestEnabled(): bool
+    {
+        return $this->decoratedExpression->isDefinedTestEnabled();
+    }
+
     public function compile(Compiler $compiler): void
     {
         $env = $compiler->getEnvironment();
+        $arrayAccessSandbox = false;
 
         // optimize array calls
         if (
             $this->getAttribute('optimizable')
-            && !$this->getAttribute('is_defined_test')
+            && !$this->isDefinedTestEnabled()
             && $this->getAttribute('type') === Template::ARRAY_CALL
             && (!$env->isStrictVariables() || $this->getAttribute('ignore_strict_check'))
         ) {
@@ -45,16 +56,33 @@ final class GetAttrExpressionDecorator extends GetAttrExpression
                 ->raw('((' . $var . ' = ')
                 ->subcompile($this->getNode('node'))
                 ->raw(') && is_array(')
-                ->raw($var)
+                ->raw($var);
+
+            if (!$env->hasExtension(SandboxExtension::class)) {
+                $compiler
+                    ->raw(') || ')
+                    ->raw($var)
+                    ->raw(' instanceof ArrayAccess ? (')
+                    ->raw($var)
+                    ->raw('[')
+                    ->subcompile($this->getNode('attribute'))
+                    ->raw('] ?? null) : null)');
+
+                return;
+            }
+
+            $arrayAccessSandbox = true;
+
+            $compiler
                 ->raw(') || ')
                 ->raw($var)
-                ->raw(' instanceof ArrayAccess ? (')
+                ->raw(' instanceof ArrayAccess && in_array(')
+                ->raw($var.'::class')
+                ->raw(', CoreExtension::ARRAY_LIKE_CLASSES, true) ? (')
                 ->raw($var)
                 ->raw('[')
                 ->subcompile($this->getNode('attribute'))
-                ->raw('] ?? null) : null)');
-
-            return;
+                ->raw('] ?? null) : ');
         }
 
         $compiler->raw(self::class . '::twigGetAttribute($this->env, $this->source, ');
@@ -76,11 +104,15 @@ final class GetAttrExpressionDecorator extends GetAttrExpression
 
         $compiler->raw(', ')
             ->repr($this->getAttribute('type'))
-            ->raw(', ')->repr($this->getAttribute('is_defined_test'))
+            ->raw(', ')->repr($this->isDefinedTestEnabled())
             ->raw(', ')->repr($this->getAttribute('ignore_strict_check'))
             ->raw(', ')->repr($env->hasExtension(SandboxExtension::class))
             ->raw(', ')->repr($this->getNode('node')->getTemplateLine())
             ->raw(')');
+
+        if ($arrayAccessSandbox) {
+            $compiler->raw(')');
+        }
     }
 
     public function getTemplateLine(): int
@@ -98,9 +130,9 @@ final class GetAttrExpressionDecorator extends GetAttrExpression
         return $this->decoratedExpression->hasAttribute($name);
     }
 
-    public function getAttribute(string $name)
+    public function getAttribute($name, $default = null)
     {
-        return $this->decoratedExpression->getAttribute($name);
+        return $this->decoratedExpression->getAttribute($name, $default);
     }
 
     public function setAttribute(string $name, $value): void
@@ -171,7 +203,7 @@ final class GetAttrExpressionDecorator extends GetAttrExpression
         mixed $object,
         mixed $item,
         array $arguments = [],
-        $type = 'any',
+        $type = Template::ANY_CALL,
         $isDefinedTest = false,
         $ignoreStrictCheck = false,
         $sandboxed = false,
