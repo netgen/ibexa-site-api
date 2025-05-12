@@ -41,7 +41,7 @@ use function str_starts_with;
 /**
  * @final
  *
- * @internal do not use directly; use @router instead to keep the chain routing mechanism
+ * @internal do not use directly; use @router instead, to keep the chain routing mechanism
  */
 class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
 {
