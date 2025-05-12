@@ -13,7 +13,7 @@
     {% set params = params|merge( { "class": embedParams.class } ) %}
 {% endif %}
 
-{{ fos_httpcache_tag('relation-' ~ embedParams.id) }}
+{{ fos_httpcache_tag('r' ~ embedParams.id) }}
 {% if ibexa.configResolver.getParameter('ng_site_api.richtext_embed_without_subrequest') == true %}
     {{ ng_view_content_embedded(embedParams.viewType, params|merge( { "contentId": embedParams.id } )) }}
 {% else %}
