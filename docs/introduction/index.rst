@@ -16,7 +16,7 @@ verbose when used for building websites. Site API fixes this by implementing a d
 on top of Ibexa Repository API which is designed for developing websites.
 
 Having a dedicated layer enables us to take an extra step and do things you would not typically want
-to do in Repository API. With Site API we can we can implement lazy loaded properties and methods
+to do in Repository API. With Site API we can implement lazy loaded properties and methods
 that enable content model traversal directly from the entities because:
 
 1. it's a dedicated layer for building websites
@@ -61,7 +61,7 @@ and mistakes and improves the overall developer experience.
 Handling Content from different siteaccesses
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Additionally to what's described above, it possible to safely fetch Content from different
+Additionally to what's described above, its possible to safely fetch Content from different
 siteaccesses as well. That is controlled by :ref:`Cross-siteaccess Content<cross_siteaccess_content>`
 feature, read the documentation there for more information on how and when that is the case.
 
@@ -169,6 +169,8 @@ prefixed with ``inner``. Example usage from Twig:
   <h1>Content ID: {{ content.innerContent.id }}</h1>
   <h2>Location ID: {{ location.innerLocation.id }}</h2>
   <h3>Field ID: {{ field.innerField.id }}</h3>
+  <h4>Inner Content Info: {{ contentInfo.innerContentInfo }}</h4>
+  <h4>Inner Content Type: {{ contentInfo.innerContentType }}</h4>
 
 
 For more details see :doc:`Templating </reference/objects>` and :doc:`Objects </reference/objects>` reference pages.
@@ -192,7 +194,7 @@ The API provides you with a set of **read-only** services:
   that is not the configured engine for the repository.
 
   Why? While Solr search engine provides more features and more performance than Legacy search
-  engine, it's a separate system needs to be synchronized with changes in the database. This
+  engine, it's a separate system that needs to be synchronized with changes in the database. This
   synchronization comes with a delay, which can be a problem in some cases.
 
   FilterService gives you access to search that is always up to date, because it uses Legacy search
@@ -219,7 +221,7 @@ For more details see :doc:`Services reference </reference/services>` page.
 Integration with Ibexa
 ----------------------
 
-You can use the Site API services described above as you would normally do it a Symfony application.
+You can use the Site API services described above as you would normally do in a Symfony application.
 But these are also integrated into Ibexa's view layer. There is a Site API version of the view
 configuration, available under ``ng_content_view`` key:
 
@@ -241,7 +243,7 @@ need to handle it with code that will inject Site API objects to the template, i
 Ibexa objects. Together with this we provide Site API version of the Content View object,
 which is used by the default Content view controller and :doc:`custom controllers </reference/custom_controllers>`.
 
-With the configuration from above you you will be able to render a line view for an article by
+With the configuration from above you will be able to render a line view for an article by
 executing a request to ``ng_content::viewAction``. However, that does not mean URL aliases will be
 handled by the Site API view configuration as well. This needs to be explicitly enabled, per
 siteaccess:

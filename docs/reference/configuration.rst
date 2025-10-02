@@ -313,7 +313,7 @@ variables inside Twig templates will be instances of Site API Content and Locati
 variable, and so on.
 
 If needed you can still use ``content_view`` rules. This will allow you to have both Site API
-template override rules as well as original Ibexa CMS template override rules, so you can rewrite
+template override rules as well as original Ibexa CMS template rules, so you can rewrite
 your templates bit by bit. You can decide which one to use by directly rendering either
 ``ng_content::viewAction`` or ``ibexa_content::viewAction`` controller.
 
@@ -353,132 +353,99 @@ Rendering a line view for an article with ``ng_content::viewAction`` would use
 It is also possible to use custom controllers, this is documented on
 :doc:`Custom controllers reference</reference/custom_controllers>` documentation page.
 
-.. _content_view_fallback_configuration:
+Placeholders for Twig templates
+-------------------------------
 
-Content View fallback
-~~~~~~~~~~~~~~~~~~~~~
-
-You can configure fallback between Site API and Ibexa CMS views. Fallback can be controlled
-through two configuration options (showing default values):
+If you named all your Twig templates after the content types, you can set a **placeholder** for
+``template`` key in your Content view. Here is an example:
 
 .. code-block:: yaml
 
     ibexa:
         system:
             frontend_group:
-                ng_site_api:
-                    fallback_to_secondary_content_view: true
-                    fallback_without_subrequest: true
+                ng_content_view:
+                    payload:
+                        common:
+                            template: "@ibexadesign/content/views/payload/{content_type}.html.twig"
+                            match:
+                                Identifier\ContentType:
+                                    - ng_article
+                                    - ng_blog_post
+                                    - ng_category
 
-- ``fallback_to_secondary_content_view``
+This reduces the need to have multiple similar views and enables you to
+have one view with specific format for template names. The above example means that
+in your project, you have the following file structure:
 
-    With this option you control whether **automatic fallback** will be used. By default, automatic
-    fallback is disabled. Secondary content view means the fallback can be used both from Site API
-    to Ibexa CMS views, and from Ibexa CMS to Site API content views. Which one will be used is
-    defined by ``site_api_is_primary_content_view`` configuration documented above.
+.. code-block:: none
 
-- ``fallback_without_subrequest``
+    ...
+    ├── content/
+    │   ├──views/
+    │   │   ├──payload/
+    │   │   │   ├── ng_article.html.twig
+    │   │   │   ├── ng_blog_post.html.twig
+    │   │   │   ├── ng_category.html.twig
 
-    With this option you can control whether the fallback will use a subrequest (default), or Twig
-    functions that can render content view without a subrequest. That applies both to automatic and
-    manually configured fallback. Rendering views without a subrequest is faster in debug mode,
-    where profiling is turned on. Depending on the number of views used on a page, performance
-    improvement when not using subrequest can be significant.
+Extending configuration from some Content view
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. warning::
+It is possible to configure a Content view to **extend** the configuration of another Content view.
+Let's say that you have defined two views that both render a list of items. In one view,
+you want to render them without intro, and in the other one, you want to render them with intro.
+In order to not need the same configuration twice, you can set that one Content view **extends**
+the configuration from another one - using ``extends: <view_name>``.
 
-    Because of reverse siteaccess matching limitations, when ``fallback_without_subrequest`` is
-    turned off, links in the preview in the admin UI will not be correctly generated. To work around
-    that problem, turn the option on.
-
-.. note::
-
-    When fallback is enabled default templates for the primary view will not be used. Otherwise the
-    fallback would never happen, because the primary view would always use the default templates
-    instead of falling back to the secondary view. Similarly, when falling back to the secondary
-    view, if its view configuration doesn't match, the default template of the secondary view will
-    be rendered.
-
-
-You can also configure fallback manually, per view. This is done by configuring a view to render one
-of two special templates, depending if the fallback is from Site API to Ibexa CMS views or the
-opposite.
-
-- ``@NetgenIbexaSiteApi/content_view_fallback/to_ibexa/view.html.twig``
-
-  This template is used for fallback from Site API to Ibexa CMS views. In the following example
-  it's used to configure fallback for ``line`` view of ``article`` ContentType:
-
-  .. code-block:: yaml
-
-      ibexa:
-          system:
-              frontend_group:
-                  ng_content_view:
-                      line:
-                          article:
-                              template: '@NetgenIbexaSiteApi/content_view_fallback/to_ibexa/view.html.twig'
-                              match:
-                                  Identifier\ContentType: article
-
-- ``@NetgenIbexaSiteApi/content_view_fallback/to_site_api/view.html.twig``
-
-  This template is used for fallback from Ibexa CMS to Site API views. In the following example
-  it's used to configure fallback for all ``full`` views:
-
-  .. code-block:: yaml
-
-      ibexa:
-          system:
-              frontend_group:
-                  content_view:
-                      full:
-                          catch_all:
-                              template: '@NetgenIbexaSiteApi/content_view_fallback/to_site_api/view.html.twig'
-                              match: ~
-
-.. _show_hidden_items_configuration:
-
-Internal Content View route on frontend siteaccesses
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Ibexa allows use of internal Content View route from the admin UI on the frontend
-siteaccesses. That might not be desirable in all cases, so Site API provides two configuration
-options to control whether the internal route will be enabled on a frontend siteaccess and, if
-enabled, whether it will permanently (HTTP code 308) redirect to the URL alias.
-
-By default, both options are set to true and the route will be enabled and it will permanently
-redirect to the URL alias:
+Here is an example:
 
 .. code-block:: yaml
 
     ibexa:
         system:
             frontend_group:
-                ng_site_api:
-                    enable_internal_view_route: true
-                    redirect_internal_view_route_to_url_alias: true
+                ng_content_view:
+                    listitem:
+                        common:
+                            template: "@ibexadesign/content/views/listitem/{content_type}.html.twig"
+                            params:
+                                with_intro: false
+                            match:
+                                Identifier\ContentType:
+                                    - file
+                                    - ng_article
+                                    - ng_audio
+                                    - ng_banner
+                                    - ng_blog_post
+                                    - ng_gallery
+                                    - ng_news
+                                    - ng_recipe
+                                    - ng_video
+                    listitem_with_intro:
+                        common:
+                            extends: listitem/common
+                            params:
+                                with_intro: true
 
-Configure showing hidden items
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+This enables you to define the configuration only once and have it be extended to
+multiple other Content views, while overriding the parameters (key ``params``)
+send to Twig template.
 
-You can configure whether hidden Content and Location objects will be shown by default through
-``show_hidden_items`` configuration option (``false`` by default):
+In Twig template, you can then check the ``with_intro`` param like so:
 
-.. code-block:: yaml
+.. code-block:: twig
 
-    ibexa:
-        system:
-            frontend_group:
-                ng_site_api:
-                    show_hidden_items: false
-
-This affects loading Location's children and siblings, Content's relations and search through Query
-Types. In Query Types you can override the configured option by explicitly defining ``visible``
-condition, see :doc:`the Query Type documentation</reference/query_types>` for more details.
+    <article>
+        <h2 class="title">
+            {{ content.name }}
+        </h2>
+        {% if with_intro|default(false) %}
+            {{ content.fields.intro.value }}
+        {% endif %}<h2 class="title">
+    </article>
 
 Redirections
-~~~~~~~~~~~~
+------------
 
 With Site API, it's also possible to configure redirects directly from the view configuration.
 Redirections have their own semantic configuration under ``redirect`` key in configuration for a
@@ -670,6 +637,130 @@ through the ``parameter`` function, which also enables negating a boolean parame
                             permanent: '@=!parameter("kernel.debug")'
                             keep_request_method: '%kernel.debug%'
                         match: ~
+
+.. _content_view_fallback_configuration:
+
+Content View fallback
+~~~~~~~~~~~~~~~~~~~~~
+
+You can configure fallback between Site API and Ibexa CMS views. Fallback can be controlled
+through two configuration options (showing default values):
+
+.. code-block:: yaml
+
+    ibexa:
+        system:
+            frontend_group:
+                ng_site_api:
+                    fallback_to_secondary_content_view: true
+                    fallback_without_subrequest: true
+
+- ``fallback_to_secondary_content_view``
+
+    With this option you control whether **automatic fallback** will be used. By default, automatic
+    fallback is disabled. Secondary content view means the fallback can be used both from Site API
+    to Ibexa CMS views, and from Ibexa CMS to Site API content views. Which one will be used is
+    defined by ``site_api_is_primary_content_view`` configuration documented above.
+
+- ``fallback_without_subrequest``
+
+    With this option you can control whether the fallback will use a subrequest (default), or Twig
+    functions that can render content view without a subrequest. That applies both to automatic and
+    manually configured fallback. Rendering views without a subrequest is faster in debug mode,
+    where profiling is turned on. Depending on the number of views used on a page, performance
+    improvement when not using subrequest can be significant.
+
+.. warning::
+
+    Because of reverse siteaccess matching limitations, when ``fallback_without_subrequest`` is
+    turned off, links in the preview in the admin UI will not be correctly generated. To work around
+    that problem, turn the option on.
+
+.. note::
+
+    When fallback is enabled default templates for the primary view will not be used. Otherwise the
+    fallback would never happen, because the primary view would always use the default templates
+    instead of falling back to the secondary view. Similarly, when falling back to the secondary
+    view, if its view configuration doesn't match, the default template of the secondary view will
+    be rendered.
+
+
+You can also configure fallback manually, per view. This is done by configuring a view to render one
+of two special templates, depending if the fallback is from Site API to Ibexa CMS views or the
+opposite.
+
+- ``@NetgenIbexaSiteApi/content_view_fallback/to_ibexa/view.html.twig``
+
+  This template is used for fallback from Site API to Ibexa CMS views. In the following example
+  it's used to configure fallback for ``line`` view of ``article`` ContentType:
+
+  .. code-block:: yaml
+
+      ibexa:
+          system:
+              frontend_group:
+                  ng_content_view:
+                      line:
+                          article:
+                              template: '@NetgenIbexaSiteApi/content_view_fallback/to_ibexa/view.html.twig'
+                              match:
+                                  Identifier\ContentType: article
+
+- ``@NetgenIbexaSiteApi/content_view_fallback/to_site_api/view.html.twig``
+
+  This template is used for fallback from Ibexa CMS to Site API views. In the following example
+  it's used to configure fallback for all ``full`` views:
+
+  .. code-block:: yaml
+
+      ibexa:
+          system:
+              frontend_group:
+                  content_view:
+                      full:
+                          catch_all:
+                              template: '@NetgenIbexaSiteApi/content_view_fallback/to_site_api/view.html.twig'
+                              match: ~
+
+.. _show_hidden_items_configuration:
+
+Internal Content View route on frontend siteaccesses
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Ibexa allows use of internal Content View route from the admin UI on the frontend
+siteaccesses. That might not be desirable in all cases, so Site API provides two configuration
+options to control whether the internal route will be enabled on a frontend siteaccess and, if
+enabled, whether it will permanently (HTTP code 308) redirect to the URL alias.
+
+By default, both options are set to true and the route will be enabled and it will permanently
+redirect to the URL alias:
+
+.. code-block:: yaml
+
+    ibexa:
+        system:
+            frontend_group:
+                ng_site_api:
+                    enable_internal_view_route: true
+                    redirect_internal_view_route_to_url_alias: true
+
+Configure showing hidden items
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You can configure whether hidden Content and Location objects will be shown by default through
+``show_hidden_items`` configuration option (``false`` by default):
+
+.. code-block:: yaml
+
+    ibexa:
+        system:
+            frontend_group:
+                ng_site_api:
+                    show_hidden_items: false
+
+This affects loading Location's children and siblings, Content's relations and search through Query
+Types. In Query Types you can override the configured option by explicitly defining ``visible``
+condition, see :doc:`the Query Type documentation</reference/query_types>` for more details.
 
 .. _named_object_configuration:
 
