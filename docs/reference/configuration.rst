@@ -211,7 +211,7 @@ be generated on the current siteaccess. Example configuration:
                             - 42
                             - 256
 
-If only a single items needs to be configured, you can also use shortcut configuration:
+If only a single item needs to be configured, you can also use shortcut configuration:
 
 .. code-block:: yaml
 
@@ -250,7 +250,7 @@ for example:
                             - group_3
                             - group_4
 
-If only a single items needs to be configured, you can also use shortcut configuration:
+If only a single item needs to be configured, you can also use shortcut configuration:
 
 .. code-block:: yaml
 
@@ -373,6 +373,12 @@ If you named all your Twig templates after the content types, you can set a **pl
                                     - ng_article
                                     - ng_blog_post
                                     - ng_category
+
+.. note::
+
+    The placeholder for Twig templates will only work if you match by **content_type**.
+    It will not work for any other available matcher (if you're interested, you can find
+    all the available matchers on the following URL: https://doc.ibexa.co/en/latest/templating/templates/view_matcher_reference/)
 
 This reduces the need to have multiple similar views and enables you to
 have one view with specific format for template names. The above example means that
