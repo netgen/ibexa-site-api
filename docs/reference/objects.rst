@@ -38,7 +38,7 @@ their counterparts in Ibexa CMS Repository API. Main benefits they provide over 
 
 ``Content`` represents a Content item in the Ibexa CMS Repository.
 
-The first difference from Repository Content is that it exist it a single translation only, meaning
+The first difference from Repository Content is that it exist in a single translation only, meaning
 it contains the fields for only one translation. That will always be the translation to be rendered
 on the siteaccess. You won't need to choose the field in the correct translation, manually or
 through some kind of helper service. The Content's single translation is always the correct one.
