@@ -585,7 +585,7 @@ Location children
 
   .. note::
 
-    If the Location doesn't contain any children, optionally limited by the the given ContentType,
+    If the Location doesn't contain any children, optionally limited by the given ContentType,
     the method will return ``null``. Make sure to check if that's the case.
 
 - **Filtering through Location's children**

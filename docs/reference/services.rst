@@ -173,17 +173,17 @@ FilterService
 | **Container service ID**       | ``netgen.ibexa_site_api.filter_service``       |
 +--------------------------------+------------------------------------------------+
 
-The purpose of the ``FindService`` is to find Content and Locations by using Ibexa CMS
+The purpose of the ``FilterService`` is to find Content and Locations by using Ibexa CMS
 Repository Search API. That is the same as ``FindService``, but with the difference that it will
 always use Legacy search engine.
 
 While Solr search engine provides more features and more performance than Legacy search engine, it's
-a separate system needs to be synchronized with changes in the database. This synchronization
+a separate system that needs to be synchronized with changes in the database. This synchronization
 comes with a delay, which can be a problem in some cases.
 
 FilterService gives you access to search that is always up to date, because it uses Legacy search
 engine that works directly with database. At the same time, search on top of Solr, with all the
-advanced features (like fulltext search or facets) is still available through FindService.
+advanced features (like fulltext search or facets) is still available through ``FindService``.
 
 The service will return ``SearchResult`` object from the Repository API containing Site API objects.
 
