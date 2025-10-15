@@ -394,8 +394,8 @@ in your project, you have the following file structure:
     │   │   │   ├── ng_blog_post.html.twig
     │   │   │   ├── ng_category.html.twig
 
-Extending configuration from some Content view
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Extending configuration from an existing Content view
+-----------------------------------------------------
 
 It is possible to configure a Content view to **extend** the configuration of another Content view.
 Let's say that you have defined two views that both render a list of items. In one view,
@@ -433,9 +433,8 @@ Here is an example:
                             params:
                                 with_intro: true
 
-This enables you to define the configuration only once and have it be extended to
-multiple other Content views, while overriding the parameters (key ``params``)
-send to Twig template.
+This enables defining the configuration once and extending it in multiple other Content views,
+overriding the parameters sent (key ``params``) to the Twig template.
 
 In Twig template, you can then check the ``with_intro`` param like so:
 
