@@ -400,8 +400,8 @@ Extending configuration from an existing Content view
 It is possible to configure a Content view to **extend** the configuration of another Content view.
 Let's say that you have defined two views that both render a list of items. In one view,
 you want to render them without intro, and in the other one, you want to render them with intro.
-In order to not need the same configuration twice, you can set that one Content view **extends**
-the configuration from another one - using ``extends: <view_name>``.
+To avoid duplicating the same configuration, you can configure one Content view to extend the configuration
+of the other by using ``extends: <view_name>``.
 
 Here is an example:
 
