@@ -169,8 +169,8 @@ prefixed with ``inner``. Example usage from Twig:
   <h1>Content ID: {{ content.innerContent.id }}</h1>
   <h2>Location ID: {{ location.innerLocation.id }}</h2>
   <h3>Field ID: {{ field.innerField.id }}</h3>
-  <h4>Inner Content Info: {{ contentInfo.innerContentInfo }}</h4>
-  <h4>Inner Content Type: {{ contentInfo.innerContentType }}</h4>
+  <h4>Section ID: {{ contentInfo.innerContentInfo.sectionId }}</h4>
+  <h5>ContentType identifier: {{ contentInfo.innerContentType.identifier }}</h5>
 
 
 For more details see :doc:`Templating </reference/objects>` and :doc:`Objects </reference/objects>` reference pages.
