@@ -61,7 +61,7 @@ and mistakes and improves the overall developer experience.
 Handling Content from different siteaccesses
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Additionally to what's described above, its possible to safely fetch Content from different
+In addition to what's described above, it's possible to safely fetch Content from different
 siteaccesses as well. That is controlled by :ref:`Cross-siteaccess Content<cross_siteaccess_content>`
 feature, read the documentation there for more information on how and when that is the case.
 
