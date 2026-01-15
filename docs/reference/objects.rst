@@ -715,9 +715,9 @@ Properties
 +-----------------------------+----------------+----------------------------------------------------------+
 | ``$contentTypeDescription`` | ``string``     | Description of the Content Type                          |
 +-----------------------------+----------------+----------------------------------------------------------+
-| ``$innerContentInfo``       | ``ContentInfo``| Ibexa's original ContentInfo object                      |
+| ``$innerContentInfo``       | ``ContentInfo``| Ibexa's Repository ContentInfo object                    |
 +-----------------------------+----------------+----------------------------------------------------------+
-| ``$innerContentType``       | ``ContentType``| Ibexa's original ContentType object                      |
+| ``$innerContentType``       | ``ContentType``| Ibexa's Repository ContentType object                    |
 +-----------------------------+----------------+----------------------------------------------------------+
 | ``$mainLocation``           | `Location`_    | Content's main Location object                           |
 +-----------------------------+----------------+----------------------------------------------------------+
