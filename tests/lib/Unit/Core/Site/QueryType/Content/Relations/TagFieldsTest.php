@@ -403,7 +403,7 @@ final class TagFieldsTest extends QueryTypeBaseTestCase
                 'fieldDefIdentifier' => 'not_tags',
                 'value' => new Value(),
                 'languageCode' => 'eng-GB',
-                'fieldTypeIdentifier' => 'ezstring',
+                'fieldTypeIdentifier' => 'ibexa_string',
             ]),
         ];
     }
@@ -424,7 +424,7 @@ final class TagFieldsTest extends QueryTypeBaseTestCase
             new FieldDefinition([
                 'id' => 3,
                 'identifier' => 'not_tags',
-                'fieldTypeIdentifier' => 'ezstring',
+                'fieldTypeIdentifier' => 'ibexa_string',
             ]),
         ]);
     }

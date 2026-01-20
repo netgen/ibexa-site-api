@@ -135,7 +135,7 @@ final class PrepareFixturesTest extends APIBaseTestCase
 
         $fieldCreateStruct = $contentTypeService->newFieldDefinitionCreateStruct(
             'title',
-            'ezstring',
+            'ibexa_string',
         );
         $fieldCreateStruct->names = [
             'eng-GB' => 'Title',
