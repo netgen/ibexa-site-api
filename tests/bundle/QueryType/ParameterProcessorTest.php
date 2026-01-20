@@ -15,6 +15,8 @@ use Netgen\Bundle\IbexaSiteApiBundle\View\ContentView;
 use Netgen\IbexaSiteApi\API\Values\Content;
 use Netgen\IbexaSiteApi\API\Values\Location;
 use Netgen\TagsBundle\API\Repository\Values\Tags\Tag;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,9 +25,14 @@ use Symfony\Component\HttpFoundation\RequestStack;
 /**
  * @internal
  */
+#[AllowMockObjectsWithoutExpectations]
 final class ParameterProcessorTest extends TestCase
 {
-    public function provideProcessCases(): iterable
+    private const string EXPECT_CONTENT = '__content__';
+    private const string EXPECT_LOCATION = '__location__';
+    private const string EXPECT_TAG = '__tag__';
+
+    public static function provideProcessCases(): iterable
     {
         $date = new DateTimeImmutable('@1');
 
@@ -232,15 +239,15 @@ final class ParameterProcessorTest extends TestCase
             ],
             [
                 "@=namedContent('pterodaktilivojka')",
-                $this->getContentMock(),
+                self::EXPECT_CONTENT,
             ],
             [
                 "@=namedLocation('grozdana')",
-                $this->getLocationMock(),
+                self::EXPECT_LOCATION,
             ],
             [
                 "@=namedTag('radoslava')",
-                $this->getTag(),
+                self::EXPECT_TAG,
             ],
             [
                 "@=split('pterodaktilivojka, grozdana,radoslava')",
@@ -261,15 +268,25 @@ final class ParameterProcessorTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider provideProcessCases
-     */
+    protected function resolveExpectedMocks(mixed $expected): mixed
+    {
+        return match ($expected) {
+            self::EXPECT_CONTENT => $this->getContentMock(),
+            self::EXPECT_LOCATION => $this->getLocationMock(),
+            self::EXPECT_TAG => $this->getTag(),
+            default => $expected,
+        };
+    }
+
+    #[DataProvider('provideProcessCases')]
     public function testProcess(mixed $parameter, mixed $expectedProcessedParameter): void
     {
         $parameterProcessor = $this->getParameterProcessorUnderTest();
         $viewMock = $this->getViewMock();
 
         $processedParameter = $parameterProcessor->process($parameter, $viewMock);
+
+        $expectedProcessedParameter = $this->resolveExpectedMocks($expectedProcessedParameter);
 
         self::assertSame($expectedProcessedParameter, $processedParameter);
     }

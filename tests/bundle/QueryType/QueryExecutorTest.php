@@ -17,11 +17,13 @@ use Netgen\IbexaSiteApi\API\FindService;
 use Netgen\IbexaSiteApi\Core\Site\Pagination\Pagerfanta\FilterAdapter;
 use Netgen\IbexaSiteApi\Core\Site\Pagination\Pagerfanta\FindAdapter;
 use Netgen\IbexaSiteApi\Core\Site\Pagination\Pagerfanta\SudoFilterAdapter;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
  */
+#[AllowMockObjectsWithoutExpectations]
 final class QueryExecutorTest extends TestCase
 {
     public function testExecuteContentFilterQuery(): void

@@ -6,26 +6,27 @@ namespace Netgen\IbexaSiteApi\Tests\Unit\Core\Site\QueryType\Base;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\LocationQuery;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Aggregation\RawTermAggregation;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\DateMetadata;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\FullText;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LogicalAnd;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Operator;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\SectionId;
-use Ibexa\Contracts\Core\Repository\Values\Content\Query\FacetBuilder\SectionFacetBuilder;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\SectionIdentifier;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\SectionName;
 use Netgen\IbexaSearchExtra\API\Values\Content\Query\Criterion\Visible;
 use Netgen\IbexaSiteApi\Core\Site\QueryType\QueryType;
 use Netgen\IbexaSiteApi\Core\Site\Settings;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Custom QueryType test case.
  *
- * @group query-type
- *
  * @internal
  */
+#[Group('query-type')]
 final class CustomQueryTypeTest extends TestCase
 {
     public function testGetName(): void
@@ -61,7 +62,7 @@ final class CustomQueryTypeTest extends TestCase
         );
     }
 
-    public function provideGetQueryCases(): iterable
+    public static function provideGetQueryCases(): iterable
     {
         return [
             [
@@ -83,8 +84,8 @@ final class CustomQueryTypeTest extends TestCase
                     'sortClauses' => [
                         new SectionIdentifier(),
                     ],
-                    'facetBuilders' => [
-                        new SectionFacetBuilder(),
+                    'aggregations' => [
+                        new RawTermAggregation('name', 'field_name'),
                     ],
                 ]),
             ],
@@ -112,8 +113,8 @@ final class CustomQueryTypeTest extends TestCase
                         new SectionName(),
                         new SectionIdentifier(),
                     ],
-                    'facetBuilders' => [
-                        new SectionFacetBuilder(),
+                    'aggregations' => [
+                        new RawTermAggregation('name', 'field_name'),
                     ],
                 ]),
             ],
@@ -140,17 +141,15 @@ final class CustomQueryTypeTest extends TestCase
                         new SectionId(42),
                     ]),
                     'query' => new FullText('one AND two OR three'),
-                    'facetBuilders' => [
-                        new SectionFacetBuilder(),
+                    'aggregations' => [
+                        new RawTermAggregation('name', 'field_name'),
                     ],
                 ]),
             ],
         ];
     }
 
-    /**
-     * @dataProvider provideGetQueryCases
-     */
+    #[DataProvider('provideGetQueryCases')]
     public function testGetQuery(array $parameters, Query $expectedQuery): void
     {
         $queryType = $this->getQueryTypeUnderTest();

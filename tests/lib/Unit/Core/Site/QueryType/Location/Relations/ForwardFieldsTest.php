@@ -32,33 +32,36 @@ use Netgen\IbexaSiteApi\Core\Site\QueryType\QueryType;
 use Netgen\IbexaSiteApi\Core\Site\Settings;
 use Netgen\IbexaSiteApi\Core\Site\Values\Content;
 use Netgen\IbexaSiteApi\Tests\Unit\Core\Site\ContentFieldsMockTrait;
-use Netgen\IbexaSiteApi\Tests\Unit\Core\Site\QueryType\QueryTypeBaseTest;
+use Netgen\IbexaSiteApi\Tests\Unit\Core\Site\QueryType\QueryTypeBaseTestCase;
 use OutOfBoundsException;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
+use PHPUnit\Framework\Attributes\Group;
 use Psr\Log\NullLogger;
 use RuntimeException;
 
 /**
  * ForwardFields Location Relation QueryType test case.
  *
- * @group query-type
- *
  * @see \Netgen\IbexaSiteApi\Core\Site\QueryType\Location\Relations\ForwardFields
  *
  * @internal
  */
-final class ForwardFieldsTest extends QueryTypeBaseTest
+#[Group('query-type')]
+#[AllowMockObjectsWithoutExpectations]
+final class ForwardFieldsTest extends QueryTypeBaseTestCase
 {
+    private const string EXPECT_TEST_CONTENT = '__content__';
+    private const string EXPECT_TEST_CONTENT_NO_FIELDS_FAIL = '__content_no_fields_fail__';
+
     use ContentFieldsMockTrait;
 
-    public function provideGetQueryCases(): array
+    public static function provideGetQueryCases(): array
     {
-        $content = $this->getTestContent();
-
         return [
             [
                 false,
                 [
-                    'content' => $content,
+                    'content' => self::EXPECT_TEST_CONTENT,
                     'relation_field' => ['relations_a', 'relations_b'],
                     'limit' => 12,
                     'offset' => 34,
@@ -80,7 +83,7 @@ final class ForwardFieldsTest extends QueryTypeBaseTest
             [
                 false,
                 [
-                    'content' => $content,
+                    'content' => self::EXPECT_TEST_CONTENT,
                     'relation_field' => ['relations_a'],
                     'content_type' => 'article',
                     'field' => [],
@@ -103,7 +106,7 @@ final class ForwardFieldsTest extends QueryTypeBaseTest
             [
                 false,
                 [
-                    'content' => $content,
+                    'content' => self::EXPECT_TEST_CONTENT,
                     'relation_field' => ['relations_b'],
                     'content_type' => 'article',
                     'field' => [
@@ -131,7 +134,7 @@ final class ForwardFieldsTest extends QueryTypeBaseTest
             [
                 false,
                 [
-                    'content' => $content,
+                    'content' => self::EXPECT_TEST_CONTENT,
                     'relation_field' => [],
                     'content_type' => 'article',
                     'field' => [
@@ -157,7 +160,7 @@ final class ForwardFieldsTest extends QueryTypeBaseTest
             [
                 false,
                 [
-                    'content' => $content,
+                    'content' => self::EXPECT_TEST_CONTENT,
                     'relation_field' => ['relations_a', 'relations_b'],
                     'content_type' => 'article',
                     'field' => [
@@ -189,7 +192,7 @@ final class ForwardFieldsTest extends QueryTypeBaseTest
             [
                 false,
                 [
-                    'content' => $content,
+                    'content' => self::EXPECT_TEST_CONTENT,
                     'relation_field' => ['relations_a', 'relations_b'],
                     'creation_date' => '4 May 2018',
                     'sort' => [
@@ -276,63 +279,59 @@ final class ForwardFieldsTest extends QueryTypeBaseTest
         );
     }
 
-    public function provideGetQueryWithInvalidOptionsCases(): array
+    public static function provideGetQueryWithInvalidOptionsCases(): array
     {
-        $content = $this->getTestContent();
-
         return [
             [
                 [
-                    'content' => $content,
+                    'content' => self::EXPECT_TEST_CONTENT,
                     'relation_field' => 'field',
                     'content_type' => 1,
                 ],
             ],
             [
                 [
-                    'content' => $content,
+                    'content' => self::EXPECT_TEST_CONTENT,
                     'relation_field' => 'field',
                     'field' => 1,
                 ],
             ],
             [
                 [
-                    'content' => $content,
+                    'content' => self::EXPECT_TEST_CONTENT,
                     'relation_field' => 'field',
                     'creation_date' => true,
                 ],
             ],
             [
                 [
-                    'content' => $content,
+                    'content' => self::EXPECT_TEST_CONTENT,
                     'relation_field' => 'field',
                     'limit' => 'five',
                 ],
             ],
             [
                 [
-                    'content' => $content,
+                    'content' => self::EXPECT_TEST_CONTENT,
                     'relation_field' => 'field',
                     'offset' => 'ten',
                 ],
             ],
             [
                 [
-                    'content' => $content,
+                    'content' => self::EXPECT_TEST_CONTENT,
                     'relation_field' => [1],
                 ],
             ],
         ];
     }
 
-    public function provideGetQueryWithInvalidCriteriaCases(): array
+    public static function provideGetQueryWithInvalidCriteriaCases(): array
     {
-        $content = $this->getTestContent();
-
         return [
             [
                 [
-                    'content' => $content,
+                    'content' => self::EXPECT_TEST_CONTENT,
                     'relation_field' => ['relations_a', 'relations_b'],
                     'creation_date' => [
                         'like' => 5,
@@ -342,14 +341,12 @@ final class ForwardFieldsTest extends QueryTypeBaseTest
         ];
     }
 
-    public function provideInvalidSortClauseThrowsExceptionCases(): array
+    public static function provideInvalidSortClauseThrowsExceptionCases(): array
     {
-        $content = $this->getTestContent();
-
         return [
             [
                 [
-                    'content' => $content,
+                    'content' => self::EXPECT_TEST_CONTENT,
                     'relation_field' => ['relations_a', 'relations_b'],
                     'sort' => 'just sort it',
                 ],
@@ -468,5 +465,14 @@ final class ForwardFieldsTest extends QueryTypeBaseTest
             'content',
             'relation_field',
         ];
+    }
+
+    protected function resolveExpectedMock(mixed $value): mixed
+    {
+        return match ($value) {
+            self::EXPECT_TEST_CONTENT => $this->getTestContent(),
+            self::EXPECT_TEST_CONTENT_NO_FIELDS_FAIL => $this->getTestContent(false),
+            default => $value,
+        };
     }
 }

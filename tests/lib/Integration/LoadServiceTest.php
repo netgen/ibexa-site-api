@@ -5,20 +5,20 @@ declare(strict_types=1);
 namespace Netgen\IbexaSiteApi\Tests\Integration;
 
 use Netgen\IbexaSiteApi\API\Exceptions\TranslationNotMatchedException;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Test case for the LoadService.
  *
  * @see \Netgen\IbexaSiteApi\API\LoadService
  *
- * @group integration
- * @group load
- *
  * @depends Netgen\IbexaSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
  * @depends Netgen\IbexaSiteApi\Tests\Integration\SiteTest::testGetLoadService
  *
  * @internal
  */
+#[Group('integration')]
+#[Group('load')]
 final class LoadServiceTest extends BaseTest
 {
     /**
