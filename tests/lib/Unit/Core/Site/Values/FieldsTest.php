@@ -14,6 +14,8 @@ use Netgen\IbexaSiteApi\API\Values\Fields as APIFields;
 use Netgen\IbexaSiteApi\Core\Site\Values\Content;
 use Netgen\IbexaSiteApi\Core\Site\Values\Fields;
 use Netgen\IbexaSiteApi\Tests\Unit\Core\Site\ContentFieldsMockTrait;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
@@ -25,12 +27,12 @@ use function sprintf;
 /**
  * Fields value unit tests.
  *
- * @group fields
- *
  * @see \Netgen\IbexaSiteApi\API\Values\Fields
  *
  * @internal
  */
+#[Group('fields')]
+#[AllowMockObjectsWithoutExpectations]
 final class FieldsTest extends TestCase
 {
     use ContentFieldsMockTrait;

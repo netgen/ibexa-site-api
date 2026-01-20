@@ -6,18 +6,20 @@ namespace Netgen\IbexaSiteApi\Tests\Unit\Pagination\Pagerfanta;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\LocationQuery;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query;
+use Ibexa\Contracts\Core\Repository\Values\Content\Search\AggregationResult\TermAggregationResult;
+use Ibexa\Contracts\Core\Repository\Values\Content\Search\AggregationResultCollection;
 use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchHit;
 use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchResult;
 use Netgen\IbexaSiteApi\API\FilterService;
 use Netgen\IbexaSiteApi\Core\Site\Pagination\Pagerfanta\FilterAdapter;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @group pager
- *
  * @internal
  */
+#[Group('pager')]
 final class FilterAdapterTest extends TestCase
 {
     protected FilterService|MockObject $filterService;
@@ -40,7 +42,7 @@ final class FilterAdapterTest extends TestCase
         $searchResult = new SearchResult(['totalCount' => $nbResults]);
 
         $this->filterService
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('filterContent')
             ->with(self::equalTo($countQuery))
             ->willReturn($searchResult);
@@ -51,24 +53,27 @@ final class FilterAdapterTest extends TestCase
         self::assertSame($nbResults, $adapter->getNbResults());
     }
 
-    public function testGetFacets(): void
+    public function testGetAggregations(): void
     {
-        $facets = ['facet', 'facet'];
+        $aggregations = new AggregationResultCollection([
+            new TermAggregationResult('aggregation'),
+            new TermAggregationResult('aggregation'),
+        ]);
         $query = new Query(['limit' => 10]);
         $countQuery = clone $query;
         $countQuery->limit = 0;
-        $searchResult = new SearchResult(['facets' => $facets]);
+        $searchResult = new SearchResult(['aggregations' => $aggregations, 'totalCount' => 123]);
 
         $this->filterService
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('filterContent')
             ->with(self::equalTo($countQuery))
             ->willReturn($searchResult);
 
         $adapter = $this->getAdapter($query);
 
-        self::assertSame($facets, $adapter->getFacets());
-        self::assertSame($facets, $adapter->getFacets());
+        self::assertSame($aggregations, $adapter->getAggregations());
+        self::assertSame($aggregations, $adapter->getAggregations());
     }
 
     public function testMaxScore(): void
@@ -77,10 +82,10 @@ final class FilterAdapterTest extends TestCase
         $query = new Query(['limit' => 10]);
         $countQuery = clone $query;
         $countQuery->limit = 0;
-        $searchResult = new SearchResult(['maxScore' => $maxScore]);
+        $searchResult = new SearchResult(['maxScore' => $maxScore, 'totalCount' => 123]);
 
         $this->filterService
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('filterContent')
             ->with(self::equalTo($countQuery))
             ->willReturn($searchResult);
@@ -94,7 +99,7 @@ final class FilterAdapterTest extends TestCase
     public function testTimeIsNotSet(): void
     {
         $this->filterService
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('filterContent');
 
         $adapter = $this->getAdapter(new Query());
@@ -108,7 +113,10 @@ final class FilterAdapterTest extends TestCase
         $offset = 20;
         $limit = 25;
         $nbResults = 123;
-        $facets = ['facet', 'facet'];
+        $aggregations = new AggregationResultCollection([
+            new TermAggregationResult('aggregation'),
+            new TermAggregationResult('aggregation'),
+        ]);
         $maxScore = 100.0;
         $time = 256.0;
         $query = new Query(['offset' => 5, 'limit' => 10]);
@@ -121,13 +129,13 @@ final class FilterAdapterTest extends TestCase
         $searchResult = new SearchResult([
             'searchHits' => $hits,
             'totalCount' => $nbResults,
-            'facets' => $facets,
+            'aggregations' => $aggregations,
             'maxScore' => $maxScore,
             'time' => $time,
         ]);
 
         $this->filterService
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('filterContent')
             ->with(self::equalTo($searchQuery))
             ->willReturn($searchResult);
@@ -137,9 +145,9 @@ final class FilterAdapterTest extends TestCase
 
         self::assertSame($hits, $slice->getSearchHits());
         self::assertSame($nbResults, $adapter->getNbResults());
-        self::assertSame($facets, $adapter->getFacets());
+        self::assertSame($aggregations, $adapter->getAggregations());
         self::assertSame($maxScore, $adapter->getMaxScore());
-        self::assertSame($time, $adapter->getTime());
+        self::assertSame($time, (float) $adapter->getTime());
     }
 
     public function testLocationQuery(): void
@@ -147,10 +155,10 @@ final class FilterAdapterTest extends TestCase
         $query = new LocationQuery(['performCount' => false]);
 
         $this->filterService
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('filterLocations')
             ->with(self::equalTo($query))
-            ->willReturn(new SearchResult());
+            ->willReturn(new SearchResult(['totalCount' => 123]));
 
         $adapter = $this->getAdapter($query);
         $adapter->getSlice(0, 25);

@@ -15,6 +15,9 @@ use Ibexa\Core\Repository\Values\Content\Location as CoreLocation;
 use Netgen\Bundle\IbexaSiteApiBundle\Exception\SiteAccessResolver\SiteAccessMatchException;
 use Netgen\Bundle\IbexaSiteApiBundle\SiteAccess\Resolver;
 use Netgen\Bundle\IbexaSiteApiBundle\SiteAccess\Resolver\NativeResolver;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
 use function array_filter;
@@ -23,12 +26,11 @@ use function explode;
 use function in_array;
 use function reset;
 
-/**
- * @group siteaccess
- */
+#[Group('siteaccess')]
+#[AllowMockObjectsWithoutExpectations]
 class NativeResolverTest extends TestCase
 {
-    public function provideResolveCases(): iterable
+    public static function provideResolveCases(): iterable
     {
         return [
             '#1.1 Nothing matches the subtree, current siteaccess is used as a fallback' => [
@@ -1026,9 +1028,7 @@ class NativeResolverTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider provideResolveCases
-     */
+    #[DataProvider('provideResolveCases')]
     public function testResolve(array $data, ?string $expectedSiteaccessName): void
     {
         $siteaccessResolver = $this->getSiteaccessResolverUnderTest($data);
@@ -1050,6 +1050,7 @@ class NativeResolverTest extends TestCase
                 'id' => 24,
                 'alwaysAvailable' => $data['alwaysAvailable'] ?? false,
                 'mainLanguageCode' => reset($data['languageCodes']),
+                'currentVersionNo' => 42,
             ]),
         ]);
     }

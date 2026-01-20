@@ -7,17 +7,17 @@ namespace Netgen\IbexaSiteApi\Tests\Integration;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinitionCreateStruct;
 use Netgen\IbexaSiteApi\API\Values\Content;
 use Netgen\IbexaSiteApi\API\Values\Location;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Test case for the RelationService.
  *
  * @see \Netgen\IbexaSiteApi\API\RelationService
  *
- * @group integration
- * @group relation
- *
  * @internal
  */
+#[Group('integration')]
+#[Group('relation')]
 final class RelationServiceTest extends BaseTest
 {
     public function testLoadFieldRelation(): void

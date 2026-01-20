@@ -17,6 +17,7 @@ use Netgen\IbexaSiteApi\API\Values\Location;
 use Netgen\TagsBundle\API\Repository\TagsService;
 use Netgen\TagsBundle\API\Repository\Values\Tags\Tag;
 use OutOfBoundsException;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
@@ -24,6 +25,7 @@ use RuntimeException;
 /**
  * @internal
  */
+#[AllowMockObjectsWithoutExpectations]
 final class LoadingProviderTest extends TestCase
 {
     public function testHasContentReturnsTrue(): void

@@ -5,17 +5,17 @@ declare(strict_types=1);
 namespace Netgen\IbexaSiteApi\Tests\Unit\Core\Site\Values;
 
 use Netgen\IbexaSiteApi\Core\Site\Values\Field\SurrogateValue;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Surrogate Field value unit tests.
  *
- * @group fields
- *
  * @see \Netgen\IbexaSiteApi\Core\Site\Values\Field\SurrogateValue
  *
  * @internal
  */
+#[Group('fields')]
 final class SurrogateValueTest extends TestCase
 {
     public function testConstructWithArbitraryArguments(): void

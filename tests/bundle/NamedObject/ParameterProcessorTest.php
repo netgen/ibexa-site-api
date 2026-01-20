@@ -11,14 +11,17 @@ use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Core\MVC\Symfony\ExpressionLanguage\ExpressionLanguage;
 use Netgen\Bundle\IbexaSiteApiBundle\NamedObject\ExpressionFunctionProvider;
 use Netgen\Bundle\IbexaSiteApiBundle\NamedObject\ParameterProcessor;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
  */
+#[AllowMockObjectsWithoutExpectations]
 final class ParameterProcessorTest extends TestCase
 {
-    public function provideProcessCases(): iterable
+    public static function provideProcessCases(): iterable
     {
         $date = new DateTimeImmutable('@1');
 
@@ -98,9 +101,7 @@ final class ParameterProcessorTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider provideProcessCases
-     */
+    #[DataProvider('provideProcessCases')]
     public function testProcess(mixed $parameter, mixed $expectedProcessedParameter): void
     {
         $parameterProcessor = $this->getParameterProcessorUnderTest();

@@ -8,6 +8,9 @@ use Ibexa\Bundle\Core\DependencyInjection\IbexaCoreExtension;
 use Ibexa\Tests\Bundle\Core\DependencyInjection\Configuration\Parser\AbstractParserTestCase;
 use InvalidArgumentException;
 use Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Configuration\Parser\ContentView;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
@@ -17,11 +20,8 @@ use function file_get_contents;
 use function preg_quote;
 use function sprintf;
 
-/**
- * @group config
- *
- * @internal
- */
+#[Group('config')]
+#[AllowMockObjectsWithoutExpectations]
 final class ContentViewTest extends AbstractParserTestCase
 {
     protected function setUp(): void
@@ -91,7 +91,7 @@ final class ContentViewTest extends AbstractParserTestCase
         );
     }
 
-    public function provideValidCases(): iterable
+    public static function provideValidCases(): iterable
     {
         return [
             [
@@ -195,9 +195,7 @@ final class ContentViewTest extends AbstractParserTestCase
         ];
     }
 
-    /**
-     * @dataProvider provideValidCases
-     */
+    #[DataProvider('provideValidCases')]
     public function testValid(array $configurationValues): void
     {
         $this->load([
@@ -220,7 +218,7 @@ final class ContentViewTest extends AbstractParserTestCase
         $this->addToAssertionCount(1);
     }
 
-    public function provideExtendsCases(): iterable
+    public static function provideExtendsCases(): iterable
     {
         return [
             [
@@ -318,9 +316,7 @@ final class ContentViewTest extends AbstractParserTestCase
         ];
     }
 
-    /**
-     * @dataProvider provideExtendsCases
-     */
+    #[DataProvider('provideExtendsCases')]
     public function testExtends(array $configurationValues, array $expectedValues): void
     {
         $baseConfig = [
@@ -392,7 +388,7 @@ final class ContentViewTest extends AbstractParserTestCase
         $this->addToAssertionCount(1);
     }
 
-    public function provideInvalidCases(): iterable
+    public static function provideInvalidCases(): iterable
     {
         return [
             [
@@ -488,9 +484,7 @@ final class ContentViewTest extends AbstractParserTestCase
         ];
     }
 
-    /**
-     * @dataProvider provideInvalidCases
-     */
+    #[DataProvider('provideInvalidCases')]
     public function testInvalid(array $configurationValues, string $exceptionClass, string $exceptionMessage): void
     {
         $this->expectException($exceptionClass);
@@ -520,7 +514,7 @@ final class ContentViewTest extends AbstractParserTestCase
         ]);
     }
 
-    public function provideDefaultValuesCases(): iterable
+    public static function provideDefaultValuesCases(): iterable
     {
         return [
             [
@@ -624,9 +618,7 @@ final class ContentViewTest extends AbstractParserTestCase
         ];
     }
 
-    /**
-     * @dataProvider provideDefaultValuesCases
-     */
+    #[DataProvider('provideDefaultValuesCases')]
     public function testDefaultValues(array $configurationValues, array $expectedConfigurationValues): void
     {
         $this->load([
