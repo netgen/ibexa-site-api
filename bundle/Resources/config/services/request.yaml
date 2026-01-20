@@ -1,14 +1,14 @@
 services:
-    netgen.ibexa_site_api.param_converter.location:
-        class: Netgen\Bundle\IbexaSiteApiBundle\Request\ParamConverter\ContentParamConverter
+    netgen.ibexa_site_api.value_resolver.content:
+        class: Netgen\Bundle\IbexaSiteApiBundle\Request\ValueResolver\ContentValueResolver
         arguments:
             - '@netgen.ibexa_site_api.load_service'
         tags:
-            - { name: request.param_converter, priority: -1 }
+            - { name: 'controller.argument_value_resolver', priority: 100 }
 
-    netgen.ibexa_site_api.param_converter.content:
-        class: Netgen\Bundle\IbexaSiteApiBundle\Request\ParamConverter\LocationParamConverter
+    netgen.ibexa_site_api.value_resolver.location:
+        class: Netgen\Bundle\IbexaSiteApiBundle\Request\ValueResolver\LocationValueResolver
         arguments:
             - '@netgen.ibexa_site_api.load_service'
         tags:
-            - { name: request.param_converter, priority: -1 }
+            - { name: 'controller.argument_value_resolver', priority: 100 }
