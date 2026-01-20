@@ -6,3 +6,4 @@ docs/_build
 docs/.virtualenv
 .phpunit.result.cache
 studio.json
+.phpunit.cache
