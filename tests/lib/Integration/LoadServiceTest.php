@@ -19,7 +19,7 @@ use PHPUnit\Framework\Attributes\Group;
  */
 #[Group('integration')]
 #[Group('load')]
-final class LoadServiceTest extends BaseTest
+final class LoadServiceTest extends BaseTestCase
 {
     /**
      * Test for the loadContent() method.
