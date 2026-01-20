@@ -16,7 +16,7 @@
         "ibexa/http-cache": "^5.0",
         "ibexa/fieldtype-richtext": "^5.0",
         "netgen/ibexa-search-extra": "dev-ibexa5",
-        "twig/twig": "*"
+        "twig/twig": "^3.22"
     },
     "require-dev": {
         "phpunit/phpunit": "*",
