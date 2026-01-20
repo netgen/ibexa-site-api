@@ -16,6 +16,7 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LogicalAnd;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LogicalNot;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ParentLocationId;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Subtree;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\CriterionInterface;
 use InvalidArgumentException;
 use Netgen\IbexaSearchExtra\API\Values\Content\Query\Criterion\ObjectStateIdentifier;
 use Netgen\IbexaSearchExtra\API\Values\Content\Query\Criterion\SectionIdentifier;
@@ -42,7 +43,7 @@ final class CriteriaBuilder
      *
      * @param \Netgen\IbexaSiteApi\Core\Site\QueryType\CriterionDefinition[] $definitions
      *
-     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion[]
+     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\CriterionInterface[]
      */
     public function build(array $definitions): array
     {
@@ -51,7 +52,7 @@ final class CriteriaBuilder
         foreach ($definitions as $definition) {
             $criterion = $this->dispatchBuild($definition);
 
-            if ($criterion instanceof Criterion) {
+            if ($criterion instanceof CriterionInterface) {
                 $criteria[] = $criterion;
             }
         }
@@ -62,7 +63,7 @@ final class CriteriaBuilder
     /**
      * Build criterion $name from the given criterion $definition.
      */
-    private function dispatchBuild(CriterionDefinition $definition): ?Criterion
+    private function dispatchBuild(CriterionDefinition $definition): ?CriterionInterface
     {
         switch ($definition->name) {
             case 'content_type':
@@ -163,7 +164,7 @@ final class CriteriaBuilder
         return new LogicalNot($criterion);
     }
 
-    private function reduceCriteria(array $criteria): Criterion
+    private function reduceCriteria(array $criteria): CriterionInterface
     {
         if (count($criteria) === 1) {
             return reset($criteria);
