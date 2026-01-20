@@ -8,7 +8,7 @@ use DateTimeImmutable;
 use Ibexa\Contracts\Core\Repository\Values\Content\Content;
 use Ibexa\Contracts\Core\Repository\Values\Content\Location;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
-use Ibexa\Tests\Integration\Core\Repository\BaseTest as APIBaseTest;
+use Ibexa\Tests\Integration\Core\Repository\BaseTestCase as APIBaseTestCase;
 use PHPUnit\Framework\Attributes\Group;
 
 /**
@@ -19,7 +19,7 @@ use PHPUnit\Framework\Attributes\Group;
 #[Group('load')]
 #[Group('find')]
 #[Group('filter')]
-final class PrepareFixturesTest extends APIBaseTest
+final class PrepareFixturesTest extends APIBaseTestCase
 {
     public function testPrepareTestFixtures(): array
     {

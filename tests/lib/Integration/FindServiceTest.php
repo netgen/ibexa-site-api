@@ -24,7 +24,7 @@ use PHPUnit\Framework\Attributes\Group;
  */
 #[Group('integration')]
 #[Group('find')]
-final class FindServiceTest extends BaseTest
+final class FindServiceTest extends BaseTestCase
 {
     /**
      * Test for the findContent() method.

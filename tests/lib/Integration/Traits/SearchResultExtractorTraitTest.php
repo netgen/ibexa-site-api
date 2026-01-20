@@ -8,12 +8,12 @@ use Ibexa\Contracts\Core\Repository\Values\Content\LocationQuery;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query;
 use Netgen\IbexaSiteApi\API\Values\Content;
 use Netgen\IbexaSiteApi\API\Values\Location;
-use Netgen\IbexaSiteApi\Tests\Integration\BaseTest;
+use Netgen\IbexaSiteApi\Tests\Integration\BaseTestCase;
 
 /**
  * @internal
  */
-final class SearchResultExtractorTraitTest extends BaseTest
+final class SearchResultExtractorTraitTest extends BaseTestCase
 {
     protected SearchResultExtractorStub $stub;
 
