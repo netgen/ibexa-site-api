@@ -8,6 +8,7 @@ use Closure;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LogicalAnd;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\CriterionInterface;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause;
 use InvalidArgumentException;
 use Netgen\IbexaSiteApi\API\Settings;
@@ -57,7 +58,7 @@ abstract class Base implements QueryType
 
         $query->query = $this->getQueryCriterion($parameters);
         $query->filter = $this->resolveFilterCriteria($parameters);
-        $query->facetBuilders = $this->getFacetBuilders($parameters);
+        $query->aggregations = $this->getAggregations($parameters);
         $query->sortClauses = $this->getSortClauses($sortDefinitions);
         $query->limit = $parameters['limit'];
         $query->offset = $parameters['offset'];
@@ -112,12 +113,12 @@ abstract class Base implements QueryType
     }
 
     /**
-     * Return an array of FacetBuilder instances.
+     * Return an array of Aggregation instances.
      *
-     * Note: facets are supported only with Solr search engine, which will be available
-     * through FindService. By default, query types use FilterService, where faceting is
-     * not supported. You can control that behavior with 'use_filter' option of the query
-     * configuration (defaulting to false).
+     * Note: aggregations are supported only with Solr and Elasticsearch search engines, which
+     * will be available through FindService. By default, query types use FilterService, where
+     * faceting is not supported. You can control that behavior with the 'use_filter' option of
+     * the query configuration (defaulting to false).
      *
      * @see \Netgen\IbexaSiteApi\API\FilterService
      * @see \Netgen\IbexaSiteApi\API\FindService
@@ -125,9 +126,9 @@ abstract class Base implements QueryType
      * Return an empty array if you don't need to use facets.
      * Override this method as needed.
      *
-     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\FacetBuilder[]
+     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Aggregation[]
      */
-    protected function getFacetBuilders(array $parameters): array
+    protected function getAggregations(array $parameters): array
     {
         return [];
     }
@@ -334,7 +335,7 @@ abstract class Base implements QueryType
         return $criteria;
     }
 
-    private function resolveFilterCriteria(array $parameters): ?Criterion
+    private function resolveFilterCriteria(array $parameters): ?CriterionInterface
     {
         $baseCriteria = $this->buildBaseCriteria($parameters);
         $registeredCriteria = $this->buildRegisteredCriteria($parameters);
@@ -344,7 +345,7 @@ abstract class Base implements QueryType
             $filterCriteria = [];
         }
 
-        if ($filterCriteria instanceof Criterion) {
+        if ($filterCriteria instanceof CriterionInterface) {
             $filterCriteria = [$filterCriteria];
         }
 
