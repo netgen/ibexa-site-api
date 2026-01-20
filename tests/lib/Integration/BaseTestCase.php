@@ -74,7 +74,7 @@ abstract class BaseTestCase extends APIBaseTestCase
                 'title' => [
                     'name' => 'Title',
                     'description' => 'Title of the test type',
-                    'fieldTypeIdentifier' => 'ezstring',
+                    'fieldTypeIdentifier' => 'ibexa_string',
                     'value' => $languageCode,
                     'isEmpty' => false,
                     'isSurrogate' => false,

@@ -359,7 +359,7 @@ final class AllTagFieldsTest extends QueryTypeBaseTestCase
                     ]),
                 ]),
                 'languageCode' => 'eng-GB',
-                'fieldTypeIdentifier' => 'ezstring',
+                'fieldTypeIdentifier' => 'ibexa_string',
             ]),
         ];
     }
@@ -380,7 +380,7 @@ final class AllTagFieldsTest extends QueryTypeBaseTestCase
             new FieldDefinition([
                 'id' => 3,
                 'identifier' => 'third',
-                'fieldTypeIdentifier' => 'ezstring',
+                'fieldTypeIdentifier' => 'ibexa_string',
             ]),
         ]);
     }
