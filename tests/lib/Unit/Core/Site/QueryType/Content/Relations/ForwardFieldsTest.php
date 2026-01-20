@@ -362,8 +362,8 @@ final class ForwardFieldsTest extends QueryTypeBaseTestCase
                 true,
             ),
             new Registry([
-                'ezobjectrelation' => new Relation(),
-                'ezobjectrelationlist' => new RelationList(),
+                'ibexa_object_relation' => new Relation(),
+                'ibexa_object_relation_list' => new RelationList(),
                 'ngsurrogate' => new Surrogate(),
             ]),
         );
@@ -377,21 +377,21 @@ final class ForwardFieldsTest extends QueryTypeBaseTestCase
                 'fieldDefIdentifier' => 'relations_a',
                 'value' => new RelationListValue([1, 2, 3]),
                 'languageCode' => 'eng-GB',
-                'fieldTypeIdentifier' => 'ezobjectrelationlist',
+                'fieldTypeIdentifier' => 'ibexa_object_relation_list',
             ]),
             new RepoField([
                 'id' => 2,
                 'fieldDefIdentifier' => 'relations_b',
                 'value' => new RelationValue(4),
                 'languageCode' => 'eng-GB',
-                'fieldTypeIdentifier' => 'ezobjectrelation',
+                'fieldTypeIdentifier' => 'ibexa_object_relation',
             ]),
             new RepoField([
                 'id' => 3,
                 'fieldDefIdentifier' => 'not_relations',
                 'value' => new Value(),
                 'languageCode' => 'eng-GB',
-                'fieldTypeIdentifier' => 'ezstring',
+                'fieldTypeIdentifier' => 'ibexa_string',
             ]),
         ];
     }
@@ -402,17 +402,17 @@ final class ForwardFieldsTest extends QueryTypeBaseTestCase
             new FieldDefinition([
                 'id' => 1,
                 'identifier' => 'relations_a',
-                'fieldTypeIdentifier' => 'ezobjectrelationlist',
+                'fieldTypeIdentifier' => 'ibexa_object_relation_list',
             ]),
             new FieldDefinition([
                 'id' => 2,
                 'identifier' => 'relations_b',
-                'fieldTypeIdentifier' => 'ezobjectrelation',
+                'fieldTypeIdentifier' => 'ibexa_object_relation',
             ]),
             new FieldDefinition([
                 'id' => 3,
                 'identifier' => 'not_relations',
-                'fieldTypeIdentifier' => 'ezstring',
+                'fieldTypeIdentifier' => 'ibexa_string',
             ]),
         ]);
     }

@@ -214,7 +214,7 @@ final class RelationServiceTest extends BaseTestCase
         $contentTypeCreateStruct->addFieldDefinition(
             new FieldDefinitionCreateStruct([
                 'identifier' => $fieldDefinitionIdentifier,
-                'fieldTypeIdentifier' => 'ezobjectrelation',
+                'fieldTypeIdentifier' => 'ibexa_object_relation',
             ]),
         );
         $contentTypeDraft = $contentTypeService->createContentType($contentTypeCreateStruct, [$contentTypeGroup]);
@@ -231,7 +231,7 @@ final class RelationServiceTest extends BaseTestCase
         $contentTypeCreateStruct->addFieldDefinition(
             new FieldDefinitionCreateStruct([
                 'identifier' => $fieldDefinitionIdentifier,
-                'fieldTypeIdentifier' => 'ezobjectrelationlist',
+                'fieldTypeIdentifier' => 'ibexa_object_relation_list',
             ]),
         );
         $contentTypeDraft = $contentTypeService->createContentType($contentTypeCreateStruct, [$contentTypeGroup]);

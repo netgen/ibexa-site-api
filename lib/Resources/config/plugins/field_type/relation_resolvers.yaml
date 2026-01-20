@@ -4,17 +4,17 @@ services:
     netgen.ibexa_site_api.plugins.field_type.relation_resolver.registry:
         class: Netgen\IbexaSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Registry
 
-    # Resolver for Relation field type
+    # Resolver for the Relation field type
     netgen.ibexa_site_api.plugins.field_type.relation_resolver.relation:
         class: Netgen\IbexaSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Resolver\Relation
         tags:
-            - { name: netgen.ibexa_site_api.plugins.field_type.relation_resolver, identifier: ezobjectrelation }
+            - { name: netgen.ibexa_site_api.plugins.field_type.relation_resolver, identifier: ibexa_object_relation }
 
     # Resolver for RelationList field type
     netgen.ibexa_site_api.plugins.field_type.relation_resolver.relation_list:
         class: Netgen\IbexaSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Resolver\RelationList
         tags:
-            - { name: netgen.ibexa_site_api.plugins.field_type.relation_resolver, identifier: ezobjectrelationlist }
+            - { name: netgen.ibexa_site_api.plugins.field_type.relation_resolver, identifier: ibexa_object_relation_list }
 
     # Resolver for 'ngenhancedlink' field type
     netgen.ibexa_site_api.plugins.field_type.relation_resolver.ngenhancedlink:
