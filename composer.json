@@ -10,20 +10,19 @@
         }
     ],
     "require": {
-        "php": ">=8.1",
+        "php": ">=8.3",
         "ext-dom": "*",
-        "ibexa/core": "^4.6.19",
-        "ibexa/http-cache": "^4.6",
-        "ibexa/fieldtype-richtext": "^4.6",
-        "netgen/ibexa-search-extra": "^3.0",
-        "sensio/framework-extra-bundle": "^6.1.0",
-        "twig/twig": "^3.21"
+        "ibexa/core": "^5.0",
+        "ibexa/http-cache": "^5.0",
+        "ibexa/fieldtype-richtext": "^5.0",
+        "netgen/ibexa-search-extra": "dev-ibexa5",
+        "twig/twig": "*"
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.0",
-        "matthiasnoback/symfony-dependency-injection-test": "^4.1",
-        "netgen/tagsbundle": "^5.0.x-dev",
-        "netgen/ibexa-fieldtype-enhanced-link": "^1.0",
+        "phpunit/phpunit": "*",
+        "matthiasnoback/symfony-dependency-injection-test": "*",
+        "netgen/tagsbundle": "*",
+        "netgen/ibexa-fieldtype-enhanced-link": "*",
         "composer/package-versions-deprecated": "*"
     },
     "replace": {
