@@ -18,7 +18,7 @@ use PHPUnit\Framework\Attributes\Group;
  */
 #[Group('integration')]
 #[Group('relation')]
-final class RelationServiceTest extends BaseTest
+final class RelationServiceTest extends BaseTestCase
 {
     public function testLoadFieldRelation(): void
     {

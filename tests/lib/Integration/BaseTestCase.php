@@ -13,7 +13,7 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Location as APILocation;
 use Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
 use Ibexa\Contracts\Core\Repository\Values\User\User;
-use Ibexa\Tests\Integration\Core\Repository\BaseTest as APIBaseTest;
+use Ibexa\Tests\Integration\Core\Repository\BaseTestCase as APIBaseTestCase;
 use Netgen\IbexaSiteApi\API\Site;
 use Netgen\IbexaSiteApi\API\Values\Content;
 use Netgen\IbexaSiteApi\API\Values\ContentInfo as APIContentInfo;
@@ -33,7 +33,7 @@ use function reset;
  *
  * @internal
  */
-abstract class BaseTest extends APIBaseTest
+abstract class BaseTestCase extends APIBaseTestCase
 {
     public function getData(string $languageCode): array
     {

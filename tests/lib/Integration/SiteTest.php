@@ -14,7 +14,7 @@ use PHPUnit\Framework\Attributes\Group;
  * @internal
  */
 #[Group('site')]
-final class SiteTest extends BaseTest
+final class SiteTest extends BaseTestCase
 {
     /**
      * Test for the getSettings() method.

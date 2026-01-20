@@ -22,7 +22,7 @@ use PHPUnit\Framework\Attributes\Group;
  */
 #[Group('integration')]
 #[Group('filter')]
-final class FilterServiceTest extends BaseTest
+final class FilterServiceTest extends BaseTestCase
 {
     /**
      * Test for the findContent() method.
