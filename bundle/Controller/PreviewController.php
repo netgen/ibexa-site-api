@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\IbexaSiteApiBundle\Controller;
 
-use eZ\Publish\Core\MVC\Symfony\View\ViewManagerInterface;
 use Ibexa\Contracts\Core\Repository\Values\Content\Content;
 use Ibexa\Contracts\Core\Repository\Values\Content\Location;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Core\MVC\Symfony\Controller\Content\PreviewController as BasePreviewController;
 use Ibexa\Core\MVC\Symfony\SiteAccess;
+use Ibexa\Core\MVC\Symfony\View\ViewManagerInterface;
 use Netgen\Bundle\IbexaSiteApiBundle\Routing\UrlAliasRouter;
 use Netgen\IbexaSiteApi\Core\Site\Site;
 use Symfony\Component\HttpFoundation\Request;
