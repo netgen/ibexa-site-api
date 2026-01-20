@@ -9,6 +9,7 @@ use Netgen\Bundle\IbexaSiteApiBundle\NamedObject\Provider\Caching;
 use Netgen\IbexaSiteApi\API\Values\Content;
 use Netgen\IbexaSiteApi\API\Values\Location;
 use Netgen\TagsBundle\API\Repository\Values\Tags\Tag;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
@@ -16,6 +17,7 @@ use RuntimeException;
 /**
  * @internal
  */
+#[AllowMockObjectsWithoutExpectations]
 final class CachingProviderTest extends TestCase
 {
     public function testHasContentReturnsTrue(): void
@@ -50,7 +52,7 @@ final class CachingProviderTest extends TestCase
         $provider = $this->getProviderUnderTest($providerMock);
 
         $providerMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getContent')
             ->with('apple')
             ->willReturn($this->getContentMock());
@@ -65,7 +67,7 @@ final class CachingProviderTest extends TestCase
         $provider = $this->getProviderUnderTest($providerMock);
 
         $providerMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getContent')
             ->with('fig')
             ->willThrowException(new RuntimeException('content not found'));
@@ -108,7 +110,7 @@ final class CachingProviderTest extends TestCase
         $provider = $this->getProviderUnderTest($providerMock);
 
         $providerMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getLocation')
             ->with('apple')
             ->willReturn($this->getLocationMock());
@@ -123,7 +125,7 @@ final class CachingProviderTest extends TestCase
         $provider = $this->getProviderUnderTest($providerMock);
 
         $providerMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getLocation')
             ->with('fig')
             ->willThrowException(new RuntimeException('location not found'));
@@ -168,7 +170,7 @@ final class CachingProviderTest extends TestCase
         $tag = new Tag();
 
         $providerMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getTag')
             ->with('apple')
             ->willReturn($tag);
@@ -182,7 +184,7 @@ final class CachingProviderTest extends TestCase
         $provider = $this->getProviderUnderTest($providerMock);
 
         $providerMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getTag')
             ->with('fig')
             ->willThrowException(new RuntimeException('tag not found'));
@@ -200,7 +202,7 @@ final class CachingProviderTest extends TestCase
 
     protected function getProviderMock(): MockObject|Provider
     {
-        return $this->getMockBuilder(Provider::class)->getMockForAbstractClass();
+        return $this->createMock(Provider::class);
     }
 
     protected function getContentMock(): MockObject

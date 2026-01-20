@@ -14,6 +14,8 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\Location\Pri
 use InvalidArgumentException;
 use Netgen\IbexaSearchExtra\API\Values\Content\Query\SortClause\ContentName;
 use Netgen\IbexaSiteApi\Core\Site\QueryType\SortClauseParser;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
 use function preg_quote;
@@ -22,16 +24,15 @@ use function sprintf;
 /**
  * SortClauseParser test case.
  *
- * @group query-type
- * @group sort
- *
  * @see \Netgen\IbexaSiteApi\Core\Site\QueryType\SortClauseParser
  *
  * @internal
  */
+#[Group('query-type')]
+#[Group('sort')]
 final class SortClauseParserTest extends TestCase
 {
-    public function provideParseValidCases(): iterable
+    public static function provideParseValidCases(): iterable
     {
         return [
             [
@@ -109,9 +110,7 @@ final class SortClauseParserTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider provideParseValidCases
-     */
+    #[DataProvider('provideParseValidCases')]
     public function testParseValid(string $stringDefinition, SortClause $expectedSortClause): void
     {
         $parser = $this->getParserUnderTest();
@@ -121,7 +120,7 @@ final class SortClauseParserTest extends TestCase
         self::assertEquals($sortClause, $expectedSortClause);
     }
 
-    public function provideParseInvalidCases(): iterable
+    public static function provideParseInvalidCases(): iterable
     {
         return [
             [
@@ -147,9 +146,7 @@ final class SortClauseParserTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider provideParseInvalidCases
-     */
+    #[DataProvider('provideParseInvalidCases')]
     public function testParseInvalid(string $stringDefinition, string $message): void
     {
         $this->expectException(InvalidArgumentException::class);

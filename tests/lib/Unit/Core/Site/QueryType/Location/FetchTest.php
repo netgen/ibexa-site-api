@@ -24,18 +24,18 @@ use Netgen\IbexaSearchExtra\API\Values\Content\Query\SortClause\ContentName;
 use Netgen\IbexaSiteApi\Core\Site\QueryType\Location\Fetch;
 use Netgen\IbexaSiteApi\Core\Site\QueryType\QueryType;
 use Netgen\IbexaSiteApi\Core\Site\Settings;
-use Netgen\IbexaSiteApi\Tests\Unit\Core\Site\QueryType\QueryTypeBaseTest;
+use Netgen\IbexaSiteApi\Tests\Unit\Core\Site\QueryType\QueryTypeBaseTestCase;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Fetch Location QueryType test case.
  *
- * @group query-type
- *
  * @internal
  */
-final class FetchTest extends QueryTypeBaseTest
+#[Group('query-type')]
+final class FetchTest extends QueryTypeBaseTestCase
 {
-    public function provideGetQueryCases(): array
+    public static function provideGetQueryCases(): array
     {
         return [
             [
@@ -228,7 +228,7 @@ final class FetchTest extends QueryTypeBaseTest
         ];
     }
 
-    public function provideGetQueryWithInvalidOptionsCases(): array
+    public static function provideGetQueryWithInvalidOptionsCases(): array
     {
         return [
             [
@@ -259,7 +259,7 @@ final class FetchTest extends QueryTypeBaseTest
         ];
     }
 
-    public function provideGetQueryWithInvalidCriteriaCases(): array
+    public static function provideGetQueryWithInvalidCriteriaCases(): array
     {
         return [
             [
@@ -272,7 +272,7 @@ final class FetchTest extends QueryTypeBaseTest
         ];
     }
 
-    public function provideInvalidSortClauseThrowsExceptionCases(): array
+    public static function provideInvalidSortClauseThrowsExceptionCases(): array
     {
         return [
             [

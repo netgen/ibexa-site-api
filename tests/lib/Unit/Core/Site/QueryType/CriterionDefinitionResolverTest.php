@@ -8,22 +8,23 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Operator;
 use InvalidArgumentException;
 use Netgen\IbexaSiteApi\Core\Site\QueryType\CriterionDefinition;
 use Netgen\IbexaSiteApi\Core\Site\QueryType\CriterionDefinitionResolver;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
 /**
  * CriterionDefinitionResolver test case.
  *
- * @group query-type
- *
  * @see \Netgen\IbexaSiteApi\Core\Site\QueryType\CriteriaResolver
  *
  * @internal
  */
+#[Group('query-type')]
 final class CriterionDefinitionResolverTest extends TestCase
 {
     protected ?CriterionDefinitionResolver $criterionDefinitionResolver = null;
 
-    public function provideResolveCases(): iterable
+    public static function provideResolveCases(): iterable
     {
         return [
             [
@@ -353,10 +354,9 @@ final class CriterionDefinitionResolverTest extends TestCase
     }
 
     /**
-     * @dataProvider provideResolveCases
-     *
      * @param \Netgen\IbexaSiteApi\Core\Site\QueryType\CriterionDefinition[] $expectedCriterionDefinitions
      */
+    #[DataProvider('provideResolveCases')]
     public function testResolve(mixed $parameters, array $expectedCriterionDefinitions): void
     {
         $criterionDefinitionResolver = $this->getCriterionDefinitionResolverUnderTest();
@@ -369,7 +369,7 @@ final class CriterionDefinitionResolverTest extends TestCase
         );
     }
 
-    public function provideResolveTargetsCases(): iterable
+    public static function provideResolveTargetsCases(): iterable
     {
         return [
             [
@@ -801,10 +801,9 @@ final class CriterionDefinitionResolverTest extends TestCase
     }
 
     /**
-     * @dataProvider provideResolveTargetsCases
-     *
      * @param \Netgen\IbexaSiteApi\Core\Site\QueryType\CriterionDefinition[] $expectedCriterionDefinitions
      */
+    #[DataProvider('provideResolveTargetsCases')]
     public function testResolveTargets(mixed $parameters, array $expectedCriterionDefinitions): void
     {
         $criterionDefinitionResolver = $this->getCriterionDefinitionResolverUnderTest();

@@ -9,16 +9,16 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Content;
 use Ibexa\Contracts\Core\Repository\Values\Content\Location;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
 use Ibexa\Tests\Integration\Core\Repository\BaseTest as APIBaseTest;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Base class for API integration tests.
  *
- * @group load
- * @group find
- * @group filter
- *
  * @internal
  */
+#[Group('load')]
+#[Group('find')]
+#[Group('filter')]
 final class PrepareFixturesTest extends APIBaseTest
 {
     public function testPrepareTestFixtures(): array

@@ -22,22 +22,23 @@ use Netgen\IbexaSearchExtra\API\Values\Content\Query\Criterion\SectionIdentifier
 use Netgen\IbexaSearchExtra\API\Values\Content\Query\Criterion\Visible;
 use Netgen\IbexaSiteApi\Core\Site\QueryType\CriteriaBuilder;
 use Netgen\IbexaSiteApi\Core\Site\QueryType\CriterionDefinition;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
 /**
  * CriteriaBuilder test case.
  *
- * @group query-type
- *
  * @see \Netgen\IbexaSiteApi\Core\Site\QueryType\CriteriaBuilder
  *
  * @internal
  */
+#[Group('query-type')]
 final class CriteriaBuilderTest extends TestCase
 {
     protected ?CriteriaBuilder $criteriaBuilder = null;
 
-    public function provideBuildCases(): iterable
+    public static function provideBuildCases(): iterable
     {
         return [
             [
@@ -413,11 +414,10 @@ final class CriteriaBuilderTest extends TestCase
     }
 
     /**
-     * @dataProvider provideBuildCases
-     *
      * @param \Netgen\IbexaSiteApi\Core\Site\QueryType\CriterionDefinition[] $arguments
      * @param \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion[] $expectedCriteria
      */
+    #[DataProvider('provideBuildCases')]
     public function testBuild(array $arguments, array $expectedCriteria): void
     {
         $criteriaBuilder = $this->getCriteriaBuilderUnderTest();
