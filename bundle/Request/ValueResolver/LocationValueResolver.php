@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\IbexaSiteApiBundle\Request\ParamConverter;
+namespace Netgen\Bundle\IbexaSiteApiBundle\Request\ValueResolver;
 
 use Netgen\IbexaSiteApi\API\Values\Location;
 
-final class LocationParamConverter extends SiteParamConverter
+final class LocationValueResolver extends SiteValueResolver
 {
     protected function getSupportedClass(): string
     {
