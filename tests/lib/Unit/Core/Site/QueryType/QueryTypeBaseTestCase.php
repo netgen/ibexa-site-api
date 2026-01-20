@@ -7,6 +7,8 @@ namespace Netgen\IbexaSiteApi\Tests\Unit\Core\Site\QueryType;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query;
 use InvalidArgumentException;
 use Netgen\IbexaSiteApi\Core\Site\QueryType\QueryType;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 
@@ -18,7 +20,7 @@ use function time;
 /**
  * Base QueryType test case.
  */
-abstract class QueryTypeBaseTest extends TestCase
+abstract class QueryTypeBaseTestCase extends TestCase
 {
     public function testGetName(): void
     {
@@ -82,16 +84,15 @@ abstract class QueryTypeBaseTest extends TestCase
         }
     }
 
-    abstract public function provideGetQueryCases(): iterable;
+    abstract public static function provideGetQueryCases(): iterable;
 
-    /**
-     * @dataProvider provideGetQueryCases
-     */
+    #[DataProvider('provideGetQueryCases')]
     public function testGetQuery(bool $showHiddenItems, array $parameters, Query $expectedQuery): void
     {
         $queryType = $this->getQueryTypeUnderTest($showHiddenItems);
 
-        $query = $queryType->getQuery($parameters);
+        $resolvedParameters = $this->resolveParameters($parameters);
+        $query = $queryType->getQuery($resolvedParameters);
 
         self::assertEquals(
             $expectedQuery,
@@ -99,47 +100,44 @@ abstract class QueryTypeBaseTest extends TestCase
         );
     }
 
-    abstract public function provideGetQueryWithInvalidOptionsCases(): iterable;
+    abstract public static function provideGetQueryWithInvalidOptionsCases(): iterable;
 
-    /**
-     * @dataProvider provideGetQueryWithInvalidOptionsCases
-     */
+    #[DataProvider('provideGetQueryWithInvalidOptionsCases')]
     public function testGetQueryWithInvalidOptions(array $parameters): void
     {
         $this->expectException(InvalidOptionsException::class);
 
         $queryType = $this->getQueryTypeUnderTest();
+        $resolvedParameters = $this->resolveParameters($parameters);
 
-        $queryType->getQuery($parameters);
+        $queryType->getQuery($resolvedParameters);
     }
 
-    abstract public function provideGetQueryWithInvalidCriteriaCases(): iterable;
+    abstract public static function provideGetQueryWithInvalidCriteriaCases(): iterable;
 
-    /**
-     * @dataProvider provideGetQueryWithInvalidCriteriaCases
-     */
+    #[DataProvider('provideGetQueryWithInvalidCriteriaCases')]
     public function testGetQueryWithInvalidCriteria(array $parameters): void
     {
         $this->expectException(InvalidArgumentException::class);
 
         $queryType = $this->getQueryTypeUnderTest();
+        $resolvedParameters = $this->resolveParameters($parameters);
 
-        $queryType->getQuery($parameters);
+        $queryType->getQuery($resolvedParameters);
     }
 
-    abstract public function provideInvalidSortClauseThrowsExceptionCases(): iterable;
+    abstract public static function provideInvalidSortClauseThrowsExceptionCases(): iterable;
 
-    /**
-     * @dataProvider provideInvalidSortClauseThrowsExceptionCases
-     */
+    #[DataProvider('provideInvalidSortClauseThrowsExceptionCases')]
     public function testInvalidSortClauseThrowsException(array $parameters): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessageMatches("/Sort string '.*' was not converted to a SortClause/");
 
         $queryType = $this->getQueryTypeUnderTest();
+        $resolvedParameters = $this->resolveParameters($parameters);
 
-        $queryType->getQuery($parameters);
+        $queryType->getQuery($resolvedParameters);
     }
 
     abstract protected function getQueryTypeUnderTest(bool $showHiddenItems = false): QueryType;
@@ -150,4 +148,19 @@ abstract class QueryTypeBaseTest extends TestCase
      * @return string[]
      */
     abstract protected function getSupportedParameters(): array;
+
+    protected function resolveParameters(array $parameters): array
+    {
+        return array_map(
+            function ($value) {
+                return $this->resolveExpectedMock($value);
+            },
+            $parameters,
+        );
+    }
+
+    protected function resolveExpectedMock(mixed $value): mixed
+    {
+        return $value;
+    }
 }

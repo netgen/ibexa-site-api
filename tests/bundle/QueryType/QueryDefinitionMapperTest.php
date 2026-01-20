@@ -18,6 +18,8 @@ use Netgen\IbexaSiteApi\API\Values\Content;
 use Netgen\IbexaSiteApi\API\Values\Location;
 use Netgen\IbexaSiteApi\Core\Site\QueryType\QueryType as SiteQueryType;
 use OutOfBoundsException;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -25,13 +27,14 @@ use Symfony\Component\HttpFoundation\RequestStack;
 /**
  * @internal
  */
+#[AllowMockObjectsWithoutExpectations]
 final class QueryDefinitionMapperTest extends TestCase
 {
-    public function provideMapCases(): iterable
-    {
-        $locationMock = $this->getMockBuilder(Location::class)->getMock();
-        $contentMock = $this->getMockBuilder(Content::class)->getMock();
+    private const string EXPECT_CONTENT = '__content__';
+    private const string EXPECT_LOCATION = '__location__';
 
+    public static function provideMapCases(): iterable
+    {
         return [
             [
                 [
@@ -61,16 +64,16 @@ final class QueryDefinitionMapperTest extends TestCase
                     'page' => 1,
                     'parameters' => [
                         'some' => 'parameters',
-                        'content' => $contentMock,
-                        'location' => $locationMock,
+                        'content' => self::EXPECT_CONTENT,
+                        'location' => self::EXPECT_LOCATION,
                     ],
                 ],
                 new QueryDefinition([
                     'name' => 'site_query_type',
                     'parameters' => [
                         'some' => 'parameters',
-                        'content' => $contentMock,
-                        'location' => $locationMock,
+                        'content' => self::EXPECT_CONTENT,
+                        'location' => self::EXPECT_LOCATION,
                     ],
                     'useFilter' => true,
                     'maxPerPage' => 10,
@@ -91,8 +94,8 @@ final class QueryDefinitionMapperTest extends TestCase
                     'name' => 'site_query_type',
                     'parameters' => [
                         'some' => 'parameters',
-                        'content' => $contentMock,
-                        'location' => $locationMock,
+                        'content' => self::EXPECT_CONTENT,
+                        'location' => self::EXPECT_LOCATION,
                     ],
                     'useFilter' => true,
                     'maxPerPage' => 10,
@@ -137,8 +140,8 @@ final class QueryDefinitionMapperTest extends TestCase
                             'various' => 'delicacies',
                         ],
                         'salad' => true,
-                        'content' => $contentMock,
-                        'location' => $locationMock,
+                        'content' => self::EXPECT_CONTENT,
+                        'location' => self::EXPECT_LOCATION,
                         'spoon' => 'soup',
                     ],
                     'useFilter' => false,
@@ -149,14 +152,43 @@ final class QueryDefinitionMapperTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider provideMapCases
-     */
+    protected function resolveExpectedMocks(mixed $expected): mixed
+    {
+        return match ($expected) {
+            self::EXPECT_CONTENT => $this->getMockBuilder(Content::class)->getMock(),
+            self::EXPECT_LOCATION => $this->getMockBuilder(Location::class)->getMock(),
+            default => $expected,
+        };
+    }
+
+    #[DataProvider('provideMapCases')]
     public function testMap(array $configuration, QueryDefinition $expectedQueryDefinition): void
     {
         $queryDefinitionMapper = $this->getQueryDefinitionMapperUnderTest();
 
+        $actualParameters = $configuration['parameters'];
+
+        foreach ($actualParameters as $name => $value) {
+            $actualParameters[$name] = $this->resolveExpectedMocks($value);
+        }
+
+        $configuration['parameters'] = $actualParameters;
+
         $queryDefinition = $queryDefinitionMapper->map($configuration, $this->getViewMock());
+
+        $expectedParameters = $expectedQueryDefinition->parameters;
+
+        foreach ($expectedParameters as $name => $value) {
+            $expectedParameters[$name] = $this->resolveExpectedMocks($value);
+        }
+
+        $expectedQueryDefinition = new QueryDefinition([
+            'name' => $expectedQueryDefinition->name,
+            'parameters' => $expectedParameters,
+            'useFilter' => $expectedQueryDefinition->useFilter,
+            'maxPerPage' => $expectedQueryDefinition->maxPerPage,
+            'page' => $expectedQueryDefinition->page,
+        ]);
 
         self::assertEquals($expectedQueryDefinition, $queryDefinition);
     }

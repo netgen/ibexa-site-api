@@ -25,30 +25,32 @@ use Netgen\IbexaSiteApi\Core\Site\QueryType\QueryType;
 use Netgen\IbexaSiteApi\Core\Site\Settings;
 use Netgen\IbexaSiteApi\Core\Site\Values\Location;
 use Netgen\IbexaSiteApi\Tests\Unit\Core\Site\ContentFieldsMockTrait;
-use Netgen\IbexaSiteApi\Tests\Unit\Core\Site\QueryType\QueryTypeBaseTest;
+use Netgen\IbexaSiteApi\Tests\Unit\Core\Site\QueryType\QueryTypeBaseTestCase;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Log\NullLogger;
 
 /**
  * Location Children QueryType test case.
  *
- * @group query-type
- *
  * @internal
  */
-final class ChildrenTest extends QueryTypeBaseTest
+#[Group('query-type')]
+#[AllowMockObjectsWithoutExpectations]
+final class ChildrenTest extends QueryTypeBaseTestCase
 {
+    private const string EXPECT_TEST_LOCATION = '__location__';
+
     use ContentFieldsMockTrait;
 
-    public function provideGetQueryCases(): array
+    public static function provideGetQueryCases(): array
     {
-        $location = $this->getTestLocation();
-
         return [
             [
                 false,
                 [
-                    'location' => $location,
+                    'location' => self::EXPECT_TEST_LOCATION,
                 ],
                 new LocationQuery([
                     'filter' => new LogicalAnd([
@@ -64,7 +66,7 @@ final class ChildrenTest extends QueryTypeBaseTest
                 false,
                 [
                     'visible' => false,
-                    'location' => $location,
+                    'location' => self::EXPECT_TEST_LOCATION,
                     'sort' => 'published asc',
                 ],
                 new LocationQuery([
@@ -81,7 +83,7 @@ final class ChildrenTest extends QueryTypeBaseTest
                 false,
                 [
                     'visible' => null,
-                    'location' => $location,
+                    'location' => self::EXPECT_TEST_LOCATION,
                     'limit' => 12,
                     'offset' => 34,
                     'sort' => 'published desc',
@@ -98,7 +100,7 @@ final class ChildrenTest extends QueryTypeBaseTest
             [
                 true,
                 [
-                    'location' => $location,
+                    'location' => self::EXPECT_TEST_LOCATION,
                     'content_type' => 'article',
                     'sort' => [
                         'published asc',
@@ -118,7 +120,7 @@ final class ChildrenTest extends QueryTypeBaseTest
                 true,
                 [
                     'visible' => true,
-                    'location' => $location,
+                    'location' => self::EXPECT_TEST_LOCATION,
                     'content_type' => 'article',
                     'field' => [],
                     'sort' => [
@@ -141,7 +143,7 @@ final class ChildrenTest extends QueryTypeBaseTest
             [
                 false,
                 [
-                    'location' => $location,
+                    'location' => self::EXPECT_TEST_LOCATION,
                     'content_type' => 'article',
                     'field' => [
                         'title' => 'Hello',
@@ -163,7 +165,7 @@ final class ChildrenTest extends QueryTypeBaseTest
             [
                 false,
                 [
-                    'location' => $location,
+                    'location' => self::EXPECT_TEST_LOCATION,
                     'content_type' => 'article',
                     'field' => [
                         'title' => [
@@ -191,7 +193,7 @@ final class ChildrenTest extends QueryTypeBaseTest
             [
                 false,
                 [
-                    'location' => $location,
+                    'location' => self::EXPECT_TEST_LOCATION,
                     'content_type' => 'article',
                     'field' => [
                         'title' => [
@@ -221,7 +223,7 @@ final class ChildrenTest extends QueryTypeBaseTest
             [
                 false,
                 [
-                    'location' => $location,
+                    'location' => self::EXPECT_TEST_LOCATION,
                     'creation_date' => '4 May 2018',
                 ],
                 new LocationQuery([
@@ -242,52 +244,48 @@ final class ChildrenTest extends QueryTypeBaseTest
         ];
     }
 
-    public function provideGetQueryWithInvalidOptionsCases(): array
+    public static function provideGetQueryWithInvalidOptionsCases(): array
     {
-        $location = $this->getTestLocation();
-
         return [
             [
                 [
-                    'location' => $location,
+                    'location' => self::EXPECT_TEST_LOCATION,
                     'content_type' => 1,
                 ],
             ],
             [
                 [
-                    'location' => $location,
+                    'location' => self::EXPECT_TEST_LOCATION,
                     'field' => 1,
                 ],
             ],
             [
                 [
-                    'location' => $location,
+                    'location' => self::EXPECT_TEST_LOCATION,
                     'creation_date' => true,
                 ],
             ],
             [
                 [
-                    'location' => $location,
+                    'location' => self::EXPECT_TEST_LOCATION,
                     'limit' => 'five',
                 ],
             ],
             [
                 [
-                    'location' => $location,
+                    'location' => self::EXPECT_TEST_LOCATION,
                     'offset' => 'ten',
                 ],
             ],
         ];
     }
 
-    public function provideGetQueryWithInvalidCriteriaCases(): array
+    public static function provideGetQueryWithInvalidCriteriaCases(): array
     {
-        $location = $this->getTestLocation();
-
         return [
             [
                 [
-                    'location' => $location,
+                    'location' => self::EXPECT_TEST_LOCATION,
                     'creation_date' => [
                         'like' => 5,
                     ],
@@ -296,14 +294,12 @@ final class ChildrenTest extends QueryTypeBaseTest
         ];
     }
 
-    public function provideInvalidSortClauseThrowsExceptionCases(): array
+    public static function provideInvalidSortClauseThrowsExceptionCases(): array
     {
-        $location = $this->getTestLocation();
-
         return [
             [
                 [
-                    'location' => $location,
+                    'location' => self::EXPECT_TEST_LOCATION,
                     'sort' => 'just sort it',
                 ],
             ],
@@ -387,5 +383,13 @@ final class ChildrenTest extends QueryTypeBaseTest
     protected function internalGetRepoFieldDefinitions(): FieldDefinitionCollection
     {
         return new FieldDefinitionCollection();
+    }
+
+    protected function resolveExpectedMock(mixed $value): mixed
+    {
+        return match ($value) {
+            self::EXPECT_TEST_LOCATION => $this->getTestLocation(),
+            default => $value,
+        };
     }
 }

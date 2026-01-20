@@ -16,7 +16,7 @@ class Relation extends Resolver
 {
     protected function getSupportedFieldTypeIdentifier(): string
     {
-        return 'ezobjectrelation';
+        return 'ibexa_object_relation';
     }
 
     protected function getRelationIdsFromValue(Value $value): array

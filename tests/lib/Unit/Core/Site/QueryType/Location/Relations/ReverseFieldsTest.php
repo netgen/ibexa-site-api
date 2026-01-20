@@ -23,31 +23,33 @@ use Netgen\IbexaSiteApi\Core\Site\QueryType\QueryType;
 use Netgen\IbexaSiteApi\Core\Site\Settings;
 use Netgen\IbexaSiteApi\Core\Site\Values\Content;
 use Netgen\IbexaSiteApi\Tests\Unit\Core\Site\ContentFieldsMockTrait;
-use Netgen\IbexaSiteApi\Tests\Unit\Core\Site\QueryType\QueryTypeBaseTest;
+use Netgen\IbexaSiteApi\Tests\Unit\Core\Site\QueryType\QueryTypeBaseTestCase;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
+use PHPUnit\Framework\Attributes\Group;
 use Psr\Log\NullLogger;
 
 /**
  * ReverseFields Location Relation QueryType test case.
  *
- * @group query-type
- *
  * @see \Netgen\IbexaSiteApi\Core\Site\QueryType\Location\Relations\ReverseFields
  *
  * @internal
  */
-final class ReverseFieldsTest extends QueryTypeBaseTest
+#[Group('query-type')]
+#[AllowMockObjectsWithoutExpectations]
+final class ReverseFieldsTest extends QueryTypeBaseTestCase
 {
+    private const string EXPECT_TEST_CONTENT = '__content__';
+
     use ContentFieldsMockTrait;
 
-    public function provideGetQueryCases(): array
+    public static function provideGetQueryCases(): array
     {
-        $content = $this->getTestContent();
-
         return [
             [
                 false,
                 [
-                    'content' => $content,
+                    'content' => self::EXPECT_TEST_CONTENT,
                     'relation_field' => ['relations_a', 'relations_b'],
                     'limit' => 12,
                     'offset' => 34,
@@ -70,7 +72,7 @@ final class ReverseFieldsTest extends QueryTypeBaseTest
             [
                 false,
                 [
-                    'content' => $content,
+                    'content' => self::EXPECT_TEST_CONTENT,
                     'relation_field' => ['relations_a'],
                     'content_type' => 'article',
                     'field' => [],
@@ -93,7 +95,7 @@ final class ReverseFieldsTest extends QueryTypeBaseTest
             [
                 false,
                 [
-                    'content' => $content,
+                    'content' => self::EXPECT_TEST_CONTENT,
                     'relation_field' => ['relations_b'],
                     'content_type' => 'article',
                     'field' => [
@@ -121,7 +123,7 @@ final class ReverseFieldsTest extends QueryTypeBaseTest
             [
                 false,
                 [
-                    'content' => $content,
+                    'content' => self::EXPECT_TEST_CONTENT,
                     'relation_field' => [],
                     'content_type' => 'article',
                     'field' => [
@@ -147,7 +149,7 @@ final class ReverseFieldsTest extends QueryTypeBaseTest
             [
                 false,
                 [
-                    'content' => $content,
+                    'content' => self::EXPECT_TEST_CONTENT,
                     'relation_field' => ['relations_a', 'relations_b'],
                     'content_type' => 'article',
                     'field' => [
@@ -180,7 +182,7 @@ final class ReverseFieldsTest extends QueryTypeBaseTest
             [
                 false,
                 [
-                    'content' => $content,
+                    'content' => self::EXPECT_TEST_CONTENT,
                     'relation_field' => ['relations_a', 'relations_b'],
                     'creation_date' => '4 May 2018',
                     'sort' => [
@@ -209,63 +211,59 @@ final class ReverseFieldsTest extends QueryTypeBaseTest
         ];
     }
 
-    public function provideGetQueryWithInvalidOptionsCases(): array
+    public static function provideGetQueryWithInvalidOptionsCases(): array
     {
-        $content = $this->getTestContent();
-
         return [
             [
                 [
-                    'content' => $content,
+                    'content' => self::EXPECT_TEST_CONTENT,
                     'relation_field' => 'field',
                     'content_type' => 1,
                 ],
             ],
             [
                 [
-                    'content' => $content,
+                    'content' => self::EXPECT_TEST_CONTENT,
                     'relation_field' => 'field',
                     'field' => 1,
                 ],
             ],
             [
                 [
-                    'content' => $content,
+                    'content' => self::EXPECT_TEST_CONTENT,
                     'relation_field' => 'field',
                     'creation_date' => true,
                 ],
             ],
             [
                 [
-                    'content' => $content,
+                    'content' => self::EXPECT_TEST_CONTENT,
                     'relation_field' => 'field',
                     'limit' => 'five',
                 ],
             ],
             [
                 [
-                    'content' => $content,
+                    'content' => self::EXPECT_TEST_CONTENT,
                     'relation_field' => 'field',
                     'offset' => 'ten',
                 ],
             ],
             [
                 [
-                    'content' => $content,
+                    'content' => self::EXPECT_TEST_CONTENT,
                     'relation_field' => [1],
                 ],
             ],
         ];
     }
 
-    public function provideGetQueryWithInvalidCriteriaCases(): array
+    public static function provideGetQueryWithInvalidCriteriaCases(): array
     {
-        $content = $this->getTestContent();
-
         return [
             [
                 [
-                    'content' => $content,
+                    'content' => self::EXPECT_TEST_CONTENT,
                     'relation_field' => ['relations_a', 'relations_b'],
                     'creation_date' => [
                         'like' => 5,
@@ -275,14 +273,12 @@ final class ReverseFieldsTest extends QueryTypeBaseTest
         ];
     }
 
-    public function provideInvalidSortClauseThrowsExceptionCases(): array
+    public static function provideInvalidSortClauseThrowsExceptionCases(): array
     {
-        $content = $this->getTestContent();
-
         return [
             [
                 [
-                    'content' => $content,
+                    'content' => self::EXPECT_TEST_CONTENT,
                     'relation_field' => ['relations_a', 'relations_b'],
                     'sort' => 'just sort it',
                 ],
@@ -358,5 +354,13 @@ final class ReverseFieldsTest extends QueryTypeBaseTest
             'content',
             'relation_field',
         ];
+    }
+
+    protected function resolveExpectedMock(mixed $value): mixed
+    {
+        return match ($value) {
+            self::EXPECT_TEST_CONTENT => $this->getTestContent(),
+            default => $value,
+        };
     }
 }

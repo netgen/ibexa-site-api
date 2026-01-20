@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Netgen\Bundle\IbexaSiteApiBundle\Request\ParamConverter;
+namespace Netgen\Bundle\IbexaSiteApiBundle\Request\ValueResolver;
 
 use Netgen\IbexaSiteApi\API\Values\Content;
 
-final class ContentParamConverter extends SiteParamConverter
+final class ContentValueResolver extends SiteValueResolver
 {
     protected function getSupportedClass(): string
     {

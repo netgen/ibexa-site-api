@@ -14,8 +14,8 @@ use Symfony\Component\DependencyInjection\Definition;
  */
 final class RedirectExpressionFunctionProviderPassTest extends AbstractCompilerPassTestCase
 {
-    protected const ExpressionLanguageId = 'netgen.ibexa_site_api.redirect.expression_language';
-    protected const ExpressionFunctionProviderTag = 'netgen.ibexa_site_api.redirect.expression_function_provider';
+    protected const string ExpressionLanguageId = 'netgen.ibexa_site_api.redirect.expression_language';
+    protected const string ExpressionFunctionProviderTag = 'netgen.ibexa_site_api.redirect.expression_function_provider';
 
     protected function setUp(): void
     {

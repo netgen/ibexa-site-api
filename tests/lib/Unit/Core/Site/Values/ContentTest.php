@@ -21,6 +21,7 @@ use Netgen\IbexaSiteApi\API\Site;
 use Netgen\IbexaSiteApi\API\Values\Content as APIContent;
 use Netgen\IbexaSiteApi\Core\Site\DomainObjectMapper;
 use Netgen\IbexaSiteApi\Core\Site\Values\Content;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
@@ -32,6 +33,7 @@ use Psr\Log\NullLogger;
  *
  * @internal
  */
+#[AllowMockObjectsWithoutExpectations]
 final class ContentTest extends TestCase
 {
     protected null|MockObject|Site $siteMock = null;

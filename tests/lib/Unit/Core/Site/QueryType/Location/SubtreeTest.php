@@ -27,29 +27,31 @@ use Netgen\IbexaSiteApi\Core\Site\QueryType\QueryType;
 use Netgen\IbexaSiteApi\Core\Site\Settings;
 use Netgen\IbexaSiteApi\Core\Site\Values\Location;
 use Netgen\IbexaSiteApi\Tests\Unit\Core\Site\ContentFieldsMockTrait;
-use Netgen\IbexaSiteApi\Tests\Unit\Core\Site\QueryType\QueryTypeBaseTest;
+use Netgen\IbexaSiteApi\Tests\Unit\Core\Site\QueryType\QueryTypeBaseTestCase;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
+use PHPUnit\Framework\Attributes\Group;
 use Psr\Log\NullLogger;
 
 /**
  * Location Subtree QueryType test case.
  *
- * @group query-type
- *
  * @internal
  */
-final class SubtreeTest extends QueryTypeBaseTest
+#[Group('query-type')]
+#[AllowMockObjectsWithoutExpectations]
+final class SubtreeTest extends QueryTypeBaseTestCase
 {
+    private const string EXPECT_TEST_LOCATION = '__location__';
+
     use ContentFieldsMockTrait;
 
-    public function provideGetQueryCases(): array
+    public static function provideGetQueryCases(): array
     {
-        $location = $this->getTestLocation();
-
         return [
             [
                 false,
                 [
-                    'location' => $location,
+                    'location' => self::EXPECT_TEST_LOCATION,
                     'exclude_self' => true,
                     'depth' => null,
                 ],
@@ -65,7 +67,7 @@ final class SubtreeTest extends QueryTypeBaseTest
                 false,
                 [
                     'visible' => false,
-                    'location' => $location,
+                    'location' => self::EXPECT_TEST_LOCATION,
                     'exclude_self' => false,
                     'relative_depth' => null,
                     'limit' => null,
@@ -88,7 +90,7 @@ final class SubtreeTest extends QueryTypeBaseTest
                 false,
                 [
                     'visible' => null,
-                    'location' => $location,
+                    'location' => self::EXPECT_TEST_LOCATION,
                     'exclude_self' => null,
                     'depth' => [
                         'in' => [2, 3, 7],
@@ -112,7 +114,7 @@ final class SubtreeTest extends QueryTypeBaseTest
             [
                 true,
                 [
-                    'location' => $location,
+                    'location' => self::EXPECT_TEST_LOCATION,
                     'relative_depth' => 5,
                     'limit' => 12,
                     'offset' => 34,
@@ -135,7 +137,7 @@ final class SubtreeTest extends QueryTypeBaseTest
                 true,
                 [
                     'visible' => true,
-                    'location' => $location,
+                    'location' => self::EXPECT_TEST_LOCATION,
                     'content_type' => null,
                     'relative_depth' => [
                         'in' => [2, 3, 7],
@@ -161,7 +163,7 @@ final class SubtreeTest extends QueryTypeBaseTest
             [
                 false,
                 [
-                    'location' => $location,
+                    'location' => self::EXPECT_TEST_LOCATION,
                     'content_type' => 'article',
                     'sort' => [
                         'published asc',
@@ -182,7 +184,7 @@ final class SubtreeTest extends QueryTypeBaseTest
             [
                 false,
                 [
-                    'location' => $location,
+                    'location' => self::EXPECT_TEST_LOCATION,
                     'content_type' => 'article',
                     'field' => [],
                     'sort' => [
@@ -206,7 +208,7 @@ final class SubtreeTest extends QueryTypeBaseTest
             [
                 false,
                 [
-                    'location' => $location,
+                    'location' => self::EXPECT_TEST_LOCATION,
                     'content_type' => 'article',
                     'field' => [
                         'title' => 'Hello',
@@ -229,7 +231,7 @@ final class SubtreeTest extends QueryTypeBaseTest
             [
                 false,
                 [
-                    'location' => $location,
+                    'location' => self::EXPECT_TEST_LOCATION,
                     'content_type' => 'article',
                     'field' => [
                         'title' => [
@@ -258,7 +260,7 @@ final class SubtreeTest extends QueryTypeBaseTest
             [
                 false,
                 [
-                    'location' => $location,
+                    'location' => self::EXPECT_TEST_LOCATION,
                     'content_type' => 'article',
                     'field' => [
                         'title' => [
@@ -289,7 +291,7 @@ final class SubtreeTest extends QueryTypeBaseTest
             [
                 false,
                 [
-                    'location' => $location,
+                    'location' => self::EXPECT_TEST_LOCATION,
                     'creation_date' => '4 May 2018',
                 ],
                 new LocationQuery([
@@ -308,8 +310,8 @@ final class SubtreeTest extends QueryTypeBaseTest
             [
                 false,
                 [
-                    'location' => $location,
-                    'sort' => $location,
+                    'location' => self::EXPECT_TEST_LOCATION,
+                    'sort' => self::EXPECT_TEST_LOCATION,
                 ],
                 new LocationQuery([
                     'filter' => new LogicalAnd([
@@ -325,52 +327,48 @@ final class SubtreeTest extends QueryTypeBaseTest
         ];
     }
 
-    public function provideGetQueryWithInvalidOptionsCases(): array
+    public static function provideGetQueryWithInvalidOptionsCases(): array
     {
-        $location = $this->getTestLocation();
-
         return [
             [
                 [
-                    'location' => $location,
+                    'location' => self::EXPECT_TEST_LOCATION,
                     'content_type' => 1,
                 ],
             ],
             [
                 [
-                    'location' => $location,
+                    'location' => self::EXPECT_TEST_LOCATION,
                     'field' => 1,
                 ],
             ],
             [
                 [
-                    'location' => $location,
+                    'location' => self::EXPECT_TEST_LOCATION,
                     'creation_date' => true,
                 ],
             ],
             [
                 [
-                    'location' => $location,
+                    'location' => self::EXPECT_TEST_LOCATION,
                     'limit' => 'five',
                 ],
             ],
             [
                 [
-                    'location' => $location,
+                    'location' => self::EXPECT_TEST_LOCATION,
                     'offset' => 'ten',
                 ],
             ],
         ];
     }
 
-    public function provideGetQueryWithInvalidCriteriaCases(): array
+    public static function provideGetQueryWithInvalidCriteriaCases(): array
     {
-        $location = $this->getTestLocation();
-
         return [
             [
                 [
-                    'location' => $location,
+                    'location' => self::EXPECT_TEST_LOCATION,
                     'creation_date' => [
                         'like' => 5,
                     ],
@@ -379,14 +377,12 @@ final class SubtreeTest extends QueryTypeBaseTest
         ];
     }
 
-    public function provideInvalidSortClauseThrowsExceptionCases(): array
+    public static function provideInvalidSortClauseThrowsExceptionCases(): array
     {
-        $location = $this->getTestLocation();
-
         return [
             [
                 [
-                    'location' => $location,
+                    'location' => self::EXPECT_TEST_LOCATION,
                     'sort' => 'just sort it',
                 ],
             ],
@@ -463,5 +459,13 @@ final class SubtreeTest extends QueryTypeBaseTest
     protected function internalGetRepoFieldDefinitions(): FieldDefinitionCollection
     {
         return new FieldDefinitionCollection();
+    }
+
+    protected function resolveExpectedMock(mixed $value): mixed
+    {
+        return match ($value) {
+            self::EXPECT_TEST_LOCATION => $this->getTestLocation(),
+            default => $value,
+        };
     }
 }

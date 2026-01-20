@@ -296,7 +296,7 @@ trait ContentFieldsMockTrait
     {
         return new RepoContentInfo([
             'id' => 1,
-            'ownerId' => 'ownerId',
+            'ownerId' => 24,
             'contentTypeId' => 42,
             'mainLanguageCode' => 'eng-GB',
         ]);

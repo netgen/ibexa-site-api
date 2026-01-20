@@ -26,35 +26,37 @@ use Netgen\IbexaSiteApi\Core\Site\QueryType\QueryType;
 use Netgen\IbexaSiteApi\Core\Site\Settings;
 use Netgen\IbexaSiteApi\Core\Site\Values\Content;
 use Netgen\IbexaSiteApi\Tests\Unit\Core\Site\ContentFieldsMockTrait;
-use Netgen\IbexaSiteApi\Tests\Unit\Core\Site\QueryType\QueryTypeBaseTest;
+use Netgen\IbexaSiteApi\Tests\Unit\Core\Site\QueryType\QueryTypeBaseTestCase;
 use Netgen\TagsBundle\API\Repository\Values\Content\Query\Criterion\TagId;
 use Netgen\TagsBundle\API\Repository\Values\Tags\Tag;
 use Netgen\TagsBundle\Core\FieldType\Tags\Value as TagValue;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
+use PHPUnit\Framework\Attributes\Group;
 use Psr\Log\NullLogger;
 use RuntimeException;
 
 /**
  * TagFields Content Relation QueryType test case.
  *
- * @group query-type
- *
  * @see \Netgen\IbexaSiteApi\Core\Site\QueryType\Content\Relations\TagFields
  *
  * @internal
  */
-final class TagFieldsTest extends QueryTypeBaseTest
+#[Group('query-type')]
+#[AllowMockObjectsWithoutExpectations]
+final class TagFieldsTest extends QueryTypeBaseTestCase
 {
+    private const string EXPECT_TEST_CONTENT = '__content__';
+
     use ContentFieldsMockTrait;
 
-    public function provideGetQueryCases(): array
+    public static function provideGetQueryCases(): array
     {
-        $content = $this->getTestContent();
-
         return [
             [
                 false,
                 [
-                    'content' => $content,
+                    'content' => self::EXPECT_TEST_CONTENT,
                     'relation_field' => ['tags_a', 'tags_b'],
                     'limit' => 12,
                     'offset' => 34,
@@ -77,7 +79,7 @@ final class TagFieldsTest extends QueryTypeBaseTest
                 false,
                 [
                     'visible' => false,
-                    'content' => $content,
+                    'content' => self::EXPECT_TEST_CONTENT,
                     'exclude_self' => true,
                     'relation_field' => ['tags_a'],
                     'content_type' => 'article',
@@ -102,7 +104,7 @@ final class TagFieldsTest extends QueryTypeBaseTest
                 false,
                 [
                     'visible' => null,
-                    'content' => $content,
+                    'content' => self::EXPECT_TEST_CONTENT,
                     'exclude_self' => false,
                     'relation_field' => ['tags_b'],
                     'content_type' => 'article',
@@ -129,7 +131,7 @@ final class TagFieldsTest extends QueryTypeBaseTest
             [
                 true,
                 [
-                    'content' => $content,
+                    'content' => self::EXPECT_TEST_CONTENT,
                     'relation_field' => [],
                     'content_type' => 'article',
                     'field' => [
@@ -154,7 +156,7 @@ final class TagFieldsTest extends QueryTypeBaseTest
                 true,
                 [
                     'visible' => true,
-                    'content' => $content,
+                    'content' => self::EXPECT_TEST_CONTENT,
                     'relation_field' => ['tags_a', 'tags_b'],
                     'content_type' => 'article',
                     'field' => [
@@ -186,7 +188,7 @@ final class TagFieldsTest extends QueryTypeBaseTest
             [
                 false,
                 [
-                    'content' => $content,
+                    'content' => self::EXPECT_TEST_CONTENT,
                     'relation_field' => ['tags_a', 'tags_b'],
                     'creation_date' => '4 May 2018',
                     'sort' => [
@@ -272,63 +274,59 @@ final class TagFieldsTest extends QueryTypeBaseTest
         );
     }
 
-    public function provideGetQueryWithInvalidOptionsCases(): array
+    public static function provideGetQueryWithInvalidOptionsCases(): array
     {
-        $content = $this->getTestContent();
-
         return [
             [
                 [
-                    'content' => $content,
+                    'content' => self::EXPECT_TEST_CONTENT,
                     'relation_field' => 'field',
                     'content_type' => 1,
                 ],
             ],
             [
                 [
-                    'content' => $content,
+                    'content' => self::EXPECT_TEST_CONTENT,
                     'relation_field' => 'field',
                     'field' => 1,
                 ],
             ],
             [
                 [
-                    'content' => $content,
+                    'content' => self::EXPECT_TEST_CONTENT,
                     'relation_field' => 'field',
                     'creation_date' => true,
                 ],
             ],
             [
                 [
-                    'content' => $content,
+                    'content' => self::EXPECT_TEST_CONTENT,
                     'relation_field' => 'field',
                     'limit' => 'five',
                 ],
             ],
             [
                 [
-                    'content' => $content,
+                    'content' => self::EXPECT_TEST_CONTENT,
                     'relation_field' => 'field',
                     'offset' => 'ten',
                 ],
             ],
             [
                 [
-                    'content' => $content,
+                    'content' => self::EXPECT_TEST_CONTENT,
                     'relation_field' => [1],
                 ],
             ],
         ];
     }
 
-    public function provideGetQueryWithInvalidCriteriaCases(): array
+    public static function provideGetQueryWithInvalidCriteriaCases(): array
     {
-        $content = $this->getTestContent();
-
         return [
             [
                 [
-                    'content' => $content,
+                    'content' => self::EXPECT_TEST_CONTENT,
                     'relation_field' => ['tags_a', 'tags_b'],
                     'creation_date' => [
                         'like' => 5,
@@ -338,14 +336,12 @@ final class TagFieldsTest extends QueryTypeBaseTest
         ];
     }
 
-    public function provideInvalidSortClauseThrowsExceptionCases(): array
+    public static function provideInvalidSortClauseThrowsExceptionCases(): array
     {
-        $content = $this->getTestContent();
-
         return [
             [
                 [
-                    'content' => $content,
+                    'content' => self::EXPECT_TEST_CONTENT,
                     'relation_field' => ['tags_a', 'tags_b'],
                     'sort' => 'just sort it',
                 ],
@@ -407,7 +403,7 @@ final class TagFieldsTest extends QueryTypeBaseTest
                 'fieldDefIdentifier' => 'not_tags',
                 'value' => new Value(),
                 'languageCode' => 'eng-GB',
-                'fieldTypeIdentifier' => 'ezstring',
+                'fieldTypeIdentifier' => 'ibexa_string',
             ]),
         ];
     }
@@ -428,7 +424,7 @@ final class TagFieldsTest extends QueryTypeBaseTest
             new FieldDefinition([
                 'id' => 3,
                 'identifier' => 'not_tags',
-                'fieldTypeIdentifier' => 'ezstring',
+                'fieldTypeIdentifier' => 'ibexa_string',
             ]),
         ]);
     }
@@ -469,5 +465,13 @@ final class TagFieldsTest extends QueryTypeBaseTest
             'relation_field',
             'exclude_self',
         ];
+    }
+
+    protected function resolveExpectedMock(mixed $value): mixed
+    {
+        return match ($value) {
+            self::EXPECT_TEST_CONTENT => $this->getTestContent(),
+            default => $value,
+        };
     }
 }

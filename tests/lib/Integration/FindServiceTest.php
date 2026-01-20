@@ -10,21 +10,21 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ContentId;
 use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchResult;
 use Netgen\IbexaSiteApi\API\Values\Content;
 use Netgen\IbexaSiteApi\API\Values\Location;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Test case for the FindService.
  *
  * @see \Netgen\IbexaSiteApi\API\FindService
  *
- * @group integration
- * @group find
- *
  * @depends Netgen\IbexaSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
  * @depends Netgen\IbexaSiteApi\Tests\Integration\SiteTest::testGetFindService
  *
  * @internal
  */
-final class FindServiceTest extends BaseTest
+#[Group('integration')]
+#[Group('find')]
+final class FindServiceTest extends BaseTestCase
 {
     /**
      * Test for the findContent() method.

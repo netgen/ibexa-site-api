@@ -6,11 +6,11 @@ namespace Netgen\IbexaSiteApi\Tests\Unit\Core\Site\QueryType\Base;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\LocationQuery;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Aggregation\RawTermAggregation;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\DateMetadata;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\FullText;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\SectionId;
-use Ibexa\Contracts\Core\Repository\Values\Content\Query\FacetBuilder\SectionFacetBuilder;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\SectionIdentifier;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\SectionName;
@@ -68,10 +68,10 @@ class CustomQueryType extends Base
         return new FullText('one AND two OR three');
     }
 
-    protected function getFacetBuilders(array $parameters): array
+    protected function getAggregations(array $parameters): array
     {
         return [
-            new SectionFacetBuilder(),
+            new RawTermAggregation('name', 'field_name'),
         ];
     }
 

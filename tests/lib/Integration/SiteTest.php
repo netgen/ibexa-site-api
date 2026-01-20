@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace Netgen\IbexaSiteApi\Tests\Integration;
 
+use PHPUnit\Framework\Attributes\Group;
+
 /**
  * Test case for the Site.
  *
  * @see \Netgen\IbexaSiteApi\API\Site
  *
- * @group site
- *
  * @internal
  */
-final class SiteTest extends BaseTest
+#[Group('site')]
+final class SiteTest extends BaseTestCase
 {
     /**
      * Test for the getSettings() method.
@@ -30,10 +31,9 @@ final class SiteTest extends BaseTest
     /**
      * Test for the getFilterService() method.
      *
-     * @group filter
-     *
      * @see \Netgen\IbexaSiteApi\API\Site::getFilterService()
      */
+    #[Group('filter')]
     public function testGetFilterService(): void
     {
         $this->getSite()->getFilterService();
@@ -44,10 +44,9 @@ final class SiteTest extends BaseTest
     /**
      * Test for the getFindService() method.
      *
-     * @group find
-     *
      * @see \Netgen\IbexaSiteApi\API\Site::getFindService()
      */
+    #[Group('find')]
     public function testGetFindService(): void
     {
         $this->getSite()->getFindService();
@@ -58,10 +57,9 @@ final class SiteTest extends BaseTest
     /**
      * Test for the getLoadService() method.
      *
-     * @group load
-     *
      * @see \Netgen\IbexaSiteApi\API\Site::getLoadService()
      */
+    #[Group('load')]
     public function testGetLoadService(): void
     {
         $this->getSite()->getLoadService();

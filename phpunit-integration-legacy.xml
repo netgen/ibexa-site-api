@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
-         bootstrap="./tests/bootstrap.php"
-         colors="true">
-  <coverage processUncoveredFiles="true">
-    <include>
-      <directory suffix=".php">./lib</directory>
-    </include>
-  </coverage>
+<phpunit
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/12.5/phpunit.xsd"
+        bootstrap="./tests/bootstrap.php"
+        colors="true"
+        cacheDirectory=".phpunit.cache"
+>
   <php>
     <env name="setupFactory" value="Netgen\IbexaSiteApi\Tests\Integration\SetupFactory\Legacy"/>
   </php>
@@ -21,4 +20,9 @@
       <file>tests/lib/Integration/Traits/SearchResultExtractorTraitTest.php</file>
     </testsuite>
   </testsuites>
+  <source>
+    <include>
+      <directory>./lib</directory>
+    </include>
+  </source>
 </phpunit>

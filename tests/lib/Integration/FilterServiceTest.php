@@ -8,21 +8,21 @@ use Ibexa\Contracts\Core\Repository\Values\Content\LocationQuery;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ContentId;
 use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchResult;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Test case for the FilterService.
  *
  * @see \Netgen\IbexaSiteApi\API\FilterService
  *
- * @group integration
- * @group filter
- *
  * @depends Netgen\IbexaSiteApi\Tests\Integration\PrepareFixturesTest::testPrepareTestFixtures
  * @depends Netgen\IbexaSiteApi\Tests\Integration\SiteTest::testGetFilterService
  *
  * @internal
  */
-final class FilterServiceTest extends BaseTest
+#[Group('integration')]
+#[Group('filter')]
+final class FilterServiceTest extends BaseTestCase
 {
     /**
      * Test for the findContent() method.

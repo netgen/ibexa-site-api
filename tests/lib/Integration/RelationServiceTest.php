@@ -7,18 +7,18 @@ namespace Netgen\IbexaSiteApi\Tests\Integration;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinitionCreateStruct;
 use Netgen\IbexaSiteApi\API\Values\Content;
 use Netgen\IbexaSiteApi\API\Values\Location;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Test case for the RelationService.
  *
  * @see \Netgen\IbexaSiteApi\API\RelationService
  *
- * @group integration
- * @group relation
- *
  * @internal
  */
-final class RelationServiceTest extends BaseTest
+#[Group('integration')]
+#[Group('relation')]
+final class RelationServiceTest extends BaseTestCase
 {
     public function testLoadFieldRelation(): void
     {
@@ -214,7 +214,7 @@ final class RelationServiceTest extends BaseTest
         $contentTypeCreateStruct->addFieldDefinition(
             new FieldDefinitionCreateStruct([
                 'identifier' => $fieldDefinitionIdentifier,
-                'fieldTypeIdentifier' => 'ezobjectrelation',
+                'fieldTypeIdentifier' => 'ibexa_object_relation',
             ]),
         );
         $contentTypeDraft = $contentTypeService->createContentType($contentTypeCreateStruct, [$contentTypeGroup]);
@@ -231,7 +231,7 @@ final class RelationServiceTest extends BaseTest
         $contentTypeCreateStruct->addFieldDefinition(
             new FieldDefinitionCreateStruct([
                 'identifier' => $fieldDefinitionIdentifier,
-                'fieldTypeIdentifier' => 'ezobjectrelationlist',
+                'fieldTypeIdentifier' => 'ibexa_object_relation_list',
             ]),
         );
         $contentTypeDraft = $contentTypeService->createContentType($contentTypeCreateStruct, [$contentTypeGroup]);

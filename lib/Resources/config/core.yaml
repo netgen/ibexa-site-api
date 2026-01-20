@@ -10,7 +10,7 @@ services:
     netgen.ibexa_site_api.repository.inner:
         class: Ibexa\Core\Repository\Repository
         factory:
-            - '@Ibexa\Bundle\Core\ApiLoader\RepositoryFactory'
+            - '@Ibexa\Core\Base\Container\ApiLoader\RepositoryFactory'
             - buildRepository
         arguments:
             - '@ibexa.api.persistence_handler'
@@ -19,7 +19,6 @@ services:
             - '@Ibexa\Core\Repository\Helper\RelationProcessor'
             - '@Ibexa\Core\FieldType\FieldTypeRegistry'
             - '@Ibexa\Core\Repository\User\PasswordHashService'
-            - '@Ibexa\Core\Repository\Strategy\ContentThumbnail\ThumbnailChainStrategy'
             - '@Ibexa\Core\Repository\ProxyFactory\ProxyDomainMapperFactory'
             - '@Ibexa\Core\Repository\Mapper\ContentDomainMapper'
             - '@Ibexa\Core\Repository\Mapper\ContentTypeDomainMapper'
@@ -33,8 +32,9 @@ services:
             - '@Ibexa\Core\Repository\User\PasswordValidatorInterface'
             - '@Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface'
             - '@Ibexa\Contracts\Core\Repository\NameSchema\NameSchemaServiceInterface'
+            - '@ibexa.repository.transaction_handler'
             - '@Ibexa\Core\Repository\Collector\ContentCollector'
-            - '%languages%'
+            - '@validator'
         lazy: true
 
     netgen.ibexa_site_api.repository.filtering_search_service:

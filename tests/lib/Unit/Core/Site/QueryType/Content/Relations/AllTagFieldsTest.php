@@ -24,35 +24,37 @@ use Netgen\IbexaSiteApi\Core\Site\QueryType\QueryType;
 use Netgen\IbexaSiteApi\Core\Site\Settings;
 use Netgen\IbexaSiteApi\Core\Site\Values\Content;
 use Netgen\IbexaSiteApi\Tests\Unit\Core\Site\ContentFieldsMockTrait;
-use Netgen\IbexaSiteApi\Tests\Unit\Core\Site\QueryType\QueryTypeBaseTest;
+use Netgen\IbexaSiteApi\Tests\Unit\Core\Site\QueryType\QueryTypeBaseTestCase;
 use Netgen\TagsBundle\API\Repository\Values\Content\Query\Criterion\TagId;
 use Netgen\TagsBundle\API\Repository\Values\Tags\Tag;
 use Netgen\TagsBundle\Core\FieldType\Tags\Value as TagValue;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
+use PHPUnit\Framework\Attributes\Group;
 use Psr\Log\NullLogger;
 
 /**
  * AllTagFields Content Relation QueryType test case.
  *
- * @group query-type
- *
  * @see \Netgen\IbexaSiteApi\Core\Site\QueryType\Content\Relations\AllTagFields
  *
  * @internal
  */
-final class AllTagFieldsTest extends QueryTypeBaseTest
+#[Group('query-type')]
+#[AllowMockObjectsWithoutExpectations]
+final class AllTagFieldsTest extends QueryTypeBaseTestCase
 {
+    private const string EXPECT_CONTENT_WITH_TAGS = '__content_with_tags__';
+    private const string EXPECT_CONTENT_WITHOUT_TAGS = '__content_without_tags__';
+
     use ContentFieldsMockTrait;
 
-    public function provideGetQueryCases(): array
+    public static function provideGetQueryCases(): array
     {
-        $contentWithTags = $this->getTestContentWithTags();
-        $contentWithoutTags = $this->getTestContentWithoutTags();
-
         return [
             [
                 false,
                 [
-                    'content' => $contentWithTags,
+                    'content' => self::EXPECT_CONTENT_WITH_TAGS,
                     'limit' => 12,
                     'offset' => 34,
                     'sort' => 'published asc',
@@ -74,7 +76,7 @@ final class AllTagFieldsTest extends QueryTypeBaseTest
                 false,
                 [
                     'visible' => false,
-                    'content' => $contentWithoutTags,
+                    'content' => self::EXPECT_CONTENT_WITHOUT_TAGS,
                     'content_type' => 'article',
                     'sort' => 'published desc',
                 ],
@@ -93,7 +95,7 @@ final class AllTagFieldsTest extends QueryTypeBaseTest
                 false,
                 [
                     'visible' => null,
-                    'content' => $contentWithTags,
+                    'content' => self::EXPECT_CONTENT_WITH_TAGS,
                     'exclude_self' => true,
                     'content_type' => 'article',
                     'field' => [],
@@ -115,7 +117,7 @@ final class AllTagFieldsTest extends QueryTypeBaseTest
             [
                 true,
                 [
-                    'content' => $contentWithTags,
+                    'content' => self::EXPECT_CONTENT_WITH_TAGS,
                     'exclude_self' => false,
                     'content_type' => 'article',
                     'field' => [
@@ -142,7 +144,7 @@ final class AllTagFieldsTest extends QueryTypeBaseTest
                 true,
                 [
                     'visible' => true,
-                    'content' => $contentWithTags,
+                    'content' => self::EXPECT_CONTENT_WITH_TAGS,
                     'content_type' => 'article',
                     'field' => [
                         'title' => [
@@ -167,7 +169,7 @@ final class AllTagFieldsTest extends QueryTypeBaseTest
             [
                 false,
                 [
-                    'content' => $contentWithTags,
+                    'content' => self::EXPECT_CONTENT_WITH_TAGS,
                     'content_type' => 'article',
                     'field' => [
                         'title' => [
@@ -198,7 +200,7 @@ final class AllTagFieldsTest extends QueryTypeBaseTest
             [
                 false,
                 [
-                    'content' => $contentWithTags,
+                    'content' => self::EXPECT_CONTENT_WITH_TAGS,
                     'creation_date' => '4 May 2018',
                     'sort' => [
                         new DatePublished(Query::SORT_DESC),
@@ -225,52 +227,48 @@ final class AllTagFieldsTest extends QueryTypeBaseTest
         ];
     }
 
-    public function provideGetQueryWithInvalidOptionsCases(): array
+    public static function provideGetQueryWithInvalidOptionsCases(): array
     {
-        $content = $this->getTestContentWithTags();
-
         return [
             [
                 [
-                    'content' => $content,
+                    'content' => self::EXPECT_CONTENT_WITH_TAGS,
                     'content_type' => 1,
                 ],
             ],
             [
                 [
-                    'content' => $content,
+                    'content' => self::EXPECT_CONTENT_WITH_TAGS,
                     'field' => 1,
                 ],
             ],
             [
                 [
-                    'content' => $content,
+                    'content' => self::EXPECT_CONTENT_WITH_TAGS,
                     'creation_date' => true,
                 ],
             ],
             [
                 [
-                    'content' => $content,
+                    'content' => self::EXPECT_CONTENT_WITH_TAGS,
                     'limit' => 'five',
                 ],
             ],
             [
                 [
-                    'content' => $content,
+                    'content' => self::EXPECT_CONTENT_WITH_TAGS,
                     'offset' => 'ten',
                 ],
             ],
         ];
     }
 
-    public function provideGetQueryWithInvalidCriteriaCases(): array
+    public static function provideGetQueryWithInvalidCriteriaCases(): array
     {
-        $content = $this->getTestContentWithTags();
-
         return [
             [
                 [
-                    'content' => $content,
+                    'content' => self::EXPECT_CONTENT_WITH_TAGS,
                     'creation_date' => [
                         'like' => 5,
                     ],
@@ -279,14 +277,12 @@ final class AllTagFieldsTest extends QueryTypeBaseTest
         ];
     }
 
-    public function provideInvalidSortClauseThrowsExceptionCases(): array
+    public static function provideInvalidSortClauseThrowsExceptionCases(): array
     {
-        $content = $this->getTestContentWithTags();
-
         return [
             [
                 [
-                    'content' => $content,
+                    'content' => self::EXPECT_CONTENT_WITH_TAGS,
                     'sort' => 'just sort it',
                 ],
             ],
@@ -354,7 +350,7 @@ final class AllTagFieldsTest extends QueryTypeBaseTest
                     ]),
                 ]),
                 'languageCode' => 'eng-GB',
-                'fieldTypeIdentifier' => 'ezstring',
+                'fieldTypeIdentifier' => 'ibexa_string',
             ]),
         ];
     }
@@ -375,7 +371,7 @@ final class AllTagFieldsTest extends QueryTypeBaseTest
             new FieldDefinition([
                 'id' => 3,
                 'identifier' => 'third',
-                'fieldTypeIdentifier' => 'ezstring',
+                'fieldTypeIdentifier' => 'ibexa_string',
             ]),
         ]);
     }
@@ -433,5 +429,14 @@ final class AllTagFieldsTest extends QueryTypeBaseTest
             'content',
             'exclude_self',
         ];
+    }
+
+    protected function resolveExpectedMock(mixed $value): mixed
+    {
+        return match ($value) {
+            self::EXPECT_CONTENT_WITH_TAGS => $this->getTestContentWithTags(),
+            self::EXPECT_CONTENT_WITHOUT_TAGS => $this->getTestContentWithoutTags(),
+            default => $value,
+        };
     }
 }
