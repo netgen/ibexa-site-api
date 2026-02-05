@@ -12,5 +12,5 @@ final class Events
      * @see \Netgen\Bundle\IbexaSiteApiBundle\EventListener\ViewTaggerSubscriber
      * @see \Netgen\Bundle\IbexaSiteApiBundle\View\ViewRenderer
      */
-    public const RENDER_VIEW = 'netgen_site_api.render_view';
+    public const string RENDER_VIEW = 'netgen_site_api.render_view';
 }

@@ -20,23 +20,23 @@ abstract class UrlGenerator
     /**
      * Generates an absolute URL, e.g. "https://netgen.io/netgen-stack-for-ibexa-ez-platform".
      */
-    public const ABSOLUTE_URL = 0;
+    public const int ABSOLUTE_URL = 0;
 
     /**
      * Generates an absolute path, e.g. "/netgen-stack-for-ibexa-ez-platform".
      */
-    public const ABSOLUTE_PATH = 1;
+    public const int ABSOLUTE_PATH = 1;
 
     /**
      * Generates a relative path based on the current request path, e.g. "../netgen-stack-for-ibexa-ez-platform".
      */
-    public const RELATIVE_PATH = 2;
+    public const int RELATIVE_PATH = 2;
 
     /**
      * Generates a network path, e.g. "//netgen.io/netgen-stack-for-ibexa-ez-platform".
      * Such reference reuses the current scheme but specifies the host.
      */
-    public const NETWORK_PATH = 3;
+    public const int NETWORK_PATH = 3;
 
     /**
      * @param object $object Site API Content or Location instance

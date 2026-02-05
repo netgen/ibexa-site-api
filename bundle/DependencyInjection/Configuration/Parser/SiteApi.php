@@ -13,7 +13,7 @@ use Symfony\Component\Config\Definition\Builder\NodeBuilder;
 
 class SiteApi extends AbstractParser
 {
-    private const NODE_KEY = 'ng_site_api';
+    private const string NODE_KEY = 'ng_site_api';
 
     public function addSemanticConfig(NodeBuilder $nodeBuilder): void
     {

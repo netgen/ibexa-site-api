@@ -23,12 +23,12 @@ use function sprintf;
 
 class ContentView extends AbstractParser
 {
-    public const QUERY_KEY = 'queries';
-    public const NODE_KEY = 'ng_content_view';
-    private const INFO = 'Template selection settings when displaying a Content with Netgen Site API';
-    private const DEFAULT_MATCH_VALUE = ['NG_DEFAULT_MATCH_VALUE'];
-    private const DEFAULT_QUERIES_VALUE = ['NG_DEFAULT_QUERIES_VALUE'];
-    private const DEFAULT_PARAMS_VALUE = ['NG_DEFAULT_PARAMS_VALUE'];
+    public const string QUERY_KEY = 'queries';
+    public const string NODE_KEY = 'ng_content_view';
+    private const string INFO = 'Template selection settings when displaying a Content with Netgen Site API';
+    private const array DEFAULT_MATCH_VALUE = ['NG_DEFAULT_MATCH_VALUE'];
+    private const array DEFAULT_QUERIES_VALUE = ['NG_DEFAULT_QUERIES_VALUE'];
+    private const array DEFAULT_PARAMS_VALUE = ['NG_DEFAULT_PARAMS_VALUE'];
 
     /**
      * Adds semantic configuration definition.

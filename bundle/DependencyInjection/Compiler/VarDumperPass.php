@@ -11,7 +11,7 @@ use Symfony\Component\VarDumper\Caster\Caster;
 
 class VarDumperPass implements CompilerPassInterface
 {
-    private const ClonerId = 'var_dumper.cloner';
+    private const string ClonerId = 'var_dumper.cloner';
 
     public function process(ContainerBuilder $container): void
     {
