@@ -111,7 +111,7 @@ final class CriterionDefinitionResolver
     }
 
     /**
-     * Return CriterionDefinition instance from the given arguments.
+     * Return a CriterionDefinition instance from the given arguments.
      */
     private function buildDefinition(
         string $name,

@@ -36,7 +36,7 @@ abstract class Fields implements IteratorAggregate, ArrayAccess, Countable, Debu
     abstract public function getFieldById(int $id): Field;
 
     /**
-     * Return first existing and non-empty field by the given $firstIdentifier and $identifiers.
+     * Return the first existing and non-empty field by the given $firstIdentifier and $identifiers.
      *
      * If no field is found in the Content, a surrogate field will be returned.
      * If all found fields are empty, the first found field will be returned.

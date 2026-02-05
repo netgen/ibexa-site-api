@@ -61,7 +61,7 @@ final class CriteriaBuilder
     }
 
     /**
-     * Build criterion $name from the given criterion $definition.
+     * Build the criterion from the given criterion $definition.
      */
     private function dispatchBuild(CriterionDefinition $definition): ?CriterionInterface
     {

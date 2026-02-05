@@ -8,9 +8,9 @@ use Ibexa\Contracts\Core\Repository\Values\ValueObject;
 use Pagerfanta\Pagerfanta;
 
 /**
- * Site Location represents location of Site Content object in the content tree.
+ * Site Location represents a location of a Site Content object in the content tree.
  *
- * Corresponds to Ibexa Repository Location object.
+ * Corresponds to the Ibexa Repository Location object.
  *
  * @see \Ibexa\Contracts\Core\Repository\Values\Content\Location
  *
@@ -39,7 +39,7 @@ use Pagerfanta\Pagerfanta;
 abstract class Location extends ValueObject implements DebugInfo
 {
     /**
-     * Return an array of children Locations, limited by optional $limit.
+     * Return an array of children Locations, limited by the optional $limit.
      *
      * @return \Netgen\IbexaSiteApi\API\Values\Location[]
      */
@@ -52,12 +52,12 @@ abstract class Location extends ValueObject implements DebugInfo
     abstract public function filterChildren(array $contentTypeIdentifiers = [], int $maxPerPage = 25, int $currentPage = 1): Pagerfanta;
 
     /**
-     * Return first child, limited by optional $contentTypeIdentifier.
+     * Return the first child, limited by optional $contentTypeIdentifier.
      */
     abstract public function getFirstChild(?string $contentTypeIdentifier = null): ?self;
 
     /**
-     * Return an array of Location siblings, limited by optional $limit.
+     * Return an array of Location siblings, limited by the optional $limit.
      *
      * @return \Netgen\IbexaSiteApi\API\Values\Location[]
      */
@@ -67,7 +67,7 @@ abstract class Location extends ValueObject implements DebugInfo
      * Return an array of Location siblings, filtered by optional
      * $contentTypeIdentifiers, $maxPerPage and $currentPage.
      *
-     * Siblings will not include current Location.
+     * Siblings will not include the current Location.
      */
     abstract public function filterSiblings(array $contentTypeIdentifiers = [], int $maxPerPage = 25, int $currentPage = 1): Pagerfanta;
 

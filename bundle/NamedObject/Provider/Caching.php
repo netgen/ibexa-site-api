@@ -12,7 +12,7 @@ use Netgen\TagsBundle\API\Repository\Values\Tags\Tag;
 /**
  * Caching named object provider provides named objects using an aggregated
  * (Loading) provider, caching them in the internal in-memory cache for the
- * subsequent calls.
+ * following calls.
  *
  * @internal do not depend on this service, it can be changed without warning
  */

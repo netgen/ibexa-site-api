@@ -124,7 +124,7 @@ class ContentViewBuilder implements ViewBuilder
 
     /**
      * Loads the embedded content with id $contentId.
-     * Will load the content with sudo(), and check if the user can view_embed this content, for the given location
+     * Will load the content with sudo() and check if the user can view_embed this Content for the given Location
      * if provided.
      *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
@@ -167,7 +167,7 @@ class ContentViewBuilder implements ViewBuilder
     }
 
     /**
-     * Loads a Location with visibility check.
+     * Loads a Location with a visibility check.
      *
      * @todo Do we need to handle permissions here ?
      */
@@ -187,7 +187,7 @@ class ContentViewBuilder implements ViewBuilder
     }
 
     /**
-     * Checks if a user can read a content, or view it as an embed.
+     * Checks if a user can read a Content or view it as an embed.
      */
     private function canReadOrViewEmbed(ContentInfo $contentInfo, ?Location $location = null): bool
     {
@@ -199,8 +199,8 @@ class ContentViewBuilder implements ViewBuilder
     }
 
     /**
-     * Checks if the view is an embed one.
-     * Uses either the controller action (embedAction), or the viewType (embed/embed-inline).
+     * Checks if the view is embed.
+     * Uses either the controller action (embedAction) or the viewType (embed/embed-inline).
      *
      * @param array $parameters The ViewBuilder parameters array
      */

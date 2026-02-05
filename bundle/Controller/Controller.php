@@ -53,7 +53,7 @@ abstract class Controller extends AbstractController
     }
 
     /**
-     * Returns the root Location object for current siteaccess configuration.
+     * Returns the root Location object for the current siteaccess configuration.
      */
     protected function getRootLocation(): Location
     {

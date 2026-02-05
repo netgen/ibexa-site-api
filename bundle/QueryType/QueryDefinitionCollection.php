@@ -33,9 +33,9 @@ final class QueryDefinitionCollection
     }
 
     /**
-     * Return QueryDefinition by given $name.
+     * Return QueryDefinition by the given $name.
      *
-     * @throws \OutOfBoundsException if no QueryDefinition with given $name is found
+     * @throws \OutOfBoundsException if no QueryDefinition with the given $name is found
      */
     public function get(string $name): QueryDefinition
     {

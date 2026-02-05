@@ -9,10 +9,10 @@ use Ibexa\Contracts\Core\Repository\Values\ValueObject;
 use Pagerfanta\Pagerfanta;
 
 /**
- * Site Content object represents Ibexa Repository Content object in a current version
+ * Site Content object represents an Ibexa Repository Content object in a current version
  * and specific language.
  *
- * Corresponds to Ibexa Repository Content object.
+ * Corresponds to an Ibexa Repository Content object.
  *
  * @see \Ibexa\Contracts\Core\Repository\Values\Content\Content
  *
@@ -75,7 +75,7 @@ abstract class Content extends ValueObject implements DebugInfo
     abstract public function getFieldValueById(int $id): Value;
 
     /**
-     * Return an array of Locations, limited by optional $limit.
+     * Return an array of Locations, limited by an optional $limit.
      *
      * @return \Netgen\IbexaSiteApi\API\Values\Location[]
      */
@@ -113,7 +113,7 @@ abstract class Content extends ValueObject implements DebugInfo
     abstract public function getSudoFieldRelations(string $fieldDefinitionIdentifier, int $limit = 25): array;
 
     /**
-     * Return related Content from $fieldDefinitionIdentifier field,
+     * Return related Content from the given $fieldDefinitionIdentifier field,
      * optionally limited by a list of $contentTypeIdentifiers.
      *
      * @param string[] $contentTypeIdentifiers
@@ -143,12 +143,12 @@ abstract class Content extends ValueObject implements DebugInfo
     ): Pagerfanta;
 
     /**
-     * Return single related Location from $fieldDefinitionIdentifier field.
+     * Return a single related Location from $fieldDefinitionIdentifier field.
      */
     abstract public function getFieldRelationLocation(string $fieldDefinitionIdentifier): ?Location;
 
     /**
-     * Return single related Location from $fieldDefinitionIdentifier field using repository sudo.
+     * Return a single related Location from $fieldDefinitionIdentifier field using repository sudo.
      */
     abstract public function getSudoFieldRelationLocation(string $fieldDefinitionIdentifier): ?Location;
 
@@ -197,14 +197,14 @@ abstract class Content extends ValueObject implements DebugInfo
     ): Pagerfanta;
 
     /**
-     * Return all reverse related Content from $fieldDefinitionIdentifier.
+     * Return all reverse-related Content from $fieldDefinitionIdentifier.
      *
      * @return \Netgen\IbexaSiteApi\API\Values\Content[]
      */
     abstract public function getReverseFieldRelations(string $fieldDefinitionIdentifier, int $limit = 25): array;
 
     /**
-     * Return all reverse related Content from $fieldDefinitionIdentifier using repository sudo.
+     * Return all reverse-related Content from $fieldDefinitionIdentifier using repository sudo.
      *
      * @return \Netgen\IbexaSiteApi\API\Values\Content[]
      */
@@ -241,14 +241,14 @@ abstract class Content extends ValueObject implements DebugInfo
     ): Pagerfanta;
 
     /**
-     * Return all reverse related Locations from $fieldDefinitionIdentifier.
+     * Return all reverse-related Locations from $fieldDefinitionIdentifier.
      *
      * @return \Netgen\IbexaSiteApi\API\Values\Location[]
      */
     abstract public function getReverseFieldRelationLocations(string $fieldDefinitionIdentifier, int $limit = 25): array;
 
     /**
-     * Return all reverse related Locations from $fieldDefinitionIdentifier using repository sudo.
+     * Return all reverse-related Locations from $fieldDefinitionIdentifier using repository sudo.
      *
      * @return \Netgen\IbexaSiteApi\API\Values\Location[]
      */
@@ -285,7 +285,7 @@ abstract class Content extends ValueObject implements DebugInfo
     ): Pagerfanta;
 
     /**
-     * Return absolute path for the Content.
+     * Return the absolute path for the Content.
      *
      * @see \Netgen\IbexaSiteApi\API\Routing\UrlGenerator::ABSOLUTE_PATH
      */

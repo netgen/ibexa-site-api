@@ -48,7 +48,7 @@ final class QueryDefinitionMapper
     /**
      * Override $configuration parameters with $override.
      *
-     * Only first level keys in main configuration and separately under 'parameters' key are replaced.
+     * Only first level keys in the main configuration and separately under the 'parameters' key are replaced.
      */
     private function overrideConfiguration(array $configuration, array $override): array
     {
@@ -63,9 +63,9 @@ final class QueryDefinitionMapper
     }
 
     /**
-     * Return named query configuration by the given $name.
+     * Return a named query configuration by the given $name.
      *
-     * @throws \OutOfBoundsException if no such configuration exist
+     * @throws \OutOfBoundsException if no such configuration exists
      */
     private function getQueryConfigurationByName(string $name): array
     {

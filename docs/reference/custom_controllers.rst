@@ -54,7 +54,7 @@ in the Content view configuration:
                             match:
                                 Identifier\ContentType: article
 
-If you are not using container automation, here's an example relying on the base controller service definition:
+If you still want to keep explicit inheritance, use the following:
 
 .. code-block:: yaml
 

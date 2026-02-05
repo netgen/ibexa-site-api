@@ -7,13 +7,13 @@ namespace Netgen\IbexaSiteApi\API\Values;
 use Netgen\IbexaSiteApi\API\Routing\UrlGenerator;
 
 /**
- * Site Url represents Content or Location URL path.
+ * Site Url represents the Content or Location URL path.
  *
  * @see \Netgen\IbexaSiteApi\API\Routing\UrlGenerator
  * @see \Netgen\IbexaSiteApi\API\Values\Content
  * @see \Netgen\IbexaSiteApi\API\Values\Location
  *
- * When this object is cast to string, path will be generated using UrlGenerator::ABSOLUTE_PATH reference type.
+ * When this object is cast to string, the path will be generated using the UrlGenerator::ABSOLUTE_PATH reference type.
  */
 final class Path
 {
