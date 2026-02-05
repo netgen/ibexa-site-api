@@ -25,7 +25,7 @@ final class ParameterProcessor
     ) {}
 
     /**
-     * Return given $value processed with ExpressionLanguage if needed.
+     * Return the given $value processed with ExpressionLanguage if needed.
      *
      * Parameter $view is used to provide values for evaluation.
      */

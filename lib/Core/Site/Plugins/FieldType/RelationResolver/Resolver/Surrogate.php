@@ -10,7 +10,7 @@ use Netgen\IbexaSiteApi\Core\Site\Plugins\FieldType\RelationResolver\Resolver;
 /**
  * Surrogate field type relation Resolver.
  *
- * This resolver will match field type with identifier 'ngsurrogate', returned when nonexistent field is
+ * This resolver will match the field type with the identifier 'ngsurrogate', returned when a nonexistent field is
  * requested from Content.
  */
 class Surrogate extends Resolver

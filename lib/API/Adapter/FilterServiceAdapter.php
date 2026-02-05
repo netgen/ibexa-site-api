@@ -24,7 +24,7 @@ use Netgen\IbexaSiteApi\API\FilterService;
  * Methods implemented here do not use $languageFilter argument since it is handled automatically
  * by the filter service itself.
  *
- * As for $filterOnUserPermissions, filter service doesn't support it, so it is simply ignored.
+ * As for $filterOnUserPermissions, the FilterService doesn't support it, so it is simply ignored.
  */
 final class FilterServiceAdapter implements SearchService
 {

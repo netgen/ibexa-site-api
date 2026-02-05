@@ -12,7 +12,7 @@ use Ibexa\Core\QueryType\QueryType as BaseQueryTypeInterface;
 interface QueryType extends BaseQueryTypeInterface
 {
     /**
-     * Check if the QueryType supports parameter with the given $name.
+     * Check if the QueryType supports a parameter with the given $name.
      */
     public function supportsParameter(string $name): bool;
 }

@@ -15,7 +15,7 @@ use function sprintf;
  * of a specific field type.
  *
  * If a field type is to be used for relations, it needs a dedicated implementation
- * of this class to be registered with resolver registry.
+ * of this class to be registered with the resolver registry.
  *
  * @see \Netgen\Bundle\IbexaSiteApiBundle\DependencyInjection\Compiler\RelationResolverRegistrationPass
  */

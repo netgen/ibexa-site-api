@@ -88,7 +88,7 @@ class ContentView extends BaseView implements ContentValueView, LocationValueVie
     }
 
     /**
-     * Is the view an embed or not.
+     * Return is the view an embed or not.
      *
      * @return bool true if the view is an embed, false if it is not
      */

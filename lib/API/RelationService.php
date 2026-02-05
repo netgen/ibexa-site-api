@@ -36,7 +36,7 @@ interface RelationService
     ): array;
 
     /**
-     * Load single related Location from $fieldDefinitionIdentifier field in $content,
+     * Load a single related Location from $fieldDefinitionIdentifier field in $content,
      * optionally limited by a list of $contentTypeIdentifiers.
      *
      * Note: only visible main Location of the related Content will be used.
@@ -63,7 +63,7 @@ interface RelationService
     ): array;
 
     /**
-     * Load all reverse related Content from $fieldDefinitionIdentifier field to the given
+     * Load all reverse-related Content from $fieldDefinitionIdentifier field to the given
      * $content, optionally limited by a list of $contentTypeIdentifiers and $limit.
      *
      * @return \Netgen\IbexaSiteApi\API\Values\Content[]
@@ -76,7 +76,7 @@ interface RelationService
     ): array;
 
     /**
-     * Load all reverse related Locations from $fieldDefinitionIdentifier field to the given
+     * Load all reverse-related Locations from $fieldDefinitionIdentifier field to the given
      * $content, optionally limited by a list of $contentTypeIdentifiers and $limit.
      *
      * Note: only visible main Locations of the reverse related Content will be used.

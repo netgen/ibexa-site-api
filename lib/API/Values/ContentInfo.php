@@ -7,9 +7,9 @@ namespace Netgen\IbexaSiteApi\API\Values;
 use Ibexa\Contracts\Core\Repository\Values\ValueObject;
 
 /**
- * Site ContentInfo object provides meta information of the Site Content object.
+ * Site ContentInfo object provides meta-information of the Site Content object.
  *
- * Corresponds to Ibexa Repository ContentInfo object.
+ * Corresponds to the Ibexa Repository ContentInfo object.
  *
  * @see \Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo
  *

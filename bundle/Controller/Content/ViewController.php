@@ -18,7 +18,7 @@ class ViewController extends Controller
      * It doesn't do anything by itself: the returned View object is rendered by the ViewRendererListener
      * into an HttpFoundation Response.
      *
-     * This action can be selectively replaced by a custom action by means of content_view
+     * This action can be selectively replaced by a custom action by content_view
      * configuration. Custom actions can add parameters to the view and customize the Response the View will be
      * converted to. They may also bypass the ViewRenderer by returning an HttpFoundation Response.
      *
@@ -30,9 +30,10 @@ class ViewController extends Controller
     }
 
     /**
-     * Embed a content.
+     * Embed a Content.
      * Behaves mostly like viewAction(), but with specific content load permission handling.
      */
+    /** @noinspection PhpUnused */
     public function embedAction(ContentView $view): ContentView
     {
         return $view;

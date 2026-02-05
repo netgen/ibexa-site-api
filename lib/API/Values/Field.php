@@ -9,7 +9,7 @@ use Ibexa\Contracts\Core\Repository\Values\ValueObject;
 /**
  * Site Field represents a field of a Site Content object.
  *
- * Corresponds to Ibexa Repository Field object.
+ * Corresponds to the Ibexa Repository Field object.
  *
  * @see \Ibexa\Contracts\Core\Repository\Values\Content\Field
  *
@@ -29,7 +29,7 @@ abstract class Field extends ValueObject implements DebugInfo
     abstract public function isEmpty(): bool;
 
     /**
-     * Returns whether the field is of 'ngsurrogate' type, returned when nonexistent field is requested from Content.
+     * Returns whether the field is of 'ngsurrogate' type, returned when a nonexistent field is requested from Content.
      */
     abstract public function isSurrogate(): bool;
 }

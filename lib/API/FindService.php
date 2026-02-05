@@ -11,7 +11,7 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchResult;
 /**
  * Find service provides methods for finding entities using Ibexa Repository Search Query API.
  *
- * Unlike FilterService, FindService uses search engine configured for the repository (Legacy or Solr).
+ * Unlike FilterService, FindService uses the search engine configured for the repository (Legacy or Solr).
  */
 interface FindService
 {

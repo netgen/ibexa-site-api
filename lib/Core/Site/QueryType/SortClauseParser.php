@@ -49,7 +49,7 @@ use function sprintf;
 final class SortClauseParser
 {
     /**
-     * Return new sort clause instance by the given $definition string.
+     * Return a new sort clause instance by the given $definition string.
      */
     public function parse(string $definition): SortClause
     {

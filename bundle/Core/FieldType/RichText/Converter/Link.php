@@ -77,8 +77,8 @@ class Link implements Converter
             $hrefAttributeName = 'xlink:href';
 
             // For embeds set the resolved href to the separate attribute
-            // Original href needs to be preserved in order to generate link parameters
-            // This will need to change with introduction of UrlService and removal of URL link
+            // Original href needs to be preserved to generate link parameters
+            // This will need to change with the introduction of UrlService and removal of URL link
             // resolving in external storage
             if ($link->localName === 'ezlink') {
                 $hrefAttributeName = 'href_resolved';
