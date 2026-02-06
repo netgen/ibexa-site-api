@@ -53,9 +53,8 @@ services:
             - 'Ibexa\Core\MVC\Symfony\Matcher\ContentBased'
             - '@?Ibexa\Bundle\Core\Matcher\ViewMatcherRegistry'
             - '@ibexa.config.resolver'
+            - "@service_container"
             - 'ng_content_view'
-        calls:
-            - [setContainer, ["@service_container"]]
 
     netgen.ibexa_site_api.ng_content_view_provider.default_configured:
         class: Ibexa\Bundle\Core\View\Provider\Configured
@@ -71,9 +70,8 @@ services:
             - 'Ibexa\Core\MVC\Symfony\Matcher\ContentBased'
             - '@?Ibexa\Bundle\Core\Matcher\ViewMatcherRegistry'
             - '@ibexa.config.resolver'
+            - "@service_container"
             - 'ng_content_view_defaults'
-        calls:
-            - [setContainer, ["@service_container"]]
 
     netgen.ibexa_site_api.view_renderer:
         class: Netgen\Bundle\IbexaSiteApiBundle\View\ViewRenderer
