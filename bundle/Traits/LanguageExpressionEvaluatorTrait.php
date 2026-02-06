@@ -53,17 +53,17 @@ trait LanguageExpressionEvaluatorTrait
         ExpressionLanguage $expressionLanguage,
         array $values,
     ): array {
-        $processedParameters = [];
 
-        foreach ($parameters as $name => $subParameters) {
-            $processedParameters[$name] = $this->evaluate(
-                $subParameters,
-                $expressionLanguage,
-                $values,
-            );
-        }
-
-        return $processedParameters;
+        return array_map(
+            function ($subParameters) use ($values, $expressionLanguage) {
+                return $this->evaluate(
+                    $subParameters,
+                    $expressionLanguage,
+                    $values,
+                );
+            },
+            $parameters,
+        );
     }
 
     private function isExpression(mixed $value): bool
