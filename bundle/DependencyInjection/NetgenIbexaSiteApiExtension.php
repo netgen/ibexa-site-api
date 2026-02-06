@@ -23,9 +23,6 @@ class NetgenIbexaSiteApiExtension extends Extension implements PrependExtensionI
         return 'netgen_ibexa_site_api';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getConfiguration(array $config, ContainerBuilder $container): Configuration
     {
         return new Configuration($this->getAlias());
