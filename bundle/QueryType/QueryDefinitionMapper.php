@@ -136,13 +136,12 @@ final class QueryDefinitionMapper
      */
     private function processParameters(array $parameters, ContentView $view): array
     {
-        $processedParameters = [];
-
-        foreach ($parameters as $name => $subParameters) {
-            $processedParameters[$name] = $this->recursiveProcessParameters($subParameters, $view);
-        }
-
-        return $processedParameters;
+        return array_map(
+            function ($subParameters) use ($view) {
+                return $this->recursiveProcessParameters($subParameters, $view);
+            },
+            $parameters,
+        );
     }
 
     private function recursiveProcessParameters($parameters, ContentView $view)

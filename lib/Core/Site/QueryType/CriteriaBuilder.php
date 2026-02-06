@@ -238,13 +238,12 @@ final class CriteriaBuilder
             return $this->resolveTimeValue($valueOrValues);
         }
 
-        $returnValues = [];
-
-        foreach ($valueOrValues as $key => $value) {
-            $returnValues[$key] = $this->resolveTimeValue($value);
-        }
-
-        return $returnValues;
+        return array_map(
+            function ($value) {
+                return $this->resolveTimeValue($value);
+            },
+            $valueOrValues,
+        );
     }
 
     private function resolveTimeValue(int|string $value): int
