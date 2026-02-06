@@ -10,20 +10,19 @@ use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Core\MVC\Symfony\Matcher\ClassNameMatcherFactory;
 use Ibexa\Core\MVC\Symfony\Matcher\ViewMatcherInterface;
 use Ibexa\Core\MVC\Symfony\View\View;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 use function mb_substr;
 use function str_starts_with;
 
 class MatcherFactory extends ClassNameMatcherFactory
 {
-    use ContainerAwareTrait;
-
     public function __construct(
         Repository $repository,
         string $relativeNamespace,
         private readonly ?ViewMatcherRegistry $viewMatcherRegistry,
         private readonly ConfigResolverInterface $configResolver,
+        private readonly ContainerInterface $container,
         private readonly string $parameterName,
         private readonly ?string $namespace = null,
         private readonly ?string $scope = null,
