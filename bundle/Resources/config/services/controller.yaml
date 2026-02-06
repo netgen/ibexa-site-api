@@ -3,8 +3,6 @@ services:
         class: Netgen\Bundle\IbexaSiteApiBundle\Controller\Controller
         abstract: true
         public: true
-        autowire: true
-        autoconfigure: true
 
     netgen.ibexa_site_api.controller.content.view:
         class: Netgen\Bundle\IbexaSiteApiBundle\Controller\Content\ViewController

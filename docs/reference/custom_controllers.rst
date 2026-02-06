@@ -61,4 +61,5 @@ If you still want to keep explicit inheritance, use the following:
     services:
         App\Controller\DemoController:
             parent: netgen.ibexa_site_api.controller.base
+            autoconfigure: true
             public: true
