@@ -10,14 +10,14 @@ use Netgen\Bundle\IbexaSiteApiBundle\Traits\LanguageExpressionEvaluatorTrait;
 use Netgen\Bundle\IbexaSiteApiBundle\View\ContentView;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
-final readonly class ParameterProcessor
+final class ParameterProcessor
 {
     use LanguageExpressionEvaluatorTrait;
 
     public function __construct(
-        private ExpressionLanguage $expressionLanguage,
-        private ConfigResolverInterface $configResolver,
-        private Provider $namedObjectProvider,
+        private readonly ExpressionLanguage $expressionLanguage,
+        private readonly ConfigResolverInterface $configResolver,
+        private readonly Provider $namedObjectProvider,
     ) {}
 
     /**
