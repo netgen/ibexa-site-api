@@ -30,14 +30,14 @@ use function str_contains;
 /**
  * Builds ContentView objects.
  */
-class ContentViewBuilder implements ViewBuilder
+readonly class ContentViewBuilder implements ViewBuilder
 {
     public function __construct(
-        private readonly Site $site,
-        private readonly Repository $repository,
-        private readonly Configurator $viewConfigurator,
-        private readonly ParametersInjector $viewParametersInjector,
-        private readonly LocationResolver $locationResolver,
+        private Site $site,
+        private Repository $repository,
+        private Configurator $viewConfigurator,
+        private ParametersInjector $viewParametersInjector,
+        private LocationResolver $locationResolver,
     ) {}
 
     public function matches($argument): bool

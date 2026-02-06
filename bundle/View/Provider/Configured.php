@@ -27,14 +27,14 @@ use function sprintf;
  *
  * @see \Ibexa\Core\MVC\Symfony\View\Configurator\ViewProvider
  */
-class Configured implements ViewProvider
+readonly class Configured implements ViewProvider
 {
     public function __construct(
-        private readonly MatcherFactoryInterface $matcherFactory,
-        private readonly QueryDefinitionMapper $queryDefinitionMapper,
-        private readonly Resolver $redirectResolver,
-        private readonly ContentViewFallbackResolver $contentViewFallbackResolver,
-        private readonly ParameterProcessor $parameterProcessor,
+        private MatcherFactoryInterface $matcherFactory,
+        private QueryDefinitionMapper $queryDefinitionMapper,
+        private Resolver $redirectResolver,
+        private ContentViewFallbackResolver $contentViewFallbackResolver,
+        private ParameterProcessor $parameterProcessor,
     ) {}
 
     /**

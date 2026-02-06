@@ -23,13 +23,13 @@ use Pagerfanta\Pagerfanta;
  *
  * @internal do not depend on this service, it can be changed without warning
  */
-final class QueryExecutor
+final readonly class QueryExecutor
 {
     public function __construct(
-        private readonly QueryTypeRegistry $queryTypeRegistry,
-        private readonly FilterService $filterService,
-        private readonly FindService $findService,
-        private readonly Repository $repository,
+        private QueryTypeRegistry $queryTypeRegistry,
+        private FilterService $filterService,
+        private FindService $findService,
+        private Repository $repository,
     ) {}
 
     /**

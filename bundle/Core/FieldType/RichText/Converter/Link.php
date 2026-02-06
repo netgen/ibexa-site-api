@@ -20,13 +20,13 @@ use Symfony\Component\Routing\RouterInterface;
 use function preg_match;
 use function sprintf;
 
-class Link implements Converter
+readonly class Link implements Converter
 {
     public function __construct(
-        private readonly Repository $repository,
-        private readonly LoadService $loadService,
-        private readonly RouterInterface $router,
-        private readonly LoggerInterface $logger = new NullLogger(),
+        private Repository $repository,
+        private LoadService $loadService,
+        private RouterInterface $router,
+        private LoggerInterface $logger = new NullLogger(),
     ) {}
 
     public function convert(DOMDocument $xmlDoc): DOMDocument

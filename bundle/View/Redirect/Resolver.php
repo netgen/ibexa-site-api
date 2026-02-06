@@ -20,10 +20,10 @@ use function is_object;
 use function is_string;
 use function mb_stripos;
 
-final class Resolver
+final readonly class Resolver
 {
     public function __construct(
-        private readonly RouterInterface $router,
+        private RouterInterface $router,
     ) {}
 
     /**

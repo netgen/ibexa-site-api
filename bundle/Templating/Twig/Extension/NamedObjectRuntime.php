@@ -17,12 +17,12 @@ use Psr\Log\NullLogger;
  *
  * @see \Netgen\Bundle\IbexaSiteApiBundle\Templating\Twig\Extension\NamedObjectExtension
  */
-class NamedObjectRuntime
+readonly class NamedObjectRuntime
 {
     public function __construct(
-        private readonly Provider $namedObjectProvider,
-        private readonly bool $isDebug,
-        private readonly LoggerInterface $logger = new NullLogger(),
+        private Provider $namedObjectProvider,
+        private bool $isDebug,
+        private LoggerInterface $logger = new NullLogger(),
     ) {}
 
     public function getNamedContent(string $name): ?Content

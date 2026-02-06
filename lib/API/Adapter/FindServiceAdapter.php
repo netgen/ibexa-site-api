@@ -26,11 +26,11 @@ use Netgen\IbexaSiteApi\API\FindService;
  *
  * As for $filterOnUserPermissions, find service doesn't support it, so it is simply ignored.
  */
-final class FindServiceAdapter implements SearchService
+final readonly class FindServiceAdapter implements SearchService
 {
     public function __construct(
-        private readonly FindService $findService,
-        private readonly Handler $searchHandler,
+        private FindService $findService,
+        private Handler $searchHandler,
     ) {}
 
     public function findContent(Query $query, array $languageFilter = [], bool $filterOnUserPermissions = true): SearchResult
