@@ -248,9 +248,12 @@ class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
         }
 
         if (isset($parameters['locationId'])) {
-            return $this->repository->sudo(
+            /** @var APILocation $location */
+            $location = $this->repository->sudo(
                 fn (): APILocation => $this->repository->getLocationService()->loadLocation($parameters['locationId'], []),
             );
+
+            return $location;
         }
 
         $object = $parameters['content'] ?? null;
@@ -280,7 +283,8 @@ class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
 
     private function loadLocationByContentId(int $contentId): APILocation
     {
-        return $this->repository->sudo(
+        /** @var APILocation $location */
+        $location = $this->repository->sudo(
             function () use ($contentId): APILocation {
                 $contentInfo = $this->repository->getContentService()->loadContentInfo($contentId);
 
@@ -293,6 +297,8 @@ class GeneratorRouter implements ChainedRouterInterface, RequestMatcherInterface
                 return $this->repository->getLocationService()->loadLocation($contentInfo->mainLocationId, []);
             },
         );
+
+        return $location;
     }
 
     private function resolveLocationFromRouteObject(mixed $object): APILocation
