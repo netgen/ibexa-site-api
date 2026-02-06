@@ -1,7 +1,5 @@
 <?php
 
-/** @noinspection PhpUnused */
-
 declare(strict_types=1);
 
 namespace Netgen\Bundle\IbexaSiteApiBundle\Controller;
@@ -55,6 +53,7 @@ abstract class Controller extends AbstractController
     /**
      * Returns the root Location object for the current siteaccess configuration.
      */
+    /** @noinspection PhpUnused */
     protected function getRootLocation(): Location
     {
         return $this->getLoadService()->loadLocation(
@@ -62,6 +61,7 @@ abstract class Controller extends AbstractController
         );
     }
 
+    /** @noinspection PhpUnused */
     protected function getQueryTypeRegistry(): QueryTypeRegistry
     {
         return $this->container->get(QueryTypeRegistry::class);
@@ -75,6 +75,7 @@ abstract class Controller extends AbstractController
     /**
      * Returns the general helper service, exposed in Twig templates as "ibexa" global variable.
      */
+    /** @noinspection PhpUnused */
     protected function getGlobalHelper(): GlobalHelper
     {
         return $this->container->get(GlobalHelper::class);
@@ -95,16 +96,19 @@ abstract class Controller extends AbstractController
         return $this->container->get(ConfigResolverInterface::class);
     }
 
+    /** @noinspection PhpUnused */
     protected function getNamedObjectProvider(): NamedObjectProvider
     {
         return $this->container->get(NamedObjectProvider::class);
     }
 
+    /** @noinspection PhpUnused */
     protected function getContentRenderer(): ContentRenderer
     {
         return $this->container->get(ContentRenderer::class);
     }
 
+    /** @noinspection PhpUnused */
     protected function getViewRenderer(): ViewRenderer
     {
         return $this->container->get(ViewRenderer::class);
@@ -115,16 +119,19 @@ abstract class Controller extends AbstractController
         return $this->container->get(LoadService::class);
     }
 
+    /** @noinspection PhpUnused */
     protected function getFilterService(): FilterService
     {
         return $this->container->get(FilterService::class);
     }
 
+    /** @noinspection PhpUnused */
     protected function getFindService(): FindService
     {
         return $this->container->get(FindService::class);
     }
 
+    /** @noinspection PhpUnused */
     protected function getRelationService(): RelationService
     {
         return $this->container->get(RelationService::class);

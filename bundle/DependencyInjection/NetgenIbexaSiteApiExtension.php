@@ -16,6 +16,7 @@ use function array_keys;
 use function file_get_contents;
 use function in_array;
 
+/** @noinspection PhpUnused */
 class NetgenIbexaSiteApiExtension extends Extension implements PrependExtensionInterface
 {
     public function getAlias(): string
