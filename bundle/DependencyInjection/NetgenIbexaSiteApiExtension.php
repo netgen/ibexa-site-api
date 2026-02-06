@@ -33,7 +33,7 @@ class NetgenIbexaSiteApiExtension extends Extension implements PrependExtensionI
         $activatedBundles = array_keys($container->getParameter('kernel.bundles'));
 
         $configuration = $this->getConfiguration($configs, $container);
-        $config = $this->processConfiguration($configuration, $configs);
+        $this->processConfiguration($configuration, $configs);
 
         $coreFileLocator = new FileLocator(__DIR__ . '/../../lib/Resources/config');
         $coreLoader = new Loader\YamlFileLoader($container, $coreFileLocator);
