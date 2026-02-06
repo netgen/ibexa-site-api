@@ -92,16 +92,22 @@ readonly class Link implements Converter
 
     private function loadContent(int $id): Content
     {
-        return $this->repository->sudo(
+        /** @var Content $content */
+        $content = $this->repository->sudo(
             fn (): Content => $this->loadService->loadContent($id),
         );
+
+        return $content;
     }
 
     private function loadLocation(int $id): Location
     {
-        return $this->repository->sudo(
+        /** @var Location $location */
+        $location = $this->repository->sudo(
             fn (): Location => $this->loadService->loadLocation($id),
         );
+
+        return $location;
     }
 
     private function generateUrlAliasForContentOrLocation(Content|Location $object, string $fragment): string

@@ -84,14 +84,20 @@ final readonly class QueryExecutor
         $query = $this->getQuery($queryDefinition);
 
         if ($query instanceof LocationQuery) {
-            return $this->repository->sudo(
+            /** @var SearchResult $searchResult */
+            $searchResult = $this->repository->sudo(
                 fn () => $this->getLocationResult($query, $queryDefinition),
             );
+
+            return $searchResult;
         }
 
-        return $this->repository->sudo(
+        /** @var SearchResult $searchResult */
+        $searchResult = $this->repository->sudo(
             fn () => $this->getContentResult($query, $queryDefinition),
         );
+
+        return $searchResult;
     }
 
     private function getPagerAdapter(QueryDefinition $queryDefinition): BaseAdapter
