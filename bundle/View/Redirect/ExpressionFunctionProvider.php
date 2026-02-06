@@ -8,10 +8,10 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\ExpressionLanguage\ExpressionFunction;
 use Symfony\Component\ExpressionLanguage\ExpressionFunctionProviderInterface;
 
-class ExpressionFunctionProvider implements ExpressionFunctionProviderInterface
+readonly class ExpressionFunctionProvider implements ExpressionFunctionProviderInterface
 {
     public function __construct(
-        private readonly ContainerInterface $container,
+        private ContainerInterface $container,
     ) {}
 
     public function getFunctions(): array

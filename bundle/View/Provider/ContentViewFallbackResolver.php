@@ -8,14 +8,14 @@ use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Core\MVC\Symfony\View\ContentView;
 use Netgen\Bundle\IbexaSiteApiBundle\View\ContentView as SiteContentView;
 
-final class ContentViewFallbackResolver
+final readonly class ContentViewFallbackResolver
 {
     public function __construct(
-        private readonly ConfigResolverInterface $configResolver,
-        private readonly string $toIbexaPlatformEmbedFallbackTemplate,
-        private readonly string $toIbexaPlatformViewFallbackTemplate,
-        private readonly string $toSiteApiEmbedFallbackTemplate,
-        private readonly string $toSiteApiViewFallbackTemplate,
+        private ConfigResolverInterface $configResolver,
+        private string $toIbexaPlatformEmbedFallbackTemplate,
+        private string $toIbexaPlatformViewFallbackTemplate,
+        private string $toSiteApiEmbedFallbackTemplate,
+        private string $toSiteApiViewFallbackTemplate,
     ) {}
 
     public function getIbexaPlatformFallbackDto(SiteContentView $view): ?ContentView

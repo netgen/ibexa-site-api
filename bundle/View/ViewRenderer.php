@@ -28,14 +28,14 @@ use function sprintf;
  *
  * @see \Ibexa\Core\MVC\Symfony\View\View
  */
-final class ViewRenderer
+final readonly class ViewRenderer
 {
     public function __construct(
-        private readonly RequestStack $requestStack,
-        private readonly ControllerResolverInterface $controllerResolver,
-        private readonly ArgumentResolverInterface $argumentResolver,
-        private readonly Renderer $coreViewRenderer,
-        private readonly EventDispatcherInterface $eventDispatcher,
+        private RequestStack $requestStack,
+        private ControllerResolverInterface $controllerResolver,
+        private ArgumentResolverInterface $argumentResolver,
+        private Renderer $coreViewRenderer,
+        private EventDispatcherInterface $eventDispatcher,
     ) {}
 
     public function render(View $view, array $parameters, bool $layout): string

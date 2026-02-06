@@ -9,10 +9,10 @@ use Netgen\Bundle\IbexaSiteApiBundle\Event\RenderViewEvent;
 use Netgen\Bundle\IbexaSiteApiBundle\Events;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-final class ViewTaggerSubscriber implements EventSubscriberInterface
+final readonly class ViewTaggerSubscriber implements EventSubscriberInterface
 {
     public function __construct(
-        private readonly ResponseTagger $responseTagger,
+        private ResponseTagger $responseTagger,
     ) {}
 
     public static function getSubscribedEvents(): array

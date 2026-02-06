@@ -16,12 +16,12 @@ use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-final class InvalidRedirectConfigurationListener implements EventSubscriberInterface
+final readonly class InvalidRedirectConfigurationListener implements EventSubscriberInterface
 {
     public function __construct(
-        private readonly UrlGeneratorInterface $urlGenerator,
-        private readonly ConfigResolverInterface $configResolver,
-        private readonly LoggerInterface $logger = new NullLogger(),
+        private UrlGeneratorInterface $urlGenerator,
+        private ConfigResolverInterface $configResolver,
+        private LoggerInterface $logger = new NullLogger(),
     ) {}
 
     public static function getSubscribedEvents(): array

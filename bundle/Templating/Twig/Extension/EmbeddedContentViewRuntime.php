@@ -9,10 +9,10 @@ use Netgen\Bundle\IbexaSiteApiBundle\View\ContentRenderer;
 /**
  * Twig extension runtime for Site API embedded content view rendering.
  */
-class EmbeddedContentViewRuntime
+readonly class EmbeddedContentViewRuntime
 {
     public function __construct(
-        private readonly ContentRenderer $contentRenderer,
+        private ContentRenderer $contentRenderer,
     ) {}
 
     /**

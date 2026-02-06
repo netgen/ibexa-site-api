@@ -15,11 +15,11 @@ use Psr\Log\NullLogger;
 
 use function sprintf;
 
-class ImageRuntime
+readonly class ImageRuntime
 {
     public function __construct(
-        private readonly VariationHandler $imageVariationService,
-        private readonly LoggerInterface $logger = new NullLogger(),
+        private VariationHandler $imageVariationService,
+        private LoggerInterface $logger = new NullLogger(),
     ) {}
 
     /**

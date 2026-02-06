@@ -24,13 +24,13 @@ use function sprintf;
  *
  * @uses \Netgen\Bundle\IbexaSiteApiBundle\View\ViewRenderer
  */
-final class ContentRenderer
+final readonly class ContentRenderer
 {
     public function __construct(
-        private readonly ContentViewBuilder $viewBuilder,
-        private readonly CoreContentViewBuilder $coreViewBuilder,
-        private readonly ViewRenderer $viewRenderer,
-        private readonly LoggerInterface $logger = new NullLogger(),
+        private ContentViewBuilder $viewBuilder,
+        private CoreContentViewBuilder $coreViewBuilder,
+        private ViewRenderer $viewRenderer,
+        private LoggerInterface $logger = new NullLogger(),
     ) {}
 
     /**
