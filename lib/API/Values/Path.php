@@ -42,6 +42,7 @@ final class Path
     /**
      * @uses \Netgen\IbexaSiteApi\API\Routing\UrlGenerator::NETWORK_PATH
      */
+    /** @noinspection PhpUnused */
     public function getNetwork(array $parameters = []): string
     {
         return $this->urlGenerator->generate(
@@ -54,6 +55,7 @@ final class Path
     /**
      * @uses \Netgen\IbexaSiteApi\API\Routing\UrlGenerator::RELATIVE_PATH
      */
+    /** @noinspection PhpUnused */
     public function getRelative(array $parameters = []): string
     {
         return $this->urlGenerator->generate(

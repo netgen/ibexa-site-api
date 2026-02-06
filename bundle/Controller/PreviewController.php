@@ -24,6 +24,7 @@ class PreviewController extends BasePreviewController
         $this->configResolver = $configResolver;
     }
 
+    /** @noinspection PhpUnused */
     public function setSite(Site $site): void
     {
         $this->site = $site;
