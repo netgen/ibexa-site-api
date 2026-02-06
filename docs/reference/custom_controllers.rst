@@ -61,17 +61,4 @@ If you still want to keep explicit inheritance, use the following:
     services:
         App\Controller\DemoController:
             parent: netgen.ibexa_site_api.controller.base
-            tags:
-                - { name: 'container.service_subscriber' }
-
-And a fully expanded example:
-
-.. code-block:: yaml
-
-    services:
-        App\Controller\DemoController:
-            calls:
-                - setContainer: ['@Psr\Container\ContainerInterface']
-            tags:
-                - { name: 'container.service_subscriber' }
             public: true
