@@ -8,7 +8,7 @@ use Ibexa\Contracts\Core\Repository\SearchService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Content;
 use Ibexa\Contracts\Core\Repository\Values\Content\LocationQuery;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query;
-use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\CriterionInterface;
 use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchResult;
 use Ibexa\Contracts\Core\Search\Capable;
 use Ibexa\Contracts\Core\Search\Handler;
@@ -72,7 +72,7 @@ final readonly class FilterServiceAdapter implements SearchService
         return $searchResult;
     }
 
-    public function findSingle(Criterion $filter, array $languageFilter = [], bool $filterOnUserPermissions = true): Content
+    public function findSingle(CriterionInterface $filter, array $languageFilter = [], bool $filterOnUserPermissions = true): Content
     {
         $query = new Query();
         $query->filter = $filter;
@@ -94,7 +94,7 @@ final readonly class FilterServiceAdapter implements SearchService
         return $siteContent->innerContent;
     }
 
-    public function suggest(string $prefix, array $fieldPaths = [], int $limit = 10, ?Criterion $filter = null): void {}
+    public function suggest(string $prefix, array $fieldPaths = [], int $limit = 10, ?CriterionInterface $filter = null): void {}
 
     public function supports(int $capabilityFlag): bool
     {
