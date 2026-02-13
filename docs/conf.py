@@ -21,8 +21,7 @@ extensions = ['sphinx.ext.autodoc',
     'sphinx.ext.todo',
     'sphinx.ext.coverage',
     'sphinx.ext.imgmath',
-    'sphinx.ext.ifconfig',
-    'sensio.sphinx.configurationblock']
+    'sphinx.ext.ifconfig']
 
 source_suffix = '.rst'
 master_doc = 'index'
@@ -34,23 +33,19 @@ author = 'Netgen'
 version = ''
 release = ''
 
-exclude_patterns = ['_build', '.virtualenvs']
+exclude_patterns = ['_build', '.virtualenv']
 
 html_theme = "sphinx_rtd_theme"
-html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 
 html_static_path = ['_static']
 templates_path = ['_templates']
 
 html_theme_options = {
     'collapse_navigation': True,
-    'display_version': True,
+    'version_selector': True,
 }
 
 html_context = {
     'copyright_url': 'https://netgen.io',
     'current_year': datetime.utcnow().year
 }
-
-def setup(app):
-    app.add_stylesheet("css/style.css")
