@@ -19,11 +19,11 @@
         "twig/twig": "^3.22"
     },
     "require-dev": {
-        "phpunit/phpunit": "*",
-        "matthiasnoback/symfony-dependency-injection-test": "*",
-        "netgen/tagsbundle": "*",
-        "netgen/ibexa-fieldtype-enhanced-link": "*",
-        "composer/package-versions-deprecated": "*"
+        "phpunit/phpunit": "^12.5",
+        "matthiasnoback/symfony-dependency-injection-test": "^6.3",
+        "netgen/tagsbundle": "^6.0",
+        "netgen/ibexa-fieldtype-enhanced-link": "^2.0",
+        "composer/package-versions-deprecated": "^1.11"
     },
     "replace": {
         "netgen/ezplatform-site-api": "*"
