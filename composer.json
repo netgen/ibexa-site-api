@@ -48,7 +48,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-ibexa5": "7.0-dev"
+            "dev-ibexa5": "7.1-dev"
         }
     },
     "scripts": {
