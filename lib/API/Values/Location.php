@@ -24,7 +24,7 @@ use Pagerfanta\Pagerfanta;
  * @property-read string $remoteId
  * @property-read int $parentLocationId
  * @property-read string $pathString
- * @property-read int[] $pathArray
+ * @property-read string[] $pathArray
  * @property-read int $depth
  * @property-read int $sortField
  * @property-read int $sortOrder
