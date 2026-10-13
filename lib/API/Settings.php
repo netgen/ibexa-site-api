@@ -13,4 +13,6 @@ namespace Netgen\IbexaSiteApi\API;
  * @property bool $showHiddenItems Whether to show hidden Locations and Content items
  * @property bool $failOnMissingField Whether to fail on a missing Content Field
  */
-abstract class Settings {}
+abstract class Settings {
+    abstract public function __get(string $property): array|bool|int;
+}
