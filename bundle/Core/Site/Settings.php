@@ -23,7 +23,7 @@ final class Settings extends BaseSettings
      *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\PropertyNotFoundException
      */
-    public function __get(string $property)
+    public function __get(string $property): array|bool|int
     {
         return match ($property) {
             'prioritizedLanguages' => $this->configResolver->getParameter('languages'),
