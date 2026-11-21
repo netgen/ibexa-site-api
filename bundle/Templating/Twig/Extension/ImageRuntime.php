@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\IbexaSiteApiBundle\Templating\Twig\Extension;
 
+use DateTimeImmutable;
 use Ibexa\Contracts\Core\Repository\Exceptions\InvalidVariationException;
 use Ibexa\Contracts\Core\Variation\Values\Variation;
 use Ibexa\Contracts\Core\Variation\VariationHandler;
@@ -65,6 +66,25 @@ readonly class ImageRuntime
             );
         }
 
-        return new Variation();
+        return $this->createEmptyVariation();
+    }
+
+    /**
+     * Returns a Variation with all properties initialized to empty values.
+     *
+     * Variation properties are typed and must not be accessed before initialization,
+     * so a bare Variation would make templates like ng_image_alias(field, 'large').uri
+     * throw an Error instead of rendering an empty value.
+     */
+    private function createEmptyVariation(): Variation
+    {
+        return new Variation([
+            'fileSize' => 0,
+            'mimeType' => '',
+            'fileName' => '',
+            'dirPath' => '',
+            'uri' => '',
+            'lastModified' => new DateTimeImmutable('@0'),
+        ]);
     }
 }
