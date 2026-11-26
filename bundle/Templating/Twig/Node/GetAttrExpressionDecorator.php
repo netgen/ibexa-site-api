@@ -175,6 +175,16 @@ final class GetAttrExpressionDecorator extends GetAttrExpression
         return $this->decoratedExpression->getIterator();
     }
 
+    /**
+     * Twig 3.31 traverses nodes through getNodes() instead of getIterator().
+     *
+     * @return array<string|int, Node>
+     */
+    public function getNodes(): array
+    {
+        return $this->decoratedExpression->getNodes();
+    }
+
     public function getTemplateName(): ?string
     {
         return $this->decoratedExpression->getTemplateName();
